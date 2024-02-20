@@ -43,7 +43,6 @@ class C_Pengunjung extends BaseController
             $pengunjung = $this->M_Pengunjung->getDataByDateRange($tanggalAwal, $tanggalAkhir);
         }
 
-
         $data =[
             'title' => 'Daftar Pengunjung',
             'data_pengunjung' => $pengunjung,
@@ -55,52 +54,47 @@ class C_Pengunjung extends BaseController
     }
     public function statistik()
     {
-        // Mendapatkan tahun dari input form
+       // Mendapatkan tahun dari input form
         $tahun = $this->request->getPost('tahun');
+        $data['tahun'] = $tahun;
 
         // Set default tahun ke tahun saat ini jika tidak ada input tahun
         if (empty($tahun)) {
             $tahun = date('Y');
         }
 
-        // Dapatkan data statistik berdasarkan tahun
-        $statistikData = $this->M_Pengunjung->getDataStatistik($tahun);
+        // Ambil data dari model
+        $data_pengunjung = $this->M_Pengunjung->getDataByYear($tahun);
 
-        // Inisialisasi variabel $data
-        $data = [];
+        // Inisialisasi data_grafik dengan format yang diharapkan
+        $data_grafik = [];
 
-        if ($tahun) {
-            $chartLabels = array_unique(array_column($statistikData, 'tanggal'));
-            $chartData = [];
-            $kategoris = [];
+        foreach ($data_pengunjung as $row) {
+            $bulan_labels[] = $row['bulan'];
 
-            foreach ($statistikData as $data) {
-                $chartData[$data['kategori']][] = $data['jumlah'];
-
-                if (!in_array($data['kategori'], $kategoris)) {
-                    $kategoris[] = $data['kategori'];
-                }
+            // Periksa apakah kategori sudah ada di dalam data_grafik
+            if (!isset($data_grafik[$row['kategori']])) {
+                // Jika belum ada, inisialisasi dengan data bulan
+                $data_grafik[$row['kategori']] = [
+                    'label' => $row['kategori'],
+                    'backgroundColor' => '#4e73df', // Ganti warna sesuai kebutuhan
+                    'hoverBackgroundColor' => '#2e59d9', // Ganti warna sesuai kebutuhan
+                    'borderColor' => '#4e73df', // Ganti warna sesuai kebutuhan
+                    // 'data' => array_fill(1, 12, 0), // Inisialisasi data dengan array nol sepanjang 12 bulan
+                ];
             }
 
-            // Isi variabel $data dengan informasi yang diperlukan
-            $data = [
-                'title' => 'Statistik Pengunjung',
-                'tahun' => $tahun,
-                'chartLabels' => json_encode($chartLabels),
-                'chartData' => $chartData,
-                'statistik' => $this->M_Pengunjung->getDataStatistik($tahun),
-                'kategoris' => $kategoris,
-            ];
-        } else {
-            // Isi variabel $data jika tidak ada tahun
-            $data = [
-                'title' => 'Statistik Pengunjung',
-                'tahun' => date('Y'),
-                'chartLabels' => json_encode([]),
-                'chartData' => [],
-                'kategoris' => [],
-            ];
+            // Isi data_grafik dengan total per bulan
+            $data_grafik[$row['kategori']]['data'][$row['bulan']] = $row['total'];
         }
+
+        // Tambahkan data ke dalam variabel $data
+        $data['bulan_labels'] = json_encode(array_unique($bulan_labels));
+        $data['data_grafik'] = json_encode(array_values($data_grafik)); // Mengambil nilai dari asosiatif array
+
+
+        // Tambahkan data_pengunjung ke dalam variabel $data
+        $data['data_pengunjung'] = $data_pengunjung;
 
         // Tampilkan view dengan variabel $data
         return view('pelayanan/v_statistik', $data);
@@ -127,8 +121,7 @@ class C_Pengunjung extends BaseController
             'jumlah' => [
                 'rules' => 'required',
                 'errors' => ['required'=>'Jumlah harus diisi']
-            ]
-                
+            ]       
         ];
 
         if(!$this->validate($rules)){
