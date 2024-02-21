@@ -159,6 +159,22 @@ class C_Pengunjung extends BaseController
 
         // return view('admin/v_masterpetugas');
     }
-    
+    // public function print(){
+    //     $data['dataPengunjung'] = $this->M_Pengunjung->getPengunjung("data_pengunjung")-> result();
+
+    //     $this->load->view('print_data', $data);
+    // }
+
+// C_Pengunjung.php
+    public function laporan()
+    {
+       
+        return view('pelayanan/v_generate_report');
+    }
+    public function print(){
+        $data['dataPengunjung'] = $this->M_Pengunjung->getPengunjung("data_pengunjung")->result();
+        $this->load->view('v_generate_report', $data);
+    }
+
 
 }

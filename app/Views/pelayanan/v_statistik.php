@@ -14,9 +14,13 @@
         </div>
     </form>
     <div class="card shadow mb-4">
-        <div class="card-header py-3">
+        <div class="card-header d-sm-flex align-items-center justify-content-between mb-4">
             <h6 class="m-0 font-weight-bold text-primary">Statistik Pengunjung Tahun <?= $tahun; ?></h6>
+            <a href="<?= base_url('/laporan'); ?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
+            </a>
         </div>
+        
         <div class="card-body">
             <canvas width="600" height="400" id="statistik"></canvas>
         </div>

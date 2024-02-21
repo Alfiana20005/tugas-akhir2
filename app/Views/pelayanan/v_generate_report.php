@@ -5,31 +5,68 @@
 <?= $this->section('content'); ?>
 
 <div class="container-fluid">
-    <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">Generate Report</h1>
+    <!-- Judul -->
+    
+    
+    <div class="card shadow mb-4">                 
+        <div class="card-header d-sm-flex align-items-center justify-content-between mb-4">
+            <h6 class="m-0 font-weight-bold text-primary">Laporan Data Pengunjung Tahun</h6>
+        </div>
+        <div class="card-body">
+            <div class="container-fluid text-center">
+                <h6 class="m-0 font-weight-bold text-black mb-4">Museum Negeri Nusa Tenggara Barat</h6>
+            </div>
+            <div class="table-responsive text-center">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <tr>
+                        <th>Bulan</th>
+                        <th>TK</th>
+                        <th>SD</th>
+                        <th>SMP</th>
+                        <th>SMA</th>
+                        <th>MHS</th>
+                        <th>Peneliti</th>
+                        <th>WTA</th>
+                        <th>RTD</th>
+                        <th>RTN</th>
+                        <th>PER</th>
+                        <th>Jumlah</th>
+                    </tr>
 
-    <!-- Display the date range -->
-    <p>Report for <?= date('d M Y', strtotime($tanggalAwal)); ?> to <?= date('d M Y', strtotime($tanggalAkhir)); ?></p>
-
-    <!-- Display the report data in a table -->
-    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-        <thead>
-            <tr>
-                <th>Month-Year</th>
-                <th>Category</th>
-                <th>Total</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($reportData as $row): ?>
-                <tr>
-                    <td><?= $row['month_year']; ?></td>
-                    <td><?= $row['kategori']; ?></td>
-                    <td><?= $row['total']; ?></td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+                    <tr>
+                        <td>januari</td>
+                        <td>10</td>
+                        <td>10</td>
+                        <td>10</td>
+                        <td>10</td>
+                        <td>10</td>
+                        <td>10</td>
+                        <td>10</td>
+                        <td>10</td>
+                        <td>10</td>
+                        <td>10</td>
+                        <td>100</td>
+                    </tr>
+                    
+                    <!-- Total -->
+                    <tr>
+                        <th>Total</th>
+                        <td>10</td>
+                        <td>10</td>
+                        <td>10</td>
+                        <td>10</td>
+                        <td>10</td>
+                        <td>10</td>
+                        <td>10</td>
+                        <td>10</td>
+                        <td>10</td>
+                        <td>10</td>
+                        <td>100</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 
 <?= $this->endSection(); ?>

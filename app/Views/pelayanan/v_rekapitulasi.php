@@ -37,9 +37,7 @@
                             <?php else: ?>
                                 <h6 class="m-0 font-weight-bold text-primary">Rekapitulasi Data Pengunjung</h6>
                             <?php endif; ?>
-                            <a href="<?= base_url('/generate-report'); ?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                                <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
-                            </a>
+                            
                                                 
                         </div>
                         <div class="card-body">

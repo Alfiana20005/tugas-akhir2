@@ -36,3 +36,5 @@ $routes->post('/rekapitulasi', 'C_Pengunjung::rekapitulasi');
 $routes->get('/generate-report', 'C_Pengunjung::generateReport');
 $routes->get('/statistik', 'C_Pengunjung::statistik');
 $routes->post('/statistik', 'C_Pengunjung::statistik');
+$routes->get('/laporan', 'C_Pengunjung::laporan');
+$routes->post('/laporan', 'C_Pengunjung::laporan');
