@@ -50,6 +50,19 @@ class M_Pengunjung extends Model
         return $result;
     }
     
+    public function getDataByMonth($tahun){
+        $query = $this->db->query("SELECT MONTH(created_at) as bulan, SUM(jumlah) as total FROM data_pengunjung WHERE YEAR(created_at) = ? GROUP BY bulan", [$tahun]);
+    
+        // Ambil hasil query sebagai array
+        $result = $query->getResultArray();
+        
+        // Konversi nomor bulan menjadi nama bulan
+        foreach ($result as &$row) {
+            $row['bulan'] = date("F", mktime(0, 0, 0, $row['bulan'], 1));
+        }
+    
+    return $result;
+    }
     public function getDataByDateRange($tanggalAwal, $tanggalAkhir)
     {
         return $this->where('created_at >=', $tanggalAwal)

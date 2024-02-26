@@ -65,6 +65,7 @@ class C_Pengunjung extends BaseController
 
         // Ambil data dari model
         $data_pengunjung = $this->M_Pengunjung->getDataByYear($tahun);
+        
 
         // Inisialisasi data_grafik dengan format yang diharapkan
         $data_grafik = [];
@@ -91,12 +92,15 @@ class C_Pengunjung extends BaseController
         // Tambahkan data ke dalam variabel $data
         $data['bulan_labels'] = json_encode(array_unique($bulan_labels));
         $data['data_grafik'] = json_encode(array_values($data_grafik)); // Mengambil nilai dari asosiatif array
-
-
-        // Tambahkan data_pengunjung ke dalam variabel $data
         $data['data_pengunjung'] = $data_pengunjung;
+        $data['jumlah']= $this->M_Pengunjung->getDataByMonth($tahun);
 
         // Tampilkan view dengan variabel $data
+        return $data;
+        
+    }
+    public function tampilstatistik(){
+        $data = $this->statistik();
         return view('pelayanan/v_statistik', $data);
     }
 
@@ -159,22 +163,17 @@ class C_Pengunjung extends BaseController
 
         // return view('admin/v_masterpetugas');
     }
-    // public function print(){
-    //     $data['dataPengunjung'] = $this->M_Pengunjung->getPengunjung("data_pengunjung")-> result();
 
-    //     $this->load->view('print_data', $data);
-    // }
-
-// C_Pengunjung.php
     public function laporan()
     {
-       
-        return view('pelayanan/v_generate_report');
+        // Panggil fungsi statistik
+        $data = $this->statistik();
+        return view('pelayanan/v_generate_report', $data);
     }
-    public function print(){
-        $data['dataPengunjung'] = $this->M_Pengunjung->getPengunjung("data_pengunjung")->result();
-        $this->load->view('v_generate_report', $data);
-    }
+    // public function print(){
+    //     $data['dataPengunjung'] = $this->M_Pengunjung->getPengunjung("data_pengunjung")->result();
+    //     $this->load->view('v_generate_report', $data);
+    // }
 
 
 }
