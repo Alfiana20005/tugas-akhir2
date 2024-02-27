@@ -26,7 +26,7 @@ class C_Petugas extends BaseController
             'data_petugas' => $petugas
         ];
 
-        return view('admin/v_masterpetugas', $data);
+        return view('petugas/v_masterpetugas', $data);
     }
     public function formtambah(): string
     {
@@ -37,7 +37,7 @@ class C_Petugas extends BaseController
            
         ];
         
-        return view('admin/v_tambahPetugas', $data);
+        return view('petugas/v_tambahPetugas', $data);
     }
 
     public function save()
@@ -122,7 +122,7 @@ class C_Petugas extends BaseController
             'petugas' => $this->M_Petugas->getPetugas($id_petugas)
         ];
         
-        return view('admin/v_ubahPetugas', $data);
+        return view('petugas/v_ubahPetugas', $data);
         
     } 
     public function update($id_petugas) {
@@ -155,5 +155,17 @@ class C_Petugas extends BaseController
 
         return redirect()->to('/petugas');
         
-    }   
+    } 
+    public function profile($id_petugas) 
+    {
+        $data =[
+            'title' => 'Ubah Data Petugas',
+            'validation' => \Config\Services::validation(),
+            'petugas' => $this->M_Petugas->getPetugas($id_petugas)
+        ];
+        
+        return view('petugas/v_profile', $data);
+        
+    }  
+
 }

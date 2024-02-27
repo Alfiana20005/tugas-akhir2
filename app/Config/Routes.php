@@ -26,6 +26,7 @@ $routes->post('/save', 'C_Petugas::save');
 $routes->delete('hapuspetugas/(:segment)', 'C_Petugas::delete/$1');
 $routes->get('ubahpetugas/(:segment)', 'C_Petugas::edit/$1');
 $routes->post('/updatepetugas/(:segment)', 'C_Petugas::update/$1');
+$routes->get('/profile/(:segment)', 'C_Petugas::profile/$1');
 
 //data pengunjung
 
@@ -36,5 +37,5 @@ $routes->post('/rekapitulasi', 'C_Pengunjung::rekapitulasi');
 $routes->get('/generate-report', 'C_Pengunjung::generateReport');
 $routes->get('/statistik', 'C_Pengunjung::tampilstatistik');
 $routes->post('/statistik', 'C_Pengunjung::tampilstatistik');
-$routes->get('/laporan', 'C_Pengunjung::laporan');
-$routes->post('/laporan', 'C_Pengunjung::laporan');
+$routes->get('/print', 'C_Pengunjung::print');
+$routes->post('/print', 'C_Pengunjung::print');

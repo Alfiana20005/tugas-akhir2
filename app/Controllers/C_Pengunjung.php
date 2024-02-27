@@ -163,17 +163,54 @@ class C_Pengunjung extends BaseController
 
         // return view('admin/v_masterpetugas');
     }
-
-    public function laporan()
+    public function print()
     {
-        // Panggil fungsi statistik
         $data = $this->statistik();
+        $tahun = $this->request->getPost('tahun');
+        session()->set('tahun', $tahun);
+    
+        // Ambil data dari model
+        $data_pengunjung = $this->M_Pengunjung->getDataByYear($tahun);
+    
+        // Inisialisasi $bulan_labels
+        $bulan_labels = [];
+    
+        // Inisialisasi data_grafik dengan format yang diharapkan
+        $data_grafik = [];
+    
+        // Loop through data_pengunjung only if there is data
+        if (!empty($data_pengunjung)) {
+            foreach ($data_pengunjung as $row) {
+                $bulan_labels[] = $row['bulan'];
+    
+                // Periksa apakah kategori sudah ada di dalam data_grafik
+                if (!isset($data_grafik[$row['kategori']])) {
+                    // Jika belum ada, inisialisasi dengan data bulan
+                    $data_grafik[$row['kategori']] = [
+                        'label' => $row['kategori'],
+                        'backgroundColor' => '#4e73df', // Ganti warna sesuai kebutuhan
+                        'hoverBackgroundColor' => '#2e59d9', // Ganti warna sesuai kebutuhan
+                        'borderColor' => '#4e73df', // Ganti warna sesuai kebutuhan
+                    ];
+                }
+    
+                // Isi data_grafik dengan total per bulan
+                $data_grafik[$row['kategori']]['data'][$row['bulan']] = $row['total'];
+            }
+        }
+    
+        // Tambahkan data ke dalam variabel $data
+        $data['bulan_labels'] = json_encode(array_unique($bulan_labels));
+        $data['data_grafik'] = json_encode(array_values($data_grafik)); // Mengambil nilai dari asosiatif array
+        $data['data_pengunjung'] = $data_pengunjung;
+        $data['jumlah'] = $this->M_Pengunjung->getDataByMonth($tahun);
+    
+        // Tampilkan view dengan variabel $data
         return view('pelayanan/v_generate_report', $data);
     }
-    // public function print(){
-    //     $data['dataPengunjung'] = $this->M_Pengunjung->getPengunjung("data_pengunjung")->result();
-    //     $this->load->view('v_generate_report', $data);
-    // }
+    
+    
+    
 
 
 }
