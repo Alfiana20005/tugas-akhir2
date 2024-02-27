@@ -1,3 +1,21 @@
+<?php
+// Array untuk memetakan nama bulan
+$bulanMapping = [
+    'January' => 'Januari',
+    'February' => 'Februari',
+    'March' => 'Maret',
+    'April' => 'April',
+    'May' => 'Mei',
+    'June' => 'Juni',
+    'July' => 'Juli',
+    'August' => 'Agustus',
+    'September' => 'September',
+    'October' => 'Oktober',
+    'November' => 'November',
+    'December' => 'Desember',
+];
+?>
+
 <?= $this->extend('template/v_template'); ?>
 
 <?= $this->section('content'); ?>
@@ -32,8 +50,8 @@ var ctx = document.getElementById("statistik");
 var myBarChart = new Chart(ctx, {
   type: 'bar',
   data: {
-    // labels: ["January", "February", "March", "April", "May", "June", "Agustus", "September", "November", "December"],
-    labels: <?= $bulan_labels; ?>,
+    labels: [],
+    
     datasets: <?= $data_grafik; ?>
   
   },
@@ -49,6 +67,7 @@ var myBarChart = new Chart(ctx, {
     },
     scales: {
       xAxes: [{
+        type: 'time',
         time: {
           unit: 'month'
         },
@@ -56,16 +75,16 @@ var myBarChart = new Chart(ctx, {
           display: false,
           drawBorder: false
         },
-        ticks: {
-          maxTicksLimit: 6
-        },
-        maxBarThickness: 25,
+        // ticks: {
+        //   maxTicksLimit: 10
+        // },
+        // maxBarThickness: 5,
       }],
       yAxes: [{
         ticks: {
           min: 0,
-          max: 15000,
-          maxTicksLimit: 5,
+          max: 1500000,
+          // maxTicksLimit: 5,
           padding: 10,
           // Include a dollar sign in the ticks
           callback: function(value, index, values) {
@@ -111,12 +130,17 @@ var myBarChart = new Chart(ctx, {
     <!-- Judul -->
     <div class="card shadow mb-4">                 
         <div class="card-body">
-            <div class="container-fluid text-center">
-                <h6 class="m-0 font-weight-bold text-black">LAPORAN DATA PENGUNJUNG</h6>
-                <h6 class="m-0 font-weight-bold text-black">MUSEUM NEGERI NUSA TENGGARA BARAT (NTB)</h6>
-                <h6 class="m-0 font-weight-bold text-black mb-4">TAHUN <?= $tahun; ?> </h6>
-                <hr>
+            <div class="container-fluid d-sm-flex align-items-center justify-content-center mt-4">
+              <img src="img\download.png" alt="" id="logo" style="width: 56px; margin-right: 20px;" >
+              <div class="text-center">
+                  <h6 class="m-0 font-weight-bold text-black">LAPORAN DATA PENGUNJUNG</h6>
+                  <h6 class="m-0 font-weight-bold text-black">MUSEUM NEGERI NUSA TENGGARA BARAT (NTB)</h6>
+                  <h6 class="m-0 font-weight-bold text-black mb-4">TAHUN <?= $tahun; ?> </h6>
+              </div>
+              <img src="img\logo-.png" alt="" id="logo" style="width: 80px; margin-left: 20px;">
             </div>
+            <hr>
+
             <div class="table-responsive text-center">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
@@ -159,7 +183,7 @@ var myBarChart = new Chart(ctx, {
                         // Menampilkan data
                         foreach ($uniqueMonths as $month) : ?> 
                             <tr>
-                                <td><?= $month; ?></td>
+                                <td><?= $bulanMapping[$month]; ?></td>
                                 <?php foreach ($uniqueCategories as $category) : ?>
                                     <td><?= $dataByMonth[$month][$category] ?? 0; ?></td>
                                 <?php endforeach; ?>

@@ -132,13 +132,16 @@
                     </div>
                     <div class="mt-4 text-center small">
                         <span class="mr-2">
-                            <i class="fas fa-circle text-primary"></i> Direct
+                            <i class="fas fa-circle text-primary"></i> Baik
                         </span>
                         <span class="mr-2">
-                            <i class="fas fa-circle text-success"></i> Social
+                            <i class="fas fa-circle text-success"></i> Rusak Ringan
                         </span>
                         <span class="mr-2">
-                            <i class="fas fa-circle text-info"></i> Referral
+                            <i class="fas fa-circle text-success"></i> Rusak Sedang
+                        </span>
+                        <span class="mr-2">
+                            <i class="fas fa-circle text-info"></i> Rusak Berat
                         </span>
                     </div>
                 </div>

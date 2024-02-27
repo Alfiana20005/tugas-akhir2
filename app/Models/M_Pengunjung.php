@@ -44,8 +44,9 @@ class M_Pengunjung extends Model
     
         // Konversi nomor bulan menjadi nama bulan
         foreach ($result as &$row) {
-            $row['bulan'] = date("F", mktime(0, 0, 0, $row['bulan'], 1));
-        }
+            if (isset($row['bulan'])) {
+                $row['bulan'] = date("F", mktime(0, 0, 0, $row['bulan'], 1));
+            }        }
     
         return $result;
     }
