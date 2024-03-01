@@ -125,11 +125,67 @@ class C_Petugas extends BaseController
         return view('petugas/v_ubahPetugas', $data);
         
     } 
+    // public function update($id_petugas) {
+
+    //     // Mengambil data yang akan diupdate dari request
+    //     $dataToUpdate = [
+    //         'nama' => $this->request->getVar('nama'),
+    //         'username' => $this->request->getVar('username'),
+    //         'email' => $this->request->getVar('email'),
+    //         'password' => $this->request->getVar('password'),
+    //         'level' => $this->request->getVar('level'),
+    //     ];
+
+    //     $foto = $this->request->getFile('foto');
+
+    //     // Cek apakah file foto diunggah
+    //     if ($foto && $foto->isValid() && !$foto->hasMoved()) {
+    //         // Generate nama unik untuk file foto
+    //         $fotoName = $foto->getRandomName();
+
+    //         // Pindahkan file foto ke folder yang diinginkan
+    //         $foto->move('../img/profile/', $fotoName);
+
+    //         // Tambahkan nama file foto ke data yang akan diupdate
+    //         $dataToUpdate['foto'] = $fotoName;
+    //     }
+
+    //     // Membersihkan data yang mungkin ada dari inputan form
+    //     $dataToUpdate = array_filter($dataToUpdate);
+
+    //     // Memastikan ada data yang akan diupdate
+    //     if (!empty($dataToUpdate)) {
+    //         // Mengeksekusi perintah update
+    //         $this->M_Petugas->update($id_petugas, $dataToUpdate);
+
+    //         // Ambil data petugas setelah diubah dari database
+    //         $newPetugasData = $this->M_Petugas->getPetugas($id_petugas);
+
+    //         // Perbarui sesi pengguna dengan data baru
+    //         session()->set([
+    //             'nama' => $newPetugasData['nama'],
+    //             'username' => $newPetugasData['username'],
+    //             'email' => $newPetugasData['email'],
+    //             'password' => $newPetugasData['password'],
+    //             'level' => $newPetugasData['level'],
+    //         ]);
+
+    //         //alert
+    //         session()->setFlashdata('pesan', 'Data Berhasil diubah.');
+    //     } else {
+    //         // Jika tidak ada data yang diupdate, munculkan pesan kesalahan
+    //         session()->setFlashdata('error', 'Tidak ada data yang diupdate.');
+    //     }
+    //     $foto = $this->request->getFile('foto');
+    //     dd($foto);
+
+    //     // return redirect()->to('/petugas');
+    //     return redirect()->back();
+        
+    // } 
+
     public function update($id_petugas) {
-
- 
-
-            // Mengambil data yang akan diupdate dari request
+        // Mengambil data yang akan diupdate dari request
         $dataToUpdate = [
             'nama' => $this->request->getVar('nama'),
             'username' => $this->request->getVar('username'),
@@ -137,35 +193,64 @@ class C_Petugas extends BaseController
             'password' => $this->request->getVar('password'),
             'level' => $this->request->getVar('level'),
         ];
+    
+        $foto = $this->request->getFile('foto');
 
+        // Cek apakah file foto diunggah
+        if ($foto && $foto->isValid() && !$foto->hasMoved()) {
+            // Generate nama unik untuk file foto
+            $fotoName = $foto->getRandomName();
+
+            // Pindahkan file foto ke folder yang diinginkan
+            $foto->move('img/profile', $fotoName); // Perbarui path sesuai dengan folder yang diinginkan
+
+            // Tambahkan nama file foto ke data yang akan diupdate
+            $dataToUpdate['foto'] = $fotoName;
+        }
+    
         // Membersihkan data yang mungkin ada dari inputan form
         $dataToUpdate = array_filter($dataToUpdate);
-
+    
         // Memastikan ada data yang akan diupdate
         if (!empty($dataToUpdate)) {
             // Mengeksekusi perintah update
             $this->M_Petugas->update($id_petugas, $dataToUpdate);
-
+    
+            // Ambil data petugas setelah diubah dari database
+            $newPetugasData = $this->M_Petugas->getPetugas($id_petugas);
+    
+            // Perbarui sesi pengguna dengan data baru
+            session()->set([
+                'nama' => $newPetugasData['nama'],
+                'username' => $newPetugasData['username'],
+                'email' => $newPetugasData['email'],
+                'password' => $newPetugasData['password'],
+                'level' => $newPetugasData['level'],
+                'foto' => $newPetugasData['foto'], // Pastikan kolom foto ditambahkan ke sesi jika diperlukan
+            ]);
+    
             //alert
             session()->setFlashdata('pesan', 'Data Berhasil diubah.');
         } else {
             // Jika tidak ada data yang diupdate, munculkan pesan kesalahan
             session()->setFlashdata('error', 'Tidak ada data yang diupdate.');
         }
+        dd('berhasil');
+    
+        // Redirect ke halaman sebelumnya atau halaman yang sesuai
+        return redirect()->back();
+    }
 
-        return redirect()->to('/petugas');
-        
-    } 
-    public function profile($id_petugas) 
+    
+
+    public function profile() 
     {
+        $petugas = $this->M_Petugas->findAll();
         $data =[
-            'title' => 'Ubah Data Petugas',
-            'validation' => \Config\Services::validation(),
-            'petugas' => $this->M_Petugas->getPetugas($id_petugas)
+            'title' => 'My Profile',
+            'data_petugas' => $petugas
         ];
-        
+    
         return view('petugas/v_profile', $data);
-        
-    }  
-
+    }
 }

@@ -27,7 +27,7 @@
                         <div class="row mb-3">
                             <label for="inputname" class="col-sm-2 col-form-label">Nama/Instansi/Keluarga</label>
                             <div class="col-sm-10">
-                            <input type="text" class="form-control" name="nama" value="<?= old('nama'); ?>">
+                            <input type="text" class="form-control"  name="nama" value="<?= old('nama'); ?>">
                             </div>
                         </div>
                         <div class="row mb-3">

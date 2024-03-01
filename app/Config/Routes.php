@@ -26,8 +26,9 @@ $routes->post('/save', 'C_Petugas::save');
 $routes->delete('hapuspetugas/(:segment)', 'C_Petugas::delete/$1');
 $routes->get('ubahpetugas/(:segment)', 'C_Petugas::edit/$1');
 $routes->post('/updatepetugas/(:segment)', 'C_Petugas::update/$1');
-$routes->get('/profile/(:segment)', 'C_Petugas::profile/$1');
-
+$routes->post('/updateProfile/(:segment)', 'C_Petugas::updateProfile/$1');
+$routes->get('/profile', 'C_Petugas::profile');
+$routes->get('profile/(:segment)', 'C_Petugas::profile/$1');
 //data pengunjung
 
 $routes->post('/tambahPengunjung', 'C_Pengunjung::tambahPengunjung');

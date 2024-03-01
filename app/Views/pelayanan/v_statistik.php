@@ -24,7 +24,7 @@ $bulanMapping = [
     <form action="/statistik" method="post" class="d-inline">
         <div class="row">
             <div class="col-lg-3 mb-4">
-                <input type="text" class="form-control" placeholder="Masukkan Tahun" aria-label="tahun" name="tahun" value="<?= date('Y'); ?>">
+                <input type="text" class="form-control" placeholder="Masukkan Tahun" aria-label="tahun" name="tahun" value="<?= $tahun; ?>">
             </div>
             <div class="col-lg-3 mb-4">
                 <button type="submit" class="btn btn-sm btn-primary shadow-s"><i class="fas fa-sm text-white-50"></i>Tampilkan Data</button>
@@ -142,7 +142,7 @@ var myBarChart = new Chart(ctx, {
             <hr>
 
             <div class="table-responsive text-center">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-bordered" id="" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>Bulan</th>

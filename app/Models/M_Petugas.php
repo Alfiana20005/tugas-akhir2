@@ -11,7 +11,9 @@ class M_Petugas extends Model
     protected $useTimestamps = true;
 
 
-    protected $allowedFields = ['foto', 'nama','password','email','username','level'];
+    // protected $allowedFields = ['foto', 'nama','password','email','username','level'];
+    protected $allowedFields = ['foto', 'nama', 'password', 'email', 'username', 'level'];
+
 
     protected $validationRules = [];
     protected $validationMessages = [];

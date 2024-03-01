@@ -23,7 +23,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="font-size: 11pt;">
                                     <thead>
                                         <tr>
                                             <th style="text-align: center;">No</th>
@@ -39,22 +39,22 @@
                                         </tr>
                                     </thead>
                                     
-                                    <tbody>
+                                    <tbody >
                                         <?php 
                                         $no=1;
                                     
                                         foreach($data_petugas as $p): ?>
                                         <tr>
                                         <td style="text-align: center;"><?= $no++; ?></td>
-                                            <td><img src="/img/<?= $p['foto']; ?>" alt=""></td>
+                                            <td><img src="<?= base_url('img/profile/' . $p['foto']); ?>" alt="" style="width: 60px;"></td>
                                             <td><?= $p['nama']; ?></td>
                                             <td><?= $p['level']; ?></td>
                                             <?php if (session()->get('level') == 'Admin'): ?>
                                             <td><?= $p['email']; ?></td>
                                             <td><?= $p['username']; ?></td>
-                                            <td><?= $p['password']; ?></td>
+                                            <td><?= str_repeat('*', strlen($p['password'])); ?></td>
                                             <td>
-                                                <a href="/ubahpetugas/<?= $p['id_petugas']; ?>" class="btn btn-success" >Edit</a>
+                                                <a href="/ubahpetugas/<?= $p['id_petugas']; ?>" class="btn btn-success " >Edit</a>
                                                 <!-- <a href="" class="btn btn-danger" >hapus</a> -->
                                                 <form action="/hapuspetugas/<?= $p['id_petugas']; ?>" method="post" class="d-inline">
                                                     <?= csrf_field(); ?>

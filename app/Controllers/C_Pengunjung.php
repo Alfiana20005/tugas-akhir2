@@ -81,18 +81,29 @@ class C_Pengunjung extends BaseController
         $bulan_labels = [];
         $data_grafik = [];
 
+        $randomColors = [
+            '#78A083', '#344955', '#1B3C73', '#944E63', '#f8a5c2', '#FFCD4B', '#720455', '#2b59c3', '#f5365c', '#FB8B24'
+        ];
+        
+        // Shuffle the $randomColors array to make sure colors are unique for each category
+        shuffle($randomColors);
+        
         foreach ($data_pengunjung as $row) {
             $bulan_labels[] = $bulanMapping[$row['bulan']];
-
+        
             if (!isset($data_grafik[$row['kategori']])) {
+                // Take the first color from the shuffled array for the current category
+                $currentColor = array_shift($randomColors);
+        
                 $data_grafik[$row['kategori']] = [
                     'label' => $row['kategori'],
-                    'backgroundColor' => '#4e73df',
-                    'hoverBackgroundColor' => '#2e59d9',
-                    'borderColor' => '#4e73df',
+                    'backgroundColor' => $currentColor,
+                    'hoverBackgroundColor' => $currentColor,
+                    'borderColor' => $currentColor,
+                    'data' => [],
                 ];
             }
-
+        
             $data_grafik[$row['kategori']]['data'][$bulanMapping[$row['bulan']]] = $row['total'];
         }
 
@@ -105,6 +116,20 @@ class C_Pengunjung extends BaseController
     }
     public function tampilstatistik(){
         $data = $this->statistik();
+            // Make sure $data['data_grafik'] is an array
+            if (is_array($data['data_grafik'])) {
+                $randomColors = [
+                    '#4e73df', '#2e59d9', '#36b9cc', '#1cc88a', '#f8a5c2', '#6d7fcc', '#11cdef', '#2b59c3', '#f5365c', '#fb6340'
+                ];
+            
+                // Assign random colors to each category
+                foreach ($data['data_grafik'] as &$categoryData) {
+                    $randomColorIndex = array_rand($randomColors);
+                    $categoryData['backgroundColor'] = $randomColors[$randomColorIndex];
+                    $categoryData['hoverBackgroundColor'] = $randomColors[$randomColorIndex];
+                    $categoryData['borderColor'] = $randomColors[$randomColorIndex];
+                }
+            }
         return view('pelayanan/v_statistik', $data);
     }
 
