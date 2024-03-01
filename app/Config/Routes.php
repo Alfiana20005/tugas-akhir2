@@ -29,8 +29,8 @@ $routes->post('/updatepetugas/(:segment)', 'C_Petugas::update/$1');
 $routes->post('/updateProfile/(:segment)', 'C_Petugas::updateProfile/$1');
 $routes->get('/profile', 'C_Petugas::profile');
 $routes->get('profile/(:segment)', 'C_Petugas::profile/$1');
-//data pengunjung
 
+//data pengunjung
 $routes->post('/tambahPengunjung', 'C_Pengunjung::tambahPengunjung');
 $routes->get('/pengunjung', 'C_Pengunjung::index');
 $routes->get('/rekapitulasi', 'C_Pengunjung::rekapitulasi');
@@ -40,3 +40,8 @@ $routes->get('/statistik', 'C_Pengunjung::tampilstatistik');
 $routes->post('/statistik', 'C_Pengunjung::tampilstatistik');
 $routes->get('/print', 'C_Pengunjung::print');
 $routes->post('/print', 'C_Pengunjung::print');
+
+//Inventaris 
+$routes->get('/tambahdata', 'C_Koleksi::tambahData');
+$routes->get('/koleksi', 'C_Koleksi::tampilKoleksi');
+$routes->get('/detailKoleksi', 'C_Koleksi::detailKoleksi');

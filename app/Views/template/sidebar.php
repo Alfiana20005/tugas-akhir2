@@ -65,12 +65,12 @@
     <!-- PETUGAS PENGKAJIAN -->
     <?php if (session()->get('level') == 'Petugas Pengkajian'): ?>
 
-    <div class="sidebar-heading">
+    <div class="sidebar-heading mt-3">
         Inventaris Koleksi
     </div>
 
     <li class="nav-item">
-        <a class="nav-link" href="/petugas">
+        <a class="nav-link" href="/tambahdata">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Tambah Data Koleksi</span></a>
     </li>
@@ -85,7 +85,7 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Pilih Kategori:</h6>
-                <a class="collapse-item" href="buttons.html">Arkeologika</a>
+                <a class="collapse-item" href="<?= base_url("/koleksi"); ?>">Arkeologika</a>
                 <a class="collapse-item" href="cards.html">Biologika</a>
                 <a class="collapse-item" href="cards.html">Etnografika</a>
                 <a class="collapse-item" href="cards.html">Filologika</a>

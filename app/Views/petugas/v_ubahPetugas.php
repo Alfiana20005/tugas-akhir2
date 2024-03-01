@@ -31,6 +31,7 @@
             <form action="/updatepetugas/<?= $petugas['id_petugas']; ?>" method="post" enctype="multipart/form-data">
                 
                 <?= csrf_field() ?>
+                
                 <div class="row mb-3">
                     <label for="name" class="col-sm-2 col-form-label">Nama Lengkap</label>
                     <div class="col-sm-10">
@@ -70,6 +71,7 @@
                         </div>
                 </div>
                 
+                <?php if (session()->get('level') != 'Admin'): ?>
                 <div class="row mb-3">
                     <label for="foto" class="col-sm-2 col-form-label">Foto</label>
                     <div class="col-sm-10">
@@ -85,7 +87,7 @@
                         </div>
                     </div>
                 </div>
-                
+                <?php endif; ?>
                 <button type="submit" class="btn btn-primary mt-4" st>Ubah Data</button>
             </form>
         </div>

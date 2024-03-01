@@ -65,12 +65,21 @@
                             </select>
                         </div>
                 </div>
-                <!-- <div class="row mb-5">
-                        <label for="formFileSm" class="col-sm-2 col-form-label">Foto</label>
-                        <div class="col-sm-10">
-                        <input class="form-control" id="formFileSm" type="file">
+                <div class="row mb-3">
+                    <label for="foto" class="col-sm-2 col-form-label">Foto</label>
+                    <div class="col-sm-10">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input form-control" id="customFile" name="foto">
+                            <label class="custom-file-label" for="customFile">Masukkan Foto Anda</label>
+                            <?php if (!empty($petugas['foto'])): ?>
+                                <div class="my-2">
+                                    <p>Foto Saat Ini:</p>
+                                    <img src="<?= base_url('img/profile/' . $petugas['foto']); ?>" alt="Foto Petugas" width="100">
+                                </div>
+                            <?php endif; ?>
                         </div>
-                </div> -->
+                    </div>
+                </div>
                 
                 <button type="submit" class="btn btn-primary">Simpan Data</button>
             </form>

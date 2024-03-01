@@ -220,22 +220,23 @@ class C_Petugas extends BaseController
             $newPetugasData = $this->M_Petugas->getPetugas($id_petugas);
     
             // Perbarui sesi pengguna dengan data baru
-            session()->set([
-                'nama' => $newPetugasData['nama'],
-                'username' => $newPetugasData['username'],
-                'email' => $newPetugasData['email'],
-                'password' => $newPetugasData['password'],
-                'level' => $newPetugasData['level'],
-                'foto' => $newPetugasData['foto'], // Pastikan kolom foto ditambahkan ke sesi jika diperlukan
-            ]);
-    
+            if (session()->get('level') != 'Admin') {
+                session()->set([
+                    'nama' => $newPetugasData['nama'],
+                    'username' => $newPetugasData['username'],
+                    'email' => $newPetugasData['email'],
+                    'password' => $newPetugasData['password'],
+                    'level' => $newPetugasData['level'],
+                    'foto' => $newPetugasData['foto'],
+                ]);
+            }
             //alert
             session()->setFlashdata('pesan', 'Data Berhasil diubah.');
         } else {
             // Jika tidak ada data yang diupdate, munculkan pesan kesalahan
             session()->setFlashdata('error', 'Tidak ada data yang diupdate.');
         }
-        dd('berhasil');
+        // dd('berhasil');
     
         // Redirect ke halaman sebelumnya atau halaman yang sesuai
         return redirect()->back();
