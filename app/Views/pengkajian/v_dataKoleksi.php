@@ -23,25 +23,29 @@
                     </thead>
                     
                     <tbody style="text-align: center;">
+                        <?php 
+                            $no=1;
+                            foreach($data_koleksi as $k): ?>
                         <tr>
-                            <td style="text-align: center;">01.01</td> 
-                            <td style="text-align: center;">01</td>
-                            <td style="text-align: center;"><img src="<?= base_url("img/koleksi/img.png"); ?>" alt="" width="100px"></td>
-                            <td style="text-align: center;">Kramik Arab</td>
-                            <td style="text-align: center;">Baik</td>
+                            <td style="text-align: center;"><?= $k['kode_kategori']; ?> . <?= $k['no_inventaris']; ?></td> 
+                            <td style="text-align: center;"><?= $k['no_registrasi']; ?></td>
+                            <td style="text-align: center;"><img src="<?= base_url("img/koleksi/". $k['gambar']); ?>" alt="" width="100px"></td>
+                            <td style="text-align: center;"><?= $k['nama_inv']; ?></td>
+                            <td style="text-align: center;"><?= $k['keadaan']; ?></td>
                             <td style="text-align: center;">
-                                <a href="<?= base_url("/detailKoleksi"); ?>" class="btn btn-success " >Detail</a>
+                                <a href="<?= base_url("/detailKoleksi/{$k['id']}"); ?>" class="btn btn-success " >Detail</a>
                                                 
-                                <form action="" method="post" class="d-inline">
+                                <form action="/hapus/<?= $k['id']; ?>" method="post"class="d-inline">
                                     <?= csrf_field(); ?>
                                     <input type="hidden" name="_method" value="DELETE">
                                     <button type="submit" class="btn btn-danger" onclick="return confirm('apakah anda yakin?');">Hapus</button>
                                 </form>
                             </td>
                             <td style="text-align: center;">
-                                <a href="" class="btn btn-info " >Lihat</a>
+                                <a href="<?= base_url("/dataPerawatan"); ?>" class="btn btn-info " >Lihat</a>
                             </td>
                         </tr>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>

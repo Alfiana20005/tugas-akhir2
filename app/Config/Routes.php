@@ -43,5 +43,13 @@ $routes->post('/print', 'C_Pengunjung::print');
 
 //Inventaris 
 $routes->get('/tambahdata', 'C_Koleksi::tambahData');
+$routes->post('/saveData', 'C_Koleksi::saveData');
 $routes->get('/koleksi', 'C_Koleksi::tampilKoleksi');
 $routes->get('/detailKoleksi', 'C_Koleksi::detailKoleksi');
+$routes->get('/detailKoleksi/(:segment)', 'C_Koleksi::detailKoleksi/$1');
+$routes->delete('hapus/(:segment)', 'C_Koleksi::delete/$1');
+
+
+//perawatan
+$routes->get('/dataPerawatan', 'C_Koleksi::lihatPerawatan');
+$routes->get('/tambahPerawatan', 'C_Koleksi::tambahPerawatan');
