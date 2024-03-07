@@ -3,15 +3,18 @@
 namespace App\Controllers;
 use App\Models\M_Petugas;
 use App\Models\M_Pengunjung;
+use App\Models\M_Koleksi;
 
 class C_Dashboard extends BaseController
 {
     protected $M_Petugas;
     protected $M_Pengunjung;
+    protected $M_koleksi;
     public function __construct() {
         helper('form');
         $this -> M_Petugas = new M_Petugas();
         $this->M_Pengunjung = new M_Pengunjung();
+        // $this->M_Koleksi = new M_Koleksi();
     }
     public function index()
     {
@@ -46,5 +49,12 @@ class C_Dashboard extends BaseController
         $data['totalPetugas'] = $this->M_Petugas->countPetugas();
         return view('v_dashboard', $data);
     }
+
+    public function sidebar(){
+        $data['koleksi'] = $this->M_koleksi->getKategoriName();
+
+        return view('sidebar', $data);
+    }
+
 
 }

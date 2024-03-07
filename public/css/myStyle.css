@@ -21,6 +21,16 @@ th {
         
         display: block !important;
     }
+    .card-header{
+        display: none;
+    }
+    #judul-inv{
+        font-family: 'Times New Roman';
+    }
+    #koleksi{
+        font-family: 'Times New Roman';
+
+    }
     
 }
 .report{

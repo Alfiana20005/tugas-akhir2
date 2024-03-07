@@ -43,6 +43,12 @@
                             </div>
                         </div>
                         <div class="row mb-3">
+                            <label for="No Hp" class="col-sm-2 col-form-label">Tanggal Kunjungan</label>
+                            <div class="col-sm-10">
+                            <input type="date" class="form-control" name="created_at" value="<?= old('created_at'); ?>">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
                                 <label for="kategori" class="col-sm-2 col-form-label">Kategori</label>
                                 <div class="col-sm-10">
                                     <select class="form-select form-control" type="text" name="kategori">

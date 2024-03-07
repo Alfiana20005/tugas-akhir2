@@ -44,11 +44,14 @@ $routes->post('/print', 'C_Pengunjung::print');
 //Inventaris 
 $routes->get('/tambahdata', 'C_Koleksi::tambahData');
 $routes->post('/saveData', 'C_Koleksi::saveData');
-$routes->get('/koleksi', 'C_Koleksi::tampilKoleksi');
+// 
 $routes->get('/detailKoleksi', 'C_Koleksi::detailKoleksi');
 $routes->get('/detailKoleksi/(:segment)', 'C_Koleksi::detailKoleksi/$1');
 $routes->delete('hapus/(:segment)', 'C_Koleksi::delete/$1');
-
+$routes->get('ubahKoleksi/(:segment)', 'C_Koleksi::edit/$1');
+$routes->post('/updateKoleksi/(:segment)', 'C_Koleksi::update/$1');
+$routes->get('/koleksi/(:segment)', 'C_Koleksi::tampilKoleksi/$1');
+// $routes->get('/koleksi/(:any)', 'C_Koleksi::tampilKoleksi/$1');
 
 //perawatan
 $routes->get('/dataPerawatan', 'C_Koleksi::lihatPerawatan');

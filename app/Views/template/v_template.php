@@ -141,6 +141,7 @@
     <script src="https://cdn.datatables.net/2.0.1/js/dataTables.min.js"></script>
     <script src="<?= base_url();?>/vendor/datatables/datatables.min.js"></script>
 
+    
 
 </body>
 

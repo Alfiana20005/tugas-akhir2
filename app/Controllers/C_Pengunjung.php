@@ -154,7 +154,11 @@ class C_Pengunjung extends BaseController
             'jumlah' => [
                 'rules' => 'required',
                 'errors' => ['required'=>'Jumlah harus diisi']
-            ]       
+            ],       
+            'created_at' => [
+                'rules' => 'required',
+                'errors' => ['required'=>'Jumlah harus diisi']
+            ]  
         ];
 
         if(!$this->validate($rules)){
@@ -181,6 +185,7 @@ class C_Pengunjung extends BaseController
                 'no_hp' => $this->request->getVar('no_hp'),
                 'kategori' => $this->request->getVar('kategori'),
                 'jumlah' => $this->request->getVar('jumlah'),
+                'created_at' => $this->request->getVar('created_at'),
                 'id_petugas' => session()->get('id_petugas'), // Ambil ID petugas dari sesi
             
         ]);

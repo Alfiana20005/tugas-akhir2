@@ -16,12 +16,16 @@ class M_Koleksi extends Model
         'no_registrasi' => 'required|max_length[6]|is_unique[data_koleksi.no_registrasi]',
         'no_inventaris' => 'required|max_length[11]|is_unique[data_koleksi.no_inventaris]',
         'nama_inv' => 'required|max_length[30]',
-        // Sesuaikan aturan validasi dengan kebutuhan Anda
+        
     ];
 
     protected $validationMessages = [];
     protected $skipValidation = false;
     protected $cleanValidationRules = true;
+    public function updateKoleksi($id, $data)
+    {
+        return $this->db->table($this->table)->where($this->primaryKey, $id)->update($data);
+    }
     public function getKoleksi($id){
         return $this->find($id);
     }
@@ -32,6 +36,22 @@ class M_Koleksi extends Model
             ->where('id_petugas', $id_petugas)
             ->get()
             ->getRowArray();
+    }
+    public function getKategoriName($kode_kategori)
+    {
+        return $this->db->table('data_koleksi')
+            ->select('kategori_inv.nama_kategori')
+            ->join('kategori_inv', 'kategori_inv.kode_kategori = data_koleksi.kode_kategori', 'left')
+            ->where('data_koleksi.kode_kategori', $kode_kategori)
+            ->get()
+            ->getRowArray();
+    }
+    public function getKoleksiByKategori($kode_kategori)
+    {
+        return $this->db->table('data_koleksi')
+            ->where('kode_kategori', $kode_kategori)
+            ->get()
+            ->getResultArray();
     }
 }
     

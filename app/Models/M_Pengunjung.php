@@ -9,10 +9,10 @@ class M_Pengunjung extends Model
 {
     protected $table = 'data_pengunjung';
     protected $primaryKey = 'id_pengunjung';
-    protected $useTimestamps = true;
+    // protected $useTimestamps = true;
 
 
-    protected $allowedFields = ['nama', 'alamat','no_hp','kategori','jumlah','id_petugas'];
+    protected $allowedFields = ['nama', 'alamat','no_hp','kategori','jumlah','id_petugas','created_at'];
 
     protected $validationRules = [];
     protected $validationMessages = [];

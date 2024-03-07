@@ -129,16 +129,16 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Pilih Kategori:</h6>
-                <a class="collapse-item" href="buttons.html">Arkeologika</a>
-                <a class="collapse-item" href="cards.html">Biologika</a>
-                <a class="collapse-item" href="cards.html">Etnografika</a>
-                <a class="collapse-item" href="cards.html">Filologika</a>
-                <a class="collapse-item" href="cards.html">Geologika</a>
-                <a class="collapse-item" href="cards.html">Historika</a>
-                <a class="collapse-item" href="cards.html">Kramologika</a>
-                <a class="collapse-item" href="cards.html">Numismatika</a>
-                <a class="collapse-item" href="cards.html">Seni Rupa</a>
-                <a class="collapse-item" href="cards.html">Teknologika</a>
+                <a class="collapse-item" href="<?= base_url("/koleksi/{$data_koleksi['01']}"); ?>" >Arkeologika</a>
+                <a class="collapse-item" href="<?= base_url("/koleksi/{$data_koleksi['02']}"); ?>">Biologika</a>
+                <a class="collapse-item" href="<?= base_url("/koleksi/". $dataKoleksi['03']); ?>" data-kategori="03">Etnografika</a>
+                <a class="collapse-item" href="<?= base_url("/koleksi/". $dataKoleksi['04']); ?>" data-kategori="04">Filologika</a>
+                <a class="collapse-item" href="<?= base_url("/koleksi/". $dataKoleksi['05']); ?>" data-kategori="05">Geologika</a>
+                <a class="collapse-item" href="<?= base_url("/koleksi/". $dataKoleksi['06']); ?>" data-kategori="06">Historika</a>
+                <a class="collapse-item" href="<?= base_url("/koleksi/". $dataKoleksi['07']); ?>" data-kategori="07">Kramologika</a>
+                <a class="collapse-item" href="<?= base_url("/koleksi/". $dataKoleksi['08']); ?>" data-kategori="08">Numismatika</a>
+                <a class="collapse-item" href="<?= base_url("/koleksi/". $dataKoleksi['09']); ?>" data-kategori="09">Seni Rupa</a>
+                <a class="collapse-item" href="<?= base_url("/koleksi/". $dataKoleksi['10']); ?>" data-kategori="10">Teknologika</a>
             
             </div>
         </div>
@@ -205,3 +205,29 @@
     </div>
 
 </ul>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- <script>
+    $(document).ready(function () {
+        // Fungsi untuk menangani perubahan kategori
+        $('.collapse-item').click(function (e) {
+            e.preventDefault(); // Mencegah perilaku tautan default
+
+            var kategori = $(this).attr('href').split('/').pop(); // Dapatkan kode kategori dari URL
+
+            // Lakukan permintaan AJAX untuk mengambil data koleksi berdasarkan kategori
+            $.ajax({
+                url: '/koleksi/' + kategori,
+                method: 'GET',
+                success: function (data) {
+                    // Ganti konten tampilan data koleksi dengan data yang baru
+                    $('#container-data-koleksi').html(data);
+                },
+                error: function () {
+                    alert('Gagal mengambil data koleksi.');
+                }
+            });
+        });
+    });
+</script> -->
