@@ -21,7 +21,7 @@ $bulanMapping = [
 <?= $this->section('content'); ?>
 
 <div class="container-fluid statistik">
-    <form action="/statistik" method="post" class="d-inline">
+    <form action="/grafikKoleksi" method="post" class="d-inline">
         <div class="row">
             <div class="col-lg-3 mb-4">
                 <input type="text" class="form-control" placeholder="Masukkan Tahun" aria-label="tahun" name="tahun" value="<?= $tahun; ?>">
@@ -33,7 +33,7 @@ $bulanMapping = [
     </form>
     <div class="card shadow mb-4">
         <div class="card-header d-sm-flex align-items-center justify-content-between mb-4">
-            <h6 class="m-0 font-weight-bold text-primary">Statistik Pengunjung Tahun <?= $tahun; ?></h6>
+            <h6 class="m-0 font-weight-bold text-primary">Grafik Koleksi Museum Negeri Nusa Tenggara Barat</h6>
 
             <button onclick="window.print()" type="submit" class="btn btn-sm btn-primary shadow-s" id="print"><i class="fas fa-print fa-sm text-white-50"></i>Print</button>
         </div>

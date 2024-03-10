@@ -9,12 +9,12 @@ class C_Dashboard extends BaseController
 {
     protected $M_Petugas;
     protected $M_Pengunjung;
-    protected $M_koleksi;
+    protected $M_Koleksi;
     public function __construct() {
         helper('form');
         $this -> M_Petugas = new M_Petugas();
         $this->M_Pengunjung = new M_Pengunjung();
-        // $this->M_Koleksi = new M_Koleksi();
+        $this->M_Koleksi = new M_Koleksi();
     }
     public function index()
     {
@@ -47,14 +47,15 @@ class C_Dashboard extends BaseController
         $data['data_pengunjung'] = $data_pengunjung;
 
         $data['totalPetugas'] = $this->M_Petugas->countPetugas();
+        $data['totalKoleksi'] = $this->M_Koleksi->countKoleksi();
         return view('v_dashboard', $data);
     }
 
-    public function sidebar(){
-        $data['koleksi'] = $this->M_koleksi->getKategoriName();
+    // public function sidebar(){
+    //     $data['koleksi'] = $this->M_Koleksi->getKategoriName();
 
-        return view('sidebar', $data);
-    }
+    //     return view('sidebar', $data);
+    // }
 
 
 }

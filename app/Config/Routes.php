@@ -54,5 +54,9 @@ $routes->get('/koleksi/(:segment)', 'C_Koleksi::tampilKoleksi/$1');
 // $routes->get('/koleksi/(:any)', 'C_Koleksi::tampilKoleksi/$1');
 
 //perawatan
-$routes->get('/dataPerawatan', 'C_Koleksi::lihatPerawatan');
-$routes->get('/tambahPerawatan', 'C_Koleksi::tambahPerawatan');
+// $routes->get('/dataPerawatan', 'C_Perawatan::lihatPerawatan');
+$routes->get('/dataPerawatan/(:segment)', 'C_Perawatan::lihatPerawatan/$1');
+// $routes->get('/tambahPerawatan', 'C_Perawatan::tambahPerawatan');
+$routes->get('/tambahPerawatan/(:segment)', 'C_Perawatan::tambahPerawatan/$1');
+$routes->post('/simpanPerawatan/(:segment)', 'C_Perawatan::savePerawatan/$1');
+$routes->post('/simpanPerawatan', 'C_Perawatan::savePerawatan');

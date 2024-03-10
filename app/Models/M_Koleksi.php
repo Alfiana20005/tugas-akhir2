@@ -22,6 +22,7 @@ class M_Koleksi extends Model
     protected $validationMessages = [];
     protected $skipValidation = false;
     protected $cleanValidationRules = true;
+
     public function updateKoleksi($id, $data)
     {
         return $this->db->table($this->table)->where($this->primaryKey, $id)->update($data);
@@ -53,5 +54,16 @@ class M_Koleksi extends Model
             ->get()
             ->getResultArray();
     }
+    public function countKoleksi()
+    {
+        // Membuat instansiasi model
+        $model = new M_Koleksi();
+
+        // Menghitung jumlah petugas
+        $totalKoleksi = $model->countAll();
+
+        return $totalKoleksi;
+    }
+    
 }
     

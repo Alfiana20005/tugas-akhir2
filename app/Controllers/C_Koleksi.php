@@ -93,13 +93,30 @@ class C_Koleksi extends BaseController
     }
     public function tampilKoleksi($kode_kategori) 
     {
+        // Mendapatkan data koleksi berdasarkan kategori
         $data_koleksi = $this->M_Koleksi->getKoleksiByKategori($kode_kategori);
-    
+
+        // Mendapatkan nama kategori
+        $kategoriName = $this->M_Koleksi->getKategoriName($kode_kategori);
+
+        // Mengecek apakah kategori ditemukan
+        if ($kategoriName !== null && isset($kategoriName['nama_kategori'])) {
+            // Jika kategori ditemukan, gunakan nama kategori di judul
+            $judulKategori = $kategoriName['nama_kategori'];
+        } else {
+            // Handle jika kategori tidak ditemukan
+            $judulKategori = 'Kategori Tidak Ditemukan';
+        }
+
+        // Membuat array data untuk dikirim ke view
         $data = [
-            'title' => 'Daftar Koleksi',
-            'data_koleksi' => $data_koleksi
+            'title' => 'Daftar Koleksi ', // Menggunakan nama kategori di judul
+            'data_koleksi' => $data_koleksi,
+            'kategori' => $kategoriName,
+            'judul' => $judulKategori,
         ];
-    
+
+        // Menampilkan view dengan data yang telah disiapkan
         return view('pengkajian/v_dataKoleksi', $data);
     }
     public function detailKoleksi($id) 
@@ -184,15 +201,4 @@ class C_Koleksi extends BaseController
         // Redirect ke halaman sebelumnya atau halaman yang sesuai
         return redirect()->to('/detailKoleksi/' . $id);
     } 
-    public function lihatPerawatan() 
-    {
-        
-        return view('pengkajian/v_dataPerawatan');
-    }
-    public function tambahPerawatan() 
-    {
-        
-        return view('pengkajian/v_tambahPerawatan');
-    }
-
 }

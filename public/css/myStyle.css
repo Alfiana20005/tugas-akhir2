@@ -17,11 +17,11 @@ th {
     .statistik {
         display: none;
     }
-    .report {
+    .report, #tampilPrint, #tampilPerawatan {
         
         display: block !important;
     }
-    .card-header{
+    .card-header {
         display: none;
     }
     #judul-inv{
@@ -31,8 +31,48 @@ th {
         font-family: 'Times New Roman';
 
     }
+    #juduldatakoleksi, #namakoleksi {
+        display: none;
+    }
+
+    /* Hide unnecessary elements within the card when printing */
+    #print {
+        display: none;
+    }
+    /* .card {
+        position: relative;
+    }
+
+    .card > *:not(.card-body) {
+        position: absolute;
+        left: -99999px;
+        top: -99999px;
+    }
+
+    /* Show only the card body content when printing */
+    /* .card-body {
+        display: block !important;
+    } */
+    .sticky-footer, .card{
+        display: none;
+    }
+    
+    
     
 }
 .report{
     display: none;
+}
+.dt-input{
+    margin-right: 10px;
+}
+#tampilPrint{
+    font-size: 14pt;
+    display: none;
+    /* padding-left: 50px; */
+}
+#tampilPerawatan{
+    font-size: 12pt;
+    display: none;
+    font-family: 'Times New Roman';
 }

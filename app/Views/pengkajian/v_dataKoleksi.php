@@ -3,9 +3,14 @@
 <?= $this-> section('content'); ?>
 
 <div class="container-fluid">
+        <?php  if(session()->getFlashdata('pesan')): ?>
+            <div class="alert alert-success" role="alert">
+                <?= session()->getFlashdata('pesan'); ?>
+            </div>
+        <?php endif; ?>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Data Koleksi [Nama Kategori] </h6>
+            <h6 class="m-0 font-weight-bold text-primary">Data Koleksi <?= $judul ?> </h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -42,7 +47,8 @@
                                 </form>
                             </td>
                             <td style="text-align: center;">
-                                <a href="<?= base_url("/dataPerawatan"); ?>" class="btn btn-info " >Lihat</a>
+                                <a href="<?= base_url("/tambahPerawatan/{$k['id']}"); ?>" class="btn btn-info " >Tambah</a>
+                                <a href="<?= base_url("/dataPerawatan/{$k['id']}"); ?>" class="btn btn-info " >Lihat</a>
                             </td>
                         </tr>
                         <?php endforeach; ?>
