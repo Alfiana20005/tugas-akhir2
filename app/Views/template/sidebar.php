@@ -164,7 +164,7 @@
             <span>Statistik</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="/statistik">
+        <a class="nav-link" href="/grafikKoleksi">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Grafik Koleksi</span></a>
     </li>

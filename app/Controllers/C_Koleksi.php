@@ -201,4 +201,136 @@ class C_Koleksi extends BaseController
         // Redirect ke halaman sebelumnya atau halaman yang sesuai
         return redirect()->to('/detailKoleksi/' . $id);
     } 
+
+    // public function grafikKoleksi()
+    // {
+
+    //     $data_koleksi = $this->M_Koleksi->findAll();
+    // $kategori = [
+    //     '01' => 'Arkeologi',
+    //     '02' => 'Biologika',
+    //     '03' => 'Etnografika',
+    //     '04' => 'Filologika',
+    //     '05' => 'Geologika',
+    //     '06' => 'Historika',
+    //     '07' => 'Kramologika',
+    //     '08' => 'Numismatika',
+    //     '09' => 'Seni Rupa',
+    //     '10' => 'Teknologika',
+    // ];
+    // $randomColors = [
+    //     '#78A083', '#344955', '#1B3C73', '#944E63', '#f8a5c2', '#FFCD4B', '#720455', '#2b59c3', '#f5365c', '#FB8B24'
+    // ];
+    // shuffle($randomColors);
+
+    // $kategori_labels = [];
+    // $data_grafik = [];
+
+    // // Debugging: Tambahkan ini untuk mencetak hasil query
+    // $result = $this->M_Koleksi->getDataByKategori();
+    // // svar_dump($result);
+
+    // foreach ($result as $row) {
+    //     $kategori_labels[] = $kategori[$row['kode_kategori']];
+
+    //     if (!isset($data_grafik[$row['keadaan']])) {
+    //         // Take the first color from the shuffled array for the current category
+    //         $currentColor = array_shift($randomColors);
+
+    //         $data_grafik[$row['keadaan']] = [
+    //             'label' => $row['keadaan'],
+    //             'backgroundColor' => $currentColor,
+    //             'hoverBackgroundColor' => $currentColor,
+    //             'borderColor' => $currentColor,
+    //             'data' => [],
+    //         ];
+    //     }
+
+    //     // Debugging: Tambahkan ini untuk mencetak nilai $row['total']
+    //     // var_dump($row['total']);
+
+    //     $data_grafik[$row['keadaan']]['data'][$kategori[$row['kode_kategori']]] = $row['total'];
+    // }
+
+    //     $data['kategori_labels'] = json_encode(array_unique($kategori_labels));
+    //     $data['data_grafik'] = json_encode(array_values($data_grafik));
+    //     $data['data_koleksi'] = $data_koleksi;
+    //     $data['jumlah'] = $this->M_Koleksi->getDataByKategori();
+
+    //     return view('Pengkajian/v_grafikkoleksi', $data);
+    // }
+
+
+    public function grafikKoleksi()
+{
+    // $data_koleksi = $this->M_Koleksi->();
+    $kategori = [
+        '01' => 'Arkeologi',
+        '02' => 'Biologika',
+        '03' => 'Etnografika',
+        '04' => 'Filologika',
+        '05' => 'Geologika',
+        '06' => 'Historika',
+        '07' => 'Kramologika',
+        '08' => 'Numismatika',
+        '09' => 'Seni Rupa',
+        '10' => 'Teknologika',
+    ];
+    $randomColors = [
+        '#78A083', '#344955', '#1B3C73', '#944E63', '#f8a5c2', '#FFCD4B', '#720455', '#2b59c3', '#f5365c', '#FB8B24'
+    ];
+    shuffle($randomColors);
+
+    $kategori_labels = [];
+    $data_grafik = [];
+
+    // Mengelompokkan data berdasarkan kode kategori
+    $datakoleksigrafik=$this->M_Koleksi->koleksi();
+    // $grouped_data = array_group_by(['kode_kategori'], ['keadaan']);
+
+    // foreach ($datakoleksigrafik as $row) {
+    //     $kategori_labels[] = $kategori[$row['kode_kategori']];
+
+    //     if (!isset($data_grafik[$row['keadaan']])) {
+    //         // Take the first color from the shuffled array for the current category
+    //         $currentColor = array_shift($randomColors);
+
+    //         $data_grafik[$row['keadaan']] = [
+    //             'label' => $row['keadaan'],
+    //             'backgroundColor' => $currentColor,
+    //             'hoverBackgroundColor' => $currentColor,
+    //             'borderColor' => $currentColor,
+    //             'data' => [],
+    //         ];
+    //     }
+
+    //     $data_grafik[$row['keadaan']]['data'][$kategori[$row['kode_kategori']]] = $row['total'];
+    // }
+    foreach ($datakoleksigrafik as $row) {
+        $kategori_labels[] = $kategori[$row['kode_kategori']];
+        
+        if (!isset($data_grafik['total'])) {
+            // Ambil warna pertama dari array acak untuk kategori saat ini
+            $currentColor = array_shift($randomColors);
+        
+            $data_grafik['total'] = [
+                'label' => 'Total Koleksi',
+                'backgroundColor' => $currentColor,
+                'hoverBackgroundColor' => $currentColor,
+                'borderColor' => $currentColor,
+                'data' => [],
+            ];
+        }
+        
+        $data_grafik['total']['data'][$kategori[$row['kode_kategori']]] = $row['total'];
+    }
+
+    $data['kategori_labels'] = json_encode(array_unique($kategori_labels));
+    $data['data_grafik'] = json_encode(array_values($data_grafik));
+    // $data['data_koleksi'] = $data_koleksi;
+    $data['jumlah'] = $this->M_Koleksi->getDataByKategori();
+
+    return view('Pengkajian/v_grafikkoleksi', $data);
+}
+
 }

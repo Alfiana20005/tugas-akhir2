@@ -64,6 +64,21 @@ class M_Koleksi extends Model
 
         return $totalKoleksi;
     }
+    public function getDataByKategori()
+    {
+        $query = $this->db->query("SELECT kode_kategori, keadaan, COUNT(keadaan) as total, count(id) as jumlah FROM data_koleksi GROUP BY kode_kategori, keadaan");
+    
+        // Ambil hasil query sebagai array
+        $result = $query->getResultArray();
+    
+        return $result;
+    }
+    public function koleksi(){
+        $query = $this->db->query("SELECT kode_kategori, count(id) as total FROM data_koleksi GROUP BY kode_kategori" );
+        $result = $query->getResultArray();
+    
+        return $result;
+    }
     
 }
     

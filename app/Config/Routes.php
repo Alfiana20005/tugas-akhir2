@@ -52,6 +52,7 @@ $routes->get('ubahKoleksi/(:segment)', 'C_Koleksi::edit/$1');
 $routes->post('/updateKoleksi/(:segment)', 'C_Koleksi::update/$1');
 $routes->get('/koleksi/(:segment)', 'C_Koleksi::tampilKoleksi/$1');
 // $routes->get('/koleksi/(:any)', 'C_Koleksi::tampilKoleksi/$1');
+$routes->get('/grafikKoleksi', 'C_Koleksi::grafikKoleksi');
 
 //perawatan
 // $routes->get('/dataPerawatan', 'C_Perawatan::lihatPerawatan');
