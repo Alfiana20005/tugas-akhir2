@@ -109,7 +109,7 @@
 
     <!-- KETUA PENGKAJIAN -->
     <?php if (session()->get('level') == 'Ketua Pengkajian'): ?>
-    <div class="sidebar-heading">
+    <div class="sidebar-heading mt-3">
         Inventaris Koleksi
     </div>
 
@@ -128,17 +128,17 @@
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Pilih Kategori:</h6>
-                <a class="collapse-item" href="buttons.html">Arkeologika</a>
-                <a class="collapse-item" href="cards.html">Biologika</a>
-                <a class="collapse-item" href="cards.html">Etnografika</a>
-                <a class="collapse-item" href="cards.html">Filologika</a>
-                <a class="collapse-item" href="cards.html">Geologika</a>
-                <a class="collapse-item" href="cards.html">Historika</a>
-                <a class="collapse-item" href="cards.html">Kramologika</a>
-                <a class="collapse-item" href="cards.html">Numismatika</a>
-                <a class="collapse-item" href="cards.html">Seni Rupa</a>
-                <a class="collapse-item" href="cards.html">Teknologika</a>
+            <h6 class="collapse-header">Pilih Kategori:</h6>
+                <a class="collapse-item" href="<?= base_url("/koleksi/01"); ?>">Arkeologika</a>
+                <a class="collapse-item" href="<?= base_url("/koleksi/02"); ?>">Biologika</a>
+                <a class="collapse-item" href="<?= base_url("/koleksi/03"); ?>">Etnografika</a>
+                <a class="collapse-item" href="<?= base_url("/koleksi/04"); ?>">Filologika</a>
+                <a class="collapse-item" href="<?= base_url("/koleksi/05"); ?>">Geologika</a>
+                <a class="collapse-item" href="<?= base_url("/koleksi/06"); ?>">Historika</a>
+                <a class="collapse-item" href="<?= base_url("/koleksi/07"); ?>">Kramologika</a>
+                <a class="collapse-item" href="<?= base_url("/koleksi/08"); ?>">Numismatika</a>
+                <a class="collapse-item" href="<?= base_url("/koleksi/09"); ?>">Seni Rupa</a>
+                <a class="collapse-item" href="<?= base_url("/koleksi/10"); ?>">Teknologika</a>
             
             </div>
         </div>

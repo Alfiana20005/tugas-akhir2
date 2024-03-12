@@ -34,25 +34,9 @@ th {
     #juduldatakoleksi, #namakoleksi {
         display: none;
     }
-
-    /* Hide unnecessary elements within the card when printing */
     #print {
         display: none;
     }
-    /* .card {
-        position: relative;
-    }
-
-    .card > *:not(.card-body) {
-        position: absolute;
-        left: -99999px;
-        top: -99999px;
-    }
-
-    /* Show only the card body content when printing */
-    /* .card-body {
-        display: block !important;
-    } */
     .sticky-footer, .card{
         display: none;
     }
