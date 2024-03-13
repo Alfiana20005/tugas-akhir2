@@ -100,7 +100,7 @@
         </div>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="/petugas">
+        <a class="nav-link" href="/perawatan">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Perawatan</span></a>
     </li>
@@ -114,7 +114,7 @@
     </div>
 
     <li class="nav-item">
-        <a class="nav-link" href="/petugas">
+        <a class="nav-link" href="/tambahdata">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Tambah Data Koleksi</span></a>
     </li>
@@ -145,7 +145,7 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="/petugas">
+        <a class="nav-link" href="/perawatan">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Perawatan</span></a>
     </li>

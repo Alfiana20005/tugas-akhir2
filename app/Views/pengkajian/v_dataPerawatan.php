@@ -120,7 +120,7 @@
                             <?php foreach ($perawatan as $item): ?>
                                 <tr>
                                     <td style="text-align: center;"><?= $no++; ?></td>
-                                    <td style="text-align: center;"><?= $item['kode_jenisprw']; ?></td>
+                                    <td style="text-align: center;"><?= $item['jenisprw']; ?></td>
                                     <td style="text-align: center;"><?= $item['deskripsi']; ?></td>
                                     <td style="text-align: center;"><?= $item['tanggal']; ?></td>
                                     <td style="text-align: center;"><img src="<?= base_url("img/sebelum/" . $item['foto_sebelum']); ?>" alt="sebelum" width="100px"></td>

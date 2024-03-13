@@ -55,9 +55,12 @@ $routes->get('/koleksi/(:segment)', 'C_Koleksi::tampilKoleksi/$1');
 $routes->get('/grafikKoleksi', 'C_Koleksi::grafikKoleksi');
 
 //perawatan
-// $routes->get('/dataPerawatan', 'C_Perawatan::lihatPerawatan');
+
 $routes->get('/dataPerawatan/(:segment)', 'C_Perawatan::lihatPerawatan/$1');
 // $routes->get('/tambahPerawatan', 'C_Perawatan::tambahPerawatan');
 $routes->get('/tambahPerawatan/(:segment)', 'C_Perawatan::tambahPerawatan/$1');
 $routes->post('/simpanPerawatan/(:segment)', 'C_Perawatan::savePerawatan/$1');
 $routes->post('/simpanPerawatan', 'C_Perawatan::savePerawatan');
+$routes->get('/perawatan', 'C_Perawatan::perawatan');
+$routes->get('/tambahJadwal', 'C_Perawatan::tambahJadwalPerawatan');
+$routes->post('/simpanJadwal', 'C_Perawatan::saveJadwalPerawatan');

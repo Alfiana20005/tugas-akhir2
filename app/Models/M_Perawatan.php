@@ -59,6 +59,23 @@ class M_Perawatan extends Model
 
         return $query;
     }
+    public function getJenisName($kode_jenisprw)
+    {
+        return $this->db->table('jenis_perawatan')
+            ->select('jenis_prw')
+            ->where('kode_jenisprw', $kode_jenisprw)
+            ->get()
+            ->getRowArray();
+    }
+    public function getJenisPrwName($kode_jenisprw)
+    {
+        return $this->db->table('data_perawatan')
+            ->select('jenis_perawatan.jenis_prw')
+            ->join('jenis_perawatan', 'jenis_perawatan.kode_jenisprw = data_perawatan.kode_jenisprw', 'left')
+            ->where('data_perawatan.kode_jenisprw', $kode_jenisprw)
+            ->get()
+            ->getRowArray();
+    }
     
     
 }
