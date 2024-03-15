@@ -79,6 +79,21 @@ class M_Koleksi extends Model
     
         return $result;
     }
+    public function getKoleksiName($id_koleksi)
+    {
+        return $this->db->table('data_koleksi')
+            ->select('nama_inv')
+            ->where('id', $id_koleksi)
+            ->get()
+            ->getRowArray();
+    }
+    public function updateKeadaan($id, $keadaan)
+    {
+        return $this->db->table('data_koleksi')
+            ->where('id', $id)
+            ->set('keadaan', $keadaan)
+            ->update();
+    }
     
 }
     

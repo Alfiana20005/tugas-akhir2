@@ -36,7 +36,22 @@
                             <td style="text-align: center;"><?= $k['no_registrasi']; ?></td>
                             <td style="text-align: center;"><img src="<?= base_url("img/koleksi/". $k['gambar']); ?>" alt="" width="100px"></td>
                             <td style="text-align: center;"><?= $k['nama_inv']; ?></td>
-                            <td style="text-align: center;"><?= $k['keadaan']; ?></td>
+                            <td style="text-align: center;">
+                                <form action="/updateKeadaan" method="post">
+                                    <input type="hidden" name="id" value="<?= $k['id']; ?>">
+                                    <div class="btn-group">
+                                    <button type="button" class="btn btn-<?php echo ($k['keadaan'] == 'Baik') ? 'success' : (($k['keadaan'] == 'Rusak Ringan') ? 'warning' : (($k['keadaan'] == 'Rusak Sedang') ? 'danger' : 'dark')); ?> btn-update-status dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <?php echo ($k['keadaan'] == 'Baik') ? 'Baik' : (($k['keadaan'] == 'Rusak Ringan') ? 'Rusak Ringan' : (($k['keadaan'] == 'Rusak Sedang') ? 'Rusak Sedang' : 'Rusak Berat')); ?>
+                                    </button>
+                                        <div class="dropdown-menu">
+                                            <button class="dropdown-item status-option" type="submit" name="keadaan" value="Baik">Baik</button>
+                                            <button class="dropdown-item status-option" type="submit" name="keadaan" value="Rusak Ringan">Rusak Ringan</button>
+                                            <button class="dropdown-item status-option" type="submit" name="keadaan" value="Rusak Sedang">Rusak Sedang</button>
+                                            <button class="dropdown-item status-option" type="submit" name="keadaan" value="Rusak ">Rusak Berat</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </td>
                             <td style="text-align: center;">
                                 <a href="<?= base_url("/detailKoleksi/{$k['id']}"); ?>" class="btn btn-success " >Detail</a>
                                                 
@@ -47,7 +62,7 @@
                                 </form>
                             </td>
                             <td style="text-align: center;">
-                                <a href="<?= base_url("/tambahPerawatan/{$k['id']}"); ?>" class="btn btn-info " >Tambah</a>
+                                <a href="<?= base_url("/tambahPerawatan/{$k['id']}"); ?>" class="btn btn-primary " >Tambah</a>
                                 <a href="<?= base_url("/dataPerawatan/{$k['id']}"); ?>" class="btn btn-info " >Lihat</a>
                             </td>
                         </tr>

@@ -62,6 +62,18 @@
                             <input type="date" class="form-control" placeholder="berakhir" aria-label="tahun" name="berakhir">
                         </div>
                     </div>
+                    <div class="row mb-3">
+                        <label for="jenis" class="col-sm-2 col-form-label">Status</label>
+                        <div class="col-sm-10">
+                            <select class="form-select form-control" type="text" name="status" >
+                                <!-- harus sesuai dengan urutan enum pada database -->
+                                <option selected>Pilih Status Jadwal</option>
+                                <option  value="Belum Mulai">Belum Mulai</option>
+                                <option  value="Sedang Berlangsung">Sedang Berlangsung</option>
+                                <option  value="Selesai">Selesai</option>
+                            </select>
+                        </div>
+                    </div>
                                         
                     <button type="submit" class="btn btn-primary">Simpan Data Perawatan</button>
                 </form>

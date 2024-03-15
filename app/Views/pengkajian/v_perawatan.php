@@ -21,12 +21,29 @@
                             </div>
                             <div class="row no-gutters align-items-center">
                                 <div class="col-auto">
-                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">0%</div>
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                    <?php 
+                                    $preventifFound = false; // Inisialisasi variabel penanda apakah data preventif yang sedang berlangsung ditemukan
+                                    foreach($jadwal as $j): ?>
+                                        <?php if($j['jenisprwNames'] == 'Preventif' && $j['status'] == 'Sedang Berlangsung'): ?>
+                                            <?php 
+                                                $progressPreventif = ($j['perawatan'] / $j['target']) * 100;
+                                                $progressPreventif = min($progressPreventif, 100);
+                                                echo $progressPreventif . "%";
+                                                $preventifFound = true; // Menandai bahwa data preventif yang sedang berlangsung ditemukan
+                                                break; // Menghentikan iterasi setelah menemukan item preventif yang sedang berlangsung
+                                            ?>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                    <?php if (!$preventifFound): ?>
+                                        0% <!-- Menampilkan 0% jika tidak ada data preventif yang sedang berlangsung -->
+                                    <?php endif; ?>
+                                    </div>
                                 </div>
                                 <div class="col">
                                     <div class="progress progress-sm mr-2">
                                         <div class="progress-bar bg-warning" role="progressbar"
-                                            style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+                                            style="width: <?= $progressPreventif ?? 0; ?>%" aria-valuenow="50" aria-valuemin="0"
                                             aria-valuemax="100"></div>
                                     </div>
                                 </div>
@@ -50,12 +67,29 @@
                             </div>
                             <div class="row no-gutters align-items-center">
                                 <div class="col-auto">
-                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">0%</div>
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                    <?php 
+                                    $kuratifFound = false; // Inisialisasi variabel penanda apakah data preventif yang sedang berlangsung ditemukan
+                                    foreach($jadwal as $j): ?>
+                                        <?php if($j['jenisprwNames'] == 'Kuratif' && $j['status'] == 'Sedang Berlangsung'): ?>
+                                            <?php 
+                                                $progressKuratif = ($j['perawatan'] / $j['target']) * 100;
+                                                $progressKuratif = min($progressKuratif, 100);
+                                                echo $progressKuratif . "%";
+                                                $kuratifFound = true; // Menandai bahwa data preventif yang sedang berlangsung ditemukan
+                                                break; // Menghentikan iterasi setelah menemukan item preventif yang sedang berlangsung
+                                            ?>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                    <?php if (!$kuratifFound): ?>
+                                        0% <!-- Menampilkan 0% jika tidak ada data preventif yang sedang berlangsung -->
+                                    <?php endif; ?>
+                                    </div>
                                 </div>
                                 <div class="col">
                                     <div class="progress progress-sm mr-2">
                                         <div class="progress-bar bg-info" role="progressbar"
-                                            style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+                                            style="width: <?= $progressKuratif ?? 0; ?>%" aria-valuenow="50" aria-valuemin="0"
                                             aria-valuemax="100"></div>
                                     </div>
                                 </div>
@@ -79,12 +113,30 @@
                             </div>
                             <div class="row no-gutters align-items-center">
                                 <div class="col-auto">
-                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">0%</div>
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                    <?php 
+                                    $restorasiFound = false; // Inisialisasi variabel penanda apakah data preventif yang sedang berlangsung ditemukan
+                                    foreach($jadwal as $j): ?>
+                                        <?php if($j['jenisprwNames'] == 'Restorasi' && $j['status'] == 'Sedang Berlangsung'): ?>
+                                            <?php 
+                                                $progressRestorasi = ($j['perawatan'] / $j['target']) * 100;
+                                                $progressRestorasi = min($progressRestorasi, 100);
+                                                echo $progressRestorasi . "%";
+                                                $restorasiFound = true; // Menandai bahwa data preventif yang sedang berlangsung ditemukan
+                                                break; // Menghentikan iterasi setelah menemukan item preventif yang sedang berlangsung
+                                            ?>
+                                        
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                    <?php if (!$restorasiFound): ?>
+                                        0% <!-- Menampilkan 0% jika tidak ada data preventif yang sedang berlangsung -->
+                                    <?php endif; ?>
+                                    </div>
                                 </div>
                                 <div class="col">
                                     <div class="progress progress-sm mr-2">
                                         <div class="progress-bar bg-danger" role="progressbar"
-                                            style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+                                            style="width: <?= $progressRestorasi ?? 0; ?>%  " aria-valuenow="50" aria-valuemin="0"
                                             aria-valuemax="100"></div>
                                     </div>
                                 </div>
@@ -124,8 +176,9 @@
                                             <th style="text-align: center;">Deskripsi</th>
                                             <th style="text-align: center;">Mulai</th>
                                             <th style="text-align: center;">Berakhir</th>
-                                            <!-- <th style="text-align: center;">Status</th> -->
+                                            <th style="text-align: center;">Status</th> 
                                             <th style="text-align: center;">Rincian</th>
+                                            <th style="text-align: center;">Aksi</th>
                                         </tr>
                                     </thead>
                                     
@@ -141,11 +194,34 @@
                                             <td style="text-align: center;"><?= $j['deskripsi']; ?></td>
                                             <td style="text-align: center;"><?= $j['mulai']; ?></td>
                                             <td style="text-align: center;"><?= $j['berakhir']; ?></td>
-                                            
                                             <td style="text-align: center;">
-                                                <a href="" class="btn btn-info "> Detail</a>
+                                                <form action="/updateStatus" method="post">
+                                                    <input type="hidden" name="id" value="<?= $j['id']; ?>">
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-<?php echo ($j['status'] == 'Selesai') ? 'success' : (($j['status'] == 'Sedang Berlangsung') ? 'warning' : 'danger'); ?> btn-update-status dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <?php echo ($j['status'] == 'Selesai') ? 'Selesai' : (($j['status'] == 'Sedang Berlangsung') ? 'Sedang Berlangsung' : 'Belum Mulai'); ?>
+                                                        </button>
+                                                        <div class="dropdown-menu">
+                                                            <button class="dropdown-item status-option" type="submit" name="status" value="Selesai">Selesai</button>
+                                                            <button class="dropdown-item status-option" type="submit" name="status" value="Sedang Berlangsung">Sedang Berlangsung</button>
+                                                            <button class="dropdown-item status-option" type="submit" name="status" value="Belum Mulai">Belum Mulai</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
                                             </td>
-                                            
+                                            <td style="text-align: center;">
+                                                <button type="button" class="btn btn-primary"><?= $j['perawatan']; ?></button>
+                                                <a href="<?= base_url('detailJadwal/' . $j['id']); ?>" class="btn btn-info "> Detail</a>
+                                            </td>
+                                            <td>
+                            
+                                                <form action="/deleteJadwal/<?= $j['id']; ?>" method="post" class="d-inline">
+                                                    <?= csrf_field(); ?>
+                                                    <input type="hidden" name="_method" value="DELETE">
+                                                    <button type="submit" class="btn btn-danger" onclick="return confirm('apakah anda yakin?');">Hapus</button>
+                                                </form>
+                                                
+                                            </td>
                                         </tr>
                                         <?php endforeach; ?>
                                     </tbody>
@@ -155,10 +231,6 @@
         </div>
     </div>
     <!-- Content Row -->
-
-
 </div>
-
-
 
 <?= $this-> endSection(); ?>

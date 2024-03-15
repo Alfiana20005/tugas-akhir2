@@ -51,7 +51,7 @@ $routes->delete('hapus/(:segment)', 'C_Koleksi::delete/$1');
 $routes->get('ubahKoleksi/(:segment)', 'C_Koleksi::edit/$1');
 $routes->post('/updateKoleksi/(:segment)', 'C_Koleksi::update/$1');
 $routes->get('/koleksi/(:segment)', 'C_Koleksi::tampilKoleksi/$1');
-// $routes->get('/koleksi/(:any)', 'C_Koleksi::tampilKoleksi/$1');
+$routes->post('/updateKeadaan', 'C_Koleksi::updateKeadaan');
 $routes->get('/grafikKoleksi', 'C_Koleksi::grafikKoleksi');
 
 //perawatan
@@ -64,3 +64,9 @@ $routes->post('/simpanPerawatan', 'C_Perawatan::savePerawatan');
 $routes->get('/perawatan', 'C_Perawatan::perawatan');
 $routes->get('/tambahJadwal', 'C_Perawatan::tambahJadwalPerawatan');
 $routes->post('/simpanJadwal', 'C_Perawatan::saveJadwalPerawatan');
+
+// $routes->get('/detailJadwal', 'C_Perawatan::detailJadwal');
+// $routes->get('detailJadwal/(:segment)', 'C_Perawatan::detailJadwal/$1');
+$routes->get('detailJadwal/(:segment)', 'C_Perawatan::detailJadwal/$1');
+$routes->post('/updateStatus', 'C_Perawatan::updateStatus');
+$routes->delete('deleteJadwal/(:segment)', 'C_Perawatan::delete/$1');

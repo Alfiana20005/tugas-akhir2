@@ -76,7 +76,18 @@ class M_Perawatan extends Model
             ->get()
             ->getRowArray();
     }
+    public function getKoleksiName($id_koleksi)
+    {
+        return $this->db->table('data_perawatan')
+            ->select('data_koleksi.nama_inv')
+            ->join('data_koleksi', 'data_koleksi.id = data_perawatan.id_koleksi', 'left')
+            ->where('data_perawatan.id_koleksi', $id_koleksi)
+            ->get()
+            ->getResultArray();
+    }
     
     
+    
+
 }
     

@@ -201,6 +201,30 @@ class C_Koleksi extends BaseController
         // Redirect ke halaman sebelumnya atau halaman yang sesuai
         return redirect()->to('/detailKoleksi/' . $id);
     } 
+    public function updateKeadaan()
+    {
+        // Pastikan metode yang digunakan adalah POST
+        if ($this->request->getMethod() == 'post') {
+            // Ambil data ID dan status dari permintaan POST
+            $id = $this->request->getPost('id');
+            $keadaan = $this->request->getPost('keadaan');
+
+            // Lakukan pembaruan status di database menggunakan model
+            $result = $this->M_Koleksi->updateKeadaan($id, $keadaan);
+
+            // Beri respons berdasarkan hasil pembaruan
+            if ($result) {
+                return redirect()->back();
+                // return $this->response->setJSON(['success' => false, 'message' => 'Berhasil']);
+        
+            } else {
+                return $this->response->setJSON(['success' => false, 'message' => 'Gagal memperbarui status']);
+            }
+        } else {
+            // Jika metode bukan POST, beri respons dengan kesalahan
+            return $this->response->setJSON(['success' => false, 'message' => 'Metode yang tidak valid']);
+        }
+    }
 
     public function grafikKoleksi()
     {

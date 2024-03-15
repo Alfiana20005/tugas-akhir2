@@ -59,13 +59,64 @@
                             <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Progress Perawatan
                             </div>
                             <div class="row no-gutters align-items-center">
+                                <?php 
+                                
+                                    $progressPerJenis = 100 / 3; // Persentase progress per jenis perawatan
+                                    $totalProgress = 0; // Total progress keseluruhan
+                                    $tahunSekarang = date("Y");
+                                    
+
+                                    $preventifFound = false; // Inisialisasi variabel penanda apakah data preventif yang sedang berlangsung ditemukan
+                                        foreach($jadwalPrw as $j): 
+                                            $tahunBerakhir = date("Y", strtotime($j['berakhir']));
+                                            if($j['kode_jenisprw'] == '01' && $j['status'] == 'Selesai' && $tahunBerakhir==$tahunSekarang):
+                                                
+                                                $totalProgress += $progressPerJenis;
+                                                $preventifFound = true; // Menandai bahwa data preventif yang sedang berlangsung ditemukan
+                                                break; // Menghentikan iterasi setelah menemukan item preventif yang sedang berlangsung    
+                                            endif; 
+                                        endforeach;
+                                        if ($preventifFound): 
+                                            $totalProgress;
+                                        endif; 
+                                    $kuratifFound = false; // Inisialisasi variabel penanda apakah data preventif yang sedang berlangsung ditemukan
+                                        foreach($jadwalPrw as $j): 
+                                            $tahunBerakhir = date("Y", strtotime($j['berakhir']));
+                                            if($j['kode_jenisprw'] == '02' && $j['status'] == 'Selesai' && $tahunBerakhir==$tahunSekarang):
+                                                $totalProgress += $progressPerJenis;
+                                                $kuratifFound = true; // Menandai bahwa data preventif yang sedang berlangsung ditemukan
+                                                break; // Menghentikan iterasi setelah menemukan item preventif yang sedang berlangsung
+                                            endif; 
+                                        endforeach;
+                                        if (!$kuratifFound): 
+                                            $totalProgress;
+                                        endif; 
+                                    $restorasiFound = false; // Inisialisasi variabel penanda apakah data preventif yang sedang berlangsung ditemukan
+                                        foreach($jadwalPrw as $j): 
+                                            $tahunBerakhir = date("Y", strtotime($j['berakhir']));
+                                            if($j['kode_jenisprw'] == '03' && $j['status'] == 'Selesai' && $tahunBerakhir==$tahunSekarang):
+                                                
+                                                    $totalProgress += $progressPerJenis;
+                                                    
+                                                    $restorasiFound = true; // Menandai bahwa data preventif yang sedang berlangsung ditemukan
+                                                    break; // Menghentikan iterasi setelah menemukan item preventif yang sedang berlangsung
+                                                
+                                            endif; 
+                                        endforeach;
+                                        if ($restorasiFound): 
+                                            $totalProgress;
+                                        endif; 
+                                ?>
                                 <div class="col-auto">
-                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">0%</div>
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+
+                                        <?= round($totalProgress) . "%"; ?>
+                                    </div>
                                 </div>
                                 <div class="col">
                                     <div class="progress progress-sm mr-2">
                                         <div class="progress-bar bg-info" role="progressbar"
-                                            style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+                                            style="width: <?= round($totalProgress) . "%"; ?>" aria-valuenow="50" aria-valuemin="0"
                                             aria-valuemax="100"></div>
                                     </div>
                                 </div>

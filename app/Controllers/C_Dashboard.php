@@ -4,21 +4,25 @@ namespace App\Controllers;
 use App\Models\M_Petugas;
 use App\Models\M_Pengunjung;
 use App\Models\M_Koleksi;
+use App\Models\M_JadwalPrw;
 
 class C_Dashboard extends BaseController
 {
     protected $M_Petugas;
     protected $M_Pengunjung;
     protected $M_Koleksi;
+    protected $M_JadwalPrw;
     public function __construct() {
         helper('form');
         $this -> M_Petugas = new M_Petugas();
         $this->M_Pengunjung = new M_Pengunjung();
         $this->M_Koleksi = new M_Koleksi();
+        $this->M_JadwalPrw = new M_JadwalPrw();
     }
     public function index()
     {
         $tahun = date('Y');
+        $jadwalPrw = $this->M_JadwalPrw->getJadwalPrw();
         $data_pengunjung = $this->M_Pengunjung->getTotalPengunjungPerBulan();
         foreach ($data_pengunjung as $row) {
             $bulan_labels[] = $row['bulan'];
@@ -41,13 +45,26 @@ class C_Dashboard extends BaseController
             'data' => array_column($data_pengunjung, 'total'),
         ];
 
+        //progress
+        foreach ($jadwalPrw as &$jadwalItem) {
+            $jenisprwNames = $this->M_JadwalPrw->getJenisPrwName($jadwalItem['kode_jenisprw']);
+            $jadwalItem['jenisprwNames'] = isset($jenisprwNames[0]['jenis_prw']) ? $jenisprwNames[0]['jenis_prw'] : 'Nama Kategori Tidak Tersedia';
+            // $perawatanData =
+            // $jadwalData = $this->M_JadwalPrw->find($jadwalItem['id']);
+            $jadwalItem['perawatan']= $this->M_JadwalPrw->countPerawatanInRange($jadwalItem['mulai'], $jadwalItem['berakhir'], $jadwalItem['kode_jenisprw']);
+            
+        }
+       
         $data['datasets'] = [$dataset];
-
         // Tambahkan data_pengunjung ke dalam variabel $data
         $data['data_pengunjung'] = $data_pengunjung;
 
         $data['totalPetugas'] = $this->M_Petugas->countPetugas();
         $data['totalKoleksi'] = $this->M_Koleksi->countKoleksi();
+        $data['jadwal'] = [$jadwalPrw];
+        $data['tahun'] = [$tahun];
+        $data['jadwalPrw'] = $this->M_JadwalPrw->getJadwalPrw();
+        // var_dump($jadwalPrw);
         return view('v_dashboard', $data);
     }
 
