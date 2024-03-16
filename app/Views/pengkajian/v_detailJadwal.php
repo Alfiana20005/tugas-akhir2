@@ -10,22 +10,16 @@
     <?php endif; ?>
 
     <div class="card shadow mb-4">
-        <div class="card-header d-sm-flex align-items-center justify-content-between mb-4">
+        <div class="card-header d-sm-flex align-items-center justify-content-between">
             <a href="<?= base_url('/perawatan'); ?>   ">
                 <h6 class="m-0 font-weight-bold text-primary">Perawatan <?= $jadwal['jenisprwNames']; ?> Tanggal <?= $jadwal['mulai']; ?> Hingga <?= $jadwal['berakhir']; ?></h6>
             </a>
         </div>
         
         <div class="card-body">
-            <!-- <div class="text-center">
-                <h6 class="m-0 font-weight-bold text-black">DATA PERAWATAN <?= $jadwal['kode_jenisprw']; ?></h6>
-                <h6 class="m-0 font-weight-bold text-black ">MUSEUM NEGERI NUSA TENGGARA BARAT (NTB)</h6>
-                <h6 class="m-0 font-weight-bold text-black mb-4">TANGGAL <?= $jadwal['mulai']; ?> HINGGA <?= $jadwal['berakhir']; ?></h6>
-            </div> -->
-
             <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="font-size: 11pt;">
-                    <thead style="text-align: center;">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead style="text-align: center; font-size:10pt">
                         <tr>
                             <th style="text-align: center;">No </th>
                             <th style="text-align: center;">Nama Kolekai </th>

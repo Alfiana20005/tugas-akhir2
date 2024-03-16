@@ -14,8 +14,8 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="font-size: 11pt;">
-                    <thead style="text-align: center;">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="">
+                    <thead style="text-align: center; font-size: 10pt;">
                         <tr>
                             <th style="text-align: center;">No Inventarisasi</th>
                             <th style="text-align: center;">No Registrasi</th>
@@ -27,7 +27,7 @@
                         </tr>
                     </thead>
                     
-                    <tbody style="text-align: center;">
+                    <tbody style="text-align: center; font-size: 10pt;">
                         <?php 
                             $no=1;
                             foreach($data_koleksi as $k): ?>
@@ -40,7 +40,7 @@
                                 <form action="/updateKeadaan" method="post">
                                     <input type="hidden" name="id" value="<?= $k['id']; ?>">
                                     <div class="btn-group">
-                                    <button type="button" class="btn btn-<?php echo ($k['keadaan'] == 'Baik') ? 'success' : (($k['keadaan'] == 'Rusak Ringan') ? 'warning' : (($k['keadaan'] == 'Rusak Sedang') ? 'danger' : 'dark')); ?> btn-update-status dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <button type="button" class="btn btn-sm  btn-<?php echo ($k['keadaan'] == 'Baik') ? 'success' : (($k['keadaan'] == 'Rusak Ringan') ? 'warning' : (($k['keadaan'] == 'Rusak Sedang') ? 'danger' : 'dark')); ?> btn-update-status dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <?php echo ($k['keadaan'] == 'Baik') ? 'Baik' : (($k['keadaan'] == 'Rusak Ringan') ? 'Rusak Ringan' : (($k['keadaan'] == 'Rusak Sedang') ? 'Rusak Sedang' : 'Rusak Berat')); ?>
                                     </button>
                                         <div class="dropdown-menu">
@@ -53,17 +53,17 @@
                                 </form>
                             </td>
                             <td style="text-align: center;">
-                                <a href="<?= base_url("/detailKoleksi/{$k['id']}"); ?>" class="btn btn-success " >Detail</a>
+                                <a href="<?= base_url("/detailKoleksi/{$k['id']}"); ?>" class="btn btn-success btn-sm " >Detail</a>
                                                 
                                 <form action="/hapus/<?= $k['id']; ?>" method="post"class="d-inline">
                                     <?= csrf_field(); ?>
                                     <input type="hidden" name="_method" value="DELETE">
-                                    <button type="submit" class="btn btn-danger" onclick="return confirm('apakah anda yakin?');">Hapus</button>
+                                    <button type="submit" class="btn btn-danger btn-sm " onclick="return confirm('apakah anda yakin?');">Hapus</button>
                                 </form>
                             </td>
                             <td style="text-align: center;">
-                                <a href="<?= base_url("/tambahPerawatan/{$k['id']}"); ?>" class="btn btn-primary " >Tambah</a>
-                                <a href="<?= base_url("/dataPerawatan/{$k['id']}"); ?>" class="btn btn-info " >Lihat</a>
+                                <a href="<?= base_url("/tambahPerawatan/{$k['id']}"); ?>" class="btn btn-primary btn-sm " >Tambah</a>
+                                <a href="<?= base_url("/dataPerawatan/{$k['id']}"); ?>" class="btn btn-info btn-sm " >Lihat</a>
                             </td>
                         </tr>
                         <?php endforeach; ?>

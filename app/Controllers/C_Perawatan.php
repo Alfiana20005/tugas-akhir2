@@ -73,6 +73,30 @@ class C_Perawatan extends BaseController
     
     public function savePerawatan()
     {
+        $rules= [
+            'kode_jenisprw' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required'=>'Jenis Perawatan harus diisi',
+                ]
+            ],
+            'tanggal' => [
+                'rules' => 'required',
+                'errors' => ['required'=>'Tanggal harus diisi']
+            ],
+            'deskripsi' => [
+                'rules' => 'required',
+                'errors' => ['required'=>'Deskripsi harus diisi']
+            ],
+        
+              
+        ];
+
+        if (!$this->validate($rules)) {
+            return redirect()->back()
+                ->withInput()
+                ->with('errors', $this->validator->listErrors());
+        }
         // $data_koleksi = $this->M_Koleksi->getKoleksi();
         $idPetugas = session()->get('id_petugas');
         if (empty($idPetugas)) {
@@ -169,6 +193,7 @@ class C_Perawatan extends BaseController
             'berakhir' => $this->request->getVar('berakhir'),
             'target' => $this->request->getVar('target'),
             'status' => $this->request->getVar('status'),
+            'id_petugas' => session()->get('id_petugas'),
         ];
     
         $insertResult = $this->M_JadwalPrw->saveJadwal($data);
@@ -206,7 +231,9 @@ class C_Perawatan extends BaseController
         // $koleksiNames = $this->M_Perawatan->getKoleksiName($data_koleksi['id']);
         foreach ($perawatanData as &$perawatanItem) {
             $data_koleksi = $this->M_Koleksi->find($perawatanItem['id_koleksi']);
+            $data_petugas = $this->M_Petugas->find($perawatanItem['id_petugas']);
             $perawatanItem['koleksiNames'] = isset($data_koleksi['nama_inv']) ? $data_koleksi['nama_inv'] : 'Nama Kategori Tidak Tersedia';
+            $perawatanItem['petugasNames'] = isset($data_petugas['nama']) ? $data_petugas['nama'] : 'Nama Kategori Tidak Tersedia';
         }
         if (!$perawatanData) {
             // Handle if perawatan data not found

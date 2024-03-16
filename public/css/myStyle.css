@@ -58,3 +58,13 @@ th {
     display: none;
     font-family: 'Times New Roman';
 }
+.table-responsive {
+    font-size: 10pt;
+    
+}
+#dataTable{
+    font-size: 10pt;
+}
+.row, .form-control{
+    font-size: 11pt;
+}

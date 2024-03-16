@@ -10,7 +10,7 @@ class M_JadwalPrw extends Model
     protected $primaryKey = 'id';
     // protected $useTimestamps = true;
 
-    protected $allowedFields = ['deskripsi','target','mulai','berakhir','status','kode_jenisprw'];
+    protected $allowedFields = ['deskripsi','target','mulai','berakhir','status','kode_jenisprw', 'id_petugas'];
 
     protected $validationRules = [
         'no_registrasi' => 'required|max_length[6]|is_unique[data_koleksi.no_registrasi]',
@@ -35,15 +35,6 @@ class M_JadwalPrw extends Model
         return $this->findAll();
 
     }
-    // public function getJenisPrwName($kode_jenisprw)
-    // {
-    //     return $this->db->table('jadwal_prw')
-    //         ->select('jenis_perawatan.jenis_prw')
-    //         ->join('jenis_perawatan', 'jenis_perawatan.kode_jenisprw = jadwal_prw.kode_jenisprw', 'left')
-    //         ->where('jadwal_prw.kode_jenisprw', $kode_jenisprw)
-    //         ->get()
-    //         ->getRowArray();
-    // }
     public function getJenisPrwName($kode_jenisprw)
     {
         return $this->db->table('jadwal_prw')

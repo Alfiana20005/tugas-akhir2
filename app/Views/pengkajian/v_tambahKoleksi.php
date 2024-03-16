@@ -3,23 +3,19 @@
 <?= $this-> section('content'); ?>
 
 <div class="container">
-    <div class="row">
-                    <div class="col-sm-2"></div>
-                    <div class="col-sm-10">
-                        <?php if (session()->getFlashdata('errors')): ?>
+    
+                    <?php if (session()->getFlashdata('errors')): ?>
                             <div class="col alert alert-danger" role="alert">
                                 <?= session()->getFlashdata('errors'); ?>
                             </div>
                         <?php endif; ?>
-                    </div>
-
                     <?php  if(session()->getFlashdata('pesan')): ?>
                         <div class="alert alert-success" role="alert">
                             <?= session()->getFlashdata('pesan'); ?>
                         </div>
                     <?php endif; ?>
                     
-    </div>
+    
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Tambahkan Data Inventaris Koleksi</h6>

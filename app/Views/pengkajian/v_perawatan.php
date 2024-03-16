@@ -167,8 +167,8 @@
         </div>
         <div class="card-body">
         <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="font-size: 11pt;">
-                                    <thead>
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" >
+                                    <thead style="font-size: 10pt;">
                                         <tr>
                                             <th style="text-align: center;">No</th>
                                             <th style="text-align: center;">Jenis Perawatan</th>
@@ -178,11 +178,13 @@
                                             <th style="text-align: center;">Berakhir</th>
                                             <th style="text-align: center;">Status</th> 
                                             <th style="text-align: center;">Rincian</th>
+                                            <?php if (session()->get('level') == 'Ketua Pengkajian'): ?>
                                             <th style="text-align: center;">Aksi</th>
+                                            <?php endif; ?>
                                         </tr>
                                     </thead>
                                     
-                                    <tbody >
+                                    <tbody style="font-size: 10pt;">
                                         <?php 
                                             $no=1;
                                             foreach($jadwal as $j): ?>
@@ -195,10 +197,14 @@
                                             <td style="text-align: center;"><?= $j['mulai']; ?></td>
                                             <td style="text-align: center;"><?= $j['berakhir']; ?></td>
                                             <td style="text-align: center;">
+                                                <?php if (session()->get('level') != 'Ketua Pengkajian'): ?>
+                                                <?= $j['status']; ?>
+                                                <?php endif; ?>
+                                                <?php if (session()->get('level') == 'Ketua Pengkajian'): ?>
                                                 <form action="/updateStatus" method="post">
                                                     <input type="hidden" name="id" value="<?= $j['id']; ?>">
                                                     <div class="btn-group">
-                                                        <button type="button" class="btn btn-<?php echo ($j['status'] == 'Selesai') ? 'success' : (($j['status'] == 'Sedang Berlangsung') ? 'warning' : 'danger'); ?> btn-update-status dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <button type="button" class="btn btn-sm btn-<?php echo ($j['status'] == 'Selesai') ? 'success' : (($j['status'] == 'Sedang Berlangsung') ? 'warning' : 'danger'); ?> btn-update-status dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                             <?php echo ($j['status'] == 'Selesai') ? 'Selesai' : (($j['status'] == 'Sedang Berlangsung') ? 'Sedang Berlangsung' : 'Belum Mulai'); ?>
                                                         </button>
                                                         <div class="dropdown-menu">
@@ -208,20 +214,25 @@
                                                         </div>
                                                     </div>
                                                 </form>
+                                                <?php endif; ?>
                                             </td>
-                                            <td style="text-align: center;">
-                                                <button type="button" class="btn btn-primary"><?= $j['perawatan']; ?></button>
-                                                <a href="<?= base_url('detailJadwal/' . $j['id']); ?>" class="btn btn-info "> Detail</a>
+                                            <td class="d-sm-flex" style="text-align: center;">
+                                                <button type="button" class="btn btn-primary btn-sm "><?= $j['perawatan']; ?></button>
+                                                <a href="<?= base_url('detailJadwal/' . $j['id']); ?>" class="btn btn-info btn-sm mx-2"> Detail</a>
                                             </td>
+                                            <?php if (session()->get('level') == 'Ketua Pengkajian'): ?>
                                             <td>
                             
                                                 <form action="/deleteJadwal/<?= $j['id']; ?>" method="post" class="d-inline">
                                                     <?= csrf_field(); ?>
                                                     <input type="hidden" name="_method" value="DELETE">
-                                                    <button type="submit" class="btn btn-danger" onclick="return confirm('apakah anda yakin?');">Hapus</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('apakah anda yakin?');">
+                                                    Hapus
+                                                    </button>
                                                 </form>
                                                 
                                             </td>
+                                            <?php endif; ?>
                                         </tr>
                                         <?php endforeach; ?>
                                     </tbody>

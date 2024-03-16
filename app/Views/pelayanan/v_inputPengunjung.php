@@ -33,13 +33,13 @@
                         <div class="row mb-3">
                             <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
                             <div class="col-sm-10">
-                            <input type="text" class="form-control" name="alamat" value="<?= old('alamat'); ?>">
+                            <input type="text" class="form-control"  name="alamat" value="<?= old('alamat'); ?>">
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="No Hp" class="col-sm-2 col-form-label">No.Telp/Hp</label>
                             <div class="col-sm-10">
-                            <input type="text" class="form-control" name="no_hp" value="<?= old('no_hp'); ?>">
+                            <input type="text" class="form-control"  name="no_hp" value="<?= old('no_hp'); ?>">
                             </div>
                         </div>
                         <div class="row mb-3">

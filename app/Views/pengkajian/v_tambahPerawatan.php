@@ -3,11 +3,18 @@
 <?= $this->section('content'); ?>
 
 <div class="container">
-<?php  if(session()->getFlashdata('pesan')): ?>
-            <div class="alert alert-success" role="alert">
-                <?= session()->getFlashdata('pesan'); ?>
-            </div>
-        <?php endif; ?>
+    
+    <?php if (session()->getFlashdata('errors')): ?>
+        <div class="col alert alert-danger" role="alert">
+            <?= session()->getFlashdata('errors'); ?>
+        </div>
+    <?php endif; ?>
+    <?php  if(session()->getFlashdata('pesan')): ?>
+        <div class="alert alert-success" role="alert">
+            <?= session()->getFlashdata('pesan'); ?>
+        </div>
+    <?php endif; ?>
+
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-sm-flex">
             <h6 class="m-0 font-weight-bold text-primary ">Tambahkan Data Perawatan</h6>

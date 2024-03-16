@@ -169,7 +169,7 @@
             <span>Grafik Koleksi</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="/petugas">
+        <a class="nav-link" href="/perawatan">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Perawatan</span></a>
     </li>

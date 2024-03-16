@@ -23,18 +23,18 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="font-size: 11pt;">
-                                    <thead>
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" >
+                                    <thead >
                                         <tr>
                                             <th style="text-align: center;">No</th>
-                                            <th>Foto</th>
-                                            <th>Nama</th> 
-                                            <th>Jabatan</th>
+                                            <th style="text-align: center;">Foto</th>
+                                            <th style="text-align: center;">Nama</th> 
+                                            <th style="text-align: center;">Jabatan</th>
                                             <?php if (session()->get('level') == 'Admin'): ?>
-                                            <th>Email</th>
-                                            <th>Username</th>
-                                            <th>Password</th>
-                                            <th>Aksi</th>
+                                            <th style="text-align: center;">Email</th>
+                                            <th style="text-align: center;">Username</th>
+                                            <th style="text-align: center;">Password</th>
+                                            <th style="text-align: center;">Aksi</th>
                                             <?php endif; ?>
                                         </tr>
                                     </thead>
@@ -46,20 +46,20 @@
                                         foreach($data_petugas as $p): ?>
                                         <tr>
                                         <td style="text-align: center;"><?= $no++; ?></td>
-                                            <td><img src="<?= base_url('img/profile/' . $p['foto']); ?>" alt="" style="width: 60px;"></td>
+                                            <td style="text-align: center;"><img src="<?= base_url('img/profile/' . $p['foto']); ?>" alt="" style="width: 60px;"></td>
                                             <td><?= $p['nama']; ?></td>
                                             <td><?= $p['level']; ?></td>
                                             <?php if (session()->get('level') == 'Admin'): ?>
                                             <td><?= $p['email']; ?></td>
                                             <td><?= $p['username']; ?></td>
                                             <td><?= str_repeat('*', strlen($p['password'])); ?></td>
-                                            <td>
-                                                <a href="/ubahpetugas/<?= $p['id_petugas']; ?>" class="btn btn-success " >Edit</a>
+                                            <td style="text-align: center;">
+                                                <a href="/ubahpetugas/<?= $p['id_petugas']; ?>" class="btn btn-success btn-sm" >Edit</a>
                                                 <!-- <a href="" class="btn btn-danger" >hapus</a> -->
                                                 <form action="/hapuspetugas/<?= $p['id_petugas']; ?>" method="post" class="d-inline">
                                                     <?= csrf_field(); ?>
                                                     <input type="hidden" name="_method" value="DELETE">
-                                                    <button type="submit" class="btn btn-danger" onclick="return confirm('apakah anda yakin?');">Hapus</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('apakah anda yakin?');">Hapus</button>
                                                 </form>
                                                 
                                             </td>

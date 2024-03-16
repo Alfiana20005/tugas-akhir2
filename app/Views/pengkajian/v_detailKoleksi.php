@@ -11,7 +11,7 @@
         <div class="card-header d-sm-flex align-items-center justify-content-between mb-2" id="juduldatakoleksi">
             <a href="<?= base_url('/koleksi/' . $data_koleksi['kode_kategori']) ?>"><h6 class="m-0 font-weight-bold text-primary" id='namakoleksi'><?= $data_koleksi['nama_inv']; ?></h6></a>
             <div class="d-flex">
-                <a href="/ubahKoleksi/<?= $data_koleksi['id']; ?>" class="btn btn-success mx-2" >Edit</a>
+                <a href="/ubahKoleksi/<?= $data_koleksi['id']; ?>" class="btn btn-success btn-sm mx-2" >Edit</a>
                 <button onclick="window.print()" type="submit" class="btn btn-sm btn-primary shadow-sm">
                     <i class="fas fa-print fa-sm text-white-50"></i>Print
                 </button>

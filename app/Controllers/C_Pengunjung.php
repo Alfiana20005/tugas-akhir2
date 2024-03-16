@@ -27,6 +27,67 @@ class C_Pengunjung extends BaseController
 
         return view('pelayanan/v_inputPengunjung', $data);
     }
+    public function tambahPengunjung()
+    {
+        //validation
+        $rules= [
+            'nama' => [
+                'rules' => 'required',
+                'errors' => ['required'=>'Nama harus diisi']
+            ],
+            'alamat' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required'=>'alamat tidak boleh kosong']
+            ],
+            'kategori' => [
+                'rules' => 'required|differs[0]',
+                'errors' => [
+                    'required'=>'Kategori harus diisi',
+                    'differs' => 'Pilih kategori yang valid'
+                    ]
+            ],
+            'jumlah' => [
+                'rules' => 'required',
+                'errors' => ['required'=>'Jumlah harus diisi']
+            ],       
+            'created_at' => [
+                'rules' => 'required',
+                'errors' => ['required'=>'Jumlah harus diisi']
+            ]  
+        ];
+
+        if(!$this->validate($rules)){
+            // session()->setFlashdata('errors', $this->validator->listErrors());
+            return redirect()->to(base_url('/pengunjung')) ->withInput() -> with('errors', $this->validator->listErrors());
+        }
+        // Debugging session
+        $idPetugas = session()->get('id_petugas');
+        if (empty($idPetugas)) {
+
+            die('Error: id_petugas tidak valid');
+        }
+
+        // Simpan data pengunjung
+        $this->M_Pengunjung->save([
+            
+                'nama' => $this->request->getVar('nama'),
+                'alamat' => $this->request->getVar('alamat'),
+                'no_hp' => $this->request->getVar('no_hp'),
+                'kategori' => $this->request->getVar('kategori'),
+                'jumlah' => $this->request->getVar('jumlah'),
+                'created_at' => $this->request->getVar('created_at'),
+                'id_petugas' => session()->get('id_petugas'), // Ambil ID petugas dari sesi
+            
+        ]);
+
+        //alert
+        session()->setFlashdata('pesan', 'Data Berhasil Ditambahkan.');
+
+        return redirect()-> to('/pengunjung');
+
+        // return view('admin/v_masterpetugas');
+    }
     public function rekapitulasi(): string
     {
         // $pengunjung = $this->M_Pengunjung->findAll();
@@ -133,70 +194,7 @@ class C_Pengunjung extends BaseController
         return view('pelayanan/v_statistik', $data);
     }
 
-    public function tambahPengunjung()
-    {
-        //validation
-        $rules= [
-            'nama' => [
-                'rules' => 'required',
-                'errors' => ['required'=>'Nama harus diisi']
-            ],
-            'alamat' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required'=>'alamat tidak boleh kosong',
-                ]
-            ],
-            'kategori' => [
-                'rules' => 'required',
-                'errors' => ['required'=>'Kategori harus diisi']
-            ],
-            'jumlah' => [
-                'rules' => 'required',
-                'errors' => ['required'=>'Jumlah harus diisi']
-            ],       
-            'created_at' => [
-                'rules' => 'required',
-                'errors' => ['required'=>'Jumlah harus diisi']
-            ]  
-        ];
 
-        if(!$this->validate($rules)){
-            // session()->setFlashdata('errors', $this->validator->listErrors());
-            return redirect()->to(base_url('/pengunjung')) ->withInput() -> with('errors', $this->validator->listErrors());
-        }
-        // Debugging session
-        $idPetugas = session()->get('id_petugas');
-        if (empty($idPetugas)) {
-            // Session id_petugas tidak diatur atau kosong
-            // Tambahkan tindakan atau pesan kesalahan sesuai kebutuhan
-            die('Error: id_petugas tidak valid');
-        }
-
-        // Tambahkan log atau debug sesuai kebutuhan
-        // echo 'ID Petugas: ' . $idPetugas;
-        // log_message('info', 'ID Petugas: ' . $idPetugas);
-
-        // Simpan data pengunjung
-        $this->M_Pengunjung->save([
-            
-                'nama' => $this->request->getVar('nama'),
-                'alamat' => $this->request->getVar('alamat'),
-                'no_hp' => $this->request->getVar('no_hp'),
-                'kategori' => $this->request->getVar('kategori'),
-                'jumlah' => $this->request->getVar('jumlah'),
-                'created_at' => $this->request->getVar('created_at'),
-                'id_petugas' => session()->get('id_petugas'), // Ambil ID petugas dari sesi
-            
-        ]);
-
-        //alert
-        session()->setFlashdata('pesan', 'Data Berhasil Ditambahkan.');
-
-        return redirect()-> to('/pengunjung');
-
-        // return view('admin/v_masterpetugas');
-    }
     
     
     

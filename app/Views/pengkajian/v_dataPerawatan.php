@@ -47,7 +47,7 @@
                 </div>
             </div>
             <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="font-size: 11pt;">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead style="text-align: center;">
                         <tr>
                             <th style="text-align: center;">No </th>

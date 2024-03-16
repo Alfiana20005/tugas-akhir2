@@ -37,7 +37,52 @@ class C_Koleksi extends BaseController
         $rules= [
             'no_registrasi' => [
                 'rules' => 'required',
-                'errors' => ['required'=>'Nama harus diisi']
+                'errors' => ['required'=>'No Registrasi harus diisi']
+            ],
+            'no_inventaris' => [
+                'rules' => 'required',
+                'errors' => ['required'=>'No Inventaris harus diisi']
+            ],
+            
+            'nama_inv' => [
+                'rules' => 'required',
+                'errors' => ['required'=>'Nama Benda harus diisi']
+            ],
+            'ukuran' => [
+                'rules' => 'required',
+                'errors' => ['required'=>'Ukuran harus diisi']
+            ],
+            'tempat_buat' => [
+                'rules' => 'required',
+                'errors' => ['required'=>'Tempat buat harus diisi']
+            ],
+            'tempat_dapat' => [
+                'rules' => 'required',
+                'errors' => ['required'=>'Tempat dapat harus diisi']
+            ],
+            'cara_dapat' => [
+                'rules' => 'required',
+                'errors' => ['required'=>'Cara dapat harus diisi']
+            ],
+            'tgl_masuk' => [
+                'rules' => 'required',
+                'errors' => ['required'=>'Tanggal Masuk harus diisi']
+            ],
+            'keadaan' => [
+                'rules' => 'required',
+                'errors' => ['required'=>'Keadaan harus diisi']
+            ],
+            'lokasi' => [
+                'rules' => 'required',
+                'errors' => ['required'=>'Lokasi harus diisi']
+            ],
+            'keterangan' => [
+                'rules' => 'required',
+                'errors' => ['required'=>'Keterangan harus diisi']
+            ],
+            'uraian' => [
+                'rules' => 'required',
+                'errors' => ['required'=>'Uraian harus diisi']
             ],
                   
         ];
