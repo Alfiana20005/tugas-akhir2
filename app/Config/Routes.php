@@ -9,6 +9,7 @@ use CodeIgniter\Router\RouteCollection;
 
 $routes->get('/', 'C_Login::index');
 $routes->get('/dashboard', 'C_Dashboard::index');
+$routes->get('/dashboard2', 'C_Dashboard::grafikKoleksi');
 
 //login
 $routes->post('/login', 'C_Login::login');

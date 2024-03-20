@@ -85,16 +85,17 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Pilih Kategori:</h6>
-                <a class="collapse-item" href="<?= base_url("/koleksi/01"); ?>">Arkeologika</a>
-                <a class="collapse-item" href="<?= base_url("/koleksi/02"); ?>">Biologika</a>
-                <a class="collapse-item" href="<?= base_url("/koleksi/03"); ?>">Etnografika</a>
-                <a class="collapse-item" href="<?= base_url("/koleksi/04"); ?>">Filologika</a>
-                <a class="collapse-item" href="<?= base_url("/koleksi/05"); ?>">Geologika</a>
-                <a class="collapse-item" href="<?= base_url("/koleksi/06"); ?>">Historika</a>
-                <a class="collapse-item" href="<?= base_url("/koleksi/07"); ?>">Kramologika</a>
-                <a class="collapse-item" href="<?= base_url("/koleksi/08"); ?>">Numismatika</a>
-                <a class="collapse-item" href="<?= base_url("/koleksi/09"); ?>">Seni Rupa</a>
-                <a class="collapse-item" href="<?= base_url("/koleksi/10"); ?>">Teknologika</a>
+                    <a class="collapse-item" href="<?= base_url("/koleksi/01"); ?>">Geologika</a>
+                    <a class="collapse-item" href="<?= base_url("/koleksi/02"); ?>">Biologika</a>
+                    <a class="collapse-item" href="<?= base_url("/koleksi/03"); ?>">Etnografika</a>
+                    <a class="collapse-item" href="<?= base_url("/koleksi/04"); ?>">Arkeologika</a>
+                    <a class="collapse-item" href="<?= base_url("/koleksi/05"); ?>">Historika</a>
+                    <a class="collapse-item" href="<?= base_url("/koleksi/06"); ?>">Numismatika</a>
+                    <a class="collapse-item" href="<?= base_url("/koleksi/07"); ?>">Filologika</a>
+                    <a class="collapse-item" href="<?= base_url("/koleksi/08"); ?>">Keramologika</a>
+                    <a class="collapse-item" href="<?= base_url("/koleksi/09"); ?>">Seni Rupa</a>
+                    <a class="collapse-item" href="<?= base_url("/koleksi/10"); ?>">Teknologika</a>
+                    <a class="collapse-item" href="<?= base_url("/koleksi/11"); ?>">Lain-lain</a>
             
             </div>
         </div>
@@ -129,16 +130,17 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Pilih Kategori:</h6>
-                <a class="collapse-item" href="<?= base_url("/koleksi/01"); ?>">Arkeologika</a>
+                <a class="collapse-item" href="<?= base_url("/koleksi/01"); ?>">Geologika</a>
                 <a class="collapse-item" href="<?= base_url("/koleksi/02"); ?>">Biologika</a>
                 <a class="collapse-item" href="<?= base_url("/koleksi/03"); ?>">Etnografika</a>
-                <a class="collapse-item" href="<?= base_url("/koleksi/04"); ?>">Filologika</a>
-                <a class="collapse-item" href="<?= base_url("/koleksi/05"); ?>">Geologika</a>
-                <a class="collapse-item" href="<?= base_url("/koleksi/06"); ?>">Historika</a>
-                <a class="collapse-item" href="<?= base_url("/koleksi/07"); ?>">Kramologika</a>
-                <a class="collapse-item" href="<?= base_url("/koleksi/08"); ?>">Numismatika</a>
+                <a class="collapse-item" href="<?= base_url("/koleksi/04"); ?>">Arkeologika</a>
+                <a class="collapse-item" href="<?= base_url("/koleksi/05"); ?>">Historika</a>
+                <a class="collapse-item" href="<?= base_url("/koleksi/06"); ?>">Numismatika</a>
+                <a class="collapse-item" href="<?= base_url("/koleksi/07"); ?>">Filologika</a>
+                <a class="collapse-item" href="<?= base_url("/koleksi/08"); ?>">Keramologika</a>
                 <a class="collapse-item" href="<?= base_url("/koleksi/09"); ?>">Seni Rupa</a>
                 <a class="collapse-item" href="<?= base_url("/koleksi/10"); ?>">Teknologika</a>
+                <a class="collapse-item" href="<?= base_url("/koleksi/11"); ?>">Lain-lain</a>
             
             </div>
         </div>
@@ -167,6 +169,29 @@
         <a class="nav-link" href="/grafikKoleksi">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Grafik Koleksi</span></a>
+    </li><li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+            aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Koleksi</span>
+        </a>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Pilih Kategori:</h6>
+                <a class="collapse-item" href="<?= base_url("/koleksi/01"); ?>">Geologika</a>
+                <a class="collapse-item" href="<?= base_url("/koleksi/02"); ?>">Biologika</a>
+                <a class="collapse-item" href="<?= base_url("/koleksi/03"); ?>">Etnografika</a>
+                <a class="collapse-item" href="<?= base_url("/koleksi/04"); ?>">Arkeologika</a>
+                <a class="collapse-item" href="<?= base_url("/koleksi/05"); ?>">Historika</a>
+                <a class="collapse-item" href="<?= base_url("/koleksi/06"); ?>">Numismatika</a>
+                <a class="collapse-item" href="<?= base_url("/koleksi/07"); ?>">Filologika</a>
+                <a class="collapse-item" href="<?= base_url("/koleksi/08"); ?>">Keramologika</a>
+                <a class="collapse-item" href="<?= base_url("/koleksi/09"); ?>">Seni Rupa</a>
+                <a class="collapse-item" href="<?= base_url("/koleksi/10"); ?>">Teknologika</a>
+                <a class="collapse-item" href="<?= base_url("/koleksi/11"); ?>">Lain-lain</a>
+            
+            </div>
+        </div>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="/perawatan">

@@ -109,7 +109,6 @@
                                 ?>
                                 <div class="col-auto">
                                     <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-
                                         <?= round($totalProgress) . "%"; ?>
                                     </div>
                                 </div>
@@ -138,7 +137,7 @@
 
         <!-- Area Chart -->
         <div class="col-xl-8 col-lg-7">
-            <div class="card shadow mb-4">
+            <div class="card shadow mb-4" style="height: 400px;">
                 <!-- Card Header - Dropdown -->
                 <div
                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -154,50 +153,20 @@
             </div>
         </div>
 
-        <!-- Pie Chart -->
-        <!-- <div class="col-xl-4 col-lg-5">
-            <div class="card shadow mb-4">
+        <!-- Bar Chart -->
+        <div class="col-xl-4 col-lg-5">
+            <div class="card shadow mb-4" style="height: 400px;">
                 
                 <div
                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Statistik Keadaan Koleksi</h6>
-                    <div class="dropdown no-arrow">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                            aria-labelledby="dropdownMenuLink">
-                            <div class="dropdown-header">Dropdown Header:</div>
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </div>
+                    <h6 class="m-0 font-weight-bold text-primary">Grafik Koleksi</h6>
                 </div>
                 
                 <div class="card-body">
-                    <div class="chart-pie pt-4 pb-2">
-                        <canvas id="myPieChart"></canvas>
-                    </div>
-                    <div class="mt-4 text-center small">
-                        <span class="mr-2">
-                            <i class="fas fa-circle text-primary"></i> Baik
-                        </span>
-                        <span class="mr-2">
-                            <i class="fas fa-circle text-success"></i> Rusak Ringan
-                        </span>
-                        <span class="mr-2">
-                            <i class="fas fa-circle text-success"></i> Rusak Sedang
-                        </span>
-                        <span class="mr-2">
-                            <i class="fas fa-circle text-info"></i> Rusak Berat
-                        </span>
-                    </div>
+                    <canvas width="600" height="360" id="statistik"></canvas>
                 </div>
             </div>
-        </div> -->
+        </div>
 
         
     </div>
@@ -205,6 +174,7 @@
 
 </div>
 
+<!-- script statistik pengunjung -->
 <script>
     var datasets = <?= json_encode($datasets); ?>;
     var ctx = document.getElementById("StatistikHariIni");
@@ -283,6 +253,86 @@ var myLineChart = new Chart(ctx, {
   }
 });
 </script>
-
+<!-- script grafik koleksi -->
+<script>
+var ctx = document.getElementById("statistik");
+var kategori_labels = <?= $kategori_labels ?>;
+var data_grafik = <?= $data_grafik; ?>;
+var myBarChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: kategori_labels,
+    datasets: data_grafik,
+  
+  },
+  options: {
+    maintainAspectRatio: false,
+    layout: {
+      padding: {
+        left: 10,
+        right: 25,
+        top: 25,
+        bottom: 0
+      }
+    },
+    scales: {
+      xAxes: [{
+        time: {
+          unit: 'month'
+        },
+        gridLines: {
+          display: false,
+          drawBorder: false
+        },
+        ticks: {
+          maxTicksLimit: 6
+        },
+        maxBarThickness: 25,
+      }],
+      yAxes: [{
+        ticks: {
+          min: 0,
+          max: 15000,
+          maxTicksLimit: 5,
+          padding: 10,
+          // Include a dollar sign in the ticks
+          callback: function(value, index, values) {
+            return '$' + number_format(value);
+          }
+        },
+        gridLines: {
+          color: "rgb(234, 236, 244)",
+          zeroLineColor: "rgb(234, 236, 244)",
+          drawBorder: false,
+          borderDash: [2],
+          zeroLineBorderDash: [2]
+        }
+      }],
+    },
+    legend: {
+      display: false
+    },
+    tooltips: {
+      titleMarginBottom: 10,
+      titleFontColor: '#6e707e',
+      titleFontSize: 14,
+      backgroundColor: "rgb(255,255,255)",
+      bodyFontColor: "#858796",
+      borderColor: '#dddfeb',
+      borderWidth: 1,
+      xPadding: 15,
+      yPadding: 15,
+      displayColors: false,
+      caretPadding: 10,
+      callbacks: {
+        label: function(tooltipItem, chart) {
+          var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+          return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
+        }
+      }
+    },
+  }
+});
+</script>
 
 <?= $this-> endSection(); ?>

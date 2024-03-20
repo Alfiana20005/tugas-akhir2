@@ -53,16 +53,17 @@
                             <select class="form-select form-control" type="text" name="kode_kategori" value="<?= old('kode_kategori'); ?>">
                                 <!-- harus sesuai dengan urutan enum pada database -->
                                 <option selected>Pilih Kode Inventaris</option>
-                                <option  value="01">01</option>
-                                <option  value="02">02</option>
-                                <option  value="03">03</option>
-                                <option  value="04">04</option>
-                                <option  value="05">05</option>
-                                <option  value="06">06</option>
-                                <option  value="07">07</option>
-                                <option  value="08">08</option>
-                                <option  value="09">09</option>
-                                <option  value="10">10</option>
+                                <option  value="01">01 (Geologika)</option>
+                                <option  value="02">02 (Biologika)</option>
+                                <option  value="03">03 (Etnografika)</option>
+                                <option  value="04">04 (Arkeologika)</option>
+                                <option  value="05">05 (Historika)</option>
+                                <option  value="06">06 (Numismatika)</option>
+                                <option  value="07">07 (Filologika)</option>
+                                <option  value="08">08 (Keramologika)</option>
+                                <option  value="09">09 (Seni Rupa)</option>
+                                <option  value="10">10 (Teknologika)</option>
+                                <option  value="11">11 (Lain-lain)</option>
                             </select>
                         </div>
                 </div>

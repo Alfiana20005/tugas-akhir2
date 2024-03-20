@@ -25,42 +25,7 @@ var myBarChart = new Chart(ctx, {
   data: {
     labels: kategori_labels,
     datasets: data_grafik,
-  //   datasets: [{
-  //     label: "jumlah Koleksi",
-  //     backgroundColor: "#4e73df",
-  //     hoverBackgroundColor: "#2e59d9",
-  //     borderColor: "#4e73df",
-  //     data: [4215, 5312, 6251, 7841, 9821, 14984],
-  //   },
-  //   {
-  //     label: "Keadaan Baik",
-  //     backgroundColor: "#4e73df",
-  //     hoverBackgroundColor: "#2e59d9",
-  //     borderColor: "#4e73df",
-  //     data: [4215, 5312, 6251, 7841, 9821, 14984],
-  //   },
-  //   {
-  //     label: "Keadaan Rusak Ringan",
-  //     backgroundColor: "#4e73df",
-  //     hoverBackgroundColor: "#2e59d9",
-  //     borderColor: "#4e73df",
-  //     data: [4215, 5312, 6251, 7841, 9821, 14984],
-  //   },
-  //   {
-  //     label: "Keadaan Rusak Sedang",
-  //     backgroundColor: "#4e73df",
-  //     hoverBackgroundColor: "#2e59d9",
-  //     borderColor: "#4e73df",
-  //     data: [4215, 5312, 6251, 7841, 9821, 14984],
-  //   },
-  //   {
-  //     label: "Keadaan Rusak Berat",
-  //     backgroundColor: "#4e73df",
-  //     hoverBackgroundColor: "#2e59d9",
-  //     borderColor: "#4e73df",
-  //     data: [4215, 5312, 6251, 7841, 9821, 14984],
-  //   }
-  // ],
+  
   },
   options: {
     maintainAspectRatio: false,

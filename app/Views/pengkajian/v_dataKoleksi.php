@@ -37,6 +37,11 @@
                             <td style="text-align: center;"><img src="<?= base_url("img/koleksi/". $k['gambar']); ?>" alt="" width="100px"></td>
                             <td style="text-align: center;"><?= $k['nama_inv']; ?></td>
                             <td style="text-align: center;">
+                                <?php if (session()->get('level') == 'Kepala Museum'): ?> 
+                                    <?= $k['keadaan']; ?>
+
+                                <?php endif; ?>
+                                <?php if (session()->get('level') == 'Ketua Pengkajian' || session()->get('level') == 'Petugas Pengkajian'): ?> 
                                 <form action="/updateKeadaan" method="post">
                                     <input type="hidden" name="id" value="<?= $k['id']; ?>">
                                     <div class="btn-group">
@@ -51,18 +56,22 @@
                                         </div>
                                     </div>
                                 </form>
+                                <?php endif; ?>
                             </td>
                             <td style="text-align: center;">
                                 <a href="<?= base_url("/detailKoleksi/{$k['id']}"); ?>" class="btn btn-success btn-sm " >Detail</a>
-                                                
+                                <?php if (session()->get('level') == 'Ketua Pengkajian' || session()->get('level') == 'Petugas Pengkajian'): ?>               
                                 <form action="/hapus/<?= $k['id']; ?>" method="post"class="d-inline">
                                     <?= csrf_field(); ?>
                                     <input type="hidden" name="_method" value="DELETE">
                                     <button type="submit" class="btn btn-danger btn-sm " onclick="return confirm('apakah anda yakin?');">Hapus</button>
                                 </form>
+                                <?php endif; ?>
                             </td>
                             <td style="text-align: center;">
+                                <?php if (session()->get('level') == 'Ketua Pengkajian' || session()->get('level') == 'Petugas Pengkajian'): ?>
                                 <a href="<?= base_url("/tambahPerawatan/{$k['id']}"); ?>" class="btn btn-primary btn-sm " >Tambah</a>
+                                <?php endif; ?>
                                 <a href="<?= base_url("/dataPerawatan/{$k['id']}"); ?>" class="btn btn-info btn-sm " >Lihat</a>
                             </td>
                         </tr>

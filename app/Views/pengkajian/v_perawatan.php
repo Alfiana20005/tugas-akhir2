@@ -6,7 +6,7 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Perawatan Koleksi</h1>
+        <h1 class="h3 mb-0 text-gray-800">Progres Perawatan Koleksi Sedang Berlangsung</h1>
     </div>
 
     <!-- Content Row -->
@@ -176,7 +176,8 @@
                                             <th style="text-align: center;">Deskripsi</th>
                                             <th style="text-align: center;">Mulai</th>
                                             <th style="text-align: center;">Berakhir</th>
-                                            <th style="text-align: center;">Status</th> 
+                                            <th style="text-align: center;">Status</th>
+                                            <th style="text-align: center;">Capaian Target</th>
                                             <th style="text-align: center;">Rincian</th>
                                             <?php if (session()->get('level') == 'Ketua Pengkajian'): ?>
                                             <th style="text-align: center;">Aksi</th>
@@ -215,6 +216,13 @@
                                                     </div>
                                                 </form>
                                                 <?php endif; ?>
+                                            </td>
+                                            <td style="text-align: center;">
+                                                   <?php 
+                                                        $progressRestorasi = ($j['perawatan'] / $j['target']) * 100;
+                                                        $progressRestorasi = min($progressRestorasi, 100);
+                                                        echo $progressRestorasi . "%";
+                                                   ?>     
                                             </td>
                                             <td class="d-sm-flex" style="text-align: center;">
                                                 <button type="button" class="btn btn-primary btn-sm "><?= $j['perawatan']; ?></button>

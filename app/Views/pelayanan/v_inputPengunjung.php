@@ -98,7 +98,7 @@
                                 <td>: <?= $totalTahun; ?></td>
                             </tr>
                             <tr>
-                                <td>Keseluruhan</td>
+                                <td>Keseluruhan (1982-Sekarang)</td>
                                 <td>: <?= $totalkeseluruhan; ?></td>
                             </tr>
                        </table>
