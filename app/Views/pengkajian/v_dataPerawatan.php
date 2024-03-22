@@ -23,7 +23,7 @@
             <?= !empty($koleksi['nama_inv']) ? $koleksi['nama_inv'] : 'Data Perawatan Tidak Tersedia'; ?>
         </h6></a>
     <?php endif; ?>
-    <button onclick="window.print()" type="submit" class="btn btn-sm btn-primary shadow-sm" id="print">
+        <button onclick="window.print()" type="submit" class="btn btn-sm btn-primary shadow-sm" id="print">
                     <i class="fas fa-print fa-sm text-white-50"></i>Print
                 </button>
         </div>

@@ -154,7 +154,7 @@
     <?php endif; ?>
 
     <?php if (session()->get('level') == 'Kepala Museum'): ?>
-    <hr class="sidebar-divider my-0">
+    <!-- <hr class="sidebar-divider my-0"> -->
     <li class="nav-item">
         <a class="nav-link" href="/petugas">
             <i class="fas fa-fw fa-users"></i>
@@ -163,13 +163,14 @@
     <li class="nav-item">
         <a class="nav-link" href="/statistik">
             <i class="fas fa-fw fa-chart-area"></i>
-            <span>Statistik</span></a>
+            <span>Statistik Pengunjung</span></a>
     </li>
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link" href="/grafikKoleksi">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Grafik Koleksi</span></a>
-    </li><li class="nav-item">
+    </li> -->
+    <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
             aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-fw fa-cog"></i>

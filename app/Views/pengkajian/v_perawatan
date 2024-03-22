@@ -199,39 +199,24 @@
                                             <td style="text-align: center;"><?= $j['berakhir']; ?></td>
                                             <td style="text-align: center;">
                                                 <?php if (session()->get('level') != 'Ketua Pengkajian'): ?>
-                                                    <?= $j['status']; ?>
+                                                <?= $j['status']; ?>
                                                 <?php endif; ?>
                                                 <?php if (session()->get('level') == 'Ketua Pengkajian'): ?>
-                                                    <?php
-                                                            $progressRestorasi = ($j['perawatan'] / $j['target']) * 100;
-                                                            $progressRestorasi = min($progressRestorasi, 100);
-                                                            $status = '';
-                                                            $updateStatus = '';
-                                                            $btn_color = '';
-                                                            if ($progressRestorasi >= 100) {
-                                                                $status = 'Selesai';
-                                                                $btn_color = 'success';
-                                                                
-                                                            } elseif ($progressRestorasi > 0) {
-                                                                $status = 'Sedang Berlangsung';
-                                                                $btn_color = 'warning';
-                                                            } else {
-                                                                $status = 'Belum Mulai';
-                                                                $btn_color = 'danger';
-                                                            }
-                                                            ?>
-                                                        <!-- Menyimpan status saat ini -->
-                                                        <form action="/updateStatus" method="post">
-                                                            <div class="btn-group">
-                                                                <!-- Tombol dengan tipe submit -->
-                                                                <button type="submit" name="updateStatus" value="<?= $status; ?>" class="btn btn-sm btn-<?php echo $btn_color; ?> btn-update-status" aria-haspopup="true" aria-expanded="false">
-                                                                    <?php echo $status; ?>
-                                                                </button>
-                                                            </div>
-                                                        </form>
+                                                <form action="/updateStatus" method="post">
+                                                    <input type="hidden" name="id" value="<?= $j['id']; ?>">
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-sm btn-<?php echo ($j['status'] == 'Selesai') ? 'success' : (($j['status'] == 'Sedang Berlangsung') ? 'warning' : 'danger'); ?> btn-update-status dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <?php echo ($j['status'] == 'Selesai') ? 'Selesai' : (($j['status'] == 'Sedang Berlangsung') ? 'Sedang Berlangsung' : 'Belum Mulai'); ?>
+                                                        </button>
+                                                        <div class="dropdown-menu">
+                                                            <button class="dropdown-item status-option" type="submit" name="status" value="Selesai">Selesai</button>
+                                                            <button class="dropdown-item status-option" type="submit" name="status" value="Sedang Berlangsung">Sedang Berlangsung</button>
+                                                            <button class="dropdown-item status-option" type="submit" name="status" value="Belum Mulai">Belum Mulai</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
                                                 <?php endif; ?>
                                             </td>
-
                                             
                                             <td class="d-sm-flex" style="text-align: center;">
                                                 <button type="button" class="btn btn-primary btn-sm "><?= $j['perawatan']; ?></button>
@@ -267,6 +252,5 @@
     </div>
     <!-- Content Row -->
 </div>
-
 
 <?= $this-> endSection(); ?>

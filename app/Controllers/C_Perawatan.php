@@ -249,7 +249,7 @@ class C_Perawatan extends BaseController
         if ($this->request->getMethod() == 'post') {
             // Ambil data ID dan status dari permintaan POST
             $id = $this->request->getPost('id');
-            $status = $this->request->getPost('status');
+            $status = $this->request->getPost('updateStatus');
 
             // Lakukan pembaruan status di database menggunakan model
             $result = $this->M_JadwalPrw->updateStatus($id, $status);
@@ -266,6 +266,8 @@ class C_Perawatan extends BaseController
             return $this->response->setJSON(['success' => false, 'message' => 'Metode yang tidak valid']);
         }
     }
+
+    
     public function delete($id) 
     {
         // Saring masukan untuk mencegah SQL injection atau serangan lainnya
