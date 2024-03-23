@@ -121,7 +121,7 @@
                 <div class="d-flex text-black justify-content-end">
                     <div class="my-4 ">
                         <table >
-                            <tr style=""><td style="color: #2b2a2a; padding-right: 5px; line-height: 10; ">Konservator,</td></tr>
+                            <tr ><td style="color: #2b2a2a; padding-right: 5px; line-height: 10; ">Konservator,</td></tr>
                             <tr ><td style="color: #2b2a2a;  padding-right: 5px; "><?= !empty($item['petugasNames']) ? $item['petugasNames'] : ''; ?></td></tr>
                             <tr ><td style="color: #2b2a2a;  padding-right: 5px; ">NIP. <?= !empty($item['nip']) ? $item['nip'] : '-'; ?></td></tr>
                             
