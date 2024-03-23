@@ -67,12 +67,26 @@ class M_JadwalPrw extends Model
             ->get()
             ->getResultArray();
     }
-    public function updateStatus($id, $status)
+    // public function updateStatus($id, $status)
+    // {
+    //     return $this->db->table('jadwal_prw')
+    //             ->where('id', $id)
+    //             ->set('status', $status)
+    //             ->update(); // Menghapus argumen $this->table yang tidak diperlukan
+    // }
+
+    // public function updateStatus($id, $status)
+    // {
+    //     return $this->db->table('jadwal_prw')
+    //         ->where('id', $id)
+    //         ->update(['status' => $status]);
+    // }
+
+    public function updateStatus($data)
     {
         return $this->db->table('jadwal_prw')
-                ->where('id', $id)
-                ->set('status', $status)
-                ->update(); // Menghapus argumen $this->table yang tidak diperlukan
+            ->where('id', $data['id'])
+            ->update(['status' => $data['status']]);
     }
     public function countPerawatanInRange($mulai, $berakhir, $kode_jenisprw)
     {

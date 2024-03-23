@@ -2,47 +2,18 @@ th {
     text-align: center;
 }
 @media print {
-    .navbar-nav {
+    .navbar-nav, .navbar, .form-control, .btn, .statistik, .card-header, #juduldatakoleksi, #namakoleksi, #print, .sticky-footer, .card{
         display: none;
     }
-    .navbar {
-        display: none;
-    }
-    .form-control {
-        display: none;
-    }
-    .btn {
-        display: none;
-    }
-    .statistik {
-        display: none;
-    }
-    .report, #tampilPrint, #tampilPerawatan {
+    .report,  #tampilPerawatan,#tampilPrint  {
         
         display: block !important;
     }
-    .card-header {
-        display: none;
-    }
-    #judul-inv{
+    #judul-inv, #koleksi{
         font-family: 'Times New Roman';
     }
-    #koleksi{
-        font-family: 'Times New Roman';
-
-    }
-    #juduldatakoleksi, #namakoleksi {
-        display: none;
-    }
-    #print {
-        display: none;
-    }
-    .sticky-footer, .card{
-        display: none;
-    }
-
 }
-.report{
+.report, #tampilPrint, #tampilPerawatan{
     display: none;
 }
 .dt-input{
@@ -50,21 +21,21 @@ th {
 }
 #tampilPrint{
     font-size: 14pt;
-    display: none;
-    /* padding-left: 50px; */
 }
 #tampilPerawatan{
     font-size: 12pt;
-    display: none;
     font-family: 'Times New Roman';
 }
-.table-responsive {
+.table-responsive, #dataTable {
     font-size: 10pt;
     
 }
-#dataTable{
-    font-size: 10pt;
-}
 .row, .form-control{
     font-size: 11pt;
+}
+
+input:required:invalid{
+    outline: 2px solid red;
+    border-radius: 2px;
+    border: none;
 }

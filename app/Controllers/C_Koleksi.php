@@ -271,57 +271,57 @@ class C_Koleksi extends BaseController
         }
     }
 
-    public function grafikKoleksi()
-    {
-        // $data_koleksi = $this->M_Koleksi->();
-        $kategori = [
-            '01' => 'Arkeologi',
-            '02' => 'Biologika',
-            '03' => 'Etnografika',
-            '04' => 'Filologika',
-            '05' => 'Geologika',
-            '06' => 'Historika',
-            '07' => 'Kramologika',
-            '08' => 'Numismatika',
-            '09' => 'Seni Rupa',
-            '10' => 'Teknologika',
-        ];
-        $randomColors = [
-            '#78A083', '#344955', '#1B3C73', '#944E63', '#f8a5c2', '#FFCD4B', '#720455', '#2b59c3', '#f5365c', '#FB8B24'
-        ];
-        shuffle($randomColors);
+    // public function grafikKoleksi()
+    // {
+    //     // $data_koleksi = $this->M_Koleksi->();
+    //     $kategori = [
+    //         '01' => 'Arkeologi',
+    //         '02' => 'Biologika',
+    //         '03' => 'Etnografika',
+    //         '04' => 'Filologika',
+    //         '05' => 'Geologika',
+    //         '06' => 'Historika',
+    //         '07' => 'Kramologika',
+    //         '08' => 'Numismatika',
+    //         '09' => 'Seni Rupa',
+    //         '10' => 'Teknologika',
+    //     ];
+    //     $randomColors = [
+    //         '#78A083', '#344955', '#1B3C73', '#944E63', '#f8a5c2', '#FFCD4B', '#720455', '#2b59c3', '#f5365c', '#FB8B24'
+    //     ];
+    //     shuffle($randomColors);
 
-        $kategori_labels = [];
-        $data_grafik = [];
+    //     $kategori_labels = [];
+    //     $data_grafik = [];
 
-        // Mengelompokkan data berdasarkan kode kategori
-        $datakoleksigrafik=$this->M_Koleksi->koleksi();
+    //     // Mengelompokkan data berdasarkan kode kategori
+    //     $datakoleksigrafik=$this->M_Koleksi->koleksi();
 
-        foreach ($datakoleksigrafik as $row) {
-            $kategori_labels[] = $kategori[$row['kode_kategori']];
+    //     foreach ($datakoleksigrafik as $row) {
+    //         $kategori_labels[] = $kategori[$row['kode_kategori']];
             
-            if (!isset($data_grafik['total'])) {
-                // Ambil warna pertama dari array acak untuk kategori saat ini
-                $currentColor = array_shift($randomColors);
+    //         if (!isset($data_grafik['total'])) {
+    //             // Ambil warna pertama dari array acak untuk kategori saat ini
+    //             $currentColor = array_shift($randomColors);
             
-                $data_grafik['total'] = [
-                    'label' => 'Total Koleksi',
-                    'backgroundColor' => $currentColor,
-                    'hoverBackgroundColor' => $currentColor,
-                    'borderColor' => $currentColor,
-                    'data' => [],
-                ];
-            }
+    //             $data_grafik['total'] = [
+    //                 'label' => 'Total Koleksi',
+    //                 'backgroundColor' => $currentColor,
+    //                 'hoverBackgroundColor' => $currentColor,
+    //                 'borderColor' => $currentColor,
+    //                 'data' => [],
+    //             ];
+    //         }
             
-            $data_grafik['total']['data'][$kategori[$row['kode_kategori']]] = $row['total'];
-        }
+    //         $data_grafik['total']['data'][$kategori[$row['kode_kategori']]] = $row['total'];
+    //     }
 
-        $data['kategori_labels'] = json_encode(array_unique($kategori_labels));
-        $data['data_grafik'] = json_encode(array_values($data_grafik));
-        // $data['data_koleksi'] = $data_koleksi;
-        $data['jumlah'] = $this->M_Koleksi->getDataByKategori();
+    //     $data['kategori_labels'] = json_encode(array_unique($kategori_labels));
+    //     $data['data_grafik'] = json_encode(array_values($data_grafik));
+    //     // $data['data_koleksi'] = $data_koleksi;
+    //     $data['jumlah'] = $this->M_Koleksi->getDataByKategori();
 
-        return view('Pengkajian/v_grafikkoleksi', $data);
-    }
+    //     return view('Pengkajian/v_grafikkoleksi', $data);
+    // }
 
 }

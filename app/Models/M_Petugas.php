@@ -12,7 +12,7 @@ class M_Petugas extends Model
 
 
     // protected $allowedFields = ['foto', 'nama','password','email','username','level'];
-    protected $allowedFields = ['foto', 'nama', 'password', 'email', 'username', 'level'];
+    protected $allowedFields = ['nip','foto', 'nama', 'password', 'email', 'username', 'level'];
 
 
     protected $validationRules = [];

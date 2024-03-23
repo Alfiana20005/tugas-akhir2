@@ -33,6 +33,12 @@
                 <?= csrf_field() ?>
                 
                 <div class="row mb-3">
+                    <label for="nip" class="col-sm-2 col-form-label">NIP</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control " name="nip" value="<?= $petugas['nip']; ?>">
+                    </div>
+                </div>
+                <div class="row mb-3">
                     <label for="name" class="col-sm-2 col-form-label">Nama Lengkap</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control " name="nama" value="<?= $petugas['nama']; ?>">
@@ -71,7 +77,7 @@
                         </div>
                 </div>
                 
-                <?php if (session()->get('level') != 'Admin'): ?>
+                
                 <div class="row mb-3">
                     <label for="foto" class="col-sm-2 col-form-label">Foto</label>
                     <div class="col-sm-10">
@@ -87,7 +93,7 @@
                         </div>
                     </div>
                 </div>
-                <?php endif; ?>
+                
                 <button type="submit" class="btn btn-primary mt-4" st>Ubah Data</button>
             </form>
         </div>

@@ -92,10 +92,17 @@
     </div>
 
         <div id="tampilPrint">
-            <div class="text-center" >
-                <h6 id="judul-inv" class="m-0 font-weight-bold mb-4" style="text-transform: uppercase;">INVENTARISASI DATA KOLEKSI <?= $data_koleksi['kategori_name']; ?> </h6>
+            <div class="container-fluid d-sm-flex align-items-center justify-content-center mt-4" id="judul-inv">
+              <img src="<?= base_url('/img/download.png') ?>   " alt="" id="logo" style="width: 56px; margin-right: 20px;" >
+              <div class="text-center">
+                  <h6 class="m-0 font-weight-bold text-black" style="text-transform: uppercase;">INVENTARISASI DATA KOLEKSI <?= $data_koleksi['kategori_name']; ?> </h6>
+                  <h6 class="m-0 font-weight-bold text-black">MUSEUM NEGERI NUSA TENGGARA BARAT (NTB)</h6>
+                  
+              </div>
+              <img src=" <?= base_url('/img/logo-.png') ?>" alt="" id="logo" style="width: 80px; margin-left: 20px;">
             </div>
-            <div class="table-responsive mx-auto" style="max-width: 700px;"> <!-- Membatasi lebar maksimum tabel -->
+            <hr>
+            <div class="table-responsive mx-auto" style="max-width: 700px; padding-left: 110px;"> <!-- Membatasi lebar maksimum tabel -->
                 <table class="table table-borderless" width="100%" cellspacing="0">
                     <tbody style="font-size: 12pt; line-height: auto; text-align: justify; font-family:Times New Roman;">
                         <!-- Isi tabel -->

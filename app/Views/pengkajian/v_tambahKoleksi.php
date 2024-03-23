@@ -2,7 +2,7 @@
 
 <?= $this-> section('content'); ?>
 
-<div class="container">
+<div class="container ">
     
                     <?php if (session()->getFlashdata('errors')): ?>
                             <div class="col alert alert-danger" role="alert">
@@ -15,41 +15,35 @@
                         </div>
                     <?php endif; ?>
                     
-    
-    <div class="card shadow mb-4">
-        <div class="card-header py-3">
+    <div class="card shadow mb-4 col-sm-7 mx-auto">
+        <div class="card-header py-3 ">
             <h6 class="m-0 font-weight-bold text-primary">Tambahkan Data Inventaris Koleksi</h6>
         </div>
-
-        
-        <div class="card-body p-7">
+        <div class="card-body">
             <!-- <div class="row mb-3 alert alert-danger" role="alert">
                  simple danger alert—check it out!
             </div> -->
-                <div class="row">
-                    <div class="col-sm-2"></div>
-                    <!--  -->
-                    
-                </div>
-            <form action="/saveData" method="post" enctype="multipart/form-data">
+            
+            <form action="/saveData" method="post" enctype="multipart/form-data" id="form">
                 
                 <?= csrf_field() ?>
                                 
+                <div class="row mb-3 ">
+                    <label for="name" class="col-sm-3 col-form-label">No Registrasi</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="contoh: 1111" name="no_registrasi" value="<?= old('no_registrasi'); ?>">
+                    </div>
+                    
+                </div>
                 <div class="row mb-3">
-                    <label for="name" class="col-sm-2 col-form-label">No Registrasi</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="no_registrasi" value="<?= old('no_registrasi'); ?>">
+                    <label for="name" class="col-sm-3 col-form-label">No Inventaris</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="contoh: 290" name="no_inventaris" value="<?= old('no_inventaris'); ?>">
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label for="name" class="col-sm-2 col-form-label">No Inventaris</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="no_inventaris" value="<?= old('no_inventaris'); ?>">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                        <label for="inputjabatan" class="col-sm-2 col-form-label">Kode Inventaris</label>
-                        <div class="col-sm-10">
+                        <label for="inputjabatan" class="col-sm-3 col-form-label">Kode Inventaris</label>
+                        <div class="col-sm-9">
                             <select class="form-select form-control" type="text" name="kode_kategori" value="<?= old('kode_kategori'); ?>">
                                 <!-- harus sesuai dengan urutan enum pada database -->
                                 <option selected>Pilih Kode Inventaris</option>
@@ -68,46 +62,46 @@
                         </div>
                 </div>
                 <div class="row mb-3">
-                    <label for="name" class="col-sm-2 col-form-label">Nama Benda</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control " name="nama_inv" value="<?= old('nama_inv'); ?>">
+                    <label for="name" class="col-sm-3 col-form-label">Nama Benda</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="contoh: Keris" name="nama_inv" value="<?= old('nama_inv'); ?>">
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label for="username" class="col-sm-2 col-form-label">Ukuran</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="ukuran" value="<?= old('ukuran'); ?>">
+                    <label for="username" class="col-sm-3 col-form-label">Ukuran</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="contoh: Panjang: 20 cm, lebar: 5 cm" name="ukuran" value="<?= old('ukuran'); ?>">
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label for="email" class="col-sm-2 col-form-label">Tempat dibuat</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="tempat_buat" value="<?= old('tempat_buat'); ?>">
+                    <label for="email" class="col-sm-3 col-form-label">Tempat dibuat</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="contoh: Lombok" name="tempat_buat" value="<?= old('tempat_buat'); ?>">
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label for="email" class="col-sm-2 col-form-label">Tempat didapat</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="tempat_dapat" value="<?= old('tempat_dapat'); ?>">
+                    <label for="email" class="col-sm-3 col-form-label">Tempat didapat</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="contoh: Lombok" name="tempat_dapat" value="<?= old('tempat_dapat'); ?>">
                     </div>
                 </div>                
                 <div class="row mb-3">
-                    <label for="email" class="col-sm-2 col-form-label">Cara didapat</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="cara_dapat" value="<?= old('cara_dapat'); ?>">
+                    <label for="email" class="col-sm-3 col-form-label">Cara didapat</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="contoh: Hibah" name="cara_dapat" value="<?= old('cara_dapat'); ?>">
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label for="email" class="col-sm-2 col-form-label">Tanggal Masuk</label>
-                    <div class="col-sm-10">
+                    <label for="email" class="col-sm-3 col-form-label">Tanggal Masuk</label>
+                    <div class="col-sm-9">
                         <input type="date" class="form-control"  aria-label="tahun" name="tgl_masuk" value="<?= old('tgl_masuk'); ?>">
                         <!-- <input type="text" class="form-control" name="tanggal" > -->
                     
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label for="email" class="col-sm-2 col-form-label">Keadaan Benda</label>
-                    <div class="col-sm-10">
+                    <label for="email" class="col-sm-3 col-form-label">Keadaan Benda</label>
+                    <div class="col-sm-9">
                             <select class="form-select form-control" type="text" name="keadaan"  value="<?= old('keadaan'); ?>">
                                 <!-- harus sesuai dengan urutan enum pada database -->
                                 <option selected>Pilih Keadaan Koleksi</option>
@@ -119,26 +113,26 @@
                         </div>
                 </div>
                 <div class="row mb-3">
-                    <label for="email" class="col-sm-2 col-form-label">Lokasi</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="lokasi" value="<?= old('lokasi'); ?>">
+                    <label for="email" class="col-sm-3 col-form-label">Lokasi</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="contoh: Gudang Koleksi Museum NTB" name="lokasi" value="<?= old('lokasi'); ?>">
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label for="email" class="col-sm-2 col-form-label">Keterangan</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="keterangan" value="<?= old('keterangan'); ?>">
+                    <label for="email" class="col-sm-3 col-form-label">Keterangan</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="contoh: Pengadaan koleksi" name="keterangan" value="<?= old('keterangan'); ?>">
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label for="email" class="col-sm-2 col-form-label">Uraian</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="uraian" value="<?= old('uraian'); ?>">
+                    <label for="email" class="col-sm-3 col-form-label">Uraian</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="contoh: Sebuah keris ..." name="uraian" value="<?= old('uraian'); ?>">
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label for="foto" class="col-sm-2 col-form-label">Gambar</label>
-                    <div class="col-sm-10">
+                    <label for="foto" class="col-sm-3 col-form-label">Gambar</label>
+                    <div class="col-sm-9">
                         <div class="custom-file">
                             <input type="file" class="custom-file-input form-control" id="customFile" name="gambar">
                             <label class="custom-file-label" for="customFile">Masukkan Gambar Koleksi</label>
@@ -146,19 +140,14 @@
                         </div>
                     </div>
                 </div>
-
                 
-                
-                <!-- <div class="row mb-5">
-                        <label for="formFileSm" class="col-sm-2 col-form-label">Foto</label>
-                        <div class="col-sm-10">
-                        <input class="form-control" id="formFileSm" type="file">
-                        </div>
-                </div> -->
-                
-                <button type="submit" class="btn btn-primary">Simpan Data</button>
+                <div class="d-flex justify-content-end">
+                     <button type="submit" class="btn btn-primary ">Simpan Data</button>
+                </div> 
             </form>
         </div>
+
+        
     </div>
 
 

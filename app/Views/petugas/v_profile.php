@@ -26,6 +26,7 @@
                         <div class="flex-grow-1 ms-3">
 
                             <h5 class="mb-2"><?= session()->get('nama'); ?></h5>
+                            <p class="mb-2 pb-1" style="color: #2b2a2a;">NIP: <?= session()->get('nip'); ?></p>
                             <p class="mb-2 pb-1" style="color: #2b2a2a;">Username: <?= session()->get('username'); ?></p>
                             <p class="mb-2 pb-1" style="color: #2b2a2a;">email: <?= session()->get('email'); ?></p>
                             <p class="mb-2 pb-1" style="color: #2b2a2a;">Password: <?= session()->get('password'); ?></p>

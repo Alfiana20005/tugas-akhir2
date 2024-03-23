@@ -75,6 +75,12 @@ class C_Petugas extends BaseController
                 'errors' => [
                     'required'=>'jabatan tidak boleh kosong',
                 ]
+            ],
+            'nip' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required'=>'NIP tidak boleh kosong',
+                ]
             ]
         ];
 
@@ -92,6 +98,7 @@ class C_Petugas extends BaseController
             'email' => $this->request->getVar('email'),
             'password' => $this->request->getVar('password'),
             'level' => $this->request->getVar('level'),
+            'nip' => $this->request->getVar('nip'),
         ]);
 
         //alert
@@ -187,6 +194,7 @@ class C_Petugas extends BaseController
     public function update($id_petugas) {
         // Mengambil data yang akan diupdate dari request
         $dataToUpdate = [
+            'nip' => $this->request->getVar('nip'),
             'nama' => $this->request->getVar('nama'),
             'username' => $this->request->getVar('username'),
             'email' => $this->request->getVar('email'),
@@ -223,6 +231,7 @@ class C_Petugas extends BaseController
             if (session()->get('level') != 'Admin') {
                 session()->set([
                     'nama' => $newPetugasData['nama'],
+                    'nip' => $newPetugasData['nip'],
                     'username' => $newPetugasData['username'],
                     'email' => $newPetugasData['email'],
                     'password' => $newPetugasData['password'],

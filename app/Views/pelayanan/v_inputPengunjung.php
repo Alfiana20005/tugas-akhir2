@@ -25,32 +25,32 @@
                     <form action="/tambahPengunjung" method="post">
                     <?= csrf_field() ?>
                         <div class="row mb-3">
-                            <label for="inputname" class="col-sm-2 col-form-label">Nama/Instansi/Keluarga</label>
-                            <div class="col-sm-10">
-                            <input type="text" class="form-control"  name="nama" value="<?= old('nama'); ?>">
+                            <label for="inputname" class="col-sm-3 col-form-label">Nama/Instansi/Keluarga</label>
+                            <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="Contoh: Universitas Mataram"  name="nama" value="<?= old('nama'); ?>">
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
-                            <div class="col-sm-10">
-                            <input type="text" class="form-control"  name="alamat" value="<?= old('alamat'); ?>">
+                            <label for="alamat" class="col-sm-3 col-form-label">Alamat</label>
+                            <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="Contoh: Jl. Gajah Mada"  name="alamat" value="<?= old('alamat'); ?>">
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="No Hp" class="col-sm-2 col-form-label">No.Telp/Hp</label>
-                            <div class="col-sm-10">
-                            <input type="text" class="form-control"  name="no_hp" value="<?= old('no_hp'); ?>">
+                            <label for="No Hp" class="col-sm-3 col-form-label">No.Telp/Hp</label>
+                            <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="Contoh: 081xxxxxxxxx" name="no_hp" value="<?= old('no_hp'); ?>">
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="No Hp" class="col-sm-2 col-form-label">Tanggal Kunjungan</label>
-                            <div class="col-sm-10">
+                            <label for="No Hp" class="col-sm-3 col-form-label">Tanggal Kunjungan</label>
+                            <div class="col-sm-9">
                             <input type="date" class="form-control" name="created_at" value="<?= old('created_at'); ?>">
                             </div>
                         </div>
                         <div class="row mb-3">
-                                <label for="kategori" class="col-sm-2 col-form-label">Kategori</label>
-                                <div class="col-sm-10">
+                                <label for="kategori" class="col-sm-3 col-form-label">Kategori</label>
+                                <div class="col-sm-9">
                                     <select class="form-select form-control" type="text" name="kategori">
                                         <option selected>Pilih Kategori</option>
                                         <option <?= old("kategori") == 'TK'? 'selected' : '' ?> value="1">TK</option>
@@ -67,9 +67,9 @@
                                 </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="jumlah" class="col-sm-2 col-form-label">Jumlah</label>
-                            <div class="col-sm-10">
-                            <input type="text" class="form-control" name="jumlah" value="<?= old('jumlah'); ?>">
+                            <label for="jumlah" class="col-sm-3 col-form-label">Jumlah</label>
+                            <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="Contoh: 10" name="jumlah" value="<?= old('jumlah'); ?>">
                             </div>
                         </div>
             

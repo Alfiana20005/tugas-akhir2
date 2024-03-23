@@ -159,17 +159,31 @@ class C_Perawatan extends BaseController
     {
         $jadwalPrw = $this->M_JadwalPrw->getJadwalPrw();
         
-        // $perawatanData = $this->M_JadwalPrw->getPerawatanFromJadwal($jadwalPrw['mulai'], $jadwalPrw['berakhir'], $jadwalPrw['kode_jenisprw']);
-        
+        //menghhitung jumlah perawatan yang dilakukan
         foreach ($jadwalPrw as &$jadwalItem) {
             $jenisprwNames = $this->M_JadwalPrw->getJenisPrwName($jadwalItem['kode_jenisprw']);
             $jadwalItem['jenisprwNames'] = isset($jenisprwNames[0]['jenis_prw']) ? $jenisprwNames[0]['jenis_prw'] : 'Nama Kategori Tidak Tersedia';
-            // $perawatanData =
-            // $jadwalData = $this->M_JadwalPrw->find($jadwalItem['id']);
             $jadwalItem['perawatan']= $this->M_JadwalPrw->countPerawatanInRange($jadwalItem['mulai'], $jadwalItem['berakhir'], $jadwalItem['kode_jenisprw']);
             
         }
-        
+    
+        // Looping untuk setiap jadwal dan memperbarui status serta menyimpannya ke database
+        foreach ($jadwalPrw as $j) {
+            // Hitung progress
+            $progress = ($j['perawatan'] / $j['target']) * 100;
+    
+            // Tentukan status berdasarkan progress
+            if ($progress >= 100) {
+                $status = 'Selesai';
+            } elseif ($progress > 0) {
+                $status = 'Sedang Berlangsung';
+            } else {
+                $status = 'Belum Mulai';
+            }
+    
+            // Simpan status ke database menggunakan model
+            $this->M_JadwalPrw->updateStatus(['id' => $j['id'], 'status' => $status]);
+        }
         $data = [
             'title' => 'Jadwal Perawatan',
             'jadwal' => $jadwalPrw,
@@ -186,6 +200,42 @@ class C_Perawatan extends BaseController
 
     public function saveJadwalPerawatan()
     {
+        $rules= [
+            'kode_jenisprw' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required'=>'Jenis Perawatan harus diisi',
+                ]
+            ],
+            'target' => [
+                'rules' => 'required',
+                'errors' => ['required'=>'Target Perawatan harus diisi']
+            ],
+            'deskripsi' => [
+                'rules' => 'required',
+                'errors' => ['required'=>'Deskripsi harus diisi']
+            ],
+            'mulai' => [
+                'rules' => 'required',
+                'errors' => ['required'=>'Tanggal Mulai harus diisi']
+            ],
+            'berakhir' => [
+                'rules' => 'required',
+                'errors' => ['required'=>'Tanggal Berakhir harus diisi']
+            ],
+            'status' => [
+                'rules' => 'required',
+                'errors' => ['required'=>'Status harus diisi']
+            ],
+        
+              
+        ];
+
+        if (!$this->validate($rules)) {
+            return redirect()->back()
+                ->withInput()
+                ->with('errors', $this->validator->listErrors());
+        }
         $data = [
             'kode_jenisprw' => $this->request->getVar('kode_jenisprw'),
             'deskripsi' => $this->request->getVar('deskripsi'),
@@ -234,6 +284,7 @@ class C_Perawatan extends BaseController
             $data_petugas = $this->M_Petugas->find($perawatanItem['id_petugas']);
             $perawatanItem['koleksiNames'] = isset($data_koleksi['nama_inv']) ? $data_koleksi['nama_inv'] : 'Nama Kategori Tidak Tersedia';
             $perawatanItem['petugasNames'] = isset($data_petugas['nama']) ? $data_petugas['nama'] : 'Nama Kategori Tidak Tersedia';
+            $perawatanItem['nip'] = isset($data_petugas['nip']) ? $data_petugas['nip'] : '-';
         }
         if (!$perawatanData) {
             // Handle if perawatan data not found
@@ -243,31 +294,80 @@ class C_Perawatan extends BaseController
         // Load the view with perawatanData and jadwalData
         return view('pengkajian/v_detailJadwal', ['perawatan' => $perawatanData, 'jadwal' => $jadwalData]);
     }
-    public function updateStatus()
-    {
-        // Pastikan metode yang digunakan adalah POST
-        if ($this->request->getMethod() == 'post') {
-            // Ambil data ID dan status dari permintaan POST
-            $id = $this->request->getPost('id');
-            $status = $this->request->getPost('updateStatus');
+    // public function updateStatus()
+    // {
+    //     // Pastikan metode yang digunakan adalah POST
+    //     if ($this->request->getMethod() == 'post') {
+    //         // Ambil data ID dan status dari permintaan POST
+    //         $id = $this->request->getPost('id');
+    //         $status = $this->request->getPost('status');
 
-            // Lakukan pembaruan status di database menggunakan model
-            $result = $this->M_JadwalPrw->updateStatus($id, $status);
+    //         // Lakukan pembaruan status di database menggunakan model
+    //         $result = $this->M_JadwalPrw->updateStatus($id, $status);
 
-            // Beri respons berdasarkan hasil pembaruan
-            if ($result) {
-                return redirect()->to("/perawatan");
+    //         // Beri respons berdasarkan hasil pembaruan
+    //         if ($result) {
+    //             return redirect()->to("/perawatan");
         
-            } else {
-                return $this->response->setJSON(['success' => false, 'message' => 'Gagal memperbarui status']);
-            }
-        } else {
-            // Jika metode bukan POST, beri respons dengan kesalahan
-            return $this->response->setJSON(['success' => false, 'message' => 'Metode yang tidak valid']);
-        }
-    }
+    //         } else {
+    //             return $this->response->setJSON(['success' => false, 'message' => 'Gagal memperbarui status']);
+    //         }
+    //     } else {
+    //         // Jika metode bukan POST, beri respons dengan kesalahan
+    //         return $this->response->setJSON(['success' => false, 'message' => 'Metode yang tidak valid']);
+    //     }
+    // }
+
+    // 
 
     
+    // public function updateStatus($id)
+    // {
+    //     // Mengambil data dari database atau sumber data lainnya
+    //     $data = $this->M_JadwalPrw->getDataById($id);
+
+    //     // Menghitung kemajuan berdasarkan data yang ada
+    //     $progress = ($data['perawatan'] / $data['target']) * 100;
+
+    //     // Menentukan status berdasarkan kemajuan
+    //     if ($progress >= 100) {
+    //         $status = 'Selesai';
+    //     } elseif ($progress > 0) {
+    //         $status = 'Sedang Berlangsung';
+    //     } else {
+    //         $status = 'Belum Mulai';
+    //     }
+
+    //     // Memperbarui status di database
+    //     $this->M_JadwalPrw->updateStatus($id, $status);
+    // }
+
+
+    // public function updateStatus(){
+    //     // Ambil data jadwal dari model
+    //     $data['jadwal'] = $this->M_JadwalPrw->getAll();
+    
+    //     // Looping untuk setiap jadwal dan memperbarui status serta menyimpannya ke database
+    //     foreach ($data['jadwal'] as $j) {
+    //         // Hitung progress
+    //         $progress = ($j['perawatan'] / $j['target']) * 100;
+    
+    //         // Tentukan status berdasarkan progress
+    //         if ($progress >= 100) {
+    //             $status = 'Selesai';
+    //         } elseif ($progress > 0) {
+    //             $status = 'Sedang Berlangsung';
+    //         } else {
+    //             $status = 'Belum Mulai';
+    //         }
+    
+    //         // Simpan status ke database menggunakan model
+    //         $this->M_JadwalPrw->updateStatus(['id' => $j['id'], 'status' => $status]);
+    //     }
+    
+    //     // Load view dengan data yang telah diperbarui
+    //     return view('pengkajian/v_perawatan', $data);
+    // }
     public function delete($id) 
     {
         // Saring masukan untuk mencegah SQL injection atau serangan lainnya
@@ -280,6 +380,11 @@ class C_Perawatan extends BaseController
         // Redirect ke halaman yang sesuai
         return redirect()->to('/perawatan');
     }  
+    public function printLapPerwatan() {
+
+        
+        
+    }
 
 
 

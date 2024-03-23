@@ -202,33 +202,16 @@
                                                     <?= $j['status']; ?>
                                                 <?php endif; ?>
                                                 <?php if (session()->get('level') == 'Ketua Pengkajian'): ?>
-                                                    <?php
-                                                            $progressRestorasi = ($j['perawatan'] / $j['target']) * 100;
-                                                            $progressRestorasi = min($progressRestorasi, 100);
-                                                            $status = '';
-                                                            $updateStatus = '';
-                                                            $btn_color = '';
-                                                            if ($progressRestorasi >= 100) {
-                                                                $status = 'Selesai';
-                                                                $btn_color = 'success';
-                                                                
-                                                            } elseif ($progressRestorasi > 0) {
-                                                                $status = 'Sedang Berlangsung';
-                                                                $btn_color = 'warning';
-                                                            } else {
-                                                                $status = 'Belum Mulai';
-                                                                $btn_color = 'danger';
-                                                            }
-                                                            ?>
-                                                        <!-- Menyimpan status saat ini -->
-                                                        <form action="/updateStatus" method="post">
-                                                            <div class="btn-group">
-                                                                <!-- Tombol dengan tipe submit -->
-                                                                <button type="submit" name="updateStatus" value="<?= $status; ?>" class="btn btn-sm btn-<?php echo $btn_color; ?> btn-update-status" aria-haspopup="true" aria-expanded="false">
-                                                                    <?php echo $status; ?>
-                                                                </button>
-                                                            </div>
-                                                        </form>
+                                                    <?php if ($j['status'] == 'Selesai'): ?>
+                                                        <span class="btn btn-success btn-sm">Selesai</span>
+                                                    <?php elseif ($j['status'] == 'Sedang Berlangsung'): ?>
+                                                        <span class="btn btn-warning btn-sm">Sedang berlangsung</span>
+                                                    <?php else: ?>
+                                                        <span class="btn btn-danger btn-sm">Belum Mulai</span>
+                                                    <?php endif; ?>
+                                                <?php else: ?>
+                                                    <?= $j['status']; ?>
+
                                                 <?php endif; ?>
                                             </td>
 
@@ -238,13 +221,16 @@
                                                 <a href="<?= base_url('detailJadwal/' . $j['id']); ?>" class="btn btn-info btn-sm mx-2"> Detail</a>
                                             </td>
                                             <?php if (session()->get('level') == 'Ketua Pengkajian'): ?>
-                                            <td>
+                                            <td >
                             
                                                 <form action="/deleteJadwal/<?= $j['id']; ?>" method="post" class="d-inline">
                                                     <?= csrf_field(); ?>
                                                     <input type="hidden" name="_method" value="DELETE">
                                                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('apakah anda yakin?');">
                                                     Hapus
+                                                    </button>
+                                                    <button type="submit" class="btn btn-primary btn-sm">
+                                                        Print
                                                     </button>
                                                 </form>
                                                 
@@ -257,6 +243,7 @@
                                                         echo $progressRestorasi . "%";
                                                    ?>     
                                             </td>
+                                            
                                         </tr>
                                         <?php endforeach; ?>
                                     </tbody>
