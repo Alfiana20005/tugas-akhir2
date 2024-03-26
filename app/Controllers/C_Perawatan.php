@@ -45,9 +45,7 @@ class C_Perawatan extends BaseController
         }
 
         // var_dump($data_perawatan);
-        // Pastikan $data_perawatan adalah array
         
-
         $data = [
             'title' => 'Data Perawatan',
             'perawatan' => $data_perawatan,
@@ -165,25 +163,31 @@ class C_Perawatan extends BaseController
             $jadwalItem['jenisprwNames'] = isset($jenisprwNames[0]['jenis_prw']) ? $jenisprwNames[0]['jenis_prw'] : 'Nama Kategori Tidak Tersedia';
             $jadwalItem['perawatan']= $this->M_JadwalPrw->countPerawatanInRange($jadwalItem['mulai'], $jadwalItem['berakhir'], $jadwalItem['kode_jenisprw']);
             
-        }
-    
-        // Looping untuk setiap jadwal dan memperbarui status serta menyimpannya ke database
-        foreach ($jadwalPrw as $j) {
             // Hitung progress
-            $progress = ($j['perawatan'] / $j['target']) * 100;
-    
-            // Tentukan status berdasarkan progress
+            $progress = ($jadwalItem['perawatan'] / $jadwalItem['target']) * 100;
             if ($progress >= 100) {
                 $status = 'Selesai';
-            } elseif ($progress > 0) {
-                $status = 'Sedang Berlangsung';
-            } else {
-                $status = 'Belum Mulai';
+            } 
+            else {
+                if ($progress>0) {
+                    if (strtotime($jadwalItem['berakhir']) > time()) {
+                        $status = 'Sedang Berlangsung';
+                    }else{
+                        $status = 'Tidak Selesai';
+                    }
+                }else{
+                    if (strtotime($jadwalItem['berakhir']) > time()) {
+                        $status = 'Belum Mulai';
+                    }else{
+                        $status = 'Tidak Selesai';
+                    }
+                }
             }
-    
             // Simpan status ke database menggunakan model
-            $this->M_JadwalPrw->updateStatus(['id' => $j['id'], 'status' => $status]);
+            $this->M_JadwalPrw->updateStatus(['id' => $jadwalItem['id'], 'status' => $status]);
         }
+    
+    
         $data = [
             'title' => 'Jadwal Perawatan',
             'jadwal' => $jadwalPrw,
@@ -294,80 +298,8 @@ class C_Perawatan extends BaseController
         // Load the view with perawatanData and jadwalData
         return view('pengkajian/v_detailJadwal', ['perawatan' => $perawatanData, 'jadwal' => $jadwalData]);
     }
-    // public function updateStatus()
-    // {
-    //     // Pastikan metode yang digunakan adalah POST
-    //     if ($this->request->getMethod() == 'post') {
-    //         // Ambil data ID dan status dari permintaan POST
-    //         $id = $this->request->getPost('id');
-    //         $status = $this->request->getPost('status');
-
-    //         // Lakukan pembaruan status di database menggunakan model
-    //         $result = $this->M_JadwalPrw->updateStatus($id, $status);
-
-    //         // Beri respons berdasarkan hasil pembaruan
-    //         if ($result) {
-    //             return redirect()->to("/perawatan");
-        
-    //         } else {
-    //             return $this->response->setJSON(['success' => false, 'message' => 'Gagal memperbarui status']);
-    //         }
-    //     } else {
-    //         // Jika metode bukan POST, beri respons dengan kesalahan
-    //         return $this->response->setJSON(['success' => false, 'message' => 'Metode yang tidak valid']);
-    //     }
-    // }
-
-    // 
-
-    
-    // public function updateStatus($id)
-    // {
-    //     // Mengambil data dari database atau sumber data lainnya
-    //     $data = $this->M_JadwalPrw->getDataById($id);
-
-    //     // Menghitung kemajuan berdasarkan data yang ada
-    //     $progress = ($data['perawatan'] / $data['target']) * 100;
-
-    //     // Menentukan status berdasarkan kemajuan
-    //     if ($progress >= 100) {
-    //         $status = 'Selesai';
-    //     } elseif ($progress > 0) {
-    //         $status = 'Sedang Berlangsung';
-    //     } else {
-    //         $status = 'Belum Mulai';
-    //     }
-
-    //     // Memperbarui status di database
-    //     $this->M_JadwalPrw->updateStatus($id, $status);
-    // }
 
 
-    // public function updateStatus(){
-    //     // Ambil data jadwal dari model
-    //     $data['jadwal'] = $this->M_JadwalPrw->getAll();
-    
-    //     // Looping untuk setiap jadwal dan memperbarui status serta menyimpannya ke database
-    //     foreach ($data['jadwal'] as $j) {
-    //         // Hitung progress
-    //         $progress = ($j['perawatan'] / $j['target']) * 100;
-    
-    //         // Tentukan status berdasarkan progress
-    //         if ($progress >= 100) {
-    //             $status = 'Selesai';
-    //         } elseif ($progress > 0) {
-    //             $status = 'Sedang Berlangsung';
-    //         } else {
-    //             $status = 'Belum Mulai';
-    //         }
-    
-    //         // Simpan status ke database menggunakan model
-    //         $this->M_JadwalPrw->updateStatus(['id' => $j['id'], 'status' => $status]);
-    //     }
-    
-    //     // Load view dengan data yang telah diperbarui
-    //     return view('pengkajian/v_perawatan', $data);
-    // }
     public function delete($id) 
     {
         // Saring masukan untuk mencegah SQL injection atau serangan lainnya
@@ -380,11 +312,82 @@ class C_Perawatan extends BaseController
         // Redirect ke halaman yang sesuai
         return redirect()->to('/perawatan');
     }  
-    public function printLapPerwatan() {
+    public function laporan() {
+        $data_koleksi = $this->M_Koleksi->findAll();
+        $modelPerawatan = new M_Perawatan();
+        
+        $tanggalAwal = $this->request->getPost('mulaiDari');
+        $tanggalAkhir = $this->request->getPost('hingga');
+        $kode_jenisprw = $this->request->getPost('kode_jenisprw');
 
-        
-        
+
+        if (empty($tanggalAwal) || empty($tanggalAkhir)) {
+            $dataPerawatan = $this->M_Perawatan->findAll();
+        } else {
+            // Jika ada tanggal yang diinputkan, ambil data sesuai rentang tanggal
+            $dataPerawatan = $modelPerawatan->getPerawatanInRange($tanggalAwal, $tanggalAkhir, $kode_jenisprw);
+        }
+
+        $jenisprwData = $this->M_Perawatan->getJenisPrwName($kode_jenisprw);
+        $nama['jenisprw'] = isset($jenisprwData['jenis_prw']) ? $jenisprwData['jenis_prw'] : 'Nama Kategori Tidak Tersedia';
+
+        // $dataPerawatan = $modelJadwal->getPerawatanFromJadwal($tanggalAwal['mulaiDari'], $tanggalAkhir['hingga'], $kode_jenisprw['jenisprw']);
+        foreach ($dataPerawatan as &$perawatanItem) {
+            $data_koleksi = $this->M_Koleksi->find($perawatanItem['id_koleksi']);
+            $data_petugas = $this->M_Petugas->find($perawatanItem['id_petugas']);
+            $jenisprwData = $this->M_Perawatan->getJenisPrwName($perawatanItem['kode_jenisprw']);
+            $perawatanItem['jenisprw'] = isset($jenisprwData['jenis_prw']) ? $jenisprwData['jenis_prw'] : 'Nama Kategori Tidak Tersedia';
+            $perawatanItem['koleksiNames'] = isset($data_koleksi['nama_inv']) ? $data_koleksi['nama_inv'] : 'Nama Kategori Tidak Tersedia';
+            $perawatanItem['no_registrasi'] = isset($data_koleksi['no_registrasi']) ? $data_koleksi['no_registrasi'] : 'Nama Kategori Tidak Tersedia';
+            $perawatanItem['petugasNames'] = isset($data_petugas['nama']) ? $data_petugas['nama'] : 'Nama Kategori Tidak Tersedia';
+            $perawatanItem['nip'] = isset($data_petugas['nip']) ? $data_petugas['nip'] : '-';
+        }
+        $data =[
+            'title' => 'Daftar Perawatan',
+            'tanggalAwal' => $tanggalAwal,
+            'tanggalAkhir' => $tanggalAkhir,
+            'kode_jenisprw' => $kode_jenisprw,
+            'perawatan'=> $dataPerawatan,
+            'nama'=>$nama
+        ];
+
+        // Load the view with perawatanData and jadwalData
+        // return view('pengkajian/v_perawatan', ['perawatan' => $perawatanData]); 
+        return view('pengkajian/v_cetak', $data);
     }
+
+    // public function cetak() {
+    //     $modelJadwal = new M_JadwalPrw();
+    //     $tanggalAwal = $this->request->getPost('mulaiDari');
+    //     $tanggalAkhir = $this->request->getPost('hingga');
+    //     $kodeJenisPrw = $this->request->getPost('jenisprw');
+    
+    //     // Pastikan tanggalAwal dan tanggalAkhir adalah string dalam format yang diharapkan (contoh: YYYY-MM-DD)
+    //     // Ubah format tanggal sesuai dengan kebutuhan
+    //     $tanggalAwalFormatted = date('Y-m-d', strtotime($tanggalAwal));
+    //     $tanggalAkhirFormatted = date('Y-m-d', strtotime($tanggalAkhir));
+    
+    //     // Ambil data perawatan sesuai dengan kriteria yang dimasukkan pengguna
+    //     $perawatanData = $modelJadwal->getPerawatanFromJadwal($tanggalAwalFormatted, $tanggalAkhirFormatted, $kodeJenisPrw);
+    
+    //     foreach ($perawatanData as &$perawatanItem) {
+    //         $dataKoleksi = $this->M_Koleksi->find($perawatanItem['id_koleksi']);
+    //         $dataPetugas = $this->M_Petugas->find($perawatanItem['id_petugas']);
+    //         $jenisprwData = $this->M_Perawatan->getJenisPrwName($perawatanItem['kode_jenisprw']);
+    //         $perawatanItem['jenisprw'] = isset($jenisprwData['jenis_prw']) ? $jenisprwData['jenis_prw'] : 'Nama Kategori Tidak Tersedia';
+    //         $perawatanItem['koleksiNames'] = isset($dataKoleksi['nama_inv']) ? $dataKoleksi['nama_inv'] : 'Nama Kategori Tidak Tersedia';
+    //         $perawatanItem['petugasNames'] = isset($dataPetugas['nama']) ? $dataPetugas['nama'] : 'Nama Kategori Tidak Tersedia';
+    //     }
+    
+    //     if (!$perawatanData) {
+    //         // Handle jika data perawatan tidak ditemukan
+    //         return view('pengkajian/v_cetak', ['perawatan' => []]);
+    //     }
+    
+    //     // Load view dengan data perawatan yang sudah disaring
+    //     return view('pengkajian/v_cetak', ['perawatan' => $perawatanData]);
+    // }
+    
 
 
 

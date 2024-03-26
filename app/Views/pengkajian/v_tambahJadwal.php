@@ -38,13 +38,13 @@
                     <div class="row mb-3">
                         <label for="email" class="col-sm-3 col-form-label">Deskripsi</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="deskripsi" >
+                            <input type="text" class="form-control" placeholder="Contoh: Lakukan perawatan...." name="deskripsi" >
                         </div>
                     </div>
                     <div class="row mb-3">
                         <label for="target" class="col-sm-3 col-form-label">Target</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="target" >
+                            <input type="text" class="form-control" placeholder="Contoh: 1000" name="target" >
                         </div>
                     </div>   
                     <div class="row mb-3">

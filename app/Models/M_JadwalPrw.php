@@ -45,17 +45,17 @@ class M_JadwalPrw extends Model
             ->getResultArray();
     }
     
-    public function getPerawatanInRange($mulai, $berakhir, $kode_jenisprw)
-    {
-        return $this->db->table('data_perawatan')
-            ->select('data_perawatan.*, jenis_perawatan.jenis_prw')
-            ->join('jenis_perawatan', 'jenis_perawatan.kode_jenisprw = data_perawatan.kode_jenisprw', 'left')
-            ->where('tanggal >=', $mulai)
-            ->where('tanggal <=', $berakhir)
-            ->where('data_perawatan.kode_jenisprw', $kode_jenisprw)
-            ->get()
-            ->getResultArray();
-    }
+    // public function getPerawatanInRange($mulai, $berakhir, $kode_jenisprw)
+    // {
+    //     return $this->db->table('data_perawatan')
+    //         ->select('data_perawatan.*, jenis_perawatan.jenis_prw')
+    //         ->join('jenis_perawatan', 'jenis_perawatan.kode_jenisprw = data_perawatan.kode_jenisprw', 'left')
+    //         ->where('tanggal >=', $mulai)
+    //         ->where('tanggal <=', $berakhir)
+    //         ->where('data_perawatan.kode_jenisprw', $kode_jenisprw)
+    //         ->get()
+    //         ->getResultArray();
+    // }
     public function getPerawatanFromJadwal($mulai, $berakhir, $kode_jenisprw)
     {
         return $this->db->table('data_perawatan')

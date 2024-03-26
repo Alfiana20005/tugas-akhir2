@@ -105,6 +105,11 @@
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Perawatan</span></a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/laporan" >
+            <i class="fas fa-print fa-sm mr-2 text-gray-400"></i>
+            <span>Laporan Perawatan</span></a>
+    </li>
     <?php endif; ?>
 
 
@@ -151,6 +156,11 @@
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Perawatan</span></a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/laporan" >
+            <i class="fas fa-print fa-sm mr-2 text-gray-400"></i>
+            <span>Laporan Perawatan</span></a>
+    </li>
     <?php endif; ?>
 
     <?php if (session()->get('level') == 'Kepala Museum'): ?>
@@ -165,11 +175,6 @@
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Statistik Pengunjung</span></a>
     </li>
-    <!-- <li class="nav-item">
-        <a class="nav-link" href="/grafikKoleksi">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>Grafik Koleksi</span></a>
-    </li> -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
             aria-expanded="true" aria-controls="collapseTwo">

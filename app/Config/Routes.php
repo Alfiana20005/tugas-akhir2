@@ -71,3 +71,5 @@ $routes->post('/simpanJadwal', 'C_Perawatan::saveJadwalPerawatan');
 $routes->get('detailJadwal/(:segment)', 'C_Perawatan::detailJadwal/$1');
 $routes->post('/updateStatus', 'C_Perawatan::updateStatus');
 $routes->delete('deleteJadwal/(:segment)', 'C_Perawatan::delete/$1');
+$routes->post('/laporan', 'C_Perawatan::laporan');
+$routes->get('/laporan', 'C_Perawatan::laporan');

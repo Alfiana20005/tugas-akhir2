@@ -14,9 +14,7 @@
             <a href="<?= base_url('/perawatan'); ?>   ">
                 <h6 class="m-0 font-weight-bold text-primary">Perawatan <?= $jadwal['jenisprwNames']; ?> Tanggal <?= $jadwal['mulai']; ?> Hingga <?= $jadwal['berakhir']; ?></h6>
             </a>
-            <button onclick="window.print()" type="submit" class="btn btn-sm btn-primary shadow-sm" id="print">
-                <i class="fas fa-print fa-sm text-white-50"></i>Print
-            </button>
+
         </div>
         
         <div class="card-body">

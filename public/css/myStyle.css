@@ -2,24 +2,34 @@ th {
     text-align: center;
 }
 @media print {
-    .navbar-nav, .navbar, .form-control, .btn, .statistik, .card-header, #juduldatakoleksi, #namakoleksi, #print, .sticky-footer, .card{
+    .navbar-nav, .navbar, .form-control, .btn, .statistik, .card-header, #juduldatakoleksi, #namakoleksi, #print, .sticky-footer, .card, #debug-icon{
         display: none;
     }
-    .report,  #tampilPerawatan,#tampilPrint  {
+    .report,  #tampilPerawatan,#tampilPrint, #printperawatan  {
         
         display: block !important;
     }
-    #judul-inv, #koleksi{
+    #koleksi{
         font-family: 'Times New Roman';
     }
+    @page {
+        size: A4 portrait;
+        margin: 1cm;
+        orphans: 3;
+    }
+
+    /* Tentukan elemen apa yang harus dimulai di halaman baru */
+    #printperawatan {
+        page-break-after: always;
+    }
 }
-.report, #tampilPrint, #tampilPerawatan{
+.report, #tampilPrint, #tampilPerawatan, #printperawatan{
     display: none;
 }
 .dt-input{
     margin-right: 10px;
 }
-#tampilPrint{
+#tampilPrint, #printperawatan{
     font-size: 14pt;
 }
 #tampilPerawatan{

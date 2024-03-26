@@ -79,9 +79,20 @@ class M_Perawatan extends Model
     public function getKoleksiName($id_koleksi)
     {
         return $this->db->table('data_perawatan')
-            ->select('data_koleksi.nama_inv')
+            ->select('data_koleksi.nama_inv', 'data_koleksi.nama_inv')
             ->join('data_koleksi', 'data_koleksi.id = data_perawatan.id_koleksi', 'left')
             ->where('data_perawatan.id_koleksi', $id_koleksi)
+            ->get()
+            ->getResultArray();
+    }
+    public function getPerawatanInRange($mulai, $berakhir, $kode_jenisprw)
+    {
+        return $this->db->table('data_perawatan')
+            ->select('data_perawatan.*, jenis_perawatan.jenis_prw')
+            ->join('jenis_perawatan', 'jenis_perawatan.kode_jenisprw = data_perawatan.kode_jenisprw', 'left')
+            ->where('tanggal >=', $mulai)
+            ->where('tanggal <=', $berakhir)
+            ->where('data_perawatan.kode_jenisprw', $kode_jenisprw)
             ->get()
             ->getResultArray();
     }

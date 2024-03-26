@@ -198,21 +198,17 @@
                                             <td style="text-align: center;"><?= $j['mulai']; ?></td>
                                             <td style="text-align: center;"><?= $j['berakhir']; ?></td>
                                             <td style="text-align: center;">
-                                                <?php if (session()->get('level') != 'Ketua Pengkajian'): ?>
-                                                    <?= $j['status']; ?>
-                                                <?php endif; ?>
-                                                <?php if (session()->get('level') == 'Ketua Pengkajian'): ?>
+                                                
                                                     <?php if ($j['status'] == 'Selesai'): ?>
                                                         <span class="btn btn-success btn-sm">Selesai</span>
                                                     <?php elseif ($j['status'] == 'Sedang Berlangsung'): ?>
                                                         <span class="btn btn-warning btn-sm">Sedang berlangsung</span>
+                                                    <?php elseif ($j['status'] == 'Tidak Selesai'): ?>
+                                                        <span class="btn btn-danger btn-sm">Tidak Selesai</span>
                                                     <?php else: ?>
-                                                        <span class="btn btn-danger btn-sm">Belum Mulai</span>
+                                                        <span class="btn btn-primary btn-sm">Belum Mulai</span>
                                                     <?php endif; ?>
-                                                <?php else: ?>
-                                                    <?= $j['status']; ?>
-
-                                                <?php endif; ?>
+                                                
                                             </td>
 
                                             
@@ -229,9 +225,7 @@
                                                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('apakah anda yakin?');">
                                                     Hapus
                                                     </button>
-                                                    <button type="submit" class="btn btn-primary btn-sm">
-                                                        Print
-                                                    </button>
+                                    
                                                 </form>
                                                 
                                             </td>
@@ -254,6 +248,53 @@
     </div>
     <!-- Content Row -->
 </div>
+<div class="modal fade" id="modalCetak" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Cetak Laporan Perawatan</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="<?= base_url('/cetak'); ?>" method="post" enctype="multipart/form-data">
+                        <?= csrf_field() ?>
+                        <div class="row mb-3">
+                            <label for="jenis" class="col-sm-3 col-form-label">Jenis Perawatan</label>
+                            <div class="col-sm-9">
+                                <select class="form-select form-control" type="text" name="jenisprw" >
+                                    <!-- harus sesuai dengan urutan enum pada database -->
+                                    <option selected>Pilih Jenis Perawatan</option>
+                                    <option  value="01">Preventif</option>
+                                    <option  value="02">Kuratif</option>
+                                    <option  value="03">Restorasi</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-sm-3 col-form-label">Mulai Dari</label>
+                            <div class="col-sm-9">
+                                <input type="date" class="form-control" placeholder="mulai" aria-label="tahun" name="mulaiDari">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-sm-3 col-form-label">Hingga</label>
+                            <div class="col-sm-9">
+                                <input type="date" class="form-control" placeholder="berakhir" aria-label="tahun" name="hingga">
+                            </div>
+                        </div>                
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal" >Cancel</button>
+                    <a class="btn btn-primary" href="" type="submit" >Cetak</a>
+                </div>
+            </div>
+        </div>
+</div>
 
+        
 
 <?= $this-> endSection(); ?>
