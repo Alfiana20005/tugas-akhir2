@@ -10,18 +10,13 @@
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Tambahkan Data Pengunjung</h6>
                 </div>
-                <div class="row">
-                    <div class="col-sm-2"></div>
-                    <div class="col-sm-10">
-                        <?php if (session()->getFlashdata('errors')): ?>
+            
+                <div class="card-body">
+                <?php if (session()->getFlashdata('errors')): ?>
                             <div class="col alert alert-danger" role="alert">
                                 <?= session()->getFlashdata('errors'); ?>
                             </div>
                         <?php endif; ?>
-                    </div>   
-                </div>
-            
-                <div class="card-body">
                     <form action="/tambahPengunjung" method="post">
                     <?= csrf_field() ?>
                         <div class="row mb-3">
@@ -53,16 +48,16 @@
                                 <div class="col-sm-9">
                                     <select class="form-select form-control" type="text" name="kategori">
                                         <option selected>Pilih Kategori</option>
-                                        <option <?= old("kategori") == 'TK'? 'selected' : '' ?> value="1">TK</option>
-                                        <option <?= old("kategori") == 'SD'? 'selected' : '' ?>value="2">SD</option>
-                                        <option <?= old("kategori") == 'SMP'? 'selected' : '' ?>value="3">SMP</option>
-                                        <option <?= old("kategori") == 'SMA'? 'selected' : '' ?>value="4">SMA</option>
-                                        <option <?= old("kategori") == 'Mahasiswa'? 'selected' : '' ?>value="5">Mahasiswa</option>
-                                        <option <?= old("kategori") == 'Peneliti'? 'selected' : '' ?>value="6">Peneliti</option>
-                                        <option <?= old("kategori") == 'Wisatawan Asing'? 'selected' : '' ?>value="7">Wisatawan Asing</option>
-                                        <option <?= old("kategori") == 'Rombongan Tamu Daerah'? 'selected' : '' ?>value="8">Rombongan Tamu Daerah</option>
-                                        <option <?= old("kategori") == 'Rombongan Tamu Negara'? 'selected' : '' ?>value="9">Rombongan Tamu Negara</option>
-                                        <option <?= old("kategori") == 'Umum'? 'selected' : '' ?>value="10">Umum</option>
+                                        <option <?= old("kategori") == 'TK'? 'selected' : 'TK' ?> value="TK">TK</option>
+                                        <option <?= old("kategori") == 'SD'? 'selected' : 'SD' ?>value="SD">SD</option>
+                                        <option <?= old("kategori") == 'SMP'? 'selected' : 'SMP' ?>value="SMP">SMP</option>
+                                        <option <?= old("kategori") == 'SMA'? 'selected' : 'SMA' ?>value="SMA">SMA</option>
+                                        <option <?= old("kategori") == 'Mahasiswa'? 'selected' : 'Mahasiswa' ?>value="Mahasiswa">Mahasiswa</option>
+                                        <option <?= old("kategori") == 'Peneliti'? 'selected' : 'Peneliti' ?>value="Peneliti">Peneliti</option>
+                                        <option <?= old("kategori") == 'Wisatawan Asing'? 'selected' : 'Wisatawan Asing' ?>value="Wisatawan Asing">Wisatawan Asing</option>
+                                        <option <?= old("kategori") == 'Rombongan Tamu Daerah'? 'selected' : 'Rombongan Tamu Daerah' ?>value="Rombongan Tamu Daerah">Rombongan Tamu Daerah</option>
+                                        <option <?= old("kategori") == 'Rombongan Tamu Negara'? 'selected' : 'Rombongan Tamu Negara' ?>value="Rombongan Tamu Negara">Rombongan Tamu Negara</option>
+                                        <option <?= old("kategori") == 'Umum'? 'selected' : 'Umum' ?>value="Umum">Umum</option>
                                     </select>
                                 </div>
                         </div>

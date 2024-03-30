@@ -144,7 +144,8 @@
                 <div class="d-flex text-black justify-content-end" style="padding-bottom: 100;">
                     <div class="my-4 ">
                         <table >
-                            <tr ><td style="color: #2b2a2a; padding-right: 5px;padding-top: 150px;">Mataram, <?= !empty($row['tanggal']) ? $row['tanggal'] : ''; ?> </td></tr>
+                            
+                            <tr ><td style="color: #2b2a2a; padding-right: 5px;padding-top: 150px;">Mataram, <?= date('d M Y', strtotime($row['tanggal'])); ?> </td></tr>
                             <tr ><td style="color: #2b2a2a; padding-right: 5px; padding-bottom: 70px; ">Konservator,</td></tr>
                             <tr ><td style="color: #2b2a2a;  padding-right: 5px; "><?= !empty($row['petugasNames']) ? $row['petugasNames'] : ''; ?></td></tr>
                             <tr ><td style="color: #2b2a2a;  padding-right: 5px; ">NIP. <?= !empty($row['nip']) ? $row['nip'] : '-'; ?></td></tr>

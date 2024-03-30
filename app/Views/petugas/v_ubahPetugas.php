@@ -80,9 +80,12 @@
                 
                 <div class="row mb-3">
                     <label for="foto" class="col-sm-2 col-form-label">Foto</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-2">
+                        <img src="/img/default.jpg" alt="" class="img-thumbnail img-preview">
+                    </div>
+                    <div class="col-sm-8">
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input form-control" id="customFile" name="foto">
+                            <input type="file" class="custom-file-input form-control" id="gambar" name="foto" onchange="previewImg('gambar')">
                             <label class="custom-file-label" for="customFile">Masukkan Foto Anda</label>
                             <?php if (!empty($petugas['foto'])): ?>
                                 <div class="my-2">
@@ -94,7 +97,7 @@
                     </div>
                 </div>
                 
-                <button type="submit" class="btn btn-primary mt-4" st>Ubah Data</button>
+                <button type="submit" class="btn btn-primary mt-4" >Ubah Data</button>
             </form>
         </div>
     </div>

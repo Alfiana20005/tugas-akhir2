@@ -27,7 +27,7 @@ class C_Koleksi extends BaseController
         session()->setFlashdata('pesan', 'Data Berhasil Dihapus.');
     
         // Redirect ke halaman yang sesuai
-        return redirect()->to('/koleksi');
+        return redirect()->back();
     }  
 
     public function saveData()
@@ -36,7 +36,7 @@ class C_Koleksi extends BaseController
         //validation
         $rules= [
             'no_registrasi' => [
-                'rules' => 'required',
+                'rules' => 'required|is_unique[data_koleksi.no_registrasi]',
                 'errors' => ['required'=>'No Registrasi harus diisi']
             ],
             'no_inventaris' => [

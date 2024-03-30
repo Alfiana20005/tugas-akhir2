@@ -63,11 +63,11 @@
                             <select class="form-select form-control" type="text" name="level" value="<?= old("level"); ?>">
                                 <!-- harus sesuai dengan urutan enum pada database -->
                                 <option selected>Pilih jabatan</option>
-                                <option <?= old("level") == 'Kepala Museum'? 'selected' : '' ?> value="1">Kepala Museum</option>
-                                <option <?= old("level") == 'Petugas Pengkajian'? 'selected' : '' ?> value="2">Petugas Pengkajian</option>
-                                <option <?= old("level") == 'Petugas Pelayanan'? 'selected' : '' ?> value="3">Petugas Pelayanan</option>
-                                <option <?= old("level") == 'Ketua Pengkajian'? 'selected' : '' ?> value="4">Ketua Pengkajian</option>
-                                <option <?= old("level") == 'Admin'? 'selected' : '' ?> value="5">Admin</option>
+                                <option <?= old("level") == '1'? 'selected' : 'Kepala Museum' ?> value="1">Kepala Museum</option>
+                                <option <?= old("level") == '2'? 'selected' : 'Petugas Pengkajian' ?> value="2">Petugas Pengkajian</option>
+                                <option <?= old("level") == '3'? 'selected' : 'Petugas Pelayanan' ?> value="3">Petugas Pelayanan</option>
+                                <option <?= old("level") == '4'? 'selected' : 'Ketua Pengkajian' ?> value="4">Ketua Pengkajian</option>
+                                <option <?= old("level") == '5'? 'selected' : 'Admin' ?> value="5">Admin</option>
                             </select>
                         </div>
                 </div>

@@ -143,7 +143,7 @@
                     <label for="foto" class="col-sm-2 col-form-label">Gambar</label>
                     <div class="col-sm-10">
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input form-control" id="customFile" name="gambar">
+                            <input type="file" class="custom-file-input form-control" id="gambar" name="gambar" onchange="previewImg('gambar')">
                             <label class="custom-file-label" for="customFile">Masukkan Gambar Koleksi</label>
                             <?php if (!empty($data_koleksi['gambar'])): ?>
                                 <div class="my-2">

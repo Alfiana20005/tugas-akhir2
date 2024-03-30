@@ -189,6 +189,39 @@
     <script src="https://cdn.datatables.net/2.0.1/js/dataTables.min.js"></script>
     <script src="<?= base_url();?>/vendor/datatables/datatables.min.js"></script>
 
+    <!-- <script>
+        function previewImg(){
+            const gambar = document.querySelector('#gambar');
+            const gambarLabel = document.querySelector('.custom-file-label');
+            const imgPreview = document.querySelector('.img-preview');
+
+            gambarLabel.textContent = gambar.files[0].name;
+
+            const fileGambar = new FileReader();
+            fileGambar.readAsDataURL(gambar.files[0]);
+
+            fileGambar.onload = function(e){
+                imgPreview.src= e.target.result;
+            }
+        }
+        
+    </script> -->
+    <script>
+        function previewImg(id){
+            const gambar = document.querySelector(`#${id}`);
+            const gambarLabel = gambar.nextElementSibling;
+            const imgPreview = gambar.closest('.row').querySelector('.img-preview');
+
+            gambarLabel.textContent = gambar.files[0].name;
+
+            const fileGambar = new FileReader();
+            fileGambar.readAsDataURL(gambar.files[0]);
+
+            fileGambar.onload = function(e){
+                imgPreview.src= e.target.result;
+            }
+        }
+    </script>
     
 
 </body>

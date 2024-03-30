@@ -64,9 +64,12 @@
                     <!-- Foto Sebelum -->
                     <div class="row mb-3">
                         <label for="foto" class="col-sm-4 col-form-label">Foto Sebelum</label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-2">
+                            <img src="/img/default.jpg" alt="" class="img-thumbnail img-preview">
+                        </div>
+                        <div class="col-sm-6">
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input form-control" id="customFile" name="foto_sebelum">
+                                <input type="file" class="custom-file-input form-control" id="foto_sebelum" name="foto_sebelum" onchange="previewImg('foto_sebelum')">
                                 <label class="custom-file-label" for="customFile">Masukkan Foto Anda</label>
                             </div>
                         </div>
@@ -75,9 +78,12 @@
                     <!-- Foto Sesudah -->
                     <div class="row mb-3">
                         <label for="foto" class="col-sm-4 col-form-label">Foto Sesudah</label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-2">
+                            <img src="/img/default.jpg" alt="" class="img-thumbnail img-preview">
+                        </div>
+                        <div class="col-sm-6">
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input form-control" id="customFile" name="foto_sesudah">
+                                <input type="file" class="custom-file-input form-control" id="foto_sesudah" name="foto_sesudah" onchange="previewImg('foto_sesudah')">
                                 <label class="custom-file-label" for="customFile">Masukkan Foto Anda</label>
                             </div>
                         </div>

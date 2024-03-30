@@ -41,10 +41,10 @@ class C_Pengunjung extends BaseController
                     'required'=>'alamat tidak boleh kosong']
             ],
             'kategori' => [
-                'rules' => 'required|differs[0]',
+                'rules' => 'required',
                 'errors' => [
                     'required'=>'Kategori harus diisi',
-                    'differs' => 'Pilih kategori yang valid'
+                    
                     ]
             ],
             'jumlah' => [
@@ -92,7 +92,7 @@ class C_Pengunjung extends BaseController
     {
         // $pengunjung = $this->M_Pengunjung->findAll();
 
-            // Ambil data tanggal dari input form
+        // Ambil data tanggal dari input form
         $tanggalAwal = $this->request->getPost('awal');
         $tanggalAkhir = $this->request->getPost('akhir');
 
@@ -175,6 +175,7 @@ class C_Pengunjung extends BaseController
 
         return $data;
     }
+
     public function tampilstatistik(){
         $data = $this->statistik();
             // Make sure $data['data_grafik'] is an array
@@ -194,10 +195,6 @@ class C_Pengunjung extends BaseController
         return view('pelayanan/v_statistik', $data);
     }
 
-
-    
-    
-    
 
 
 }
