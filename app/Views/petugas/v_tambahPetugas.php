@@ -10,9 +10,7 @@
         </div>
 
         <div class="card-body">
-            <!-- <div class="row mb-3 alert alert-danger" role="alert">
-                 simple danger alert—check it out!
-            </div> -->
+            
                 <div class="row">
                     <div class="col-sm-2"></div>
                     <div class="col-sm-10">

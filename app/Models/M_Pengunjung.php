@@ -64,6 +64,7 @@ class M_Pengunjung extends Model
     
     return $result;
     }
+    
     public function getDataByDateRange($tanggalAwal, $tanggalAkhir)
     {
         return $this->where('created_at >=', $tanggalAwal)

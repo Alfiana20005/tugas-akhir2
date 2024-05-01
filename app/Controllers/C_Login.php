@@ -42,7 +42,7 @@ class C_Login extends BaseController
 
         if (!$this->validate($rules)) {
             // Validasi tidak berhasil
-            return redirect()->to('/')->withInput()->with('errors', $this->validator->listErrors());
+            return redirect()->to('/halamanLogin')->withInput()->with('errors', $this->validator->listErrors());
         }
 
         // Jika validasi berhasil
@@ -65,7 +65,7 @@ class C_Login extends BaseController
         } else {
             // Jika data tidak cocok
             session()->setFlashdata('pesanlogin', 'Login Gagal, data yang Anda masukkan tidak cocok');
-            return redirect()->to(base_url('/'));
+            return redirect()->to(base_url('/halamanLogin'));
         }
 
        
@@ -81,8 +81,6 @@ class C_Login extends BaseController
         
         session()->setFlashdata('pesanlogout', 'Logout Berhasil');
             return redirect()->to(base_url('/'));
-
-
     }
     
     

@@ -64,11 +64,12 @@ class M_Koleksi extends Model
 
         return $totalKoleksi;
     }
+    // grafik koleksi di dashboard
     public function getDataByKategori()
     {
         $query = $this->db->query("SELECT kode_kategori, keadaan, COUNT(keadaan) as total, count(id) as jumlah FROM data_koleksi GROUP BY kode_kategori, keadaan");
     
-        // Ambil hasil query sebagai array
+        
         $result = $query->getResultArray();
     
         return $result;

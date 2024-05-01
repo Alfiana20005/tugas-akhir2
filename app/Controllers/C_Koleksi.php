@@ -176,8 +176,8 @@ class C_Koleksi extends BaseController
         $data_koleksi['kategori_name'] = isset($kategoriName['nama_kategori']) ? $kategoriName['nama_kategori'] : 'Nama Kategori Tidak Tersedia';
         
         // Akses log query setelah menjalankan query model
-    // $queries = $this->M_Koleksi->getQueryLog();
-    // print_r($queries);
+        // $queries = $this->M_Koleksi->getQueryLog();
+        // print_r($queries);
         $data = [
             'title' => 'Detail Koleksi',
             'data_koleksi' => $data_koleksi,

@@ -51,7 +51,6 @@ var myBarChart = new Chart(ctx, {
   type: 'bar',
   data: {
     labels: [],
-    
     datasets: <?= $data_grafik; ?>
   
   },

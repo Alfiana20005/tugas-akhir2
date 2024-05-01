@@ -79,27 +79,28 @@
                                         if ($preventifFound): 
                                             $totalProgress;
                                         endif; 
-                                    $kuratifFound = false; // Inisialisasi variabel penanda apakah data preventif yang sedang berlangsung ditemukan
+
+                                    $kuratifFound = false; 
                                         foreach($jadwalPrw as $j): 
                                             $tahunBerakhir = date("Y", strtotime($j['berakhir']));
                                             if($j['kode_jenisprw'] == '02' && $j['status'] == 'Selesai' && $tahunBerakhir==$tahunSekarang):
                                                 $totalProgress += $progressPerJenis;
-                                                $kuratifFound = true; // Menandai bahwa data preventif yang sedang berlangsung ditemukan
-                                                break; // Menghentikan iterasi setelah menemukan item preventif yang sedang berlangsung
+                                                $kuratifFound = true; 
+                                                break; 
                                             endif; 
                                         endforeach;
                                         if (!$kuratifFound): 
                                             $totalProgress;
                                         endif; 
-                                    $restorasiFound = false; // Inisialisasi variabel penanda apakah data preventif yang sedang berlangsung ditemukan
+                                    $restorasiFound = false; 
                                         foreach($jadwalPrw as $j): 
                                             $tahunBerakhir = date("Y", strtotime($j['berakhir']));
                                             if($j['kode_jenisprw'] == '03' && $j['status'] == 'Selesai' && $tahunBerakhir==$tahunSekarang):
                                                 
                                                     $totalProgress += $progressPerJenis;
                                                     
-                                                    $restorasiFound = true; // Menandai bahwa data preventif yang sedang berlangsung ditemukan
-                                                    break; // Menghentikan iterasi setelah menemukan item preventif yang sedang berlangsung
+                                                    $restorasiFound = true; 
+                                                    break; 
                                                 
                                             endif; 
                                         endforeach;

@@ -114,17 +114,26 @@
                             <select class="form-select form-control" type="text" name="keadaan"  value="<?= $data_koleksi['keadaan']; ?>">
                                 <!-- harus sesuai dengan urutan enum pada database -->
                                 <option selected>Pilih Keadaan Koleksi</option>
-                                <option <?= $data_koleksi['keadaan'] == 'Baik'? 'selected' : '' ?> value="1">Baik</option>
-                                <option <?= $data_koleksi['keadaan'] == 'Rusak Ringan'? 'selected' : '' ?> value="2">Rusak Ringan</option>
-                                <option <?= $data_koleksi['keadaan'] == 'Rusak Sedang'? 'selected' : '' ?> value="3">Rusak Sedang</option>
-                                <option <?= $data_koleksi['keadaan'] == 'Rusak Berat'? 'selected' : '' ?> value="3">Rusak Berat</option>
+                                <option <?= $data_koleksi['keadaan'] == 'Baik'? 'selected' : '' ?> value="Baik">Baik</option>
+                                <option <?= $data_koleksi['keadaan'] == 'Rusak Ringan'? 'selected' : '' ?> value="Rusak Ringan">Rusak Ringan</option>
+                                <option <?= $data_koleksi['keadaan'] == 'Rusak Sedang'? 'selected' : '' ?> value="Rusak Sedang">Rusak Sedang</option>
+                                <option <?= $data_koleksi['keadaan'] == 'Rusak Berat'? 'selected' : '' ?> value="Rusak Berat">Rusak Berat</option>
                             </select>
                         </div>
                 </div>
+                
                 <div class="row mb-3">
                     <label for="email" class="col-sm-2 col-form-label">Lokasi</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="lokasi" value="<?= $data_koleksi['lokasi']; ?>">
+                            <select class="form-select form-control" type="text" name="lokasi" value="<?= $data_koleksi['lokasi']; ?>">
+                                <!-- harus sesuai dengan urutan enum pada database -->
+                                <option selected>Pilih Lokasi Koleksi</option>
+                                <option <?= $data_koleksi['lokasi'] == 'Gudang Koleksi Museum NTB'? 'selected' : 'Gudang Koleksi Museum NTB' ?> value="Gudang Koleksi Museum NTB">Gudang Koleksi Museum NTB</option>
+                                <option <?= $data_koleksi['lokasi'] == 'Gudang Atas Ruang TU'? 'selected' : 'Gudang Atas Ruang TU' ?> value="Gudang Atas Ruang TU">Gudang Atas Ruang TU</option>
+                                <option <?= $data_koleksi['lokasi'] == 'Gudang Belakang Museum NTB'? 'selected' : 'Gudang Belakang Museum NTB' ?> value="Gudang Belakang Museum NTB">Gudang Belakang Museum NTB</option>
+                                <option <?= $data_koleksi['lokasi'] == 'Ruang Pameran Tetap Museum NTB'? 'selected' : 'Ruang Pameran Tetap Museum NTB' ?> value="Ruang Pameran Tetap Museum NTB">Ruang Pameran Tetap Museum NTB</option>
+                                <option <?= $data_koleksi['lokasi'] == 'Area/Halaman Museum NTB'? 'selected' : 'Area/Halaman Museum NTB' ?> value="Area/Halaman Museum NTB">Area/Halaman Museum NTB</option>
+                            </select>
                     </div>
                 </div>
                 <div class="row mb-3">

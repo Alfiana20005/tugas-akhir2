@@ -14,7 +14,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" >
                     <thead style="text-align: center; font-size: 10pt;">
                         <tr>
                             <th style="text-align: center;">No Inventarisasi</th>
@@ -52,7 +52,7 @@
                                             <button class="dropdown-item status-option" type="submit" name="keadaan" value="Baik">Baik</button>
                                             <button class="dropdown-item status-option" type="submit" name="keadaan" value="Rusak Ringan">Rusak Ringan</button>
                                             <button class="dropdown-item status-option" type="submit" name="keadaan" value="Rusak Sedang">Rusak Sedang</button>
-                                            <button class="dropdown-item status-option" type="submit" name="keadaan" value="Rusak ">Rusak Berat</button>
+                                            <button class="dropdown-item status-option" type="submit" name="keadaan" value="Rusak Berat">Rusak Berat</button>
                                         </div>
                                     </div>
                                 </form>

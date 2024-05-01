@@ -113,6 +113,7 @@ class C_Pengunjung extends BaseController
         ];
         return view('pelayanan/v_rekapitulasi', $data);
     }
+    
     public function statistik()
     {
         $tahun = $this->request->getPost('tahun');
