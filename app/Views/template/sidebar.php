@@ -29,6 +29,21 @@
             <i class="fas fa-fw fa-users"></i>
             <span>Master Petugas</span></a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/petugas">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Berita</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/petugas">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Kegiatan</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/petugas">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Kajian</span></a>
+    </li>
     <!-- <hr class="sidebar-divider"> -->
     <?php endif; ?>
     <!-- Divider -->

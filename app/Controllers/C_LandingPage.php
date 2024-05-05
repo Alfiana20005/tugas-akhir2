@@ -14,7 +14,7 @@ class C_LandingPage extends BaseController
     }
     public function index(): string
     {
-        return view('landingPage');
+        return view('CompanyProfile/company');
     }
     
 
