@@ -3,6 +3,57 @@
 <?= $this-> section('main'); ?>
 
 
+
+
+  <!-- ======= Hero Section ======= -->
+  
+  <section id="hero" class="d-flex align-items-center">
+    <video autoplay muted loop id="bg-video">
+        <source src="/assets/img/drone-museum.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+    </video>
+    
+    <div class="container" data-aos="zoom-out" data-aos-delay="100">
+        <h3 style="color:white;  font-style: italic;">Selamat Datang Di </h3>
+        <h1 class="">
+            <span style="font-family: graceful; font-weight: bold; color: #850000; ">MUSEUM NEGERI</span>
+            <span style="font-family: graceful; font-weight: bold; color: #f1d3d3; font-size: 20pt;">Nusa Tenggara Barat</span>
+        </h1>
+      <h2 style="font-family: friendly;  font-style: italic;">Kotaku Museumku Kampungku Museumku</h2>
+      <div class="d-flex">
+        <a href="" class="btn-get-started scrollto" data-toggle="modal" data-target="#modalJadwal">Jadwal Kunjungan</a>
+        <!-- <a href="" class="btn-get-started scrollto mx-4">Hubungi Kami</a> -->
+        <!-- <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="glightbox btn-watch-video"><i class="bi bi-play-circle"></i><span>Watch Video</span></a> -->
+      </div>
+    </div>
+  </section><!-- End Hero -->
+
+  <!-- <a href="#" class="btn-get-started scrollto" data-toggle="modal" data-target="#modalJadwal">Jadwal Kunjungan</a> -->
+
+<!-- Modal -->
+<div class="modal fade" id="modalJadwal" tabindex="-1" role="dialog" aria-labelledby="modalJadwalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalJadwalLabel">Jadwal Kunjungan</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Isi modal di sini -->
+        <!-- Contoh: -->
+        <p>Ini adalah konten modal jadwal kunjungan.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+        <!-- Jika Anda ingin menambahkan tombol lain, Anda bisa menambahkannya di sini -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
     <!-- ======= Featured Services Section ======= -->
     <section id="featured-services" class="featured-services">
       <div class="container" data-aos="fade-up">
@@ -66,7 +117,8 @@
         </div>
 
       </div>
-    </section><!-- End Featured Services Section -->
+    </section>
+    <!-- End Featured Services Section -->
 
     <!-- ======= About Section ======= -->
     <section id="about" class="about section-bg">
@@ -203,66 +255,47 @@
     </section> -->
     <!-- End Skills Section -->
 
-    <div id="portfolio" class="my-4">
+  <!-- <div id="portfolio" class="my-4">
     <div class="section-title">
           <h2>Galery</h2>
-          <!-- <h3>Pantau Terus <span>Event Kami</span></h3> -->
-          <!-- <p>Museum Dihatiku</p> -->
+
         </div>
     <div class="container-fluid p-0 ">
         <div class="row g-0">
             <div class="col-lg-2 col-sm-4">
                 <a class="portfolio-box" href="img/landingPage/taman.png" title="Project Name">
                     <img class="img-fluid" src="img/landingPage/taman.png" alt="..." />
-                    <!-- <div class="portfolio-box-caption">
-                        <div class="project-category text-white-50">Fasilitas</div>
-                        <div class="project-name">Taman</div>
-                    </div> -->
+                    
                 </a>
             </div>
             <div class="col-lg-2 col-sm-4">
                 <a class="portfolio-box" href="img/landingPage/pameran.png" title="Project Name">
                     <img class="img-fluid" src="img/landingPage/pameran.png" alt="..." />
-                    <!-- <div class="portfolio-box-caption">
-                        <div class="project-category text-white-50">Fasilitas</div>
-                        <div class="project-name">Ruang Pameran Tetap</div>
-                    </div> -->
+                    
                 </a>
             </div>
             <div class="col-lg-2 col-sm-4">
                 <a class="portfolio-box" href="img/landingPage/perpus.png" title="Project Name">
                     <img class="img-fluid" src="img/landingPage/perpus.png" alt="..." />
-                    <!-- <div class="portfolio-box-caption">
-                        <div class="project-category text-white-50">Fasilitas</div>
-                        <div class="project-name">Perpustakaan</div>
-                    </div> -->
+                    
                 </a>
             </div>
             <div class="col-lg-2 col-sm-4">
                 <a class="portfolio-box" href="img/landingPage/pameran.png" title="Project Name">
                     <img class="img-fluid" src="img/landingPage/pameran.png" alt="..." />
-                    <!-- <div class="portfolio-box-caption">
-                        <div class="project-category text-white-50">Fasilitas</div>
-                        <div class="project-name">Ruang Pameran Tetap</div>
-                    </div> -->
+                    
                 </a>
             </div>
             <div class="col-lg-2 col-sm-4">
                 <a class="portfolio-box" href="img/landingPage/perpus.png" title="Project Name">
                     <img class="img-fluid" src="img/landingPage/perpus.png" alt="..." />
-                    <!-- <div class="portfolio-box-caption">
-                        <div class="project-category text-white-50">Fasilitas</div>
-                        <div class="project-name">Perpustakaan</div>
-                    </div> -->
+                    
                 </a>
             </div>
             <div class="col-lg-2 col-sm-4">
                 <a class="portfolio-box" href="img/landingPage/perpus.png" title="Project Name">
                     <img class="img-fluid" src="img/landingPage/perpus.png" alt="..." />
-                    <!-- <div class="portfolio-box-caption">
-                        <div class="project-category text-white-50">Fasilitas</div>
-                        <div class="project-name">Perpustakaan</div>
-                    </div> -->
+                    
                 </a>
             </div>
         </div>
@@ -272,60 +305,72 @@
             <div class="col-lg-2 col-sm-4">
                 <a class="portfolio-box" href="img/landingPage/taman.png" title="Project Name">
                     <img class="img-fluid" src="img/landingPage/taman.png" alt="..." />
-                    <!-- <div class="portfolio-box-caption">
-                        <div class="project-category text-white-50">Fasilitas</div>
-                        <div class="project-name">Taman</div>
-                    </div> -->
+                    
                 </a>
             </div>
             <div class="col-lg-2 col-sm-4">
                 <a class="portfolio-box" href="img/landingPage/pameran.png" title="Project Name">
                     <img class="img-fluid" src="img/landingPage/pameran.png" alt="..." />
-                    <!-- <div class="portfolio-box-caption">
-                        <div class="project-category text-white-50">Fasilitas</div>
-                        <div class="project-name">Ruang Pameran Tetap</div>
-                    </div> -->
+                    
                 </a>
             </div>
             <div class="col-lg-2 col-sm-4">
                 <a class="portfolio-box" href="img/landingPage/perpus.png" title="Project Name">
                     <img class="img-fluid" src="img/landingPage/perpus.png" alt="..." />
-                    <!-- <div class="portfolio-box-caption">
-                        <div class="project-category text-white-50">Fasilitas</div>
-                        <div class="project-name">Perpustakaan</div>
-                    </div> -->
+                    
                 </a>
             </div>
             <div class="col-lg-2 col-sm-4">
                 <a class="portfolio-box" href="img/landingPage/pameran.png" title="Project Name">
                     <img class="img-fluid" src="img/landingPage/pameran.png" alt="..." />
-                    <!-- <div class="portfolio-box-caption">
-                        <div class="project-category text-white-50">Fasilitas</div>
-                        <div class="project-name">Ruang Pameran Tetap</div>
-                    </div> -->
+                    
                 </a>
             </div>
             <div class="col-lg-2 col-sm-4">
                 <a class="portfolio-box" href="img/landingPage/perpus.png" title="Project Name">
                     <img class="img-fluid" src="img/landingPage/perpus.png" alt="..." />
-                    <!-- <div class="portfolio-box-caption">
-                        <div class="project-category text-white-50">Fasilitas</div>
-                        <div class="project-name">Perpustakaan</div>
-                    </div> -->
+                    
                 </a>
             </div>
             <div class="col-lg-2 col-sm-4">
                 <a class="portfolio-box" href="img/landingPage/perpus.png" title="Project Name">
                     <img class="img-fluid" src="img/landingPage/perpus.png" alt="..." />
-                    <!-- <div class="portfolio-box-caption">
-                        <div class="project-category text-white-50">Fasilitas</div>
-                        <div class="project-name">Perpustakaan</div>
-                    </div> -->
+                    
                 </a>
             </div>
         </div>
     </div>
-</div>
+  </div> -->
+
+      <!-- ======= Gallery Section ======= -->
+      <section id="gallery" class="gallery">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Gallery</h2>
+          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+        </div>
+
+        <div class="gallery-slider swiper">
+          <div class="swiper-wrapper align-items-center">
+            <div class="swiper-slide"><a class="gallery-lightbox" href="img/landingPage/taman.png"><img src="img/landingPage/taman.png" class="img-fluid" alt=""></a></div>
+            <div class="swiper-slide"><a class="gallery-lightbox" href="img/landingPage/pameran.png"><img src="img/landingPage/pameran.png" class="img-fluid" alt=""></a></div>
+            <div class="swiper-slide"><a class="gallery-lightbox" href="assets/img/pengunjung.jpg"><img src="assets/img/pengunjung.jpg" class="img-fluid" alt=""></a></div>
+            <div class="swiper-slide"><a class="gallery-lightbox" href="img/galery/pengunjung2.png"><img src="img/galery/pengunjung2.png" class="img-fluid" alt=""></a></div>
+            <div class="swiper-slide"><a class="gallery-lightbox" href="img/galery/GLXY3412.jpg"><img src="img/galery/GLXY3412.jpg" class="img-fluid" alt=""></a></div>
+            <div class="swiper-slide"><a class="gallery-lightbox" href="img/galery/becak.jpg"><img src="img/galery/becak.jpg" class="img-fluid" alt=""></a></div>
+            <div class="swiper-slide"><a class="gallery-lightbox" href="img/galery/DSCF0712-min.png"><img src="img/galery/DSCF0712-min.png" class="img-fluid" alt=""></a></div>
+            <div class="swiper-slide"><a class="gallery-lightbox" href="img/galery/mewarnai.jpg"><img src="img/galery/mewarnai.jpg" class="img-fluid" alt=""></a></div>
+          </div>
+          
+          <div class="swiper-pagination"></div>
+        </div>
+
+      </div>
+    </section><!-- End Gallery Section -->
+
+
+
 
 
 
@@ -337,7 +382,7 @@
 
         <div class="section-title">
           <h2>Contact</h2>
-          <h3><span>Kontak Kami</span></h3>
+          <!-- <h3><span>Kontak Kami</span></h3> -->
           <!-- <p>Ut possimus qui ut temporibus culpa velit eveniet modi omnis est adipisci expedita at voluptas atque vitae autem.</p> -->
         </div>
 
@@ -392,7 +437,7 @@
                 <input type="text" class="form-control" name="subject" id="subject" placeholder="Judul" required>
               </div>
               <div class="form-group">
-                <textarea class="form-control" name="message" rows="5" placeholder="Pesan" required></textarea>
+                <textarea class="form-control" name="message" rows="5" placeholder="Sebagai Sahabat Museum, tuliskan pesan dan kesan anda" required></textarea>
               </div>
               <div class="my-3">
                 <div class="loading">Loading</div>

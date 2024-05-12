@@ -8,6 +8,22 @@ use CodeIgniter\Router\RouteCollection;
 
 
 $routes->get('/', 'C_LandingPage::index');
+$routes->get('/sejarah', 'C_LandingPage::sejarah');
+$routes->get('/visimisi', 'C_LandingPage::visiMisi');
+$routes->get('/struktur', 'C_LandingPage::struktur');
+$routes->get('/ruangPamer', 'C_LandingPage::ruangPamer');
+$routes->get('/tatatertib', 'C_LandingPage::tatatertib');
+$routes->get('/berita', 'C_LandingPage::berita');
+$routes->get('/kegiatan', 'C_LandingPage::kegiatan');
+$routes->get('/kajian', 'C_LandingPage::kajian');
+$routes->get('/beritaAdmin', 'C_LandingPage::beritaAdmin');
+$routes->get('/tambahBerita', 'C_LandingPage::tambahBerita');
+$routes->get('/koleksi_page', 'C_LandingPage::koleksi_page');
+$routes->get('/koleksi_detail', 'C_LandingPage::koleksi_detail');
+$routes->get('/publikasi', 'C_LandingPage::publikasi');
+
+
+
 $routes->get('/halamanLogin', 'C_Login::index');
 $routes->get('/dashboard', 'C_Dashboard::index');
 $routes->get('/dashboard2', 'C_Dashboard::grafikKoleksi');

@@ -52,7 +52,7 @@
         
 
         <!-- Background Video-->
-        <video class="bg-video" playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop"><source src="mp4/bg.mp4" type="video/mp4" /></video>
+        <video class="bg-video" playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop"><source src="/assets/img/drone-museum.mp4" type="video/mp4" /></video>
         
         
         <!-- Masthead-->

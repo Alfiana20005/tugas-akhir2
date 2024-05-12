@@ -6,11 +6,46 @@
 * License: https://bootstrapmade.com/license/
 */
 
-/*--------------------------------------------------------------
+
+@media (max-width: 768px) {
+  .tataTertib img{
+    width: 291px; /* Sesuaikan ukuran sesuai kebutuhan */
+  }
+}
+
+/* Untuk mode PC */
+@media (min-width: 769px) {
+  .tataTertib img{
+    width: 100%; /* Sesuaikan ukuran sesuai kebutuhan */
+  }
+}
+/*----------------------------------------------co---------------
 # General
 --------------------------------------------------------------*/
-
+.berita-box{
+  padding: 10px;
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 0 29px 0 rgba(68, 88, 144, 0.12);
+  transition: all 0.3s ease-in-out;
+  border-radius: 8px;
+  z-index: 1;
+}
 /* Untuk mode HP */
+@media (max-width: 768px) {
+  .berita-box .berita img {
+    width: 150px; /* Sesuaikan ukuran sesuai kebutuhan */
+  }
+}
+
+/* Untuk mode PC */
+@media (min-width: 769px) {
+  .berita-box .berita img {
+    width: 150px; /* Sesuaikan ukuran sesuai kebutuhan */
+  }
+}
+
 @media (max-width: 768px) {
   .icon-box .icon img {
     width: 198px; /* Sesuaikan ukuran sesuai kebutuhan */
@@ -132,7 +167,10 @@ h6 {
 # Top Bar
 --------------------------------------------------------------*/
 #topbar {
-  background: #850000;
+  /* background: #850000; */
+  /* background: url(assets/img/batik.png); */
+  /* background-image: url(assets\img\batik.png); */
+  background: url("../img/batik.png") top center;
   height: 40px;
   font-size: 14px;
   transition: all 0.5s;
@@ -185,7 +223,7 @@ h6 {
 }
 
 #header.fixed-top {
-  height: 70px;
+  height: 80px;
 }
 
 #header .logo {
@@ -207,7 +245,7 @@ h6 {
 }
 
 #header .logo img {
-  max-height: 40px;
+  max-height: 80px;
 }
 
 .scrolled-offset {
@@ -464,7 +502,7 @@ h6 {
 .navbar-mobile .dropdown ul a:hover,
 .navbar-mobile .dropdown ul .active:hover,
 .navbar-mobile .dropdown ul li:hover>a {
-  color: #850000;
+  color: #106eea;
 }
 
 .navbar-mobile .dropdown>.dropdown-active {
@@ -495,13 +533,27 @@ h6 {
 
 #hero:before {
   content: "";
-  background: rgba(255, 255, 255, 0.452);
+  background: rgba(255, 255, 255, 0.36);
+  /* transform: skewY(-11deg); */
+  transform-origin: top center;
   position: absolute;
   bottom: 0;
   top: 0;
   left: 0;
   right: 0;
 }
+
+/* .hero:before {
+  content: "";
+  position: absolute;
+  top: 10;
+  bottom: 0;
+  right: 10;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.85);
+} */
 
 #hero .container {
   position: relative;
@@ -513,7 +565,7 @@ h6 {
   font-weight: 700;
   line-height: 56px;
   color: #222222;
-  font-family: "Poppins", sans-serif;
+  font-family: "Poppins", "serif" ;
 }
 
 #hero h1 span {
@@ -609,13 +661,13 @@ h6 {
 /*--------------------------------------------------------------
 # Sections General
 --------------------------------------------------------------*/
-section {
+/* section {
   padding: 60px 0;
   overflow: hidden;
 }
 
 .section-bg {
-  background-color: #f6f9fe;
+  background-color: #fff;
 }
 
 .section-title {
@@ -629,8 +681,8 @@ section {
   font-weight: 700;
   padding: 8px 20px;
   margin: 0;
-  background: #e7f1fd;
-  color: #106eea;
+  background: #eab7b7;
+  color: #850000;
   display: inline-block;
   text-transform: uppercase;
   border-radius: 50px;
@@ -643,7 +695,7 @@ section {
 }
 
 .section-title h3 span {
-  color: #106eea;
+  color: #850000;
 }
 
 .section-title p {
@@ -655,7 +707,7 @@ section {
   .section-title p {
     width: 50%;
   }
-}
+} */
 
 /*--------------------------------------------------------------
 # Breadcrumbs
@@ -711,6 +763,8 @@ section {
     display: inline-block;
   }
 }
+
+
 
 /*--------------------------------------------------------------
 # Featured Services
@@ -809,7 +863,7 @@ section {
   font-size: 24px;
   padding: 20px;
   margin-right: 15px;
-  color: #106eea;
+  color: #fff;
   border-radius: 50px;
 }
 
@@ -1102,7 +1156,7 @@ section {
 /*--------------------------------------------------------------
 # Portfolio
 --------------------------------------------------------------*/
-.portfolio #portfolio-flters {
+/* .portfolio #portfolio-flters {
   padding: 0;
   margin: 0 auto 15px auto;
   list-style: none;
@@ -1205,11 +1259,12 @@ section {
 .portfolio .portfolio-item:hover .portfolio-info {
   opacity: 1;
   bottom: 20px;
-}
+} */
 
 /*--------------------------------------------------------------
 # Portfolio Details
 --------------------------------------------------------------*/
+/* 
 .portfolio-details {
   padding-top: 40px;
 }
@@ -1270,7 +1325,7 @@ section {
 
 .portfolio-details .portfolio-description p {
   padding: 0;
-}
+} */
 
 /*--------------------------------------------------------------
 # Team
@@ -1654,15 +1709,144 @@ section {
   }
 }
 
+
+/*--------------------------------------------------------------
+# Doctors
+--------------------------------------------------------------*/
+.doctors .member {
+  margin-bottom: 20px;
+  overflow: hidden;
+  text-align: center;
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 0px 2px 15px rgba(63, 187, 192, 0.1);
+}
+
+.doctors .member .member-img {
+  position: relative;
+  overflow: hidden;
+}
+
+.doctors .member .social {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 40px;
+  opacity: 0;
+  transition: ease-in-out 0.3s;
+  background: rgba(255, 255, 255, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.doctors .member .social a {
+  transition: color 0.3s;
+  color: #555555;
+  margin: 0 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.doctors .member .social a i {
+  line-height: 0;
+}
+
+.doctors .member .social a:hover {
+  color: #850000;
+}
+
+.doctors .member .social i {
+  font-size: 18px;
+  margin: 0 2px;
+}
+
+.doctors .member .member-info {
+  padding: 25px 15px;
+}
+
+.doctors .member .member-info h4 {
+  font-weight: 700;
+  margin-bottom: 5px;
+  font-size: 18px;
+  color: #555555;
+}
+
+.doctors .member .member-info span {
+  display: block;
+  font-size: 13px;
+  font-weight: 400;
+  color: #aaaaaa;
+}
+
+.doctors .member .member-info p {
+  font-style: italic;
+  font-size: 14px;
+  line-height: 26px;
+  color: #777777;
+}
+
+.doctors .member:hover .social {
+  opacity: 1;
+}
+
+
+
+/*--------------------------------------------------------------
+# Gallery
+--------------------------------------------------------------*/
+.gallery {
+  overflow: hidden;
+}
+
+.gallery .swiper-pagination {
+  margin-top: 20px;
+  position: relative;
+}
+
+.gallery .swiper-pagination .swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  background-color: #fff;
+  opacity: 1;
+  border: 1px solid #850000;
+}
+
+.gallery .swiper-pagination .swiper-pagination-bullet-active {
+  background-color: #850000;
+}
+
+.gallery .swiper-slide-active {
+  text-align: center;
+}
+
+@media (min-width: 992px) {
+  .gallery .swiper-wrapper {
+    padding: 40px 0;
+  }
+
+  .gallery .swiper-slide-active {
+    border: 6px solid #850000;
+    padding: 4px;
+    background: #fff;
+    z-index: 1;
+    transform: scale(1.2);
+    margin-top: 10px;
+  }
+}
+
+
 /*--------------------------------------------------------------
 # Footer
 --------------------------------------------------------------*/
 #footer {
   background: #fff;
   padding: 0 0 30px 0;
-  color: #444444;
+  color: #fff;
   font-size: 14px;
-  background: #f1f6fe;
+  background: #850000;
 }
 
 #footer .footer-newsletter {
@@ -1718,7 +1902,7 @@ section {
 
 #footer .footer-top {
   padding: 60px 0 30px 0;
-  background: #fff;
+  background: #f1d3d3;
 }
 
 #footer .footer-top .footer-contact {
@@ -1795,7 +1979,7 @@ section {
 #footer .footer-top .social-links a {
   font-size: 18px;
   display: inline-block;
-  background: #106eea;
+  background: #850000;
   color: #fff;
   line-height: 1;
   padding: 8px 0;
