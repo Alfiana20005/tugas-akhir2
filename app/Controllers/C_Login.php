@@ -54,6 +54,7 @@ class C_Login extends BaseController
             // Jika data cocok
             session()->set('log', true);
             session()->set('id_petugas', $cek['id_petugas']);
+            session()->set('nip', $cek['nip']);
             session()->set('nama', $cek['nama']);
             session()->set('username', $cek['username']);
             session()->set('email', $cek['email']);
@@ -73,6 +74,7 @@ class C_Login extends BaseController
     public function logout() {
         session()->remove('log');
         session()->remove('nama');
+        session()->remove('nip');
         session()->remove('username');
         session()->remove('email');
         session()->remove('level');

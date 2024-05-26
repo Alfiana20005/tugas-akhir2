@@ -10,20 +10,20 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <a href="/"><link href="img/logobaru.png" rel="icon"></a>
-  <a href="/"><link href="img/logobaru.png" rel="apple-touch-icon"></a>
+  <a href="/"><link href="<?= base_url();?>/img/logobaru.png" rel="icon"></a>
+  <a href="/"><link href="<?= base_url();?>/img/logobaru.png" rel="apple-touch-icon"></a>
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0Yz/Zn6PjyW2hg0TKfTk0x60EgKJzU6wuFHYIBk1j7rFJzFLbmPe0zv9yzB2O82" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5+gbg4C/N8WWtHk+N5K9K7QwoirjwQVyTC6s7721" crossorigin="anonymous"></script>
   <!-- Vendor CSS Files -->
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="<?= base_url();?>/assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="<?= base_url();?>/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="<?= base_url();?>/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="<?= base_url();?>/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="<?= base_url();?>/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="<?= base_url();?>/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
 
 
@@ -32,56 +32,47 @@
   <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet"> -->
 
   <!-- Vendor CSS Files -->
-  <link href="assets2/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
-  <link href="assets2/vendor/animate.css/animate.min.css" rel="stylesheet">
-  <link href="assets2/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets2/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets2/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets2/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets2/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="assets2/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="<?= base_url();?>/assets2/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="<?= base_url();?>/assets2/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="<?= base_url();?>/assets2/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="<?= base_url();?>/assets2/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="<?= base_url();?>/assets2/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="<?= base_url();?>/assets2/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="<?= base_url();?>/assets2/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="<?= base_url();?>/assets2/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  
 
   <!-- Template Main CSS File -->
-  <link href="assets2/css/style.css" rel="stylesheet">
+  <link href="<?= base_url();?>/assets2/css/style.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
-  <link href="css/style4.css" rel="stylesheet">
-  <link href="css/style2.css" rel="stylesheet">
-
-
-
+  <link href="<?= base_url();?>/assets/css/style.css" rel="stylesheet">
+  <link href="<?= base_url();?>/css/style4.css" rel="stylesheet">
+  <link href="<?= base_url();?>/css/style2.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="<?= base_url() ?>vendor/jquery/jquery.min.js"></script>
+  <script src="<?= base_url() ?>js/sweetalert.min.js"></script>
   
 </head>
 
 <body>
 
   <!-- ======= Top Bar ======= -->
-  <section id="topbar" class="d-flex align-items-center">
-    <div class="container d-flex justify-content-center justify-content-md-between">
-      <div class="contact-info d-flex align-items-center">
-        <!-- <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">contact@example.com</a></i> -->
-        <!-- <i class="bi bi-phone d-flex align-items-center ms-4"><span>+1 5589 55488 55</span></i> -->
-      </div>
-      <div class="social-links d-none d-md-flex align-items-center">
-        <a href="https://twitter.com/museum_ntb" class="twitter"><i class="bi bi-twitter"></i></a>
-        <a href="https://www.facebook.com/museumnegerintb/" class="facebook"><i class="bi bi-facebook"></i></a>
-        <a href="https://www.instagram.com/museumntb/" class="instagram"><i class="bi bi-instagram"></i></a>
-        <a href="https://www.youtube.com/channel/UC3491bQdveCXUTbROL_-s2A" class="linkedin"><i class="bx bxl-youtube"></i></i></a>
-      </div>
-    </div>
-  </section>
+  <!-- <section id="topbar" class="d-flex align-items-center">
+    
+  </section> -->
 
   <!-- ======= Header ======= -->
   <header id="header" class="d-flex align-items-center">
     <div class="container d-flex align-items-center justify-content-between">
 
-      <h1 class="logo"><a href="/"><img src="/img/logobaru.png" alt="" ></a></h1>
+      <h1 class="logo"><a href="/"><img src="/img/logoMuseum.png" alt="" ></a></h1>
 
       <nav id="navbar" class="navbar">
         <ul>
-        <li><a class="nav-link scrollto" href="/">Home</a></li>
-          <li class="dropdown"><a href="#"><span>Profile</span> <i class="bi bi-chevron-down"></i></a>
+        <li><a class="nav-link scrollto" href="/" style="font-family: roboto;">Home</a></li>
+          <li class="dropdown"><a href="#" style="font-family: roboto;"><span>Profile</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="/sejarah">Sejarah</a></li>
               <li><a href="/visimisi">Visi dan Misi</a></li>
@@ -89,7 +80,7 @@
               
             </ul>
           </li>
-          <li class="dropdown"><a href="#"><span>Layanan</span> <i class="bi bi-chevron-down"></i></a>
+          <li class="dropdown"><a href="#" style="font-family: roboto;"><span>Layanan</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="/tatatertib">Tata Tertib</a></li>
               <li><a href="/ruangPamer">Ruang Pamer</a></li>
@@ -98,18 +89,18 @@
             </ul>
           </li>
           
-          <li><a class="nav-link scrollto" href="/berita">Berita</a></li>
-          <li><a class="nav-link scrollto" href="/kegiatan">Kegiatan</a></li>
-          <li class="dropdown"><a href="#"><span>Kajian Museum</span> <i class="bi bi-chevron-down"></i></a>
+          <li><a class="nav-link scrollto" href="/berita" style="font-family: roboto;">Berita</a></li>
+          <li><a class="nav-link scrollto" href="/kegiatan" style="font-family: roboto;">Kegiatan</a></li>
+          <li class="dropdown"><a href="#" style="font-family: roboto;"><span>Kajian Museum</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="/kajian">Kajian</a></li>
               <!-- <li><a href="#">Hasil Kajian</a></li> -->
               <li><a href="/publikasi">Publikasi</a></li>
             </ul>
           </li>
-          <li><a class="nav-link scrollto" href="/koleksi_page">Koleksi</a></li>
-          <li><a class="nav-link scrollto" href="">Perpustakaan</a></li>
-          <li><a class="nav-link scrollto" href="/halamanLogin">Login</a></li>
+          <li><a class="nav-link scrollto" href="/koleksi_page" style="font-family: roboto;">Koleksi</a></li>
+          <li><a class="nav-link scrollto" href="/perpustakaan" style="font-family: roboto;">Perpustakaan</a></li>
+          <li><a class="nav-link scrollto" href="/halamanLogin" style="font-family: roboto;">Login</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
         
@@ -264,42 +255,46 @@
 
   </script> -->
   <!-- Vendor JS Files -->
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="<?= base_url();?>/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="<?= base_url();?>/assets/vendor/aos/aos.js"></script>
+  <script src="<?= base_url();?>/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="<?= base_url();?>/assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="<?= base_url();?>/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="<?= base_url();?>/assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="<?= base_url();?>/assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="<?= base_url();?>/assets/vendor/php-email-form/validate.js"></script>
 
   <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
+  <script src="<?= base_url();?>/assets/js/main.js"></script>
   <!-- <script src="js/scripts4.js"></script> -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5+gbg4C/N8WWtHk+N5K9K7QwoirjwQVyTC6s7721" crossorigin="anonymous"></script>
 
     <!-- Vendor JS Files -->
-  <script src="assets2/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets2/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets2/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets2/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets2/vendor/php-email-form/validate.js"></script>
+  <script src="<?= base_url();?>/assets2/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="<?= base_url();?>/assets2/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="<?= base_url();?>/assets2/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="<?= base_url();?>/assets2/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="<?= base_url();?>/assets2/vendor/php-email-form/validate.js"></script>
 
   <!-- Template Main JS File -->
-  <script src="assets2/js/main.js"></script>
-  <script src="assets3/js/scripts.js"></script>
+  <script src="<?= base_url();?>/assets2/js/main.js"></script>
+  <script src="<?= base_url();?>/assets3/js/scripts.js"></script>
 
 
   <!-- Vendor JS Files -->
-  <script src="assets4/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets4/vendor/aos/aos.js"></script>
-  <script src="assets4/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets4/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets4/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets4/vendor/php-email-form/validate.js"></script>
+  <script src="<?= base_url();?>/assets4/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="<?= base_url();?>/assets4/vendor/aos/aos.js"></script>
+  <script src="<?= base_url();?>/assets4/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="<?= base_url();?>/assets4/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="<?= base_url();?>/assets4/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="<?= base_url();?>/assets4/vendor/php-email-form/validate.js"></script>
 
   <!-- Template Main JS File -->
-  <script src="assets4/js/main.js"></script>
+  <script src="<?= base_url();?>/assets4/js/main.js"></script>
+  <script src="<?= base_url() ?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
+
 </body>
 
 </html>

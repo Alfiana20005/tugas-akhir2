@@ -35,14 +35,29 @@
             <span>Berita</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="/petugas">
+        <a class="nav-link" href="/tambahKegiatan">
             <i class="fas fa-fw fa-users"></i>
             <span>Kegiatan</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="/petugas">
+        <a class="nav-link" href="/kajianAdmin">
             <i class="fas fa-fw fa-users"></i>
             <span>Kajian</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/tambahPublikasi">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Publikasi</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/koleksiAdmin">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Koleksi</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/galleryAdmin">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Gallery</span></a>
     </li>
     <!-- <hr class="sidebar-divider"> -->
     <?php endif; ?>

@@ -105,13 +105,13 @@
             <ul class="nav nav-tabs flex-column">
               <li class="nav-item">
                 <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#tab-1">
-                  <h4>Ruang Pameran Utama 1</h4>
+                  <h4>Ruang Pameran Tetap 1</h4>
                   <p>Quis excepturi porro totam sint earum quo nulla perspiciatis eius.</p>
                 </a>
               </li>
               <li class="nav-item mt-2">
                 <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-2">
-                  <h4>Ruang Pameran Utama 2</h4>
+                  <h4>Ruang Pameran Tetap 2</h4>
                   <p>Voluptas vel esse repudiandae quo excepturi.</p>
                 </a>
               </li>

@@ -7,6 +7,31 @@
 */
 
 
+
+@media (max-width: 768px) {
+  .team img{
+    width: 300px; /* Sesuaikan ukuran sesuai kebutuhan */
+  }
+}
+
+/* Untuk mode PC */
+@media (min-width: 769px) {
+  .team img{
+    width: 900px; /* Sesuaikan ukuran sesuai kebutuhan */
+  }
+}
+@media (max-width: 768px) {
+  .selamatDatang img{
+    width: 291px; /* Sesuaikan ukuran sesuai kebutuhan */
+  }
+}
+
+/* Untuk mode PC */
+@media (min-width: 769px) {
+  .selamatDatang img{
+    width: 530px; /* Sesuaikan ukuran sesuai kebutuhan */
+  }
+}
 @media (max-width: 768px) {
   .tataTertib img{
     width: 291px; /* Sesuaikan ukuran sesuai kebutuhan */
@@ -58,6 +83,18 @@
     width: 240px; /* Sesuaikan ukuran sesuai kebutuhan */
   }
 }
+@media (max-width: 768px) {
+  .icon2 img {
+    width: 240px; /* Sesuaikan ukuran sesuai kebutuhan */
+  }
+}
+
+/* Untuk mode PC */
+@media (min-width: 769px) {
+   .icon2 img {
+    width: 240px; /* Sesuaikan ukuran sesuai kebutuhan */
+  }
+}
 
 
 body {
@@ -66,12 +103,12 @@ body {
 }
 
 a {
-  color: #106eea;
+  color: #850000;
   text-decoration: none;
 }
 
 a:hover {
-  color: #3b8af2;
+  color: #850000;
   text-decoration: none;
 }
 
@@ -170,8 +207,9 @@ h6 {
   /* background: #850000; */
   /* background: url(assets/img/batik.png); */
   /* background-image: url(assets\img\batik.png); */
-  background: url("../img/batik.png") top center;
+  background: url("/img/WEB.png") top center;
   height: 40px;
+  /* width: 1500px; */
   font-size: 14px;
   transition: all 0.5s;
   color: #fff;
@@ -245,6 +283,7 @@ h6 {
 }
 
 #header .logo img {
+  /* padding: 0; */
   max-height: 80px;
 }
 
@@ -285,7 +324,8 @@ h6 {
   align-items: center;
   justify-content: space-between;
   padding: 0 3px;
-  font-size: 15px;
+
+  font-size: 17px;
   font-weight: 600;
   color: #222222;
   white-space: nowrap;
@@ -657,6 +697,7 @@ h6 {
     height: 120vh;
   }
 }
+
 
 /*--------------------------------------------------------------
 # Sections General
@@ -1330,7 +1371,7 @@ h6 {
 /*--------------------------------------------------------------
 # Team
 --------------------------------------------------------------*/
-.team {
+/* .team {
   padding: 60px 0;
 }
 
@@ -1407,7 +1448,7 @@ h6 {
 .team .member:hover .social {
   opacity: 1;
   bottom: 15px;
-}
+} */
 
 /*--------------------------------------------------------------
 # Pricing
@@ -1846,7 +1887,7 @@ h6 {
   padding: 0 0 30px 0;
   color: #fff;
   font-size: 14px;
-  background: #850000;
+  background: url("/img/WEB.png") top center;
 }
 
 #footer .footer-newsletter {
@@ -1902,7 +1943,7 @@ h6 {
 
 #footer .footer-top {
   padding: 60px 0 30px 0;
-  background: #f1d3d3;
+  background: #ede1de;
 }
 
 #footer .footer-top .footer-contact {
@@ -1918,7 +1959,7 @@ h6 {
 }
 
 #footer .footer-top .footer-contact h3 span {
-  color: #106eea;
+  color: #850000;
 }
 
 #footer .footer-top .footer-contact p {
@@ -1949,7 +1990,7 @@ h6 {
 
 #footer .footer-top .footer-links ul i {
   padding-right: 2px;
-  color: #106eea;
+  color: #850000;
   font-size: 18px;
   line-height: 1;
 }
@@ -2018,3 +2059,313 @@ h6 {
     padding: 2px 0;
   }
 }
+
+
+/* Untuk mode PC */
+@media (min-width: 768px) {
+  .footer-top , .footer-top a{
+   font-size: 12pt; /* Sesuaikan ukuran sesuai kebutuhan */
+  }
+}
+@media (max-width: 768px) {
+  .footer-top , .footer-top a{
+    font-size: 12pt;  /* Sesuaikan ukuran sesuai kebutuhan */
+  }
+}
+
+/*--------------------------------------------------------------
+# Our Team
+--------------------------------------------------------------*/
+.team .member {
+  margin-bottom: 20px;
+  overflow: hidden;
+  text-align: center;
+  border-radius: 5px;
+  background: #fff;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+.team .member .member-img {
+  position: relative;
+  overflow: hidden;
+}
+
+.team .member .social {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 40px;
+  opacity: 0;
+  transition: ease-in-out 0.3s;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.team .member .social a {
+  transition: color 0.3s;
+  color: #111;
+  margin: 0 10px;
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
+}
+
+.team .member .social a i {
+  line-height: 0;
+}
+
+.team .member .social a:hover {
+  color: #850000;
+}
+
+.team .member .social i {
+  font-size: 18px;
+  margin: 0 2px;
+}
+
+.team .member .member-info {
+  padding: 25px 15px;
+}
+
+.team .member .member-info h4 {
+  font-weight: 700;
+  margin-bottom: 5px;
+  font-size: 18px;
+  color: #111;
+}
+
+.team .member .member-info span {
+  display: block;
+  font-size: 13px;
+  font-weight: 400;
+  color: #b4aca8;
+}
+
+.team .member .member-info p {
+  font-style: italic;
+  font-size: 14px;
+  line-height: 26px;
+  color: #847872;
+}
+
+.team .member:hover .social {
+  opacity: 1;
+}
+
+/*--------------------------------------------------------------
+# Hero Section
+--------------------------------------------------------------*/
+#visiMisi {
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+  position: relative;
+}
+
+#visiMisi .carousel,
+#visiMisi .carousel-inner,
+#visiMisi .carousel-item,
+#visiMisi .carousel-item::before {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+
+#visiMisi .carousel-container {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  position: absolute;
+  bottom: 60px;
+  top: 70px;
+  left: 55px;
+  right: 55px;
+}
+
+#visiMisi .carousel-content {
+  background: rgba(4, 4, 4, 0.7);
+  padding: 20px;
+  color: #fff;
+  border-top: 5px solid #850000;
+}
+
+#visiMisi .carousel-content h2 {
+  color: #fff;
+  margin-bottom: 20px;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+#visiMisi .btn-get-started {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 12px 32px;
+  border-radius: 4px;
+  transition: 0.5s;
+  line-height: 1;
+  margin: 10px;
+  color: #fff;
+  animation-delay: 0.8s;
+  border: 2px solid #850000;
+}
+
+#visiMisi .btn-get-started:hover {
+  background: #850000;
+  color: #fff;
+  text-decoration: none;
+}
+
+#visiMisi .carousel-inner .carousel-item {
+  transition-property: opacity;
+  background-position: center top;
+}
+
+#visiMisi .carousel-inner .carousel-item,
+#visiMisi .carousel-inner .active.carousel-item-start,
+#visiMisi .carousel-inner .active.carousel-item-end {
+  opacity: 0;
+}
+
+#visiMisi .carousel-inner .active,
+#visiMisi .carousel-inner .carousel-item-next.carousel-item-start,
+#visiMisi .carousel-inner .carousel-item-prev.carousel-item-end {
+  opacity: 1;
+  transition: 0.5s;
+}
+
+#visiMisi .carousel-inner .carousel-item-next,
+#visiMisi .carousel-inner .carousel-item-prev,
+#visiMisi .carousel-inner .active.carousel-item-start,
+#visiMisi .carousel-inner .active.carousel-item-end {
+  left: 0;
+  transform: translate3d(0, 0, 0);
+}
+
+#visiMisi .carousel-control-next-icon,
+#visiMisi .carousel-control-prev-icon {
+  background: none;
+  font-size: 30px;
+  line-height: 0;
+  width: auto;
+  height: auto;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 50px;
+  transition: 0.3s;
+  color: rgba(255, 255, 255, 0.6);
+  width: 54px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#visiMisi .carousel-control-next-icon:hover,
+#visiMisi .carousel-control-prev-icon:hover {
+  background: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+#visiMisi .carousel-indicators li {
+  list-style-type: none;
+  cursor: pointer;
+  background: #fff;
+  overflow: hidden;
+  border: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 50px;
+  opacity: 0.6;
+  transition: 0.3s;
+}
+
+#visiMisi .carousel-indicators li.active {
+  opacity: 1;
+  background: #850000;
+}
+
+@media (min-width: 1024px) {
+  #visiMisi .carousel-content {
+    width: 60%;
+  }
+
+  #visiMisi .carousel-control-prev,
+  #visiMisi .carousel-control-next {
+    width: 5%;
+  }
+}
+
+@media (max-width: 992px) {
+  #visiMisi .carousel-container {
+    top: 58px;
+  }
+
+  #hero .carousel-content h2 {
+    margin-bottom: 11px;
+    font-size: 22px;
+  }
+
+  #visiMisi .carousel-content p {
+    font-size: 11px;
+  }
+}
+
+@media (max-height: 500px) {
+  #visiMisi {
+    height: 120vh;
+  }
+}
+
+/*--------------------------------------------------------------
+# Sections General
+--------------------------------------------------------------*/
+section {
+  padding: 60px 0;
+  overflow: hidden;
+}
+
+.section-bg {
+  background-color: #fff;
+}
+
+.section-title {
+  text-align: center;
+  padding-bottom: 30px;
+}
+
+.section-title h2 {
+  font-size: 32px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  position: relative;
+}
+
+.section-title h2::after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 50px;
+  height: 3px;
+  background: #850000;
+  bottom: 0;
+  left: calc(50% - 25px);
+}
+
+.section-title p {
+  margin-bottom: 0;
+}
+

@@ -234,11 +234,11 @@
   font-weight: 700;
   line-height: 56px;
   text-transform: uppercase;
-  color: #2c4964;
+  color: #fff;
 }
 
 #hero2 h2 {
-  color: #2c4964;
+  color: #fff;
   margin: 10px 0 0 0;
   font-size: 24px;
 }
@@ -324,6 +324,18 @@
 @media (min-width: 768px) {
   .berita-box .berita2 img {
     width: 246px; /* Sesuaikan ukuran sesuai kebutuhan */
+  }
+}
+@media (max-width: 768px) {
+  .berita-box .berita3 img {
+    width: 300px; /* Sesuaikan ukuran sesuai kebutuhan */
+  }
+}
+
+/* Untuk mode PC */
+@media (min-width: 768px) {
+  .berita-box .berita3 img {
+    width: 175px; /* Sesuaikan ukuran sesuai kebutuhan */
   }
 }
 
@@ -497,7 +509,7 @@ section {
 }
 
 .section-bg {
-  background-color: #f7fcfc;
+  background-color: #fff;
 }
 
 .section-title {
@@ -512,6 +524,7 @@ section {
   margin-bottom: 20px;
   padding-bottom: 20px;
   position: relative;
+  font-family: roboto ;
 }
 
 .section-title h2::after {
@@ -618,6 +631,10 @@ section {
   100% {
     opacity: 1;
   }
+}
+
+h4{
+  font-family: roboto;
 }
 
 /*--------------------------------------------------------------
@@ -1406,3 +1423,4 @@ section {
   color: #aaaaaa;
   font-size: 14px;
 }
+

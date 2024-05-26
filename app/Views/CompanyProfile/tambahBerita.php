@@ -22,17 +22,17 @@
                     </div>
                     
                 </div>
-            <form action="/save" method="post">
+            <form action="/saveBerita" method="post" enctype="multipart/form-data" id="form">
                 
                 <?= csrf_field() ?>
                 <div class="row mb-3">
-                        <label for="inputjabatan" class="col-sm-2 col-form-label">Tipe Berita</label>
+                        <label  class="col-sm-2 col-form-label">Tipe Berita</label>
                         <div class="col-sm-10">
-                            <select class="form-select form-control" type="text" name="tipe" value="<?= old("tipe"); ?>">
+                            <select class="form-select form-control" type="text" name="type" value="<?= old("type"); ?>">
                                 <!-- harus sesuai dengan urutan enum pada database -->
                                 <option selected>Pilih Tipe Berita yang akan di masukkan</option>
-                                <option <?= old("tipe") == '1'? 'selected' : 'narasi' ?> value="1">Narasi</option>
-                                <option <?= old("tipe") == '2'? 'selected' : 'link' ?> value="2">Link</option>
+                                <option <?= old("type") == 'Narasi'? 'selected' : 'Narasi' ?> value="Narasi">Narasi</option>
+                                <option <?= old("type") == 'Link'? 'selected' : 'Link' ?> value="Link">Link</option>
                                 
                             </select>
                         </div>
@@ -46,34 +46,27 @@
                 <div class="row mb-3">
                     <label for="username" class="col-sm-2 col-form-label">Tanggal</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="tanggal" value="<?= old("tanggal"); ?>">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <label for="name" class="col-sm-2 col-form-label">Narasi</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control " name="narasi" value="<?= old('narasi'); ?>">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <label for="username" class="col-sm-2 col-form-label">Link</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="link" value="<?= old("link"); ?>">
+                    <input type="date" class="form-control"  aria-label="tanggal" name="tanggal" value="<?= old('tanggal'); ?>">
                     </div>
                 </div>
                 
                 <div class="row mb-3">
-                    <label for="foto" class="col-sm-2 col-form-label">Foto</label>
+                    <label for="isi" class="col-sm-2 col-form-label">Isi Berita</label>
                     <div class="col-sm-10">
+                        <input type="text" class="form-control" name="isi" value="<?= old("isi"); ?>">
+                    </div>
+                </div>
+                
+                <div class="row mb-3">
+                    <label for="foto" class="col-sm-2 col-form-label">Gambar</label>
+                    <div class="col-sm-2">
+                        <img src="/img/default.jpg" alt="" class="img-thumbnail img-preview">
+                    </div>    
+                    <div class="col-sm-8">
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input form-control" id="customFile" name="foto">
-                            <label class="custom-file-label" for="customFile">Masukkan Foto Anda</label>
-                            <!-- <?php if (!empty($petugas['foto'])): ?>
-                                <div class="my-2">
-                                    <p>Foto Saat Ini:</p>
-                                    <img src="<?= base_url('img/profile/' . $petugas['foto']); ?>" alt="Foto Petugas" width="100">
-                                </div>
-                            <?php endif; ?> -->
+                            <input type="file" class="custom-file-input form-control" id="foto" name="foto" onchange="previewImg('foto')">
+                            <label class="custom-file-label" for="customFile">Masukkan Gambar Koleksi</label>
+                            
                         </div>
                     </div>
                 </div>

@@ -14,105 +14,112 @@
     </video>
     
     <div class="container" data-aos="zoom-out" data-aos-delay="100">
-        <h3 style="color:white;  font-style: italic;">Selamat Datang Di </h3>
-        <h1 class="">
-            <span style="font-family: graceful; font-weight: bold; color: #850000; ">MUSEUM NEGERI</span>
-            <span style="font-family: graceful; font-weight: bold; color: #f1d3d3; font-size: 20pt;">Nusa Tenggara Barat</span>
-        </h1>
-      <h2 style="font-family: friendly;  font-style: italic;">Kotaku Museumku Kampungku Museumku</h2>
-      <div class="d-flex">
-        <a href="" class="btn-get-started scrollto" data-toggle="modal" data-target="#modalJadwal">Jadwal Kunjungan</a>
-        <!-- <a href="" class="btn-get-started scrollto mx-4">Hubungi Kami</a> -->
-        <!-- <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="glightbox btn-watch-video"><i class="bi bi-play-circle"></i><span>Watch Video</span></a> -->
+       
+      <div class="selamatDatang">
+        <img class="selamatDatang" src="img/Museum (web).png" alt="" style="">
+      </div>
+
+      <div class="d-flex mt-4">
+        <!-- <button class="btn btn-sm">Jadwal Kunjungan</button> -->
+        <a href="" class="btn-get-started scrollto btn-sm" data-toggle="modal" data-target="#modalJadwal">Jadwal</a>
       </div>
     </div>
-  </section><!-- End Hero -->
+  </section>
+  <!-- End Hero -->
 
   <!-- <a href="#" class="btn-get-started scrollto" data-toggle="modal" data-target="#modalJadwal">Jadwal Kunjungan</a> -->
 
 <!-- Modal -->
-<div class="modal fade" id="modalJadwal" tabindex="-1" role="dialog" aria-labelledby="modalJadwalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<!-- Modal -->
+<div class="modal fade" id="modalJadwal" tabindex="-1" aria-labelledby="modalJadwal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalJadwalLabel">Jadwal Kunjungan</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <h1 class="modal-title fs-5" id="modalJadwal">Jadwal Kunjungan</h1>
+        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+        
       </div>
       <div class="modal-body">
-        <!-- Isi modal di sini -->
-        <!-- Contoh: -->
-        <p>Ini adalah konten modal jadwal kunjungan.</p>
+        <!-- ...Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p> -->
+        <!-- <h2>Jadwal Kunjungan</h2> -->
+        <p style="font-family: georgia;"></p>
+        <table>
+          <tr>
+            <td >Senin</td>
+            <td >: </td>
+            <td > 10.00-16.00 WITA</td>
+          </tr>
+          <tr>
+            <td>Selasa - Kamis   </td>
+            <td >: </td>
+            <td> 08.00-16.00 WITA</td>
+          </tr>
+          <tr>
+            <td>Jumat   </td>
+            <td>: </td>
+            <td> 09.00-17.00 WITA</td>
+          </tr>
+          <tr>
+            <td>Sabtu - Minggu   </td>
+            <td >: </td>
+            <td> 09.00-17.00 WITA</td>
+          </tr>
+
+        </table>
+
+        <p class="mt-4" style="color: #850000;">*Museum Tutup pada hari libur nasional</p>
+        <h5>Harga Tiket</h5>
+        <table>
+          <tr>
+            <td class="mx-4">Dewasa</td>
+            <td>: </td>
+            <td>Rp. 4000</td>
+          </tr>
+          <tr>
+            <td>Anak  </td>
+            <td>: </td>
+            <td>Rp. 2000</td>
+          </tr>
+          <tr>
+            <td>Wisman   </td>
+            <td>: </td>
+            <td>Rp. 7000</td>
+          </tr>
+          
+
+        </table>
+        <p class="mt-4" style="color: #850000;">*Bagi pengunjung rombongan mohon hubungi nara
+        hubung atau kirim surat melalui email ke<span>museumntb@gmail.com</span>  terlebih dahulu.
+        </p>     
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-        <!-- Jika Anda ingin menambahkan tombol lain, Anda bisa menambahkannya di sini -->
-      </div>
+      
+      <!-- <div class="modal-footer"> -->
+      <!-- <h1 class="modal-title fs-5" id="modalJadwal">Jadwal Kunjungan</h1> -->
+      
+         
+      <!-- </div> -->
     </div>
   </div>
 </div>
-
 
     <!-- ======= Featured Services Section ======= -->
     <section id="featured-services" class="featured-services">
       <div class="container" data-aos="fade-up">
 
         <div class="row">
-        
+          <?php foreach($beritaterbaru as $b): ?>
           <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
             <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
-              <div class="icon"><img src="img/berita/berita1.png" alt="" ></div>
-              <h4 class="title"><a href="">Lorem Ipsum</a></h4>
-              <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
+              <div class="icon2 mb-4"><img src="<?= base_url("img/berita/". $b['foto']); ?>" alt="" ></div>
+              <h3 class="title" ><a href="<?= base_url("/lihatberita/{$b['id_berita']}"); ?>" style="font-family: 'cambria';"><?= $b['judul']; ?></a></h3>
+              <!-- <p class="description" style="font-family: georgia;"></p> -->
             </div>
           </div>
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-            <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
-              <div class="icon"><img src="img/berita/berita1.png" alt="" ></div>
-              <h4 class="title"><a href="">Lorem Ipsum</a></h4>
-              <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-            <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
-              <div class="icon"><img src="img/berita/berita1.png" alt="" ></div>
-              <h4 class="title"><a href="">Lorem Ipsum</a></h4>
-              <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-            <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
-              <div class="icon"><img src="img/berita/berita1.png" alt="" ></div>
-              <h4 class="title"><a href="">Lorem Ipsum</a></h4>
-              <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
-            </div>
-          </div>
+          <!-- s -->
+          <?php endforeach; ?>
           
 
-          <!-- <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-            <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
-              <div class="icon"><i class="bx bx-file"></i></div>
-              <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
-              <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-            <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
-              <div class="icon"><i class="bx bx-tachometer"></i></div>
-              <h4 class="title"><a href="">Magni Dolores</a></h4>
-              <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-            <div class="icon-box" data-aos="fade-up" data-aos-delay="400">
-              <div class="icon"><i class="bx bx-world"></i></div>
-              <h4 class="title"><a href="">Nemo Enim</a></h4>
-              <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
-            </div>
-          </div> -->
+          
 
         </div>
 
@@ -130,19 +137,21 @@
           <!-- <p>Museum Dihatiku</p> -->
         </div>
 
-        <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000" loop="loop">
+          <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000" loop="loop">
             
             <div class="carousel-inner">
-                <!-- <h3 class="text-center" style="color: #fff;">Event</h3> -->
+                
+
+                <?php 
+                                       
+                foreach($kegiatan as $k):
+                if ($k['tampilkan'] == 'Home'): ?> 
                 <div class="carousel-item active">
-                <img src="img/kegiatan/1.png" class="d-block w-100" alt="...">
+                <img src="<?= base_url('img/kegiatan/' . $k['foto']); ?>" class="d-block w-100" alt="...">
                 </div>
-                <div class="carousel-item">
-                <img src="img/kegiatan/2.png" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                <img src="img/kegiatan/3.png" class="d-block w-100" alt="...">
-                </div>
+                <?php endif; ?>
+                <?php endforeach; ?>
+                
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -152,7 +161,7 @@
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
-            </div>
+          </div>
 
         <!-- <div class="row">
           <div class="col-lg-6" data-aos="fade-right" data-aos-delay="100">
@@ -344,30 +353,27 @@
 
       <!-- ======= Gallery Section ======= -->
       <section id="gallery" class="gallery">
-      <div class="container" data-aos="fade-up">
+        <div class="container" data-aos="fade-up">
 
-        <div class="section-title">
-          <h2>Gallery</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-        </div>
-
-        <div class="gallery-slider swiper">
-          <div class="swiper-wrapper align-items-center">
-            <div class="swiper-slide"><a class="gallery-lightbox" href="img/landingPage/taman.png"><img src="img/landingPage/taman.png" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="gallery-lightbox" href="img/landingPage/pameran.png"><img src="img/landingPage/pameran.png" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="gallery-lightbox" href="assets/img/pengunjung.jpg"><img src="assets/img/pengunjung.jpg" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="gallery-lightbox" href="img/galery/pengunjung2.png"><img src="img/galery/pengunjung2.png" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="gallery-lightbox" href="img/galery/GLXY3412.jpg"><img src="img/galery/GLXY3412.jpg" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="gallery-lightbox" href="img/galery/becak.jpg"><img src="img/galery/becak.jpg" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="gallery-lightbox" href="img/galery/DSCF0712-min.png"><img src="img/galery/DSCF0712-min.png" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="gallery-lightbox" href="img/galery/mewarnai.jpg"><img src="img/galery/mewarnai.jpg" class="img-fluid" alt=""></a></div>
+          <div class="section-title">
+            <h2>Gallery</h2>
           </div>
-          
-          <div class="swiper-pagination"></div>
-        </div>
 
-      </div>
-    </section><!-- End Gallery Section -->
+          <div class="gallery-slider swiper">
+            <div class="swiper-wrapper align-items-center">
+            <?php 
+                foreach($gallery as $g): ?>
+              <div class="swiper-slide"><a class="gallery-lightbox" href="img/landingPage/taman.png"><img src="<?= base_url("img/galery/". $g['foto']); ?>" class="img-fluid" alt=""></a></div>
+              
+             <?php endforeach; ?>
+            </div>
+            
+            <div class="swiper-pagination"></div> 
+          </div>
+
+        </div>
+      </section>
+      <!-- End Gallery Section -->
 
 
 
@@ -388,9 +394,9 @@
 
         <div class="row" data-aos="fade-up" data-aos-delay="100">
           <div class="col-lg-6">
-            <div class="info-box mb-4">
+            <div class="info-box mb-4" style="font-family: georgia;">
               <i class="bx bx-map"></i>
-              <h3>Alamat Kami</h3>
+              <h3 >Alamat Kami</h3>
               <p>Jl. Panji Tilar Negara No.6, Taman Sari, <br>
                 Kec. Ampenan, Kota Mataram, Nusa Tenggara Bar. 83117</p>
             </div>
@@ -400,7 +406,7 @@
             <div class="info-box  mb-4">
               <i class="bx bx-envelope"></i>
               <h3>Email</h3>
-              <p>contact@example.com</p>
+              <p style="font-family: georgia;">contact@example.com</p>
             </div>
           </div>
 
@@ -452,5 +458,12 @@
 
       </div>
     </section><!-- End Contact Section -->
-
+    <script>
+    const myModal = new bootstrap.Modal(document.getElementById('modalJadwal'), options)
+    // or
+    const myModalAlternative = new bootstrap.Modal('#modalJadwal', options)
+   </script>
+   
   <?= $this->endSection(); ?>  
+
+

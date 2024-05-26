@@ -109,50 +109,50 @@
         </div>
           <div class="col-lg-3 col-md-4">
             <div class="icon-box">
-              <i class="ri-store-line" style="color: #ffbb2c;"></i>
-              <h3><a href="">Dilarang merokok</a></h3>
+              <i><img src="img/tataTertib/dont touch.png" alt="" style="width: 50px; "></i>
+              <h3><a href="">Dilarang Menyentuh Koleksi Museum</a></h3>
             </div>
           </div>
           <div class="col-lg-3 col-md-4 mt-4 mt-md-0">
             <div class="icon-box">
-              <i class="ri-bar-chart-box-line" style="color: #5578ff;"></i>
-              <h3><a href="">Dilarang menyalakan api</a></h3>
+              <i><img src="img/tataTertib/dont eat.png" alt="" style="width: 50px;"></i>
+              <h3><a href="">Dilarang Makan dan Minum di Dalam Ruang Pameran</a></h3>
             </div>
           </div>
           <div class="col-lg-3 col-md-4 mt-4 mt-md-0">
             <div class="icon-box">
-              <i class="ri-calendar-todo-line" style="color: #e80368;"></i>
-              <h3><a href="">Dilarang makan dan minum di dalam ruang pameran</a></h3>
+              <i > <img src="img/tataTertib/dont run.png" alt="" style="width: 50px;"></i>
+              <h3><a href="">Dilarang Berlari di Area Pameran</a></h3>
             </div>
           </div>
           <div class="col-lg-3 col-md-4 mt-4 mt-lg-0">
             <div class="icon-box">
-              <i class="ri-paint-brush-line" style="color: #e361ff;"></i>
-              <h3><a href="">Dilarang menyentuh koleksi Museum</a></h3>
+              <i ><img src="img/tataTertib/no pet.png" alt="" style="width: 50px;"></i>
+              <h3><a href="">Dilarang Membawa Hewan Peliharaan</a></h3>
             </div>
           </div>
           <div class="col-lg-3 col-md-4 mt-4">
             <div class="icon-box">
-              <i class="ri-database-2-line" style="color: #47aeff;"></i>
-              <h3><a href="">Dilarang berlari di area pameran</a></h3>
+              <i ><img src="img/tataTertib/gabgae.png" alt="" style="width: 50px;"></i>
+              <h3><a href="">Dilarang Membuang Sampah Sembarangan</a></h3>
             </div>
           </div>
           <div class="col-lg-3 col-md-4 mt-4">
             <div class="icon-box">
-              <i class="ri-gradienter-line" style="color: #ffa76e;"></i>
-              <h3><a href="">Dilarang membawa peliharaan</a></h3>
+              <i ><img src="img/tataTertib/dont smoke.png" alt="" style="width: 50px;"></i>
+              <h3><a href="">Dilarang Merokok</a></h3>
             </div>
           </div>
           <div class="col-lg-3 col-md-4 mt-4">
             <div class="icon-box">
-              <i class="ri-file-list-3-line" style="color: #11dbcf;"></i>
-              <h3><a href="">Dilarang membawa senjata tajam</a></h3>
+              <i ><img src="img/tataTertib/no sharp weapon.png" alt="" style="width: 50px;"></i>
+              <h3><a href="">Dilarang Membawa Senjata Tajam</a></h3>
             </div>
           </div>
           <div class="col-lg-3 col-md-4 mt-4 mb-4">
             <div class="icon-box">
-              <i class="ri-price-tag-2-line" style="color: #4233ff;"></i>
-              <h3><a href="">Dilarang membuang sampah sembarangan</a></h3>
+              <i ><img src="img/tataTertib/no fire.png" alt="" style="width: 50px;"></i>
+              <h3><a href="">Dilarang Menyalakan Api</a></h3>
             </div>
           </div>
           <!-- <div class="col-lg-3 col-md-4 mt-4">

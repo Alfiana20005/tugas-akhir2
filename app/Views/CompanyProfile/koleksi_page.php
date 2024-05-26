@@ -2,7 +2,7 @@
 
 <?= $this-> section('main'); ?>
 
-<h1>Halaman Ini Dalam Tahap Pengembangan</h1> 
+<!-- <h1>Halaman Ini Dalam Tahap Pengembangan</h1>  -->
 
 
     <!-- ======= Portfolio Section ======= -->
@@ -11,35 +11,36 @@
 
         <div class="section-title" data-aos="fade-up">
           <h2>Koleksi</h2>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus voluptatum quas assumenda quasi perferendis accusantium, facilis, esse itaque quaerat totam omnis tempora ducimus est fuga vero placeat. Vero, asperiores temporibus.</p>
+          <p style="font-family: cambria;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus voluptatum quas assumenda quasi perferendis accusantium, facilis, esse itaque quaerat totam omnis tempora ducimus est fuga vero placeat. Vero, asperiores temporibus.</p>
         </div>
 
         <div class="row">
           <div class="col-lg-12 d-flex justify-content-center" data-aos="fade-up" data-aos-delay="100">
-            <ul id="portfolio-flters">
+            <!-- <ul id="portfolio-flters">
               <li data-filter="*" class="filter-active">Semua</li>
               <li data-filter=".filter-app">Kategori 1</li>
               <li data-filter=".filter-card">Kategori 2</li>
               <li data-filter=".filter-web">Kategori 3</li>
-            </ul>
+            </ul> -->
           </div>
         </div>
 
         <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
-
+        <?php foreach($koleksi as $k): ?>  
           <div class="col-lg-4 col-md-6 portfolio-item filter-app">
             <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
+              <img src="<?= base_url("img/koleksiAdmin/". $k['foto']); ?>" class="img-fluid" alt="">
               <div class="portfolio-info">
-                <h4>Koleksi 1</h4>
-                <p>Kategori 1</p>
+                <h4><?= $k['nama']; ?></h4>
+                <p><?= $k['kategori']; ?></p>
               </div>
               <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-plus"></i></a>
-                <a href="/koleksi_detail" title="More Details"><i class="bx bx-link"></i></a>
+                <a href="<?= base_url("img/koleksiAdmin/". $k['foto']); ?>" data-gallery="portfolioGallery" class="portfolio-lightbox" title="<?= $k['nama']; ?>"><i class="bx bx-plus"></i></a>
+                <a href="<?= base_url("/koleksi_detail/{$k['id_koleksi']}"); ?>" title="More Details"><i class="bx bx-link"></i></a>
               </div>
             </div>
           </div>
+          <?php endforeach; ?> 
 
           <div class="col-lg-4 col-md-6 portfolio-item filter-web">
             <div class="portfolio-wrap">

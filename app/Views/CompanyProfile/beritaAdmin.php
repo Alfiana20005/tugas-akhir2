@@ -29,7 +29,8 @@
                                             <th style="text-align: center;">No</th>
                                             <th style="text-align: center;">Foto</th>
                                             <th style="text-align: center;">Judul Berita</th> 
-                                            <th style="text-align: center;">Narasi</th>
+                                            <th style="text-align: center;">Isi Berita</th>
+                                            <th style="text-align: center;">Tipe Berita</th>
                                             
                                             <th style="text-align: center;">Tanggal</th>
                                             
@@ -39,17 +40,20 @@
                                     </thead>
                                     
                                     <tbody >
-                                       
+                                    <?php 
+                                        $no=1;
+                                        foreach($dataBerita as $b): ?>   
                                         <tr>
-                                        <td style="text-align: center;">1</td>
+                                            <!-- <td style="text-align: center;">1</td> -->
                                             <!-- <td style="text-align: center;"><img src="" alt="" style="width: 60px;"></td> -->
-                                            <!-- <td>1</td> -->
-                                            <td><img src="" alt=""></td>
-                                            
-                                            <td>judul Berita</td>
-                                            <td>narasi</td>
-                                            <td>tanggal</td>
+                                            <td style="text-align: center;"><?= $no++; ?></td>
+                                            <td style="text-align: center;"><img src="<?= base_url("img/berita/". $b['foto']); ?>" alt="" style="width: 60px;"></td>
+                                            <td style="text-align: center;"><?= $b['judul']; ?></td>
+                                            <td style="text-align: center;"><?= $b['isi']; ?></td>
+                                            <td style="text-align: center;"><?= $b['type']; ?></td>
+                                            <td style="text-align: center;"><?= $b['tanggal']; ?></td>
                                             <td style="text-align: center;">
+                                            
                                                 <a href="/ubahpetugas/" class="btn btn-success btn-sm" >Edit</a>
                                                 <!-- <a href="" class="btn btn-danger" >hapus</a> -->
                                                 <form action="/hapuspetugas/" method="post" class="d-inline">
@@ -61,7 +65,7 @@
                                             </td>
 
                                         </tr>
-                                        
+                                        <?php endforeach; ?>
                                     </tbody>
                                 </table>
                             </div>
