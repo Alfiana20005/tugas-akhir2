@@ -50,14 +50,22 @@
                                             <?php if (!empty($data_kajian['foto'])): ?>
                                                 <div class="my-2">
                                                     <p>Foto Saat Ini:</p>
-                                                    <img src="<?= base_url('img/kegiatan/' . $data_kajian['foto']); ?>" alt="Foto Kajian" width="100">
+                                                    <img src="<?= base_url('img/kajian/' . $data_kajian['foto']); ?>" alt="Foto Kajian" width="100">
                                                 </div>
+                                                
                                             <?php endif; ?>
                                         </div>
                                     </div>
+                                    
                                 </div>
 
                             </div>
+                            <div class="form-check my-4">
+                                                    <input class="form-check-input" type="checkbox" id="removeFoto" name="removeFoto" value="1">
+                                                    <label class="form-check-label" for="removeFoto">
+                                                    Klik apabila tidak membutuhkan gambar
+                                                    </label>
+                                                </div>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-success btn-sm mb-2 mx-4">Simpan</button>
@@ -109,6 +117,12 @@
                                 </div>
 
                             </div>
+                            <div class="form-check my-4">
+                                                    <input class="form-check-input" type="checkbox" id="removeFoto${formCount}" name="removeFoto" value="1">
+                                                    <label class="form-check-label" for="removeFoto">
+                                                        Klik apabila tidak membutuhkan gambar
+                                                    </label>
+                                                </div>
                         </div>
         `;
         container.appendChild(newForm);

@@ -17,14 +17,15 @@
 					</div>
 				</div>
 </section>
-			<!-- End banner Area -->	
+<!-- End banner Area -->	
 
 
 			<!-- Start contact-page Area -->
 			<section class="contact-page-area section-gap">
 				<div class="container">
 					<div class="row">
-						<div class="map-wrap" style="width:100%; height: 445px;" id="map"></div>
+						<!-- <div class="map-wrap" style="width:100%; height: 445px;" id="map"></div> -->
+						<a href="https://maps.app.goo.gl/SWsce1nC6HhRKZ5v8" target="_blank"><img src="/img/map.png" alt="" class="img-map align-items-center justify-content-center pb-30" style="width:100%; height: 445px;"></a>
 						<div class="col-lg-4 d-flex flex-column address-wrap">
 							<div class="single-contact-address d-flex flex-row">
 								<div class="icon">
@@ -45,7 +46,7 @@
 									<span class="lnr lnr-phone-handset"></span>
 								</div>
 								<div class="contact-details">
-									<h5>00 (958) 9865 562</h5>
+								<h5>+62 897-3862-445</h5>
 									<p>Humas</p>
 								</div>
 							</div>
@@ -54,8 +55,19 @@
 									<span class="lnr lnr-envelope"></span>
 								</div>
 								<div class="contact-details">
-									<h5>support@colorlib.com</h5>
-									<p>Send us your query anytime!</p>
+								<h5>museumnegeri@ntbprov.go.id</h5>
+									<h5>museumntb@gmail.com</h5>
+								</div>
+							</div>														
+							<div class="single-contact-address d-flex flex-row my-4">
+								
+								<div class="contact-details">
+
+								<h5 class="mb-4">SOSIAL MEDIA</h5>
+								<a href="" target="_blank" style="color:#850000; font-size:30px; font-weight:bold;"><i class="fa fa-facebook"></i></a>
+								<a href="https://www.youtube.com/@museumntb1284" target="_blank" style="color:#850000; font-size:30px; font-weight:bold;"><i class="fa fa-youtube mx-4"></i></a>
+								<a href="https://www.instagram.com/museumntb?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" style="color:#850000; font-size:30px; font-weight:bold;"><i class="fa fa-instagram"></i></a>
+									
 								</div>
 							</div>														
 						</div>

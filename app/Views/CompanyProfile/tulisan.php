@@ -256,7 +256,7 @@
               <div class="sidebar-item recent-posts">
               <?php 
                 foreach ($kajianTerbaru as $kajian): {
-                  # code...
+               
                 } ?>
                 <div class="post-item clearfix">
                   <img src="<?= base_url("img/kajian/". $kajian['sampul']); ?>" alt="">

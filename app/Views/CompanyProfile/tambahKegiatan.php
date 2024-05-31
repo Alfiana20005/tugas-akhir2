@@ -39,19 +39,24 @@
             </div>
             
             <div class="row mb-2">
-                <label for="email" class="col-sm-3 col-form-label">Kategori</label>
+                <label for="" class="col-sm-3 col-form-label">Tampilkan di</label>
                 <div class="col-sm-9">
-                    <select class="form-select form-control" type="text" name="kategori"  value="<?= old('kategori'); ?>">
+                    <select class="form-select form-control" type="text" name="tampilkan"  value="<?= old('tampilkan'); ?>">
                                 <!-- harus sesuai dengan urutan enum pada database -->
                         <option selected>Pilih </option>
-                        <option <?= old("kategori") == 'Opini'? 'selected' : 'Opini' ?> value="Opini">Opini</option>
-                        <option <?= old("kategori") == 'Kajian Koleksi'? 'selected' : 'Kajian Koleksi' ?> value="Kajian Koleksi">Kajian Koleksi</option>
-                        <option <?= old("kategori") == 'Permuseuman'? 'selected' : 'Permuseuman' ?> value="Permuseuman">Permuseuman</option>
-                        <option <?= old("kategori") == 'Kajian Budaya'? 'selected' : 'Kajian Budaya' ?> value="Kajian Budaya">Kajian Budaya</option>
-                        <option <?= old("kategori") == 'Artikel'? 'selected' : 'Artikel' ?> value="Artikel">Artikel</option>
+                        <option <?= old("tampilkan") == 'Home'? 'selected' : 'Home' ?> value="Home">Home</option>
+                        <option <?= old("tampilkan") == 'Kegiatan'? 'selected' : 'Kegiatan' ?> value="Kegiatan">Kegiatan</option>
+                        
                     </select>
                 </div>
             </div>
+            <div class="row mb-2">
+                    <label for="isi" class="col-sm-3 col-form-label">keterangan</label>
+                    <div class="col-sm-9">
+                        <textarea class="form-control" name="keterangan" id="" value="<?= old("keterangan"); ?>"></textarea>
+                        
+                    </div>
+                </div>
             <div class="row mb-2">
                 <label for="foto" class="col-sm-3 col-form-label">Sampul</label>
                     <div class="col-sm-2">
@@ -127,7 +132,7 @@
                                             
                                                 <a href="" class="btn btn-success btn-sm" >Edit</a>
                                                 <!-- <a href="" class="btn btn-danger" >hapus</a> -->
-                                                <form action="/hapuspetugas/" method="post" class="d-inline">
+                                                <form action="/hapusKegiatan/<?= $k['id_kegiatan']; ?>" method="post" class="d-inline">
                                                     <?= csrf_field(); ?>
                                                     <input type="hidden" name="_method" value="DELETE">
                                                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('apakah anda yakin?');">Hapus</button>

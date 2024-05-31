@@ -11,6 +11,9 @@ class C_Login extends BaseController
     public function __construct() {
         helper('form');
         $this -> M_Petugas = new M_Petugas();
+        if (!session()->get('log')) {
+            return redirect()->to('/halamanLogin')->with('error', 'Silakan login terlebih dahulu.');
+        }
     }
     public function index(): string
     {

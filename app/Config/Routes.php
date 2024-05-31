@@ -7,7 +7,7 @@ use CodeIgniter\Router\RouteCollection;
  */
 
 //Landing PAge
-$routes->get('/', 'C_LandingPage::index');
+$routes->get('/', 'C_LandingPage::home');
 $routes->get('/sejarah', 'C_LandingPage::sejarah');
 $routes->get('/visimisi', 'C_LandingPage::visiMisi');
 $routes->get('/struktur', 'C_LandingPage::struktur');
@@ -40,14 +40,19 @@ $routes->get('/beritaAdmin', 'C_Admin::berita');
 
 $routes->get('/tambahBerita', 'C_Admin::tambahBerita');
 $routes->post('/saveBerita', 'C_Admin::save');
+$routes->delete('hapusberita/(:segment)', 'C_Admin::deleteBerita/$1');
 $routes->get('/tambahKegiatan', 'C_Admin::tambahKegiatan');
 $routes->post('/saveKegiatan', 'C_Admin::saveKegiatan');
+$routes->delete('hapusKegiatan/(:segment)', 'C_Admin::deleteKegiatan/$1');
 $routes->get('/tambahPublikasi', 'C_Admin::tambahPublikasi');
 $routes->post('/savePublikasi', 'C_Admin::savePublikasi');
+$routes->delete('hapusPublikasi/(:segment)', 'C_Admin::deletePublikasi/$1');
 $routes->get('/koleksiAdmin', 'C_Admin::koleksiAdmin');
 $routes->post('/saveKoleksi', 'C_Admin::saveKoleksi');
+$routes->delete('hapusKoleksiAdmin/(:segment)', 'C_Admin::deleteKoleksi/$1');
 $routes->get('/galleryAdmin', 'C_Admin::galleryAdmin');
 $routes->post('/saveGallery', 'C_Admin::saveGallery');
+$routes->delete('hapusGallery/(:segment)', 'C_Admin::deleteGallery/$1');
 $routes->post('/saveKajian', 'C_Admin::saveKajian');
 $routes->get('/kajianAdmin', 'C_Admin::kajianAdmin');
 $routes->get('/tulisKajian', 'C_Admin::tulisKajian');
@@ -55,7 +60,7 @@ $routes->post('/addSection', 'C_Admin::/addSection');
 $routes->get('/tulisKajian/(:segment)', 'C_Admin::tulisKajian/$1');
 $routes->post('/saveIsiKajian', 'C_Admin::saveIsiKajian');
 $routes->get('/tulisKajian/(:num)', 'C_Admin::tulisKajian/$1');
-
+$routes->delete('hapusKajian/(:segment)', 'C_Admin::deleteKajian/$1');
 
 
 
@@ -146,7 +151,9 @@ $routes->get('/lihatKegiatan2', 'C_LandingPage::lihatKegiatan2');
 $routes->get('/lihatKegiatan2/(:segment)', 'C_LandingPage::lihatKegiatan2/$1');
 $routes->get('/kegiatan2', 'C_LandingPage::kegiatan2');
 $routes->get('/kajian2', 'C_LandingPage::kajian2');
-$routes->get('/tulisan2', 'C_LandingPage::tulisan2');
+$routes->get('/kajianKategori2/(:segment)', 'C_LandingPage::kajianKategori2/$1');
+$routes->get('/tulisan2', 'C_LandingPage::tulisan');
+$routes->get('/tulisan2/(:segment)', 'C_LandingPage::tulisan2/$1');
 
 
 $routes->get('/koleksi_page2', 'C_LandingPage::koleksi_page2');

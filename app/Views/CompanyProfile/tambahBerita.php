@@ -53,7 +53,8 @@
                 <div class="row mb-3">
                     <label for="isi" class="col-sm-2 col-form-label">Isi Berita</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="isi" value="<?= old("isi"); ?>">
+                        <textarea class="form-control" name="isi" id="" value="<?= old("isi"); ?>"></textarea>
+                        <!-- <input type="text area" class="form-control" name="isi" value="<?= old("isi"); ?>"> -->
                     </div>
                 </div>
                 

@@ -20,6 +20,11 @@ class M_Berita extends Model
     protected $skipValidation = false;
     protected $cleanValidationRules = true;
 
+    public function getBeritaBaru()
+    {
+        return $this->orderBy('tanggal', 'DESC')
+                    ->findAll();
+    }
     public function getBerita($id_berita)
     {
         return $this->find($id_berita);

@@ -50,7 +50,7 @@
 			<link rel="stylesheet" href="<?= base_url();?>landingPage/css/owl.carousel.css">				
 			<link rel="stylesheet" href="<?= base_url();?>landingPage/css/main.css">
 
-			<link href="<?= base_url();?>landingPage/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+			<!-- <link href="<?= base_url();?>landingPage/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet"> -->
 
 
 
@@ -100,9 +100,9 @@
 				          </li>	
 				          <li><a href="/berita2">Berita</a></li>
 				          <li><a href="/kegiatan2">Kegiatan</a></li>
-				          <li class="menu-has-children"><a href="">Kajian Museum</a>
+				          <li class="menu-has-children"><a href="">Tulisan Museum</a>
 				            <ul>
-				              <li><a href="/kajian2">Kajian</a></li>
+				              <li><a href="/kajian2">Tulisan</a></li>
 				              <li><a href="/publikasi2">Publikasi</a></li>
 				            </ul>
 				          </li>	
@@ -126,65 +126,59 @@
 					<div class="row">
 						<div class="col-lg-3  col-md-6 col-sm-6">
 							<div class="single-footer-widget">
-								<h6>About Agency</h6>
-								<p>
-									The world has become so fast paced that people don’t want to stand by reading a page of information, they would much rather look at a presentation and understand the message. It has come to a point 
-								</p>
+								<h6>Museum Negeri NTB</h6>
+								<span ></span>
+								<p class="lnr lnr-map-marker">
+                                    Jl. Panji Tilar Negara No.6, <br>
+                                    Taman Sari,Kec. Ampenan, Kota Mataram,
+                                    Nusa Tenggara Barat. 83117 <br><br>
+                                    
+                                    </p>
+							</div>
+							<div class="single-footer-widget">
+								<h6>Sosial Media</h6>
+								<a href="" target="_blank" style="font-size:20px; font-weight:bold;"><i class="fa fa-facebook"></i></a>
+								<a href="https://www.youtube.com/@museumntb1284" target="_blank" style="font-size:20px; font-weight:bold;"><i class="fa fa-youtube mx-4"></i></a>
+								<a href="https://www.instagram.com/museumntb?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" style="font-size:20px; font-weight:bold;"><i class="fa fa-instagram"></i></a>
 							</div>
 						</div>
 						<div class="col-lg-3 col-md-6 col-sm-6">
 							<div class="single-footer-widget">
-								<h6>Navigation Links</h6>
+								<h6>Link Terkait</h6>
 								<div class="row">
 									<div class="col">
 										<ul>
-											<li><a href="#">Home</a></li>
-											<li><a href="#">Feature</a></li>
-											<li><a href="#">Services</a></li>
-											<li><a href="#">Portfolio</a></li>
+											<li><a href="https://dikbud.ntbprov.go.id//" target="_blank">>> Dinas Pendidikan dan Kebudayaan Provinsi NTB</a></li>
+											<li><a href="https://www.museumnasional.or.id/" target="_blank">>> Museum Nasional</a></li>
+											
+											<li><a href="https://ntbprov.go.id/" target="_blank">>> Pemprov NTB</a></li>
+											
 										</ul>
 									</div>
-									<div class="col">
-										<ul>
-											<li><a href="#">Team</a></li>
-											<li><a href="#">Pricing</a></li>
-											<li><a href="#">Blog</a></li>
-											<li><a href="#">Contact</a></li>
-										</ul>
-									</div>										
+
 								</div>							
 							</div>
 						</div>							
 						<div class="col-lg-3  col-md-6 col-sm-6">
 							<div class="single-footer-widget">
-								<h6>Newsletter</h6>
+								<h6>Total Pengunjung</h6>
 								<p>
-									For business professionals caught between high OEM price and mediocre print and graphic output.									
+									Bulan Ini : 									
 								</p>								
-								<div id="mc_embed_signup">
-									<form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="subscription relative">
-										<div class="input-group d-flex flex-row">
-											<input name="EMAIL" placeholder="Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address '" required="" type="email">
-											<button class="btn bb-btn"><span class="lnr lnr-location"></span></button>		
-										</div>									
-										<div class="mt-10 info"></div>
-									</form>
-								</div>
+								<p>
+									Tahun Ini : 									
+								</p>								
+								<p>
+									Keseluruhan : 									
+								</p>								
+								
 							</div>
 						</div>
 						<div class="col-lg-3  col-md-6 col-sm-6">
 							<div class="single-footer-widget mail-chimp">
-								<h6 class="mb-20">InstaFeed</h6>
-								<ul class="instafeed d-flex flex-wrap">
-									<li><img src="img/i1.jpg" alt=""></li>
-									<li><img src="img/i2.jpg" alt=""></li>
-									<li><img src="img/i3.jpg" alt=""></li>
-									<li><img src="img/i4.jpg" alt=""></li>
-									<li><img src="img/i5.jpg" alt=""></li>
-									<li><img src="img/i6.jpg" alt=""></li>
-									<li><img src="img/i7.jpg" alt=""></li>
-									<li><img src="img/i8.jpg" alt=""></li>
-								</ul>
+								<h6 class="mb-20">Total Koleksi</h6>
+								<h1 class="mb-20" style="color: white;">7707</h1>
+
 							</div>
 						</div>						
 					</div>
@@ -192,10 +186,10 @@
 
 				</div>
 			</footer>
-			<!-- End footer Area -->	
+			<!-- End footer Area -->
 
 
-			<script src="<?= base_url();?>landingPage/assets/vendor/swiper/swiper-bundle.min.js"></script>
+			<!-- <script src="<?= base_url();?>landingPage/assets/vendor/swiper/swiper-bundle.min.js"></script> -->
 
 <script>
   $('.active-recent-blog-carusel').owlCarousel({
@@ -241,6 +235,6 @@
 			<script src="<?= base_url();?>landingPage/js/mail-script.js"></script>	
 			<script src="<?= base_url();?>landingPage/js/main.js"></script>	
 
-      
+		  	<!-- <link href="<?= base_url();?>landingPage/assets2/vendor/fontawesome-free/css/all.min.css" rel="stylesheet"> -->
 		</body>
 	</html>

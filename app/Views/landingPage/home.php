@@ -16,7 +16,7 @@
 				<div class="container">
 					<div class="row fullscreen align-items-center justify-content-between">
 						<div class="col-lg-6 col-md-6 banner-left">
-							<h6 class="text-white">Selamat Datang</h6>
+							<h3 class="text-white">Selamat Datang</h3>
 							<h1 class="text-white">MUSEUM NEGERI</h1>
 							<h3 class="text-white"><span class="typed-words"></span></h3>
 							<!-- <p class="text-white">Kota u Museum Ku Kampung Ku Museum Ku</p> -->
@@ -25,8 +25,10 @@
 						<div class="col-lg-4 col-md-6 banner-right">
 							<ul class="nav nav-tabs" id="myTab" role="tablist">
 							  <li class="nav-item">
-							    <a class="nav-link active" id="flight-tab" data-toggle="tab" href="#flight" role="tab" aria-controls="flight" aria-selected="true">Jadwal</a>
-							  </li>
+							    <!-- <a class="nav-link active" id="flight-tab" data-toggle="tab" href="#flight" role="tab" aria-controls="flight" aria-selected="true">Jadwal</a> -->
+							    <a class="nav-link hover" id="flight-tab" data-toggle="tab" href="#flight" role="tab" aria-controls="flight" aria-selected="true">Jadwal</a>
+							  
+								</li>
 							  <li class="nav-item">
 							    <a class="nav-link" id="hotel-tab" data-toggle="tab" href="#hotel" role="tab" aria-controls="hotel" aria-selected="false">Tiket</a>
 							  </li>
@@ -35,7 +37,8 @@
 							  </li>
 							</ul>
 							<div class="tab-content" id="myTabContent">
-							  <div class="tab-pane fade show active" id="flight" role="tabpanel" aria-labelledby="flight-tab">
+							  <!-- <div class="tab-pane fade show active" id="flight" role="tabpanel" aria-labelledby="flight-tab"> -->
+							  <div class="tab-pane fade  " id="flight" role="tabpanel" aria-labelledby="flight-tab">
 								<form class="form-wrap">
                                     <table style="text-align: left;">
                                         <tr>
@@ -153,7 +156,7 @@
 									<img class="img-fluid" src="<?= base_url("img/berita/". $b['foto']); ?>" alt="">					
 								</div>
                                 <br>
-								<a href="<?= base_url("/lihatberita/{$b['id_berita']}"); ?>">
+								<a href="<?= base_url("/lihatberita2/{$b['id_berita']}"); ?>">
 									<h5 ><?= $b['judul']; ?></h5>
 								</a>
 								<p style="text-align: justify; color:#850000;">
@@ -795,6 +798,8 @@
 				</div>	
 			</section> -->
 			<!-- End recent-blog Area -->		
+
+			
 
 
 <?= $this->endSection(); ?>  

@@ -53,6 +53,7 @@
                     </select>
                 </div>
             </div>
+
             <div class="row mb-2">
                 <label for="foto" class="col-sm-3 col-form-label">Sampul</label>
                     <div class="col-sm-2">
@@ -95,11 +96,11 @@
     <div class="card mb-3">
          
         <div class="row ">
-            <div class="col-md-2" >
-            <img src="<?= base_url("img/kajian/". $k['sampul']); ?>" class="img-fluid rounded-start" style="width: 250px;" alt="..." >
+            <div class="col-md-3" >
+            <img src="<?= base_url("img/kajian/". $k['sampul']); ?>" class="img-fluid rounded-start" style="width: 275px;" alt="..." >
             </div>
             
-            <div class="col-md-9">
+            <div class="col-md-8">
                 <div class="card-body">
                 <a href="<?= base_url("/tulisKajian/{$k['id_kajian']}"); ?>">
                 <h5 class="card-title"><?= $k['judul']; ?></h5>
@@ -107,6 +108,12 @@
                 </a> 
                     <p class="card-text"><?= $k['kategori']; ?></p>
                     <p class="card-text"><small class="text-body-secondary">Last updated <?= $k['updated_at']; ?></small></p>
+
+                    <form action="/hapusKajian/<?= $k['id_kajian']; ?>" method="post" class="d-inline">
+                        <?= csrf_field(); ?>
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('apakah anda yakin?');">Hapus</button>
+                    </form>
                 </div>            
             </div>
         </div>

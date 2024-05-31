@@ -114,7 +114,7 @@
                                             
                                                 <a href="" class="btn btn-success btn-sm" >Edit</a>
                                                 <!-- <a href="" class="btn btn-danger" >hapus</a> -->
-                                                <form action="/hapuspetugas/" method="post" class="d-inline">
+                                                <form action="/hapusPublikasi/<?= $p['id_publikasi']; ?>" method="post" class="d-inline">
                                                     <?= csrf_field(); ?>
                                                     <input type="hidden" name="_method" value="DELETE">
                                                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('apakah anda yakin?');">Hapus</button>

@@ -105,6 +105,18 @@ class C_Admin extends BaseController
 
         // return view('admin/v_masterpetugas');
     }
+    public function deleteBerita($id_berita) 
+    {
+        // Saring masukan untuk mencegah SQL injection atau serangan lainnya
+        $id_berita = filter_var($id_berita, FILTER_SANITIZE_NUMBER_INT);
+    
+        // Panggil metode delete pada model atau apapun yang diperlukan
+        $this->M_Berita->delete($id_berita);
+        session()->setFlashdata('pesan', 'Data Berhasil Dihapus.');
+    
+        // Redirect ke halaman yang sesuai
+        return redirect()->to('/beritaAdmin');
+    }
     public function tambahKegiatan(): string
     {
         $data_kegiatan = $this->M_Kegiatan->findAll();
@@ -171,6 +183,18 @@ class C_Admin extends BaseController
 
         // return view('admin/v_masterpetugas');
     }
+    public function deleteKegiatan($id_kegiatan)
+    {
+        // Saring masukan untuk mencegah SQL injection atau serangan lainnya
+        $id_kegiatan = filter_var($id_kegiatan, FILTER_SANITIZE_NUMBER_INT);
+    
+        // Panggil metode delete pada model atau apapun yang diperlukan
+        $this->M_Kegiatan->delete($id_kegiatan);
+        session()->setFlashdata('pesan', 'Data Berhasil Dihapus.');
+    
+        // Redirect ke halaman yang sesuai
+        return redirect()->to('/tambahKegiatan');
+    }
     public function kajianAdmin(): string
     {
         $kajian = $this->M_Kajian->findAll();
@@ -206,6 +230,7 @@ class C_Admin extends BaseController
             // session()->setFlashdata('errors', $this->validator->listErrors());
             return redirect()->to('/kajianAdmin') ->withInput() -> with('errors', $this->validator->listErrors());
         }
+        
 
         $foto = $this->request->getFile('sampul');
     
@@ -283,14 +308,18 @@ class C_Admin extends BaseController
 
         $foto = $this->request->getFile('foto');
     
-        if ($foto->isValid() && !$foto->hasMoved()) {
-            $fotoName = $foto->getRandomName();
-            $foto->move('img/kajian', $fotoName);
+        $removeFoto = $this->request->getVar('removeFoto');
+
+        // Handle the photo removal or upload
+        if ($removeFoto) {
+            $fotoName = null; // Set to null if the photo is to be removed
         } else {
-            // Handle file upload error
-            return redirect()->to(base_url('/kajianAdmin'))
-                ->withInput()
-                ->with('errors', $foto->getErrorString());
+            if ($foto && $foto->isValid() && !$foto->hasMoved()) {
+                $fotoName = $foto->getRandomName();
+                $foto->move('img/kajian', $fotoName);
+            } else {
+                $fotoName = $this->request->getVar('existingFoto'); // Use the existing photo name if no new photo is uploaded
+            }
         }
 
         //tambahh data
@@ -307,6 +336,18 @@ class C_Admin extends BaseController
         session()->setFlashdata('pesan', 'Data Berhasil Ditambahkan.');
 
        return redirect()->to('/tulisKajian/' . $id_kajian);
+    }
+    public function deleteKajian($id_kajian)
+    {
+        // Saring masukan untuk mencegah SQL injection atau serangan lainnya
+        $id_kajian = filter_var($id_kajian, FILTER_SANITIZE_NUMBER_INT);
+    
+        // Panggil metode delete pada model atau apapun yang diperlukan
+        $this->M_Kajian->delete($id_kajian);
+        session()->setFlashdata('pesan', 'Data Berhasil Dihapus.');
+    
+        // Redirect ke halaman yang sesuai
+        return redirect()->to('/kajianAdmin');
     }
 
     public function tambahPublikasi(): string
@@ -373,6 +414,18 @@ class C_Admin extends BaseController
         return redirect()-> to('/tambahPublikasi');
 
         // return view('admin/v_masterpetugas');
+    }
+    public function deletePublikasi($id_publikasi)
+    {
+        // Saring masukan untuk mencegah SQL injection atau serangan lainnya
+        $id_publikasi = filter_var($id_publikasi, FILTER_SANITIZE_NUMBER_INT);
+    
+        // Panggil metode delete pada model atau apapun yang diperlukan
+        $this->M_Publikasi->delete($id_publikasi);
+        session()->setFlashdata('pesan', 'Data Berhasil Dihapus.');
+    
+        // Redirect ke halaman yang sesuai
+        return redirect()->to('/tambahPublikasi');
     }
     public function koleksiAdmin(): string
     {
@@ -442,6 +495,18 @@ class C_Admin extends BaseController
 
         // return view('admin/v_masterpetugas');
     }
+    public function deleteKoleksi($id_koleksi)
+    {
+        // Saring masukan untuk mencegah SQL injection atau serangan lainnya
+        $id_koleksi = filter_var($id_koleksi, FILTER_SANITIZE_NUMBER_INT);
+    
+        // Panggil metode delete pada model atau apapun yang diperlukan
+        $this->M_KoleksiLandingPage->delete($id_koleksi);
+        session()->setFlashdata('pesan', 'Data Berhasil Dihapus.');
+    
+        // Redirect ke halaman yang sesuai
+        return redirect()->to('/koleksiAdmin');
+    }
     public function galleryAdmin(): string
     {
         $gallery = $this->M_Gallery->findAll();
@@ -506,6 +571,18 @@ class C_Admin extends BaseController
         return redirect()-> to('/galleryAdmin');
 
         // return view('admin/v_masterpetugas');
+    }
+    public function deleteGallery($id_gallery)
+    {
+        // Saring masukan untuk mencegah SQL injection atau serangan lainnya
+        $id_gallery = filter_var($id_gallery, FILTER_SANITIZE_NUMBER_INT);
+    
+        // Panggil metode delete pada model atau apapun yang diperlukan
+        $this->M_Gallery->delete($id_gallery);
+        session()->setFlashdata('pesan', 'Data Berhasil Dihapus.');
+    
+        // Redirect ke halaman yang sesuai
+        return redirect()->to('/galleryAdmin');
     }
    
     

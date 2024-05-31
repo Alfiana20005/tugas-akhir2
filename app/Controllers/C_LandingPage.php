@@ -304,8 +304,11 @@ class C_LandingPage extends BaseController
     }
     public function berita2(): string
     {
-        $data_berita = $this->M_Berita->findAll();
+        $data_berita = $this->M_Berita->getBeritaBaru();
         // $berita = $this->M_Berita->getBerita($id_berita);
+        foreach ($data_berita as &$berita) {
+            $berita['isi_pendek'] = $this->getExcerpt($berita['isi'], 20); // 30 adalah jumlah kata yang ingin ditampilkan
+        }
 
 
 
@@ -366,12 +369,52 @@ class C_LandingPage extends BaseController
 
     public function kajian2(): string
     {
-        return view('landingPage/kajian2');
+        $kajian = $this->M_Kajian->findAll();
+        $kajianTerbaru = $this->M_Kajian->getKajianTerbaru(5);
+
+
+
+
+
+        $data =[
+            'title' => 'Daftar Kegiatan',
+            'kajian' => $kajian,
+            'kajianTerbaru' => $kajianTerbaru
+        ];
+
+        return view('landingPage/kajian2', $data);
     }
-   
-    public function tulisan2(): string
+    public function kajianKategori2($kategori): string
     {
-        return view('landingPage/tulisan2');
+        // $kajian = $this->M_Kajian->findAll();
+        $kajianTerbaru = $this->M_Kajian->getKajianTerbaru(5);
+        $kajianKategori = $this->M_Kajian->getDataByKategori($kategori);
+
+
+
+        $data =[
+            'title' => 'Daftar Kegiatan',
+            // 'kajian' => $kajian,
+            'kajianTerbaru' => $kajianTerbaru,
+            'kajian' => $kajianKategori
+        ];
+
+        return view('landingPage/kajian2', $data);
+    }
+    public function tulisan2($id_kajian): string
+    {
+        $kajian = $this->M_Kajian->getKajian($id_kajian);
+        $kajianTerbaru = $this->M_Kajian->getKajianTerbaru(5);
+        $IsiKajian = $this->M_IsiKajian->getDataByIdKajian($id_kajian);
+
+        // var_dump($berita);
+        $data =[
+
+            'kajian' => $kajian,
+            'kajianTerbaru' => $kajianTerbaru,
+            'isiKajian' => $IsiKajian
+        ];
+        return view('landingPage/tulisan2', $data);
     }
 
     public function tambahBerita2(): string
