@@ -25,6 +25,11 @@ class Filters extends BaseConfig
         'honeypot'      => Honeypot::class,
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
+        'csrf' => \CodeIgniter\Filters\CSRF::class,
+        'login'      => \Myth\Auth\Filters\LoginFilter::class,
+        'role'       => \Myth\Auth\Filters\RoleFilter::class,
+        'permission' => \Myth\Auth\Filters\PermissionFilter::class,
+        'filterAdmin' => \App\Filters\FilterAdmin::class,
         
     ];
 
@@ -37,12 +42,38 @@ class Filters extends BaseConfig
      */
     public array $globals = [
         'before' => [
+            // 'filterAdmin' =>[
+            //     'except' => [
+            //         '/login','c_Login/*','/halamanLogin','c_Login', 
+            //         'c_LandingPage/*',  'c_LandingPage/','/','/home', 
+            //         '/berita2','/lihatberita2','/lihatberita2/*', 
+            //         '/visimisi2','/sejarah2','/struktur2',
+            //         '/ruangPamer2', '/kontak',
+            //         '/kegiatan2', '/lihatKegiatan2', '/lihatKegiatan2/*',
+            //         '/kajian2', '/kajianKategori2/*',
+            //         '/tulisan2','/tulisan2/*',
+            //         '/koleksi_page2', '/koleksi_detail2', '/koleksi_detail2/*',
+            //         '/publikasi2',
+            //         '/perpustakaan2',                 
+            //     ]
+            // ],
             
-            // 'honeypot',
-            // 'csrf',
-            // 'invalidchars',
+            
         ],
         'after' => [
+            // 'filterAdmin' =>[
+            //     'except' => [
+            //         '/login', 'C_Login/*', '/logout', '/dashboard', '/halamanLogin', 'C_Login',
+            //         'C_LandingPage/*', 'C_LandingPage/',
+            //         '/beritaAdmin', '/tambahBerita', '/saveBerita', 'hapusberita/*', 
+            //         '/tambahKegiatan', '/saveKegiatan', 'hapusKegiatan/*', 
+            //         '/tambahPublikasi', '/savePublikasi', 'hapusPublikasi/*', 
+            //         '/koleksiAdmin', '/saveKoleksi', 'hapusKoleksiAdmin/*', 
+            //         '/galleryAdmin', '/saveGallery', 'hapusGallery/*',
+            //         '/saveKajian', '/kajianAdmin', 
+            //         '/tulisKajian', '/addSection', '/tulisKajian/*', '/saveIsiKajian', '/tulisKajian/*', 'hapusKajian/*', 
+            //      ]
+            // ],
             'toolbar',
             // 'honeypot',
             // 'secureheaders',
