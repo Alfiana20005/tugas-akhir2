@@ -337,7 +337,7 @@ class C_LandingPage extends BaseController
     }
     public function kegiatan2(): string
     { 
-        $kegiatan = $this->M_Kegiatan->findAll();
+        $kegiatan = $this->M_Kegiatan->get();
         // $berita = $this->M_Berita->getBerita($id_berita);
 
 

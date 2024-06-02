@@ -28,16 +28,16 @@
                     <?php 
                 foreach($kegiatan as $k):
                 if ($k['tampilkan'] == 'Kegiatan'): ?>		
-						<div class="col-lg-3">
+						<div class="col-lg-3 my-2">
 							<div class="single-destination relative">
 								<div class="thumb relative">
 									<div class="overlay overlay-bg"></div>
 									<img class="img-fluid" src="<?= base_url("img/kegiatan/". $k['foto']); ?>" alt="">
 								</div>
 								<div class="desc">	
-									<!-- <a href="#" class="price-btn">$150</a>			 -->
-									<h4><?= $k['judul']; ?></h4>
-									<p>Paraguay</p>			
+									
+									<a href="<?= $k['keterangan']; ?>" target="_blank"><h4><?= $k['judul']; ?></h4></a>
+									
 								</div>
 							</div>
 						</div>

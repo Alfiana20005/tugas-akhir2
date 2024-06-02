@@ -6,7 +6,7 @@ use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 
-class FilterAdmin implements FilterInterface
+class FilterKepala implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
@@ -21,7 +21,7 @@ class FilterAdmin implements FilterInterface
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
         // Do something here
-        if (session()->level=='Admin') {
+        if (session()->level=='Kepala Museum' || session()->level=='Ketua Pengkajian') {
             # code...
             return redirect()->to (base_url('/dashboard'));
         }

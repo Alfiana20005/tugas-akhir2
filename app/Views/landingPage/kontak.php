@@ -75,18 +75,18 @@
 							<form class="form-area contact-form text-right" id="myForm" action="mail.php" method="post">
 								<div class="row">	
 									<div class="col-lg-6 form-group">
-										<input name="name" placeholder="Nama" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'" class="common-input mb-20 form-control" required="" type="text">
+										<input name="name" placeholder="Nama" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nama'" class="common-input mb-20 form-control" required="" type="text">
 									
-										<input name="email" placeholder="Email" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'" class="common-input mb-20 form-control" required="" type="email">
+										<input name="email" placeholder="Email" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'" class="common-input mb-20 form-control" required="" type="email">
 
 										
 									</div>
 									<div class="col-lg-6 form-group">
-										<textarea class="common-textarea form-control" name="message" placeholder="Sebagai Sahabat Musuem, Tuliskan pesan dan Kesan Anda" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Messege'" required=""></textarea>				
+										<textarea class="common-textarea form-control" name="message" placeholder="Sebagai Sahabat Musuem, Tuliskan pesan dan Kesan Anda" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Sebagai Sahabat Musuem, Tuliskan pesan dan Kesan Anda'" required=""></textarea>				
 									</div>
 									<div class="col-lg-12">
 										<div class="alert-msg" style="text-align: left;"></div>
-										<button class="genric-btn primary" style="float: right;">Send Message</button>											
+										<button class="genric-btn primary" style="float: right;">Kirim Pesan</button>											
 									</div>
 								</div>
 							</form>	

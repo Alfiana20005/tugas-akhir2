@@ -20,6 +20,11 @@ class M_Kegiatan extends Model
     protected $skipValidation = false;
     protected $cleanValidationRules = true;
 
+    public function get()
+    {
+        return $this->orderBy('tanggal', 'DESC')
+                    ->findAll();
+    }
     public function getKegiatan($id_kegiatan)
     {
         return $this->find($id_kegiatan);

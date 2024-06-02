@@ -8,9 +8,9 @@
 			<div class="row d-flex align-items-center justify-content-center">
 				<div class="about-content col-lg-12">
 					<h1 class="text-white">
-								Kajian Museum		
+								Tulisan Museum		
 					</h1>	
-					<p class="text-white link-nav"><a href="/home">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="/kajian2"> Kajian Museum</a></p>
+					<p class="text-white link-nav"><a href="/home">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="/kajian2"> Tulisan Museum</a></p>
 				</div>	
 			</div>
 		</div>
@@ -62,7 +62,7 @@
 						<div class="col-lg-4 sidebar-widgets">
 							<div class="widget-wrap">
                                 <div class="single-sidebar-widget post-category-widget">
-									<h4 class="category-title">Kategori Kajian</h4>
+									<h4 class="category-title">Kategori Tulisan</h4>
 									<ul class="cat-list">
 										<li>
 											<a href="/kajian2" class="d-flex justify-content-between">
@@ -110,7 +110,7 @@
 								</div>
 
                                 <div class="single-sidebar-widget popular-post-widget">
-									<h4 class="popular-title">Kajian Terbaru</h4>
+									<h4 class="popular-title">Tulisan Terbaru</h4>
                                     <?php 
                                     foreach ($kajianTerbaru as $kajian): {
                                 
