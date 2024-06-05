@@ -10,6 +10,7 @@ use App\Models\M_KoleksiLandingPage;
 use App\Models\M_Gallery;
 use App\Models\M_Kajian;
 use App\Models\M_IsiKajian;
+use App\Models\M_Pesan;
 
 class C_LandingPage extends BaseController
 {
@@ -22,6 +23,8 @@ class C_LandingPage extends BaseController
     protected $M_Gallery;
     protected $M_Kajian;
     protected $M_IsiKajian;
+    protected $M_Pesan;
+
     public function __construct() {
         helper('form');
         $this -> M_Petugas = new M_Petugas();
@@ -32,6 +35,8 @@ class C_LandingPage extends BaseController
         $this -> M_Gallery = new M_Gallery();
         $this -> M_Kajian = new M_Kajian();
         $this -> M_IsiKajian = new M_IsiKajian();
+        $this -> M_Pesan = new M_Pesan();
+
     }
     public function index(): string
     {
@@ -481,9 +486,51 @@ class C_LandingPage extends BaseController
     }
     public function kontak(): string
     {
+        
 
         return view('landingPage/kontak');
     }
+    public function pesanUser()
+    {
+        $rules= [
+            'nama' => [
+                'rules' => 'required',
+                'errors' => ['required'=>'Judul harus diisi']
+            ],
+            'pesan' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required'=>'tanggal tidak boleh kosong',
+                    
+    
+                ]
+            ],
+        ];
+
+        if(!$this->validate($rules)){
+            // session()->setFlashdata('errors', $this->validator->listErrors());
+            return redirect()->to('/kontak') ->withInput() -> with('errors', $this->validator->listErrors());
+        }
+
+        //tambahh data
+        // $this->M_Petugas->save($this->request->getPost());
+        $this->M_Pesan->save([
+            // 'id_petugas' => $id_petugas,
+            'nama' => $this->request->getVar('nama'),
+            'email' => $this->request->getVar('email'),
+            'pesan' => $this->request->getVar('pesan'),
+
+            
+        ]);
+
+        //alert
+        session()->setFlashdata('pesan', 'Pesan Anda Berhasil Dikirim.');
+
+        return redirect()-> to('/kontak');
+
+        // return view('landingPage/kontak');
+    }
+
 
 
 

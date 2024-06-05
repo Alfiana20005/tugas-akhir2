@@ -8,7 +8,7 @@
 		<div class="container">				
 			<div class="row d-flex align-items-center justify-content-center">
 				<div class="about-content col-lg-12">
-					<h1 class="text-white">
+					<h1 class="text-white" style="font-size: 35px;">
 								Perpustakaan Museum (Opac)		
 					</h1>	
 					<p class="text-white link-nav"><a href="/home">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="/perpustakaan"> Perpustakaan</a></p>
@@ -29,10 +29,12 @@
 		                        <p>We all live in an age that belongs to the young at heart. Life that is becoming extremely fast, day to.</p>
 		                    </div>
 		                </div>
-		            </div>						 -->
+		            </div>	
+									 -->
+									 <h5>Halaman Ini Dalam Tahap Pengembangan</h5>
 					<div class="row">
                         <div class="active-recent-blog-carusel">
-                        <h5>Halaman Ini Dalam Tahap Pengembangan</h5>
+                        
 																												
 					</div>
 				</div>	

@@ -254,7 +254,7 @@
 												<img class="img-fluid" src="img/blog/pp1.jpg" alt="">
 											</div>
 											<div class="details">
-												<a href="<?= $b['isi'] ?>" target="_blank"><h6>- <?= $b['judul']; ?></h6></a>
+												<a href="<?= $b['isi'] ?>" target="_blank"><h6>> <?= $b['judul']; ?></h6></a>
 												<p><?= $b['tanggal']; ?></p>
 											</div>
 										</div>

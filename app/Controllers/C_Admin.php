@@ -10,6 +10,7 @@ use App\Models\M_KoleksiLandingPage;
 use App\Models\M_Gallery;
 use App\Models\M_Kajian;
 use App\Models\M_Isikajian;
+use App\Models\M_Pesan;
 
 class C_Admin extends BaseController
 {
@@ -22,6 +23,8 @@ class C_Admin extends BaseController
     protected $M_Kajian;
     protected $M_Isikajian;
     protected $M_Gallery;
+    protected $M_Pesan;
+
     public function __construct() {
         helper('form');
         $this -> M_Petugas = new M_Petugas();
@@ -32,7 +35,9 @@ class C_Admin extends BaseController
         $this -> M_Gallery = new M_Gallery();
         $this -> M_Kajian = new M_Kajian();
         $this -> M_Isikajian = new M_Isikajian();
+        $this -> M_Pesan = new M_Pesan();
     }
+    
     public function berita(): string
     {
         $data_berita = $this->M_Berita->findAll();
@@ -117,6 +122,64 @@ class C_Admin extends BaseController
         // Redirect ke halaman yang sesuai
         return redirect()->to('/beritaAdmin');
     }
+    public function updateBerita($id_berita) {
+        // Mengambil data yang akan diupdate dari request
+        $dataToUpdate = [
+            'judul' => $this->request->getVar('judul'),
+            'tanggal' => $this->request->getVar('tanggal'),
+            'type' => $this->request->getVar('type'),
+            'isi' => $this->request->getVar('isi'),
+            'foto' => $this->request->getVar('foto'),
+            
+        ];
+    
+        $foto = $this->request->getFile('foto');
+
+        // Cek apakah file foto diunggah
+        if ($foto && $foto->isValid() && !$foto->hasMoved()) {
+            // Generate nama unik untuk file foto
+            $fotoName = $foto->getRandomName();
+
+            // Pindahkan file foto ke folder yang diinginkan
+            $foto->move('img/berita', $fotoName); // Perbarui path sesuai dengan folder yang diinginkan
+
+            // Tambahkan nama file foto ke data yang akan diupdate
+            $dataToUpdate['foto'] = $fotoName;
+        }
+    
+        // Membersihkan data yang mungkin ada dari inputan form
+        $dataToUpdate = array_filter($dataToUpdate);
+    
+        // Memastikan ada data yang akan diupdate
+        if (!empty($dataToUpdate)) {
+            // Mengeksekusi perintah update
+            $this->M_Berita->update($id_berita, $dataToUpdate);
+    
+            // Ambil data petugas setelah diubah dari database
+            $newDataBerita = $this->M_Berita->getBerita($id_berita);
+    
+            // Perbarui sesi pengguna dengan data baru
+            if (session()->get('level') != 'Admin') {
+                session()->set([
+                    'judul' => $newDataBerita['judul'],
+                    'tanggal' => $newDataBerita['tanggal'],
+                    'type' => $newDataBerita['type'],
+                    'isi' => $newDataBerita['isi'],
+                    'foto' => $newDataBerita['foto'],
+                ]);
+            }
+            //alert
+            session()->setFlashdata('pesan', 'Data Berhasil diubah.');
+        } else {
+            // Jika tidak ada data yang diupdate, munculkan pesan kesalahan
+            session()->setFlashdata('error', 'Tidak ada data yang diupdate.');
+        }
+        // dd('berhasil');
+    
+        // Redirect ke halaman sebelumnya atau halaman yang sesuai
+        return redirect()->to('/beritaAdmin');
+    }
+
     public function tambahKegiatan(): string
     {
         $data_kegiatan = $this->M_Kegiatan->findAll();
@@ -195,13 +258,71 @@ class C_Admin extends BaseController
         // Redirect ke halaman yang sesuai
         return redirect()->to('/tambahKegiatan');
     }
+
+    public function updateKegiatan($id_kegiatan) {
+        // Mengambil data yang akan diupdate dari request
+        $dataToUpdate = [
+            'judul' => $this->request->getVar('judul'),
+            'tanggal' => $this->request->getVar('tanggal'),
+            'tampilkan' => $this->request->getVar('tampilkan'),
+            'keterangan' => $this->request->getVar('keterangan'),
+            'foto' => $this->request->getVar('foto'),
+            
+        ];
+    
+        $foto = $this->request->getFile('foto');
+
+        // Cek apakah file foto diunggah
+        if ($foto && $foto->isValid() && !$foto->hasMoved()) {
+            // Generate nama unik untuk file foto
+            $fotoName = $foto->getRandomName();
+
+            // Pindahkan file foto ke folder yang diinginkan
+            $foto->move('img/kegiatan', $fotoName); // Perbarui path sesuai dengan folder yang diinginkan
+
+            // Tambahkan nama file foto ke data yang akan diupdate
+            $dataToUpdate['foto'] = $fotoName;
+        }
+    
+        // Membersihkan data yang mungkin ada dari inputan form
+        $dataToUpdate = array_filter($dataToUpdate);
+    
+        // Memastikan ada data yang akan diupdate
+        if (!empty($dataToUpdate)) {
+            // Mengeksekusi perintah update
+            $this->M_Kegiatan->update($id_kegiatan, $dataToUpdate);
+    
+            // Ambil data petugas setelah diubah dari database
+            $newDataKegiatan = $this->M_Kegiatan->getKegiatan($id_kegiatan);
+    
+            // Perbarui sesi pengguna dengan data baru
+            if (session()->get('level') != 'Admin') {
+                session()->set([
+                    'judul' => $newDataKegiatan['judul'],
+                    'tanggal' => $newDataKegiatan['tanggal'],
+                    'tampilkan' => $newDataKegiatan['tampilkan'],
+                    'keterangan' => $newDataKegiatan['keterangan'],
+                    'foto' => $newDataKegiatan['foto'],
+                ]);
+            }
+            //alert
+            session()->setFlashdata('pesan', 'Data Berhasil diubah.');
+        } else {
+            // Jika tidak ada data yang diupdate, munculkan pesan kesalahan
+            session()->setFlashdata('error', 'Tidak ada data yang diupdate.');
+        }
+        // dd('berhasil');
+    
+        // Redirect ke halaman sebelumnya atau halaman yang sesuai
+        return redirect()->to('/tambahKegiatan');
+    }
     public function kajianAdmin(): string
     {
         $kajian = $this->M_Kajian->findAll();
 
 
         $data =[
-            'title' => 'Daftar Kegiatan',
+            'title' => 'Daftar Kajian',
             'kajian' => $kajian
         ];
 
@@ -427,6 +548,61 @@ class C_Admin extends BaseController
         // Redirect ke halaman yang sesuai
         return redirect()->to('/tambahPublikasi');
     }
+    public function updatePublikasi($id_publikasi) {
+        // Mengambil data yang akan diupdate dari request
+        $dataToUpdate = [
+            'judul' => $this->request->getVar('judul'),
+            'tanggal' => $this->request->getVar('tanggal'),
+            'link' => $this->request->getVar('link'),
+            'foto' => $this->request->getVar('foto'),
+            
+        ];
+    
+        $foto = $this->request->getFile('foto');
+
+        // Cek apakah file foto diunggah
+        if ($foto && $foto->isValid() && !$foto->hasMoved()) {
+            // Generate nama unik untuk file foto
+            $fotoName = $foto->getRandomName();
+
+            // Pindahkan file foto ke folder yang diinginkan
+            $foto->move('img/publikasi', $fotoName); // Perbarui path sesuai dengan folder yang diinginkan
+
+            // Tambahkan nama file foto ke data yang akan diupdate
+            $dataToUpdate['foto'] = $fotoName;
+        }
+    
+        // Membersihkan data yang mungkin ada dari inputan form
+        $dataToUpdate = array_filter($dataToUpdate);
+    
+        // Memastikan ada data yang akan diupdate
+        if (!empty($dataToUpdate)) {
+            // Mengeksekusi perintah update
+            $this->M_Publikasi->update($id_publikasi, $dataToUpdate);
+    
+            // Ambil data petugas setelah diubah dari database
+            $newDataPublikasi = $this->M_Publikasi->getPublikasi($id_publikasi);
+    
+            // Perbarui sesi pengguna dengan data baru
+            if (session()->get('level') != 'Admin') {
+                session()->set([
+                    'judul' => $newDataPublikasi['judul'],
+                    'tanggal' => $newDataPublikasi['tanggal'],
+                    'link' => $newDataPublikasi['link'],
+                    'foto' => $newDataPublikasi['foto'],
+                ]);
+            }
+            //alert
+            session()->setFlashdata('pesan', 'Data Berhasil diubah.');
+        } else {
+            // Jika tidak ada data yang diupdate, munculkan pesan kesalahan
+            session()->setFlashdata('error', 'Tidak ada data yang diupdate.');
+        }
+        // dd('berhasil');
+    
+        // Redirect ke halaman sebelumnya atau halaman yang sesuai
+        return redirect()->to('/tambahPublikasi');
+    }
     public function koleksiAdmin(): string
     {
         $koleksi = $this->M_KoleksiLandingPage->findAll();
@@ -507,6 +683,68 @@ class C_Admin extends BaseController
         // Redirect ke halaman yang sesuai
         return redirect()->to('/koleksiAdmin');
     }
+    public function updateKoleksiAdmin($id_koleksi)
+    {
+        // Mengambil data yang akan diupdate dari request
+        $dataToUpdate = [
+            'nama' => $this->request->getVar('nama'),
+            'no' => $this->request->getVar('no'),
+            'kategori' => $this->request->getVar('kategori'),
+            'ukuran' => $this->request->getVar('ukuran'),
+            'deskripsi' => $this->request->getVar('deskripsi'),
+            'foto' => $this->request->getVar('foto'),
+            
+        ];
+    
+        $foto = $this->request->getFile('foto');
+
+        // Cek apakah file foto diunggah
+        if ($foto && $foto->isValid() && !$foto->hasMoved()) {
+            // Generate nama unik untuk file foto
+            $fotoName = $foto->getRandomName();
+
+            // Pindahkan file foto ke folder yang diinginkan
+            $foto->move('img/koleksiAdmin', $fotoName); // Perbarui path sesuai dengan folder yang diinginkan
+
+            // Tambahkan nama file foto ke data yang akan diupdate
+            $dataToUpdate['foto'] = $fotoName;
+        }
+    
+        // Membersihkan data yang mungkin ada dari inputan form
+        $dataToUpdate = array_filter($dataToUpdate);
+    
+        // Memastikan ada data yang akan diupdate
+        if (!empty($dataToUpdate)) {
+            // Mengeksekusi perintah update
+            $this->M_KoleksiLandingPage->update($id_koleksi, $dataToUpdate);
+    
+            // Ambil data petugas setelah diubah dari database
+            $newDataKoleksi = $this->M_KoleksiLandingPage->getKOleksiById($id_koleksi);
+    
+            // Perbarui sesi pengguna dengan data baru
+            if (session()->get('level') != 'Admin') {
+                session()->set([
+                    'nama' => $newDataKoleksi['nama'],
+                    'no' => $newDataKoleksi['no'],
+                    'ukuran' => $newDataKoleksi['ukuran'],
+                    'kategori' => $newDataKoleksi['kategori'],
+                    'deskripsi' => $newDataKoleksi['deskripsi'],
+                    'foto' => $newDataKoleksi['foto'],
+                ]);
+            }
+            //alert
+            session()->setFlashdata('pesan', 'Data Berhasil diubah.');
+        } else {
+            // Jika tidak ada data yang diupdate, munculkan pesan kesalahan
+            session()->setFlashdata('error', 'Tidak ada data yang diupdate.');
+        }
+        // dd('berhasil');
+    
+        // Redirect ke halaman sebelumnya atau halaman yang sesuai
+        return redirect()->to('/koleksiAdmin');
+    }
+
+
     public function galleryAdmin(): string
     {
         $gallery = $this->M_Gallery->findAll();
@@ -583,6 +821,31 @@ class C_Admin extends BaseController
     
         // Redirect ke halaman yang sesuai
         return redirect()->to('/galleryAdmin');
+    }
+    public function pesanAdmin(): string
+    {
+        $data_pesan = $this->M_Pesan->findAll();
+
+
+        $data =[
+            'title' => 'Daftar Pesan',
+            'pesan' => $data_pesan
+        ];
+
+        
+        return view('CompanyProfile/pesanAdmin', $data);
+    }
+    public function deletePesan($id_pesan)
+    {
+        // Saring masukan untuk mencegah SQL injection atau serangan lainnya
+        $id_pesan = filter_var($id_pesan, FILTER_SANITIZE_NUMBER_INT);
+    
+        // Panggil metode delete pada model atau apapun yang diperlukan
+        $this->M_Pesan->delete($id_pesan);
+        session()->setFlashdata('pesan', 'Data Berhasil Dihapus.');
+    
+        // Redirect ke halaman yang sesuai
+        return redirect()->to('/pesanAdmin');
     }
    
     

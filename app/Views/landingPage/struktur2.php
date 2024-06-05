@@ -1,6 +1,3 @@
-
-
-
 <?= $this->extend('landingPage/template baru'); ?>
 
 <?= $this-> section('content'); ?>
@@ -23,8 +20,8 @@
     <section id="team" class="team section-bg">
         <div class="container">
             <div class="row d-flex align-items-center justify-content-center pt-30">
-            <img src="img/organisasi.png" alt=""  class="img-responsive " style=" width: 700px; text-align: center; " >
-            
+              
+              <img src=" <?= base_url('img/organisasi.png'); ?> " id="struktur2" alt=""  class="img-responsive " style="  text-align: center; " >
 
             </div>
           
@@ -37,7 +34,7 @@
                     <a href=""><p>Lihat Semua Tim</p></a>
                   </div>
                 </div>
-              </div>	
+            </div>	
 
             <div class="row">
 

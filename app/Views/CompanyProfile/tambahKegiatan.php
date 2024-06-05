@@ -17,81 +17,82 @@
     <?php endif; ?>
 
     <div class="modal fade" id="tambahKegiatan" tabindex="-1" aria-labelledby="tambahKegiatan" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h4 class="modal-title fs-5" id="tambahKegiatan">Tambahkan Kegiatan</h4>
-            <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
-        </div>
-        <div class="modal-body">
-            <form action="/saveKegiatan" method="post" enctype="multipart/form-data" id="form">
-            <div class="row mb-2">
-                <label for="email" class="col-sm-3 col-form-label">Judul</label>
-                <div class="col-sm-9">
-                    <input type="text" class="form-control" id="recipient-name" name="judul">
-                </div>
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title fs-5" id="tambahKegiatan">Tambahkan Kegiatan</h4>
+                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
             </div>
-            <div class="row mb-2">
-                <label for="email" class="col-sm-3 col-form-label">Tanggal</label>
-                <div class="col-sm-9">
-                    <input type="date" class="form-control" id="recipient-name" name="tanggal">
-                </div>
-            </div>
-            
-            <div class="row mb-2">
-                <label for="" class="col-sm-3 col-form-label">Tampilkan di</label>
-                <div class="col-sm-9">
-                    <select class="form-select form-control" type="text" name="tampilkan"  value="<?= old('tampilkan'); ?>">
-                                <!-- harus sesuai dengan urutan enum pada database -->
-                        <option selected>Pilih </option>
-                        <option <?= old("tampilkan") == 'Home'? 'selected' : 'Home' ?> value="Home">Home</option>
-                        <option <?= old("tampilkan") == 'Kegiatan'? 'selected' : 'Kegiatan' ?> value="Kegiatan">Kegiatan</option>
-                        
-                    </select>
-                </div>
-            </div>
-            <div class="row mb-2">
-                    <label for="isi" class="col-sm-3 col-form-label">keterangan</label>
+            <div class="modal-body">
+                <form action="/saveKegiatan" method="post" enctype="multipart/form-data" id="form">
+                <div class="row mb-2">
+                    <label for="email" class="col-sm-3 col-form-label">Judul</label>
                     <div class="col-sm-9">
-                        <textarea class="form-control" name="keterangan" id="" value="<?= old("keterangan"); ?>"></textarea>
-                        
+                        <input type="text" class="form-control" id="recipient-name" name="judul">
                     </div>
                 </div>
-            <div class="row mb-2">
-                <label for="foto" class="col-sm-3 col-form-label">Sampul</label>
-                    <div class="col-sm-2">
-                        <img src="/img/default.jpg" alt="" class="img-thumbnail img-preview">
+                <div class="row mb-2">
+                    <label for="email" class="col-sm-3 col-form-label">Tanggal</label>
+                    <div class="col-sm-9">
+                        <input type="date" class="form-control" id="recipient-name" name="tanggal">
                     </div>
-                    <div class="col-sm-7">
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input form-control" id="gambar" name="foto" onchange="previewImg('gambar')">
-                            <label class="custom-file-label" for="customFile">Masukkan Foto Anda</label>
-                            <?php if (!empty($dataKegiatan['foto'])): ?>
-                                <div class="my-2">
-                                    <p>Foto Saat Ini:</p>
-                                    <img src="<?= base_url('img/kegiatan/' . $dataKegiatan['foto']); ?>" alt="Foto Petugas" width="100">
-                                </div>
-                            <?php endif; ?>
+                </div>
+                
+                <div class="row mb-2">
+                    <label for="" class="col-sm-3 col-form-label">Tampilkan di</label>
+                    <div class="col-sm-9">
+                        <select class="form-select form-control" type="text" name="tampilkan"  value="<?= old('tampilkan'); ?>">
+                                    <!-- harus sesuai dengan urutan enum pada database -->
+                            <option selected>Pilih </option>
+                            <option <?= old("tampilkan") == 'Home'? 'selected' : 'Home' ?> value="Home">Home</option>
+                            <option <?= old("tampilkan") == 'Kegiatan'? 'selected' : 'Kegiatan' ?> value="Kegiatan">Kegiatan</option>
+                            
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                        <label for="isi" class="col-sm-3 col-form-label">keterangan</label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control" name="keterangan" id="" value="<?= old("keterangan"); ?>"></textarea>
+                            
                         </div>
                     </div>
+                <div class="row mb-2">
+                    <label for="foto" class="col-sm-3 col-form-label">Sampul</label>
+                        <div class="col-sm-2">
+                            <img src="/img/default.jpg" alt="" class="img-thumbnail img-preview">
+                        </div>
+                        <div class="col-sm-7">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input form-control" id="gambar" name="foto" onchange="previewImg('gambar')">
+                                <label class="custom-file-label" for="customFile">Masukkan Foto Anda</label>
+                                <?php if (!empty($dataKegiatan['foto'])): ?>
+                                    <div class="my-2">
+                                        <p>Foto Saat Ini:</p>
+                                        <img src="<?= base_url('img/kegiatan/' . $dataKegiatan['foto']); ?>" alt="Foto Petugas" width="100">
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                </div>
+                
+
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Tambahkan</button>
+            </div>
+            </div>
+                </form>
             </div>
             
+        </div>
+    </div>
 
-            <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Tambahkan</button>
-        </div>
-        </div>
-            </form>
-        </div>
-        
-    </div>
-    </div>
     
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Data Kajian</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Data Kegiatan</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -130,7 +131,7 @@
                                             
                                             <td style="text-align: center;">
                                             
-                                                <a href="" class="btn btn-success btn-sm" >Edit</a>
+                                                <a href="" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editKegiatan<?= $k['id_kegiatan']; ?>" data-bs-whatever="@getbootstrap">Edit</a>
                                                 <!-- <a href="" class="btn btn-danger" >hapus</a> -->
                                                 <form action="/hapusKegiatan/<?= $k['id_kegiatan']; ?>" method="post" class="d-inline">
                                                     <?= csrf_field(); ?>
@@ -147,6 +148,82 @@
                             </div>
                         </div>
     </div>
+    <?php 
+        $no=1;
+        foreach($dataKegiatan as $k): ?> 
+    <div class="modal fade" id="editKegiatan<?= $k['id_kegiatan']; ?>" tabindex="-1" aria-labelledby="editKegiatan" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title fs-5" id="editKegiatan">Edit Berita</h4> 
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                </div>
+                <div class="modal-body">
+                    <form action="<?= base_url()?>updateKegiatan/<?= $k['id_kegiatan']; ?>" method="post" enctype="multipart/form-data" id="form">
+                    <div class="row mb-2">
+                        <label for="email" class="col-sm-3 col-form-label">Judul</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="recipient-name" name="judul" value="<?= $k['judul']; ?>">
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <label for="email" class="col-sm-3 col-form-label">Tanggal</label>
+                        <div class="col-sm-9">
+                            <input type="date" class="form-control" id="recipient-name" name="tanggal" value="<?= $k['tanggal']; ?>">
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-2">
+                        <label for="" class="col-sm-3 col-form-label">Tampilkan di</label>
+                        <div class="col-sm-9">
+                            <select class="form-select form-control" type="text" name="tampilkan"  value="<?= $k['tampilkan']; ?>">
+                                        <!-- harus sesuai dengan urutan enum pada database -->
+                                <option selected>Pilih </option>
+                                <option <?= $k['tampilkan'] == 'Home'? 'selected' : 'Home' ?> value="Home">Home</option>
+                                <option <?= $k['tampilkan'] == 'Kegiatan'? 'selected' : 'Kegiatan' ?> value="Kegiatan">Kegiatan</option>
+                                
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                            <label for="isi" class="col-sm-3 col-form-label">Link</label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" name="keterangan" id="keterangan"><?= $k['keterangan']; ?></textarea>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <label class="col-sm-3 col-form-label">Gambar</label>
+                            <div class="col-sm-2">
+                                <img src="/img/default.jpg" alt="" class="img-thumbnail img-preview" id="img-preview-<?= $k['id_kegiatan']; ?>">
+                            </div>
+                            <div class="col-sm-7">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input form-control" id="gambar<?= $k['id_kegiatan']; ?>" name="foto" onchange="previewImg('gambar<?= $k['id_kegiatan']; ?>')">
+                                    <label class="custom-file-label" for="customFile">Masukkan Gambar </label>
+                                    
+                                </div>
+                                <?php if (!empty($k['foto'])): ?>
+                                        <div class="my-4">
+                                            <p>Foto Saat Ini:</p>
+                                            <img src="<?= base_url('img/kegiatan/' . $k['foto']); ?>" alt="Foto Kegiatan" width="100">
+                                        </div>
+                                    <?php endif; ?>
+                            </div>
+                            
+                        </div>
+
+                    <div class="modal-footer my-4">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                </div>
+            </div>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+
+    <?php endforeach; ?>
 </div>
 
 <script async src="https://cdn.jsdelivr.net/npm/es-module-shims@1/dist/es-module-shims.min.js" crossorigin="anonymous"></script>

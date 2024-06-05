@@ -67,7 +67,7 @@
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-primary">Simpan</button>
         </div>
-        </div>
+        </div>W
             </form>
         </div>
         
@@ -77,7 +77,7 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Data Kegiatan</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Data Publikasi</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -112,7 +112,7 @@
                                             
                                             <td style="text-align: center;">
                                             
-                                                <a href="" class="btn btn-success btn-sm" >Edit</a>
+                                                <a href="" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editPublikasi<?= $p['id_publikasi']; ?>" data-bs-whatever="@getbootstrap">Edit</a>
                                                 <!-- <a href="" class="btn btn-danger" >hapus</a> -->
                                                 <form action="/hapusPublikasi/<?= $p['id_publikasi']; ?>" method="post" class="d-inline">
                                                     <?= csrf_field(); ?>
@@ -129,6 +129,73 @@
                             </div>
                         </div>
     </div>
+
+    <?php 
+        $no=1;
+        foreach($data_publikasi as $p): ?> 
+    <div class="modal fade" id="editPublikasi<?= $p['id_publikasi']; ?>" tabindex="-1" aria-labelledby="editPublikasi" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title fs-5" id="editPublikasi">Edit Berita</h4>
+                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+            </div>
+            <div class="modal-body">
+                <form action="<?= base_url()?>updatePublikasi/<?= $p['id_publikasi']; ?>" method="post" enctype="multipart/form-data" id="form">
+                <div class="row mb-2">
+                    <label for="email" class="col-sm-3 col-form-label">Judul</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="recipient-name" name="judul" value="<?= $p['judul']; ?>">
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <label for="email" class="col-sm-3 col-form-label">Tanggal</label>
+                    <div class="col-sm-9">
+                        <input type="date" class="form-control" id="recipient-name" name="tanggal" value="<?= $p['tanggal']; ?>">
+                    </div>
+                </div>
+                
+                
+                <div class="row mb-2">
+                        <label for="isi" class="col-sm-3 col-form-label">Link</label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control" name="link" id="link"><?= $p['link']; ?></textarea>
+                        </div>
+                    </div>
+                <div class="row mb-2">
+                    <label for="foto" class="col-sm-3 col-form-label">Sampul</label>
+                        <div class="col-sm-2">
+                            <img src="/img/default.jpg" alt="" class="img-thumbnail img-preview" id="img-preview-<?= $p['id_publikasi']; ?>">
+                        </div>
+                        <div class="col-sm-7">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input form-control" id="gambar<?= $p['id_publikasi']; ?>" name="foto" onchange="previewImg('gambar<?= $p['id_publikasi']; ?>')">
+                                <label class="custom-file-label" for="customFile">Masukkan Sampul </label>
+                                
+                            </div>
+                            <?php if (!empty($p['foto'])): ?>
+                                    <div class="my-4">
+                                        <p>Foto Saat Ini:</p>
+                                        <img src="<?= base_url('img/publikasi/' . $p['foto']); ?>" alt="Foto Petugas" width="100">
+                                    </div>
+                                <?php endif; ?>
+                        </div>
+                        
+                </div>
+                
+
+                <div class="modal-footer my-4">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+            </div>
+            </div>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+
+    <?php endforeach; ?>
 </div>
 
 <script async src="https://cdn.jsdelivr.net/npm/es-module-shims@1/dist/es-module-shims.min.js" crossorigin="anonymous"></script>

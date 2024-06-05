@@ -25,7 +25,7 @@
 				<div class="container">
 					<div class="row">
 						<!-- <div class="map-wrap" style="width:100%; height: 445px;" id="map"></div> -->
-						<a href="https://maps.app.goo.gl/SWsce1nC6HhRKZ5v8" target="_blank"><img src="/img/map.png" alt="" class="img-map align-items-center justify-content-center pb-30" style="width:100%; height: 445px;"></a>
+						<a href="https://maps.app.goo.gl/SWsce1nC6HhRKZ5v8" target="_blank"><img src="/img/map.png" id="maps" alt="" class="img-map align-items-center justify-content-center pb-30" style=""></a>
 						<div class="col-lg-4 d-flex flex-column address-wrap">
 							<div class="single-contact-address d-flex flex-row">
 								<div class="icon">
@@ -72,21 +72,26 @@
 							</div>														
 						</div>
 						<div class="col-lg-8">
-							<form class="form-area contact-form text-right" id="myForm" action="mail.php" method="post">
+							<?php  if(session()->getFlashdata('pesan')): ?>
+								<div class="alert alert-success" role="alert">
+									<?= session()->getFlashdata('pesan'); ?>
+								</div>
+							<?php endif; ?>
+							<form class="form-area contact-form text-right" action="<?= base_url();?>pesanUser"  method="post">
+								<?= csrf_field() ?>
 								<div class="row">	
 									<div class="col-lg-6 form-group">
-										<input name="name" placeholder="Nama" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nama'" class="common-input mb-20 form-control" required="" type="text">
+										<input name="nama" placeholder="Nama"  class="common-input mb-20 form-control" type="text">
 									
-										<input name="email" placeholder="Email" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'" class="common-input mb-20 form-control" required="" type="email">
-
+										<input name="email" placeholder="Email" class="common-input mb-20 form-control"  type="email">
 										
 									</div>
 									<div class="col-lg-6 form-group">
-										<textarea class="common-textarea form-control" name="message" placeholder="Sebagai Sahabat Musuem, Tuliskan pesan dan Kesan Anda" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Sebagai Sahabat Musuem, Tuliskan pesan dan Kesan Anda'" required=""></textarea>				
+										<textarea class="common-textarea form-control" name="pesan" placeholder="Sebagai Sahabat Musuem, Tuliskan pesan dan Kesan Anda" ></textarea>				
 									</div>
 									<div class="col-lg-12">
-										<div class="alert-msg" style="text-align: left;"></div>
-										<button class="genric-btn primary" style="float: right;">Kirim Pesan</button>											
+										
+										<button type="submit" class="btn btn-primary">Kirim</button>										
 									</div>
 								</div>
 							</form>	

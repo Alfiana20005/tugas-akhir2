@@ -20,7 +20,7 @@
 							<h1 class="text-white">MUSEUM NEGERI</h1>
 							<h3 class="text-white"><span class="typed-words"></span></h3>
 							<!-- <p class="text-white">Kota u Museum Ku Kampung Ku Museum Ku</p> -->
-							<a href="#" class="primary-btn text-uppercase mt-4">Kota Ku Museum Ku Kampung Ku Museum Ku</a>
+							<a href="#" class="primary-btn text-uppercase mt-4">Kotaku Museumku Kampungku Museumku</a>
 						</div>
 						<div class="col-lg-4 col-md-6 banner-right">
 							<ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -59,7 +59,7 @@
                                         <tr>
                                         <td>Sabtu - Minggu   </td>
                                         <td >: </td>
-                                        <td> 09.00-17.00 WITA</td>
+                                        <td> 09.00-14.00 WITA</td>
                                         </tr>
 
                                     </table>
@@ -89,7 +89,7 @@
 
                                     </table>
                                     <p class="mt-4" style="color: #850000;">*Bagi pengunjung rombongan mohon hubungiterlebih dahulu nara
-                                    hubung atau kirim surat melalui email ke <span>museumntb@gmail.com</span>  
+                                    hubung atau kirim surat melalui email ke <span>museumntb@gmail.com / museumnegeri@ntbprov.go.id</span>  
                                     </p>     								
 								</form>							  	
 							  </div>

@@ -30,6 +30,11 @@
             <span>Master Petugas</span></a>
     </li>
     <li class="nav-item">
+        <a class="nav-link" href="/pesanAdmin">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Pesan</span></a>
+    </li>
+    <li class="nav-item">
         <a class="nav-link" href="/beritaAdmin">
             <i class="fas fa-fw fa-users"></i>
             <span>Berita</span></a>

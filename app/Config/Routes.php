@@ -41,15 +41,20 @@ $routes->get('/beritaAdmin', 'C_Admin::berita');
 $routes->get('/tambahBerita', 'C_Admin::tambahBerita');
 $routes->post('/saveBerita', 'C_Admin::save');
 $routes->delete('hapusberita/(:segment)', 'C_Admin::deleteBerita/$1');
+$routes->post('updateBerita/(:segment)', 'C_Admin::updateBerita/$1');
 $routes->get('/tambahKegiatan', 'C_Admin::tambahKegiatan');
 $routes->post('/saveKegiatan', 'C_Admin::saveKegiatan');
 $routes->delete('hapusKegiatan/(:segment)', 'C_Admin::deleteKegiatan/$1');
+$routes->post('updateKegiatan/(:segment)', 'C_Admin::updateKegiatan/$1');
 $routes->get('/tambahPublikasi', 'C_Admin::tambahPublikasi');
 $routes->post('/savePublikasi', 'C_Admin::savePublikasi');
 $routes->delete('hapusPublikasi/(:segment)', 'C_Admin::deletePublikasi/$1');
+$routes->post('updatePublikasi/(:segment)', 'C_Admin::updatePublikasi/$1');
 $routes->get('/koleksiAdmin', 'C_Admin::koleksiAdmin');
 $routes->post('/saveKoleksi', 'C_Admin::saveKoleksi');
 $routes->delete('hapusKoleksiAdmin/(:segment)', 'C_Admin::deleteKoleksi/$1');
+$routes->post('updateKoleksiAdmin/(:segment)', 'C_Admin::updateKoleksiAdmin/$1');
+
 $routes->get('/galleryAdmin', 'C_Admin::galleryAdmin');
 $routes->post('/saveGallery', 'C_Admin::saveGallery');
 $routes->delete('hapusGallery/(:segment)', 'C_Admin::deleteGallery/$1');
@@ -61,6 +66,8 @@ $routes->get('/tulisKajian/(:segment)', 'C_Admin::tulisKajian/$1');
 $routes->post('/saveIsiKajian', 'C_Admin::saveIsiKajian');
 $routes->get('/tulisKajian/(:num)', 'C_Admin::tulisKajian/$1');
 $routes->delete('hapusKajian/(:segment)', 'C_Admin::deleteKajian/$1');
+$routes->get('/pesanAdmin', 'C_Admin::pesanAdmin');
+$routes->delete('hapuspesan/(:segment)', 'C_Admin::deletePesan/$1');
 
 
 
@@ -162,3 +169,5 @@ $routes->get('/koleksi_detail2/(:segment)', 'C_LandingPage::koleksi_detail2/$1')
 $routes->get('/publikasi2', 'C_LandingPage::publikasi2');
 $routes->get('/perpustakaan2', 'C_LandingPage::perpustakaan2');
 $routes->get('/kontak', 'C_LandingPage::kontak');
+$routes->post('/pesanUser', 'C_LandingPage::pesanUser');
+$routes->get('/pesanUser', 'C_LandingPage::pesanUser');

@@ -83,32 +83,32 @@
 				        <a href="/home"><img src="<?= base_url();?>img/terbaru-removebg-preview.png" alt="" style="width: 130px;" title="" /></a>
 				      </div>
 				      <nav id="nav-menu-container">
-				        <ul class="nav-menu">
-				          <li><a href="/home">Home</a></li>
-                  <li class="menu-has-children"><a href="">Profil</a>
+				        <ul class="nav-menu" >
+				          <li><a href="/home"><strong>Home</strong></a></li>
+                  <li class="menu-has-children"><a href=""><strong>Profil</strong></a>
 				            <ul>
 				              <li><a href="/sejarah2">Sejarah</a></li>
 				              <li><a href="/visimisi2">Visi Misi</a></li>
 				              <li><a href="/struktur2">Struktur Organisasi</a></li>
 				            </ul>
 				          </li>	
-                  <li class="menu-has-children"><a href="">Layanan</a>
+                  <li class="menu-has-children"><a href=""><strong>Layanan</strong></a>
 				            <ul>
 				              <li><a href="/kontak">Kontak</a></li>
 				              <li><a href="/ruangPamer2">Ruang Pamer</a></li>
 				            </ul>
 				          </li>	
-				          <li><a href="/berita2">Berita</a></li>
-				          <li><a href="/kegiatan2">Kegiatan</a></li>
-				          <li class="menu-has-children"><a href="">Tulisan Museum</a>
+				          <li><a href="/berita2"><strong>Berita</strong></a></li>
+				          <li><a href="/kegiatan2"><strong>Kegiatan</strong></a></li>
+				          <li class="menu-has-children"><a href=""><strong>Tulisan Museum</strong></a>
 				            <ul>
 				              <li><a href="/kajian2">Tulisan</a></li>
 				              <li><a href="/publikasi2">Publikasi</a></li>
 				            </ul>
 				          </li>	
-                  <li><a href="/koleksi_page2">Koleksi</a></li>
-				          <li><a href="/perpustakaan2">Perpustakaan</a></li>		          					          		          
-				          <li><a href="/halamanLogin">LOGIN</a></li>
+                  <li><a href="/koleksi_page2"><strong>Koleksi</strong></a></li>
+				          <li><a href="/perpustakaan2"><strong>Perpustakaan</strong></a></li>		          					          		          
+				          <li><a href="/halamanLogin"><strong>LOGIN</strong></a></li>
 				        </ul>
 				      </nav><!-- #nav-menu-container -->					      		  
 					</div>
