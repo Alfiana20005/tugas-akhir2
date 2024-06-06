@@ -3,6 +3,11 @@
 <?= $this-> section('content'); ?>
 
 <div class="container-fluid">
+<?php  if(session()->getFlashdata('pesan')): ?>
+            <div class="alert alert-success" role="alert">
+                <?= session()->getFlashdata('pesan'); ?>
+            </div>
+        <?php endif; ?>
     <!-- Page Heading -->
     <form action="<?= base_url('/rekapitulasi');?>" method="post">
         <div class="row">
@@ -53,6 +58,7 @@
                                             <th>Jumlah</th>
                                             <th>Tanggal Kunjungan</th>
                                             <th>Dicatat Oleh</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -78,6 +84,15 @@
                                                 echo isset($petugasName['nama']) ? $petugasName['nama'] : 'Nama Petugas Tidak Tersedia';
                                             ?>
                                             </td>
+                                            <td>
+                                                <form action="/deleteData/<?= $pengunjung['id_pengunjung']; ?>" method="post" class="d-inline">
+                                                    <?= csrf_field(); ?>
+                                                    <input type="hidden" name="_method" value="DELETE">
+                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('apakah anda yakin?');">
+                                                    Hapus
+                                                    </button>
+                                    
+                                                </form></td>
                                         </tr>
 
                                     <?php endforeach; ?>

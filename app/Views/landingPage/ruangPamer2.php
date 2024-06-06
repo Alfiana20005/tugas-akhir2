@@ -72,13 +72,15 @@ keanekaragaman geologi di Nusa Tenggara Barat.
                 <h3>Ruang Pameran Tetap 2</h3>
                 <!-- <p class="fst-italic">Qui laudantium consequatur laborum sit qui ad sapiente dila parde sonata raqer a videna mareta paulona marka</p> -->
                 <img src="img/ruangPamer/ruang2.jpeg" alt="" class="img-fluid">
-                <p>Et nobis maiores eius. Voluptatibus ut enim blanditiis atque harum sint. Laborum eos ipsum ipsa odit magni. Incidunt hic ut molestiae aut qui. Est repellat minima eveniet eius et quis magni nihil. Consequatur dolorem quaerat quos qui similique accusamus nostrum rem vero</p>
+                <p>Ruang Pameran Tetap 2 Museum Negeri Nusa tenggara Barat berisi koleksi-koleksi tentang warisan budaya
+sebagai sumber sejarah dan ilmu pengetahuan.</p>
               </div>
               <div class="tab-pane" id="tab-3">
                 <h3>Ruang Khazanah</h3>
                 <!-- <p class="fst-italic">Qui laudantium consequatur laborum sit qui ad sapiente dila parde sonata raqer a videna mareta paulona marka</p> -->
-                <!-- <img src="assets/img/departments-3.jpg" alt="" class="img-fluid"> -->
-                <!-- <p>Et nobis maiores eius. Voluptatibus ut enim blanditiis atque harum sint. Laborum eos ipsum ipsa odit magni. Incidunt hic ut molestiae aut qui. Est repellat minima eveniet eius et quis magni nihil. Consequatur dolorem quaerat quos qui similique accusamus nostrum rem vero</p> -->
+                <img src="img/ruangPamer/khazanah2.jpeg" alt="" class="img-fluid">
+                <p>Ruang Khazanah Museum Negeri Nusa Tenggara Barat berisi koleksi-koleksi berharga yang menunjukkan keunggulan dari segi bahan,
+bentuk, fungsi dan karakteristik.</p>
               </div>
               <div class="tab-pane" id="tab-4">
                 <h3>Ruang Geologi</h3>

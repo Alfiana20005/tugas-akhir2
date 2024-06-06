@@ -4382,7 +4382,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 .single-footer-widget {
-  color: #fff;
+  color: #777;
 }
 
 .single-footer-widget input {
@@ -4398,7 +4398,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 .single-footer-widget .bb-btn {
   background-color: #850000;
-  color: #fff;
+  color: #777;
   font-weight: 300;
   border-radius: 0;
   cursor: pointer;

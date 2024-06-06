@@ -102,6 +102,7 @@ $routes->post('/tambahPengunjung', 'C_Pengunjung::tambahPengunjung');
 $routes->get('/pengunjung', 'C_Pengunjung::index');
 $routes->get('/rekapitulasi', 'C_Pengunjung::rekapitulasi');
 $routes->post('/rekapitulasi', 'C_Pengunjung::rekapitulasi');
+$routes->delete('deleteData/(:segment)', 'C_Pengunjung::deleteData/$1');
 $routes->get('/generate-report', 'C_Pengunjung::generateReport');
 $routes->get('/statistik', 'C_Pengunjung::tampilstatistik');
 $routes->post('/statistik', 'C_Pengunjung::tampilstatistik');

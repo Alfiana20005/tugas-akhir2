@@ -11,6 +11,7 @@ use App\Models\M_Gallery;
 use App\Models\M_Kajian;
 use App\Models\M_IsiKajian;
 use App\Models\M_Pesan;
+use App\Models\M_Pengunjung;
 
 class C_LandingPage extends BaseController
 {
@@ -24,6 +25,7 @@ class C_LandingPage extends BaseController
     protected $M_Kajian;
     protected $M_IsiKajian;
     protected $M_Pesan;
+    protected $M_Pengunjung;
 
     public function __construct() {
         helper('form');
@@ -36,6 +38,7 @@ class C_LandingPage extends BaseController
         $this -> M_Kajian = new M_Kajian();
         $this -> M_IsiKajian = new M_IsiKajian();
         $this -> M_Pesan = new M_Pesan();
+        $this -> M_Pengunjung = new M_Pengunjung();
 
     }
     public function index(): string
@@ -249,21 +252,23 @@ class C_LandingPage extends BaseController
     }
 
 
+
     // Start Landing Page Baru
     public function home(){
         $kegiatan = $this->M_Kegiatan->findAll();
         $beritaTerbaru = $this->M_Berita->getBeritaTerbaru(4);
         $galery = $this->M_Gallery->findAll();
 
+
         foreach ($beritaTerbaru as &$berita) {
             $berita['isi_pendek'] = $this->getExcerpt($berita['isi'], 20); // 30 adalah jumlah kata yang ingin ditampilkan
         }
 
-        $data = [
-            'beritaterbaru' => $beritaTerbaru,
-            'kegiatan' => $kegiatan,
-            'gallery' => $galery,
-        ];
+        // $data = [
+        //     'beritaterbaru' => $beritaTerbaru,
+        //     'kegiatan' => $kegiatan,
+        //     'gallery' => $galery,
+        // ];
 
         // var_dump($berita);
         $data =[
@@ -272,6 +277,10 @@ class C_LandingPage extends BaseController
             'beritaterbaru' => $beritaTerbaru,
             'kegiatan' => $kegiatan,
             'gallery' => $galery,
+            'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
+            'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
+            'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
+            'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
         ];
 
         return view('landingPage/home', $data);
@@ -289,23 +298,53 @@ class C_LandingPage extends BaseController
 
     public function sejarah2(): string
     {
-        return view('landingPage/sejarah2');
+        $data =[
+            'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
+            'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
+            'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
+            'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
+        ];
+        return view('landingPage/sejarah2', $data);
     }
     public function visiMisi2(): string
     {
-        return view('landingPage/visiMisi2');
+        $data =[
+            'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
+            'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
+            'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
+            'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
+        ];
+        return view('landingPage/visiMisi2', $data);
     }
     public function struktur2(): string
     {
-        return view('landingPage/struktur2');
+        $data =[
+            'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
+            'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
+            'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
+            'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
+        ];
+        return view('landingPage/struktur2', $data);
     }
     public function ruangPamer2(): string
     {
-        return view('landingPage/ruangPamer2');
+        $data =[
+            'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
+            'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
+            'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
+            'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
+        ];
+        return view('landingPage/ruangPamer2', $data);
     }
     public function tataTertib2(): string
     {
-        return view('landingPage/tatatertib2');
+        $data =[
+            'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
+            'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
+            'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
+            'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
+        ];
+        return view('landingPage/tatatertib2', $data);
     }
     public function berita2(): string
     {
@@ -320,8 +359,13 @@ class C_LandingPage extends BaseController
         $data =[
             'title' => 'Daftar Berita',
             'dataBerita' => $data_berita,
+            'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
+            'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
+            'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
+            'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
             // 'berita' => $berita
         ];
+        
         return view('landingPage/berita2', $data);
     }
     public function lihatberita2($id_berita): string
@@ -337,7 +381,12 @@ class C_LandingPage extends BaseController
             'dataBerita' => $data_berita,
             'berita' => $berita,
             'beritaterbaru' => $beritaTerbaru,
+            'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
+            'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
+            'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
+            'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
         ];
+        
         return view('landingPage/lihatBerita2', $data);
     }
     public function kegiatan2(): string
@@ -350,8 +399,13 @@ class C_LandingPage extends BaseController
         $data =[
             'title' => 'Daftar Kegiatan',
             'kegiatan' => $kegiatan,
+            'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
+            'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
+            'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
+            'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
             // 'berita' => $berita
         ];
+        
 
 
         return view('landingPage/kegiatan2', $data);
@@ -367,7 +421,12 @@ class C_LandingPage extends BaseController
             // 'dataBerita' => $data_berita,
             'kegiatan' => $kegiatan,
             'kegiatanTerbaru' => $kegiatanTerbaru,
+            'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
+            'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
+            'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
+            'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
         ];
+        
 
         return view('landingPage/lihatKegiatan2', $data);
     }
@@ -384,8 +443,13 @@ class C_LandingPage extends BaseController
         $data =[
             'title' => 'Daftar Kegiatan',
             'kajian' => $kajian,
-            'kajianTerbaru' => $kajianTerbaru
+            'kajianTerbaru' => $kajianTerbaru,
+            'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
+            'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
+            'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
+            'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
         ];
+        
 
         return view('landingPage/kajian2', $data);
     }
@@ -401,8 +465,13 @@ class C_LandingPage extends BaseController
             'title' => 'Daftar Kegiatan',
             // 'kajian' => $kajian,
             'kajianTerbaru' => $kajianTerbaru,
-            'kajian' => $kajianKategori
+            'kajian' => $kajianKategori,
+            'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
+            'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
+            'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
+            'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
         ];
+        
 
         return view('landingPage/kajian2', $data);
     }
@@ -417,8 +486,14 @@ class C_LandingPage extends BaseController
 
             'kajian' => $kajian,
             'kajianTerbaru' => $kajianTerbaru,
-            'isiKajian' => $IsiKajian
+            'isiKajian' => $IsiKajian,
+            'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
+            'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
+            'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
+            'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
         ];
+        
+
         return view('landingPage/tulisan2', $data);
     }
 
@@ -438,8 +513,13 @@ class C_LandingPage extends BaseController
         $data =[
             'title' => 'Daftar Berita',
             'koleksi' => $koleksi,
+            'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
+            'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
+            'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
+            'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
             // 'berita' => $berita
         ];
+        
         
         // dd($koleksi);
         return view('landingPage/koleksi_page2', $data);
@@ -457,7 +537,12 @@ class C_LandingPage extends BaseController
             // 'dataBerita' => $data_berita,
             'koleksi' => $koleksi,
             // 'kegiatanTerbaru' => $kegiatanTerbaru,
+            'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
+            'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
+            'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
+            'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
         ];
+        
             
         return view('landingPage/koleksi_detail2', $data);
     }
@@ -473,22 +558,38 @@ class C_LandingPage extends BaseController
         $data =[
             'title' => 'Daftar Publikasi',
             'publikasi' => $publikasi,
+            'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
+            'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
+            'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
+            'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
             // 'berita' => $berita
         ];
-
+        
 
         return view('landingPage/publikasi2', $data);
     }
     public function perpustakaan2(): string
     {
+        $data =[
+            'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
+            'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
+            'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
+            'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
+        ];
 
-        return view('landingPage/perpustakaan_page2');
+        return view('landingPage/perpustakaan_page2', $data);
     }
     public function kontak(): string
     {
+        $data =[
+            'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
+            'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
+            'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
+            'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
+        ];
         
 
-        return view('landingPage/kontak');
+        return view('landingPage/kontak', $data);
     }
     public function pesanUser()
     {

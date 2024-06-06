@@ -24,7 +24,7 @@
 				<div class="container">
 					<div class="row align-items-center">
 						<div class="col-lg-6 insurence-left">
-							<img class="img-fluid img-one" src="img/sejarah/Bangunan Museum.jpg" alt="">
+							<img class="img-fluid img-one" src="img/sejarah/image1.jpg" alt="">
 						</div>
 						<div class="col-lg-6 insurence-right">
 							<!-- <h6 class="text-uppercase">Need to know</h6> -->
@@ -93,7 +93,7 @@ Nusa Tenggara Barat
 							</div>
 						</div>
 						<div class="col-lg-6 insurence-right">
-							<img class="img-fluid img-two" src="img/sejarah/IMG_8855.jpeg" alt="">
+							<img class="img-fluid img-two" src="img/sejarah/image2.jpg" alt="">
 						</div>						
 					</div>
 				</div>	

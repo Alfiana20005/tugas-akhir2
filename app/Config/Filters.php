@@ -32,6 +32,7 @@ class Filters extends BaseConfig
         'filterPelayanan' => \App\Filters\FilterPelayanan::class,
         'filterPengkajian' => \App\Filters\FilterPengkajian::class,
         'filterKepala' => \App\Filters\FilterKepala::class,
+        'fiterKetuaPengkajian' => \App\Filters\FilterKetuaPengkajian::class,
         // 'filterPelayanan' => \App\Filters\FilterPelayanan::class,
         // 'filterPengkajian' => \App\Filters\FilterPengkajian::class,
         // 'filterKepala' => \App\Filters\FilterKepala::class,
@@ -116,6 +117,22 @@ class Filters extends BaseConfig
                     
                 ]
             ],
+            'fiterKetuaPengkajian' =>[
+                'except' => [
+                    '/login','c_Login/*','/halamanLogin','c_Login', 
+                    'c_LandingPage/*',  'c_LandingPage/','/','/home', 
+                    '/berita2','/lihatberita2','/lihatberita2/*', 
+                    '/visimisi2','/sejarah2','/struktur2',
+                    '/ruangPamer2', '/kontak', '/pesanUser',
+                    '/kegiatan2', '/lihatKegiatan2', '/lihatKegiatan2/*',
+                    '/kajian2', '/kajianKategori2/*',
+                    '/tulisan2','/tulisan2/*',
+                    '/koleksi_page2', '/koleksi_detail2', '/koleksi_detail2/*',
+                    '/publikasi2',
+                    '/perpustakaan2',
+                    
+                ]
+            ],
             
 
 
@@ -142,7 +159,7 @@ class Filters extends BaseConfig
                 'except' => [
                     '/login', 'C_Login/*', '/logout', '/dashboard', '/halamanLogin', 'C_Login', 
                     'C_Pengunjung/*', 'C_Pengunjung/', 
-                    '/tambahPengunjung', '/pengunjung','/rekapitulasi', 
+                    '/tambahPengunjung', '/pengunjung','/rekapitulasi', 'deleteData/*',
                     '/statistik', '/print', 
 
                  ]
@@ -161,6 +178,7 @@ class Filters extends BaseConfig
 
                  ]
             ],
+            
             'filterKepala' =>[
                 'except' => [
                     '/login', 'C_Login/*', '/logout', '/dashboard', '/halamanLogin', 'C_Login', 
@@ -168,6 +186,20 @@ class Filters extends BaseConfig
                     '/koleksi/*', '/detailKoleksi', '/detailKoleksi/*',
                     '/perawatan', '/dataPerawatan/*', 'detailJadwal/*',
                     
+
+                 ]
+            ],
+            'fiterKetuaPengkajian' =>[
+                'except' => [
+                    '/login', 'C_Login/*', '/logout', '/dashboard', '/halamanLogin', 'C_Login', 
+                    'C_Koleksi/*', 'C_Koleksi/',
+                    '/tambahdata','/saveData','/detailKoleksi', '/detailKoleksi/*','hapus/*', 'ubahKoleksi/*', 
+                    '/updateKoleksi/*', '/koleksi/*', '/updateKeadaan',
+                    '/grafikKoleksi',
+                    'C_Perawatan/*', 'C_Perawatan/',
+                    '/dataPerawatan/*', '/tambahPerawatan/*', 
+                    '/simpanPerawatan/*', '/simpanPerawatan','/perawatan', '/tambahJadwal','/simpanJadwal', 
+                    'detailJadwal/*', '/updateStatus', 'deleteJadwal/*', '/laporan', 
 
                  ]
             ],

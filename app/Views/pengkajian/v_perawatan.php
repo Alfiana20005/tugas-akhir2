@@ -153,7 +153,7 @@
     </div>
     
 
-    <?php if (session()->get('level') == 'Ketua Pengkajian'): ?>
+    <?php if (session()->get('level') == 'Ketua Pengkajian' || session()->get('level') == 'Petugas Pengkajian'): ?>
         <a class="btn btn-primary my-4" href="/tambahJadwal" role="button">Tambah Jadwal Perawatan</a>
         <?php  if(session()->getFlashdata('pesan')): ?>
             <div class="alert alert-success" role="alert">
@@ -178,9 +178,8 @@
                                             <th style="text-align: center;">Berakhir</th>
                                             <th style="text-align: center;">Status</th>
                                             <th style="text-align: center;">Rincian</th>
-                                            <?php if (session()->get('level') == 'Ketua Pengkajian'): ?>
                                             <th style="text-align: center;">Aksi</th>
-                                            <?php endif; ?>
+                                            
                                             <th style="text-align: center;">Capaian Target</th>
                                         </tr>
                                     </thead>
@@ -216,7 +215,7 @@
                                                 <button type="button" class="btn btn-primary btn-sm "><?= $j['perawatan']; ?></button>
                                                 <a href="<?= base_url('detailJadwal/' . $j['id']); ?>" class="btn btn-info btn-sm mx-2"> Detail</a>
                                             </td>
-                                            <?php if (session()->get('level') == 'Ketua Pengkajian'): ?>
+                                            
                                             <td >
                             
                                                 <form action="/deleteJadwal/<?= $j['id']; ?>" method="post" class="d-inline">
@@ -229,7 +228,7 @@
                                                 </form>
                                                 
                                             </td>
-                                            <?php endif; ?>
+                                            
                                             <td style="text-align: center;">
                                                    <?php 
                                                         $progressRestorasi = ($j['perawatan'] / $j['target']) * 100;

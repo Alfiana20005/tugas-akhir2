@@ -53,6 +53,10 @@
 			<!-- <link href="<?= base_url();?>landingPage/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet"> -->
 
 
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+
 
 		</head>
 		<body>	
@@ -137,9 +141,11 @@
 							</div>
 							<div class="single-footer-widget">
 								<h6>Sosial Media</h6>
-								<a href="" target="_blank" style="font-size:20px; font-weight:bold;"><i class="fa fa-facebook"></i></a>
-								<a href="https://www.youtube.com/@museumntb1284" target="_blank" style="font-size:20px; font-weight:bold;"><i class="fa fa-youtube mx-4"></i></a>
-								<a href="https://www.instagram.com/museumntb?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" style="font-size:20px; font-weight:bold;"><i class="fa fa-instagram"></i></a>
+								<a href="https://www.facebook.com/museumnegerintb/" target="_blank" style="font-size:20px; font-weight:bold;"><i class="fa-brands fa-facebook"></i></a>
+								<a href="https://www.youtube.com/@museumntb1284" target="_blank" style="font-size:20px; font-weight:bold;"><i class="fa-brands fa-youtube mx-2"></i></a>
+								<a href="https://www.instagram.com/museumntb?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" style="font-size:20px; font-weight:bold;"><i class="fa-brands fa-instagram"></i></a>
+								<a href="https://twitter.com/museum_ntb" target="_blank" style="font-size:20px; font-weight:bold;"><i class="fa-brands fa-twitter mx-2"></i></a>
+								<a href="https://www.tiktok.com/@museumntb?_t=8mxmb7tA12H&_r=1" target="_blank" style="font-size:20px; font-weight:bold; "><i class="fa-brands fa-tiktok"></i></a>
 							</div>
 						</div>
 						<div class="col-lg-3 col-md-6 col-sm-6">
@@ -163,13 +169,13 @@
 							<div class="single-footer-widget">
 								<h6>Total Pengunjung</h6>
 								<p>
-									Bulan Ini : 									
+									Bulan Ini : <?= $totalBulan; ?>									
 								</p>								
 								<p>
-									Tahun Ini : 									
+									Tahun Ini :  <?= $totalTahun; ?>										
 								</p>								
 								<p>
-									Keseluruhan : 									
+									Total Keseluruhan : 	<?= $totalkeseluruhan; ?>								
 								</p>								
 								
 							</div>
@@ -177,7 +183,7 @@
 						<div class="col-lg-3  col-md-6 col-sm-6">
 							<div class="single-footer-widget mail-chimp">
 								<h6 class="mb-20">Total Koleksi</h6>
-								<h1 class="mb-20" style="color: white;">7707</h1>
+								<h1 class="mb-20" style="color: white;">7714</h1>
 
 							</div>
 						</div>						

@@ -102,7 +102,7 @@
 										?>
 									
 											<a href="#" class="d-flex justify-content-between">
-												<p>Deskripsi : </p>
+												<p> </p>
 												
 											</a>
                                             <p><?= nl2p($koleksi['deskripsi']); ?> </p>

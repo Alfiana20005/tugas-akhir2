@@ -31,7 +31,7 @@
                 <div class="menu-content pb-60 col-lg-9">
                   <div class="title text-center">
                     <h1 class="mb-10">Tim Kami</h1>
-                    <a href=""><p>Lihat Semua Tim</p></a>
+                    <a href="" style="color: #850000;"><p>Lihat Semua Tim</p></a>
                   </div>
                 </div>
             </div>	

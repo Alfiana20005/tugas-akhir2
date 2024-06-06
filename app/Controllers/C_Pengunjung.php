@@ -113,6 +113,18 @@ class C_Pengunjung extends BaseController
         ];
         return view('pelayanan/v_rekapitulasi', $data);
     }
+    public function deleteData($id_pengunjung)
+    {
+        // Saring masukan untuk mencegah SQL injection atau serangan lainnya
+        $id_pengunjung = filter_var($id_pengunjung, FILTER_SANITIZE_NUMBER_INT);
+    
+        // Panggil metode delete pada model atau apapun yang diperlukan
+        $this->M_Pengunjung->delete($id_pengunjung);
+        session()->setFlashdata('pesan', 'Data Berhasil Dihapus.');
+    
+        // Redirect ke halaman yang sesuai
+        return redirect()->to('/rekapitulasi');
+    }
     
     public function statistik()
     {

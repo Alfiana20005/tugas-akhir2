@@ -64,10 +64,11 @@
 								<div class="contact-details">
 
 								<h5 class="mb-4">SOSIAL MEDIA</h5>
-								<a href="" target="_blank" style="color:#850000; font-size:30px; font-weight:bold;"><i class="fa fa-facebook"></i></a>
-								<a href="https://www.youtube.com/@museumntb1284" target="_blank" style="color:#850000; font-size:30px; font-weight:bold;"><i class="fa fa-youtube mx-4"></i></a>
-								<a href="https://www.instagram.com/museumntb?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" style="color:#850000; font-size:30px; font-weight:bold;"><i class="fa fa-instagram"></i></a>
-									
+								<a href="https://www.facebook.com/museumnegerintb" target="_blank" style="color:#850000; font-size:30px; font-weight:bold;"><i class="fa-brands fa-facebook"></i></i></a>
+								<a href="https://www.youtube.com/@museumntb1284" target="_blank" style="color:#850000; font-size:30px; font-weight:bold;"><i class="fa-brands fa-youtube mx-4"></i></a>
+								<a href="https://www.instagram.com/museumntb?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" style="color:#850000; font-size:30px; font-weight:bold;"><i class="fa-brands fa-instagram"></i></a>
+								<a href="https://twitter.com/museum_ntb" target="_blank" style="color:#850000; font-size:30px; font-weight:bold;"><i class="fa-brands fa-twitter mx-4"></i></a>
+								<a href="https://www.tiktok.com/@museumntb?_t=8mxmb7tA12H&_r=1" target="_blank" style="color:#850000; font-size:30px; font-weight:bold;"><i class="fa-brands fa-tiktok"></i></a>	
 								</div>
 							</div>														
 						</div>
