@@ -31,7 +31,7 @@
                 <div class="menu-content pb-60 col-lg-9">
                   <div class="title text-center">
                     <h1 class="mb-10">Tim Kami</h1>
-                    <a href="" style="color: #850000;"><p>Lihat Semua Tim</p></a>
+                    <a href="/semuaPetugas" style="color: #850000;"><p>Lihat Semua Tim</p></a>
                   </div>
                 </div>
             </div>	
@@ -41,7 +41,7 @@
               <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
                 <div class="member" data-aos="fade-up">
                   <div class="member-img">
-                    <img src="img/strukturOrgan/kamus.png" class="img-fluid" alt="">
+                    <img src="img/strukturOrgan/kamus.png" class="img-fluid"  alt="">
                     <div class="social">
                       <a href=""><i class="bi bi-twitter"></i></a>
                       <a href=""><i class="bi bi-facebook"></i></a>

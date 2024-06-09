@@ -35,12 +35,17 @@ $routes->get('/perpustakaan', 'C_LandingPage::perpustakaan');
 
 
 //Admin
+$routes->get('/strukturOrganisasi', 'C_Admin::strukturOrganisasi');
+$routes->post('/petugasMuseum', 'C_Admin::petugasMuseum');
+$routes->post('/updateKaryawan/(:segment)', 'C_Admin::updateKaryawan/$1');
+$routes->delete('hapusOrganisasi/(:segment)', 'C_Admin::hapusOrganisasi/$1');
 $routes->get('/beritaAdmin', 'C_Admin::berita');
 
 
 $routes->get('/tambahBerita', 'C_Admin::tambahBerita');
 $routes->post('/saveBerita', 'C_Admin::save');
 $routes->delete('hapusberita/(:segment)', 'C_Admin::deleteBerita/$1');
+
 $routes->post('updateBerita/(:segment)', 'C_Admin::updateBerita/$1');
 $routes->get('/tambahKegiatan', 'C_Admin::tambahKegiatan');
 $routes->post('/saveKegiatan', 'C_Admin::saveKegiatan');
@@ -172,3 +177,6 @@ $routes->get('/perpustakaan2', 'C_LandingPage::perpustakaan2');
 $routes->get('/kontak', 'C_LandingPage::kontak');
 $routes->post('/pesanUser', 'C_LandingPage::pesanUser');
 $routes->get('/pesanUser', 'C_LandingPage::pesanUser');
+$routes->get('/semuaPetugas', 'C_LandingPage::semuaPetugas');
+$routes->get('/sekardiyu', 'C_LandingPage::sekardiyu');
+$routes->get('/rencanaStrategis', 'C_LandingPage::rencanaStrategis');

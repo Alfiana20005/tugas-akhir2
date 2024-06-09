@@ -89,14 +89,16 @@
 				      <nav id="nav-menu-container">
 				        <ul class="nav-menu" >
 				          <li><a href="/home"><strong>Home</strong></a></li>
-                  <li class="menu-has-children"><a href=""><strong>Profil</strong></a>
+                  			<li class="menu-has-children"><a href=""><strong>Profil</strong></a>
 				            <ul>
 				              <li><a href="/sejarah2">Sejarah</a></li>
 				              <li><a href="/visimisi2">Visi Misi</a></li>
+				              <li><a href="/rencanaStrategis">Rencana Strategis</a></li>
 				              <li><a href="/struktur2">Struktur Organisasi</a></li>
+				              <li><a href="/sekardiyu">Sekardiyu</a></li>
 				            </ul>
 				          </li>	
-                  <li class="menu-has-children"><a href=""><strong>Layanan</strong></a>
+                  			<li class="menu-has-children"><a href=""><strong>Layanan</strong></a>
 				            <ul>
 				              <li><a href="/kontak">Kontak</a></li>
 				              <li><a href="/ruangPamer2">Ruang Pamer</a></li>
@@ -110,9 +112,9 @@
 				              <li><a href="/publikasi2">Publikasi</a></li>
 				            </ul>
 				          </li>	
-                  <li><a href="/koleksi_page2"><strong>Koleksi</strong></a></li>
-				          <li><a href="/perpustakaan2"><strong>Perpustakaan</strong></a></li>		          					          		          
-				          <li><a href="/halamanLogin"><strong>LOGIN</strong></a></li>
+                  			<li><a href="/koleksi_page2"><strong>Koleksi</strong></a></li>
+				          	<li><a href="/perpustakaan2"><strong>Perpustakaan</strong></a></li>		          					          		          
+				          	<li><a href="/halamanLogin"><strong>LOGIN</strong></a></li>
 				        </ul>
 				      </nav><!-- #nav-menu-container -->					      		  
 					</div>

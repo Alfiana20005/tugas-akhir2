@@ -11,6 +11,7 @@ use App\Models\M_Gallery;
 use App\Models\M_Kajian;
 use App\Models\M_Isikajian;
 use App\Models\M_Pesan;
+use App\Models\M_SemuaPetugas;
 
 class C_Admin extends BaseController
 {
@@ -24,6 +25,7 @@ class C_Admin extends BaseController
     protected $M_Isikajian;
     protected $M_Gallery;
     protected $M_Pesan;
+    protected $M_SemuaPetugas;
 
     public function __construct() {
         helper('form');
@@ -36,6 +38,135 @@ class C_Admin extends BaseController
         $this -> M_Kajian = new M_Kajian();
         $this -> M_Isikajian = new M_Isikajian();
         $this -> M_Pesan = new M_Pesan();
+        $this -> M_SemuaPetugas = new M_SemuaPetugas();
+    }
+    public function strukturOrganisasi(){
+
+        $dataPetugas = $this->M_SemuaPetugas->findAll();
+
+        $data =[
+            'title' => 'Struktur Organisasi',
+            'dataPetugas' => $dataPetugas,
+            
+        ];
+
+        
+        return view('CompanyProfile/strukturAdmin', $data);
+    }
+
+    public function petugasMuseum()
+    {
+        //validation
+        $rules= [
+            'nama' => [
+                'rules' => 'required',
+                'errors' => ['required'=>'Judul harus diisi']
+            ],
+            
+        ];
+
+        if(!$this->validate($rules)){
+            // session()->setFlashdata('errors', $this->validator->listErrors());
+            return redirect()->to('/strukturOrganisasi') ->withInput() -> with('errors', $this->validator->listErrors());
+        }
+
+        $foto = $this->request->getFile('foto');
+    
+        if ($foto->isValid() && !$foto->hasMoved()) {
+            $fotoName = $foto->getRandomName();
+            $foto->move('img/semuaPetugas', $fotoName);
+        } else {
+            // Handle file upload error
+            return redirect()->to(base_url('/strukturOrganisasi'))
+                -> withInput()
+                ->with('errors', $foto->getErrorString());
+        }
+
+        //tambahh data
+        // $this->M_Petugas->save($this->request->getPost());
+        $this->M_SemuaPetugas->save([
+            // 'id_petugas' => $id_petugas,
+            'nama' => $this->request->getVar('nama'),
+            'nip' => $this->request->getVar('nip'),
+            'jabatan' => $this->request->getVar('jabatan'),
+            'foto' => $fotoName,
+            
+        ]);
+
+        //alert
+        session()->setFlashdata('pesan', 'Data Berhasil Ditambahkan.');
+
+        return redirect()-> to('/strukturOrganisasi');
+
+        // return view('admin/v_masterpetugas');
+    }
+    public function updateKaryawan($id_karyawan) {
+        // Mengambil data yang akan diupdate dari request
+        $dataToUpdate = [
+            'nama' => $this->request->getVar('nama'),
+            'nip' => $this->request->getVar('nip'),
+            'jabatan' => $this->request->getVar('jabatan'),
+            'foto' => $this->request->getVar('foto'),
+            
+        ];
+    
+        $foto = $this->request->getFile('foto');
+
+        // Cek apakah file foto diunggah
+        if ($foto && $foto->isValid() && !$foto->hasMoved()) {
+            // Generate nama unik untuk file foto
+            $fotoName = $foto->getRandomName();
+
+            // Pindahkan file foto ke folder yang diinginkan
+            $foto->move('img/semuaPetugas', $fotoName); // Perbarui path sesuai dengan folder yang diinginkan
+
+            // Tambahkan nama file foto ke data yang akan diupdate
+            $dataToUpdate['foto'] = $fotoName;
+        }
+    
+        // Membersihkan data yang mungkin ada dari inputan form
+        $dataToUpdate = array_filter($dataToUpdate);
+    
+        // Memastikan ada data yang akan diupdate
+        if (!empty($dataToUpdate)) {
+            // Mengeksekusi perintah update
+            $this->M_SemuaPetugas->update($id_karyawan, $dataToUpdate);
+    
+            // Ambil data petugas setelah diubah dari database
+            $newDataKaryawan = $this->M_SemuaPetugas->getKaryawan($id_karyawan);
+    
+            // Perbarui sesi pengguna dengan data baru
+            if (session()->get('level') != 'Admin') {
+                session()->set([
+                    'nama' => $newDataKaryawan['nama'],
+                    'nip' => $newDataKaryawan['nip'],
+                    'jabatan' => $newDataKaryawan['jabatan'],
+                    'foto' => $newDataKaryawan['foto'],
+                ]);
+            }
+            //alert
+            session()->setFlashdata('pesan', 'Data Berhasil diubah.');
+        } else {
+            // Jika tidak ada data yang diupdate, munculkan pesan kesalahan
+            session()->setFlashdata('error', 'Tidak ada data yang diupdate.');
+        }
+        // dd('berhasil');
+    
+        // Redirect ke halaman sebelumnya atau halaman yang sesuai
+        return redirect()->to('/strukturOrganisasi');
+    }
+
+    public function hapusOrganisasi($id_karyawan) 
+    {
+        // Saring masukan untuk mencegah SQL injection atau serangan lainnya
+        $id_karyawan = filter_var($id_karyawan, FILTER_SANITIZE_NUMBER_INT);
+    
+        // Panggil metode delete pada model atau apapun yang diperlukan
+        $this->M_SemuaPetugas->delete($id_karyawan);
+        session()->setFlashdata('pesan', 'Data Berhasil Dihapus.');
+    
+        // Redirect ke halaman yang sesuai
+        return redirect()->to('/strukturOrganisasi');
     }
     
     public function berita(): string
@@ -51,11 +182,13 @@ class C_Admin extends BaseController
         
         return view('CompanyProfile/beritaAdmin', $data);
     }
+
     public function tambahBerita(): string
     {
 
         return view('CompanyProfile/tambahBerita');
     }
+
     public function save()
     {
         //validation
@@ -110,6 +243,7 @@ class C_Admin extends BaseController
 
         // return view('admin/v_masterpetugas');
     }
+
     public function deleteBerita($id_berita) 
     {
         // Saring masukan untuk mencegah SQL injection atau serangan lainnya
@@ -122,6 +256,7 @@ class C_Admin extends BaseController
         // Redirect ke halaman yang sesuai
         return redirect()->to('/beritaAdmin');
     }
+
     public function updateBerita($id_berita) {
         // Mengambil data yang akan diupdate dari request
         $dataToUpdate = [
@@ -180,6 +315,7 @@ class C_Admin extends BaseController
         return redirect()->to('/beritaAdmin');
     }
 
+
     public function tambahKegiatan(): string
     {
         $data_kegiatan = $this->M_Kegiatan->findAll();
@@ -192,6 +328,7 @@ class C_Admin extends BaseController
 
         return view('CompanyProfile/tambahKegiatan', $data);
     }
+
     public function saveKegiatan()
     {
         //validation
@@ -246,6 +383,7 @@ class C_Admin extends BaseController
 
         // return view('admin/v_masterpetugas');
     }
+
     public function deleteKegiatan($id_kegiatan)
     {
         // Saring masukan untuk mencegah SQL injection atau serangan lainnya
@@ -483,6 +621,7 @@ class C_Admin extends BaseController
 
         return view('CompanyProfile/publikasiAdmin', $data);
     }
+
     public function savePublikasi()
     {
         //validation
@@ -536,6 +675,7 @@ class C_Admin extends BaseController
 
         // return view('admin/v_masterpetugas');
     }
+
     public function deletePublikasi($id_publikasi)
     {
         // Saring masukan untuk mencegah SQL injection atau serangan lainnya
@@ -548,6 +688,7 @@ class C_Admin extends BaseController
         // Redirect ke halaman yang sesuai
         return redirect()->to('/tambahPublikasi');
     }
+
     public function updatePublikasi($id_publikasi) {
         // Mengambil data yang akan diupdate dari request
         $dataToUpdate = [
@@ -603,6 +744,7 @@ class C_Admin extends BaseController
         // Redirect ke halaman sebelumnya atau halaman yang sesuai
         return redirect()->to('/tambahPublikasi');
     }
+
     public function koleksiAdmin(): string
     {
         $koleksi = $this->M_KoleksiLandingPage->findAll();
@@ -616,6 +758,7 @@ class C_Admin extends BaseController
         
         return view('CompanyProfile/koleksiAdmin', $data);
     }
+
     public function saveKoleksi()
     {
         //validation
@@ -671,6 +814,7 @@ class C_Admin extends BaseController
 
         // return view('admin/v_masterpetugas');
     }
+
     public function deleteKoleksi($id_koleksi)
     {
         // Saring masukan untuk mencegah SQL injection atau serangan lainnya
@@ -683,6 +827,7 @@ class C_Admin extends BaseController
         // Redirect ke halaman yang sesuai
         return redirect()->to('/koleksiAdmin');
     }
+
     public function updateKoleksiAdmin($id_koleksi)
     {
         // Mengambil data yang akan diupdate dari request
@@ -758,6 +903,7 @@ class C_Admin extends BaseController
         
         return view('CompanyProfile/galleryAdmin', $data);
     }
+
     public function saveGallery()
     {
         //validation
@@ -810,6 +956,7 @@ class C_Admin extends BaseController
 
         // return view('admin/v_masterpetugas');
     }
+
     public function deleteGallery($id_gallery)
     {
         // Saring masukan untuk mencegah SQL injection atau serangan lainnya
@@ -835,6 +982,7 @@ class C_Admin extends BaseController
         
         return view('CompanyProfile/pesanAdmin', $data);
     }
+
     public function deletePesan($id_pesan)
     {
         // Saring masukan untuk mencegah SQL injection atau serangan lainnya

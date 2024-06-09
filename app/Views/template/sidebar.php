@@ -27,7 +27,12 @@
     <li class="nav-item">
         <a class="nav-link" href="/petugas">
             <i class="fas fa-fw fa-users"></i>
-            <span>Master Petugas</span></a>
+            <span>Daftar Hak Akses Petugas</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/strukturOrganisasi">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Struktur Organisasi</span></a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="/pesanAdmin">

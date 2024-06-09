@@ -12,6 +12,7 @@ use App\Models\M_Kajian;
 use App\Models\M_IsiKajian;
 use App\Models\M_Pesan;
 use App\Models\M_Pengunjung;
+use App\Models\M_SemuaPetugas;
 
 class C_LandingPage extends BaseController
 {
@@ -26,6 +27,7 @@ class C_LandingPage extends BaseController
     protected $M_IsiKajian;
     protected $M_Pesan;
     protected $M_Pengunjung;
+    protected $M_SemuaPetugas;
 
     public function __construct() {
         helper('form');
@@ -39,6 +41,7 @@ class C_LandingPage extends BaseController
         $this -> M_IsiKajian = new M_IsiKajian();
         $this -> M_Pesan = new M_Pesan();
         $this -> M_Pengunjung = new M_Pengunjung();
+        $this -> M_SemuaPetugas = new M_SemuaPetugas();
 
     }
     public function index(): string
@@ -630,6 +633,45 @@ class C_LandingPage extends BaseController
         return redirect()-> to('/kontak');
 
         // return view('landingPage/kontak');
+    }
+    public function semuaPetugas(): string
+    {
+        $data =[
+            'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
+            'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
+            'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
+            'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
+            'dataPetugas' => $this->M_SemuaPetugas->findAll(),
+        ];
+        
+
+        return view('landingPage/semuaPetugas', $data);
+    }
+    public function sekardiyu(): string
+    {
+        $data =[
+            'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
+            'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
+            'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
+            'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
+           
+        ];
+        
+
+        return view('landingPage/sekardiyu', $data);
+    }
+    public function rencanaStrategis(): string
+    {
+        $data =[
+            'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
+            'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
+            'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
+            'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
+           
+        ];
+        
+
+        return view('landingPage/rencanaStrategis', $data);
     }
 
 

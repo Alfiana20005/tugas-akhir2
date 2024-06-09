@@ -58,7 +58,7 @@ class Filters extends BaseConfig
                     '/login','c_Login/*','/halamanLogin','c_Login', 
                     'c_LandingPage/*',  'c_LandingPage/','/','/home', 
                     '/berita2','/lihatberita2','/lihatberita2/*', 
-                    '/visimisi2','/sejarah2','/struktur2',
+                    '/visimisi2','/sejarah2','/struktur2', '/semuaPetugas',
                     '/ruangPamer2', '/kontak', '/pesanUser',
                     '/kegiatan2', '/lihatKegiatan2', '/lihatKegiatan2/*',
                     '/kajian2', '/kajianKategori2/*',
@@ -66,6 +66,8 @@ class Filters extends BaseConfig
                     '/koleksi_page2', '/koleksi_detail2', '/koleksi_detail2/*',
                     '/publikasi2',
                     '/perpustakaan2',
+                    '/sekardiyu',
+                    '/rencanaStrategis'
                     
                 ]
             ],
@@ -74,7 +76,7 @@ class Filters extends BaseConfig
                     '/login','c_Login/*','/halamanLogin','c_Login', 
                     'c_LandingPage/*',  'c_LandingPage/','/','/home', 
                     '/berita2','/lihatberita2','/lihatberita2/*', 
-                    '/visimisi2','/sejarah2','/struktur2',
+                    '/visimisi2','/sejarah2','/struktur2', '/semuaPetugas',
                     '/ruangPamer2', '/kontak', '/pesanUser',
                     '/kegiatan2', '/lihatKegiatan2', '/lihatKegiatan2/*',
                     '/kajian2', '/kajianKategori2/*',
@@ -82,6 +84,8 @@ class Filters extends BaseConfig
                     '/koleksi_page2', '/koleksi_detail2', '/koleksi_detail2/*',
                     '/publikasi2',
                     '/perpustakaan2',
+                    '/sekardiyu',
+                    '/rencanaStrategis'
                     
                 ]
             ],
@@ -90,7 +94,7 @@ class Filters extends BaseConfig
                     '/login','c_Login/*','/halamanLogin','c_Login', 
                     'c_LandingPage/*',  'c_LandingPage/','/','/home', 
                     '/berita2','/lihatberita2','/lihatberita2/*', 
-                    '/visimisi2','/sejarah2','/struktur2',
+                    '/visimisi2','/sejarah2','/struktur2', '/semuaPetugas',
                     '/ruangPamer2', '/kontak', '/pesanUser',
                     '/kegiatan2', '/lihatKegiatan2', '/lihatKegiatan2/*',
                     '/kajian2', '/kajianKategori2/*',
@@ -98,6 +102,8 @@ class Filters extends BaseConfig
                     '/koleksi_page2', '/koleksi_detail2', '/koleksi_detail2/*',
                     '/publikasi2',
                     '/perpustakaan2',
+                    '/sekardiyu',
+                    '/rencanaStrategis'
                     
                 ]
             ],
@@ -106,7 +112,7 @@ class Filters extends BaseConfig
                     '/login','c_Login/*','/halamanLogin','c_Login', 
                     'c_LandingPage/*',  'c_LandingPage/','/','/home', 
                     '/berita2','/lihatberita2','/lihatberita2/*', 
-                    '/visimisi2','/sejarah2','/struktur2',
+                    '/visimisi2','/sejarah2','/struktur2', '/semuaPetugas',
                     '/ruangPamer2', '/kontak', '/pesanUser',
                     '/kegiatan2', '/lihatKegiatan2', '/lihatKegiatan2/*',
                     '/kajian2', '/kajianKategori2/*',
@@ -114,6 +120,8 @@ class Filters extends BaseConfig
                     '/koleksi_page2', '/koleksi_detail2', '/koleksi_detail2/*',
                     '/publikasi2',
                     '/perpustakaan2',
+                    '/sekardiyu',
+                    '/rencanaStrategis'
                     
                 ]
             ],
@@ -122,7 +130,7 @@ class Filters extends BaseConfig
                     '/login','c_Login/*','/halamanLogin','c_Login', 
                     'c_LandingPage/*',  'c_LandingPage/','/','/home', 
                     '/berita2','/lihatberita2','/lihatberita2/*', 
-                    '/visimisi2','/sejarah2','/struktur2',
+                    '/visimisi2','/sejarah2','/struktur2', '/semuaPetugas',
                     '/ruangPamer2', '/kontak', '/pesanUser',
                     '/kegiatan2', '/lihatKegiatan2', '/lihatKegiatan2/*',
                     '/kajian2', '/kajianKategori2/*',
@@ -130,6 +138,8 @@ class Filters extends BaseConfig
                     '/koleksi_page2', '/koleksi_detail2', '/koleksi_detail2/*',
                     '/publikasi2',
                     '/perpustakaan2',
+                    '/sekardiyu',
+                    '/rencanaStrategis'
                     
                 ]
             ],
@@ -152,6 +162,7 @@ class Filters extends BaseConfig
                     '/galleryAdmin', '/saveGallery', 'hapusGallery/*',
                     '/saveKajian', '/kajianAdmin', 
                     '/tulisKajian', '/addSection', '/tulisKajian/*', '/saveIsiKajian', '/tulisKajian/*', 'hapusKajian/*', 
+                    '/petugasMuseum', '/strukturOrganisasi', 'hapusOrganisasi/*', '/updateKaryawan/*',
 
                  ]
             ],
