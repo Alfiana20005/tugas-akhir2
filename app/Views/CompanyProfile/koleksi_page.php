@@ -35,7 +35,7 @@
                 <p><?= $k['kategori']; ?></p>
               </div>
               <div class="portfolio-links">
-                <a href="<?= base_url("img/koleksiAdmin/". $k['foto']); ?>" data-gallery="portfolioGallery" class="portfolio-lightbox" title="<?= $k['nama']; ?>"><i class="bx bx-plus"></i></a>
+                <a href="<?= base_url("img/koleksiAdmin/". $k['foto']); ?>" data-gallery="portfolioGallery" class="portfolio-lightbox" title="<?= $k['nama']; ?>"><i class="fa-solid fa-magnifying-glass"></i></a>
                 <a href="<?= base_url("/koleksi_detail/{$k['id_koleksi']}"); ?>" title="More Details"><i class="bx bx-link"></i></a>
               </div>
             </div>

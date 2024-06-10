@@ -9,7 +9,7 @@
 
 <div class="text-xs py-5">
     
-    <h6 class="m-0 font-weight-bold text-gray"><img src="/img/logo-.png" alt="" style="width: 60px;">Museum Negeri NTB</h6>
+    <!-- <h6 class="m-0 font-weight-bold text-gray"><img src="/img/logo-.png" alt="" style="width: 36px; font-size:small;">Museum Negeri NTB</h6> -->
 </div>
 <!-- Topbar Navbar -->
 <ul class="navbar-nav ml-auto">

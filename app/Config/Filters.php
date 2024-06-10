@@ -151,7 +151,7 @@ class Filters extends BaseConfig
             'filterAdmin' =>[
                 'except' => [
                     '/login', 'C_Login/*', '/logout', '/dashboard', '/halamanLogin', 'C_Login', 
-                    'C_Petugas/*', 'C_Petugas/',
+                    'C_Petugas/*', 'C_Petugas/', 'profile/*', '/profile',  '/updateProfile/*', 
                     '/petugas','/tambahpetugas', '/save', 'hapuspetugas/*', 'ubahpetugas/*', '/updatepetugas/*','/updateProfile/*', '/profile', 'profile/*', 
                     'C_LandingPage/*', 'C_LandingPage/', 'C_Admin/*', 'C_Admin/', 
                     '/pesanAdmin', 'hapuspesan/*',
@@ -169,7 +169,7 @@ class Filters extends BaseConfig
             'filterPelayanan' =>[
                 'except' => [
                     '/login', 'C_Login/*', '/logout', '/dashboard', '/halamanLogin', 'C_Login', 
-                    'C_Pengunjung/*', 'C_Pengunjung/', 
+                    'C_Pengunjung/*', 'C_Pengunjung/',  'profile/*', '/updateProfile/*', 'C_Petugas/*', '/profile', 'ubahpetugas/*', '/updatepetugas/*',
                     '/tambahPengunjung', '/pengunjung','/rekapitulasi', 'deleteData/*',
                     '/statistik', '/print', 
 
@@ -178,7 +178,7 @@ class Filters extends BaseConfig
             'filterPengkajian' =>[
                 'except' => [
                     '/login', 'C_Login/*', '/logout', '/dashboard', '/halamanLogin', 'C_Login', 
-                    'C_Koleksi/*', 'C_Koleksi/',
+                    'C_Koleksi/*', 'C_Koleksi/',  'profile/*', '/updateProfile/*', 'C_Petugas/*', '/profile',
                     '/tambahdata','/saveData','/detailKoleksi', '/detailKoleksi/*','hapus/*', 'ubahKoleksi/*', 
                     '/updateKoleksi/*', '/koleksi/*', '/updateKeadaan',
                     '/grafikKoleksi',
@@ -193,7 +193,7 @@ class Filters extends BaseConfig
             'filterKepala' =>[
                 'except' => [
                     '/login', 'C_Login/*', '/logout', '/dashboard', '/halamanLogin', 'C_Login', 
-                    '/petugas', '/statistik', 
+                    '/petugas', '/statistik',  'profile/*', '/updateProfile/*', 'C_Petugas/*', '/profile',
                     '/koleksi/*', '/detailKoleksi', '/detailKoleksi/*',
                     '/perawatan', '/dataPerawatan/*', 'detailJadwal/*',
                     
@@ -202,8 +202,8 @@ class Filters extends BaseConfig
             ],
             'fiterKetuaPengkajian' =>[
                 'except' => [
-                    '/login', 'C_Login/*', '/logout', '/dashboard', '/halamanLogin', 'C_Login', 
-                    'C_Koleksi/*', 'C_Koleksi/',
+                    '/login', 'C_Login/*', '/logout', '/dashboard', '/halamanLogin', 'C_Login',  'profile/*', '/updateProfile/*', 'C_Petugas/*', '/profile',
+                    'C_Koleksi/*', 'C_Koleksi/', 
                     '/tambahdata','/saveData','/detailKoleksi', '/detailKoleksi/*','hapus/*', 'ubahKoleksi/*', 
                     '/updateKoleksi/*', '/koleksi/*', '/updateKeadaan',
                     '/grafikKoleksi',

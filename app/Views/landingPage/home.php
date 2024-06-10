@@ -16,11 +16,11 @@
 				<div class="container">
 					<div class="row fullscreen align-items-center justify-content-between">
 						<div class="col-lg-6 col-md-6 banner-left">
-							<h3 class="text-white">Selamat Datang</h3>
-							<h1 class="text-white">MUSEUM NEGERI</h1>
-							<h3 class="text-white"><span class="typed-words"></span></h3>
+							<h3 class="text-white" id="selamatdatang" >Selamat Datang</h3>
+							<h1 class="text-white" style="margin-top: 0px; margin-bottom: 0px;">MUSEUM NEGERI</h1>
+							<h3 class="text-white" id="ntb"><span class="typed-words"></span></h3>
 							<!-- <p class="text-white">Kota u Museum Ku Kampung Ku Museum Ku</p> -->
-							<a href="#" class="primary-btn text-uppercase mt-4">Kotaku Museumku Kampungku Museumku</a>
+							<a href="#" id="kmkm" class="primary-btn text-uppercase mt-4">Kotaku Museumku Kampungku Museumku</a>
 						</div>
 						<div class="col-lg-4 col-md-6 banner-right">
 							<ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -100,6 +100,7 @@
                                             <td ><img src="img/tataTertib/dont touch.png" style="width: 40px;" alt=""></td>
                                             <td > Dilarang Menyentuh Koleksi Museum </td>
                                         </tr>
+										
                                         <tr>
                                             <td ><img src="img/tataTertib/dont eat.png" style="width: 40px;" alt=""></td>
                                             <td >Dilarang Makan dan Minum di Dalam Ruang Pameran</td>

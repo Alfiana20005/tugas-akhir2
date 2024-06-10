@@ -5228,6 +5228,27 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 
 @media (max-width: 991px) {
+  #myTabContent{
+    font-size: 10pt;
+  }
+}
+@media (max-width: 991px) {
+  #selamatdatang{
+    margin-top: 30px;
+    font-size: 12pt;
+  }
+}
+@media (max-width: 991px) {
+  #ntb{
+    font-size: 14pt;
+  }
+}
+@media (max-width: 991px) {
+  #kmkm{
+   font-size: 7pt;
+  }
+}
+@media (max-width: 991px) {
   #struktur2 {
     width: 300px;
   }
