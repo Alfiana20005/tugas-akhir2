@@ -134,7 +134,7 @@
                 
             </div>
             <div class="modal-body">
-                <form action="/saveGallery" method="post" enctype="multipart/form-data" id="form">
+                <form action="updateGallery/<?= $g['id_gallery']; ?>" method="post" enctype="multipart/form-data" id="form">
                 <div class="row mb-2">
                     <label for="nama" class="col-sm-3 col-form-label">Judul</label>
                     <div class="col-sm-9">

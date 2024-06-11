@@ -60,8 +60,10 @@ $routes->post('/saveKoleksi', 'C_Admin::saveKoleksi');
 $routes->delete('hapusKoleksiAdmin/(:segment)', 'C_Admin::deleteKoleksi/$1');
 $routes->post('updateKoleksiAdmin/(:segment)', 'C_Admin::updateKoleksiAdmin/$1');
 
+
 $routes->get('/galleryAdmin', 'C_Admin::galleryAdmin');
 $routes->post('/saveGallery', 'C_Admin::saveGallery');
+$routes->post('updateGallery/(:segment)', 'C_Admin::updateGallery/$1');
 $routes->delete('hapusGallery/(:segment)', 'C_Admin::deleteGallery/$1');
 $routes->post('/saveKajian', 'C_Admin::saveKajian');
 $routes->get('/kajianAdmin', 'C_Admin::kajianAdmin');

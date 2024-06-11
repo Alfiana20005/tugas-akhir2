@@ -969,6 +969,66 @@ class C_Admin extends BaseController
         // Redirect ke halaman yang sesuai
         return redirect()->to('/galleryAdmin');
     }
+
+    
+    public function updateGallery($id_gallery)
+    {
+        // Mengambil data yang akan diupdate dari request
+        $dataToUpdate = [
+            'judul' => $this->request->getVar('judul'),
+            'no' => $this->request->getVar('no'),
+            'deskripsi' => $this->request->getVar('deskripsi'),
+            'foto' => $this->request->getVar('foto'),
+            
+        ];
+    
+        $foto = $this->request->getFile('foto');
+
+        // Cek apakah file foto diunggah
+        if ($foto && $foto->isValid() && !$foto->hasMoved()) {
+            // Generate nama unik untuk file foto
+            $fotoName = $foto->getRandomName();
+
+            // Pindahkan file foto ke folder yang diinginkan
+            $foto->move('img/galery', $fotoName); // Perbarui path sesuai dengan folder yang diinginkan
+
+            // Tambahkan nama file foto ke data yang akan diupdate
+            $dataToUpdate['foto'] = $fotoName;
+        }
+    
+        // Membersihkan data yang mungkin ada dari inputan form
+        $dataToUpdate = array_filter($dataToUpdate);
+    
+        // Memastikan ada data yang akan diupdate
+        if (!empty($dataToUpdate)) {
+            // Mengeksekusi perintah update
+            $this->M_Gallery->update($id_gallery, $dataToUpdate);
+    
+            // Ambil data petugas setelah diubah dari database
+            $newDataGallery = $this->M_Gallery->getGallery($id_gallery);
+    
+            // Perbarui sesi pengguna dengan data baru
+            if (session()->get('level') != 'Admin') {
+                session()->set([
+                    'judul' => $newDataGallery['judul'],
+                    'no' => $newDataGallery['no'],
+                    'deskripsi' => $newDataGallery['deskripsi'],
+                    'foto' => $newDataGallery['foto'],
+                ]);
+            }
+            //alert
+            session()->setFlashdata('pesan', 'Data Berhasil diubah.');
+        } else {
+            // Jika tidak ada data yang diupdate, munculkan pesan kesalahan
+            session()->setFlashdata('error', 'Tidak ada data yang diupdate.');
+        }
+        // dd('berhasil');
+    
+        // Redirect ke halaman sebelumnya atau halaman yang sesuai
+        return redirect()->to('/galleryAdmin');
+    }
+
+
     public function pesanAdmin(): string
     {
         $data_pesan = $this->M_Pesan->findAll();
