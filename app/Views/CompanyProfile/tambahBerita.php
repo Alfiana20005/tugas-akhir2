@@ -70,6 +70,12 @@
                             
                         </div>
                     </div>
+                    <div class="form-check my-4">
+                                                    <input class="form-check-input" type="checkbox" id="removeFoto" name="removeFoto" value="1">
+                                                    <label class="form-check-label" for="removeFoto">
+                                                    Klik apabila tidak membutuhkan gambar
+                                                    </label>
+                                                </div>
                 </div>
                 
                 <button type="submit" class="btn btn-primary">Simpan Data</button>

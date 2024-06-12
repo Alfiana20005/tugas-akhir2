@@ -214,14 +214,18 @@ class C_Admin extends BaseController
 
         $foto = $this->request->getFile('foto');
     
-        if ($foto->isValid() && !$foto->hasMoved()) {
-            $fotoName = $foto->getRandomName();
-            $foto->move('img/berita', $fotoName);
+        $removeFoto = $this->request->getVar('removeFoto');
+
+        // Handle the photo removal or upload
+        if ($removeFoto) {
+            $fotoName = null; // Set to null if the photo is to be removed
         } else {
-            // Handle file upload error
-            return redirect()->to(base_url('/tambahBerita'))
-                ->withInput()
-                ->with('errors', $foto->getErrorString());
+            if ($foto && $foto->isValid() && !$foto->hasMoved()) {
+                $fotoName = $foto->getRandomName();
+                $foto->move('img/berita', $fotoName);
+            } else {
+                $fotoName = $this->request->getVar('existingFoto'); // Use the existing photo name if no new photo is uploaded
+            }
         }
 
         //tambahh data
