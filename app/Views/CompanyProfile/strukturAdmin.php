@@ -176,7 +176,7 @@
                             <div class="col-sm-7">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input form-control" id="gambar<?= $ptgs['id_karyawan']; ?>" name="foto" onchange="previewImg('gambar<?= $ptgs['id_karyawan']; ?>')">
-                                    <label class="custom-file-label" for="customFile">Masukkan Gambar </label>
+                                    <label class="custom-file-label" for="customFile">Gambar Maksimal 2 Mb</label>
                                     
                                 </div>
                                 <?php if (!empty($ptgs['foto'])): ?>

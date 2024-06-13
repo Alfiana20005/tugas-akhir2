@@ -52,7 +52,7 @@
                     <div class="col-sm-7">
                         <div class="custom-file">
                             <input type="file" class="custom-file-input form-control" id="gambar" name="foto" onchange="previewImg('gambar')">
-                            <label class="custom-file-label" for="customFile">Masukkan Foto Anda</label>
+                            <label class="custom-file-label" for="customFile">Gambar Maksimal 2 Mb</label>
                             <?php if (!empty($data_publikasi['foto'])): ?>
                                 <div class="my-2">
                                     <p>Foto Saat Ini:</p>
@@ -170,7 +170,7 @@
                         <div class="col-sm-7">
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input form-control" id="gambar<?= $p['id_publikasi']; ?>" name="foto" onchange="previewImg('gambar<?= $p['id_publikasi']; ?>')">
-                                <label class="custom-file-label" for="customFile">Masukkan Sampul </label>
+                                <label class="custom-file-label" for="customFile">Gambar Maksimal 2 Mb</label>
                                 
                             </div>
                             <?php if (!empty($p['foto'])): ?>

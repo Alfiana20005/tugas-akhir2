@@ -63,7 +63,7 @@
                     <div class="col-sm-7">
                         <div class="custom-file">
                             <input type="file" class="custom-file-input form-control" id="gambar" name="sampul" onchange="previewImg('gambar')">
-                            <label class="custom-file-label" for="customFile">Masukkan Foto Anda</label>
+                            <label class="custom-file-label" for="customFile">Gambar Maksimal 2 Mb</label>
                             <?php if (!empty($dataKegiatan['sampul'])): ?>
                                 <div class="my-2">
                                     <p>Foto Saat Ini:</p>
@@ -122,61 +122,6 @@
     </div>
     <?php endforeach; ?>
     
-    <!-- DataTales Example -->
-    <!-- <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Data Kajian</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" >
-                                    <thead >
-                                        <tr>
-                                            <th style="text-align: center;">No</th>
-                                            <th style="text-align: center;">Sampul</th>
-                                            <th style="text-align: center;">Judul</th> 
-                                            
-                                            <th style="text-align: center;">Tanggal</th>
-                                            <th style="text-align: center;">Kategori</th>
-                                            
-                                            <th style="text-align: center;">Aksi</th>
-                                            
-                                        </tr>
-                                    </thead>
-                                    
-                                    <tbody >
-                                    <?php 
-                                        $no=1;
-                                        foreach($kajian as $k): ?>  
-                                        <tr>
-                                           
-                                            <td style="text-align: center;"><?= $no++; ?></td>
-                                            <td style="text-align: center;"> <img src="<?= base_url("img/kajian/". $k['sampul']); ?>" class="img-fluid rounded-start" style="width: 150px;" alt="..." ></td>
-                                            
-                                            <td style="text-align: center;"><?= $k['judul']; ?></td>
-                                           
-                                            
-                                            <td style="text-align: center;"><?= $k['created_at']; ?></td>
-                                            <td style="text-align: center;"><?= $k['kategori']; ?></td>
-                                            
-                                            <td style="text-align: center;">
-                                            
-                                                <a href="<?= base_url("/tulisKajian/{$k['id_kajian']}"); ?>" class="btn btn-success btn-sm" >Tulis</a>
-                                                <form action=""></form>
-                                                    <?= csrf_field(); ?>
-                                                    <input type="hidden" name="_method" value="DELETE">
-                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('apakah anda yakin?');">Hapus</button>
-                                                </form>
-                                                
-                                            </td>
-
-                                        </tr>
-                                        <?php endforeach; ?> 
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-    </div> -->
     <div class="modal fade" id="tulis" tabindex="-1" aria-labelledby="tulis" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -201,7 +146,7 @@
                     <div class="col-sm-7">
                         <div class="custom-file">
                             <input type="file" class="custom-file-input form-control" id="gambar" name="foto" onchange="previewImg('gambar')">
-                            <label class="custom-file-label" for="customFile">Masukkan Foto Anda</label>
+                            <label class="custom-file-label" for="customFile">Gambar Maksimal 2 Mb</label>
                             <?php if (!empty($dataKegiatan['foto'])): ?>
                                 <div class="my-2">
                                     <p>Foto Saat Ini:</p>

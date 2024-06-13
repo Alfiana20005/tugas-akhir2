@@ -133,7 +133,7 @@
                         <div class="col-sm-7">
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input form-control" id="gambar<?= $b['id_berita']; ?>" name="foto" onchange="previewImg('gambar<?= $b['id_berita']; ?>')">
-                                <label class="custom-file-label" for="customFile">Masukkan Foto Anda</label>
+                                <label class="custom-file-label" for="customFile">Gambar Maksimal 2 Mb</label>
                                 
                             </div>
                             <?php if (!empty($b['foto'])): ?>

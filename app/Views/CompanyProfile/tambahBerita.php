@@ -78,7 +78,7 @@
                     <div class="col-sm-8">
                         <div class="custom-file">
                             <input type="file" class="custom-file-input form-control" id="foto" name="foto" onchange="previewImg('foto')">
-                            <label class="custom-file-label" for="customFile">Masukkan Gambar Koleksi</label>
+                            <label class="custom-file-label" for="customFile">Gambar Maksimal 2 Mb</label>
                             
                         </div>
                     </div>
