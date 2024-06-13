@@ -29,7 +29,7 @@
                         <label  class="col-sm-2 col-form-label">Tipe Berita</label>
                         <div class="col-sm-10">
                             <select class="form-select form-control" type="text" name="type" value="<?= old("type"); ?>">
-                                <!-- harus sesuai dengan urutan enum pada database -->
+                                
                                 <option selected>Pilih Tipe Berita yang akan di masukkan</option>
                                 <option <?= old("type") == 'Narasi'? 'selected' : 'Narasi' ?> value="Narasi">Narasi</option>
                                 <option <?= old("type") == 'Link'? 'selected' : 'Link' ?> value="Link">Link</option>
@@ -41,7 +41,7 @@
                         <label  class="col-sm-2 col-form-label">Kategori Berita</label>
                         <div class="col-sm-10">
                             <select class="form-select form-control" type="text" name="kategoriBerita" value="<?= old("kategoriBerita"); ?>">
-                                <!-- harus sesuai dengan urutan enum pada database -->
+                                
                                 <option selected>Pilih Kategori Berita</option>
                                 <option <?= old("kategoriBerita") == 'Regional'? 'selected' : 'Regional' ?> value="Regional">Regional</option>
                                 <option <?= old("kategoriBerita") == 'Nasional'? 'selected' : 'Nasional' ?> value="Nasional">Nasional</option>
@@ -66,7 +66,7 @@
                     <label for="isi" class="col-sm-2 col-form-label">Isi Berita</label>
                     <div class="col-sm-10">
                         <textarea class="form-control" name="isi" id="" value="<?= old("isi"); ?>"></textarea>
-                        <!-- <input type="text area" class="form-control" name="isi" value="<?= old("isi"); ?>"> -->
+                        
                     </div>
                 </div>
                 

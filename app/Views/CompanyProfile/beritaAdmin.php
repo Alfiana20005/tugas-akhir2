@@ -3,10 +3,7 @@
 <?= $this-> section('content'); ?>
 
 <div class="container-fluid">
-    <!-- Page Heading -->
-    <!-- <h1 class="h3 mb-4 text-gray-800">Data Petugas Terdaftar</h1> -->
 
-    <!-- <button class="btn btn-primary mb-3">Tambah data</button> -->
     <?php if (session()->get('level') == 'Admin'): ?>
         <a class="btn btn-primary mb-3" href="/tambahBerita" role="button">Tambah Berita</a>
         <?php  if(session()->getFlashdata('pesan')): ?>
@@ -45,8 +42,7 @@
                                         $no=1;
                                         foreach($dataBerita as $b): ?>   
                                         <tr>
-                                            <!-- <td style="text-align: center;">1</td> -->
-                                            <!-- <td style="text-align: center;"><img src="" alt="" style="width: 60px;"></td> -->
+                                            
                                             <td style="text-align: center;"><?= $no++; ?></td>
                                             <td style="text-align: center;"><img src="<?= base_url("img/berita/". $b['foto']); ?>" alt="" style="width: 60px;"></td>
                                             <td style="text-align: center;"><?= $b['judul']; ?></td>
@@ -82,7 +78,7 @@
             <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title fs-5" id="editBerita">Edit Berita</h4>
-                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                
             </div>
             <div class="modal-body">
                 <form action="<?= base_url()?>updateBerita/<?= $b['id_berita']; ?>" method="post" enctype="multipart/form-data" id="form">

@@ -31,7 +31,7 @@
                 <div class="menu-content pb-60 col-lg-9">
                   <div class="title text-center">
                     <h1 class="mb-10">Tim Kami</h1>
-                    <a href="/semuaPetugas" style="color: #850000;"><p>Lihat Semua Tim</p></a>
+                    <!-- <a href="/semuaPetugas" style="color: #850000;"><p>Lihat Semua Tim</p></a> -->
                   </div>
                 </div>
             </div>	
@@ -110,7 +110,10 @@
                 </div>
               </div>
 
+              
+
             </div>
+            <a href="/semuaPetugas" class="btn d-flex justify-content-center align-items-center my-4" style="background:#850000; color: white;"> Lihat Semua Tim</a>
 
         </div>
     </section><!-- End Our Team Section -->

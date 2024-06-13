@@ -5272,11 +5272,11 @@ body.mobile-nav-active #mobile-nav-toggle {
     
   }
 }
-@media (max-width: 991px) {
+/* @media (max-width: 991px) {
   #kategoriBerita {
     padding-left: 14px; 
     padding-right: 14px; 
     
   }
-}
+} */
 
