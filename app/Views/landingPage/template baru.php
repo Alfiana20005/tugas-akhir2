@@ -4,7 +4,7 @@
 		<!-- Mobile Specific Meta -->
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<!-- Favicon-->
-		<link rel="shortcut icon" href="img/fav.png">
+		<link rel="shortcut icon" href="img/logomuseum2.png">
 		<!-- Author Meta -->
 		<meta name="author" content="colorlib">
 		<!-- Meta Description -->
@@ -83,8 +83,13 @@
 				</div>
 				<div class="container main-menu">
 					<div class="row align-items-center justify-content-between d-flex">
-				      <div id="logo">
-				        <a href="/home"><img src="<?= base_url();?>img/terbaru-removebg-preview.png" alt="" style="width: 130px;" title="" /></a>
+				      <div id="logo" class="d-flex">
+				        <a href="/home"><img id="logoMuseum" src="<?= base_url();?>img/logomuseum2.png" alt="" title="" /></a>
+						<div id="text" class="text mx-2" style="color: white;">
+							<div>Museum Negeri</div>
+							<div id="ntb">Nusa Tenggara Barat</div>
+							
+						</div>
 				      </div>
 				      <nav id="nav-menu-container">
 				        <ul class="nav-menu" >
@@ -114,7 +119,7 @@
 				          </li>	
                   			<li><a href="/koleksi_page2"><strong>Koleksi</strong></a></li>
 				          	<li><a href="/perpustakaan2"><strong>Perpustakaan</strong></a></li>		          					          		          
-				          	<li><a href="/halamanLogin"><strong>LOGIN</strong></a></li>
+				          	<!-- <li><a href="/halamanLogin"><strong>LOGIN</strong></a></li> -->
 				        </ul>
 				      </nav><!-- #nav-menu-container -->					      		  
 					</div>

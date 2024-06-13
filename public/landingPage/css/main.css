@@ -5272,11 +5272,44 @@ body.mobile-nav-active #mobile-nav-toggle {
     
   }
 }
-/* @media (max-width: 991px) {
-  #kategoriBerita {
-    padding-left: 14px; 
-    padding-right: 14px; 
+@media (max-width: 991px) {
+  #logoMuseum {
+    width: 50px;
+  }
+}
+@media (min-width: 991px) {
+  #logoMuseum {
+    width: 60px;
+  }
+}
+@media (max-width: 991px) {
+  #text {
+    padding-top: 6px;
+    font-size: 7pt;
+  }
+}
+@media (min-width: 991px) {
+  #text {
+    padding-top: 10px;
+    font-size: 9pt;
+  }
+}
+@media (max-width: 991px) {
+  #ntb {
+    margin-top: -6px;
+  }
+}
+@media (min-width: 991px) {
+  #ntb {
+    margin-top: -6px;
     
   }
-} */
+}
+@media (max-width: 991px) {
+  #kategoriBerita {
+    padding-left: 40px; 
+    padding-right: 40px; 
+    
+  }
+}
 
