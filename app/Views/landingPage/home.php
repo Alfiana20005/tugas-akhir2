@@ -225,7 +225,7 @@
                     <div class="row d-flex justify-content-center">
 		                <div class="menu-content pb-70 col-lg-8">
 		                    <div class="title text-center">
-		                        <h1 class="mb-10">Gallery</h1>
+		                        <h1 class="mb-10">Galeri</h1>
 		                        <p></p>
 		                    </div>
 		                </div>

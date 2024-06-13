@@ -37,7 +37,7 @@
 									<a class="posts-title" href="<?= base_url("/lihatberita2/{$b['id_berita']}"); ?>"><h5><?= $b['judul']; ?></h5></a>
 									<p><?= $b['tanggal']; ?></p>
 									<p class="excert"><?= $b['isi_pendek']; ?></p>
-									<a href="<?= base_url("/lihatberita2/{$b['id_berita']}"); ?>" class="primary-btn">View More</a>
+									<a href="<?= base_url("/lihatberita2/{$b['id_berita']}"); ?>" class="primary-btn">Baca Berita</a>
 								</div>
 								<?php endif; ?>
                 			<?php endforeach; ?>

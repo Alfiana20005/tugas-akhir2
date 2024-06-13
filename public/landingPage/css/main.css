@@ -5263,7 +5263,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 @media (max-width: 991px) {
   #maps {
-    width: 330px;
+    width: 400px;
   }
 }
 @media (min-width: 991px) {

@@ -50,6 +50,7 @@
                         <option <?= old("kategori") == 'Kajian Koleksi'? 'selected' : 'Kajian Koleksi' ?> value="Kajian Koleksi">Kajian Koleksi</option>
                         <option <?= old("kategori") == 'Kajian Budaya'? 'selected' : 'Kajian Budaya' ?> value="Kajian Budaya">Kajian Budaya</option>
                         <option <?= old("kategori") == 'Permuseuman'? 'selected' : 'Permuseuman' ?> value="Permuseuman">Permuseuman</option>
+                        <option <?= old("kategori") == 'Resensi Buku'? 'selected' : 'Resensi Buku' ?> value="Resensi Buku">Resensi Buku</option>
                     </select>
                 </div>
             </div>

@@ -230,18 +230,7 @@
 								<div class="single-sidebar-widget post-category-widget">
 									<h4 class="category-title">Kategori Tulisan</h4>
 									<ul class="cat-list">
-										<li>
-											<a href="/kajian2" class="d-flex justify-content-between">
-												<p>Semua Kajian</p>
-												<!-- <p>37</p> -->
-											</a>
-										</li>
-										<li>
-											<a href="/kajianKategori2/Opini" class="d-flex justify-content-between">
-												<p>Opini</p>
-												<!-- <p>24</p> -->
-											</a>
-										</li>
+										
 										<li>
 											<a href="/kajianKategori2/Kajian Koleksi" class="d-flex justify-content-between">
 												<p>Kajian Koleksi</p>
@@ -261,9 +250,27 @@
 											</a>
 										</li>
 										<li>
+											<a href="/kajianKategori2/Resensi Buku" class="d-flex justify-content-between">
+												<p>Resensi Buku</p>
+												<!-- <p>09</p> -->
+											</a>
+										</li>
+										<li>
 											<a href="/kajianKategori2/Artikel" class="d-flex justify-content-between">
 												<p>Artikel</p>
 												<!-- <p>09</p> -->
+											</a>
+										</li>
+										<li>
+											<a href="/kajianKategori2/Opini" class="d-flex justify-content-between">
+												<p>Opini</p>
+												<!-- <p>24</p> -->
+											</a>
+										</li>
+										<li>
+											<a href="/kajian2" class="d-flex justify-content-between">
+												<p>Semua Kajian</p>
+												<!-- <p>37</p> -->
 											</a>
 										</li>
 										<!-- <li>
