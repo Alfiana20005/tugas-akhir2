@@ -29,7 +29,7 @@
 				</button>
 					<div class="row align-items-center">
 						<div class="col-lg-6 info-left">
-							<img class="img-fluid" src="img/sekardiyu/sekardiyu1.jpeg" alt="">
+							<img class="img-fluid" src="img/sekardiyu/baru.jpeg" alt="">
 						</div>
 						<div class="col-lg-6 info-right">
 							<h6>Logo Museum Negeri NTB</h6>
