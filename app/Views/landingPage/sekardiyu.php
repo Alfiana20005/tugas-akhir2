@@ -21,7 +21,12 @@
 
 <!-- Start about-info Area -->
 <section class="about-info-area section-gap">
+
 				<div class="container">
+				<button class="genric-btn primary small"> 
+					<div>Kuda Sekardiyu [No Koleksi: 2955] Terbuat dari kulit kerbau</div>
+					<div></div>
+				</button>
 					<div class="row align-items-center">
 						<div class="col-lg-6 info-left">
 							<img class="img-fluid" src="img/sekardiyu/sekardiyu1.jpeg" alt="">
@@ -54,14 +59,20 @@
 		                </div>
 		            </div>					 -->
 					<div class="row">
+					
 						<div class="col-lg-4 col-md-6">
+						
 							<div class="single-other-issue">
 								<div class="thumb">
-									<img class="img-fluid mb-2" src="img/sekardiyu/sekardiyu2.png" alt="">					
+									<img class="img-fluid mb-2" src="img/sekardiyu/sekardiyu2.png" alt="">														
 								</div>
 								
+								
+								
 							</div>
+							
 						</div>
+						
 						<div class="col-lg-4 col-md-6">
 							<div class="single-other-issue">
 								<div class="thumb">
