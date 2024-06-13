@@ -158,6 +158,7 @@ $routes->get('/struktur2', 'C_LandingPage::struktur2');
 $routes->get('/ruangPamer2', 'C_LandingPage::ruangPamer2');
 $routes->get('/tatatertib2', 'C_LandingPage::tatatertib2');
 $routes->get('/berita2', 'C_LandingPage::berita2');
+$routes->post('/berita2', 'C_LandingPage::berita2');
 $routes->get('/lihatberita2', 'C_LandingPage::lihatberita2');
 $routes->get('/lihatberita2/(:segment)', 'C_LandingPage::lihatberita2/$1');
 

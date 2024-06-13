@@ -245,9 +245,18 @@
 								</div> -->
 								<div class="single-sidebar-widget popular-post-widget">
 									<h4 class="popular-title">Berita Terkait</h4>
+									<!-- <a href="#" class="genric-btn primary-border my-2">  Regional  </a>
+									<a href="#" class="genric-btn primary-border my-2">  Nasional  </a> -->
+									<form method="POST" action="">
+									<div class="col-lg-12 d-flex">
+										<button id="kategoriBerita"  class="genric-btn primary-border small my-2 mx-2 <?= $kategoriBerita == 'Regional' ? 'active' : '' ?>" name="kategoriBerita" value="Regional" >Regional</button>
+										<button id="kategoriBerita" class="genric-btn primary-border small my-2  mx-2 <?= $kategoriBerita == 'Nasional' ? 'active' : '' ?>" name="kategoriBerita" value="Nasional">Nasional</button>
+									</div>
+									</form>
+
 									<div class="popular-post-list">
 										<?php 
-										foreach($dataBerita as $b):
+										foreach($berita as $b):
 										if ($b['type'] == 'Link'): ?>
 										<div class="single-post-list d-flex flex-row align-items-center">
 											<div class="thumb">

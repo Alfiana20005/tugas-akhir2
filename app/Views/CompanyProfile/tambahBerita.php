@@ -38,6 +38,18 @@
                         </div>
                 </div>
                 <div class="row mb-3">
+                        <label  class="col-sm-2 col-form-label">Kategori Berita</label>
+                        <div class="col-sm-10">
+                            <select class="form-select form-control" type="text" name="kategoriBerita" value="<?= old("kategoriBerita"); ?>">
+                                <!-- harus sesuai dengan urutan enum pada database -->
+                                <option selected>Pilih Kategori Berita</option>
+                                <option <?= old("kategoriBerita") == 'Regional'? 'selected' : 'Regional' ?> value="Regional">Regional</option>
+                                <option <?= old("kategoriBerita") == 'Nasional'? 'selected' : 'Nasional' ?> value="Nasional">Nasional</option>
+                                
+                            </select>
+                        </div>
+                </div>
+                <div class="row mb-3">
                     <label for="nip" class="col-sm-2 col-form-label">Judul</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control " name="judul" value="<?= old('judul'); ?>">

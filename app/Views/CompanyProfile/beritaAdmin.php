@@ -31,6 +31,7 @@
                                             <th style="text-align: center;">Judul Berita</th> 
                                             <th style="text-align: center;">Isi Berita</th>
                                             <th style="text-align: center;">Tipe Berita</th>
+                                            <th style="text-align: center;">Kategori Berita</th>
                                             
                                             <th style="text-align: center;">Tanggal</th>
                                             
@@ -51,6 +52,7 @@
                                             <td style="text-align: center;"><?= $b['judul']; ?></td>
                                             <td style="text-align: center; width: 400px; max-width: 400px;" ><?= $b['isi']; ?></td>
                                             <td style="text-align: center;"><?= $b['type']; ?></td>
+                                            <td style="text-align: center;"><?= $b['kategoriBerita']; ?></td>
                                             <td style="text-align: center;"><?= $b['tanggal']; ?></td>
                                             <td style="text-align: center;">
                                                 <a href="" class="btn btn-success btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#editBerita<?= $b['id_berita']; ?>" data-bs-whatever="@getbootstrap">Edit</a>
@@ -105,6 +107,18 @@
                             <option selected>Pilih </option>
                             <option <?= $b['type'] == 'Narasi'? 'selected' : 'Narasi' ?> value="Narasi">Narasi</option>
                             <option <?= $b['type'] == 'Link'? 'selected' : 'Link' ?> value="Link">Link</option>
+                            
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <label for="" class="col-sm-3 col-form-label">Kategori Berita</label>
+                    <div class="col-sm-9">
+                        <select class="form-select form-control" type="text" name="kategoriBerita"  value="<?= $b['kategoriBerita']; ?>">
+                                    <!-- harus sesuai dengan urutan enum pada database -->
+                            <option selected>Pilih </option>
+                            <option <?= $b['kategoriBerita'] == 'Regional'? 'selected' : 'Regional' ?> value="Regional">Regional</option>
+                            <option <?= $b['kategoriBerita'] == 'Nasional'? 'selected' : 'Nasional' ?> value="Nasional">Nasional</option>
                             
                         </select>
                     </div>

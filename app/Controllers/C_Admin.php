@@ -235,6 +235,7 @@ class C_Admin extends BaseController
             'judul' => $this->request->getVar('judul'),
             'tanggal' => $this->request->getVar('tanggal'),
             'type' => $this->request->getVar('type'),
+            'kategoriBerita' => $this->request->getVar('kategoriBerita'),
             'isi' => $this->request->getVar('isi'),
             'foto' => $fotoName,
             
@@ -267,6 +268,7 @@ class C_Admin extends BaseController
             'judul' => $this->request->getVar('judul'),
             'tanggal' => $this->request->getVar('tanggal'),
             'type' => $this->request->getVar('type'),
+            'kategoriBerita' => $this->request->getVar('kategoriBerita'),
             'isi' => $this->request->getVar('isi'),
             'foto' => $this->request->getVar('foto'),
             
@@ -303,6 +305,7 @@ class C_Admin extends BaseController
                     'judul' => $newDataBerita['judul'],
                     'tanggal' => $newDataBerita['tanggal'],
                     'type' => $newDataBerita['type'],
+                    'kategoriBerita' => $newDataBerita['kategoriBerita'],
                     'isi' => $newDataBerita['isi'],
                     'foto' => $newDataBerita['foto'],
                 ]);

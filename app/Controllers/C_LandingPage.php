@@ -351,6 +351,9 @@ class C_LandingPage extends BaseController
     }
     public function berita2(): string
     {
+        $kategoriBerita = $this->request->getPost('kategoriBerita') ?? 'Regional'; // Default ke 'Regional'
+        $data['berita'] = $this->M_Berita->getBeritaByKategori($kategoriBerita);
+        $data['kategoriBerita'] = $kategoriBerita;
         $data_berita = $this->M_Berita->getBeritaBaru();
         // $berita = $this->M_Berita->getBerita($id_berita);
         foreach ($data_berita as &$berita) {
@@ -366,6 +369,8 @@ class C_LandingPage extends BaseController
             'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
             'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
             'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
+            'berita' => $this->M_Berita->getBeritaByKategori($kategoriBerita),
+            'kategoriBerita' => $kategoriBerita,
             // 'berita' => $berita
         ];
         
