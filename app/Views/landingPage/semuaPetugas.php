@@ -40,7 +40,7 @@
 										foreach($dataPetugas as $ptgs):
 										?>
 
-              <div class="col-lg-2  d-flex align-items-stretch">
+              <div class="col-lg-2 col-md-6 d-flex align-items-stretch">
                 <div class="member" data-aos="fade-up">
                   <div class="member-img">
                     <img src="<?= base_url('img/semuaPetugas/' . $ptgs['foto']); ?>" class="img-fluid" alt="">
