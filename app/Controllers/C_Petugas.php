@@ -45,23 +45,23 @@ class C_Petugas extends BaseController
         //validation
         $rules= [
             'nama' => [
-                'rules' => 'required|max_length[30]|is_unique[petugas.nama]',
+                'rules' => 'required|max_length[50]|is_unique[petugas.nama]',
                 'errors' => ['required'=>'Nama harus diisi']
             ],
             'username' => [
-                'rules' => 'required|max_length[8]|is_unique[petugas.username]',
+                'rules' => 'required|max_length[10]|is_unique[petugas.username]',
                 'errors' => [
                     'required'=>'Username tidak boleh kosong',
-                    'max_length' => 'username maximal 8 huruf',
+                    'max_length' => 'username maximal 10 huruf',
                     'is_unique' => 'username tidak boleh sama'
     
                 ]
             ],
             'password' => [
-                'rules' => 'required|max_length[8]',
+                'rules' => 'required|max_length[10]',
                 'errors' => [
                     'required'=>'password tidak boleh kosong',
-                    'max_length' => 'password maximal 8 huruf',
+                    'max_length' => 'password maximal 10 huruf',
                 ]
             ],
             'email' => [
