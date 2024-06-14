@@ -27,7 +27,7 @@ class M_IsiKajian extends Model
     public function getDataByIdKajian($id_kajian)
     {
         return $this->where('id_kajian', $id_kajian)
-                    ->orderBy('id_dataKajian', 'DESC')
+                    ->orderBy('id_dataKajian', 'ASC')
                     ->findAll();
     }
     public function getBeritaTerbaru($limit)
