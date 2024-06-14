@@ -48,8 +48,23 @@
 									// 	return $text;
 									// }
 
+									if (!function_exists('nl2p')) {
+										function nl2p($text) {
+											$text = trim($text);
+											$paragraphs = preg_split('/\n\s*\n/', $text);
+											$text = '';
+											foreach ($paragraphs as $paragraph) {
+												$paragraph = trim($paragraph);
+												if (!empty($paragraph)) {
+													$text .= '<p>' . esc($paragraph) . '</p>';
+												}
+											}
+											return $text;
+										}
+									}
+
 									?>
-									<p class="excert " ><?= $data['narasi']; ?></p>
+									<p class="excert " ><?= nl2p($data['narasi']); ?></p>
                                     <div class="d-flex align-items-center justify-content-center my-4"> 
                                         <img src="<?= base_url("img/kajian/". $data['foto']); ?>" class="img-fluid" alt="" style="width: 300px; ">
                                     </div>
