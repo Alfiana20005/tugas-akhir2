@@ -19,55 +19,55 @@
     <div class="modal fade" id="tambahKegiatan" tabindex="-1" aria-labelledby="tambahKegiatan" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-        <div class="modal-header">
-            <h4 class="modal-title fs-5" id="tambahKegiatan">Tambahkan Publikasi</h4>
-            <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
-        </div>
-        <div class="modal-body">
-            <form action="/savePublikasi" method="post" enctype="multipart/form-data" id="form">
-            <div class="row mb-2">
-                <label for="email" class="col-sm-3 col-form-label">Judul</label>
-                <div class="col-sm-9">
-                    <input type="text" class="form-control" id="recipient-name" name="judul">
-                </div>
+            <div class="modal-header">
+                <h4 class="modal-title fs-5" id="tambahKegiatan">Tambahkan Publikasi</h4>
+                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
             </div>
-            <div class="row mb-2">
-                <label for="email" class="col-sm-3 col-form-label">Tanggal</label>
-                <div class="col-sm-9">
-                    <input type="date" class="form-control" id="recipient-name" name="tanggal">
-                </div>
-            </div>
-            <div class="row mb-2">
-                <label for="email" class="col-sm-3 col-form-label">link</label>
-                <div class="col-sm-9">
-                    <input type="text" class="form-control" id="recipient-name" name="link">
-                </div>
-            </div>
-            
-            <div class="row mb-2">
-                <label for="foto" class="col-sm-3 col-form-label">Foto</label>
-                    <div class="col-sm-2">
-                        <img src="/img/default.jpg" alt="" class="img-thumbnail img-preview">
+            <div class="modal-body">
+                <form action="/savePublikasi" method="post" enctype="multipart/form-data" id="form">
+                <div class="row mb-2">
+                    <label for="email" class="col-sm-3 col-form-label">Judul</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="recipient-name" name="judul">
                     </div>
-                    <div class="col-sm-7">
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input form-control" id="gambar" name="foto" onchange="previewImg('gambar')">
-                            <label class="custom-file-label" for="customFile">Gambar Maksimal 2 Mb</label>
-                            <?php if (!empty($data_publikasi['foto'])): ?>
-                                <div class="my-2">
-                                    <p>Foto Saat Ini:</p>
-                                    <img src="<?= base_url('img/publikasi/' . $data_publikasi['foto']); ?>" alt="Foto Petugas" width="100">
-                                </div>
-                            <?php endif; ?>
+                </div>
+                <div class="row mb-2">
+                    <label for="email" class="col-sm-3 col-form-label">Tanggal</label>
+                    <div class="col-sm-9">
+                        <input type="date" class="form-control" id="recipient-name" name="tanggal">
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <label for="email" class="col-sm-3 col-form-label">link</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="recipient-name" name="link">
+                    </div>
+                </div>
+                
+                <div class="row mb-2">
+                    <label for="foto" class="col-sm-3 col-form-label">Foto</label>
+                        <div class="col-sm-2">
+                            <img src="/img/default.jpg" alt="" class="img-thumbnail img-preview">
                         </div>
-                    </div>
+                        <div class="col-sm-7">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input form-control" id="gambar" name="foto" onchange="previewImg('gambar')">
+                                <label class="custom-file-label" for="customFile">Gambar Maksimal 2 Mb</label>
+                                <?php if (!empty($data_publikasi['foto'])): ?>
+                                    <div class="my-2">
+                                        <p>Foto Saat Ini:</p>
+                                        <img src="<?= base_url('img/publikasi/' . $data_publikasi['foto']); ?>" alt="Foto Petugas" width="100">
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                </div>
+                
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
             </div>
-            
-            <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Simpan</button>
-        </div>
-        </div>W
+            </div>
             </form>
         </div>
         

@@ -352,7 +352,19 @@ class C_LandingPage extends BaseController
     public function berita2(): string
     {
         $kategoriBerita = $this->request->getPost('kategoriBerita') ?? 'Regional'; // Default ke 'Regional'
-        $data['berita'] = $this->M_Berita->getBeritaByKategori($kategoriBerita);
+        $lihatSemua = $this->request->getGet('lihatSemua') ?? false;
+        $limit = $lihatSemua ? null : 3; // Jika 'lihatSemua' aktif, tampilkan semua berita. Jika tidak, tampilkan 2 berita.
+    
+        if ($lihatSemua) {
+            $data['berita'] = $this->M_Berita->getBeritaByKategoriAll($kategoriBerita);
+        } else {
+            $data['berita'] = $this->M_Berita->getBeritaByKategori($kategoriBerita, $limit);
+        }
+
+        // var_dump($limit);
+        // var_dump($data['berita']);
+        
+        // $data['berita'] = $this->M_Berita->getBeritaByKategori($kategoriBerita, 1);
         $data['kategoriBerita'] = $kategoriBerita;
         $data_berita = $this->M_Berita->getBeritaBaru();
         // $berita = $this->M_Berita->getBerita($id_berita);
@@ -369,8 +381,9 @@ class C_LandingPage extends BaseController
             'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
             'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
             'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
-            'berita' => $this->M_Berita->getBeritaByKategori($kategoriBerita),
+            'berita' => $data['berita'],
             'kategoriBerita' => $kategoriBerita,
+            'lihatSemua' => $lihatSemua, 
             // 'berita' => $berita
         ];
         

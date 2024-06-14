@@ -39,8 +39,24 @@ class M_Berita extends Model
                     ->limit($limit)
                     ->findAll();
     }
-    public function getBeritaByKategori($kategoriBerita) {
+    // public function getBeritaByKategori($kategoriBerita, $limit) {
+    //     return $this->where('kategoriBerita', $kategoriBerita)
+    //                 ->limit($limit)
+    //                 ->findAll();
+    // }
 
+    public function getBeritaByKategori($kategoriBerita, $limit = null)
+{
+    $builder = $this->db->table('berita');
+    $builder->where('kategoriBerita', $kategoriBerita);
+
+    if ($limit !== null) {
+        $builder->limit($limit);
+    }
+
+    return $builder->get()->getResultArray();
+}
+    public function getBeritaByKategoriAll($kategoriBerita) {
         return $this->where('kategoriBerita', $kategoriBerita)
                     ->findAll();
     }

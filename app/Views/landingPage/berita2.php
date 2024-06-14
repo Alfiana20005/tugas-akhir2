@@ -67,7 +67,7 @@
 										if ($b['type'] == 'Link'): ?>
 										<div class="single-post-list d-flex flex-row align-items-center">
 											<div class="thumb">
-												<img class="img-fluid" src="img/blog/pp1.jpg" alt="">
+												<!-- <img class="img-fluid" src="img/blog/pp1.jpg" alt=""> -->
 											</div>
 											<div class="details">
 												<a href="<?= $b['isi'] ?>" target="_blank"><h6>> <?= $b['judul']; ?></h6></a>
@@ -78,6 +78,11 @@
                							<?php endforeach; ?>
 														
 									</div>
+									<?php if (count($berita) >= 2 && !$lihatSemua): ?>
+										<div>
+											<a href="?kategoriBerita=<?= $kategoriBerita ?>&lihatSemua=1" style="color: #850000;">Lihat semua. . .</a>
+										</div>
+									<?php endif; ?>
 								</div>
 								
 							</div>
