@@ -78,7 +78,7 @@
                							<?php endforeach; ?>
 														
 									</div>
-									<?php if (count($berita) >= 2 && !$lihatSemua): ?>
+									<?php if (count($berita) >= 3 && !$lihatSemua): ?>
 										<div>
 											<a href="?kategoriBerita=<?= $kategoriBerita ?>&lihatSemua=1" style="color: #850000;">Lihat semua. . .</a>
 										</div>
