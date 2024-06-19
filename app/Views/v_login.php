@@ -94,6 +94,7 @@
                                     
                                     <div class="text-center">
                                         <a class="small" href="/home">Museum Negeri Nusa Tenggara Barat</a>
+                                        
                                     </div>
                                 </div>
                             </div>

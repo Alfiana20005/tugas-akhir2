@@ -85,7 +85,7 @@ class C_Login extends BaseController
         session()->remove('foto');
         
         session()->setFlashdata('pesanlogout', 'Logout Berhasil');
-            return redirect()->to(base_url('/'));
+            return redirect()->to(base_url('/halamanLogin'));
     }
     
     
