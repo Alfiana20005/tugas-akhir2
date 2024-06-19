@@ -184,3 +184,10 @@ $routes->get('/pesanUser', 'C_LandingPage::pesanUser');
 $routes->get('/semuaPetugas', 'C_LandingPage::semuaPetugas');
 $routes->get('/sekardiyu', 'C_LandingPage::sekardiyu');
 $routes->get('/rencanaStrategis', 'C_LandingPage::rencanaStrategis');
+
+
+// Perpustakaan 
+$routes->get('/inputData', 'C_Perpustakaan::index');
+$routes->post('/saveDataBuku', 'C_Perpustakaan::saveDataBuku');
+// 
+

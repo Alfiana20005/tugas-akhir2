@@ -68,11 +68,14 @@
                             <select class="form-select form-control" type="text" name="level" value="<?= $petugas['level']; ?>">
                                 <!-- harus sesuai dengan urutan enum pada database -->
                                 <option selected>Pilih jabatan</option>
-                                <option <?= $petugas['level'] == 'Kepala Museum'? 'selected' : '' ?> value="1">Kepala Museum</option>
-                                <option <?= $petugas['level'] == 'Petugas Pengkajian'? 'selected' : '' ?> value="2">Petugas Pengkajian</option>
-                                <option <?= $petugas['level'] == 'Petugas Pelayanan'? 'selected' : '' ?> value="3">Petugas Pelayanan</option>
-                                <option <?= $petugas['level'] == 'Ketua Pengkajian'? 'selected' : '' ?> value="4">Ketua Pengkajian</option>
-                                <option <?= $petugas['level'] == 'Admin'? 'selected' : '' ?> value="5">Admin</option>
+                                <option <?= $petugas['level'] == 'Kepala Museum'? 'selected' : '' ?> value="Kepala Museum">Kepala Museum</option>
+                                <option <?= $petugas['level'] == 'Petugas Pengkajian'? 'selected' : '' ?> value="Petugas Pengkajian">Petugas Pengkajian</option>
+                                <option <?= $petugas['level'] == 'Petugas Pelayanan'? 'selected' : '' ?> value="Petugas Pelayanan">Petugas Pelayanan</option>
+                                <option <?= $petugas['level'] == 'Ketua Pengkajian'? 'selected' : '' ?> value="Ketua Pengkajian">Ketua Pengkajian</option>
+                                <option <?= $petugas['level'] == 'Admin'? 'selected' : '' ?> value="Admin">Admin</option>
+                                <option <?= $petugas['level'] == 'Admin/Pelayanan'? 'selected' : '' ?> value="Admin/Pelayanan">Admin/Pelayanan</option>
+                                <option <?= $petugas['level'] == 'Admin/Pengkajian'? 'selected' : '' ?> value="Admin/Pengkajian">Admin/Pengkajian</option>
+                                <option <?= $petugas['level'] == 'Perpustakaan'? 'selected' : '' ?> value="Perpustakaan">Perpustakaan</option>
                             </select>
                         </div>
                 </div>

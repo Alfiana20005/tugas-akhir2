@@ -251,6 +251,197 @@
     <?php endif; ?>
 
 
+    <!-- ADMIN/Pengkajian -->
+    <?php if (session()->get('level') == 'Admin/Pengkajian'): ?>
+    <!-- <hr class="sidebar-divider my-0"> -->
+    <li class="nav-item">
+        <a class="nav-link" href="/petugas">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Daftar Hak Akses Petugas</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/strukturOrganisasi">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Struktur Organisasi</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/koleksiAdmin">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Koleksi</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/kajianAdmin">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Kajian</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/tambahPublikasi">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Publikasi</span></a>
+    </li>
+    
+    <li class="nav-item">
+        <a class="nav-link" href="/beritaAdmin">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Berita</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/tambahKegiatan">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Kegiatan</span></a>
+    </li>
+    
+    <li class="nav-item">
+        <a class="nav-link" href="/pesanAdmin">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Pesan</span></a>
+    </li>
+    
+    <li class="nav-item">
+        <a class="nav-link" href="/galleryAdmin">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Galeri</span></a>
+    </li>
+    <hr class="sidebar-divider">
+
+    <div class="sidebar-heading mt-3">
+        Inventaris Koleksi
+    </div>
+
+    <li class="nav-item">
+        <a class="nav-link" href="/tambahdata">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Tambah Data Koleksi</span></a>
+    </li>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+            aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Kategori Koleksi</span>
+        </a>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Pilih Kategori:</h6>
+                    <a class="collapse-item" href="<?= base_url("/koleksi/01"); ?>">Geologika</a>
+                    <a class="collapse-item" href="<?= base_url("/koleksi/02"); ?>">Biologika</a>
+                    <a class="collapse-item" href="<?= base_url("/koleksi/03"); ?>">Etnografika</a>
+                    <a class="collapse-item" href="<?= base_url("/koleksi/04"); ?>">Arkeologika</a>
+                    <a class="collapse-item" href="<?= base_url("/koleksi/05"); ?>">Historika</a>
+                    <a class="collapse-item" href="<?= base_url("/koleksi/06"); ?>">Numismatika</a>
+                    <a class="collapse-item" href="<?= base_url("/koleksi/07"); ?>">Filologika</a>
+                    <a class="collapse-item" href="<?= base_url("/koleksi/08"); ?>">Keramologika</a>
+                    <a class="collapse-item" href="<?= base_url("/koleksi/09"); ?>">Seni Rupa</a>
+                    <a class="collapse-item" href="<?= base_url("/koleksi/10"); ?>">Teknologika</a>
+                    <a class="collapse-item" href="<?= base_url("/koleksi/11"); ?>">Lain-lain</a>
+            
+            </div>
+        </div>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/perawatan">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Perawatan</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/laporan" >
+            <i class="fas fa-print fa-sm mr-2 text-gray-400"></i>
+            <span>Laporan Perawatan</span></a>
+    </li>
+    <?php endif; ?>
+    <!-- Divider -->
+
+
+    <!-- ADMIN/Pelayanan -->
+    <?php if (session()->get('level') == 'Admin/Pelayanan'): ?>
+    <!-- <hr class="sidebar-divider my-0"> -->
+    <li class="nav-item">
+        <a class="nav-link" href="/petugas">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Daftar Hak Akses Petugas</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/strukturOrganisasi">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Struktur Organisasi</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/koleksiAdmin">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Koleksi</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/kajianAdmin">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Kajian</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/tambahPublikasi">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Publikasi</span></a>
+    </li>
+    
+    <li class="nav-item">
+        <a class="nav-link" href="/beritaAdmin">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Berita</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/tambahKegiatan">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Kegiatan</span></a>
+    </li>
+    
+    <li class="nav-item">
+        <a class="nav-link" href="/pesanAdmin">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Pesan</span></a>
+    </li>
+    
+    <li class="nav-item">
+        <a class="nav-link" href="/galleryAdmin">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Galeri</span></a>
+    </li>
+    <hr class="sidebar-divider">
+
+    <div class="sidebar-heading mt-3">
+        Data Pengunjung
+    </div>
+    <li class="nav-item">
+        <a class="nav-link" href="/pengunjung">
+            <i class="fas fa-fw fa-database"></i>
+            <span>Tambah Data Pengunjung</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/rekapitulasi">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Rekapitulasi</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/statistik">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Statistik</span></a>
+    </li>
+
+
+    <?php endif; ?>
+    <!-- Divider -->
+
+
+    <?php if (session()->get('level') == 'Perpustakaan'): ?>
+    <!-- <hr class="sidebar-divider my-0"> -->
+    <li class="nav-item">
+        <a class="nav-link" href="/inputData">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Data Buku</span></a>
+    </li>
+
+    <!-- <hr class="sidebar-divider"> -->
+    <?php endif; ?>
+
+
 
     <hr class="sidebar-divider">
     

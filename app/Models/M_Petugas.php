@@ -46,6 +46,11 @@ class M_Petugas extends Model
 
         return $totalPetugas;
     }
+    public function getUserRoles($id_petugas) {
+        $db = \Config\Database::connect();
+        $query = $db->query("SELECT level FROM petugas WHERE id_petugas = ?", [$id_petugas]);
+        return $query->getResultArray();
+    }
   
 
     

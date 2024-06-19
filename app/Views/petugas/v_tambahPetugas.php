@@ -61,11 +61,14 @@
                             <select class="form-select form-control" type="text" name="level" value="<?= old("level"); ?>">
                                 <!-- harus sesuai dengan urutan enum pada database -->
                                 <option selected>Pilih jabatan</option>
-                                <option <?= old("level") == '1'? 'selected' : 'Kepala Museum' ?> value="1">Kepala Museum</option>
-                                <option <?= old("level") == '2'? 'selected' : 'Petugas Pengkajian' ?> value="2">Petugas Pengkajian</option>
-                                <option <?= old("level") == '3'? 'selected' : 'Petugas Pelayanan' ?> value="3">Petugas Pelayanan</option>
-                                <option <?= old("level") == '4'? 'selected' : 'Ketua Pengkajian' ?> value="4">Ketua Pengkajian</option>
-                                <option <?= old("level") == '5'? 'selected' : 'Admin' ?> value="5">Admin</option>
+                                <option <?= old("level") == 'Kepala Museum'? 'selected' : 'Kepala Museum' ?> value="Kepala Museum">Kepala Museum</option>
+                                <option <?= old("level") == 'Petugas Pengkajian'? 'selected' : 'Petugas Pengkajian' ?> value="Petugas Pengkajian">Petugas Pengkajian</option>
+                                <option <?= old("level") == 'Petugas Pelayanan'? 'selected' : 'Petugas Pelayanan' ?> value="Petugas Pelayanan">Petugas Pelayanan</option>
+                                <option <?= old("level") == 'Ketua Pengkajian'? 'selected' : 'Ketua Pengkajian' ?> value="Ketua Pengkajian">Ketua Pengkajian</option>
+                                <option <?= old("level") == 'Admin'? 'selected' : 'Admin' ?> value="Admin">Admin</option>
+                                <option <?= old("level") == 'Admin/Pelayanan'? 'selected' : 'Admin/Pelayanan' ?> value="Admin/Pelayanan">Admin/Pelayanan</option>
+                                <option <?= old("level") == 'Admin/Pengkajian'? 'selected' : 'Admin/Pengkajian' ?> value="Admin/Pengkajian">Admin/Pengkajian</option>
+                                <option <?= old("level") == 'Perpustakaan'? 'selected' : 'Perpustakaan' ?> value="Perpustakaan">Perpustakaan</option>
                             </select>
                         </div>
                 </div>

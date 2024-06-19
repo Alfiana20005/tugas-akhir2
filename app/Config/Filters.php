@@ -33,6 +33,9 @@ class Filters extends BaseConfig
         'filterPengkajian' => \App\Filters\FilterPengkajian::class,
         'filterKepala' => \App\Filters\FilterKepala::class,
         'fiterKetuaPengkajian' => \App\Filters\FilterKetuaPengkajian::class,
+        'filterAdminPengkajian' => \App\Filters\FilterAdminPengkajian::class,
+        'filterAdminPelayanan' => \App\Filters\FilterAdminPelayanan::class,
+        'filterPerpustakaan' => \App\Filters\FilterPerpustakaan::class,
         // 'filterPelayanan' => \App\Filters\FilterPelayanan::class,
         // 'filterPengkajian' => \App\Filters\FilterPengkajian::class,
         // 'filterKepala' => \App\Filters\FilterKepala::class,
@@ -143,6 +146,60 @@ class Filters extends BaseConfig
                     
                 ]
             ],
+            'filterAdminPengkajian' =>[
+                'except' => [
+                    '/login','c_Login/*','/halamanLogin','c_Login', 
+                    'c_LandingPage/*',  'c_LandingPage/','/','/home', 
+                    '/berita2','/lihatberita2','/lihatberita2/*', 
+                    '/visimisi2','/sejarah2','/struktur2', '/semuaPetugas',
+                    '/ruangPamer2', '/kontak', '/pesanUser',
+                    '/kegiatan2', '/lihatKegiatan2', '/lihatKegiatan2/*',
+                    '/kajian2', '/kajianKategori2/*',
+                    '/tulisan2','/tulisan2/*',
+                    '/koleksi_page2', '/koleksi_detail2', '/koleksi_detail2/*',
+                    '/publikasi2',
+                    '/perpustakaan2',
+                    '/sekardiyu',
+                    '/rencanaStrategis'
+                    
+                ]
+            ],
+            'filterAdminPelayanan' =>[
+                'except' => [
+                    '/login','c_Login/*','/halamanLogin','c_Login', 
+                    'c_LandingPage/*',  'c_LandingPage/','/','/home', 
+                    '/berita2','/lihatberita2','/lihatberita2/*', 
+                    '/visimisi2','/sejarah2','/struktur2', '/semuaPetugas',
+                    '/ruangPamer2', '/kontak', '/pesanUser',
+                    '/kegiatan2', '/lihatKegiatan2', '/lihatKegiatan2/*',
+                    '/kajian2', '/kajianKategori2/*',
+                    '/tulisan2','/tulisan2/*',
+                    '/koleksi_page2', '/koleksi_detail2', '/koleksi_detail2/*',
+                    '/publikasi2',
+                    '/perpustakaan2',
+                    '/sekardiyu',
+                    '/rencanaStrategis'
+                    
+                ]
+            ],
+            'filterPerpustakaan' =>[
+                'except' => [
+                    '/login','c_Login/*','/halamanLogin','c_Login', 
+                    'c_LandingPage/*',  'c_LandingPage/','/','/home', 
+                    '/berita2','/lihatberita2','/lihatberita2/*', 
+                    '/visimisi2','/sejarah2','/struktur2', '/semuaPetugas',
+                    '/ruangPamer2', '/kontak', '/pesanUser',
+                    '/kegiatan2', '/lihatKegiatan2', '/lihatKegiatan2/*',
+                    '/kajian2', '/kajianKategori2/*',
+                    '/tulisan2','/tulisan2/*',
+                    '/koleksi_page2', '/koleksi_detail2', '/koleksi_detail2/*',
+                    '/publikasi2',
+                    '/perpustakaan2',
+                    '/sekardiyu',
+                    '/rencanaStrategis'
+                    
+                ]
+            ],
             
 
 
@@ -211,6 +268,60 @@ class Filters extends BaseConfig
                     '/dataPerawatan/*', '/tambahPerawatan/*', 
                     '/simpanPerawatan/*', '/simpanPerawatan','/perawatan', '/tambahJadwal','/simpanJadwal', 
                     'detailJadwal/*', '/updateStatus', 'deleteJadwal/*', '/laporan', 
+
+                 ]
+            ],
+            'filterAdminPengkajian' =>[
+                'except' => [
+                    '/login', 'C_Login/*', '/logout', '/dashboard', '/halamanLogin', 'C_Login', 
+                    'C_Koleksi/*', 'C_Koleksi/',  'profile/*', '/updateProfile/*', 'C_Petugas/*', '/profile',
+                    '/tambahdata','/saveData','/detailKoleksi', '/detailKoleksi/*','hapus/*', 'ubahKoleksi/*', 
+                    '/updateKoleksi/*', '/koleksi/*', '/updateKeadaan',
+                    '/grafikKoleksi',
+                    'C_Perawatan/*', 'C_Perawatan/',
+                    '/dataPerawatan/*', '/tambahPerawatan/*', 
+                    '/simpanPerawatan/*', '/simpanPerawatan','/perawatan', '/tambahJadwal','/simpanJadwal', 
+                    'detailJadwal/*', '/updateStatus', 'deleteJadwal/*', '/laporan', 
+
+                    '/petugas','/tambahpetugas', '/save', 'hapuspetugas/*', 'ubahpetugas/*', '/updatepetugas/*','/updateProfile/*', '/profile', 'profile/*', 
+                    'C_LandingPage/*', 'C_LandingPage/', 'C_Admin/*', 'C_Admin/', 
+                    '/pesanAdmin', 'hapuspesan/*',
+                    '/beritaAdmin', '/tambahBerita', '/saveBerita', 'hapusberita/*',  'updateBerita/*',
+                    '/tambahKegiatan', '/saveKegiatan', 'hapusKegiatan/*', 'updateKegiatan/*',
+                    '/tambahPublikasi', '/savePublikasi', 'hapusPublikasi/*', 'updatePublikasi/*',
+                    '/koleksiAdmin', '/saveKoleksi', 'hapusKoleksiAdmin/*', 'updateKoleksiAdmin/*',
+                    '/galleryAdmin', '/saveGallery', 'hapusGallery/*', 'updateGallery/*',
+                    '/saveKajian', '/kajianAdmin', 
+                    '/tulisKajian', '/addSection', '/tulisKajian/*', '/saveIsiKajian', '/tulisKajian/*', 'hapusKajian/*', '/previewKajian/*',
+                    '/petugasMuseum', '/strukturOrganisasi', 'hapusOrganisasi/*', '/updateKaryawan/*',
+
+                 ]
+            ],
+            'filterAdminPelayanan' =>[
+                'except' => [
+                    '/login', 'C_Login/*', '/logout', '/dashboard', '/halamanLogin', 'C_Login', 
+                    'C_Pengunjung/*', 'C_Pengunjung/',  'profile/*', '/updateProfile/*', 'C_Petugas/*', '/profile', 'ubahpetugas/*', '/updatepetugas/*',
+                    '/tambahPengunjung', '/pengunjung','/rekapitulasi', 'deleteData/*',
+                    '/statistik', '/print',
+
+                    '/petugas','/tambahpetugas', '/save', 'hapuspetugas/*', 'ubahpetugas/*', '/updatepetugas/*','/updateProfile/*', '/profile', 'profile/*', 
+                    'C_LandingPage/*', 'C_LandingPage/', 'C_Admin/*', 'C_Admin/', 
+                    '/pesanAdmin', 'hapuspesan/*',
+                    '/beritaAdmin', '/tambahBerita', '/saveBerita', 'hapusberita/*',  'updateBerita/*',
+                    '/tambahKegiatan', '/saveKegiatan', 'hapusKegiatan/*', 'updateKegiatan/*',
+                    '/tambahPublikasi', '/savePublikasi', 'hapusPublikasi/*', 'updatePublikasi/*',
+                    '/koleksiAdmin', '/saveKoleksi', 'hapusKoleksiAdmin/*', 'updateKoleksiAdmin/*',
+                    '/galleryAdmin', '/saveGallery', 'hapusGallery/*', 'updateGallery/*',
+                    '/saveKajian', '/kajianAdmin', 
+                    '/tulisKajian', '/addSection', '/tulisKajian/*', '/saveIsiKajian', '/tulisKajian/*', 'hapusKajian/*', '/previewKajian/*',
+                    '/petugasMuseum', '/strukturOrganisasi', 'hapusOrganisasi/*', '/updateKaryawan/*',
+
+                 ]
+            ],
+            'filterPerpustakaan' =>[
+                'except' => [
+                    '/login', 'C_Login/*', '/logout', '/dashboard', '/halamanLogin', 'C_Login', 
+                    'C_Perpustakaan/','C_Perpustakaan/*','/inputData', '/saveDataBuku'
 
                  ]
             ],

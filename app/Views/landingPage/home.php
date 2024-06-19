@@ -187,7 +187,7 @@
 		                <div class="menu-content pb-70 col-lg-8">
 		                    <div class="title text-center">
 		                        <h1 class="mb-10">Kegiatan Kami</h1>
-		                        <p>Pantau terus kegiatan Musuem</p>
+		                        <p>Pantau terus kegiatan Museum</p>
 		                    </div>
 		                </div>
 		            </div>						

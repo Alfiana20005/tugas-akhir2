@@ -153,7 +153,7 @@
     </div>
     
 
-    <?php if (session()->get('level') == 'Ketua Pengkajian' || session()->get('level') == 'Petugas Pengkajian'): ?>
+    <?php if (session()->get('level') == 'Ketua Pengkajian' || session()->get('level') == 'Petugas Pengkajian'  || session()->get('level') == 'Admin/Pengkajian'): ?>
         <a class="btn btn-primary my-4" href="/tambahJadwal" role="button">Tambah Jadwal Perawatan</a>
         <?php  if(session()->getFlashdata('pesan')): ?>
             <div class="alert alert-success" role="alert">

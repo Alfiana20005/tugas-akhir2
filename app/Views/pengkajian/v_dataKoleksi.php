@@ -41,7 +41,7 @@
                                     <?= $k['keadaan']; ?>
 
                                 <?php endif; ?>
-                                <?php if (session()->get('level') == 'Ketua Pengkajian' || session()->get('level') == 'Petugas Pengkajian'): ?> 
+                                <?php if (session()->get('level') == 'Ketua Pengkajian' || session()->get('level') == 'Petugas Pengkajian' || session()->get('level') == 'Admin/Pengkajian'): ?> 
                                 <form action="/updateKeadaan" method="post">
                                     <input type="hidden" name="id" value="<?= $k['id']; ?>">
                                     <div class="btn-group">
@@ -60,7 +60,7 @@
                             </td>
                             <td style="text-align: center;">
                                 <a href="<?= base_url("/detailKoleksi/{$k['id']}"); ?>" class="btn btn-success btn-sm " >Detail</a>
-                                <?php if (session()->get('level') == 'Ketua Pengkajian' || session()->get('level') == 'Petugas Pengkajian'): ?>               
+                                <?php if (session()->get('level') == 'Ketua Pengkajian' || session()->get('level') == 'Petugas Pengkajian'  || session()->get('level') == 'Admin/Pengkajian'): ?>               
                                 <form action="/hapus/<?= $k['id']; ?>" method="post"class="d-inline">
                                     <?= csrf_field(); ?>
                                     <input type="hidden" name="_method" value="DELETE">
@@ -69,7 +69,7 @@
                                 <?php endif; ?>
                             </td>
                             <td style="text-align: center;">
-                                <?php if (session()->get('level') == 'Ketua Pengkajian' || session()->get('level') == 'Petugas Pengkajian'): ?>
+                                <?php if (session()->get('level') == 'Ketua Pengkajian' || session()->get('level') == 'Petugas Pengkajian'  || session()->get('level') == 'Admin/Pengkajian'): ?>
                                 <a href="<?= base_url("/tambahPerawatan/{$k['id']}"); ?>" class="btn btn-primary btn-sm " >Tambah</a>
                                 <?php endif; ?>
                                 <a href="<?= base_url("/dataPerawatan/{$k['id']}"); ?>" class="btn btn-info btn-sm " >Lihat</a>
