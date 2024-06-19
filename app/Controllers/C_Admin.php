@@ -550,6 +550,113 @@ class C_Admin extends BaseController
        
         return view('CompanyProfile/tulisKajian', $data);
     }
+    
+    // public function saveIsiKajian()
+    // {
+    //    // Ambil data dari form
+    // //    $narasi = $this->request->getPost('narasi');
+    //    $id_kajian = $this->request->getPost('id_kajian');
+    // //    $gambar = $this->request->getFile('foto');
+    //     // $kajian = $this->M_Kajian->getKajian($id_kajian);
+    //     // $narasi = $this->request->getPost('narasi');
+        
+
+    //     //validation
+    //     $rules= [
+    //         'narasi' => [
+    //             'rules' => 'required',
+    //             'errors' => ['required'=>'Judul harus diisi']
+    //         ],
+    //     ];
+
+    //     if(!$this->validate($rules)){
+    //         // session()->setFlashdata('errors', $this->validator->listErrors());
+    //         return redirect()->to('/kajianAdmin') ->withInput() -> with('errors', $this->validator->listErrors());
+    //     }
+
+       
+
+    //     $foto = $this->request->getFile('foto');
+    
+    //     $removeFoto = $this->request->getVar('removeFoto');
+
+    //     // Handle the photo removal or upload
+    //     if ($removeFoto) {
+    //         $fotoName = null; // Set to null if the photo is to be removed
+    //     } else {
+    //         if ($foto && $foto->isValid() && !$foto->hasMoved()) {
+    //             $fotoName = $foto->getRandomName();
+    //             $foto->move('img/kajian', $fotoName);
+    //         } else {
+    //             $fotoName = $this->request->getVar('existingFoto'); // Use the existing photo name if no new photo is uploaded
+    //         }
+    //     }
+
+        
+
+    //     //tambahh data
+    //     // $this->M_Petugas->save($this->request->getPost());
+    //     $this->M_Isikajian->save([
+    //         // 'id_petugas' => $id_petugas,
+    //         'narasi' => $this->request->getVar('narasi'),
+    //         'id_kajian' => $this->request->getVar('id_kajian'),
+    //         'foto' => $fotoName,
+            
+    //     ]);
+
+    //     //alert
+    //     session()->setFlashdata('pesan', 'Data Berhasil Ditambahkan.');
+
+    //    return redirect()->to('/tulisKajian/' . $id_kajian);
+    // }
+
+
+    // public function saveIsiKajian()
+    // {
+    //     // Ambil data dari form
+    //     $id_kajian = $this->request->getPost('id_kajian');
+    //     $narasi = $this->request->getPost('narasi');
+    //     $fotoFiles = $this->request->getFiles('foto');
+    //     $removeFoto = $this->request->getPost('removeFoto');
+
+    //     // Cek validasi
+    //     $validationRules = [
+    //         'narasi' => 'required',
+    //     ];
+
+    //     if (!$this->validate($validationRules)) {
+    //         return redirect()->to('/tulisKajian/' . $id_kajian[0])
+    //                          ->withInput()
+    //                          ->with('errors', $this->validator->getErrors());
+    //     }
+
+    //     foreach ($narasi as $index => $narasiText) {
+    //         // Handle file upload for each part
+    //         $fotoFile = isset($fotoFiles[$index]) ? $fotoFiles[$index] : null;
+    //         $fotoName = null;
+
+    //         if ($fotoFile && $fotoFile->isValid() && !$fotoFile->hasMoved()) {
+    //             $fotoName = $fotoFile->getRandomName();
+    //             $fotoFile->move('img/kajian', $fotoName);
+    //         } elseif (isset($removeFoto[$index]) && $removeFoto[$index] == '1') {
+    //             $fotoName = null; // Handle the removal of the photo
+    //         } else {
+    //             $fotoName = null; // Or use a default value
+    //         }
+
+    //         // Save each part
+    //         $this->M_Isikajian->save([
+    //             'id_kajian' => $id_kajian[$index],
+    //             'narasi' => $narasiText,
+    //             'foto' => $fotoName,
+    //         ]);
+    //     }
+
+    //     // Set flashdata and redirect
+    //     session()->setFlashdata('pesan', 'Data Berhasil Ditambahkan.');
+    //     return redirect()->to('/tulisKajian/' . $id_kajian[0]);
+    // }
+
     public function saveIsiKajian()
     {
        // Ambil data dari form
@@ -560,17 +667,17 @@ class C_Admin extends BaseController
         
 
         //validation
-        $rules= [
-            'narasi' => [
-                'rules' => 'required',
-                'errors' => ['required'=>'Judul harus diisi']
-            ],
-        ];
+        // $rules= [
+        //     'narasi' => [
+        //         'rules' => 'required',
+        //         'errors' => ['required'=>'Judul harus diisi']
+        //     ],
+        // ];
 
-        if(!$this->validate($rules)){
-            // session()->setFlashdata('errors', $this->validator->listErrors());
-            return redirect()->to('/kajianAdmin') ->withInput() -> with('errors', $this->validator->listErrors());
-        }
+        // if(!$this->validate($rules)){
+            
+        //     return redirect()->to('/kajianAdmin') ->withInput() -> with('errors', $this->validator->listErrors());
+        // }
 
         $foto = $this->request->getFile('foto');
     
@@ -603,6 +710,26 @@ class C_Admin extends BaseController
 
        return redirect()->to('/tulisKajian/' . $id_kajian);
     }
+
+    public function previewKajian($id_kajian): string
+    {
+        $kajian = $this->M_Kajian->getKajian($id_kajian);
+        $kajianTerbaru = $this->M_Kajian->getKajianTerbaru(5);
+        $IsiKajian = $this->M_Isikajian->getDataByIdKajian($id_kajian);
+
+        // var_dump($berita);
+        $data =[
+
+            'kajian' => $kajian,
+            'kajianTerbaru' => $kajianTerbaru,
+            'isiKajian' => $IsiKajian,
+        ];
+        
+
+        return view('CompanyProfile/previewKajian', $data);
+    }
+
+
     public function deleteKajian($id_kajian)
     {
         // Saring masukan untuk mencegah SQL injection atau serangan lainnya

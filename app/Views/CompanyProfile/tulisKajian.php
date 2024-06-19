@@ -6,7 +6,7 @@
     <?php if (session()->get('level') == 'Admin'): ?>
         <div class="d-flex">
             <a class="btn btn-primary btn-sm mb-2" href="#" id="addSection" role="button">Tambahkan Bagian</a>
-            <a class="btn btn-warning btn-sm mb-2 mx-2" href=""  role="button">Preview</a>
+            <a class="btn btn-warning btn-sm mb-2 mx-2" href="<?= base_url("/previewKajian/{$kajian['id_kajian']}"); ?>"  role="button">Preview</a>
         </div>
         
         <?php if (session()->getFlashdata('pesan')): ?>
@@ -24,7 +24,7 @@
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h5 class="card-title"><?= $kajian['judul']; ?></h5>
+                            <a href="/kajianAdmin"><h5 class="card-title"><?= $kajian['judul']; ?></h5></a>
                             <p class="card-text"><?= $kajian['kategori']; ?></p>
                             <p class="card-text"><small class="text-body-secondary">Last updated <?= $kajian['updated_at']; ?></small></p>
                         </div>
@@ -66,9 +66,12 @@
                                                     Klik apabila tidak membutuhkan gambar
                                                     </label>
                                                 </div>
+
+                                                
                         </div>
                     </div>
                     <button type="submit" class="btn btn-success btn-sm mb-2 mx-4">Simpan</button>
+                    
                 </form>
             </div>
         
@@ -90,12 +93,14 @@
         const newForm = document.createElement('div');
         newForm.classList.add('card', 'mb-3');
         newForm.innerHTML = `
+        <form id="formKajianContainer" action="/saveIsiKajian" method="post" enctype="multipart/form-data">
+                    <div id="formsContainer">
 
                         <div class="my-4 mx-4">
-                            <input type="hidden" name="id_kajian" value="<?= $kajian['id_kajian']; ?>">
+                            <input type="hidden" name="id_kajian${formCount}" value="<?= $kajian['id_kajian']; ?>">
                             <div class="mb-3">
                                 <label for="narasi${formCount}" class="form-label">Tuliskan Narasi</label>
-                                <textarea class="form-control" id="narasi${formCount}" rows="3" name="narasi"></textarea>
+                                <textarea class="form-control" id="narasi${formCount}" rows="3" name="narasi${formCount}"></textarea>
                             </div>
                             <div class="mb-3">  
                                 <div class="row mb-2">
@@ -104,7 +109,7 @@
                                     </div>
                                     <div class="col-sm-10">
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input form-control" id="gambar${formCount}" name="foto" onchange="previewImg('gambar${formCount}')">
+                                            <input type="file" class="custom-file-input form-control" id="gambar${formCount}" name="foto${formCount}" onchange="previewImg('gambar${formCount}')">
                                             <label class="custom-file-label" >Masukkan Gambar</label>
                                             <?php if (!empty($data_kajian['foto'])): ?>
                                                 <div class="my-2">
@@ -118,12 +123,18 @@
 
                             </div>
                             <div class="form-check my-4">
-                                                    <input class="form-check-input" type="checkbox" id="removeFoto${formCount}" name="removeFoto" value="1">
+                                                    <input class="form-check-input" type="checkbox" id="removeFoto${formCount}" name="removeFoto${formCount}" value="1">
                                                     <label class="form-check-label" for="removeFoto">
                                                         Klik apabila tidak membutuhkan gambar
                                                     </label>
                                                 </div>
+
+                                               
                         </div>
+                        </div>
+                    
+                </form>
+                        
         `;
         container.appendChild(newForm);
     }

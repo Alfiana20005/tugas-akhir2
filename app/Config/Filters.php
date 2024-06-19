@@ -161,7 +161,7 @@ class Filters extends BaseConfig
                     '/koleksiAdmin', '/saveKoleksi', 'hapusKoleksiAdmin/*', 'updateKoleksiAdmin/*',
                     '/galleryAdmin', '/saveGallery', 'hapusGallery/*', 'updateGallery/*',
                     '/saveKajian', '/kajianAdmin', 
-                    '/tulisKajian', '/addSection', '/tulisKajian/*', '/saveIsiKajian', '/tulisKajian/*', 'hapusKajian/*', 
+                    '/tulisKajian', '/addSection', '/tulisKajian/*', '/saveIsiKajian', '/tulisKajian/*', 'hapusKajian/*', '/previewKajian/*',
                     '/petugasMuseum', '/strukturOrganisasi', 'hapusOrganisasi/*', '/updateKaryawan/*',
 
                  ]

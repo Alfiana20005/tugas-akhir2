@@ -71,6 +71,7 @@ $routes->get('/tulisKajian', 'C_Admin::tulisKajian');
 $routes->post('/addSection', 'C_Admin::/addSection');
 $routes->get('/tulisKajian/(:segment)', 'C_Admin::tulisKajian/$1');
 $routes->post('/saveIsiKajian', 'C_Admin::saveIsiKajian');
+$routes->get('/previewKajian/(:segment)', 'C_Admin::previewKajian/$1');
 $routes->get('/tulisKajian/(:num)', 'C_Admin::tulisKajian/$1');
 $routes->delete('hapusKajian/(:segment)', 'C_Admin::deleteKajian/$1');
 $routes->get('/pesanAdmin', 'C_Admin::pesanAdmin');
