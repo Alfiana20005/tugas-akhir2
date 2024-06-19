@@ -320,7 +320,7 @@ class Filters extends BaseConfig
             ],
             'filterPerpustakaan' =>[
                 'except' => [
-                    '/login', 'C_Login/*', '/logout', '/dashboard', '/halamanLogin', 'C_Login', 
+                    '/login', 'C_Login/*', '/logout', '/dashboard', '/halamanLogin', 'C_Login', 'profile/*', '/updateProfile/*', 'C_Petugas/*', '/profile',
                     'C_Perpustakaan/','C_Perpustakaan/*','/inputData', '/saveDataBuku'
 
                  ]
