@@ -102,7 +102,7 @@
                         <select class="form-select form-control" type="text" name="tampilkan"  value="<?= old('tampilkan'); ?>">
                                     <!-- harus sesuai dengan urutan enum pada database -->
                             <option selected>Pilih Status </option>
-                            <option <?= old("tampilkan") == 'Tampilkan Buku'? 'selected' : 'Tampilkan Buku' ?> value="Tampilkan Buku">Tampilkan</option>
+                            <option <?= old("tampilkan") == 'Tampilkan Buku'? 'selected' : 'Tampilkan Buku' ?> value="Tampilkan Buku">Tampilkan Buku</option>
                             <option <?= old("tampilkan") == 'Sembunyikan'? 'selected' : 'Sembunyikan' ?> value="Sembunyikan">Sembunyikan</option>
                             
                         </select>

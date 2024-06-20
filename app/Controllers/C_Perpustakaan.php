@@ -74,6 +74,7 @@ class C_Perpustakaan extends BaseController
             'status' => $this->request->getVar('status'),
             'keterangan' => $this->request->getVar('keterangan'),
             'kategoriBuku' => $this->request->getVar('kategoriBuku'),            
+            'tampilkan' => $this->request->getVar('tampilkan'),            
             'foto' => $fotoName,
             
         ]);
