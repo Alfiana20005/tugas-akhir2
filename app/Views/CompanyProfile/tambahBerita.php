@@ -49,6 +49,18 @@
                             </select>
                         </div>
                 </div>
+                <!-- <div class="row mb-3">
+                        <label  class="col-sm-2 col-form-label">Kategori Berita</label>
+                        <div class="col-sm-10">
+                            <select class="form-select form-control" type="text" name="kategoriBerita" value="<?= old("kategoriBerita"); ?>">
+                                
+                                <option selected>Pilih Kategori Berita</option>
+                                <option <?= old("kategoriBerita") == 'Regional'? 'selected' : 'Regional' ?> value="Regional">Regional</option>
+                                <option <?= old("kategoriBerita") == 'Nasional'? 'selected' : 'Nasional' ?> value="Nasional">Nasional</option>
+                                
+                            </select>
+                        </div>
+                </div> -->
                 <div class="row mb-3">
                     <label for="nip" class="col-sm-2 col-form-label">Judul</label>
                     <div class="col-sm-10">
@@ -88,6 +100,13 @@
                                                     Klik apabila tidak membutuhkan gambar
                                                     </label>
                                                 </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="isi" class="col-sm-2 col-form-label">Keterangan Gambar</label>
+                    <div class="col-sm-10">
+                        <textarea class="form-control" name="ketgambar" id="" value="<?= old("ketgambar"); ?>"></textarea>
+                        
+                    </div>
                 </div>
                 
                 <button type="submit" class="btn btn-primary">Simpan Data</button>

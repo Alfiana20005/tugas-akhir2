@@ -215,7 +215,7 @@
                                             <td style="text-align: center;">
                                             
                                                 <a href="" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editKegiatan<?= $buku['id_buku']; ?>" data-bs-whatever="@getbootstrap">Edit</a>
-                                                <!-- <a href="" class="btn btn-danger" >hapus</a> -->
+                                                
                                                 <form action="deleteBuku/<?= $buku['id_buku']; ?>" method="post" class="d-inline">
                                                     <?= csrf_field(); ?>
                                                     <input type="hidden" name="_method" value="DELETE">

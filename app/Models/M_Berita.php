@@ -12,7 +12,7 @@ class M_Berita extends Model
 
 
     // protected $allowedFields = ['foto', 'nama','password','email','username','level'];
-    protected $allowedFields = ['judul','tanggal', 'type','isi', 'foto', 'penulis', 'kategoriBerita'];
+    protected $allowedFields = ['judul','tanggal', 'type','isi', 'foto', 'penulis', 'kategoriBerita', 'ketgambar'];
 
 
     protected $validationRules = [];

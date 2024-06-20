@@ -29,7 +29,11 @@
 								<div class="col-lg-12">
 									<div class="feature-img">
 										<img class="img-fluid" src="<?= base_url('img/berita/' . $berita['foto']); ?>" alt="">
-									</div>									
+									</div>
+									<button class="genric-btn primary small d-flex" style="background-color: gray;"> 
+									 <div class=""><i class="fa-solid fa-camera" style="padding-right: 4pt;"> </i><?= $berita['ketgambar']; ?></div>
+									<div></div>
+								</button>									
 								</div>
 								<!-- <div class="col-lg-3  col-md-3 meta-details">
 									<ul class="tags">

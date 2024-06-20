@@ -237,6 +237,7 @@ class C_Admin extends BaseController
             'type' => $this->request->getVar('type'),
             'kategoriBerita' => $this->request->getVar('kategoriBerita'),
             'isi' => $this->request->getVar('isi'),
+            'ketgambar' => $this->request->getVar('ketgambar'),
             'foto' => $fotoName,
             
         ]);

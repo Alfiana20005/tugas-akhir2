@@ -31,6 +31,7 @@
                                             <th style="text-align: center;">Sifat Berita</th>
                                             
                                             <th style="text-align: center;">Tanggal</th>
+                                            <th style="text-align: center;">Ket.Gambar</th>
                                             
                                             <th style="text-align: center;">Aksi</th>
                                             
@@ -50,6 +51,7 @@
                                             <td style="text-align: center;"><?= $b['type']; ?></td>
                                             <td style="text-align: center;"><?= $b['kategoriBerita']; ?></td>
                                             <td style="text-align: center;"><?= $b['tanggal']; ?></td>
+                                            <td style="text-align: center;"><?= $b['ketgambar']; ?></td>
                                             <td style="text-align: center;">
                                                 <a href="" class="btn btn-success btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#editBerita<?= $b['id_berita']; ?>" data-bs-whatever="@getbootstrap">Edit</a>
                                                 <!-- <a href="" class="btn btn-danger" >hapus</a> -->
@@ -125,6 +127,12 @@
                             <textarea class="form-control" name="isi" id="isi"><?= $b['isi']; ?></textarea>
                         </div>
                     </div>
+                <div class="row mb-2" >
+                        <label for="isi" class="col-sm-3 col-form-label">Keterangan Gambar</label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control" name="ketgambar" id="ketgambar"><?= $b['ketgambar']; ?></textarea>
+                        </div>
+                    </div>
                 <div class="row mb-2">
                     <label for="foto" class="col-sm-3 col-form-label">Gambar</label>
                         <div class="col-sm-2">
@@ -145,6 +153,13 @@
                         </div>
                         
                 </div>
+
+                <div class="row mb-2" >
+                        <label for="isi" class="col-sm-3 col-form-label">Keterangan Gambar</label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control" name="ketgambar" id="ketgambar"><?= $b['ketgambar']; ?></textarea>
+                        </div>
+                    </div>
                 
 
                 <div class="modal-footer my-4">
