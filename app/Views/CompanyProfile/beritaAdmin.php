@@ -127,12 +127,7 @@
                             <textarea class="form-control" name="isi" id="isi"><?= $b['isi']; ?></textarea>
                         </div>
                     </div>
-                <div class="row mb-2" >
-                        <label for="isi" class="col-sm-3 col-form-label">Keterangan Gambar</label>
-                        <div class="col-sm-9">
-                            <textarea class="form-control" name="ketgambar" id="ketgambar"><?= $b['ketgambar']; ?></textarea>
-                        </div>
-                    </div>
+                
                 <div class="row mb-2">
                     <label for="foto" class="col-sm-3 col-form-label">Gambar</label>
                         <div class="col-sm-2">
