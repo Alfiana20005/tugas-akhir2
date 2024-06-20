@@ -189,5 +189,6 @@ $routes->get('/rencanaStrategis', 'C_LandingPage::rencanaStrategis');
 // Perpustakaan 
 $routes->get('/inputData', 'C_Perpustakaan::index');
 $routes->post('/saveDataBuku', 'C_Perpustakaan::saveDataBuku');
+$routes->delete('deleteBuku/(:segment)', 'C_Perpustakaan::deleteBuku/$1');
 // 
 

@@ -218,7 +218,7 @@
                                             
                                                 <a href="" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editKegiatan<?= $buku['id_buku']; ?>" data-bs-whatever="@getbootstrap">Edit</a>
                                                 <!-- <a href="" class="btn btn-danger" >hapus</a> -->
-                                                <form action="/hapusBuku/<?= $buku['id_buku']; ?>" method="post" class="d-inline">
+                                                <form action="/deleteBuku/<?= $buku['id_buku']; ?>" method="post" class="d-inline">
                                                     <?= csrf_field(); ?>
                                                     <input type="hidden" name="_method" value="DELETE">
                                                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('apakah anda yakin?');">Hapus</button>
