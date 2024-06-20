@@ -102,7 +102,7 @@
                                                 </div>
                 </div>
                 <div class="row mb-3">
-                    <label for="isi" class="col-sm-2 col-form-label">Keterangan Gambar</label>
+                    <label for="ketgambar" class="col-sm-2 col-form-label">Keterangan Gambar</label>
                     <div class="col-sm-10">
                         <textarea class="form-control" name="ketgambar" id="" value="<?= old("ketgambar"); ?>"></textarea>
                         
