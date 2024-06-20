@@ -272,6 +272,7 @@ class C_Admin extends BaseController
             'kategoriBerita' => $this->request->getVar('kategoriBerita'),
             'isi' => $this->request->getVar('isi'),
             'foto' => $this->request->getVar('foto'),
+            'ketgambar' => $this->request->getVar('ketgambar'),
             
         ];
     
@@ -309,6 +310,8 @@ class C_Admin extends BaseController
                     'kategoriBerita' => $newDataBerita['kategoriBerita'],
                     'isi' => $newDataBerita['isi'],
                     'foto' => $newDataBerita['foto'],
+                    'ketgambar' => $newDataBerita['ketgambar'],
+
                 ]);
             }
             //alert
