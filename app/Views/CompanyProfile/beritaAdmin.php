@@ -28,7 +28,7 @@
                                             <th style="text-align: center;">Judul Berita</th> 
                                             <th style="text-align: center;">Isi Berita</th>
                                             <th style="text-align: center;">Tipe Berita</th>
-                                            <th style="text-align: center;">Kategori Berita</th>
+                                            <th style="text-align: center;">Sifat Berita</th>
                                             
                                             <th style="text-align: center;">Tanggal</th>
                                             

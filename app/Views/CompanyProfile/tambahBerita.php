@@ -38,7 +38,7 @@
                         </div>
                 </div>
                 <div class="row mb-3">
-                        <label  class="col-sm-2 col-form-label">Kategori Berita</label>
+                        <label  class="col-sm-2 col-form-label">Sifat Berita</label>
                         <div class="col-sm-10">
                             <select class="form-select form-control" type="text" name="kategoriBerita" value="<?= old("kategoriBerita"); ?>">
                                 
