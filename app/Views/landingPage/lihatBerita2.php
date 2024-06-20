@@ -30,10 +30,10 @@
 									<div class="feature-img">
 										<img class="img-fluid" src="<?= base_url('img/berita/' . $berita['foto']); ?>" alt="">
 									</div>
-									<button class="genric-btn primary small d-flex" style="background-color: gray;"> 
-									 <div class=""><i class="fa-solid fa-camera" style="padding-right: 4pt;"> </i><?= $berita['ketgambar']; ?></div>
-									<div></div>
-								</button>									
+									<!-- <button class="genric-btn primary small d-flex" style="background-color: gray;">  -->
+									 <div class="" style="font-size: 9pt;"><i class="fa-solid fa-camera" style="padding-right: 4pt;"> </i><?= $berita['ketgambar']; ?></div>
+									
+								<!-- </button>									 -->
 								</div>
 								<!-- <div class="col-lg-3  col-md-3 meta-details">
 									<ul class="tags">
@@ -57,7 +57,7 @@
 								</div> -->
 								<div class="col-lg-12 col-md-12">
 									<h3 class="mt-20 mb-20"><?= $berita['judul']; ?></h3>
-									<p ><?= $berita['tanggal']; ?></p>
+									<p ><i class="fa-solid fa-calendar-days" style="padding-right: 4pt;"></i> <?= $berita['tanggal']; ?></p>
 
 									<?php
 									function nl2p($text) {
