@@ -258,14 +258,17 @@ class C_LandingPage extends BaseController
 
     // Start Landing Page Baru
     public function home(){
+
         $kegiatan = $this->M_Kegiatan->findAll();
-        $beritaTerbaru = $this->M_Berita->getBeritaTerbaru(4);
+        $beritaTerbaru = $this->M_Berita->getBeritaTerbaruHome(8);
         $galery = $this->M_Gallery->findAll();
 
 
         foreach ($beritaTerbaru as &$berita) {
             $berita['isi_pendek'] = $this->getExcerpt($berita['isi'], 20); // 30 adalah jumlah kata yang ingin ditampilkan
         }
+
+        
 
         // $data = [
         //     'beritaterbaru' => $beritaTerbaru,
@@ -353,7 +356,7 @@ class C_LandingPage extends BaseController
     {
         $kategoriBerita = $this->request->getPost('kategoriBerita') ?? 'Regional'; // Default ke 'Regional'
         $lihatSemua = $this->request->getGet('lihatSemua') ?? false;
-        $limit = $lihatSemua ? null : 3; // Jika 'lihatSemua' aktif, tampilkan semua berita. Jika tidak, tampilkan 2 berita.
+        $limit = $lihatSemua ? null : 4; // Jika 'lihatSemua' aktif, tampilkan semua berita. Jika tidak, tampilkan 2 berita.
     
         if ($lihatSemua) {
             $data['berita'] = $this->M_Berita->getBeritaByKategoriAll($kategoriBerita);

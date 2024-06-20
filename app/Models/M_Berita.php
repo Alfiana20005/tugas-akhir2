@@ -33,11 +33,18 @@ class M_Berita extends Model
     {
         return $this->where('level', $level)->findAll();
     }
-    public function getBeritaTerbaru($limit)
+    public function getBeritaTerbaruHome($limit = null)
     {
-        return $this->orderBy('tanggal', 'DESC')
-                    ->limit($limit)
-                    ->findAll();
+        return $this->where('type', 'Narasi')
+                    ->orderBy('tanggal', 'DESC')
+                    ->findAll($limit);
+    }
+
+    public function getBeritaTerbaru($limit = null)
+    {
+        return $this->where('type', 'Link')
+                    ->orderBy('tanggal', 'DESC')
+                    ->findAll($limit);
     }
     // public function getBeritaByKategori($kategoriBerita, $limit) {
     //     return $this->where('kategoriBerita', $kategoriBerita)

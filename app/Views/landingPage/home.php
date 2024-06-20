@@ -147,29 +147,27 @@
 		                </div>
 		            </div>					
 					<div class="row">
-                        <?php 
-							
-							foreach($beritaterbaru as $b): 
+                        <?php foreach($beritaterbaru as $b): 
 							if ($b['type'] == 'Narasi'): ?>
-						<div class="col-lg-3 col-md-6">
-							<div class="single-other-issue">
-								<div class="thumb">
-									<img class="img-fluid" src="<?= base_url("img/berita/". $b['foto']); ?>" alt="">					
+								<div class="col-lg-3 col-md-6">
+									<div class="single-other-issue">
+										<div class="thumb">
+											<img class="img-fluid" src="<?= base_url("img/berita/". $b['foto']); ?>" alt="">					
+										</div>
+										<br>
+										<a href="<?= base_url("/lihatberita2/{$b['id_berita']}"); ?>">
+											<h5 ><?= $b['judul']; ?></h5>
+										</a>
+										<p style="text-align: justify; color:#850000;">
+										<?= $b['tanggal']; ?>
+										</p>
+										<p style="text-align: justify;">
+										<?= $b['isi_pendek']; ?>
+										</p>
+									</div>
 								</div>
-                                <br>
-								<a href="<?= base_url("/lihatberita2/{$b['id_berita']}"); ?>">
-									<h5 ><?= $b['judul']; ?></h5>
-								</a>
-								<p style="text-align: justify; color:#850000;">
-                                <?= $b['tanggal']; ?>
-								</p>
-								<p style="text-align: justify;">
-                                <?= $b['isi_pendek']; ?>
-								</p>
-							</div>
-						</div>
-                        <?php endif; ?>
-							<?php endforeach; ?>
+                        	<?php endif; ?>
+						<?php endforeach; ?>
 																	
 					</div>
 				</div>	

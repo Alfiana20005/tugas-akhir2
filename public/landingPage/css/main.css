@@ -5262,6 +5262,11 @@ body.mobile-nav-active #mobile-nav-toggle {
   }
 }
 @media (max-width: 991px) {
+  .ket {
+    font-size: 8pt;
+  }
+}
+@media (max-width: 991px) {
   #maps {
     width: 400px;
   }
@@ -5312,4 +5317,13 @@ body.mobile-nav-active #mobile-nav-toggle {
     
   }
 }
-
+@media (max-width: 991px) {
+  #ket {
+    font-size: 7pt;
+  }
+}
+@media (min-width: 991px) {
+  #ket {
+    font-size: 9pt;
+  }
+}

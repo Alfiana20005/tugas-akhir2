@@ -31,7 +31,7 @@
 										<img class="img-fluid" src="<?= base_url('img/berita/' . $berita['foto']); ?>" alt="">
 									</div>
 									<!-- <button class="genric-btn primary small d-flex" style="background-color: gray;">  -->
-									 <div class="" style="font-size: 9pt;"><i class="fa-solid fa-camera" style="padding-right: 4pt;"> </i><?= $berita['ketgambar']; ?></div>
+									 <div class="ket" id="ket" ><i class="fa-solid fa-camera" style="padding-right: 4pt;"> </i><?= $berita['ketgambar']; ?></div>
 									
 								<!-- </button>									 -->
 								</div>
