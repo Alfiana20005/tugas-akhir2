@@ -108,7 +108,7 @@
                     </div>
                 </div>
                 <div class="row mb-2">
-                    <label for="" class="col-sm-3 col-form-label">Kategori Berita</label>
+                    <label for="" class="col-sm-3 col-form-label">Sifat Berita</label>
                     <div class="col-sm-9">
                         <select class="form-select form-control" type="text" name="kategoriBerita"  value="<?= $b['kategoriBerita']; ?>">
                                     <!-- harus sesuai dengan urutan enum pada database -->
