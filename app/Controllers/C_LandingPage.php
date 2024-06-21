@@ -260,7 +260,7 @@ class C_LandingPage extends BaseController
     public function home(){
 
         $kegiatan = $this->M_Kegiatan->findAll();
-        $beritaTerbaru = $this->M_Berita->getBeritaTerbaruHome(8);
+        $beritaTerbaru = $this->M_Berita->getBeritaTerbaruHome(4);
         $galery = $this->M_Gallery->findAll();
 
 

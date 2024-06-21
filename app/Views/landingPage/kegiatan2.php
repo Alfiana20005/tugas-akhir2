@@ -31,12 +31,12 @@
 						<div class="col-lg-3 my-2">
 							<div class="single-destination relative">
 								<div class="thumb relative">
-									<div class="overlay overlay-bg"></div>
-									<img class="img-fluid" src="<?= base_url("img/kegiatan/". $k['foto']); ?>" alt="">
+									<!-- <div class="overlay overlay-bg"></div> -->
+									<a href="<?= $k['keterangan']; ?>"  target="_blank"><img class="img-fluid" src="<?= base_url("img/kegiatan/". $k['foto']); ?>" alt=""></a>
 								</div>
 								<div class="desc">	
 									
-									<a href="<?= $k['keterangan']; ?>" target="_blank"><h4><?= $k['judul']; ?></h4></a>
+									<!-- <a href="<?= $k['keterangan']; ?>"><h4><?= $k['judul']; ?></h4></a> -->
 									
 								</div>
 							</div>
