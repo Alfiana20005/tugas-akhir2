@@ -364,13 +364,11 @@ class C_LandingPage extends BaseController
             $data['berita'] = $this->M_Berita->getBeritaByKategori($kategoriBerita, $limit);
         }
 
-        // var_dump($limit);
-        // var_dump($data['berita']);
         
-        // $data['berita'] = $this->M_Berita->getBeritaByKategori($kategoriBerita, 1);
+        
+        
         $data['kategoriBerita'] = $kategoriBerita;
         $data_berita = $this->M_Berita->getBeritaBaru();
-        // $berita = $this->M_Berita->getBerita($id_berita);
         foreach ($data_berita as &$berita) {
             $berita['isi_pendek'] = $this->getExcerpt($berita['isi'], 20); // 30 adalah jumlah kata yang ingin ditampilkan
         }
@@ -394,21 +392,36 @@ class C_LandingPage extends BaseController
     }
     public function lihatberita2($id_berita): string
     {
+        $kategoriBerita = $this->request->getPost('kategoriBerita') ?? 'Regional'; // Default ke 'Regional'
+        $lihatSemua = $this->request->getGet('lihatSemua') ?? false;
+        $limit = $lihatSemua ? null : 4; // Jika 'lihatSemua' aktif, tampilkan semua berita. Jika tidak, tampilkan 2 berita.
+
+        if ($lihatSemua) {
+            $data['berita2'] = $this->M_Berita->getBeritaByKategoriAll($kategoriBerita);
+        } else {
+            $data['berita2'] = $this->M_Berita->getBeritaByKategori($kategoriBerita, $limit);
+        }
         
+
         $data_berita = $this->M_Berita->findAll();
         $berita = $this->M_Berita->getBerita($id_berita);
         $beritaTerbaru = $this->M_Berita->getBeritaTerbaru(10);
+
+        $data['kategoriBerita'] = $kategoriBerita;
 
         // var_dump($berita);
         $data =[
             // 'title' => 'Daftar Berita',
             'dataBerita' => $data_berita,
             'berita' => $berita,
+            'berita2' => $data['berita2'],
             'beritaterbaru' => $beritaTerbaru,
             'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
             'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
             'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
             'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
+            'kategoriBerita' => $kategoriBerita,
+            'lihatSemua' => $lihatSemua, 
         ];
         
         return view('landingPage/lihatBerita2', $data);

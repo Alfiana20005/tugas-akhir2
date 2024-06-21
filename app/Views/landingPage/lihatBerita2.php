@@ -64,21 +64,71 @@
 						</div>
 						<div class="col-lg-4 sidebar-widgets">
 							<div class="widget-wrap">
-								
+								<div class="single-sidebar-widget post-category-widget">
+									<h4 class="category-title">Kategori Berita</h4>
+									<ul class="cat-list">
+										
+										<li>
+											<a href="/beritaKategori2/Pendidikan" class="d-flex justify-content-between">
+												<p>Pendidikan</p>
+												<!-- <p>59</p> -->
+											</a>
+										</li>
+										<li>
+											<a href="/beritaKategori2/Sosial Masyarakat" class="d-flex justify-content-between">
+												<p>Sosial Masyarakat</p>
+												<!-- <p>29</p> -->
+											</a>
+										</li>
+										<li>
+											<a href="/beritaKategori2/Sejarah dan Budaya" class="d-flex justify-content-between">
+												<p>Sejarah dan Budaya</p>
+												<!-- <p>15</p> -->
+											</a>
+										</li>
+										<li>
+											<a href="/beritaKategori2/Pemerintahan" class="d-flex justify-content-between">
+												<p>Pemerintahan</p>
+												<!-- <p>09</p> -->
+											</a>
+										</li>
+										<li>
+											<a href="/beritaKategori2/Pariwisata" class="d-flex justify-content-between">
+												<p>Pariwisata</p>
+												<!-- <p>09</p> -->
+											</a>
+										</li>
+										<li>
+											<a href="/berita2" class="d-flex justify-content-between">
+												<p>Semua Kategori</p>
+												
+											</a>
+										</li>
+										
+									</ul>
+								</div>	
 								
 								<div class="single-sidebar-widget popular-post-widget">
 									<h4 class="popular-title">Berita Terkait</h4>
+									<!-- <a href="#" class="genric-btn primary-border my-2">  Regional  </a>
+									<a href="#" class="genric-btn primary-border my-2">  Nasional  </a> -->
+									<form method="POST" action="">
+									<div id="kategoriBerita" class="col-lg-12 d-flex">
+										<button   class="genric-btn primary-border small my-2 mx-2 <?= $kategoriBerita == 'Regional' ? 'active' : '' ?>" name="kategoriBerita" value="Regional" >Regional</button>
+										<button  class="genric-btn primary-border small my-2  mx-2 <?= $kategoriBerita == 'Nasional' ? 'active' : '' ?>" name="kategoriBerita" value="Nasional">Nasional</button>
+									</div>
+									</form>
+
 									<div class="popular-post-list">
-										
-                                        <?php 
-										foreach($dataBerita as $b):
+										<?php 
+										foreach($berita2 as $b):
 										if ($b['type'] == 'Link'): ?>
 										<div class="single-post-list d-flex flex-row align-items-center">
 											<div class="thumb">
-												<img class="img-fluid" src="img/blog/pp1.jpg" alt="">
+												<!-- <img class="img-fluid" src="img/blog/pp1.jpg" alt=""> -->
 											</div>
 											<div class="details">
-												<a href="<?= $b['isi'] ?>"><h6><?= $b['judul']; ?></h6></a>
+												<a href="<?= $b['isi'] ?>" target="_blank"><h6>> <?= $b['judul']; ?></h6></a>
 												<p><?= $b['tanggal']; ?></p>
 											</div>
 										</div>
@@ -86,8 +136,19 @@
                							<?php endforeach; ?>
 														
 									</div>
+									<?php if (count($berita) >= 3 && !$lihatSemua): ?>
+										<div>
+											<a href="?kategoriBerita=<?= $kategoriBerita ?>&lihatSemua=1" style="color: #850000;">Lihat semua. . .</a>
+										</div>
+									<?php endif; ?>
 								</div>
-													
+
+
+
+
+
+								
+								
 							</div>
 						</div>
 					</div>
