@@ -3,8 +3,7 @@
 <?= $this-> section('content'); ?>
 
 <div class="container-fluid">
-    <!-- Page Heading -->
-    <!-- <h1 class="h3 mb-4 text-gray-800">Data Petugas Terdaftar</h1> -->
+
 
     <!-- <button class="btn btn-primary mb-3">Tambah data</button> -->
     <?php if (session()->get('level') == 'Perpustakaan'): ?>
@@ -101,7 +100,7 @@
                     <div class="col-sm-9">
                         <select class="form-select form-control" type="text" name="tampilkan"  value="<?= old('tampilkan'); ?>">
                                     <!-- harus sesuai dengan urutan enum pada database -->
-                            <option selected>Pilih Status </option>
+                            <option selected>Pilih  </option>
                             <option <?= old("tampilkan") == 'Tampilkan Buku'? 'selected' : 'Tampilkan Buku' ?> value="Tampilkan Buku">Tampilkan Buku</option>
                             <option <?= old("tampilkan") == 'Sembunyikan'? 'selected' : 'Sembunyikan' ?> value="Sembunyikan">Sembunyikan</option>
                             
@@ -214,7 +213,7 @@
                                             <td style="text-align: center;"><?= $buku['tampilkan']; ?></td>
                                             <td style="text-align: center;">
                                             
-                                                <a href="" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editKegiatan<?= $buku['id_buku']; ?>" data-bs-whatever="@getbootstrap">Edit</a>
+                                                <a href="" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editBuku<?= $buku['id_buku']; ?>" data-bs-whatever="@getbootstrap">Edit</a>
                                                 
                                                 <form action="deleteBuku/<?= $buku['id_buku']; ?>" method="post" class="d-inline">
                                                     <?= csrf_field(); ?>
@@ -234,15 +233,15 @@
     <?php 
         $no=1;
         foreach($data_buku as $buku): ?> 
-    <div class="modal fade" id="editKegiatan<?= $buku['id_buku']; ?>" tabindex="-1" aria-labelledby="editKegiatan" aria-hidden="true">
+    <div class="modal fade" id="editBuku<?= $buku['id_buku']; ?>" tabindex="-1" aria-labelledby="editBuku" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title fs-5" id="editKegiatan">Edit Data Buku</h4> 
+                    <h4 class="modal-title fs-5" id="editBuku">Edit Data Buku</h4> 
                     <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
                 </div>
                 <div class="modal-body">
-                    <form action="<?= base_url()?>updateKegiatan/<?= $buku['id_buku']; ?>" method="post" enctype="multipart/form-data" id="form">
+                    <form action="<?= base_url()?>updateBuku/<?= $buku['id_buku']; ?>" method="post" enctype="multipart/form-data" id="form">
                     <div class="row mb-2">
                         <label for="email" class="col-sm-3 col-form-label">Judul</label>
                         <div class="col-sm-9">
@@ -252,43 +251,57 @@
                     <div class="row mb-2">
                         <label for="email" class="col-sm-3 col-form-label">Pengarang</label>
                         <div class="col-sm-9">
-                            <input type="date" class="form-control" id="recipient-name" name="pengarang" value="<?= $buku['pengarang']; ?>">
+                            <input type="text" class="form-control" id="recipient-name" name="pengarang" value="<?= $buku['pengarang']; ?>">
                         </div>
                     </div>
                     <div class="row mb-2">
                         <label for="email" class="col-sm-3 col-form-label">Penerbit</label>
                         <div class="col-sm-9">
-                            <input type="date" class="form-control" id="recipient-name" name="penerbit" value="<?= $buku['penerbit']; ?>">
+                            <input type="text" class="form-control" id="recipient-name" name="penerbit" value="<?= $buku['penerbit']; ?>">
                         </div>
                     </div>
                     <div class="row mb-2">
                         <label for="email" class="col-sm-3 col-form-label">Tempat Terbit</label>
                         <div class="col-sm-9">
-                            <input type="date" class="form-control" id="recipient-name" name="tempatTerbit" value="<?= $buku['tempatTerbit']; ?>">
+                            <input type="text" class="form-control" id="recipient-name" name="tempatTerbit" value="<?= $buku['tempatTerbit']; ?>">
                         </div>
                     </div>
                     <div class="row mb-2">
                         <label for="email" class="col-sm-3 col-form-label">Tahun Terbit</label>
                         <div class="col-sm-9">
-                            <input type="date" class="form-control" id="recipient-name" name="tahunTerbit" value="<?= $buku['tahunTerbit']; ?>">
+                            <input type="text" class="form-control" id="recipient-name" name="tahunTerbit" value="<?= $buku['tahunTerbit']; ?>">
                         </div>
                     </div>
                     <div class="row mb-2">
                         <label for="email" class="col-sm-3 col-form-label">Eksemplar</label>
                         <div class="col-sm-9">
-                            <input type="date" class="form-control" id="recipient-name" name="eksemplar" value="<?= $buku['eksemplar']; ?>">
+                            <input type="text" class="form-control" id="recipient-name" name="eksemplar" value="<?= $buku['eksemplar']; ?>">
                         </div>
                     </div>
                     <div class="row mb-2">
                         <label for="email" class="col-sm-3 col-form-label">Lokasi Penyimpanan</label>
                         <div class="col-sm-9">
-                            <input type="date" class="form-control" id="recipient-name" name="rak" value="<?= $buku['rak']; ?>">
+                            <input type="text" class="form-control" id="recipient-name" name="rak" value="<?= $buku['rak']; ?>">
                         </div>
                     </div>
                     <div class="row mb-2">
-                        <label for="email" class="col-sm-3 col-form-label">Kategori Buku</label>
+                        <label for="" class="col-sm-3 col-form-label">Kategori Buku</label>
                         <div class="col-sm-9">
-                            <input type="date" class="form-control" id="recipient-name" name="kategoriBuku" value="<?= $buku['kategoriBuku']; ?>">
+                            <select class="form-select form-control" type="text" name="kategoriBuku"  value="<?= $buku['kategoriBuku']; ?>">
+                                        <!-- harus sesuai dengan urutan enum pada database -->
+                                <option selected>Pilih Kategori</option>
+                                <option <?= $buku['kategoriBuku'] == 'Ilmu Filsafat'? 'selected' : 'Ilmu Filsafat' ?> value="Ilmu Filsafat">Ilmu Filsafat</option>
+                                <option <?= $buku['kategoriBuku'] == 'Ilmu Agama'? 'selected' : 'Ilmu Agama' ?> value="Ilmu Agama">Ilmu Agama</option>
+                                <option <?= $buku['kategoriBuku'] == 'Ilmu Bahasa'? 'selected' : 'Ilmu Bahasa' ?> value="Ilmu Bahasa">Ilmu Bahasa</option>
+                                <option <?= $buku['kategoriBuku'] == 'Ilmu Sosial'? 'selected' : 'Ilmu Sosial' ?> value="Ilmu Sosial">Ilmu Sosial</option>
+                                <option <?= $buku['kategoriBuku'] == 'Ilmu Murni/Pasti'? 'selected' : 'Ilmu Murni/Pasti' ?> value="Ilmu Murni/Pasti">Ilmu Murni/Pasti</option>
+                                <option <?= $buku['kategoriBuku'] == 'Teknologi'? 'selected' : 'Teknologi' ?> value="Teknologi">Teknologi</option>
+                                <option <?= $buku['kategoriBuku'] == 'Kesenian'? 'selected' : 'Kesenian' ?> value="Kesenian">Kesenian</option>
+                                <option <?= $buku['kategoriBuku'] == 'Sejarah/Geografi'? 'selected' : 'Sejarah/Geografi' ?> value="Sejarah/Geografi">Sejarah/Geografi</option>
+                                <option <?= $buku['kategoriBuku'] == 'Kesusastraan'? 'selected' : 'Kesusastraan' ?> value="Kesusastraan">Kesusastraan</option>
+                                <option <?= $buku['kategoriBuku'] == 'Lainnya'? 'selected' : 'Lainnya' ?> value="Lainnya">Lainnya</option>
+                                
+                            </select>
                         </div>
                     </div>
                     <div class="row mb-2">
@@ -306,7 +319,7 @@
                     <div class="row mb-2">
                         <label for="email" class="col-sm-3 col-form-label">Keterangan</label>
                         <div class="col-sm-9">
-                            <input type="date" class="form-control" id="recipient-name" name="keterangan" value="<?= $buku['keterangan']; ?>">
+                            <input type="text" class="form-control" id="recipient-name" name="keterangan" value="<?= $buku['keterangan']; ?>">
                         </div>
                     </div>
                     

@@ -43,15 +43,19 @@ class C_Perpustakaan extends BaseController
         }
 
         $foto = $this->request->getFile('foto');
+        $dafaultImg = 'no_cover.jpg';
     
         if ($foto->isValid() && !$foto->hasMoved()) {
             $fotoName = $foto->getRandomName();
             $foto->move('img/perpustakaan', $fotoName);
         } else {
             // Handle file upload error
-            return redirect()->to(base_url('/inputData'))
-                ->withInput()
-                ->with('errors', $foto->getErrorString());
+            $fotoName = $dafaultImg;
+            // $foto->move('img/perpustakaan', $fotoName);
+            
+            // return redirect()->to(base_url('/inputData'))
+            //     ->withInput()
+            //     ->with('errors', $foto->getErrorString());
         }
 
         // $idPetugas = session()->get('id_petugas');
@@ -100,14 +104,22 @@ class C_Perpustakaan extends BaseController
         return redirect()->to('/inputData');
     }
 
-    public function updateKegiatan($id_kegiatan) {
+    public function updateBuku($id_buku) {
         // Mengambil data yang akan diupdate dari request
         $dataToUpdate = [
+            'kode' => $this->request->getVar('kode'),
             'judul' => $this->request->getVar('judul'),
-            'tanggal' => $this->request->getVar('tanggal'),
-            'tampilkan' => $this->request->getVar('tampilkan'),
+            'pengarang' => $this->request->getVar('pengarang'),
+            'penerbit' => $this->request->getVar('penerbit'),
+            'tempatTerbit' => $this->request->getVar('tempatTerbit'),
+            'tahunTerbit' => $this->request->getVar('tahunTerbit'),
+            'rak' => $this->request->getVar('rak'),
+            'eksemplar' => $this->request->getVar('eksemplar'),
+            'status' => $this->request->getVar('status'),
             'keterangan' => $this->request->getVar('keterangan'),
-            'foto' => $this->request->getVar('foto'),
+            'kategoriBuku' => $this->request->getVar('kategoriBuku'),            
+            'tampilkan' => $this->request->getVar('tampilkan'),            
+            'foto' => $this->request->getVar('foto'), 
             
         ];
     
@@ -119,7 +131,7 @@ class C_Perpustakaan extends BaseController
             $fotoName = $foto->getRandomName();
 
             // Pindahkan file foto ke folder yang diinginkan
-            $foto->move('img/kegiatan', $fotoName); // Perbarui path sesuai dengan folder yang diinginkan
+            $foto->move('img/perpustakaan', $fotoName); // Perbarui path sesuai dengan folder yang diinginkan
 
             // Tambahkan nama file foto ke data yang akan diupdate
             $dataToUpdate['foto'] = $fotoName;
@@ -131,19 +143,29 @@ class C_Perpustakaan extends BaseController
         // Memastikan ada data yang akan diupdate
         if (!empty($dataToUpdate)) {
             // Mengeksekusi perintah update
-            $this->M_Perpustakaan->update($id_kegiatan, $dataToUpdate);
+            $this->M_Perpustakaan->update($id_buku, $dataToUpdate);
     
             // Ambil data petugas setelah diubah dari database
-            $newDataKegiatan = $this->M_Perpustakaan->getKegiatan($id_kegiatan);
+            $newDataBuku = $this->M_Perpustakaan->getBuku($id_buku);
     
             // Perbarui sesi pengguna dengan data baru
             if (session()->get('level') != 'Admin') {
                 session()->set([
-                    'judul' => $newDataKegiatan['judul'],
-                    'tanggal' => $newDataKegiatan['tanggal'],
-                    'tampilkan' => $newDataKegiatan['tampilkan'],
-                    'keterangan' => $newDataKegiatan['keterangan'],
-                    'foto' => $newDataKegiatan['foto'],
+                    
+
+                    'kode' => $newDataBuku['kode'],
+                    'judul' => $newDataBuku['judul'],
+                    'pengarang' => $newDataBuku['pengarang'],
+                    'penerbit' => $newDataBuku['penerbit'],
+                    'tempatTerbit' => $newDataBuku['tempatTerbit'],
+                    'tahunTerbit' => $newDataBuku['tahunTerbit'],
+                    'rak' => $newDataBuku['rak'],
+                    'eksemplar' => $newDataBuku['eksemplar'],
+                    'status' => $newDataBuku['status'],
+                    'keterangan' => $newDataBuku['keterangan'],
+                    'kategoriBuku' => $newDataBuku['kategoriBuku'],         
+                    'tampilkan' =>$newDataBuku['tampilkan'],      
+                    'foto' => $newDataBuku['foto'],
                 ]);
             }
             //alert
@@ -155,7 +177,7 @@ class C_Perpustakaan extends BaseController
         // dd('berhasil');
     
         // Redirect ke halaman sebelumnya atau halaman yang sesuai
-        return redirect()->to('/tambahKegiatan');
+        return redirect()->to('/inputData');
     }
 
     public function tambahData()
@@ -264,112 +286,113 @@ class C_Perpustakaan extends BaseController
         // Menampilkan view dengan data yang telah disiapkan
         return view('perpustakaan/inputData', $data);
     }
-    public function detailKoleksi($id) 
-    {
-        // $this->M_Koleksi->enableQueryLog();
-
-
-        $data_koleksi = $this->M_Perpustakaan->getKoleksi($id);
-        $petugasName = $this->M_Perpustakaan->getPetugasName($data_koleksi['id_petugas']);
-        $kategoriName = $this->M_Perpustakaan->getKategoriName($data_koleksi['kode_kategori']);
-        $data_koleksi['petugas_name'] = isset($petugasName['nama']) ? $petugasName['nama'] : 'Nama Petugas Tidak Tersedia';
-        $data_koleksi['kategori_name'] = isset($kategoriName['nama_kategori']) ? $kategoriName['nama_kategori'] : 'Nama Kategori Tidak Tersedia';
-        
-        // Akses log query setelah menjalankan query model
-        // $queries = $this->M_Koleksi->getQueryLog();
-        // print_r($queries);
-        $data = [
-            'title' => 'Detail Koleksi',
-            'data_koleksi' => $data_koleksi,
-        ];
-
-        return view('pengkajian/v_detailKoleksi', $data);
-        
-    }
     
-    public function edit($id) 
-    {
-        $data =[
-            'title' => 'Ubah Data Koleksi',
-            'validation' => \Config\Services::validation(),
-            'data_koleksi' => $this->M_Perpustakaan->getKoleksi($id)
-        ];
-        
-        return view('pengkajian/v_ubahKoleksi', $data);
-        
-    }
-    public function update($id) {
-        
-        
-        // Simpan data pengunjung
-       //validation
-       $data_koleksi = $this->M_Perpustakaan->getKoleksi($id);
+    // public function detailKoleksi($id) 
+    // {
+    //     // $this->M_Koleksi->enableQueryLog();
 
-        $idPetugas = session()->get('id_petugas');
-        if (empty($idPetugas)) {
-            die('Error: id_petugas tidak valid');
-        }
 
-        $foto = $this->request->getFile('gambar');
-
-        if ($foto->isValid() && !$foto->hasMoved()) {
-            $fotoName = $foto->getRandomName();
-            $foto->move('img/koleksi', $fotoName);
-        } else {
-            // Handle file upload error
-            $fotoName = $data_koleksi['gambar'];
-        }
+    //     $data_koleksi = $this->M_Perpustakaan->getKoleksi($id);
+    //     $petugasName = $this->M_Perpustakaan->getPetugasName($data_koleksi['id_petugas']);
+    //     $kategoriName = $this->M_Perpustakaan->getKategoriName($data_koleksi['kode_kategori']);
+    //     $data_koleksi['petugas_name'] = isset($petugasName['nama']) ? $petugasName['nama'] : 'Nama Petugas Tidak Tersedia';
+    //     $data_koleksi['kategori_name'] = isset($kategoriName['nama_kategori']) ? $kategoriName['nama_kategori'] : 'Nama Kategori Tidak Tersedia';
         
-        $data= [
-                'no_registrasi' => $this->request->getVar('no_registrasi'),
-                'no_inventaris' => $this->request->getVar('no_inventaris'),
-                'nama_inv' => $this->request->getVar('nama_inv'),
-                'gambar' => $fotoName,
-                'ukuran' => $this->request->getVar('ukuran'),
-                'tempat_buat' => $this->request->getVar('tempat_buat'),
-                'tempat_dapat' => $this->request->getVar('tempat_dapat'),
-                'cara_dapat' => $this->request->getVar('cara_dapat'),
-                'tgl_masuk' => $this->request->getVar('tgl_masuk'),
-                'keadaan' => $this->request->getVar('keadaan'),
-                'lokasi' => $this->request->getVar('lokasi'),
-                'keterangan' => $this->request->getVar('keterangan'),
-                'uraian' => $this->request->getVar('uraian'),
-                'kode_kategori' => $this->request->getVar('kode_kategori'),
-                'id_petugas' => session()->get('id_petugas'), // Ambil ID petugas dari sesi
+    //     // Akses log query setelah menjalankan query model
+    //     // $queries = $this->M_Koleksi->getQueryLog();
+    //     // print_r($queries);
+    //     $data = [
+    //         'title' => 'Detail Koleksi',
+    //         'data_koleksi' => $data_koleksi,
+    //     ];
+
+    //     return view('pengkajian/v_detailKoleksi', $data);
+        
+    // }
+    
+    // public function edit($id) 
+    // {
+    //     $data =[
+    //         'title' => 'Ubah Data Koleksi',
+    //         'validation' => \Config\Services::validation(),
+    //         'data_koleksi' => $this->M_Perpustakaan->getKoleksi($id)
+    //     ];
+        
+    //     return view('pengkajian/v_ubahKoleksi', $data);
+        
+    // }
+    // public function update($id) {
+        
+        
+    //     // Simpan data pengunjung
+    //    //validation
+    //    $data_koleksi = $this->M_Perpustakaan->getKoleksi($id);
+
+    //     $idPetugas = session()->get('id_petugas');
+    //     if (empty($idPetugas)) {
+    //         die('Error: id_petugas tidak valid');
+    //     }
+
+    //     $foto = $this->request->getFile('gambar');
+
+    //     if ($foto->isValid() && !$foto->hasMoved()) {
+    //         $fotoName = $foto->getRandomName();
+    //         $foto->move('img/koleksi', $fotoName);
+    //     } else {
+    //         // Handle file upload error
+    //         $fotoName = $data_koleksi['gambar'];
+    //     }
+        
+    //     $data= [
+    //             'no_registrasi' => $this->request->getVar('no_registrasi'),
+    //             'no_inventaris' => $this->request->getVar('no_inventaris'),
+    //             'nama_inv' => $this->request->getVar('nama_inv'),
+    //             'gambar' => $fotoName,
+    //             'ukuran' => $this->request->getVar('ukuran'),
+    //             'tempat_buat' => $this->request->getVar('tempat_buat'),
+    //             'tempat_dapat' => $this->request->getVar('tempat_dapat'),
+    //             'cara_dapat' => $this->request->getVar('cara_dapat'),
+    //             'tgl_masuk' => $this->request->getVar('tgl_masuk'),
+    //             'keadaan' => $this->request->getVar('keadaan'),
+    //             'lokasi' => $this->request->getVar('lokasi'),
+    //             'keterangan' => $this->request->getVar('keterangan'),
+    //             'uraian' => $this->request->getVar('uraian'),
+    //             'kode_kategori' => $this->request->getVar('kode_kategori'),
+    //             'id_petugas' => session()->get('id_petugas'), // Ambil ID petugas dari sesi
             
-        ];
-        $this->M_Perpustakaan->updateKoleksi($id, $data);
+    //     ];
+    //     $this->M_Perpustakaan->updateKoleksi($id, $data);
 
-        //alert
-        session()->setFlashdata('pesan', 'Data Berhasil Diubah.');
-        // dd($this->request->getVar());
-        // Redirect ke halaman sebelumnya atau halaman yang sesuai
-        return redirect()->to('/detailKoleksi/' . $id);
-    } 
-    public function updateKeadaan()
-    {
-        // Pastikan metode yang digunakan adalah POST
-        if ($this->request->getMethod() == 'post') {
-            // Ambil data ID dan status dari permintaan POST
-            $id = $this->request->getPost('id');
-            $keadaan = $this->request->getPost('keadaan');
+    //     //alert
+    //     session()->setFlashdata('pesan', 'Data Berhasil Diubah.');
+    //     // dd($this->request->getVar());
+    //     // Redirect ke halaman sebelumnya atau halaman yang sesuai
+    //     return redirect()->to('/detailKoleksi/' . $id);
+    // } 
+    // public function updateKeadaan()
+    // {
+    //     // Pastikan metode yang digunakan adalah POST
+    //     if ($this->request->getMethod() == 'post') {
+    //         // Ambil data ID dan status dari permintaan POST
+    //         $id = $this->request->getPost('id');
+    //         $keadaan = $this->request->getPost('keadaan');
 
-            // Lakukan pembaruan status di database menggunakan model
-            $result = $this->M_Perpustakaan->updateKeadaan($id, $keadaan);
+    //         // Lakukan pembaruan status di database menggunakan model
+    //         $result = $this->M_Perpustakaan->updateKeadaan($id, $keadaan);
 
-            // Beri respons berdasarkan hasil pembaruan
-            if ($result) {
-                return redirect()->back();
-                // return $this->response->setJSON(['success' => false, 'message' => 'Berhasil']);
+    //         // Beri respons berdasarkan hasil pembaruan
+    //         if ($result) {
+    //             return redirect()->back();
+    //             // return $this->response->setJSON(['success' => false, 'message' => 'Berhasil']);
         
-            } else {
-                return $this->response->setJSON(['success' => false, 'message' => 'Gagal memperbarui status']);
-            }
-        } else {
-            // Jika metode bukan POST, beri respons dengan kesalahan
-            return $this->response->setJSON(['success' => false, 'message' => 'Metode yang tidak valid']);
-        }
-    }
+    //         } else {
+    //             return $this->response->setJSON(['success' => false, 'message' => 'Gagal memperbarui status']);
+    //         }
+    //     } else {
+    //         // Jika metode bukan POST, beri respons dengan kesalahan
+    //         return $this->response->setJSON(['success' => false, 'message' => 'Metode yang tidak valid']);
+    //     }
+    // }
 
     // public function grafikKoleksi()
     // {

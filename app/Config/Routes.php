@@ -126,6 +126,7 @@ $routes->get('/detailKoleksi/(:segment)', 'C_Koleksi::detailKoleksi/$1');
 $routes->delete('hapus/(:segment)', 'C_Koleksi::delete/$1');
 $routes->get('ubahKoleksi/(:segment)', 'C_Koleksi::edit/$1');
 $routes->post('/updateKoleksi/(:segment)', 'C_Koleksi::update/$1');
+
 $routes->get('/koleksi/(:segment)', 'C_Koleksi::tampilKoleksi/$1');
 $routes->post('/updateKeadaan', 'C_Koleksi::updateKeadaan');
 $routes->get('/grafikKoleksi', 'C_Koleksi::grafikKoleksi');
@@ -192,5 +193,6 @@ $routes->get('/rencanaStrategis', 'C_LandingPage::rencanaStrategis');
 $routes->get('/inputData', 'C_Perpustakaan::index');
 $routes->post('/saveDataBuku', 'C_Perpustakaan::saveDataBuku');
 $routes->delete('deleteBuku/(:segment)', 'C_Perpustakaan::deleteBuku/$1');
+$routes->post('/updateBuku/(:segment)', 'C_Perpustakaan::updateBuku/$1');
 // 
 

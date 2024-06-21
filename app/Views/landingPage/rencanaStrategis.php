@@ -18,4 +18,33 @@
 </section>
 <!-- End banner Area -->	
 
+<section class="about-info-area section-gap">
+
+				<div class="container">
+				<!-- <button class="genric-btn primary small"> 
+					<div>Kuda Sekardiyu [No Koleksi: 2955] Terbuat dari kulit kerbau</div>
+					<div></div>
+				</button> -->
+					<div class="row align-items-center">
+						<div class="col-lg-6 info-left">
+							<img class="img-fluid" src="img/rencanaStrategis/logo kmkm.png" alt="">
+						</div>
+						<div class="col-lg-6 info-right">
+							<h6>Rencana Strategis Museum Negeri NTB</h6>
+							<h1>Kotaku Museumku Kampungku Museumku</h1>
+							<!-- <p >
+								Logo Museum Negeri NTB merupakan gambar Jaran Juring atau Jaran Kamput yang 
+                                merupakan  perwujudan sosok Sekardiyu yaitu tunggangan Wong Menak Jayengrana.
+                                Sekardiyu memiliki makna kendaraan kemenangan dan kebahagiaan bagi orang berbudi luhur.
+                                Jadi, logo ini menggambarkan museum sebagai tempat perlindungan dan pelestarian kebudayaan yang memiliki nilai
+                                kebahagiaan sesuai dengan jargon museum yaitu "museum menyenangkan".
+							</p> -->
+						</div>
+					</div>
+				</div>	
+			</section>
+			<!-- End about-info Area -->
+
+
+
 <?= $this->endSection(); ?>  
