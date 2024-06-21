@@ -413,6 +413,48 @@ class C_LandingPage extends BaseController
         
         return view('landingPage/lihatBerita2', $data);
     }
+    public function beritaKategori2($jenisBerita): string
+    {
+        // $kajian = $this->M_Kajian->findAll();
+        $beritaTerbaru = $this->M_Kajian->getKajianTerbaru(5);
+        $beritaKategori = $this->M_Berita->getDataByJenis($jenisBerita);
+        // $data_berita = $this->M_Berita->getBeritaBaru();
+
+        $kategoriBerita = $this->request->getPost('kategoriBerita') ?? 'Regional'; // Default ke 'Regional'
+        $lihatSemua = $this->request->getGet('lihatSemua') ?? false;
+        $limit = $lihatSemua ? null : 4; 
+    
+        if ($lihatSemua) {
+            $data['berita'] = $this->M_Berita->getBeritaByKategoriAll($kategoriBerita);
+        } else {
+            $data['berita'] = $this->M_Berita->getBeritaByKategori($kategoriBerita, $limit);
+        }
+
+
+        $data['kategoriBerita'] = $kategoriBerita;
+        foreach ($beritaKategori as &$berita) {
+            $berita['isi_pendek'] = $this->getExcerpt($berita['isi'], 20); // 30 adalah jumlah kata yang ingin ditampilkan
+        }
+
+
+
+        $data =[
+            'title' => 'Daftar Kegiatan',
+            // 'dataBerita' => $data_berita,
+            'beritaTerbaru' => $beritaTerbaru,
+            'dataBerita' => $beritaKategori,
+            'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
+            'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
+            'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
+            'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
+            'berita' => $data['berita'],
+            'kategoriBerita' => $kategoriBerita,
+            'lihatSemua' => $lihatSemua, 
+        ];
+        
+
+        return view('landingPage/berita2', $data);
+    }
     public function kegiatan2(): string
     { 
         $kegiatan = $this->M_Kegiatan->get();
@@ -434,6 +476,8 @@ class C_LandingPage extends BaseController
 
         return view('landingPage/kegiatan2', $data);
     }
+
+
     public function lihatKegiatan2($id_kegiatan){
         // $data_berita = $this->M_Berita->findAll();
         $kegiatan = $this->M_Kegiatan->getKegiatan($id_kegiatan);
@@ -499,6 +543,7 @@ class C_LandingPage extends BaseController
 
         return view('landingPage/kajian2', $data);
     }
+
     public function tulisan2($id_kajian): string
     {
         $kajian = $this->M_Kajian->getKajian($id_kajian);

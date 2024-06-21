@@ -49,6 +49,21 @@
                             </select>
                         </div>
                 </div>
+                <div class="row mb-3">
+                        <label  class="col-sm-2 col-form-label">Kategori Berita</label>
+                        <div class="col-sm-10">
+                            <select class="form-select form-control" type="text" name="jenisBerita" value="<?= old("jenisBerita"); ?>">
+                                
+                                <option selected>Pilih Sifat Berita</option>
+                                <option <?= old("jenisBerita") == 'Pendidikan'? 'selected' : 'Pendidikan' ?> value="Pendidikan">Pendidikan</option>
+                                <option <?= old("jenisBerita") == 'Sosial Masyarakat'? 'selected' : 'Sosial Masyarakat' ?> value="Sosial Masyarakat">Sosial Masyarakat</option>
+                                <option <?= old("jenisBerita") == 'Sejarah dan Budaya'? 'selected' : 'Sejarah dan Budaya' ?> value="Sejarah dan Budaya">Sejarah dan Budaya</option>
+                                <option <?= old("jenisBerita") == 'Pemerintahan'? 'selected' : 'Pemerintahan' ?> value="Pemerintahan">Pemerintahan</option>
+                                <option <?= old("jenisBerita") == 'Pariwisata'? 'selected' : 'Pariwisata' ?> value="Pariwisata">Pariwisata</option>
+                                
+                            </select>
+                        </div>
+                </div>
                 <!-- <div class="row mb-3">
                         <label  class="col-sm-2 col-form-label">Kategori Berita</label>
                         <div class="col-sm-10">

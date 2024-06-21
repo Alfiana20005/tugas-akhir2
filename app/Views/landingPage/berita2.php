@@ -31,11 +31,15 @@
 								foreach($dataBerita as $b):
 								if ($b['type'] == 'Narasi'): ?>  
 								<div class="col-lg-4 col-md-12 my-2">
+									<button class="genric-btn primary small"> 
+										<div><?= $b['jenisBerita']; ?></div>
+										<div></div>
+									</button>
 									<div class="feature-img mb-2">
 										<img class="img-fluid"  src="<?= base_url("img/berita/". $b['foto']); ?>" alt="">
 									</div>
-									<a class="posts-title" href="<?= base_url("/lihatberita2/{$b['id_berita']}"); ?>"><h5><?= $b['judul']; ?></h5></a>
-									<p><?= $b['tanggal']; ?></p>
+									<a class="posts-title "  href="<?= base_url("/lihatberita2/{$b['id_berita']}"); ?>"><h5 style="padding-bottom: 6pt;"><?= $b['judul']; ?></h5></a>
+									<p><i class="fa-solid fa-calendar-days" style="padding-right: 4pt;"></i><?= $b['tanggal']; ?></p>
 									<p class="excert"><?= $b['isi_pendek']; ?></p>
 									<a href="<?= base_url("/lihatberita2/{$b['id_berita']}"); ?>" class="primary-btn">Baca Berita</a>
 								</div>
@@ -49,6 +53,49 @@
 						</div>
 						<div class="col-lg-4 sidebar-widgets">
 							<div class="widget-wrap">
+								<div class="single-sidebar-widget post-category-widget">
+									<h4 class="category-title">Kategori Berita</h4>
+									<ul class="cat-list">
+										
+										<li>
+											<a href="/beritaKategori2/Pendidikan" class="d-flex justify-content-between">
+												<p>Pendidikan</p>
+												<!-- <p>59</p> -->
+											</a>
+										</li>
+										<li>
+											<a href="/beritaKategori2/Sosial Masyarakat" class="d-flex justify-content-between">
+												<p>Sosial Masyarakat</p>
+												<!-- <p>29</p> -->
+											</a>
+										</li>
+										<li>
+											<a href="/beritaKategori2/Sejarah dan Budaya" class="d-flex justify-content-between">
+												<p>Sejarah dan Budaya</p>
+												<!-- <p>15</p> -->
+											</a>
+										</li>
+										<li>
+											<a href="/beritaKategori2/Pemerintahan" class="d-flex justify-content-between">
+												<p>Pemerintahan</p>
+												<!-- <p>09</p> -->
+											</a>
+										</li>
+										<li>
+											<a href="/beritaKategori2/Pariwisata" class="d-flex justify-content-between">
+												<p>Pariwisata</p>
+												<!-- <p>09</p> -->
+											</a>
+										</li>
+										<li>
+											<a href="/berita2" class="d-flex justify-content-between">
+												<p>Semua Kategori</p>
+												
+											</a>
+										</li>
+										
+									</ul>
+								</div>	
 								
 								<div class="single-sidebar-widget popular-post-widget">
 									<h4 class="popular-title">Berita Terkait</h4>
@@ -84,9 +131,16 @@
 										</div>
 									<?php endif; ?>
 								</div>
+
+
+
+
+
+								
 								
 							</div>
 						</div>
+
 					</div>
 				</div>	
 			</section>

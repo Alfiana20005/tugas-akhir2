@@ -162,6 +162,7 @@ $routes->get('/berita2', 'C_LandingPage::berita2');
 $routes->post('/berita2', 'C_LandingPage::berita2');
 $routes->get('/lihatberita2', 'C_LandingPage::lihatberita2');
 $routes->get('/lihatberita2/(:segment)', 'C_LandingPage::lihatberita2/$1');
+$routes->get('/beritaKategori2/(:segment)', 'C_LandingPage::beritaKategori2/$1');
 
 $routes->get('/kegiatan2', 'C_LandingPage::kegiatan2');
 $routes->get('/lihatKegiatan2', 'C_LandingPage::lihatKegiatan2');

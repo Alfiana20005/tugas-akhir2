@@ -60,7 +60,7 @@ class Filters extends BaseConfig
                 'except' => [
                     '/login','c_Login/*','/halamanLogin','c_Login', 
                     'c_LandingPage/*',  'c_LandingPage/','/','/home', 
-                    '/berita2','/lihatberita2','/lihatberita2/*', 
+                    '/berita2','/lihatberita2','/lihatberita2/*', '/beritaKategori2/*', 
                     '/visimisi2','/sejarah2','/struktur2', '/semuaPetugas',
                     '/ruangPamer2', '/kontak', '/pesanUser',
                     '/kegiatan2', '/lihatKegiatan2', '/lihatKegiatan2/*',
@@ -78,7 +78,7 @@ class Filters extends BaseConfig
                 'except' => [
                     '/login','c_Login/*','/halamanLogin','c_Login', 
                     'c_LandingPage/*',  'c_LandingPage/','/','/home', 
-                    '/berita2','/lihatberita2','/lihatberita2/*', 
+                    '/berita2','/lihatberita2','/lihatberita2/*',  '/beritaKategori2/*', 
                     '/visimisi2','/sejarah2','/struktur2', '/semuaPetugas',
                     '/ruangPamer2', '/kontak', '/pesanUser',
                     '/kegiatan2', '/lihatKegiatan2', '/lihatKegiatan2/*',
@@ -96,7 +96,7 @@ class Filters extends BaseConfig
                 'except' => [
                     '/login','c_Login/*','/halamanLogin','c_Login', 
                     'c_LandingPage/*',  'c_LandingPage/','/','/home', 
-                    '/berita2','/lihatberita2','/lihatberita2/*', 
+                    '/berita2','/lihatberita2','/lihatberita2/*',  '/beritaKategori2/*', 
                     '/visimisi2','/sejarah2','/struktur2', '/semuaPetugas',
                     '/ruangPamer2', '/kontak', '/pesanUser',
                     '/kegiatan2', '/lihatKegiatan2', '/lihatKegiatan2/*',
@@ -114,7 +114,7 @@ class Filters extends BaseConfig
                 'except' => [
                     '/login','c_Login/*','/halamanLogin','c_Login', 
                     'c_LandingPage/*',  'c_LandingPage/','/','/home', 
-                    '/berita2','/lihatberita2','/lihatberita2/*', 
+                    '/berita2','/lihatberita2','/lihatberita2/*',  '/beritaKategori2/*', 
                     '/visimisi2','/sejarah2','/struktur2', '/semuaPetugas',
                     '/ruangPamer2', '/kontak', '/pesanUser',
                     '/kegiatan2', '/lihatKegiatan2', '/lihatKegiatan2/*',
@@ -132,7 +132,7 @@ class Filters extends BaseConfig
                 'except' => [
                     '/login','c_Login/*','/halamanLogin','c_Login', 
                     'c_LandingPage/*',  'c_LandingPage/','/','/home', 
-                    '/berita2','/lihatberita2','/lihatberita2/*', 
+                    '/berita2','/lihatberita2','/lihatberita2/*',  '/beritaKategori2/*', 
                     '/visimisi2','/sejarah2','/struktur2', '/semuaPetugas',
                     '/ruangPamer2', '/kontak', '/pesanUser',
                     '/kegiatan2', '/lihatKegiatan2', '/lihatKegiatan2/*',
@@ -150,7 +150,7 @@ class Filters extends BaseConfig
                 'except' => [
                     '/login','c_Login/*','/halamanLogin','c_Login', 
                     'c_LandingPage/*',  'c_LandingPage/','/','/home', 
-                    '/berita2','/lihatberita2','/lihatberita2/*', 
+                    '/berita2','/lihatberita2','/lihatberita2/*',  '/beritaKategori2/*', 
                     '/visimisi2','/sejarah2','/struktur2', '/semuaPetugas',
                     '/ruangPamer2', '/kontak', '/pesanUser',
                     '/kegiatan2', '/lihatKegiatan2', '/lihatKegiatan2/*',
@@ -168,7 +168,7 @@ class Filters extends BaseConfig
                 'except' => [
                     '/login','c_Login/*','/halamanLogin','c_Login', 
                     'c_LandingPage/*',  'c_LandingPage/','/','/home', 
-                    '/berita2','/lihatberita2','/lihatberita2/*', 
+                    '/berita2','/lihatberita2','/lihatberita2/*',  '/beritaKategori2/*', 
                     '/visimisi2','/sejarah2','/struktur2', '/semuaPetugas',
                     '/ruangPamer2', '/kontak', '/pesanUser',
                     '/kegiatan2', '/lihatKegiatan2', '/lihatKegiatan2/*',
@@ -186,7 +186,7 @@ class Filters extends BaseConfig
                 'except' => [
                     '/login','c_Login/*','/halamanLogin','c_Login', 
                     'c_LandingPage/*',  'c_LandingPage/','/','/home', 
-                    '/berita2','/lihatberita2','/lihatberita2/*', 
+                    '/berita2','/lihatberita2','/lihatberita2/*',  '/beritaKategori2/*', 
                     '/visimisi2','/sejarah2','/struktur2', '/semuaPetugas',
                     '/ruangPamer2', '/kontak', '/pesanUser',
                     '/kegiatan2', '/lihatKegiatan2', '/lihatKegiatan2/*',

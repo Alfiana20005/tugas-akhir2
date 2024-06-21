@@ -12,7 +12,7 @@ class M_Berita extends Model
 
 
     // protected $allowedFields = ['foto', 'nama','password','email','username','level'];
-    protected $allowedFields = ['judul','tanggal', 'type','isi', 'foto', 'penulis', 'kategoriBerita', 'ketgambar'];
+    protected $allowedFields = ['judul','tanggal', 'type','isi', 'foto', 'penulis', 'kategoriBerita', 'ketgambar', 'jenisBerita'];
 
 
     protected $validationRules = [];
@@ -69,6 +69,15 @@ class M_Berita extends Model
                     ->orderBy('tanggal', 'DESC')
                     ->findAll();
     }
+
+    public function getDataByJenis($jenisBerita)
+    {
+        return $this->db->table('berita')
+        ->where('jenisBerita', $jenisBerita)
+        ->get()
+        ->getResultArray();
+    }
+    
   
 
     
