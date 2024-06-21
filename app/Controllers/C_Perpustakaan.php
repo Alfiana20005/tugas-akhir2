@@ -24,7 +24,7 @@ class C_Perpustakaan extends BaseController
             'data_buku' => $data_buku
         ];
 
-        return view('perpustakaan/inputData', $data);
+        return view('Perpustakaan/inputdata', $data);
     }
 
     public function saveDataBuku()
@@ -286,7 +286,7 @@ class C_Perpustakaan extends BaseController
         // Menampilkan view dengan data yang telah disiapkan
         return view('perpustakaan/inputData', $data);
     }
-    
+
     // public function detailKoleksi($id) 
     // {
     //     // $this->M_Koleksi->enableQueryLog();
