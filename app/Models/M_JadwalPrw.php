@@ -56,14 +56,25 @@ class M_JadwalPrw extends Model
     //         ->get()
     //         ->getResultArray();
     // }
+    // public function getPerawatanFromJadwal($mulai, $berakhir, $kode_jenisprw)
+    // {
+    //     return $this->db->table('data_perawatan')
+    //         ->select('data_perawatan.*, jenis_perawatan.jenis_prw' )
+    //         ->join('jenis_perawatan', 'jenis_perawatan.kode_jenisprw = data_perawatan.kode_jenisprw', 'left')
+    //         ->where('tanggal >=', $mulai)
+    //         ->where('tanggal <=', $berakhir)
+    //         ->where('data_perawatan.kode_jenisprw', $kode_jenisprw)
+    //         ->get()
+    //         ->getResultArray();
+    // }
     public function getPerawatanFromJadwal($mulai, $berakhir, $kode_jenisprw)
     {
-        return $this->db->table('data_perawatan')
-            ->select('data_perawatan.*, jenis_perawatan.jenis_prw' )
-            ->join('jenis_perawatan', 'jenis_perawatan.kode_jenisprw = data_perawatan.kode_jenisprw', 'left')
-            ->where('tanggal >=', $mulai)
-            ->where('tanggal <=', $berakhir)
-            ->where('data_perawatan.kode_jenisprw', $kode_jenisprw)
+        return $this->db->table('data_perawatan2')
+            ->select('data_perawatan2.*, jenis_perawatan.jenis_prw' )
+            ->join('jenis_perawatan', 'jenis_perawatan.kode_jenisprw = data_perawatan2.kode_jenisprw', 'left')
+            ->where('tanggal_sebelum >=', $mulai)
+            // ->where('tanggal_sesudah <=', $berakhir)
+            ->where('data_perawatan2.kode_jenisprw', $kode_jenisprw)
             ->get()
             ->getResultArray();
     }
@@ -88,11 +99,19 @@ class M_JadwalPrw extends Model
             ->where('id', $data['id'])
             ->update(['status' => $data['status']]);
     }
+    // public function countPerawatanInRange($mulai, $berakhir, $kode_jenisprw)
+    // {
+    //     return $this->db->table('data_perawatan')
+    //         ->where('tanggal >=', $mulai)
+    //         ->where('tanggal <=', $berakhir)
+    //         ->where('kode_jenisprw', $kode_jenisprw)
+    //         ->countAllResults();
+    // }
     public function countPerawatanInRange($mulai, $berakhir, $kode_jenisprw)
     {
-        return $this->db->table('data_perawatan')
-            ->where('tanggal >=', $mulai)
-            ->where('tanggal <=', $berakhir)
+        return $this->db->table('data_perawatan2')
+            ->where('tanggal_sebelum >=', $mulai)
+            ->where('status =', 'Selesai')
             ->where('kode_jenisprw', $kode_jenisprw)
             ->countAllResults();
     }

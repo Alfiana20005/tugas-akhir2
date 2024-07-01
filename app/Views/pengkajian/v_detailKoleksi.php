@@ -12,6 +12,7 @@
             <a href="<?= base_url('/koleksi/' . $data_koleksi['kode_kategori']) ?>"><h6 class="m-0 font-weight-bold text-primary" id='namakoleksi'><?= $data_koleksi['nama_inv']; ?></h6></a>
             <div class="d-flex">
                 <a href="/ubahKoleksi/<?= $data_koleksi['id']; ?>" class="btn btn-success btn-sm mx-2" >Edit</a>
+                <a href="/ubahKoleksi/<?= $data_koleksi['id']; ?>" class="btn btn-warning btn-sm mx-2" >Terakhir Diubah</a>
                 <button onclick="window.print()" type="submit" class="btn btn-sm btn-primary shadow-sm" id="print">
                     <i class="fas fa-print fa-sm text-white-50"></i>Print
                 </button>
@@ -67,7 +68,7 @@
                         </tr>
                         <tr style="line-height: 0;">
                             <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">Lokasi</td>
-                            <td>: <?= $data_koleksi['lokasi']; ?></td>
+                            <td>: <?= $data_koleksi['rak']; ?> <?= $data_koleksi['lemari']; ?> <?= $data_koleksi['lokasi']; ?></td>
                         </tr>
                         <tr style="line-height: 0;">
                             <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">Diubah oleh</td>

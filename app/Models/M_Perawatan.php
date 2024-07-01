@@ -10,7 +10,7 @@ class M_Perawatan extends Model
     protected $primaryKey = 'id_perawatan';
     // protected $useTimestamps = true;
 
-    protected $allowedFields = ['kode_jenisprw','deskripsi','tanggal','foto_sebelum','foto_sesudah','id_koleksi', 'id_petugas'];
+    protected $allowedFields = ['kode_jenisprw','deskripsi','tanggal','foto_sebelum','foto_sesudah','id_koleksi', 'id_petugas', ];
 
     protected $validationRules = [
         'no_registrasi' => 'required|max_length[6]|is_unique[data_koleksi.no_registrasi]',
@@ -23,12 +23,6 @@ class M_Perawatan extends Model
     protected $skipValidation = false;
     protected $cleanValidationRules = true;
     
-    // public function getPerawatan($id){
-    //     return $this->db->table('data_perawatan')
-    //         ->where('id_koleksi', $id)
-    //         ->get()
-    //         ->getRowArray();
-    // }
 
     public function getPerawatan($id)
     {
@@ -96,6 +90,19 @@ class M_Perawatan extends Model
             ->get()
             ->getResultArray();
     }
+    public function getPerawatanInRange2($mulai, $berakhir, $kode_kategori)
+    {
+        return $this->db->table('data_perawatan2')
+            ->select('data_perawatan.*, data_koleksi.kode_kategori')
+            ->join('data_koleksi', 'data_koleksi.no_registrasi = data_perawatan2.no_registrasi', 'left')
+            ->where('tanggal >=', $mulai)
+            ->where('tanggal <=', $berakhir) 
+            ->where('data_perawatan2.kode_kategori', $kode_kategori)           
+            ->get()
+            ->getResultArray();
+    }
+
+
     
     
     

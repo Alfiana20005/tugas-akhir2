@@ -123,6 +123,45 @@
                 </div>
                 
                 <div class="row mb-3">
+                    <label for="email" class="col-sm-2 col-form-label">Rak/Laci</label>
+                    <div class="col-sm-10">
+                            <select class="form-select form-control" type="text" name="rak" value="<?= $data_koleksi['rak']; ?>">
+                                <!-- harus sesuai dengan urutan enum pada database -->
+                                <option selected> </option>
+                                <option <?= $data_koleksi['rak'] == 'Rak/Laci 1'? 'selected' : 'Rak/Laci 1' ?> value="Rak/Laci 1">Rak/Laci 1</option>
+                                <option <?= $data_koleksi['rak'] == 'Rak/Laci 2'? 'selected' : 'Rak/Laci 2' ?> value="Rak/Laci 2">Rak/Laci 2</option>
+                                <option <?= $data_koleksi['rak'] == 'Rak/Laci 3'? 'selected' : 'Rak/Laci 3' ?> value="Rak/Laci 3">Rak/Laci 3</option>
+                                <option <?= $data_koleksi['rak'] == 'Rak/Laci 4'? 'selected' : 'Rak/Laci 4' ?> value="Rak/Laci 4">Rak/Laci 4</option>
+                                <option <?= $data_koleksi['rak'] == 'Rak/Laci 5'? 'selected' : 'Rak/Laci 5' ?> value="Rak/Laci 5">Rak/Laci 5</option>
+                                <option <?= $data_koleksi['rak'] == 'Rak/Laci 6'? 'selected' : 'Rak/Laci 6' ?> value="Rak/Laci 6">Rak/Laci 6</option>
+                                <option <?= $data_koleksi['rak'] == 'Rak/Laci 7'? 'selected' : 'Rak/Laci 7' ?> value="Rak/Laci 7">Rak/Laci 7</option>
+                                <option <?= $data_koleksi['rak'] == 'Rak/Laci 8'? 'selected' : 'Rak/Laci 8' ?> value="Rak/Laci 8">Rak/Laci 8</option>
+                                <option <?= $data_koleksi['rak'] == 'Rak/Laci 9'? 'selected' : 'Rak/Laci 9' ?> value="Rak/Laci 9">Rak/Laci 9</option>
+                                <option <?= $data_koleksi['rak'] == 'Rak/Laci 10'? 'selected' : 'Rak/Laci 10' ?> value="Rak/Laci 10">Rak/Laci 10</option>
+                                
+                            </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="email" class="col-sm-2 col-form-label">Lemari</label>
+                    <div class="col-sm-10">
+                            <select class="form-select form-control" type="text" name="lemari" value="<?= $data_koleksi['lemari']; ?>">
+                                <!-- harus sesuai dengan urutan enum pada database -->
+                                <option selected>Pilih...</option>
+                                <option <?= $data_koleksi['lemari'] == 'Lemari 1'? 'selected' : 'Lemari 1' ?> value="Lemari 1">Lemari 1</option>
+                                <option <?= $data_koleksi['lemari'] == 'Lemari 2'? 'selected' : 'Lemari 2' ?> value="Lemari 2">Lemari 2</option>
+                                <option <?= $data_koleksi['lemari'] == 'Lemari 3'? 'selected' : 'Lemari 3' ?> value="Lemari 3">Lemari 3</option>
+                                <option <?= $data_koleksi['lemari'] == 'Lemari 4'? 'selected' : 'Lemari 4' ?> value="Lemari 4">Lemari 4</option>
+                                <option <?= $data_koleksi['lemari'] == 'Lemari 5'? 'selected' : 'Lemari 5' ?> value="Lemari 5">Lemari 5</option>
+                                <option <?= $data_koleksi['lemari'] == 'Lemari 6'? 'selected' : 'Lemari 6' ?> value="Lemari 6">Lemari 6</option>
+                                <option <?= $data_koleksi['lemari'] == 'Lemari 7'? 'selected' : 'Lemari 7' ?> value="Lemari 7">Lemari 7</option>
+                                <option <?= $data_koleksi['lemari'] == 'Lemari 8'? 'selected' : 'Lemari 8' ?> value="Lemari 8">Lemari 8</option>
+                                <option <?= $data_koleksi['lemari'] == 'Lemari 9'? 'selected' : 'Lemari 9' ?> value="Lemari 9">Lemari 9</option>
+                                <option <?= $data_koleksi['lemari'] == 'Lemari 10'? 'selected' : 'Lemari 10' ?> value="Lemari 10">Lemari 10</option>
+                            </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
                     <label for="email" class="col-sm-2 col-form-label">Lokasi</label>
                     <div class="col-sm-10">
                             <select class="form-select form-control" type="text" name="lokasi" value="<?= $data_koleksi['lokasi']; ?>">

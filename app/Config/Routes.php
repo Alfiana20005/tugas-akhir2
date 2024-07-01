@@ -121,6 +121,7 @@ $routes->post('/print', 'C_Pengunjung::print');
 $routes->get('/tambahdata', 'C_Koleksi::tambahData');
 $routes->post('/saveData', 'C_Koleksi::saveData');
 // 
+$routes->get('/seluruhKoleksi', 'C_Koleksi::seluruhKoleksi');
 $routes->get('/detailKoleksi', 'C_Koleksi::detailKoleksi');
 $routes->get('/detailKoleksi/(:segment)', 'C_Koleksi::detailKoleksi/$1');
 $routes->delete('hapus/(:segment)', 'C_Koleksi::delete/$1');
@@ -133,7 +134,7 @@ $routes->get('/grafikKoleksi', 'C_Koleksi::grafikKoleksi');
 
 //perawatan
 
-$routes->get('/dataPerawatan/(:segment)', 'C_Perawatan::lihatPerawatan/$1');
+$routes->get('/dataPerawatan/(:any)', 'C_Perawatan::lihatPerawatan/$1');
 // $routes->get('/tambahPerawatan', 'C_Perawatan::tambahPerawatan');
 $routes->get('/tambahPerawatan/(:segment)', 'C_Perawatan::tambahPerawatan/$1');
 $routes->post('/simpanPerawatan/(:segment)', 'C_Perawatan::savePerawatan/$1');
@@ -142,9 +143,20 @@ $routes->get('/perawatan', 'C_Perawatan::perawatan');
 $routes->get('/tambahJadwal', 'C_Perawatan::tambahJadwalPerawatan');
 $routes->post('/simpanJadwal', 'C_Perawatan::saveJadwalPerawatan');
 
+// perawatan2
+$routes->post('/savePerawatanPreventif', 'C_Perawatan2::savePerawatanPreventif');
+$routes->post('/savePerawatanKuratif', 'C_Perawatan2::savePerawatanKuratif');
+$routes->post('/savePerawatanRestorasi', 'C_Perawatan2::savePerawatanRestorasi');
+$routes->get('/perawatanPreventif', 'C_Perawatan2::perawatanPreventif');
+$routes->get('/perawatanKuratif', 'C_Perawatan2::perawatanKuratif');
+$routes->get('/perawatanRestorasi', 'C_Perawatan2::perawatanRestorasi');
+$routes->delete('deletePerawatan2/(:segment)', 'C_Perawatan2::delete/$1');
+$routes->post('/updatePerawatan/(:segment)', 'C_Perawatan2::updatePerawatan/$1');
+
 // $routes->get('/detailJadwal', 'C_Perawatan::detailJadwal');
 // $routes->get('detailJadwal/(:segment)', 'C_Perawatan::detailJadwal/$1');
 $routes->get('detailJadwal/(:segment)', 'C_Perawatan::detailJadwal/$1');
+$routes->post('detailJadwal/(:segment)', 'C_Perawatan::detailJadwal/$1');
 $routes->post('/updateStatus', 'C_Perawatan::updateStatus');
 $routes->delete('deleteJadwal/(:segment)', 'C_Perawatan::delete/$1');
 $routes->post('/laporan', 'C_Perawatan::laporan');

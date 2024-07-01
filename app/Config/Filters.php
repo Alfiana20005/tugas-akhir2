@@ -236,11 +236,12 @@ class Filters extends BaseConfig
                 'except' => [
                     '/login', 'C_Login/*', '/logout', '/dashboard', '/halamanLogin', 'C_Login', 
                     'C_Koleksi/*', 'C_Koleksi/',  'profile/*', '/updateProfile/*', 'C_Petugas/*', '/profile',
-                    '/tambahdata','/saveData','/detailKoleksi', '/detailKoleksi/*','hapus/*', 'ubahKoleksi/*', 
+                    '/tambahdata','/saveData','/detailKoleksi', '/detailKoleksi/*','hapus/*', 'ubahKoleksi/*', '/seluruhKoleksi',
                     '/updateKoleksi/*', '/koleksi/*', '/updateKeadaan',
                     '/grafikKoleksi',
                     'C_Perawatan/*', 'C_Perawatan/',
-                    '/dataPerawatan/*', '/tambahPerawatan/*', 
+                    '/dataPerawatan/*', '/tambahPerawatan/*', '/perawatanKuratif', '/perawatanPreventif', '/perawatanRestorasi', '/savePerawatanPreventif',
+                    '/savePerawatanKuratif','deletePerawatan2/*', '/updatePerawatan/*', '/savePerawatanRestorasi',
                     '/simpanPerawatan/*', '/simpanPerawatan','/perawatan', '/tambahJadwal','/simpanJadwal', 
                     'detailJadwal/*', '/updateStatus', 'deleteJadwal/*', '/laporan', 
 
@@ -261,11 +262,12 @@ class Filters extends BaseConfig
                 'except' => [
                     '/login', 'C_Login/*', '/logout', '/dashboard', '/halamanLogin', 'C_Login',  'profile/*', '/updateProfile/*', 'C_Petugas/*', '/profile',
                     'C_Koleksi/*', 'C_Koleksi/', 
-                    '/tambahdata','/saveData','/detailKoleksi', '/detailKoleksi/*','hapus/*', 'ubahKoleksi/*', 
+                    '/tambahdata','/saveData','/detailKoleksi', '/detailKoleksi/*','hapus/*', 'ubahKoleksi/*', '/seluruhKoleksi',
                     '/updateKoleksi/*', '/koleksi/*', '/updateKeadaan',
                     '/grafikKoleksi',
                     'C_Perawatan/*', 'C_Perawatan/',
-                    '/dataPerawatan/*', '/tambahPerawatan/*', 
+                    '/dataPerawatan/*', '/tambahPerawatan/*', '/perawatanKuratif', '/perawatanPreventif', '/perawatanRestorasi', '/savePerawatanPreventif',
+                    '/savePerawatanKuratif', 'deletePerawatan2/*', '/updatePerawatan/*', '/savePerawatanRestorasi',
                     '/simpanPerawatan/*', '/simpanPerawatan','/perawatan', '/tambahJadwal','/simpanJadwal', 
                     'detailJadwal/*', '/updateStatus', 'deleteJadwal/*', '/laporan', 
 
@@ -275,11 +277,12 @@ class Filters extends BaseConfig
                 'except' => [
                     '/login', 'C_Login/*', '/logout', '/dashboard', '/halamanLogin', 'C_Login', 
                     'C_Koleksi/*', 'C_Koleksi/',  'profile/*', '/updateProfile/*', 'C_Petugas/*', '/profile',
-                    '/tambahdata','/saveData','/detailKoleksi', '/detailKoleksi/*','hapus/*', 'ubahKoleksi/*', 
+                    '/tambahdata','/saveData','/detailKoleksi', '/detailKoleksi/*','hapus/*', 'ubahKoleksi/*', '/seluruhKoleksi',
                     '/updateKoleksi/*', '/koleksi/*', '/updateKeadaan',
                     '/grafikKoleksi',
                     'C_Perawatan/*', 'C_Perawatan/',
-                    '/dataPerawatan/*', '/tambahPerawatan/*', 
+                    '/dataPerawatan/*', '/tambahPerawatan/*', '/perawatanKuratif',  '/perawatanPreventif', '/perawatanRestorasi', '/savePerawatanPreventif',
+                    '/savePerawatanKuratif', 'deletePerawatan2/*', '/updatePerawatan/*', '/savePerawatanRestorasi',
                     '/simpanPerawatan/*', '/simpanPerawatan','/perawatan', '/tambahJadwal','/simpanJadwal', 
                     'detailJadwal/*', '/updateStatus', 'deleteJadwal/*', '/laporan', 
 

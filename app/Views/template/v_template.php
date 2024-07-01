@@ -11,7 +11,7 @@
 
     <title>Museum - NTB</title>
 
-    <link rel="shortcut icon" href="img/logomuseum2.png">
+    <link rel="icon" href="img/logomuseum2.png">
 
     <!-- Custom fonts for this template-->
     <link href="<?= base_url();?>/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

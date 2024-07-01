@@ -13,7 +13,7 @@ th {
         font-family: 'Times New Roman';
     }
     @page {
-        size: A4 portrait;
+        size: A4 ;
         margin: 1cm;
         orphans: 3;
     }
@@ -21,7 +21,13 @@ th {
     /* Tentukan elemen apa yang harus dimulai di halaman baru */
     #printperawatan {
         page-break-after: always;
+        size: A4 landscape;
     }
+    .seluruhKoleksi{
+        transform: rotate(90deg);
+
+    }
+    
 }
 .report, #tampilPrint, #tampilPerawatan, #printperawatan{
     display: none;

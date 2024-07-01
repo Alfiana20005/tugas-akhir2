@@ -70,9 +70,9 @@
                             </td>
                             <td style="text-align: center;">
                                 <?php if (session()->get('level') == 'Ketua Pengkajian' || session()->get('level') == 'Petugas Pengkajian'  || session()->get('level') == 'Admin/Pengkajian'): ?>
-                                <a href="<?= base_url("/tambahPerawatan/{$k['id']}"); ?>" class="btn btn-primary btn-sm " >Tambah</a>
+                                <!-- <a href="<?= base_url("/tambahPerawatan/{$k['no_registrasi']}"); ?>" class="btn btn-primary btn-sm " >Tambah</a> -->
                                 <?php endif; ?>
-                                <a href="<?= base_url("/dataPerawatan/{$k['id']}"); ?>" class="btn btn-info btn-sm " >Lihat</a>
+                                <a href="<?= base_url("/dataPerawatan/{$k['no_registrasi']}"); ?>" class="btn btn-info btn-sm " >Lihat</a>
                             </td>
                         </tr>
                         <?php endforeach; ?>

@@ -155,6 +155,9 @@
 
     <?php if (session()->get('level') == 'Ketua Pengkajian' || session()->get('level') == 'Petugas Pengkajian'  || session()->get('level') == 'Admin/Pengkajian'): ?>
         <a class="btn btn-primary my-4" href="/tambahJadwal" role="button">Tambah Jadwal Perawatan</a>
+        <a class="btn btn-warning my-4" href="/perawatanPreventif" role="button">Preventif</a>
+        <a class="btn btn-success my-4" href="/perawatanKuratif" role="button">Kuratif</a>
+        <a class="btn btn-danger my-4" href="/perawatanRestorasi" role="button">Restorasi</a>
         <?php  if(session()->getFlashdata('pesan')): ?>
             <div class="alert alert-success" role="alert">
                 <?= session()->getFlashdata('pesan'); ?>
@@ -163,7 +166,7 @@
     <?php endif; ?>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Jadwal Perawatan</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Data Perawatan</h6>
         </div>
         <div class="card-body">
         <div class="table-responsive">

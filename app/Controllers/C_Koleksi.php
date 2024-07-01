@@ -123,9 +123,12 @@ class C_Koleksi extends BaseController
                 'tgl_masuk' => $this->request->getVar('tgl_masuk'),
                 'keadaan' => $this->request->getVar('keadaan'),
                 'lokasi' => $this->request->getVar('lokasi'),
+                'rak' => $this->request->getVar('rak'),
+                'lemari' => $this->request->getVar('lemari'),
                 'keterangan' => $this->request->getVar('keterangan'),
                 'uraian' => $this->request->getVar('uraian'),
                 'kode_kategori' => $this->request->getVar('kode_kategori'),
+                'harga' => $this->request->getVar('harga'),
                 'id_petugas' => session()->get('id_petugas'), // Ambil ID petugas dari sesi
             
         ]);
@@ -135,6 +138,24 @@ class C_Koleksi extends BaseController
 
         return redirect()-> to('/tambahdata');
 
+    }
+
+    public function seluruhKoleksi() 
+    {
+        // Mendapatkan data koleksi berdasarkan kategori
+        $data_koleksi = $this->M_Koleksi->getkoleksiAll();
+
+        
+
+        // Membuat array data untuk dikirim ke view
+        $data = [
+            'title' => 'Daftar Koleksi ', // Menggunakan nama kategori di judul
+            'data_koleksi' => $data_koleksi,
+            
+        ];
+
+        // Menampilkan view dengan data yang telah disiapkan
+        return view('pengkajian/v_seluruhKoleksi', $data);
     }
     public function tampilKoleksi($kode_kategori) 
     {
@@ -231,6 +252,8 @@ class C_Koleksi extends BaseController
                 'cara_dapat' => $this->request->getVar('cara_dapat'),
                 'tgl_masuk' => $this->request->getVar('tgl_masuk'),
                 'keadaan' => $this->request->getVar('keadaan'),
+                'rak' => $this->request->getVar('rak'),
+                'lemari' => $this->request->getVar('lemari'),
                 'lokasi' => $this->request->getVar('lokasi'),
                 'keterangan' => $this->request->getVar('keterangan'),
                 'uraian' => $this->request->getVar('uraian'),

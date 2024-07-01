@@ -10,7 +10,7 @@ class M_Koleksi extends Model
     protected $primaryKey = 'id';
     // protected $useTimestamps = true;
 
-    protected $allowedFields = ['no_registrasi', 'no_inventaris', 'nama_inv', 'gambar', 'ukuran', 'tempat_buat', 'tempat_dapat', 'cara_dapat', 'tgl_masuk', 'keadaan', 'lokasi', 'keterangan', 'uraian', 'kode_kategori', 'id_petugas'];
+    protected $allowedFields = ['rak', 'lemari', 'harga', 'no_registrasi', 'no_inventaris', 'nama_inv', 'gambar', 'ukuran', 'tempat_buat', 'tempat_dapat', 'cara_dapat', 'tgl_masuk', 'keadaan', 'lokasi', 'keterangan', 'uraian', 'kode_kategori', 'id_petugas'];
 
     // protected $validationRules = [
     //     'no_registrasi' => 'required|max_length[6]|is_unique[data_koleksi.no_registrasi]',
@@ -23,9 +23,31 @@ class M_Koleksi extends Model
     protected $skipValidation = false;
     protected $cleanValidationRules = true;
 
+    public function getkoleksiAll() {
+        return $this->orderBy('CAST(no_registrasi AS UNSIGNED)', 'ASC')
+                    ->findAll();
+    }
+    public function getPerawatanKoleksi($no_registrasi)
+    {
+        $result = $this->db->table('data_perawatan2')
+            ->where('no_registrasi', $no_registrasi)
+            ->get()
+            ->getResultArray();
+
+       
+        if (empty($result)) {
+            return null; // Or you can return an empty array depending on your preference
+        }
+
+        return $result;
+    }
+
     public function updateKoleksi($id, $data)
     {
         return $this->db->table($this->table)->where($this->primaryKey, $id)->update($data);
+    }
+    public function getKoleksi2($no_registrasi){
+        return $this->find($no_registrasi);
     }
     public function getKoleksi($id){
         return $this->find($id);

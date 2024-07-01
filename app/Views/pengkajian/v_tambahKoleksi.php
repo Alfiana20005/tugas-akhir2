@@ -113,6 +113,44 @@
                         </div>
                 </div>
                 <div class="row mb-3">
+                    <label for="email" class="col-sm-3 col-form-label">Rak/Laci</label>
+                    <div class="col-sm-9">
+                            <select class="form-select form-control" type="text" name="rak"  value="<?= old('rak'); ?>">
+                                <!-- harus sesuai dengan urutan enum pada database -->
+                                <option selected> </option>
+                                <option <?= old("rak") == 'Rak/Laci 1'? 'selected' : 'Rak/laci 1' ?> value="Rak/laci 1">Rak/laci 1</option>
+                                <option <?= old("rak") == 'Rak/laci 2'? 'selected' : 'Rak/laci 2' ?> value="Rak/laci 2">Rak/laci 2</option>
+                                <option <?= old("rak") == 'Rak/laci 3'? 'selected' : 'Rak/laci 3' ?> value="Rak/laci 3">Rak/laci 3</option>
+                                <option <?= old("rak") == 'Rak/laci 4'? 'selected' : 'Rak/laci 4' ?> value="Rak/laci 4">Rak/laci 4</option>
+                                <option <?= old("rak") == 'Rak/laci 5'? 'selected' : 'Rak/laci 5' ?> value="Rak/laci 5">Rak/laci 5</option>
+                                <option <?= old("rak") == 'Rak/laci 6'? 'selected' : 'Rak/laci 6' ?> value="Rak/laci 6">Rak/laci 6</option>
+                                <option <?= old("rak") == 'Rak/laci 7'? 'selected' : 'Rak/laci 7' ?> value="Rak/laci 7">Rak/laci 7</option>
+                                <option <?= old("rak") == 'Rak/laci 8'? 'selected' : 'Rak/laci 8' ?> value="Rak/laci 8">Rak/laci 8</option>
+                                <option <?= old("rak") == 'Rak/laci 9'? 'selected' : 'Rak/laci 9' ?> value="Rak/laci 9">Rak/laci 9</option>
+                                <option <?= old("rak") == 'Rak/laci 10'? 'selected' : 'Rak/laci 10' ?> value="Rak/laci 10">Rak/laci 10</option>
+                            </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="email" class="col-sm-3 col-form-label">Lemari</label>
+                    <div class="col-sm-9">
+                            <select class="form-select form-control" type="text" name="lemari"  value="<?= old('lemari'); ?>">
+                                <!-- harus sesuai dengan urutan enum pada database -->
+                                <option selected>Pilih...</option>
+                                <option <?= old("lemari") == 'Lemari 1'? 'selected' : 'Lemari 1' ?> value="Lemari 1">Lemari 1</option>
+                                <option <?= old("lemari") == 'Lemari 2'? 'selected' : 'Lemari 2' ?> value="Lemari 2">Lemari 2</option>
+                                <option <?= old("lemari") == 'Lemari 3'? 'selected' : 'Lemari 3' ?> value="Lemari 3">Lemari 3</option>
+                                <option <?= old("lemari") == 'Lemari 4'? 'selected' : 'Lemari 4' ?> value="Lemari 4">Lemari 4</option>
+                                <option <?= old("lemari") == 'Lemari 5'? 'selected' : 'Lemari 5' ?> value="Lemari 5">Lemari 5</option>
+                                <option <?= old("lemari") == 'Lemari 6'? 'selected' : 'Lemari 6' ?> value="Lemari 6">Lemari 6</option>
+                                <option <?= old("lemari") == 'Lemari 7'? 'selected' : 'Lemari 7' ?> value="Lemari 7">Lemari 7</option>
+                                <option <?= old("lemari") == 'Lemari 8'? 'selected' : 'Lemari 8' ?> value="Lemari 8">Lemari 8</option>
+                                <option <?= old("lemari") == 'Lemari 9'? 'selected' : 'Lemari 9' ?> value="Lemari 9">Lemari 9</option>
+                                <option <?= old("lemari") == 'Lemari 10'? 'selected' : 'Lemari 10' ?> value="Lemari 10">Lemari 10</option>
+                            </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
                     <label for="email" class="col-sm-3 col-form-label">Lokasi</label>
                     <div class="col-sm-9">
                             <select class="form-select form-control" type="text" name="lokasi"  value="<?= old('lokasi'); ?>">
@@ -124,6 +162,12 @@
                                 <option <?= old("lokasi") == 'Ruang Pameran Tetap Museum NTB'? 'selected' : 'Ruang Pameran Tetap Museum NTB' ?> value="Ruang Pameran Tetap Museum NTB">Ruang Pameran Tetap Museum NTB</option>
                                 <option <?= old("lokasi") == 'Area/Halaman Museum NTB'? 'selected' : 'Area/Halaman Museum NTB' ?> value="Area/Halaman Museum NTB">Area/Halaman Museum NTB</option>
                             </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="email" class="col-sm-3 col-form-label">Harga</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="contoh: Rp.000" name="harga" value="<?= old('harga'); ?>">
                     </div>
                 </div>
                 <div class="row mb-3">
