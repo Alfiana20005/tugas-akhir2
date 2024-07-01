@@ -44,7 +44,7 @@
 									<a href="<?= base_url("/lihatberita2/{$b['id_berita']}"); ?>" class="primary-btn">Baca Berita</a>
 								</div>
 								<?php endif; ?>
-                			<?php endforeach; ?>
+                				<?php endforeach; ?>
 							</div>
 							
 							

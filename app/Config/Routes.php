@@ -182,6 +182,8 @@ $routes->get('/kegiatan2', 'C_LandingPage::kegiatan2');
 $routes->get('/lihatKegiatan2', 'C_LandingPage::lihatKegiatan2');
 $routes->get('/lihatKegiatan2/(:segment)', 'C_LandingPage::lihatKegiatan2/$1');
 $routes->get('/kegiatan2', 'C_LandingPage::kegiatan2');
+$routes->get('/kegiatanKategori2/(:segment)', 'C_LandingPage::kegiatanKategori2/$1');
+
 $routes->get('/kajian2', 'C_LandingPage::kajian2');
 $routes->get('/kajianKategori2/(:segment)', 'C_LandingPage::kajianKategori2/$1');
 $routes->get('/tulisan2', 'C_LandingPage::tulisan');

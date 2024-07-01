@@ -18,38 +18,130 @@
 			</div>
 		</div>
 </section>
-<!-- End banner Area -->	
+<!-- End banner Area -->			
+
+
 
 			<!-- Start popular-destination Area -->
-			<section class="popular-destination-area section-gap">
+			<section class="post-content-area pt-60">
+			
 				<div class="container">
 					
+					<!-- <button class="genric-btn primary small col-lg-3"> 
+						<div>Museum Talk</div>
+						
+					</button> -->
+					
 					<div class="row">
-                    <?php 
-                foreach($kegiatan as $k):
-                if ($k['tampilkan'] == 'Kegiatan'): ?>		
-						<div class="col-lg-3 my-2">
-							<div class="single-destination relative">
-								<div class="thumb relative">
-									<!-- <div class="overlay overlay-bg"></div> -->
-									<a href="<?= $k['keterangan']; ?>"  target="_blank"><img class="img-fluid" src="<?= base_url("img/kegiatan/". $k['foto']); ?>" alt=""></a>
-								</div>
-								<div class="desc">	
+						<div class="col-lg-8 posts-list">
+							<div class="single-post row d-flex">
+
+							<?php 
+							foreach($kegiatan as $k):
+							if ($k['tampilkan'] == 'Kegiatan'): ?>		
+									<div class="col-lg-4 col-md-12 my-2">
+										<div class="single-destination relative">
+											<div class="thumb relative">
+												<!-- <div class="overlay overlay-bg"></div> -->
+												<a href="<?= $k['keterangan']; ?>"  target="_blank"><img class="img-fluid" src="<?= base_url("img/kegiatan/". $k['foto']); ?>" alt=""></a>
+											</div>
+											<div class="desc">	
+												
+												<!-- <a href="<?= $k['keterangan']; ?>"><h4><?= $k['judul']; ?></h4></a> -->
+												
+											</div>
+										</div>
+									</div>
+									<?php endif; ?>
+							<?php endforeach; ?>
+							</div>
+							
+							
+							<!-- <div class="single-post row d-flex">
+
+								<?php 
+								foreach($kegiatan as $k):
+								if ($k['tampilkan'] == 'Kegiatan'): ?>  
+								<div class="col-lg-4 col-md-12 my-2">
 									
-									<!-- <a href="<?= $k['keterangan']; ?>"><h4><?= $k['judul']; ?></h4></a> -->
+									<div class="feature-img mb-2">
+										<img class="img-fluid"  src="<?= base_url("img/kegiatan/". $k['foto']); ?>" alt="">
+									</div>
 									
 								</div>
+								<?php endif; ?>
+                				<?php endforeach; ?>
+							</div>
+							 -->
+							
+
+						</div>
+						
+						
+						<div class="col-lg-4 sidebar-widgets">
+							<div class="widget-wrap">
+								<div class="single-sidebar-widget post-category-widget">
+									<h4 class="category-title">Kategori</h4>
+									<ul class="cat-list">
+										
+										<li>
+											<a href="/kegiatanKategori2/Museum Talk" class="d-flex justify-content-between">
+												<p>Museum Talk</p>
+												<!-- <p>59</p> -->
+											</a>
+										</li>
+										<li>
+											<a href="/kegiatanKategori2/Museum Jalan-Jalan" class="d-flex justify-content-between">
+												<p>Museum Jalan-Jalan</p>
+												<!-- <p>29</p> -->
+											</a>
+										</li>
+										<li>
+											<a href="/kegiatanKategori2/Belajar Koleksi" class="d-flex justify-content-between">
+												<p>Belajar Koleksi</p>
+												<!-- <p>15</p> -->
+											</a>
+										</li>
+										<li>
+											<a href="/kegiatan2" class="d-flex justify-content-between">
+												<p>Semua Kegiatan</p>
+												<!-- <p>15</p> -->
+											</a>
+										</li>
+										
+										
+									</ul>
+								</div>	
+
+
+
+
+
+
+								
+								
 							</div>
 						</div>
-                        <?php endif; ?>
-                <?php endforeach; ?>   
+
+
 											
 					</div>
+
+
+
+					
+
+
 				</div>	
+
+
+				
 
         
 			</section>
 			<!-- End popular-destination Area -->
+
+			
 			
 
 

@@ -39,6 +39,20 @@
                 </div>
                 
                 <div class="row mb-2">
+                    <label for="" class="col-sm-3 col-form-label">Kategori Kegiatan</label>
+                    <div class="col-sm-9">
+                        <select class="form-select form-control" type="text" name="kategori_kegiatan"  value="<?= old('kategori_kegiatan'); ?>">
+                                    <!-- harus sesuai dengan urutan enum pada database -->
+                            <option selected>Pilih </option>
+                            <option <?= old("kategori_kegiatan") == 'Museum Talk'? 'selected' : 'Museum Talk' ?> value="Museum Talk">Museum Talk</option>
+                            <option <?= old("kategori_kegiatan") == 'Museum Jalan-Jalan'? 'selected' : 'Museum Jalan-Jalan' ?> value="Museum Jalan-Jalan">Museum Jalan-Jalan</option>
+                            <option <?= old("kategori_kegiatan") == 'Belajar Koleksi'? 'selected' : 'Belajar Koleksi' ?> value="Belajar Koleksi">Belajar Koleksi</option>
+                            <option <?= old("kategori_kegiatan") == 'Lainnya'? 'selected' : 'Lainnya' ?> value="Lainnya">Lainnya</option>
+                            
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-2">
                     <label for="" class="col-sm-3 col-form-label">Tampilkan di</label>
                     <div class="col-sm-9">
                         <select class="form-select form-control" type="text" name="tampilkan"  value="<?= old('tampilkan'); ?>">
@@ -51,12 +65,11 @@
                     </div>
                 </div>
                 <div class="row mb-2">
-                        <label for="isi" class="col-sm-3 col-form-label">keterangan</label>
+                        <label for="isi" class="col-sm-3 col-form-label">Link</label>
                         <div class="col-sm-9">
                             <textarea class="form-control" name="keterangan" id="" value="<?= old("keterangan"); ?>"></textarea>
-                            
                         </div>
-                    </div>
+                </div>
                 <div class="row mb-2">
                     <label for="foto" class="col-sm-3 col-form-label">Sampul</label>
                         <div class="col-sm-2">
@@ -104,8 +117,8 @@
                                             <th style="text-align: center;">Judul</th> 
                                             <th style="text-align: center;">Keterangan</th>
                                             <!-- <th style="text-align: center;">Tipe Berita</th> -->
-                                            
                                             <th style="text-align: center;">Tanggal</th>
+                                            <th style="text-align: center;">Kategori</th>
                                             <th style="text-align: center;">Tampilkan di</th>
                                             
                                             <th style="text-align: center;">Aksi</th>
@@ -127,6 +140,7 @@
                                             <td style="text-align: center;"><?= $k['keterangan']; ?></td>
                                             
                                             <td style="text-align: center;"><?= $k['tanggal']; ?></td>
+                                            <td style="text-align: center;"><?= $k['kategori_kegiatan']; ?></td>
                                             <td style="text-align: center;"><?= $k['tampilkan']; ?></td>
                                             
                                             <td style="text-align: center;">
@@ -181,6 +195,20 @@
                                 <option selected>Pilih </option>
                                 <option <?= $k['tampilkan'] == 'Home'? 'selected' : 'Home' ?> value="Home">Home</option>
                                 <option <?= $k['tampilkan'] == 'Kegiatan'? 'selected' : 'Kegiatan' ?> value="Kegiatan">Kegiatan</option>
+                                
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <label for="" class="col-sm-3 col-form-label">Kategori Kegiatan</label>
+                        <div class="col-sm-9">
+                            <select class="form-select form-control" type="text" name="kategori_kegiatan"  value="<?= $k['kategori_kegiatan']; ?>">
+                                        <!-- harus sesuai dengan urutan enum pada database -->
+                                <option selected>Pilih </option>
+                                <option <?= $k['kategori_kegiatan'] == 'Museum Talk'? 'selected' : 'Museum Talk' ?> value="Museum Talk">Museum Talk</option>
+                                <option <?= $k['kategori_kegiatan'] == 'Museum Jalan-Jalan'? 'selected' : 'Museum Jalan-Jalan' ?> value="Museum Jalan-Jalan">Museum Jalan-Jalan</option>
+                                <option <?= $k['kategori_kegiatan'] == 'Belajar Koleksi'? 'selected' : 'Belajar Koleksi' ?> value="Belajar Koleksi">Belajar Koleksi</option>
+                                <option <?= $k['kategori_kegiatan'] == 'Lainnya'? 'selected' : 'Lainnya' ?> value="Lainnya">Lainnya</option>
                                 
                             </select>
                         </div>

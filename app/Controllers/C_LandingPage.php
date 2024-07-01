@@ -468,6 +468,7 @@ class C_LandingPage extends BaseController
 
         return view('landingPage/berita2', $data);
     }
+
     public function kegiatan2(): string
     { 
         $kegiatan = $this->M_Kegiatan->get();
@@ -490,7 +491,28 @@ class C_LandingPage extends BaseController
         return view('landingPage/kegiatan2', $data);
     }
 
+    public function kegiatanKategori2($kategori_kegiatan): string
+    {
+        // $kajian = $this->M_Kajian->findAll();
+        // $beritaTerbaru = $this->M_Kajian->getKajianTerbaru(5);
+        $kegiatanKategori = $this->M_Kegiatan->getDataByJenis($kategori_kegiatan);
+        // $data_berita = $this->M_Berita->getBeritaBaru()
 
+
+
+        $data =[
+            'title' => 'Daftar Kegiatan',
+            'kegiatan'=> $kegiatanKategori,
+            'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
+            'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
+            'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
+            'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
+            
+        ];
+        
+
+        return view('landingPage/kegiatan2', $data);
+    }
     public function lihatKegiatan2($id_kegiatan){
         // $data_berita = $this->M_Berita->findAll();
         $kegiatan = $this->M_Kegiatan->getKegiatan($id_kegiatan);

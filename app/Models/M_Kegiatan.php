@@ -12,7 +12,7 @@ class M_Kegiatan extends Model
 
 
     // protected $allowedFields = ['foto', 'nama','password','email','username','level'];
-    protected $allowedFields = ['judul','tanggal', 'keterangan', 'foto', 'tampilkan'];
+    protected $allowedFields = ['judul','tanggal', 'keterangan', 'foto', 'tampilkan', 'kategori_kegiatan'];
 
 
     protected $validationRules = [];
@@ -35,7 +35,13 @@ class M_Kegiatan extends Model
                     ->limit($limit)
                     ->findAll();
     }
-    
+    public function getDataByJenis($kategori_kegiatan)
+    {
+        return $this->db->table('kegiatan')
+        ->where('kategori_kegiatan', $kategori_kegiatan)
+        ->get()
+        ->getResultArray();
+    }
   
 
     

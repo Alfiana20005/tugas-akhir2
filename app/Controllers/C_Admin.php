@@ -386,6 +386,7 @@ class C_Admin extends BaseController
             'tanggal' => $this->request->getVar('tanggal'),
             'keterangan' => $this->request->getVar('keterangan'),
             'tampilkan' => $this->request->getVar('tampilkan'),
+            'kategori_kegiatan' => $this->request->getVar('kategori_kegiatan'),
             'foto' => $fotoName,
             
         ]);
@@ -418,6 +419,7 @@ class C_Admin extends BaseController
             'tanggal' => $this->request->getVar('tanggal'),
             'tampilkan' => $this->request->getVar('tampilkan'),
             'keterangan' => $this->request->getVar('keterangan'),
+            'kategori_kegiatan' => $this->request->getVar('kategori_kegiatan'),
             'foto' => $this->request->getVar('foto'),
             
         ];
@@ -454,6 +456,7 @@ class C_Admin extends BaseController
                     'tanggal' => $newDataKegiatan['tanggal'],
                     'tampilkan' => $newDataKegiatan['tampilkan'],
                     'keterangan' => $newDataKegiatan['keterangan'],
+                    'kategori_kegiatan' => $newDataKegiatan['kategori_kegiatan'],
                     'foto' => $newDataKegiatan['foto'],
                 ]);
             }
