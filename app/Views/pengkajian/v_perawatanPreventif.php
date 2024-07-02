@@ -10,25 +10,7 @@
             </div>
         <?php endif; ?>
 
-        <!-- <form action="<?= base_url('/');?>" method="post">
-           
-            <div class="row">
-                
-                <div class="col">
-                    <input type="date" class="form-control" placeholder="Mulai dari" aria-label="tanggal" name="mulaiDari"  value="<?= (!empty($tanggalAwal)) ? $tanggalAwal : ''; ?>">
-                </div>
-                
-                <div class="col">
-                    <input type="date" class="form-control" placeholder="Hingga" aria-label="tanggal" name="hingga" value="<?= (!empty($tanggalAkhir)) ? $tanggalAkhir : ''; ?>">
-                </div>
-                <div class="col mb-4">
-                <button type="submit" class="btn btn-sm btn-primary shadow-sm">
-                    <i class="fas fa-sm text-white-50"></i> Tampilkan Data
-                </button>
-                </div>
-            </div>
-        </form> -->
-
+        
         <div class="modal fade" id="tambahPerawatan" tabindex="-1" aria-labelledby="tambahPerawatan" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -57,17 +39,27 @@
                                 <select class="form-select form-control" type="text" name="rak"  value="<?= old('kode_kategori'); ?>">
                                             <!-- harus sesuai dengan urutan enum pada database -->
                                     <option selected>Pilih </option>
-                                    <option <?= old("kode_kategori") == '01'? 'selected' : '01' ?> value=" 01">Geologika</option>
-                                    <option <?= old("kode_kategori") == '02'? 'selected' : '02' ?> value=" 02">Biologika</option>
-                                    <option <?= old("kode_kategori") == '03'? 'selected' : '03' ?> value=" 03">Etnografika</option>
-                                    <option <?= old("kode_kategori") == '04'? 'selected' : '04' ?> value=" 04">Arkeologika</option>
-                                    <option <?= old("kode_kategori") == '05'? 'selected' : '05' ?> value=" 05">Historika</option>
-                                    <option <?= old("kode_kategori") == '06'? 'selected' : '06' ?> value=" 06">Numismatika</option>
-                                    <option <?= old("kode_kategori") == '07'? 'selected' : '07' ?> value=" 07">Filologika</option>
-                                    <option <?= old("kode_kategori") == '08'? 'selected' : '08' ?> value=" 08">Kramologika</option>
-                                    <option <?= old("kode_kategori") == '09'? 'selected' : '09' ?> value=" 09">Seni Rupa</option>
-                                    <option <?= old("kode_kategori") == '10'? 'selected' : '10' ?> value=" 10">Teknologika</option>
-                                    <option <?= old("kode_kategori") == 'Lain-lain'? 'selected' : 'Lain-lain' ?> value=" 11">Lain-lain</option>
+                                    <div class="row mb-2">
+                            <label for="" class="col-sm-3 col-form-label">Kategori Inventaris</label>
+                            <div class="col-sm-9">
+                                <select class="form-select form-control" type="text" name="kode_kategori"  value="<?= old('kode_kategori'); ?>">
+                                            <!-- harus sesuai dengan urutan enum pada database -->
+                                    <option selected>Pilih </option>
+                                    <option <?= old("kode_kategori") == '01'? 'selected' : 'Geologika' ?> value=" 01">Geologika</option>
+                                    <option <?= old("kode_kategori") == '02'? 'selected' : 'Biologika' ?> value=" 02">Biologika</option>
+                                    <option <?= old("kode_kategori") == '03'? 'selected' : 'Etnografika' ?> value=" 03">Etnografika</option>
+                                    <option <?= old("kode_kategori") == '04'? 'selected' : 'Arkeologika' ?> value=" 04">Arkeologika</option>
+                                    <option <?= old("kode_kategori") == '05'? 'selected' : 'Historika' ?> value=" 05">Historika</option>
+                                    <option <?= old("kode_kategori") == '06'? 'selected' : 'Numismatika' ?> value=" 06">Numismatika</option>
+                                    <option <?= old("kode_kategori") == '07'? 'selected' : 'Filologika' ?> value=" 07">Filologika</option>
+                                    <option <?= old("kode_kategori") == '08'? 'selected' : 'Kramologika' ?> value=" 08">Kramologika</option>
+                                    <option <?= old("kode_kategori") == '09'? 'selected' : 'Seni Rupa' ?> value=" 09">Seni Rupa</option>
+                                    <option <?= old("kode_kategori") == '10'? 'selected' : 'Teknologika' ?> value=" 10">Teknologika</option>
+                                    <option <?= old("kode_kategori") == '11'? 'selected' : 'Lain-lain' ?> value=" 11">Lain-lain</option>
+                                    
+                                </select>
+                            </div>
+                        </div>
                                     
                                 </select>
                             </div>

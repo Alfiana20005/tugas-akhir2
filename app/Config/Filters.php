@@ -235,7 +235,7 @@ class Filters extends BaseConfig
             'filterPengkajian' =>[
                 'except' => [
                     '/login', 'C_Login/*', '/logout', '/dashboard', '/halamanLogin', 'C_Login', 
-                    'C_Koleksi/*', 'C_Koleksi/',  'profile/*', '/updateProfile/*', 'C_Petugas/*', '/profile',
+                    'C_Koleksi/*', 'C_Koleksi/',  'profile/*', '/updateProfile/*', 'C_Petugas/*', '/profile','ubahpetugas/*', '/updatepetugas/*',
                     '/tambahdata','/saveData','/detailKoleksi', '/detailKoleksi/*','hapus/*', 'ubahKoleksi/*', '/seluruhKoleksi',
                     '/updateKoleksi/*', '/koleksi/*', '/updateKeadaan',
                     '/grafikKoleksi',

@@ -58,6 +58,27 @@
                         </div>
                     </div>
                     <div class="row mb-2">
+                            <label for="" class="col-sm-3 col-form-label">Kategori Inventaris</label>
+                            <div class="col-sm-9">
+                                <select class="form-select form-control" type="text" name="kode_kategori"  value="<?= old('kode_kategori'); ?>">
+                                            <!-- harus sesuai dengan urutan enum pada database -->
+                                    <option selected>Pilih </option>
+                                    <option <?= old("kode_kategori") == '01'? 'selected' : 'Geologika' ?> value=" 01">Geologika</option>
+                                    <option <?= old("kode_kategori") == '02'? 'selected' : 'Biologika' ?> value=" 02">Biologika</option>
+                                    <option <?= old("kode_kategori") == '03'? 'selected' : 'Etnografika' ?> value=" 03">Etnografika</option>
+                                    <option <?= old("kode_kategori") == '04'? 'selected' : 'Arkeologika' ?> value=" 04">Arkeologika</option>
+                                    <option <?= old("kode_kategori") == '05'? 'selected' : 'Historika' ?> value=" 05">Historika</option>
+                                    <option <?= old("kode_kategori") == '06'? 'selected' : 'Numismatika' ?> value=" 06">Numismatika</option>
+                                    <option <?= old("kode_kategori") == '07'? 'selected' : 'Filologika' ?> value=" 07">Filologika</option>
+                                    <option <?= old("kode_kategori") == '08'? 'selected' : 'Kramologika' ?> value=" 08">Kramologika</option>
+                                    <option <?= old("kode_kategori") == '09'? 'selected' : 'Seni Rupa' ?> value=" 09">Seni Rupa</option>
+                                    <option <?= old("kode_kategori") == '10'? 'selected' : 'Teknologika' ?> value=" 10">Teknologika</option>
+                                    <option <?= old("kode_kategori") == '11'? 'selected' : 'Lain-lain' ?> value=" 11">Lain-lain</option>
+                                    
+                                </select>
+                            </div>
+                        </div>
+                    <div class="row mb-2">
                         <label for="" class="col-sm-3 col-form-label">Rak/Laci</label>
                         <div class="col-sm-9">
                             <select class="form-select form-control" type="text" name="rak"  value="<?= old('rak'); ?>">
@@ -174,7 +195,7 @@
                     <div class="row mb-2">
                         <label for="email" class="col-sm-3 col-form-label">Tanggal Mulai</label>
                         <div class="col-sm-9">
-                            <input type="date" class="form-control" id="recipient-name" name="tanggal" value="<?= $prw['tanggal_sebelum']; ?>">
+                            <input type="date" class="form-control" id="recipient-name" name="tanggal_sebelum" value="<?= $prw['tanggal_sebelum']; ?>">
                         </div>
                     </div>
                     <div class="row mb-2">
@@ -190,7 +211,27 @@
                         </div>
                     </div>
                     
-                    
+                    <div class="row mb-2">
+                        <label for="" class="col-sm-3 col-form-label">Kategori Inventaris</label>
+                        <div class="col-sm-9">
+                            <select class="form-select form-control" type="text" name="kode_kategori"  value="<?= $prw['kode_kategori']; ?>">
+                                        <!-- harus sesuai dengan urutan enum pada database -->
+                                <option selected> </option>
+                                <option <?= $prw['kode_kategori'] == '01'? 'selected' : 'Geologika' ?> value=" 01">Geologika</option>
+                                    <option <?= $prw['kode_kategori'] == '02'? 'selected' : 'Biologika' ?> value=" 02">Biologika</option>
+                                    <option <?= $prw['kode_kategori'] == '03'? 'selected' : 'Etnografika' ?> value=" 03">Etnografika</option>
+                                    <option <?= $prw['kode_kategori'] == '04'? 'selected' : 'Arkeologika' ?> value=" 04">Arkeologika</option>
+                                    <option <?= $prw['kode_kategori'] == '05'? 'selected' : 'Historika' ?> value=" 05">Historika</option>
+                                    <option <?= $prw['kode_kategori'] == '06'? 'selected' : 'Numismatika' ?> value=" 06">Numismatika</option>
+                                    <option <?= $prw['kode_kategori'] == '07'? 'selected' : 'Filologika' ?> value=" 07">Filologika</option>
+                                    <option <?= $prw['kode_kategori'] == '08'? 'selected' : 'Kramologika' ?> value=" 08">Kramologika</option>
+                                    <option <?= $prw['kode_kategori'] == '09'? 'selected' : 'Seni Rupa' ?> value=" 09">Seni Rupa</option>
+                                    <option <?= $prw['kode_kategori'] == '10'? 'selected' : 'Teknologika' ?> value=" 10">Teknologika</option>
+                                    <option <?= $prw['kode_kategori'] == '11'? 'selected' : 'Lain-lain' ?> value=" 11">Lain-lain</option>
+                                
+                            </select>
+                        </div>
+                    </div>
                    
                     <div class="row mb-2">
                         <label for="" class="col-sm-3 col-form-label">Rak/Laci</label>

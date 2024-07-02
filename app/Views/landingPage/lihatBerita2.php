@@ -27,6 +27,10 @@
 						<div class="col-lg-8 posts-list">
 							<div class="single-post row">
 								<div class="col-lg-12">
+									<button class="genric-btn primary small"> 
+										<div><?= $berita['jenisBerita']; ?></div>
+										<div></div>
+									</button>
 									<div class="feature-img">
 										<img class="img-fluid" src="<?= base_url('img/berita/' . $berita['foto']); ?>" alt="">
 									</div>
@@ -110,7 +114,7 @@
 								
 								<div class="single-sidebar-widget popular-post-widget">
 									<h4 class="popular-title">Berita Terkait</h4>
-									
+
 									<form method="POST" action="">
 									<div id="kategoriBerita" class="col-lg-12 d-flex">
 										<button   class="genric-btn primary-border small my-2 mx-2 <?= $kategoriBerita == 'Regional' ? 'active' : '' ?>" name="kategoriBerita" value="Regional" >Regional</button>
