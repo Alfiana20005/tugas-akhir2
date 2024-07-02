@@ -16,6 +16,14 @@
 		<!-- Site Title -->
 		<title>MuseumNegeri-NTB</title>
 
+		<!-- Google Tag Manager -->
+		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+		})(window,document,'script','dataLayer','GTM-MLF7QLNB');</script>
+		<!-- End Google Tag Manager -->
+
 		<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet"> 
     	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
@@ -193,6 +201,8 @@
 
 			<!-- <script src="<?= base_url();?>landingPage/assets/vendor/swiper/swiper-bundle.min.js"></script> -->
 
+
+
 <script>
   $('.active-recent-blog-carusel').owlCarousel({
     items: 1, // Hanya menampilkan satu item per slide
@@ -238,5 +248,11 @@
 			<script src="<?= base_url();?>landingPage/js/main.js"></script>	
 
 		  	<!-- <link href="<?= base_url();?>landingPage/assets2/vendor/fontawesome-free/css/all.min.css" rel="stylesheet"> -->
+
+			<!-- Google Tag Manager (noscript) -->
+			<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MLF7QLNB"
+			height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+			<!-- End Google Tag Manager (noscript) -->
+		
 		</body>
 	</html>
