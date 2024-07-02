@@ -46,11 +46,6 @@ class M_Berita extends Model
                     ->orderBy('tanggal', 'DESC')
                     ->findAll($limit);
     }
-    // public function getBeritaByKategori($kategoriBerita, $limit) {
-    //     return $this->where('kategoriBerita', $kategoriBerita)
-    //                 ->limit($limit)
-    //                 ->findAll();
-    // }
 
     public function getBeritaByKategori($kategoriBerita, $limit = null)
     {

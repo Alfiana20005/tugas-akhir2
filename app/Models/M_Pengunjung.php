@@ -73,29 +73,7 @@ class M_Pengunjung extends Model
     }
 
 
-    // public function getStatistikData($tahun)
-    // {
-    //     $formattedTahun = date('Y', strtotime($tahun));
-
-    //     return $this->db->table('data_pengunjung')
-    //     ->select('DATE_FORMAT(created_at, "%Y-%m") AS bulan, kategori, SUM(jumlah) AS jumlah')
-    //     ->like('created_at', $formattedTahun, 'after')
-    //     ->groupBy('bulan, kategori')
-    //     ->get()
-    //     ->getResultArray();
-    // }    
-    // public function getDataStatistik($tahun)
-    // {
-    //     // Query untuk mengambil data pengunjung pertahun
-    //     $sql = "SELECT YEAR(created_at) AS tahun, MONTHNAME(created_at) AS bulan, kategori, sum(jumlah) AS jumlah FROM data_pengunjung WHERE created_at LIKE '$tahun%' GROUP BY YEAR(created_at), MONTH(created_at), kategori";
-
-    //     // Menjalankan query
-    //     $result = $this->db->query($sql)->getResultArray();
-
-    //     // ... (proses data sesuai kebutuhan Anda)
-
-    //     return $result;
-    // }
+    
     public function countPengunjung() {
         $model = new M_Pengunjung();
 

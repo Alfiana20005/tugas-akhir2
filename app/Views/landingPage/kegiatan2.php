@@ -57,23 +57,6 @@
 							</div>
 							
 							
-							<!-- <div class="single-post row d-flex">
-
-								<?php 
-								foreach($kegiatan as $k):
-								if ($k['tampilkan'] == 'Kegiatan'): ?>  
-								<div class="col-lg-4 col-md-12 my-2">
-									
-									<div class="feature-img mb-2">
-										<img class="img-fluid"  src="<?= base_url("img/kegiatan/". $k['foto']); ?>" alt="">
-									</div>
-									
-								</div>
-								<?php endif; ?>
-                				<?php endforeach; ?>
-							</div>
-							 -->
-							
 
 						</div>
 						
@@ -113,31 +96,13 @@
 									</ul>
 								</div>	
 
-
-
-
-
-
-								
-								
 							</div>
 						</div>
-
-
-											
+						
 					</div>
-
-
-
-					
-
 
 				</div>	
 
-
-				
-
-        
 			</section>
 			<!-- End popular-destination Area -->
 

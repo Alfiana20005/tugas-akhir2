@@ -18,102 +18,13 @@
 </section>
 <!-- End banner Area -->	
 
-			<!-- Start top-category-widget Area -->
-			<!-- <section class="top-category-widget-area pt-90 pb-90 ">
-				<div class="container">
-					<div class="row">		
-						<div class="col-lg-4">
-							<div class="single-cat-widget">
-								<div class="content relative">
-									<div class="overlay overlay-bg"></div>
-								    <a href="#" target="_blank">
-								      <div class="thumb">
-								  		 <img class="content-image img-fluid d-block mx-auto" src="img/blog/cat-widget1.jpg" alt="">
-								  	  </div>
-								      <div class="content-details">
-								        <h4 class="content-title mx-auto text-uppercase">Social life</h4>
-								        <span></span>								        
-								        <p>Enjoy your social life together</p>
-								      </div>
-								    </a>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4">
-							<div class="single-cat-widget">
-								<div class="content relative">
-									<div class="overlay overlay-bg"></div>
-								    <a href="#" target="_blank">
-								      <div class="thumb">
-								  		 <img class="content-image img-fluid d-block mx-auto" src="img/blog/cat-widget2.jpg" alt="">
-								  	  </div>
-								      <div class="content-details">
-								        <h4 class="content-title mx-auto text-uppercase">Politics</h4>
-								        <span></span>								        
-								        <p>Be a part of politics</p>
-								      </div>
-								    </a>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4">
-							<div class="single-cat-widget">
-								<div class="content relative">
-									<div class="overlay overlay-bg"></div>
-								    <a href="#" target="_blank">
-								      <div class="thumb">
-								  		 <img class="content-image img-fluid d-block mx-auto" src="img/blog/cat-widget3.jpg" alt="">
-								  	  </div>
-								      <div class="content-details">
-								        <h4 class="content-title mx-auto text-uppercase">Food</h4>
-								        <span></span>
-								        <p>Let the food be finished</p>
-								      </div>
-								    </a>
-								</div>
-							</div>
-						</div>												
-					</div>
-				</div>	
-			</section> -->
-			<!-- End top-category-widget Area -->
-			
 			<!-- Start post-content Area -->
 			<section class="post-content-area pt-30">
 				<div class="container">
 					<div class="row">
 						<div class="col-lg-8 posts-list">
 
-                        	<!-- Start other-issue Area -->
-                            <!-- <section class="other-issue-area ">
-                                <div class="container">	
-                                    <div class="row">
-                                        <?php 
-                                        foreach($kajian as $kj):
-                                        ?>
-                                        <div class="col-lg-3 col-md-6">
-                                            <div class="single-other-issue">
-                                                <div class="thumb">
-                                                    <img class="img-fluid" src="<?= base_url("img/kajian/". $kj['sampul']); ?>" alt="">					
-                                                </div>
-                                                <a href="#">
-                                                    <h4><?= $kj['judul']; ?></h4> 
-                                                </a>
-                                                <p>
-                                                    <?= $kj['created_at']; ?>
-                                                </p>
-                                                <p>
-                                                    <?= $kj['kategori']; ?>
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <?php endforeach; ?>
 
-																
-                                    </div>
-                                </div>	
-                            </section> -->
-                            <!-- End other-issue Area -->
                             	
                             <!-- Start blog Area -->
                             <section class="recent-blog-area ">
@@ -208,12 +119,7 @@
 												<!-- <p>37</p> -->
 											</a>
 										</li>
-										<!-- <li>
-											<a href="#" class="d-flex justify-content-between">
-												<p>Adventure</p>
-												<p>44</p>
-											</a>
-										</li>															 -->
+																								 
 									</ul>
 								</div>	
 

@@ -309,26 +309,6 @@ class C_Perawatan extends BaseController
     public function detailJadwal($id)
     {
 
-        
-
-        // $jenisprwData = $this->M_Perawatan->getJenisPrwName($kode_jekode_kategorinisprw);
-        // $nama['jenisprw'] = isset($jenisprwData['jenis_prw']) ? $jenisprwData['jenis_prw'] : 'Nama Kategori Tidak Tersedia';
-
-        // $dataPerawatan = $modelJadwal->getPerawatanFromJadwal($tanggalAwal['mulaiDari'], $tanggalAkhir['hingga'], $kode_jenisprw['jenisprw']);
-        // foreach ($dataPerawatan as &$perawatanItem) {
-        //     $data_koleksi = $this->M_Koleksi->find($perawatanItem['id_koleksi']);
-        //     $data_petugas = $this->M_Petugas->find($perawatanItem['id_petugas']);
-        //     $jenisprwData = $this->M_Perawatan->getJenisPrwName($perawatanItem['kode_jenisprw']);
-        //     $perawatanItem['jenisprw'] = isset($jenisprwData['jenis_prw']) ? $jenisprwData['jenis_prw'] : 'Nama Kategori Tidak Tersedia';
-        //     $perawatanItem['koleksiNames'] = isset($data_koleksi['nama_inv']) ? $data_koleksi['nama_inv'] : 'Nama Kategori Tidak Tersedia';
-        //     $perawatanItem['no_registrasi'] = isset($data_koleksi['no_registrasi']) ? $data_koleksi['no_registrasi'] : 'Nama Kategori Tidak Tersedia';
-        //     $perawatanItem['petugasNames'] = isset($data_petugas['nama']) ? $data_petugas['nama'] : 'Nama Kategori Tidak Tersedia';
-        //     $perawatanItem['nip'] = isset($data_petugas['nip']) ? $data_petugas['nip'] : '-';
-        // }
-
-        
-
-
          // $data_koleksi = $this->M_Koleksi->findAll();
          $modelJadwal = new M_JadwalPrw();
          // $jadwalPrw = $this->M_JadwalPrw->getJadwalPrw();
@@ -364,7 +344,6 @@ class C_Perawatan extends BaseController
             return redirect()->to(base_url('/'))->with('error', 'Jadwal not found');
         }
 
-        // Fetch the perawatan data within the specified range and jenis perawatan
         
         // $koleksiNames = $this->M_Perawatan->getKoleksiName($data_koleksi['id']);
         foreach ($perawatanData as &$perawatanItem) {
@@ -500,72 +479,7 @@ class C_Perawatan extends BaseController
 
         
     }
-    // public function savePerawatanPreventif()
-    // {
-    //     $rules= [
-            
-    //         'tanggal' => [
-    //             'rules' => 'required',
-    //             'errors' => ['required'=>'Tanggal harus diisi']
-    //         ],
-            
-        
-              
-    //     ];
-
-    //     if (!$this->validate($rules)) {
-    //         return redirect()->back()
-    //             ->withInput()
-    //             ->with('errors', $this->validator->listErrors());
-    //     }
-    //     // $data_koleksi = $this->M_Koleksi->getKoleksi();
-    //     $idPetugas = session()->get('id_petugas');
-    //     if (empty($idPetugas)) {
-    //         die('Error: id_petugas tidak valid');
-    //     }
     
-        
-    //     $fotoSebelum = $this->request->getFile('foto_sebelum');
-        
-    
-    //     if ($fotoSebelum->isValid() && !$fotoSebelum->hasMoved()) {
-    //         $fotoNameSebelum = $fotoSebelum->getRandomName();
-    //         $fotoSebelum->move('img/sebelum', $fotoNameSebelum);
-    //     } else {
-    //         // Handle file upload error
-    //         return redirect()->to(base_url('/perawatanPreventif'))
-    //             ->withInput()
-    //             ->with('errors', $fotoSebelum->getErrorString());
-    //     }
-
-    //     // Simpan data perawatan
-    //     $data = [
-    //         'no_registrasi' => $this->request->getVar('no_registrasi'),
-    //         'nama_inv' => $this->request->getVar('nama_inv'),
-    //         'kode_jenisprw' => '02',
-    //         'deskripsi' => $this->request->getVar('deskripsi'),
-    //         'tanggal_sebelum' => $this->request->getVar('tanggal_sebelum'),
-    //         'foto_sebelum' => $fotoNameSebelum,
-    //         'status'=> 'Selesai',
-    //         'id_petugas' => session()->get('id_petugas'),
-    //     ];
-
-    //     $id = $this->request->getVar('id_koleksi');
-    
-    //     $insertResult = $this->M_Perawatan2->savePerawatan($data);
-
-    //     if ($insertResult) {
-    //         // Alert
-    //         session()->setFlashdata('pesan', 'Data Perawatan Berhasil Ditambahkan.');
-    //         return redirect()->to(base_url('/perawatanPreventif'));
-    //         // return redirect()->back(); 
-    //     } else {
-    //         // Handle error, redirect back, or display an error message
-    //         return redirect()->to(base_url('/perawatanPreventif'))
-    //             ->withInput()
-    //             ->with('errors', 'Gagal menyimpan data.');
-    //     }
-    // } 
     public function perawatanRestorasi() 
     {
     
@@ -584,8 +498,7 @@ class C_Perawatan extends BaseController
         if (empty($tanggalAwal) || empty($tanggalAkhir)) {
             $dataPerawatan = $this->M_Perawatan->findAll();
         } else {
-            // Jika ada tanggal yang diinputkan, ambil data sesuai rentang tanggal
-            // $dataPerawatan = $modelPerawatan->getPerawatanInRange2($tanggalAwal, $tanggalAkhir);
+           
         }
 
         // $jenisprwData = $this->M_Perawatan->getJenisPrwName($kode_jenisprw);

@@ -45,28 +45,7 @@ class M_JadwalPrw extends Model
             ->getResultArray();
     }
     
-    // public function getPerawatanInRange($mulai, $berakhir, $kode_jenisprw)
-    // {
-    //     return $this->db->table('data_perawatan')
-    //         ->select('data_perawatan.*, jenis_perawatan.jenis_prw')
-    //         ->join('jenis_perawatan', 'jenis_perawatan.kode_jenisprw = data_perawatan.kode_jenisprw', 'left')
-    //         ->where('tanggal >=', $mulai)
-    //         ->where('tanggal <=', $berakhir)
-    //         ->where('data_perawatan.kode_jenisprw', $kode_jenisprw)
-    //         ->get()
-    //         ->getResultArray();
-    // }
-    // public function getPerawatanFromJadwal($mulai, $berakhir, $kode_jenisprw)
-    // {
-    //     return $this->db->table('data_perawatan')
-    //         ->select('data_perawatan.*, jenis_perawatan.jenis_prw' )
-    //         ->join('jenis_perawatan', 'jenis_perawatan.kode_jenisprw = data_perawatan.kode_jenisprw', 'left')
-    //         ->where('tanggal >=', $mulai)
-    //         ->where('tanggal <=', $berakhir)
-    //         ->where('data_perawatan.kode_jenisprw', $kode_jenisprw)
-    //         ->get()
-    //         ->getResultArray();
-    // }
+  
     public function getPerawatanFromJadwal($mulai, $berakhir, $kode_jenisprw)
     {
         return $this->db->table('data_perawatan2')
@@ -78,20 +57,7 @@ class M_JadwalPrw extends Model
             ->get()
             ->getResultArray();
     }
-    // public function updateStatus($id, $status)
-    // {
-    //     return $this->db->table('jadwal_prw')
-    //             ->where('id', $id)
-    //             ->set('status', $status)
-    //             ->update(); // Menghapus argumen $this->table yang tidak diperlukan
-    // }
-
-    // public function updateStatus($id, $status)
-    // {
-    //     return $this->db->table('jadwal_prw')
-    //         ->where('id', $id)
-    //         ->update(['status' => $status]);
-    // }
+    
 
     public function updateStatus($data)
     {
@@ -99,14 +65,7 @@ class M_JadwalPrw extends Model
             ->where('id', $data['id'])
             ->update(['status' => $data['status']]);
     }
-    // public function countPerawatanInRange($mulai, $berakhir, $kode_jenisprw)
-    // {
-    //     return $this->db->table('data_perawatan')
-    //         ->where('tanggal >=', $mulai)
-    //         ->where('tanggal <=', $berakhir)
-    //         ->where('kode_jenisprw', $kode_jenisprw)
-    //         ->countAllResults();
-    // }
+    
     public function countPerawatanInRange($mulai, $berakhir, $kode_jenisprw)
     {
         return $this->db->table('data_perawatan2')

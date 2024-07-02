@@ -110,8 +110,7 @@
 								
 								<div class="single-sidebar-widget popular-post-widget">
 									<h4 class="popular-title">Berita Terkait</h4>
-									<!-- <a href="#" class="genric-btn primary-border my-2">  Regional  </a>
-									<a href="#" class="genric-btn primary-border my-2">  Nasional  </a> -->
+									
 									<form method="POST" action="">
 									<div id="kategoriBerita" class="col-lg-12 d-flex">
 										<button   class="genric-btn primary-border small my-2 mx-2 <?= $kategoriBerita == 'Regional' ? 'active' : '' ?>" name="kategoriBerita" value="Regional" >Regional</button>

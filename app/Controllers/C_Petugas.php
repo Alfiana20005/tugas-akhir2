@@ -194,7 +194,6 @@ class C_Petugas extends BaseController
         return redirect()->back();
     }
 
-    
 
     public function profile() 
     {

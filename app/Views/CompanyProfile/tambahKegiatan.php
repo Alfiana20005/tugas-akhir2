@@ -115,7 +115,7 @@
                                             <th style="text-align: center;">No</th>
                                             <th style="text-align: center;">Sampul</th>
                                             <th style="text-align: center;">Judul</th> 
-                                            <th style="text-align: center;">Keterangan</th>
+                                            <th style="text-align: center;">Link</th>
                                             <!-- <th style="text-align: center;">Tipe Berita</th> -->
                                             <th style="text-align: center;">Tanggal</th>
                                             <th style="text-align: center;">Kategori</th>

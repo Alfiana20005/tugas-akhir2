@@ -12,12 +12,6 @@ class M_Koleksi extends Model
 
     protected $allowedFields = ['rak', 'lemari', 'harga', 'no_registrasi', 'no_inventaris', 'nama_inv', 'gambar', 'ukuran', 'tempat_buat', 'tempat_dapat', 'cara_dapat', 'tgl_masuk', 'keadaan', 'lokasi', 'keterangan', 'uraian', 'kode_kategori', 'id_petugas'];
 
-    // protected $validationRules = [
-    //     'no_registrasi' => 'required|max_length[6]|is_unique[data_koleksi.no_registrasi]',
-    //     'no_inventaris' => 'required|max_length[11]|is_unique[data_koleksi.no_inventaris]',
-    //     'nama_inv' => 'required|max_length[30]',
-        
-    // ];
 
     protected $validationMessages = [];
     protected $skipValidation = false;

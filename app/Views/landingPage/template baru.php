@@ -20,19 +20,7 @@
     	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
 
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0Yz/Zn6PjyW2hg0TKfTk0x60EgKJzU6wuFHYIBk1j7rFJzFLbmPe0zv9yzB2O82" crossorigin="anonymous"> -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5+gbg4C/N8WWtHk+N5K9K7QwoirjwQVyTC6s7721" crossorigin="anonymous"></script> -->
   
-    <!-- <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js"></script> -->
-
-    <!-- Atur link ke Bootstrap CSS -->
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"> -->
-
-<!-- Isi dari halaman web Anda -->
-
-<!-- Sertakan jQuery (diperlukan untuk Bootstrap JavaScript) -->
-<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
-
 <!-- Sertakan Bootstrap JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 

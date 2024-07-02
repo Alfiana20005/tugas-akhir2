@@ -314,8 +314,6 @@ class C_Perawatan2 extends BaseController
         session()->setFlashdata('pesan', 'Data Berhasil Ditambahkan.');
 
         return redirect()-> to('/perawatanRestorasi');
-
-        
     }
 
     

@@ -11,7 +11,7 @@ class M_Gallery extends Model
     protected $useTimestamps = false;
 
 
-    // protected $allowedFields = ['foto', 'nama','password','email','username','level'];
+    
     protected $allowedFields = ['judul','foto', 'deskripsi'];
 
 

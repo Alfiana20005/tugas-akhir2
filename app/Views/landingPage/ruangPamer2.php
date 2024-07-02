@@ -22,8 +22,7 @@
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <!-- <h2>Ruang Pamer</h2>
-          <p> Sebuah wadah aktivitas yang dilakukan pengguna dalam museum yang berfungsi sebagai elemen utama visualisasi, ruang sebagai program, ruang sebagai susunan tata letak, dalam sebuah museum.</p> -->
+
         </div>
 
         <div class="row" data-aos="fade-up" data-aos-delay="100">
@@ -59,10 +58,7 @@
             <div class="tab-content">
               <div class="tab-pane active show" id="tab-1">
                 <h3>Ruang Pameran Tetap 1</h3>
-                <!-- <p class="fst-italic">Museum Negeri
-NTB juga memiliki Ruang Pameran Tetap 1 Berisi koleksi-koleksi warisan geologi dan
-keanekaragaman geologi di Nusa Tenggara Barat.
-</p> -->
+
                 <img src="img/ruangPamer/ruang1.png" alt="" class="img-fluid">
                 <p>Museum Negeri
                   NTB juga memiliki Ruang Pameran Tetap 1 Berisi koleksi-koleksi warisan geologi dan
@@ -70,24 +66,19 @@ keanekaragaman geologi di Nusa Tenggara Barat.
               </div>
               <div class="tab-pane" id="tab-2">
                 <h3>Ruang Pameran Tetap 2</h3>
-                <!-- <p class="fst-italic">Qui laudantium consequatur laborum sit qui ad sapiente dila parde sonata raqer a videna mareta paulona marka</p> -->
                 <img src="img/ruangPamer/ruang2.jpeg" alt="" class="img-fluid">
                 <p>Ruang Pameran Tetap 2 Museum Negeri Nusa tenggara Barat berisi koleksi-koleksi tentang warisan budaya
 sebagai sumber sejarah dan ilmu pengetahuan.</p>
               </div>
               <div class="tab-pane" id="tab-3">
                 <h3>Ruang Khazanah</h3>
-                <!-- <p class="fst-italic">Qui laudantium consequatur laborum sit qui ad sapiente dila parde sonata raqer a videna mareta paulona marka</p> -->
                 <img src="img/ruangPamer/khazanah2.jpeg" alt="" class="img-fluid">
                 <p>Ruang Khazanah Museum Negeri Nusa Tenggara Barat berisi koleksi-koleksi berharga yang menunjukkan keunggulan dari segi bahan,
 bentuk, fungsi dan karakteristik.</p>
               </div>
               <div class="tab-pane" id="tab-4">
                 <h3>Ruang Geologi</h3>
-                <!-- <p class="fst-italic">Di halaman museum terdapat beberapa koleksi
-unggulan antara lain Lingga Yoni, dua buah meriam
-yang merupakan peninggalan masa penjajahan, dan
-jangkar kapal.</p> -->
+                
                 <img src="img/ruangPamer/geologi.jpg" alt="" class="img-fluid">
                 <p> Museum Negeri
 NTB juga memiliki Pusat Informasi Geologi (PIG) yang

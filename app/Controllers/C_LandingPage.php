@@ -44,215 +44,8 @@ class C_LandingPage extends BaseController
         $this -> M_SemuaPetugas = new M_SemuaPetugas();
 
     }
-    public function index(): string
-    {
-        $kegiatan = $this->M_Kegiatan->findAll();
-        $beritaTerbaru = $this->M_Berita->getBeritaTerbaru(4);
-        $galery = $this->M_Gallery->findAll();
-
-        // var_dump($berita);
-        $data =[
-            // 'title' => 'Daftar Berita',
-            
-            'beritaterbaru' => $beritaTerbaru,
-            'kegiatan' => $kegiatan,
-            'gallery' => $galery,
-        ];
-        return view('CompanyProfile/company', $data);
-    }
-    public function sejarah(): string
-    {
-        return view('CompanyProfile/v_sejarah');
-    }
-    public function visiMisi(): string
-    {
-        return view('CompanyProfile/visiMisi');
-    }
-    public function struktur(): string
-    {
-        return view('CompanyProfile/struktur');
-    }
-    public function ruangPamer(): string
-    {
-        return view('CompanyProfile/ruangPamer');
-    }
-    public function tataTertib(): string
-    {
-        return view('CompanyProfile/tatatertib');
-    }
-    public function berita(): string
-    {
-        $data_berita = $this->M_Berita->findAll();
-        // $berita = $this->M_Berita->getBerita($id_berita);
 
 
-
-        $data =[
-            'title' => 'Daftar Berita',
-            'dataBerita' => $data_berita,
-            // 'berita' => $berita
-        ];
-        return view('CompanyProfile/berita', $data);
-    }
-    public function lihatberita($id_berita): string
-    {
-        
-        $data_berita = $this->M_Berita->findAll();
-        $berita = $this->M_Berita->getBerita($id_berita);
-        $beritaTerbaru = $this->M_Berita->getBeritaTerbaru(10);
-
-        // var_dump($berita);
-        $data =[
-            // 'title' => 'Daftar Berita',
-            'dataBerita' => $data_berita,
-            'berita' => $berita,
-            'beritaterbaru' => $beritaTerbaru,
-        ];
-        return view('CompanyProfile/lihatBerita', $data);
-    }
-    public function kegiatan(): string
-    { 
-        $kegiatan = $this->M_Kegiatan->findAll();
-        // $berita = $this->M_Berita->getBerita($id_berita);
-
-
-
-        $data =[
-            'title' => 'Daftar Kegiatan',
-            'kegiatan' => $kegiatan,
-            // 'berita' => $berita
-        ];
-
-
-        return view('CompanyProfile/kegiatan', $data);
-    }
-    public function lihatKegiatan($id_kegiatan){
-        // $data_berita = $this->M_Berita->findAll();
-        $kegiatan = $this->M_Kegiatan->getKegiatan($id_kegiatan);
-        $kegiatanTerbaru = $this->M_Kegiatan->getKegiatanTeratas(10);
-
-        // var_dump($berita);
-        $data =[
-            // 'title' => 'Daftar Berita',
-            // 'dataBerita' => $data_berita,
-            'kegiatan' => $kegiatan,
-            'kegiatanTerbaru' => $kegiatanTerbaru,
-        ];
-
-        return view('CompanyProfile/lihatKegiatan', $data);
-    }
-
-    public function kajian(): string
-    {
-        $kajian = $this->M_Kajian->findAll();
-        $kajianTerbaru = $this->M_Kajian->getKajianTerbaru(5);
-
-
-
-        $data =[
-            'title' => 'Daftar Kegiatan',
-            'kajian' => $kajian,
-            'kajianTerbaru' => $kajianTerbaru
-        ];
-
-        return view('CompanyProfile/kajian', $data);
-    }
-    public function kajianKategori($kategori): string
-    {
-        // $kajian = $this->M_Kajian->findAll();
-        $kajianTerbaru = $this->M_Kajian->getKajianTerbaru(5);
-        $kajianKategori = $this->M_Kajian->getDataByKategori($kategori);
-
-
-
-        $data =[
-            'title' => 'Daftar Kegiatan',
-            // 'kajian' => $kajian,
-            'kajianTerbaru' => $kajianTerbaru,
-            'kajian' => $kajianKategori
-        ];
-
-        return view('CompanyProfile/kajian', $data);
-    }
-   
-    public function tulisan($id_kajian): string
-    {
-        $kajian = $this->M_Kajian->getKajian($id_kajian);
-        $kajianTerbaru = $this->M_Kajian->getKajianTerbaru(5);
-        $IsiKajian = $this->M_IsiKajian->getDataByIdKajian($id_kajian);
-
-        // var_dump($berita);
-        $data =[
-
-            'kajian' => $kajian,
-            'kajianTerbaru' => $kajianTerbaru,
-            'isiKajian' => $IsiKajian
-        ];
-        return view('CompanyProfile/tulisan', $data);
-    }
-
-    public function tambahBerita(): string
-    {
-
-        return view('CompanyProfile/tambahBerita');
-    }
-
-    public function koleksi_page(): string
-    {
-        $koleksi = $this->M_KoleksiLandingPage->findAll();
-        // $berita = $this->M_Berita->getBerita($id_berita);
-
-
-
-        $data =[
-            'title' => 'Daftar Berita',
-            'koleksi' => $koleksi,
-            // 'berita' => $berita
-        ];
-        
-        // dd($koleksi);
-        return view('CompanyProfile/koleksi_page', $data);
-    }
-
-    public function koleksi_detail($id_koleksi)
-    {
-        // $data_berita = $this->M_Berita->findAll();
-        $koleksi = $this->M_KoleksiLandingPage->getKOleksiById($id_koleksi);
-        // $kegiatanTerbaru = $this->M_Kegiatan->getKegiatanTeratas(10);
-
-        
-        $data =[
-            // 'title' => 'Daftar Berita',
-            // 'dataBerita' => $data_berita,
-            'koleksi' => $koleksi,
-            // 'kegiatanTerbaru' => $kegiatanTerbaru,
-        ];
-            
-        return view('CompanyProfile/koleksi_detail', $data);
-    }
-
-    public function publikasi(): string
-    {
-        $publikasi = $this->M_Publikasi->findAll();
-        
-        // $berita = $this->M_Berita->getBerita($id_berita);
-
-
-
-        $data =[
-            'title' => 'Daftar Publikasi',
-            'publikasi' => $publikasi,
-            // 'berita' => $berita
-        ];
-
-
-        return view('CompanyProfile/publikasi', $data);
-    }
-    public function perpustakaan(): string
-    {
-
-        return view('CompanyProfile/perpustakaan_page');
-    }
 
 
 
@@ -267,14 +60,6 @@ class C_LandingPage extends BaseController
         foreach ($beritaTerbaru as &$berita) {
             $berita['isi_pendek'] = $this->getExcerpt($berita['isi'], 20); // 30 adalah jumlah kata yang ingin ditampilkan
         }
-
-        
-
-        // $data = [
-        //     'beritaterbaru' => $beritaTerbaru,
-        //     'kegiatan' => $kegiatan,
-        //     'gallery' => $galery,
-        // ];
 
         // var_dump($berita);
         $data =[
@@ -364,16 +149,11 @@ class C_LandingPage extends BaseController
             $data['berita'] = $this->M_Berita->getBeritaByKategori($kategoriBerita, $limit);
         }
 
-        
-        
-        
         $data['kategoriBerita'] = $kategoriBerita;
         $data_berita = $this->M_Berita->getBeritaBaru();
         foreach ($data_berita as &$berita) {
             $berita['isi_pendek'] = $this->getExcerpt($berita['isi'], 20); // 30 adalah jumlah kata yang ingin ditampilkan
         }
-
-
 
         $data =[
             'title' => 'Daftar Berita',
@@ -493,13 +273,9 @@ class C_LandingPage extends BaseController
 
     public function kegiatanKategori2($kategori_kegiatan): string
     {
-        // $kajian = $this->M_Kajian->findAll();
-        // $beritaTerbaru = $this->M_Kajian->getKajianTerbaru(5);
+        
         $kegiatanKategori = $this->M_Kegiatan->getDataByJenis($kategori_kegiatan);
-        // $data_berita = $this->M_Berita->getBeritaBaru()
-
-
-
+        
         $data =[
             'title' => 'Daftar Kegiatan',
             'kegiatan'=> $kegiatanKategori,
@@ -520,8 +296,7 @@ class C_LandingPage extends BaseController
 
         // var_dump($berita);
         $data =[
-            // 'title' => 'Daftar Berita',
-            // 'dataBerita' => $data_berita,
+            
             'kegiatan' => $kegiatan,
             'kegiatanTerbaru' => $kegiatanTerbaru,
             'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
@@ -538,9 +313,6 @@ class C_LandingPage extends BaseController
     {
         $kajian = $this->M_Kajian->findAll();
         $kajianTerbaru = $this->M_Kajian->getKajianTerbaru(5);
-
-
-
 
 
         $data =[
@@ -561,7 +333,6 @@ class C_LandingPage extends BaseController
         // $kajian = $this->M_Kajian->findAll();
         $kajianTerbaru = $this->M_Kajian->getKajianTerbaru(5);
         $kajianKategori = $this->M_Kajian->getDataByKategori($kategori);
-
 
 
         $data =[
@@ -610,10 +381,7 @@ class C_LandingPage extends BaseController
     public function koleksi_page2(): string
     {
         $koleksi = $this->M_KoleksiLandingPage->findAll();
-        // $berita = $this->M_Berita->getBerita($id_berita);
-
-
-
+        
         $data =[
             'title' => 'Daftar Berita',
             'koleksi' => $koleksi,
@@ -625,22 +393,19 @@ class C_LandingPage extends BaseController
         ];
         
         
-        // dd($koleksi);
         return view('landingPage/koleksi_page2', $data);
     }
 
     public function koleksi_detail2($id_koleksi)
     {
-        // $data_berita = $this->M_Berita->findAll();
+        
         $koleksi = $this->M_KoleksiLandingPage->getKOleksiById($id_koleksi);
         // $kegiatanTerbaru = $this->M_Kegiatan->getKegiatanTeratas(10);
 
         
         $data =[
-            // 'title' => 'Daftar Berita',
-            // 'dataBerita' => $data_berita,
+            
             'koleksi' => $koleksi,
-            // 'kegiatanTerbaru' => $kegiatanTerbaru,
             'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
             'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
             'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
@@ -654,11 +419,7 @@ class C_LandingPage extends BaseController
     public function publikasi2(): string
     {
         $publikasi = $this->M_Publikasi->findAll();
-        
-        // $berita = $this->M_Berita->getBerita($id_berita);
-
-
-
+       
         $data =[
             'title' => 'Daftar Publikasi',
             'publikasi' => $publikasi,
@@ -717,8 +478,7 @@ class C_LandingPage extends BaseController
             return redirect()->to('/kontak') ->withInput() -> with('errors', $this->validator->listErrors());
         }
 
-        //tambahh data
-        // $this->M_Petugas->save($this->request->getPost());
+
         $this->M_Pesan->save([
             // 'id_petugas' => $id_petugas,
             'nama' => $this->request->getVar('nama'),

@@ -132,17 +132,7 @@ class M_Perawatan2 extends Model
         return $this->where('no_registrasi', $noRegistrasi)->first();
     }
 
-    // public function getPerawatanInRange2($mulai, $berakhir, $kode_kategori)
-    // {
-    //     return $this->db->table('data_perawatan2')
-    //         ->select('data_perawatan2.*, data_koleksi.kode_kategori')
-    //         ->join('data_koleksi', 'data_koleksi.no_registrasi = data_perawatan2.no_registrasi', 'left')
-    //         ->where('tanggal_sebelum >=', $mulai)
-    //         ->where('tanggal_sesudah <=', $berakhir) 
-    //         ->where('data_koleksi.kode_kategori', $kode_kategori)           
-    //         ->get()
-    //         ->getResultArray();
-    // }
+
     public function getPerawatanInRange2($mulai, $berakhir, $kode_kategori, $kode_jenisprw)
     {
     return $this->db->table('data_perawatan2')

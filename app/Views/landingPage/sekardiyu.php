@@ -47,30 +47,18 @@
 			</section>
 			<!-- End about-info Area -->
 
-    			<!-- Start other-issue Area -->
+    		<!-- Start other-issue Area -->
 			<section class="other-issue-area pb-70 ">
 				<div class="container">
-		            <!-- <div class="row d-flex justify-content-center">
-		                <div class="menu-content pb-70 col-lg-9">
-		                    <div class="title text-center">
-		                        <h1 class="mb-10">Other issues we can help you with</h1>
-		                        <p>We all live in an age that belongs to the young at heart. Life that is.</p>
-		                    </div>
-		                </div>
-		            </div>					 -->
+		            
 					<div class="row">
 					
 						<div class="col-lg-4 col-md-6">
-						
 							<div class="single-other-issue">
 								<div class="thumb">
 									<img class="img-fluid mb-2" src="img/sekardiyu/sekardiyu2.png" alt="">														
 								</div>
-								
-								
-								
 							</div>
-							
 						</div>
 						
 						<div class="col-lg-4 col-md-6">

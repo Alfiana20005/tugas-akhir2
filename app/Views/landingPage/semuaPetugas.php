@@ -26,14 +26,7 @@
           
             <!-- <hr> -->
 
-            <div class="row d-flex justify-content-center">
-                <div class="menu-content pb-60 col-lg-9">
-                  <div class="title text-center">
-                    <!-- <h1 class="mb-10">Tim Kami</h1> -->
-                    <!-- <a href="/semuaPetugas" style="color: #850000;"><p>Lihat Semua Tim</p></a> -->
-                  </div>
-                </div>
-            </div>	
+            
 
             <div class="row">
             <?php 
@@ -45,10 +38,6 @@
                   <div class="member-img">
                     <img src="<?= base_url('img/semuaPetugas/' . $ptgs['foto']); ?>" class="img-fluid" alt="">
                     <div class="social">
-                      <!-- <a href=""><i class="bi bi-twitter"></i></a>
-                      <a href=""><i class="bi bi-facebook"></i></a>
-                      <a href=""><i class="bi bi-instagram"></i></a>
-                      <a href=""><i class="bi bi-linkedin"></i></a> -->
                       <span style="font-size:7pt;"><?= $ptgs['jabatan']; ?></span>
                     </div>
                   </div>

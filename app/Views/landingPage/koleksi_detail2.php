@@ -25,21 +25,7 @@
 						<div class="col-lg-8 posts-list">
 							 
 							<div class="single-post row d-flex">
-								<!-- <div class="col-lg-3  col-md-3 meta-details">
-									<ul class="tags">
-										<li><a href="#">Food,</a></li>
-										<li><a href="#">Technology,</a></li>
-										<li><a href="#">Politics,</a></li>
-										<li><a href="#">Lifestyle</a></li>
-									</ul>
-									<div class="user-details row">
-										<p class="user-name col-lg-12 col-md-12 col-6"><a href="#">Mark wiens</a> <span class="lnr lnr-user"></span></p>
-										<p class="date col-lg-12 col-md-12 col-6"><a href="#">12 Dec, 2017</a> <span class="lnr lnr-calendar-full"></span></p>
-										<p class="view col-lg-12 col-md-12 col-6"><a href="#">1.2M Views</a> <span class="lnr lnr-eye"></span></p>
-										<p class="comments col-lg-12 col-md-12 col-6"><a href="#">06 Comments</a> <span class="lnr lnr-bubble"></span></p>						
-									</div>
-								</div> -->
-								 
+								
 								<div class="col-lg-12 col-md-12 ">
 									<div class="feature-img mb-2">
 										<img class="img-fluid"  src="<?= base_url("img/koleksiAdmin/". $koleksi['foto']); ?>" alt="">

@@ -21,14 +21,6 @@
 			<!-- Start destinations Area -->
 			<section class="destinations-area section-gap">
 				<div class="container">
-		            <!-- <div class="row d-flex justify-content-center">
-		                <div class="menu-content pb-40 col-lg-8">
-		                    <div class="title text-center">
-		                        <h1 class="mb-10">Popular Destinations</h1>
-		                        <p>We all live in an age that belongs to the young at heart. Life that is becoming extremely fast, day to.</p>
-		                    </div>
-		                </div>
-		            </div>						 -->
 					<div class="row">
                         <div class="active-recent-blog-carusel">
                         <?php foreach($publikasi as $p):?> 
@@ -41,13 +33,7 @@
                                     <div class="details">
                                         <h4 class="d-flex justify-content-between">
                                             <a href="<?= $p['link']; ?>" target="_blank" style="color:#850000;"><span><?= $p['judul']; ?></span>  </a>                            	
-                                            <!-- <div class="star">
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star"></span>				
-                                            </div>	 -->
+                                            
                                         </h4>
                                         <p>
                                             <?= $p['tanggal']; ?>  
