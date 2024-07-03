@@ -141,7 +141,7 @@
                             <th style="text-align: center;">Gambar Sebelum</th>
                             <th style="text-align: center;">Gambar sesudah</th>
                             
-                            <th style="text-align: center;">Dilakukan Oleh</th>
+                            <th style="text-align: center;">Penanggung Jawab</th>
                         </tr>
                     </thead>
 
@@ -161,7 +161,7 @@
                                     
                                     <td style="text-align: center;"><img src="<?= base_url("img/sebelum/" . $item['foto_sebelum']); ?>" alt="sebelum" width="100px"></td>
                                     <td style="text-align: center;"><img src="<?= base_url("img/sesudah/" . $item['foto_setelah']); ?>" alt="sesudah" width="100px"></td>
-                                    <td style="text-align: center;"><?= $item['petugasNames']; ?></td>
+                                    <td style="text-align: center;"><?= $item['penanggung_jawab']; ?></td>
                                 </tr>
                                 <?php endif; ?>
                             <?php endforeach; ?>
