@@ -99,15 +99,15 @@ class C_Koleksi extends BaseController
         }
     
         $foto = $this->request->getFile('gambar');
+        $dafaultImg = 'images.jpeg';
     
         if ($foto->isValid() && !$foto->hasMoved()) {
             $fotoName = $foto->getRandomName();
             $foto->move('img/koleksi', $fotoName);
         } else {
             // Handle file upload error
-            return redirect()->to(base_url('/tambahdata'))
-                ->withInput()
-                ->with('errors', $foto->getErrorString());
+            $fotoName = $dafaultImg;
+            
         }
         // Simpan data pengunjung
         $this->M_Koleksi->save([
