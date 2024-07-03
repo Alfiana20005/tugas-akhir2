@@ -194,6 +194,33 @@ class C_Perawatan2 extends BaseController
             
         ];
     
+        $foto = $this->request->getFile('foto_sebelum');
+
+        // Cek apakah file foto diunggah
+        if ($foto && $foto->isValid() && !$foto->hasMoved()) {
+            // Generate nama unik untuk file foto
+            $fotoName = $foto->getRandomName();
+
+            // Pindahkan file foto ke folder yang diinginkan
+            $foto->move('img/sebelum', $fotoName); // Perbarui path sesuai dengan folder yang diinginkan
+
+            // Tambahkan nama file foto ke data yang akan diupdate
+            $dataToUpdate['foto_sebelum'] = $fotoName;
+        }
+        
+        $foto = $this->request->getFile('foto_setelah');
+
+        // Cek apakah file foto diunggah
+        if ($foto && $foto->isValid() && !$foto->hasMoved()) {
+            // Generate nama unik untuk file foto
+            $fotoName = $foto->getRandomName();
+
+            // Pindahkan file foto ke folder yang diinginkan
+            $foto->move('img/sesudah', $fotoName); // Perbarui path sesuai dengan folder yang diinginkan
+
+            // Tambahkan nama file foto ke data yang akan diupdate
+            $dataToUpdate['foto_setelah'] = $fotoName;
+        }
         $foto = $this->request->getFile('foto_setelah');
 
         // Cek apakah file foto diunggah
