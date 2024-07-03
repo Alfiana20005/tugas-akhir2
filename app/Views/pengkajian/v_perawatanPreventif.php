@@ -83,7 +83,7 @@
                         <div class="col-sm-9">
                             <select class="form-select form-control" type="text" name="rak"  value="<?= old('rak'); ?>">
                                         <!-- harus sesuai dengan urutan enum pada database -->
-                                <option selected> </option>
+                                <option selected  value=" "> </option>
                                 <option <?= old("rak") == 'Rak/Laci 1'? 'selected' : 'Rak/Laci 1' ?> value="Rak/Laci 1">Rak/Laci 1</option>
                                 <option <?= old("rak") == 'Rak/Laci 2'? 'selected' : 'Rak/Laci 2' ?> value="Rak/Laci 2">Rak/Laci 2</option>
                                 <option <?= old("rak") == 'Rak/Laci 3'? 'selected' : 'Rak/Laci 3' ?> value="Rak/Laci 3">Rak/Laci 3</option>
@@ -103,7 +103,7 @@
                         <div class="col-sm-9">
                             <select class="form-select form-control" type="text" name="lemari"  value="<?= old('lemari'); ?>">
                                         <!-- harus sesuai dengan urutan enum pada database -->
-                                <option selected>Pilih </option>
+                                <option selected  value=" "> </option>
                                 <option <?= old("lemari") == 'Lemari 1'? 'selected' : 'Lemari 1' ?> value="Lemari 1">Lemari 1</option>
                                 <option <?= old("lemari") == 'Lemari 2'? 'selected' : 'Lemari 2' ?> value="Lemari 2">Lemari 2</option>
                                 <option <?= old("lemari") == 'Lemari 3'? 'selected' : 'Lemari 3' ?> value="Lemari 3">Lemari 3</option>
