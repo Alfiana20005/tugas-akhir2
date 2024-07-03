@@ -50,15 +50,15 @@ class C_Perawatan2 extends BaseController
     public function savePerawatanPreventif() {
 
         $foto = $this->request->getFile('foto_sebelum');
+        $dafaultImg = 'images.jpeg';
     
         if ($foto->isValid() && !$foto->hasMoved()) {
             $fotoName = $foto->getRandomName();
             $foto->move('img/sebelum', $fotoName);
         } else {
             // Handle file upload error
-            return redirect()->to(base_url('/perawatanPreventif'))
-                ->withInput()
-                ->with('errors', $foto->getErrorString());
+            $fotoName = $dafaultImg;
+            
         }
 
         //tambahh data
@@ -121,15 +121,15 @@ class C_Perawatan2 extends BaseController
     public function savePerawatanKuratif() {
 
         $foto = $this->request->getFile('foto_sebelum');
+        $dafaultImg = 'images.jpeg';
     
         if ($foto->isValid() && !$foto->hasMoved()) {
             $fotoName = $foto->getRandomName();
             $foto->move('img/sebelum', $fotoName);
         } else {
             // Handle file upload error
-            return redirect()->to(base_url('/perawatanKuratif'))
-                ->withInput()
-                ->with('errors', $foto->getErrorString());
+            $fotoName = $dafaultImg;
+            
         }
 
 
@@ -281,15 +281,15 @@ class C_Perawatan2 extends BaseController
     public function savePerawatanRestorasi() {
 
         $foto = $this->request->getFile('foto_sebelum');
+        $dafaultImg = 'images.jpeg';
     
         if ($foto->isValid() && !$foto->hasMoved()) {
             $fotoName = $foto->getRandomName();
             $foto->move('img/sebelum', $fotoName);
         } else {
             // Handle file upload error
-            return redirect()->to(base_url('/perawatanRestorasi'))
-                ->withInput()
-                ->with('errors', $foto->getErrorString());
+            $fotoName = $dafaultImg;
+           
         }
 
 
