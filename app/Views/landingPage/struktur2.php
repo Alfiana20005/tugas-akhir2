@@ -21,7 +21,7 @@
         <div class="container">
             <div class="row d-flex align-items-center justify-content-center pt-30">
               
-              <img src=" <?= base_url('img/organisasi.png'); ?> " id="struktur2" alt=""  class="img-responsive " style="  text-align: center; " >
+              <img src=" <?= base_url('img/strukturOrgan/struktur2.png'); ?> " id="struktur2" alt=""  class="img-responsive " style="  text-align: center; " >
 
             </div>
           

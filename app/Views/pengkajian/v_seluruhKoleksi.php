@@ -43,7 +43,7 @@
                         <tr>
                             <!-- <td style="text-align: center;"><?= $k['kode_kategori']; ?> . <?= $k['no_inventaris']; ?></td>  -->
                             <td style="text-align: center;"><?= $k['no_registrasi']; ?></td>
-                            <td style="text-align: center;"><?= $k['no_inventaris']; ?></td>
+                            <td style="text-align: center;"><?= $k['kode_kategori']; ?> . <?= $k['no_inventaris']; ?></td>
                             <td style="text-align: center;"><img src="<?= base_url("img/koleksi/". $k['gambar']); ?>" alt="" width="100px"></td>
                             <td style="text-align: center;"><?= $k['nama_inv']; ?></td>
                             <td style="text-align: center;"><?= $k['uraian']; ?></td>
