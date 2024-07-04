@@ -122,6 +122,7 @@ $routes->get('/tambahdata', 'C_Koleksi::tambahData');
 $routes->post('/saveData', 'C_Koleksi::saveData');
 // 
 $routes->get('/seluruhKoleksi', 'C_Koleksi::seluruhKoleksi');
+$routes->get('/exportExcel', 'C_Koleksi::exportExcel');
 $routes->get('/detailKoleksi', 'C_Koleksi::detailKoleksi');
 $routes->get('/detailKoleksi/(:segment)', 'C_Koleksi::detailKoleksi/$1');
 $routes->delete('hapus/(:segment)', 'C_Koleksi::delete/$1');

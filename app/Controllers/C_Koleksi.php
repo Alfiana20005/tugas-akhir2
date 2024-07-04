@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 use App\Models\M_Koleksi;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class C_Koleksi extends BaseController
 {
@@ -292,6 +294,55 @@ class C_Koleksi extends BaseController
             // Jika metode bukan POST, beri respons dengan kesalahan
             return $this->response->setJSON(['success' => false, 'message' => 'Metode yang tidak valid']);
         }
+    }
+
+    public function exportExcel(){
+        $koleksiModel = new M_Koleksi();
+        $koleksi = $koleksiModel->getkoleksiAll();
+
+        $fileName = 'koleksi.xlsx';
+
+        $spreadsheet = new Spreadsheet();
+
+        $sheet = $spreadsheet->getActiveSheet();
+        $sheet-> setCellValue('A1', 'NO REGISTRASI');
+        $sheet-> setCellValue('B1', 'NO INVENTARIS');
+        $sheet-> setCellValue('C1', 'NAMA BENDA');
+        $sheet-> setCellValue('D1', 'URAIAN');
+        $sheet-> setCellValue('E1', 'ASAL DIDAPAT');
+        $sheet-> setCellValue('F1', 'UKURAN');
+        $sheet-> setCellValue('G1', 'CARA DIDAPAT');
+        $sheet-> setCellValue('H1', 'TANGGAL');
+        $sheet-> setCellValue('I1', 'HARGA');
+        $sheet-> setCellValue('J1', 'LOKASI PENYIMPANAN');
+        $sheet-> setCellValue('K1', 'KEADAAN');
+
+        $row = 2;
+
+        foreach($koleksi as $item){
+            $sheet-> setCellValue('A' . $row, $item['no_registrasi']);
+            $sheet-> setCellValue('B' . $row, $item['kode_kategori'] . " . " . $item['no_inventaris']);
+            $sheet-> setCellValue('C' . $row, $item['nama_inv']);
+            $sheet-> setCellValue('D' . $row, $item['uraian']);
+            $sheet-> setCellValue('E' . $row, $item['tempat_dapat']);
+            $sheet-> setCellValue('F' . $row, $item['ukuran']);
+            $sheet-> setCellValue('G' . $row, $item['cara_dapat']);
+            $sheet-> setCellValue('H' . $row, $item['tgl_masuk']);
+            $sheet-> setCellValue('I' . $row, $item['harga']);
+            $sheet-> setCellValue('J' . $row, $item['rak'] . " " .  $item['lemari'] . " " . $item['lokasi']);
+            $sheet-> setCellValue('K' . $row, $item['keadaan']);
+            $row++;
+
+        }
+
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment: filename' . $fileName);
+        header('cache-Control: max=age-0');
+
+        $writer = new xlsx($spreadsheet);
+        $writer->save('php://output');
+        exit;
+
     }
 
    
