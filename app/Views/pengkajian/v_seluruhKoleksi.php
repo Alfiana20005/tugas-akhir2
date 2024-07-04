@@ -12,8 +12,8 @@
         <div class="card-header d-sm-flex py-3  align-items-center justify-content-between">
             <h6 class="m-0 font-weight-bold text-primary">Data Koleksi </h6>
             <div class="d-flex">
-                <button onclick="window.print()" type="submit" class="btn btn-sm btn-primary shadow-s"><i class="fas fa-print fa-sm text-white-50"></i>Print</button>
-                <a href="/exportExcel" class="btn btn-sm btn-primary mx-2">Excel</a>
+                <!-- <button onclick="window.print()" type="submit" class="btn btn-sm btn-primary shadow-s"><i class="fas fa-print fa-sm text-white-50"></i>Print</button> -->
+                <a href="/exportExcel" class="btn btn-sm btn-primary mx-2">Export Excel</a>
             </div>
         </div>
         

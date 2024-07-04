@@ -42,7 +42,7 @@
                         <div class="col-sm-10">
                             <select class="form-select form-control" type="text" name="kategoriBerita" value="<?= old("kategoriBerita"); ?>">
                                 
-                                <option selected>Pilih Sifat Berita</option>
+                                <option selected value=" "> </option>
                                 <option <?= old("kategoriBerita") == 'Regional'? 'selected' : 'Regional' ?> value="Regional">Regional</option>
                                 <option <?= old("kategoriBerita") == 'Nasional'? 'selected' : 'Nasional' ?> value="Nasional">Nasional</option>
                                 

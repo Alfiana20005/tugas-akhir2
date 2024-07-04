@@ -197,7 +197,7 @@
 								<div class="single-carusel">
 									<div class="thumb relative">
 										<div class="overlay"></div>
-										<a href="<?= base_url('img/kegiatan/' . $k['foto']); ?>" class="img-gal"><img class="img-fluid" src="<?= base_url('img/kegiatan/' . $k['foto']); ?>" alt=""></a>
+										<a href="<?= $k['keterangan']?>" target="_blank" class="img-gal"><img class="img-fluid" src="<?= base_url('img/kegiatan/' . $k['foto']); ?>" alt=""></a>
 									</div>
 									
 								</div>
