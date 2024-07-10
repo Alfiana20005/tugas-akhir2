@@ -9,10 +9,9 @@
     <?php endif; ?>
     <div class="card shadow mb-2">
         <div class="card-header d-sm-flex align-items-center justify-content-between mb-2" id="juduldatakoleksi">
-            <a href="<?= base_url('/koleksi/' . $data_koleksi['kode_kategori']) ?>"><h6 class="m-0 font-weight-bold text-primary" id='namakoleksi'><?= $data_koleksi['nama_inv']; ?></h6></a>
+            <h6 class="m-0 font-weight-bold text-primary" id='namakoleksi'><?= $data_koleksi['nama_inv']; ?></h6>
             <div class="d-flex">
-                <a href="/ubahKoleksi/<?= $data_koleksi['id']; ?>" class="btn btn-success btn-sm mx-2" >Edit</a>
-                <!-- <a href="/terakhirDiubah/{$data_koleksi['id']}" class="btn btn-warning btn-sm mx-2" >Terakhir Diubah</a> -->
+               
                 <button onclick="window.print()" type="submit" class="btn btn-sm btn-primary shadow-sm" id="print">
                     <i class="fas fa-print fa-sm text-white-50"></i>Print
                 </button>
@@ -20,7 +19,7 @@
         </div>
         <div class="card-body ">
             <div class="text-center" >
-                <h6 id="judul-inv" class="m-0 font-weight-bold mb-4" style="text-transform: uppercase;">INVENTARISASI DATA KOLEKSI <?= $data_koleksi['kategori_name']; ?> </h6>
+                <h6 id="judul-inv" class="m-0 font-weight-bold mb-4" style="text-transform: uppercase;">INVENTARISASI DATA KOLEKSI <?= $data_koleksi['kategori_name']; ?> TERAKHIR DIUBAH </h6>
             </div>
             <div class="table-responsive mx-auto" style="max-width: 700px;"> <!-- Membatasi lebar maksimum tabel -->
                 <table class="table table-bordered" width="100%" cellspacing="0">

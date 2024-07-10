@@ -5,14 +5,17 @@ namespace App\Controllers;
 use App\Models\M_Koleksi;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use App\Models\M_TerakhirDiubah;
 
 class C_Koleksi extends BaseController
 {
     protected $M_Koleksi;
+    protected $M_TerakhirDiubah;
 
     public function __construct()
     {
         $this->M_Koleksi = new M_Koleksi();
+        $this->M_TerakhirDiubah = new M_TerakhirDiubah();
     }
 
     public function tambahData()
@@ -342,6 +345,23 @@ class C_Koleksi extends BaseController
         $writer = new xlsx($spreadsheet);
         $writer->save('php://output');
         exit;
+
+    }
+
+    public function terakhirDiubah($id){
+
+        // $data_koleksi = $this->M_TerakhirDiubah->getData($id);
+        $data_koleksi = $this->M_TerakhirDiubah->findAll();
+        // $petugasName = $this->M_Koleksi->getPetugasName($data_koleksi['id_petugas']);
+        // $kategoriName = $this->M_Koleksi->getKategoriName($data_koleksi['kode_kategori']);
+        // $data_koleksi['petugas_name'] = isset($petugasName['nama']) ? $petugasName['nama'] : 'Nama Petugas Tidak Tersedia';
+        // $data_koleksi['kategori_name'] = isset($kategoriName['nama_kategori']) ? $kategoriName['nama_kategori'] : 'Nama Kategori Tidak Tersedia';
+        
+        $data = [
+            'title' => 'Detail Koleksi',
+            'data_koleksi' => $data_koleksi,
+        ];
+        return view('pengkajian/v_terakhirDiubah', $data);
 
     }
 

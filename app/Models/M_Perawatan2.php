@@ -147,6 +147,47 @@ class M_Perawatan2 extends Model
         ->getResultArray();
     }
 
+    public function getDataByYear($tahun)
+    {
+        $query = $this->db->query("SELECT MONTH(tanggal_sebelum) as bulan, kode_jenisprw, count(id_perawatan2) as total FROM data_perawatan2 WHERE YEAR(tanggal_sebelum) = ? GROUP BY bulan, kode_jenisprw", [$tahun]);
+    
+        // Ambil hasil query sebagai array
+        $result = $query->getResultArray();
+    
+        // Konversi nomor bulan menjadi nama bulan
+        foreach ($result as &$row) {
+            if (isset($row['bulan'])) {
+                $row['bulan'] = date("F", mktime(0, 0, 0, $row['bulan'], 1));
+            }        }
+    
+        return $result;
+    }
+    
+    public function getDataByMonth($tahun){
+        $query = $this->db->query("SELECT MONTH(tanggal_sebelum) as bulan, count(id_perawatan2) as total FROM data_perawatan2 WHERE YEAR(tanggal_sebelum) = ? GROUP BY bulan", [$tahun]);
+    
+        // Ambil hasil query sebagai array
+        $result = $query->getResultArray();
+        
+        // Konversi nomor bulan menjadi nama bulan
+        foreach ($result as &$row) {
+            $row['bulan'] = date("F", mktime(0, 0, 0, $row['bulan'], 1));
+        }
+    
+    return $result;
+    }
+
+    public function totalPerawatan() {
+        $query = $this->db->table('data_perawatan2')
+                          ->select('COUNT(id_perawatan2) as jumlah')
+                          ->get();
+        
+        $result = $query->getRow();
+        return $result ? $result->jumlah : 0;
+    }
+
+
+
     
     
 
