@@ -41,6 +41,7 @@
     <script src="https://cdn.datatables.net/2.0.1/css/dataTables.dataTables.min.css"></script>
     
 
+    <script src="https://cdn.tiny.cloud/1/gtj01mmywsyppz5gtyrpv6yzaw511bybybikku5m2o97dzl1/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 
 </head>
 

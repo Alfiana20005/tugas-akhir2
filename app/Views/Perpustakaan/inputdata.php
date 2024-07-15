@@ -84,6 +84,7 @@
                             <option <?= old("kategoriBuku") == 'Kesenian'? 'selected' : 'Kesenian' ?> value="Kesenian">Kesenian</option>
                             <option <?= old("kategoriBuku") == 'Sejarah/Geografi'? 'selected' : 'Sejarah/Geografi' ?> value="Sejarah/Geografi">Sejarah/Geografi</option>
                             <option <?= old("kategoriBuku") == 'Kesusastraan'? 'selected' : 'Kesusastraan' ?> value="Kesusastraan">Kesusastraan</option>
+                            <option <?= old("kategoriBuku") == 'Koleksi NTB'? 'selected' : 'Koleksi NTB' ?> value="Koleksi NTB">Koleksi NTB</option>
                             <option <?= old("kategoriBuku") == 'Lainnya'? 'selected' : 'Lainnya' ?> value="Lainnya">Lainnya</option>
 
                         </select>
@@ -180,10 +181,8 @@
                                             <th style="text-align: center;">Lokasi Penyimpanan</th>
                                             <th style="text-align: center;">Status</th>
                                             <th style="text-align: center;">Keterangan</th>
-                                           
                                             <th style="text-align: center;">OPAC</th>                                           
                                             <th style="text-align: center;">Aksi</th>
-                                            
                                         </tr>
                                     </thead>
                                     
@@ -192,8 +191,6 @@
                                         $no=1;
                                         foreach($data_buku as $buku): ?>  
                                         <tr>
-                                            <!-- <td style="text-align: center;">1</td> -->
-                                            <!-- <td style="text-align: center;"><img src="" alt="" style="width: 60px;"></td> -->
                                             <td style="text-align: center;"><?= $no++; ?></td>
                                             <td style="text-align: center;"><?= $buku['kode']; ?></td>
                                             <td style="text-align: center;"><img src="<?= base_url("img/perpustakaan/". $buku['foto']); ?>" alt="" style="width: 60px;"></td>
@@ -204,7 +201,6 @@
                                             <td style="text-align: center;"><?= $buku['penerbit']; ?></td>
                                             <td style="text-align: center;"><?= $buku['tempatTerbit']; ?></td>
                                             <td style="text-align: center;"><?= $buku['tahunTerbit']; ?></td>
-                                            
                                             <td style="text-align: center;"><?= $buku['eksemplar']; ?></td>
                                             <td style="text-align: center;"><?= $buku['kategoriBuku']; ?></td>
                                             <td style="text-align: center;"><?= $buku['rak']; ?></td>
@@ -212,17 +208,13 @@
                                             <td style="text-align: center;"><?= $buku['keterangan']; ?></td>
                                             <td style="text-align: center;"><?= $buku['tampilkan']; ?></td>
                                             <td style="text-align: center;">
-                                            
                                                 <a href="" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editBuku<?= $buku['id_buku']; ?>" data-bs-whatever="@getbootstrap">Edit</a>
-                                                
                                                 <form action="deleteBuku/<?= $buku['id_buku']; ?>" method="post" class="d-inline">
                                                     <?= csrf_field(); ?>
                                                     <input type="hidden" name="_method" value="DELETE">
                                                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('apakah anda yakin?');">Hapus</button>
                                                 </form>
-                                                
                                             </td>
-
                                         </tr>
                                         <?php endforeach; ?> 
                                     </tbody>
@@ -230,143 +222,145 @@
                             </div>
                         </div>
     </div>
+
     <?php 
         $no=1;
         foreach($data_buku as $buku): ?> 
-    <div class="modal fade" id="editBuku<?= $buku['id_buku']; ?>" tabindex="-1" aria-labelledby="editBuku" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title fs-5" id="editBuku">Edit Data Buku</h4> 
-                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
-                </div>
-                <div class="modal-body">
-                    <form action="<?= base_url()?>updateBuku/<?= $buku['id_buku']; ?>" method="post" enctype="multipart/form-data" id="form">
-                    <div class="row mb-2">
-                        <label for="email" class="col-sm-3 col-form-label">Judul</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="recipient-name" name="judul" value="<?= $buku['judul']; ?>">
-                        </div>
+        <div class="modal fade" id="editBuku<?= $buku['id_buku']; ?>" tabindex="-1" aria-labelledby="editBuku" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title fs-5" id="editBuku">Edit Data Buku</h4> 
+                        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
                     </div>
-                    <div class="row mb-2">
-                        <label for="email" class="col-sm-3 col-form-label">Pengarang</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="recipient-name" name="pengarang" value="<?= $buku['pengarang']; ?>">
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <label for="email" class="col-sm-3 col-form-label">Penerbit</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="recipient-name" name="penerbit" value="<?= $buku['penerbit']; ?>">
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <label for="email" class="col-sm-3 col-form-label">Tempat Terbit</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="recipient-name" name="tempatTerbit" value="<?= $buku['tempatTerbit']; ?>">
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <label for="email" class="col-sm-3 col-form-label">Tahun Terbit</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="recipient-name" name="tahunTerbit" value="<?= $buku['tahunTerbit']; ?>">
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <label for="email" class="col-sm-3 col-form-label">Eksemplar</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="recipient-name" name="eksemplar" value="<?= $buku['eksemplar']; ?>">
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <label for="email" class="col-sm-3 col-form-label">Lokasi Penyimpanan</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="recipient-name" name="rak" value="<?= $buku['rak']; ?>">
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <label for="" class="col-sm-3 col-form-label">Kategori Buku</label>
-                        <div class="col-sm-9">
-                            <select class="form-select form-control" type="text" name="kategoriBuku"  value="<?= $buku['kategoriBuku']; ?>">
-                                        <!-- harus sesuai dengan urutan enum pada database -->
-                                <option selected>Pilih Kategori</option>
-                                <option <?= $buku['kategoriBuku'] == 'Ilmu Filsafat'? 'selected' : 'Ilmu Filsafat' ?> value="Ilmu Filsafat">Ilmu Filsafat</option>
-                                <option <?= $buku['kategoriBuku'] == 'Ilmu Agama'? 'selected' : 'Ilmu Agama' ?> value="Ilmu Agama">Ilmu Agama</option>
-                                <option <?= $buku['kategoriBuku'] == 'Ilmu Bahasa'? 'selected' : 'Ilmu Bahasa' ?> value="Ilmu Bahasa">Ilmu Bahasa</option>
-                                <option <?= $buku['kategoriBuku'] == 'Ilmu Sosial'? 'selected' : 'Ilmu Sosial' ?> value="Ilmu Sosial">Ilmu Sosial</option>
-                                <option <?= $buku['kategoriBuku'] == 'Ilmu Murni/Pasti'? 'selected' : 'Ilmu Murni/Pasti' ?> value="Ilmu Murni/Pasti">Ilmu Murni/Pasti</option>
-                                <option <?= $buku['kategoriBuku'] == 'Teknologi'? 'selected' : 'Teknologi' ?> value="Teknologi">Teknologi</option>
-                                <option <?= $buku['kategoriBuku'] == 'Kesenian'? 'selected' : 'Kesenian' ?> value="Kesenian">Kesenian</option>
-                                <option <?= $buku['kategoriBuku'] == 'Sejarah/Geografi'? 'selected' : 'Sejarah/Geografi' ?> value="Sejarah/Geografi">Sejarah/Geografi</option>
-                                <option <?= $buku['kategoriBuku'] == 'Kesusastraan'? 'selected' : 'Kesusastraan' ?> value="Kesusastraan">Kesusastraan</option>
-                                <option <?= $buku['kategoriBuku'] == 'Lainnya'? 'selected' : 'Lainnya' ?> value="Lainnya">Lainnya</option>
-                                
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <label for="" class="col-sm-3 col-form-label">Status</label>
-                        <div class="col-sm-9">
-                            <select class="form-select form-control" type="text" name="status"  value="<?= $buku['status']; ?>">
-                                        <!-- harus sesuai dengan urutan enum pada database -->
-                                <option selected>Pilih </option>
-                                <option <?= $buku['status'] == 'Boleh Dipinjam'? 'selected' : 'Boleh Dipinjam' ?> value="Boleh Dipinjam">Boleh Dipinjam</option>
-                                <option <?= $buku['status'] == 'Belum Boleh Dipinjam'? 'selected' : 'Belum Boleh Dipinjam' ?> value="Belum Boleh Dipinjam">Belum Boleh Dipinjam</option>
-                                
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <label for="email" class="col-sm-3 col-form-label">Keterangan</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="recipient-name" name="keterangan" value="<?= $buku['keterangan']; ?>">
-                        </div>
-                    </div>
-                    
-                    <div class="row mb-2">
-                        <label for="" class="col-sm-3 col-form-label">OPAC</label>
-                        <div class="col-sm-9">
-                            <select class="form-select form-control" type="text" name="tampilkan"  value="<?= $buku['tampilkan']; ?>">
-                                        <!-- harus sesuai dengan urutan enum pada database -->
-                                <option selected>Pilih </option>
-                                <option <?= $buku['tampilkan'] == 'Tampilkan Buku'? 'selected' : 'Tampilkan Buku' ?> value="Tampilkan Buku">Tampilkan Buku</option>
-                                <option <?= $buku['tampilkan'] == 'Sembunyikan'? 'selected' : 'Sembunyikan' ?> value="Sembunyikan">Sembunyikan</option>
-                                
-                            </select>
-                        </div>
-                    </div>
-                    
+                    <div class="modal-body">
+                        <form action="<?= base_url()?>updateBuku/<?= $buku['id_buku']; ?>" method="post" enctype="multipart/form-data" id="form">
                         <div class="row mb-2">
-                            <label class="col-sm-3 col-form-label">Sampul</label>
-                            <div class="col-sm-2">
-                                <img src="/img/default.jpg" alt="" class="img-thumbnail img-preview" id="img-preview-<?= $buku['id_buku']; ?>">
+                            <label for="email" class="col-sm-3 col-form-label">Judul</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="recipient-name" name="judul" value="<?= $buku['judul']; ?>">
                             </div>
-                            <div class="col-sm-7">
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input form-control" id="gambar<?= $buku['id_buku']; ?>" name="foto" onchange="previewImg('gambar<?= $buku['id_buku']; ?>')">
-                                    <label class="custom-file-label" for="customFile">Gambar Maksimal 2 Mb</label>
-                                    
-                                </div>
-                                <?php if (!empty($buku['foto'])): ?>
-                                        <div class="my-4">
-                                            <p>Foto Saat Ini:</p>
-                                            <img src="<?= base_url('img/perpustakaan/' . $buku['foto']); ?>" alt="Foto Kegiatan" width="100">
-                                        </div>
-                                    <?php endif; ?>
-                            </div>
-                            
                         </div>
+                        <div class="row mb-2">
+                            <label for="email" class="col-sm-3 col-form-label">Pengarang</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="recipient-name" name="pengarang" value="<?= $buku['pengarang']; ?>">
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <label for="email" class="col-sm-3 col-form-label">Penerbit</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="recipient-name" name="penerbit" value="<?= $buku['penerbit']; ?>">
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <label for="email" class="col-sm-3 col-form-label">Tempat Terbit</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="recipient-name" name="tempatTerbit" value="<?= $buku['tempatTerbit']; ?>">
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <label for="email" class="col-sm-3 col-form-label">Tahun Terbit</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="recipient-name" name="tahunTerbit" value="<?= $buku['tahunTerbit']; ?>">
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <label for="email" class="col-sm-3 col-form-label">Eksemplar</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="recipient-name" name="eksemplar" value="<?= $buku['eksemplar']; ?>">
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <label for="email" class="col-sm-3 col-form-label">Lokasi Penyimpanan</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="recipient-name" name="rak" value="<?= $buku['rak']; ?>">
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <label for="" class="col-sm-3 col-form-label">Kategori Buku</label>
+                            <div class="col-sm-9">
+                                <select class="form-select form-control" type="text" name="kategoriBuku"  value="<?= $buku['kategoriBuku']; ?>">
+                                            <!-- harus sesuai dengan urutan enum pada database -->
+                                    <option selected>Pilih Kategori</option>
+                                    <option <?= $buku['kategoriBuku'] == 'Ilmu Filsafat'? 'selected' : 'Ilmu Filsafat' ?> value="Ilmu Filsafat">Ilmu Filsafat</option>
+                                    <option <?= $buku['kategoriBuku'] == 'Ilmu Agama'? 'selected' : 'Ilmu Agama' ?> value="Ilmu Agama">Ilmu Agama</option>
+                                    <option <?= $buku['kategoriBuku'] == 'Ilmu Bahasa'? 'selected' : 'Ilmu Bahasa' ?> value="Ilmu Bahasa">Ilmu Bahasa</option>
+                                    <option <?= $buku['kategoriBuku'] == 'Ilmu Sosial'? 'selected' : 'Ilmu Sosial' ?> value="Ilmu Sosial">Ilmu Sosial</option>
+                                    <option <?= $buku['kategoriBuku'] == 'Ilmu Murni/Pasti'? 'selected' : 'Ilmu Murni/Pasti' ?> value="Ilmu Murni/Pasti">Ilmu Murni/Pasti</option>
+                                    <option <?= $buku['kategoriBuku'] == 'Teknologi'? 'selected' : 'Teknologi' ?> value="Teknologi">Teknologi</option>
+                                    <option <?= $buku['kategoriBuku'] == 'Kesenian'? 'selected' : 'Kesenian' ?> value="Kesenian">Kesenian</option>
+                                    <option <?= $buku['kategoriBuku'] == 'Sejarah/Geografi'? 'selected' : 'Sejarah/Geografi' ?> value="Sejarah/Geografi">Sejarah/Geografi</option>
+                                    <option <?= $buku['kategoriBuku'] == 'Kesusastraan'? 'selected' : 'Kesusastraan' ?> value="Kesusastraan">Kesusastraan</option>
+                                    <option <?= $buku['kategoriBuku'] == 'Koleksi NTB'? 'selected' : 'Koleksi NTB' ?> value="Koleksi NTB">Koleksi NTB</option>
+                                    
+                                    <option <?= $buku['kategoriBuku'] == 'Lainnya'? 'selected' : 'Lainnya' ?> value="Lainnya">Lainnya</option>
+                                    
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <label for="" class="col-sm-3 col-form-label">Status</label>
+                            <div class="col-sm-9">
+                                <select class="form-select form-control" type="text" name="status"  value="<?= $buku['status']; ?>">
+                                            <!-- harus sesuai dengan urutan enum pada database -->
+                                    <option selected>Pilih </option>
+                                    <option <?= $buku['status'] == 'Boleh Dipinjam'? 'selected' : 'Boleh Dipinjam' ?> value="Boleh Dipinjam">Boleh Dipinjam</option>
+                                    <option <?= $buku['status'] == 'Belum Boleh Dipinjam'? 'selected' : 'Belum Boleh Dipinjam' ?> value="Belum Boleh Dipinjam">Belum Boleh Dipinjam</option>
+                                    
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <label for="email" class="col-sm-3 col-form-label">Keterangan</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="recipient-name" name="keterangan" value="<?= $buku['keterangan']; ?>">
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-2">
+                            <label for="" class="col-sm-3 col-form-label">OPAC</label>
+                            <div class="col-sm-9">
+                                <select class="form-select form-control" type="text" name="tampilkan"  value="<?= $buku['tampilkan']; ?>">
+                                            <!-- harus sesuai dengan urutan enum pada database -->
+                                    <option selected>Pilih </option>
+                                    <option <?= $buku['tampilkan'] == 'Tampilkan Buku'? 'selected' : 'Tampilkan Buku' ?> value="Tampilkan Buku">Tampilkan Buku</option>
+                                    <option <?= $buku['tampilkan'] == 'Sembunyikan'? 'selected' : 'Sembunyikan' ?> value="Sembunyikan">Sembunyikan</option>
+                                    
+                                </select>
+                            </div>
+                        </div>
+                        
+                            <div class="row mb-2">
+                                <label class="col-sm-3 col-form-label">Sampul</label>
+                                <div class="col-sm-2">
+                                    <img src="/img/default.jpg" alt="" class="img-thumbnail img-preview" id="img-preview-<?= $buku['id_buku']; ?>">
+                                </div>
+                                <div class="col-sm-7">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input form-control" id="gambar<?= $buku['id_buku']; ?>" name="foto" onchange="previewImg('gambar<?= $buku['id_buku']; ?>')">
+                                        <label class="custom-file-label" for="customFile">Gambar Maksimal 2 Mb</label>
+                                        
+                                    </div>
+                                    <?php if (!empty($buku['foto'])): ?>
+                                            <div class="my-4">
+                                                <p>Foto Saat Ini:</p>
+                                                <img src="<?= base_url('img/perpustakaan/' . $buku['foto']); ?>" alt="Foto Kegiatan" width="100">
+                                            </div>
+                                        <?php endif; ?>
+                                </div>
+                            </div>
 
-                    <div class="modal-footer my-4">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                        <div class="modal-footer my-4">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                    </div>
                 </div>
+                    </form>
+                </div>
+                
             </div>
-                </form>
-            </div>
-            
         </div>
-    </div>
 
     <?php endforeach; ?>
 </div>

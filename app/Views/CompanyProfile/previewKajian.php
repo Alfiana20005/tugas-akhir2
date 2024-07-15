@@ -100,7 +100,8 @@
 									}
 
 									?>
-									<p class="excert " ><?= nl2p($data['narasi']); ?></p>
+									<!-- <p class="excert " ><?= nl2p($data['narasi']); ?></p> -->
+									<?= $content=$data['narasi']; ?>
                                     <div class="d-flex align-items-center justify-content-center my-4"> 
                                         <img src="<?= base_url("img/kajian/". $data['foto']); ?>" class="img-fluid" alt="" style="width: 300px; ">
                                     </div>
@@ -140,5 +141,17 @@
 			<script src="<?= base_url();?>landingPage/js/main.js"></script>	
 
 		  	<!-- <link href="<?= base_url();?>landingPage/assets2/vendor/fontawesome-free/css/all.min.css" rel="stylesheet"> -->
+
+			  <script>
+				tinymce.init({
+  selector: '#narasi',  // ganti dengan selektor elemen yang sesuai
+  plugins: 'lists',
+  toolbar: 'bold italic underline | bullist numlist outdent indent',
+  menubar: false,
+  statusbar: false,
+  content_style: 'body { font-family: Calibri, sans-serif; font-size: 12pt; }'
+});
+
+			</script>
 		</body>
 	</html>
