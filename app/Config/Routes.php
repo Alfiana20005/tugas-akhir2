@@ -197,6 +197,8 @@ $routes->get('/koleksi_detail2', 'C_LandingPage::koleksi_detail2');
 $routes->get('/koleksi_detail2/(:segment)', 'C_LandingPage::koleksi_detail2/$1');
 $routes->get('/publikasi2', 'C_LandingPage::publikasi2');
 $routes->get('/perpustakaan2', 'C_LandingPage::perpustakaan2');
+$routes->get('/detailBuku/(:segment)', 'C_LandingPage::detailBuku/$1');
+
 $routes->get('/kontak', 'C_LandingPage::kontak');
 $routes->post('/pesanUser', 'C_LandingPage::pesanUser');
 $routes->get('/pesanUser', 'C_LandingPage::pesanUser');

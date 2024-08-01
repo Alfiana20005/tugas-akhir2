@@ -63,16 +63,17 @@ class C_Dashboard extends BaseController
 
         // grafik koleksi
         $kategori = [
-            '01' => 'Arkeologi',
+            '01' => 'Geologika',
             '02' => 'Biologika',
             '03' => 'Etnografika',
-            '04' => 'Filologika',
-            '05' => 'Geologika',
-            '06' => 'Historika',
-            '07' => 'Kramologika',
-            '08' => 'Numismatika',
+            '04' => 'Arkeologika',
+            '05' => 'Historika',
+            '06' => 'Numismatika',
+            '07' => 'Filologika',
+            '08' => 'Kramologika',
             '09' => 'Seni Rupa',
             '10' => 'Teknologika',
+            '11' => 'Lain-Lain',
         ];
         $randomColors = [
             '#78A083', '#344955', '#1B3C73', '#944E63', '#f8a5c2', '#FFCD4B', '#720455', '#2b59c3', '#f5365c', '#FB8B24'

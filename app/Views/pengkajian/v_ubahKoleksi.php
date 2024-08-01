@@ -77,6 +77,12 @@
                     </div>
                 </div>
                 <div class="row mb-3">
+                    <label for="name" class="col-sm-2 col-form-label">Object Name</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control " name="inv_name" value="<?= $data_koleksi['inv_name']; ?>">
+                    </div>
+                </div>
+                <div class="row mb-3">
                     <label for="username" class="col-sm-2 col-form-label">Ukuran</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" name="ukuran" value="<?= $data_koleksi['ukuran']; ?>">
@@ -176,6 +182,36 @@
                     </div>
                 </div>
                 <div class="row mb-3">
+                    <label for="email" class="col-sm-2 col-form-label">Usia Benda</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="usia" value="<?= $data_koleksi['usia']; ?>">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="email" class="col-sm-2 col-form-label">Harga Perolehan</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="harga" value="<?= $data_koleksi['harga']; ?>">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="email" class="col-sm-2 col-form-label">Nilai Wajar Benda</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="harga_wajar" value="<?= $data_koleksi['harga_wajar']; ?>">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="email" class="col-sm-2 col-form-label">Nilai Penggantian</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="harga_penggantian" value="<?= $data_koleksi['harga_penggantian']; ?>">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="email" class="col-sm-2 col-form-label">Usia Benda</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="usia" value="<?= $data_koleksi['usia']; ?>">
+                    </div>
+                </div>
+                <div class="row mb-3">
                     <label for="email" class="col-sm-2 col-form-label">Keterangan</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" name="keterangan" value="<?= $data_koleksi['keterangan']; ?>">
@@ -202,15 +238,28 @@
                         </div>
                     </div>
                 </div>
+                <div class="row mb-3">
+                    <label for="email" class="col-sm-2 col-form-label">Sumber Data</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="sumber" value="<?= $data_koleksi['sumber']; ?>">
+                    </div>
+                </div>
+                
+                <div class="row mb-3">
+                    <label for="email" class="col-sm-2 col-form-label">Status</label>
+                    <div class="col-sm-10">
+                            <select class="form-select form-control" type="text" name="status"  value="<?= $data_koleksi['status']; ?>">
+                                <!-- harus sesuai dengan urutan enum pada database -->
+                                <option selected>Pilih</option>
+                                <option <?= $data_koleksi['status'] == 'Valid'? 'selected' : 'Valid' ?> value="Valid">Valid</option>
+                                <option <?= $data_koleksi['status'] == 'Valid tbc'? 'selected' : 'Valid tbc' ?> value="Valid tbc">Valid tbc</option>
+                                <option <?= $data_koleksi['status'] == 'Anomali'? 'selected' : 'Anomali' ?> value="Anomali">Anomali</option>
+                                <option <?= $data_koleksi['status'] == 'Disclaimer'? 'selected' : 'Disclaimer' ?> value="Disclaimer">Disclaimer</option>
+                            </select>
+                        </div>
+                </div>
 
                 
-                
-                <!-- <div class="row mb-5">
-                        <label for="formFileSm" class="col-sm-2 col-form-label">Foto</label>
-                        <div class="col-sm-10">
-                        <input class="form-control" id="formFileSm" type="file">
-                        </div>
-                </div> -->
                 
                 <button type="submit" class="btn btn-primary">Simpan Data</button>
             </form>

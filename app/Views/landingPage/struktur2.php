@@ -86,8 +86,8 @@
                     </div>
                   </div>
                   <div class="member-info">
-                    <h4>Irwan, S.Pd</h4>
-                    <span>Penyajian dan Layanan Edukasi</span>
+                    <h4>Raden Heru Indriawan, S.S</h4>
+                    <span>Plt. Penyajian dan Layanan Edukasi</span>
                   </div>
                 </div>
               </div>

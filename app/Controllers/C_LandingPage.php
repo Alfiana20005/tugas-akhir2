@@ -13,6 +13,7 @@ use App\Models\M_IsiKajian;
 use App\Models\M_Pesan;
 use App\Models\M_Pengunjung;
 use App\Models\M_SemuaPetugas;
+use App\Models\M_Perpustakaan;
 
 class C_LandingPage extends BaseController
 {
@@ -28,6 +29,7 @@ class C_LandingPage extends BaseController
     protected $M_Pesan;
     protected $M_Pengunjung;
     protected $M_SemuaPetugas;
+    protected $M_Perpustakaan;
 
     public function __construct() {
         helper('form');
@@ -42,6 +44,7 @@ class C_LandingPage extends BaseController
         $this -> M_Pesan = new M_Pesan();
         $this -> M_Pengunjung = new M_Pengunjung();
         $this -> M_SemuaPetugas = new M_SemuaPetugas();
+        $this -> M_Perpustakaan = new M_Perpustakaan();
 
     }
 
@@ -418,6 +421,7 @@ class C_LandingPage extends BaseController
 
     public function publikasi2(): string
     {
+
         $publikasi = $this->M_Publikasi->findAll();
        
         $data =[
@@ -435,7 +439,10 @@ class C_LandingPage extends BaseController
     }
     public function perpustakaan2(): string
     {
+        $data_buku = $this->M_Perpustakaan->findAll();
+        
         $data =[
+            'data_buku' => $data_buku,
             'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
             'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
             'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
@@ -443,6 +450,20 @@ class C_LandingPage extends BaseController
         ];
 
         return view('landingPage/perpustakaan_page2', $data);
+    }
+    public function detailBuku($id_buku): string
+    {
+        $data_buku = $this->M_Perpustakaan->getBuku($id_buku);
+        
+        $data =[
+            'data_buku' => $data_buku,
+            'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
+            'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
+            'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
+            'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
+        ];
+
+        return view('landingPage/detailBuku', $data);
     }
     public function kontak(): string
     {

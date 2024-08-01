@@ -68,6 +68,18 @@
                     </div>
                 </div>
                 <div class="row mb-3">
+                    <label for="judul" class="col-sm-3 col-form-label">Object Name</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="" name="inv_name" value="<?= old('inv_name'); ?>">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="username" class="col-sm-3 col-form-label">Usia Benda</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="900 tahun" name="usia" value="<?= old('usia'); ?>">
+                    </div>
+                </div>
+                <div class="row mb-3">
                     <label for="username" class="col-sm-3 col-form-label">Ukuran</label>
                     <div class="col-sm-9">
                         <input type="text" class="form-control" placeholder="contoh: Panjang: 20 cm, lebar: 5 cm" name="ukuran" value="<?= old('ukuran'); ?>">
@@ -91,12 +103,11 @@
                         <input type="text" class="form-control" placeholder="contoh: Hibah" name="cara_dapat" value="<?= old('cara_dapat'); ?>">
                     </div>
                 </div>
+                
                 <div class="row mb-3">
                     <label for="email" class="col-sm-3 col-form-label">Tanggal Masuk</label>
                     <div class="col-sm-9">
                         <input type="date" class="form-control"  aria-label="tahun" name="tgl_masuk" value="<?= old('tgl_masuk'); ?>">
-                        <!-- <input type="text" class="form-control" name="tanggal" > -->
-                    
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -165,9 +176,21 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label for="email" class="col-sm-3 col-form-label">Harga</label>
+                    <label for="email" class="col-sm-3 col-form-label">Harga Perolehan</label>
                     <div class="col-sm-9">
                         <input type="text" class="form-control" placeholder="contoh: Rp.000" name="harga" value="<?= old('harga'); ?>">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="email" class="col-sm-3 col-form-label">Nilai Wajar Benda (2024)</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="contoh: Rp.000" name="harga_wajar" value="<?= old('harga_wajar'); ?>">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="email" class="col-sm-3 col-form-label">Nilai Penggantian</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="contoh: Rp.000" name="harga_penggantian" value="<?= old('harga_penggantian'); ?>">
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -194,6 +217,25 @@
                             
                         </div>
                     </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="sumber" class="col-sm-3 col-form-label">Sumber Data</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="" name="sumber" value="<?= old('sumber'); ?>">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="status" class="col-sm-3 col-form-label">Status</label>
+                    <div class="col-sm-9">
+                            <select class="form-select form-control" type="text" name="status"  value="<?= old('status'); ?>">
+                                <!-- harus sesuai dengan urutan enum pada database -->
+                                <option selected>Pilih</option>
+                                <option <?= old("status") == 'Valid'? 'selected' : 'Valid' ?> value="Valid">Valid</option>
+                                <option <?= old("status") == 'Valid tbc'? 'selected' : 'Valid tbc' ?> value="Valid tbc">Valid tbc</option>
+                                <option <?= old("status") == 'Anomali'? 'selected' : 'Anomali' ?> value="Anomali">Anomali</option>
+                                <option <?= old("status") == 'Disclaimer'? 'selected' : 'Disclaimer' ?> value="Disclaimer">Disclaimer</option>
+                            </select>
+                        </div>
                 </div>
                 
                 <div class="d-flex justify-content-end">

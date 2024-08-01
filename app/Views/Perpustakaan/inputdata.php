@@ -85,6 +85,8 @@
                             <option <?= old("kategoriBuku") == 'Sejarah/Geografi'? 'selected' : 'Sejarah/Geografi' ?> value="Sejarah/Geografi">Sejarah/Geografi</option>
                             <option <?= old("kategoriBuku") == 'Kesusastraan'? 'selected' : 'Kesusastraan' ?> value="Kesusastraan">Kesusastraan</option>
                             <option <?= old("kategoriBuku") == 'Koleksi NTB'? 'selected' : 'Koleksi NTB' ?> value="Koleksi NTB">Koleksi NTB</option>
+                            <option <?= old("kategoriBuku") == 'Koleksi NTB'? 'selected' : 'Koleksi NTB' ?> value="Koleksi NTB">Majalah</option>
+                            <option <?= old("kategoriBuku") == 'Koleksi NTB'? 'selected' : 'Koleksi NTB' ?> value="Koleksi NTB">Koran</option>
                             <option <?= old("kategoriBuku") == 'Lainnya'? 'selected' : 'Lainnya' ?> value="Lainnya">Lainnya</option>
 
                         </select>

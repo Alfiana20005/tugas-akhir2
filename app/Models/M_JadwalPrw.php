@@ -46,13 +46,25 @@ class M_JadwalPrw extends Model
     }
     
   
-    public function getPerawatanFromJadwal($mulai, $berakhir, $kode_jenisprw)
+    // public function getPerawatanFromJadwal($mulai, $berakhir, $kode_jenisprw)
+    // {
+    //     return $this->db->table('data_perawatan2')
+    //         ->select('data_perawatan2.*, jenis_perawatan.jenis_prw' )
+    //         ->join('jenis_perawatan', 'jenis_perawatan.kode_jenisprw = data_perawatan2.kode_jenisprw', 'left')
+    //         ->where('tanggal_sebelum >=', $mulai)
+    //         ->where('tanggal_sesudah <=', $berakhir)
+    //         ->where('data_perawatan2.kode_jenisprw', $kode_jenisprw)
+    //         ->get()
+    //         ->getResultArray();
+    // }
+
+        public function getPerawatanFromJadwal($mulai, $berakhir, $kode_jenisprw)
     {
         return $this->db->table('data_perawatan2')
             ->select('data_perawatan2.*, jenis_perawatan.jenis_prw' )
             ->join('jenis_perawatan', 'jenis_perawatan.kode_jenisprw = data_perawatan2.kode_jenisprw', 'left')
             ->where('tanggal_sebelum >=', $mulai)
-            // ->where('tanggal_sesudah <=', $berakhir)
+            ->where('tanggal_sesudah <=', $berakhir)
             ->where('data_perawatan2.kode_jenisprw', $kode_jenisprw)
             ->get()
             ->getResultArray();
@@ -70,6 +82,7 @@ class M_JadwalPrw extends Model
     {
         return $this->db->table('data_perawatan2')
             ->where('tanggal_sebelum >=', $mulai)
+            ->where('tanggal_sesudah <=', $berakhir)
             ->where('status =', 'Selesai')
             ->where('kode_jenisprw', $kode_jenisprw)
             ->countAllResults();

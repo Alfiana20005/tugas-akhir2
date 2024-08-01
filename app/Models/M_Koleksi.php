@@ -10,7 +10,7 @@ class M_Koleksi extends Model
     protected $primaryKey = 'id';
     // protected $useTimestamps = true;
 
-    protected $allowedFields = ['rak', 'lemari', 'harga', 'no_registrasi', 'no_inventaris', 'nama_inv', 'gambar', 'ukuran', 'tempat_buat', 'tempat_dapat', 'cara_dapat', 'tgl_masuk', 'keadaan', 'lokasi', 'keterangan', 'uraian', 'kode_kategori', 'id_petugas'];
+    protected $allowedFields = ['rak', 'lemari', 'harga', 'no_registrasi', 'no_inventaris', 'nama_inv','inv_name', 'gambar', 'ukuran', 'tempat_buat', 'tempat_dapat', 'cara_dapat', 'tgl_masuk', 'keadaan', 'lokasi', 'keterangan', 'uraian', 'kode_kategori', 'id_petugas', 'usia','harga_wajar', 'harga_penggantian','sumber','status'];
 
 
     protected $validationMessages = [];
@@ -110,6 +110,16 @@ class M_Koleksi extends Model
             ->where('id', $id)
             ->set('keadaan', $keadaan)
             ->update();
+    }
+    public function countStatus($status)
+    {
+        // Membuat instansiasi model
+        $model = new M_Koleksi();
+
+        // Menghitung jumlah petugas
+        $totalKoleksi = $model->where('status', $status)->countAllResults();
+
+        return $totalKoleksi;
     }
     
 }

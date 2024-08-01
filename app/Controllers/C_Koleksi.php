@@ -69,10 +69,7 @@ class C_Koleksi extends BaseController
                 'rules' => 'required',
                 'errors' => ['required'=>'Cara dapat harus diisi']
             ],
-            'tgl_masuk' => [
-                'rules' => 'required',
-                'errors' => ['required'=>'Tanggal Masuk harus diisi']
-            ],
+            
             'keadaan' => [
                 'rules' => 'required',
                 'errors' => ['required'=>'Keadaan harus diisi']
@@ -120,6 +117,7 @@ class C_Koleksi extends BaseController
                 'no_registrasi' => $this->request->getVar('no_registrasi'),
                 'no_inventaris' => $this->request->getVar('no_inventaris'),
                 'nama_inv' => $this->request->getVar('nama_inv'),
+                'inv_name' => $this->request->getVar('inv_name'),
                 'gambar' => $fotoName,
                 'ukuran' => $this->request->getVar('ukuran'),
                 'tempat_buat' => $this->request->getVar('tempat_buat'),
@@ -134,6 +132,11 @@ class C_Koleksi extends BaseController
                 'uraian' => $this->request->getVar('uraian'),
                 'kode_kategori' => $this->request->getVar('kode_kategori'),
                 'harga' => $this->request->getVar('harga'),
+                'usia' => $this->request->getVar('usia'),
+                'harga_wajar' => $this->request->getVar('harga_wajar'),
+                'harga_penggantian' => $this->request->getVar('harga_penggantian'),
+                'sumber' => $this->request->getVar('sumber'),
+                'status' => $this->request->getVar('status'),
                 'id_petugas' => session()->get('id_petugas'), // Ambil ID petugas dari sesi
             
         ]);
@@ -149,6 +152,10 @@ class C_Koleksi extends BaseController
     {
         // Mendapatkan data koleksi berdasarkan kategori
         $data_koleksi = $this->M_Koleksi->getkoleksiAll();
+        $valid = $this->M_Koleksi->countStatus("Valid");
+        $validtbc = $this->M_Koleksi->countStatus("Valid tbc");
+        $anomali = $this->M_Koleksi->countStatus("Anomali");
+        $disclaimer = $this->M_Koleksi->countStatus("Disclaimer");
 
         
 
@@ -156,6 +163,10 @@ class C_Koleksi extends BaseController
         $data = [
             'title' => 'Daftar Koleksi ', // Menggunakan nama kategori di judul
             'data_koleksi' => $data_koleksi,
+            'valid' => $valid,
+            'validtbc' => $validtbc,
+            'anomali' => $anomali,
+            'disclaimer' => $disclaimer
             
         ];
 
@@ -250,6 +261,7 @@ class C_Koleksi extends BaseController
                 'no_registrasi' => $this->request->getVar('no_registrasi'),
                 'no_inventaris' => $this->request->getVar('no_inventaris'),
                 'nama_inv' => $this->request->getVar('nama_inv'),
+                'inv_name' => $this->request->getVar('inv_name'),
                 'gambar' => $fotoName,
                 'ukuran' => $this->request->getVar('ukuran'),
                 'tempat_buat' => $this->request->getVar('tempat_buat'),
@@ -263,6 +275,12 @@ class C_Koleksi extends BaseController
                 'keterangan' => $this->request->getVar('keterangan'),
                 'uraian' => $this->request->getVar('uraian'),
                 'kode_kategori' => $this->request->getVar('kode_kategori'),
+                'harga' => $this->request->getVar('harga'),
+                'usia' => $this->request->getVar('usia'),
+                'harga_wajar' => $this->request->getVar('harga_wajar'),
+                'harga_penggantian' => $this->request->getVar('harga_penggantian'),
+                'sumber' => $this->request->getVar('sumber'),
+                'status' => $this->request->getVar('status'),
                 'id_petugas' => session()->get('id_petugas'), // Ambil ID petugas dari sesi
             
         ];

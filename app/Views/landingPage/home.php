@@ -73,7 +73,7 @@
                                         <tr>
                                         <td class="mx-4">Dewasa</td>
                                         <td>: </td>
-                                        <td>Rp. 4000</td>
+                                        <td>Rp. 5000</td>
                                         </tr>
                                         <tr>
                                         <td>Anak  </td>
@@ -83,7 +83,7 @@
                                         <tr>
                                         <td>Wisman   </td>
                                         <td>: </td>
-                                        <td>Rp. 7000</td>
+                                        <td>Rp. 20.000</td>
                                         </tr>
                                         
 

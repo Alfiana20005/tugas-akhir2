@@ -8,6 +8,75 @@
                 <?= session()->getFlashdata('pesan'); ?>
             </div>
         <?php endif; ?>
+
+    <div class="row">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                Data Valid</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $valid; ?>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                Data Valid tbc</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $validtbc; ?></div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-danger shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                Data Anomali</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $anomali; ?></div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-dark shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">
+                                Data Disclaimer</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $disclaimer; ?></div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <div class="card shadow mb-4">
         <div class="card-header d-sm-flex py-3  align-items-center justify-content-between">
             <h6 class="m-0 font-weight-bold text-primary">Data Koleksi </h6>
@@ -26,14 +95,15 @@
                             <th style="text-align: center;">No Inventaris</th>
                             <th style="text-align: center;">Gambar</th> 
                             <th style="text-align: center;">Nama</th>
-                            <th style="text-align: center;">Uraian</th>
+                            <!-- <th style="text-align: center;">Uraian</th>
                             <th style="text-align: center;">Asal Didapat</th>
                             <th style="text-align: center;">Ukuran</th>
                             <th style="text-align: center;">Cara Didapat</th>
                             <th style="text-align: center;">Tanggal</th>
-                            <th style="text-align: center;">Harga</th>
+                            <th style="text-align: center;">Harga</th> -->
                             <th style="text-align: center;">Lokasi</th>
                             <th style="text-align: center;">Keadaan</th>
+                            <th style="text-align: center;">Status Data</th>
                             <th style="text-align: center;">Aksi</th>
                             
                         </tr>
@@ -49,12 +119,12 @@
                             <td style="text-align: center;"><?= $k['kode_kategori']; ?> . <?= $k['no_inventaris']; ?></td>
                             <td style="text-align: center;"><img src="<?= base_url("img/koleksi/". $k['gambar']); ?>" alt="" width="100px"></td>
                             <td style="text-align: center;"><?= $k['nama_inv']; ?></td>
-                            <td style="text-align: center;"><?= $k['uraian']; ?></td>
+                            <!-- <td style="text-align: center;"><?= $k['uraian']; ?></td>
                             <td style="text-align: center;"><?= $k['tempat_dapat']; ?></td>
                             <td style="text-align: center;"><?= $k['ukuran']; ?></td>
                             <td style="text-align: center;"><?= $k['cara_dapat']; ?></td>
                             <td style="text-align: center;"><?= $k['tgl_masuk']; ?></td>
-                            <td style="text-align: center;"><?= $k['harga']; ?></td>
+                            <td style="text-align: center;"><?= $k['harga']; ?></td> -->
                             <td style="text-align: center;"><?= $k['rak']; ?> <?= $k['lemari']; ?> <?= $k['lokasi']; ?></td>
                             <td style="text-align: center;">
                                 <?php if (session()->get('level') == 'Kepala Museum'): ?> 
@@ -77,6 +147,11 @@
                                     </div>
                                 </form>
                                 <?php endif; ?>
+                            </td>
+                                <td style="text-align: center;">
+                                <button type="button" class="btn btn-sm  btn-<?php echo ($k['status'] == 'Valid') ? 'success' : (($k['status'] == 'Valid tbc') ? 'warning' : (($k['status'] == 'Anomali') ? 'danger' : (($k['status'] == 'Disclaimer') ? 'dark' : 'light') )); ?> btn-update-status" aria-haspopup="true" aria-expanded="false">
+                                        <?php echo ($k['status'] == 'Valid') ? 'Valid' : (($k['status'] == 'Valid tbc') ? 'Valid tbc' : (($k['status'] == 'Anomali') ? 'Anomali' :(($k['status'] == 'Disclaimer') ? 'Disclaimer' : 'tidak ada status'))); ?>
+                                    </button>    
                             </td>
                             <td style="text-align: center;">
                                 <a href="<?= base_url("/detailKoleksi/{$k['id']}"); ?>" class="btn btn-success btn-sm " >Detail</a>
