@@ -20,8 +20,11 @@
             </div>
         </div>
         <div class="card-body ">
-            <div class="text-center" >
+            <!-- <div class="text-center" >
                 <h6 id="judul-inv" class="m-0 font-weight-bold mb-4" style="text-transform: uppercase;">INVENTARISASI DATA KOLEKSI <?= $data_koleksi['kategori_name']; ?> </h6>
+            </div> -->
+            <div class="text-center" >
+                <h6 id="judul-inv" class="m-0 font-weight-bold mb-4" style="text-transform: uppercase;">DATA KOLEKSI </h6>
             </div>
             <div class="table-responsive mx-auto" style="max-width: 700px;"> <!-- Membatasi lebar maksimum tabel -->
                 <table class="table table-bordered" width="100%" cellspacing="0">
@@ -76,9 +79,29 @@
                             <td>: <?= $data_koleksi['keadaan']; ?></td>
                         </tr>
                         <tr style="line-height: auto;">
-                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">Lokasi</td>
-                            <td>: <?= $data_koleksi['rak']; ?> <?= $data_koleksi['lemari']; ?> <?= $data_koleksi['lokasi']; ?></td>
+                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">Penyimpanan</td>
+                            <td>: <?= $data_koleksi['lokasi']; ?> <?= $data_koleksi['zona']; ?> <?= $data_koleksi['lemari']; ?> <?= $data_koleksi['rak']; ?> urutan ke <?= $data_koleksi['urutan']; ?></td>
                         </tr>
+                        <!-- <tr style="line-height: 0;">
+                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">Lokasi</td>
+                            <td>: <?= $data_koleksi['lokasi']; ?> </td>
+                        </tr>
+                        <tr style="line-height: 0;">
+                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">Zona</td>
+                            <td>: <?= $data_koleksi['zona']; ?> </td>
+                        </tr>
+                        <tr style="line-height: 0;">
+                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">Lemari</td>
+                            <td>: <?= $data_koleksi['lemari']; ?> </td>
+                        </tr>
+                        <tr style="line-height: 0;">
+                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">Rak/Laci</td>
+                            <td>: <?= $data_koleksi['rak']; ?> </td>
+                        </tr>
+                        <tr style="line-height: 0;">
+                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">Urutan</td>
+                            <td>: <?= $data_koleksi['urutan']; ?> </td>
+                        </tr> -->
                         <tr style="line-height: auto;">
                             <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">Harga Perolehan</td>
                             <td>: <?= $data_koleksi['harga']; ?></td>
@@ -92,10 +115,7 @@
                             <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">Nilai Penggantian</td>
                             <td>: <?= $data_koleksi['harga_penggantian']; ?></td>
                         </tr>
-                        <tr style="line-height: 0;">
-                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">Diubah oleh</td>
-                            <td>: <?= $data_koleksi['petugas_name']; ?></td>
-                        </tr>
+                        
                         <tr style="line-height: auto;">
                             <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">Keterangan</td>
                             <td>: <?= $data_koleksi['keterangan']; ?></td>
@@ -113,9 +133,23 @@
                             <td>: <?= $data_koleksi['status']; ?></td>
                         </tr>
                         <tr style="line-height: 0;">
+                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">Verifikator</td>
+                            <td>: <?= $data_koleksi['petugas_name']; ?></td>
+                        </tr>
+                        <tr style="line-height: 0;">
+                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">Fotografer</td>
+                            <td>: <?= $data_koleksi['fotografer']; ?></td>
+                        </tr>
+                        <tr style="line-height: 0;">
                             <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">Gambar</td>
                             <td>: <img src="<?= base_url('/img/koleksi/' . $data_koleksi['gambar']); ?>" alt="Generic placeholder image" class="img-fluid" style="width: 180px; border-radius: 10px;"></td>
-                        </tr>         
+                        </tr>
+                        
+                        <tr style="line-height: 0;">
+                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">Kode Lembar Kerja</td>
+                            <td>: <?= $data_koleksi['kode_lk']; ?></td>
+                        </tr>
+
                     </tbody>
                 </table>
             </div>
@@ -136,67 +170,126 @@
             <div class="table-responsive mx-auto" style="max-width: 700px; padding-left: 110px;"> <!-- Membatasi lebar maksimum tabel -->
                 <table class="table table-borderless" width="100%" cellspacing="0">
                     <tbody style="font-size: 12pt; line-height: auto; text-align: justify; font-family:Times New Roman;">
-                        <!-- Isi tabel -->
-                        <tr style="line-height: 0;">
-                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">1. No. Inventarisasi</td>
+                       <!-- Isi tabel -->
+                       <tr style="line-height: 0;">
+                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">No. Inventarisasi</td>
                             <td>: <?= $data_koleksi['kode_kategori']; ?> . <?= $data_koleksi['no_inventaris']; ?></td>
                         </tr>
                         <tr style="line-height: 0;">
-                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">2. No. Registrasi</td>
+                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">No. Registrasi</td>
                             <td>: <?= $data_koleksi['no_registrasi']; ?></td>
                         </tr>
                         <tr style="line-height: 0;">
-                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">3. Jenis Koleksi</td>
+                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">Jenis Koleksi</td>
                             <td>: <?= $data_koleksi['kategori_name']; ?></td>
                         </tr>
                         <tr style="line-height: 0;">
-                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">4. Nama Benda</td>
+                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">Nama Benda</td>
                             <td>: <?= $data_koleksi['nama_inv']; ?></td>
                         </tr>
+                        <tr style="line-height: 0;">
+                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">Object Name</td>
+                            <td>: <?= $data_koleksi['inv_name']; ?></td>
+                        </tr>
+                        <tr style="line-height: 0;">
+                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">Usia Benda</td>
+                            <td>: <?= $data_koleksi['usia']; ?></td>
+                        </tr>
                         <tr style="line-height: auto;">
-                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">5. Ukuran</td>
+                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">Ukuran</td>
                             <td>: <?= $data_koleksi['ukuran']; ?></td>
                         </tr>
                         <tr style="line-height: 0;">
-                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">6. Tempat Dibuat</td>
+                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">Tempat Dibuat</td>
                             <td>: <?= $data_koleksi['tempat_buat']; ?></td>
                         </tr>
                         <tr style="line-height: 0;">
-                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">7. Tempat Didapat</td>
+                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">Tempat Didapat</td>
                             <td>: <?= $data_koleksi['tempat_dapat']; ?></td>
                         </tr>
                         <tr style="line-height: auto;">
-                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">8. Cara Dapat</td>
+                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">Cara Dapat</td>
                             <td>: <?= $data_koleksi['cara_dapat']; ?></td>
                         </tr>
                         <tr style="line-height: 0;">
-                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">9. Tanggal Masuk</td>
+                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">Tanggal Masuk</td>
                             <td>: <?= $data_koleksi['tgl_masuk']; ?></td>
                         </tr>
                         <tr style="line-height: 0;">
-                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">10. Keadaan</td>
+                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">Keadaan</td>
                             <td>: <?= $data_koleksi['keadaan']; ?></td>
                         </tr>
-                        <tr style="line-height: 0;">
-                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">11. Lokasi</td>
-                            <td>: <?= $data_koleksi['lokasi']; ?></td>
+                        <tr style="line-height: auto;">
+                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">Penyimpanan</td>
+                            <td>: <?= $data_koleksi['lokasi']; ?> <?= $data_koleksi['zona']; ?> <?= $data_koleksi['lemari']; ?> <?= $data_koleksi['rak']; ?> urutan ke <?= $data_koleksi['urutan']; ?></td>
+                        </tr>
+                        <!-- <tr style="line-height: 0;">
+                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">Lokasi</td>
+                            <td>: <?= $data_koleksi['lokasi']; ?> </td>
                         </tr>
                         <tr style="line-height: 0;">
-                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">12. Diubah oleh</td>
-                            <td>: <?= $data_koleksi['petugas_name']; ?></td>
+                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">Zona</td>
+                            <td>: <?= $data_koleksi['zona']; ?> </td>
+                        </tr>
+                        <tr style="line-height: 0;">
+                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">Lemari</td>
+                            <td>: <?= $data_koleksi['lemari']; ?> </td>
+                        </tr>
+                        <tr style="line-height: 0;">
+                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">Rak/Laci</td>
+                            <td>: <?= $data_koleksi['rak']; ?> </td>
+                        </tr>
+                        <tr style="line-height: 0;">
+                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">Urutan</td>
+                            <td>: <?= $data_koleksi['urutan']; ?> </td>
+                        </tr> -->
+                        <tr style="line-height: auto;">
+                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">Harga Perolehan</td>
+                            <td>: <?= $data_koleksi['harga']; ?></td>
                         </tr>
                         <tr style="line-height: auto;">
-                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">13. Keterangan</td>
+                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">Nilai Wajar Benda (2024)</td>
+                            <td>: <?= $data_koleksi['harga_wajar']; ?></td>
+                        </tr>
+                        
+                        <tr style="line-height: auto;">
+                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">Nilai Penggantian</td>
+                            <td>: <?= $data_koleksi['harga_penggantian']; ?></td>
+                        </tr>
+                        
+                        <tr style="line-height: auto;">
+                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">Keterangan</td>
                             <td>: <?= $data_koleksi['keterangan']; ?></td>
                         </tr>
                         <tr style="line-height: auto;">
-                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">14. Uraian</td>
+                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">Uraian</td>
                             <td>: <?= $data_koleksi['uraian']; ?></td>
                         </tr>
+                        <tr style="line-height: auto;">
+                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">Sumber Data</td>
+                            <td>: <?= $data_koleksi['sumber']; ?></td>
+                        </tr>
+                        <tr style="line-height: auto;">
+                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">Status</td>
+                            <td>: <?= $data_koleksi['status']; ?></td>
+                        </tr>
                         <tr style="line-height: 0;">
-                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">15. Gambar</td>
+                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">Verifikator</td>
+                            <td>: <?= $data_koleksi['petugas_name']; ?></td>
+                        </tr>
+                        <tr style="line-height: 0;">
+                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">Fotografer</td>
+                            <td>: <?= $data_koleksi['fotografer']; ?></td>
+                        </tr>
+                        <tr style="line-height: 0;">
+                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">Gambar</td>
                             <td>: <img src="<?= base_url('/img/koleksi/' . $data_koleksi['gambar']); ?>" alt="Generic placeholder image" class="img-fluid" style="width: 180px; border-radius: 10px;"></td>
-                        </tr>         
+                        </tr>
+                        
+                        <tr style="line-height: 0;">
+                            <td class="font-weight-bold" style="color: #2b2a2a; width: 30%;">Kode Lembar Kerja</td>
+                            <td>: <?= $data_koleksi['kode_lk']; ?></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>   

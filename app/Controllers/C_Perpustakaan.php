@@ -17,11 +17,15 @@ class C_Perpustakaan extends BaseController
     public function index(): string
     {
         $data_buku = $this->M_Perpustakaan->findAll();
+        $buku_rekomendasi = $this->M_Perpustakaan->getBukuRekomendasi('Tampilkan Sebagai Buku Rekomendasi');
+        $buku_favorit = $this->M_Perpustakaan->getBukuRekomendasi('Tampilkan Sebagai Buku Favorit');
 
 
         $data =[
             'title' => 'Daftar Buku',
-            'data_buku' => $data_buku
+            'data_buku' => $data_buku,
+            'buku_rekomendasi' => $buku_rekomendasi,
+            'buku_favorit' => $buku_favorit
         ];
 
         return view('Perpustakaan/inputdata', $data);
@@ -113,6 +117,7 @@ class C_Perpustakaan extends BaseController
         ];
     
         $foto = $this->request->getFile('foto');
+        
 
         // Cek apakah file foto diunggah
         if ($foto && $foto->isValid() && !$foto->hasMoved()) {
@@ -210,15 +215,17 @@ class C_Perpustakaan extends BaseController
         }
     
         $foto = $this->request->getFile('gambar');
+        $dafaultImg = 'no_cover.jpeg';
     
         if ($foto->isValid() && !$foto->hasMoved()) {
             $fotoName = $foto->getRandomName();
             $foto->move('img/perpustakaan', $fotoName);
         } else {
             // Handle file upload error
-            return redirect()->to(base_url('/inputData'))
-                ->withInput()
-                ->with('errors', $foto->getErrorString());
+            // return redirect()->to(base_url('/inputData'))
+            //     ->withInput()
+            //     ->with('errors', $foto->getErrorString());
+            $fotoName = $dafaultImg;
         }
         // Simpan data pengunjung
         $this->M_Perpustakaan->save([

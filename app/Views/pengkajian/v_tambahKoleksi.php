@@ -124,6 +124,57 @@
                         </div>
                 </div>
                 <div class="row mb-3">
+                    <label for="email" class="col-sm-3 col-form-label">Lokasi</label>
+                    <div class="col-sm-9">
+                            <select class="form-select form-control" type="text" name="lokasi"  value="<?= old('lokasi'); ?>">
+                                <!-- harus sesuai dengan urutan enum pada database -->
+                                <option selected></option>
+                                <option <?= old("lokasi") == 'Gudang Koleksi Museum NTB'? 'selected' : 'Gudang Koleksi Museum NTB' ?> value="Gudang Koleksi Museum NTB">Gudang Koleksi Museum NTB</option>
+                                <option <?= old("lokasi") == 'Gudang Atas Ruang TU'? 'selected' : 'Gudang Atas Ruang TU' ?> value="Gudang Atas Ruang TU">Gudang Atas Ruang TU</option>
+                                <option <?= old("lokasi") == 'Gudang Belakang Museum NTB'? 'selected' : 'Gudang Belakang Museum NTB' ?> value="Gudang Belakang Museum NTB">Gudang Belakang Museum NTB</option>
+                                <option <?= old("lokasi") == 'Ruang Pameran Tetap Museum NTB'? 'selected' : 'Ruang Pameran Tetap Museum NTB' ?> value="Ruang Pameran Tetap Museum NTB">Ruang Pameran Tetap Museum NTB</option>
+                                <option <?= old("lokasi") == 'Area/Halaman Museum NTB'? 'selected' : 'Area/Halaman Museum NTB' ?> value="Area/Halaman Museum NTB">Area/Halaman Museum NTB</option>
+                            </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="email" class="col-sm-3 col-form-label">Zona</label>
+                    <div class="col-sm-9">
+                            <select class="form-select form-control" type="text" name="zona"  value="<?= old('zona'); ?>">
+                                <!-- harus sesuai dengan urutan enum pada database -->
+                                <option selected></option>
+                                <option <?= old("zona") == 'Zona A (Meja Besar)'? 'selected' : 'Zona A (Meja Besar)' ?> value="Zona A (Meja Besar)">Zona A (Meja Besar)</option>
+                                <option <?= old("zona") == 'Zona B (Senjata)'? 'selected' : 'Zona B (Senjata)' ?> value="Zona B (Senjata)">Zona B (Senjata)</option>
+                                <option <?= old("zona") == 'Zona C (Wayang)'? 'selected' : 'Zona C (Wayang)' ?> value="Zona C (Wayang)">Zona C (Wayang)</option>
+                                <option <?= old("zona") == 'Zona D (Naskah)'? 'selected' : 'Zona D (Naskah)' ?> value="Zona D (Naskah)">Zona D (Naskah)</option>
+                                <option <?= old("zona") == 'Zona E (Etnografika)'? 'selected' : 'Zona E (Etnografika)' ?> value="Zona E (Etnografika)">Zona E (Etnografika)</option>
+                                <option <?= old("zona") == 'Zona F (Etnografika, Arkeologika, Geologika, Biologika)'? 'selected' : 'Zona F (Etnografika, Arkeologika, Geologika, Biologika)' ?> value="Zona F (Etnografika, Arkeologika, Geologika, Biologika)">Zona F (Etnografika, Arkeologika, Geologika, Biologika)</option>
+                                <option <?= old("zona") == 'Zona G (Keramik Gerabah)'? 'selected' : 'Zona G (Keramik Gerabah)' ?> value="Zona G (Keramik Gerabah)">Zona G (Keramik Gerabah)</option>
+                                <option <?= old("zona") == 'Zona H (Kain)'? 'selected' : 'Zona H (Kain)' ?> value="Zona H (Kain)">Zona H (Kain)</option>
+                                <option <?= old("zona") == 'Zona I (Etnografika)'? 'selected' : 'Zona I (Etnografika)' ?> value="Zona I (Etnografika)">Zona I (Etnografika)</option>
+                            </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="email" class="col-sm-3 col-form-label">Lemari</label>
+                    <div class="col-sm-9">
+                            <select class="form-select form-control" type="text" name="lemari"  value="<?= old('lemari'); ?>">
+                                <!-- harus sesuai dengan urutan enum pada database -->
+                                <option selected></option>
+                                <option <?= old("lemari") == 'Lemari 1'? 'selected' : 'Lemari 1' ?> value="Lemari 1">Lemari 1</option>
+                                <option <?= old("lemari") == 'Lemari 2'? 'selected' : 'Lemari 2' ?> value="Lemari 2">Lemari 2</option>
+                                <option <?= old("lemari") == 'Lemari 3'? 'selected' : 'Lemari 3' ?> value="Lemari 3">Lemari 3</option>
+                                <option <?= old("lemari") == 'Lemari 4'? 'selected' : 'Lemari 4' ?> value="Lemari 4">Lemari 4</option>
+                                <option <?= old("lemari") == 'Lemari 5'? 'selected' : 'Lemari 5' ?> value="Lemari 5">Lemari 5</option>
+                                <option <?= old("lemari") == 'Lemari 6'? 'selected' : 'Lemari 6' ?> value="Lemari 6">Lemari 6</option>
+                                <option <?= old("lemari") == 'Lemari 7'? 'selected' : 'Lemari 7' ?> value="Lemari 7">Lemari 7</option>
+                                <option <?= old("lemari") == 'Lemari 8'? 'selected' : 'Lemari 8' ?> value="Lemari 8">Lemari 8</option>
+                                <option <?= old("lemari") == 'Lemari 9'? 'selected' : 'Lemari 9' ?> value="Lemari 9">Lemari 9</option>
+                                <option <?= old("lemari") == 'Lemari 10'? 'selected' : 'Lemari 10' ?> value="Lemari 10">Lemari 10</option>
+                            </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
                     <label for="email" class="col-sm-3 col-form-label">Rak/Laci</label>
                     <div class="col-sm-9">
                             <select class="form-select form-control" type="text" name="rak"  value="<?= old('rak'); ?>">
@@ -139,42 +190,18 @@
                                 <option <?= old("rak") == 'Rak/laci 8'? 'selected' : 'Rak/laci 8' ?> value="Rak/laci 8">Rak/laci 8</option>
                                 <option <?= old("rak") == 'Rak/laci 9'? 'selected' : 'Rak/laci 9' ?> value="Rak/laci 9">Rak/laci 9</option>
                                 <option <?= old("rak") == 'Rak/laci 10'? 'selected' : 'Rak/laci 10' ?> value="Rak/laci 10">Rak/laci 10</option>
+                                <option <?= old("rak") == 'Lantai'? 'selected' : 'Lantai' ?> value="Lantai">Lantai</option>
                             </select>
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label for="email" class="col-sm-3 col-form-label">Lemari</label>
+                    <label for="email" class="col-sm-3 col-form-label">Urutan (Kiri ke kanan)</label>
                     <div class="col-sm-9">
-                            <select class="form-select form-control" type="text" name="lemari"  value="<?= old('lemari'); ?>">
-                                <!-- harus sesuai dengan urutan enum pada database -->
-                                <option selected>Pilih...</option>
-                                <option <?= old("lemari") == 'Lemari 1'? 'selected' : 'Lemari 1' ?> value="Lemari 1">Lemari 1</option>
-                                <option <?= old("lemari") == 'Lemari 2'? 'selected' : 'Lemari 2' ?> value="Lemari 2">Lemari 2</option>
-                                <option <?= old("lemari") == 'Lemari 3'? 'selected' : 'Lemari 3' ?> value="Lemari 3">Lemari 3</option>
-                                <option <?= old("lemari") == 'Lemari 4'? 'selected' : 'Lemari 4' ?> value="Lemari 4">Lemari 4</option>
-                                <option <?= old("lemari") == 'Lemari 5'? 'selected' : 'Lemari 5' ?> value="Lemari 5">Lemari 5</option>
-                                <option <?= old("lemari") == 'Lemari 6'? 'selected' : 'Lemari 6' ?> value="Lemari 6">Lemari 6</option>
-                                <option <?= old("lemari") == 'Lemari 7'? 'selected' : 'Lemari 7' ?> value="Lemari 7">Lemari 7</option>
-                                <option <?= old("lemari") == 'Lemari 8'? 'selected' : 'Lemari 8' ?> value="Lemari 8">Lemari 8</option>
-                                <option <?= old("lemari") == 'Lemari 9'? 'selected' : 'Lemari 9' ?> value="Lemari 9">Lemari 9</option>
-                                <option <?= old("lemari") == 'Lemari 10'? 'selected' : 'Lemari 10' ?> value="Lemari 10">Lemari 10</option>
-                            </select>
+                        <input type="text" class="form-control" placeholder="6" name="urutan" value="<?= old('urutan'); ?>">
                     </div>
                 </div>
-                <div class="row mb-3">
-                    <label for="email" class="col-sm-3 col-form-label">Lokasi</label>
-                    <div class="col-sm-9">
-                            <select class="form-select form-control" type="text" name="lokasi"  value="<?= old('lokasi'); ?>">
-                                <!-- harus sesuai dengan urutan enum pada database -->
-                                <option selected>Pilih Lokasi Koleksi</option>
-                                <option <?= old("lokasi") == 'Gudang Koleksi Museum NTB'? 'selected' : 'Gudang Koleksi Museum NTB' ?> value="Gudang Koleksi Museum NTB">Gudang Koleksi Museum NTB</option>
-                                <option <?= old("lokasi") == 'Gudang Atas Ruang TU'? 'selected' : 'Gudang Atas Ruang TU' ?> value="Gudang Atas Ruang TU">Gudang Atas Ruang TU</option>
-                                <option <?= old("lokasi") == 'Gudang Belakang Museum NTB'? 'selected' : 'Gudang Belakang Museum NTB' ?> value="Gudang Belakang Museum NTB">Gudang Belakang Museum NTB</option>
-                                <option <?= old("lokasi") == 'Ruang Pameran Tetap Museum NTB'? 'selected' : 'Ruang Pameran Tetap Museum NTB' ?> value="Ruang Pameran Tetap Museum NTB">Ruang Pameran Tetap Museum NTB</option>
-                                <option <?= old("lokasi") == 'Area/Halaman Museum NTB'? 'selected' : 'Area/Halaman Museum NTB' ?> value="Area/Halaman Museum NTB">Area/Halaman Museum NTB</option>
-                            </select>
-                    </div>
-                </div>
+                
+                
                 <div class="row mb-3">
                     <label for="email" class="col-sm-3 col-form-label">Harga Perolehan</label>
                     <div class="col-sm-9">
@@ -219,6 +246,12 @@
                     </div>
                 </div>
                 <div class="row mb-3">
+                    <label for="sumber" class="col-sm-3 col-form-label">Fotografer</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="" name="fotografer" value="<?= old('fotografer'); ?>">
+                    </div>
+                </div>
+                <div class="row mb-3">
                     <label for="sumber" class="col-sm-3 col-form-label">Sumber Data</label>
                     <div class="col-sm-9">
                         <input type="text" class="form-control" placeholder="" name="sumber" value="<?= old('sumber'); ?>">
@@ -236,6 +269,12 @@
                                 <option <?= old("status") == 'Disclaimer'? 'selected' : 'Disclaimer' ?> value="Disclaimer">Disclaimer</option>
                             </select>
                         </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="sumber" class="col-sm-3 col-form-label">Kode Lembar Kerja</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="" name="kode_lk" value="<?= old('kode_lk'); ?>">
+                    </div>
                 </div>
                 
                 <div class="d-flex justify-content-end">

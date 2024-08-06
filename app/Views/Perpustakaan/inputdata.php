@@ -104,8 +104,9 @@
                         <select class="form-select form-control" type="text" name="tampilkan"  value="<?= old('tampilkan'); ?>">
                                     <!-- harus sesuai dengan urutan enum pada database -->
                             <option selected>Pilih  </option>
-                            <option <?= old("tampilkan") == 'Tampilkan Buku'? 'selected' : 'Tampilkan Buku' ?> value="Tampilkan Buku">Tampilkan Buku</option>
-                            <option <?= old("tampilkan") == 'Sembunyikan'? 'selected' : 'Sembunyikan' ?> value="Sembunyikan">Sembunyikan</option>
+                            <option <?= old("tampilkan") == 'Tampilkan Sebagai Buku Rekomendasi'? 'selected' : 'Tampilkan Sebagai Buku Rekomendasi' ?> value="Tampilkan Sebagai Buku Rekomendasi">Tampilkan Sebagai Buku Rekomendasi</option>
+                            <option <?= old("tampilkan") == 'Tampilkan Sebagai Buku Favorit'? 'selected' : 'Tampilkan Sebagai Buku Favorit' ?> value="Tampilkan Sebagai Buku Favorit">Tampilkan Sebagai Buku Favorit</option>
+                            <option <?= old("tampilkan") == 'Tampilkan Sebagai Katalog'? 'selected' : 'Tampilkan Sebagai Katalog' ?> value="Tampilkan Sebagai Katalog">Tampilkan Sebagai Katalog</option>
                             
                         </select>
                     </div>
@@ -326,8 +327,9 @@
                                 <select class="form-select form-control" type="text" name="tampilkan"  value="<?= $buku['tampilkan']; ?>">
                                             <!-- harus sesuai dengan urutan enum pada database -->
                                     <option selected>Pilih </option>
-                                    <option <?= $buku['tampilkan'] == 'Tampilkan Buku'? 'selected' : 'Tampilkan Buku' ?> value="Tampilkan Buku">Tampilkan Buku</option>
-                                    <option <?= $buku['tampilkan'] == 'Sembunyikan'? 'selected' : 'Sembunyikan' ?> value="Sembunyikan">Sembunyikan</option>
+                                    <option <?= $buku['tampilkan'] == 'Tampilkan Sebagai Buku Rekomendasi'? 'selected' : 'Tampilkan Sebagai Buku Rekomendasi' ?> value="Tampilkan Sebagai Buku Rekomendasi">Tampilkan Sebagai Buku Rekomendasi</option>
+                                    <option <?= $buku['tampilkan'] == 'Tampilkan Sebagai Buku Favorit'? 'selected' : 'Tampilkan Sebagai Buku Favorit' ?> value="Tampilkan Sebagai Buku Favorit">Tampilkan Sebagai Buku Favorit</option>
+                                    <option <?= $buku['tampilkan'] == 'Tampilkan Sebagai Katalog'? 'selected' : 'Tampilkan Sebagai Katalog' ?> value="Tampilkan Sebagai Katalog">Tampilkan Sebagai Katalog</option>
                                     
                                 </select>
                             </div>

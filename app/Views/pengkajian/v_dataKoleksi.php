@@ -17,6 +17,7 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" >
                     <thead style="text-align: center; font-size: 10pt;">
                         <tr>
+                            <th style="text-align: center;">Kode Lembar Kerja</th>
                             <th style="text-align: center;">No Inventarisasi</th>
                             <th style="text-align: center;">No Registrasi</th>
                             <th style="text-align: center;">Gambar</th> 
@@ -32,6 +33,7 @@
                             $no=1;
                             foreach($data_koleksi as $k): ?>
                         <tr>
+                            <td style="text-align: center;"><?= $k['kode_lk']; ?></td> 
                             <td style="text-align: center;"><?= $k['kode_kategori']; ?> . <?= $k['no_inventaris']; ?></td> 
                             <td style="text-align: center;"><?= $k['no_registrasi']; ?></td>
                             <td style="text-align: center;"><img src="<?= base_url("img/koleksi/". $k['gambar']); ?>" alt="" width="100px"></td>

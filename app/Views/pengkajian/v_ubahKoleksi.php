@@ -127,7 +127,61 @@
                             </select>
                         </div>
                 </div>
-                
+                <div class="row mb-3">
+                    <label for="email" class="col-sm-2 col-form-label">Lokasi</label>
+                    <div class="col-sm-10">
+                            <select class="form-select form-control" type="text" name="lokasi" value="<?= $data_koleksi['lokasi']; ?>">
+                                <!-- harus sesuai dengan urutan enum pada database -->
+                                <option selected>Pilih Lokasi Koleksi</option>
+                                <option <?= $data_koleksi['lokasi'] == 'Gudang Koleksi Museum NTB'? 'selected' : 'Gudang Koleksi Museum NTB' ?> value="Gudang Koleksi Museum NTB">Gudang Koleksi Museum NTB</option>
+                                <option <?= $data_koleksi['lokasi'] == 'Gudang Atas Ruang TU'? 'selected' : 'Gudang Atas Ruang TU' ?> value="Gudang Atas Ruang TU">Gudang Atas Ruang TU</option>
+                                <option <?= $data_koleksi['lokasi'] == 'Gudang Belakang Museum NTB'? 'selected' : 'Gudang Belakang Museum NTB' ?> value="Gudang Belakang Museum NTB">Gudang Belakang Museum NTB</option>
+                                <option <?= $data_koleksi['lokasi'] == 'Ruang Pameran Tetap Museum NTB'? 'selected' : 'Ruang Pameran Tetap Museum NTB' ?> value="Ruang Pameran Tetap Museum NTB">Ruang Pameran Tetap Museum NTB</option>
+                                <option <?= $data_koleksi['lokasi'] == 'Area/Halaman Museum NTB'? 'selected' : 'Area/Halaman Museum NTB' ?> value="Area/Halaman Museum NTB">Area/Halaman Museum NTB</option>
+                            </select>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label for="email" class="col-sm-2 col-form-label">Zona</label>
+                    <div class="col-sm-10">
+                            <select class="form-select form-control" type="text" name="zona" value="<?= $data_koleksi['zona']; ?>">
+                                <!-- harus sesuai dengan urutan enum pada database -->
+                                <option selected>Pilih...</option>
+                                <option <?= $data_koleksi['zona'] == 'Zona A (Meja Besar)'? 'selected' : 'Zona A (Meja Besar)' ?> value="Zona A Meja Besar">Zona A Meja Besar</option>
+                                <option <?= $data_koleksi['zona'] == 'Zona B (Senjata)'? 'selected' : 'Zona B (Senjata)' ?> value="Zona B (Senjata)">Zona B (Senjata)</option>
+                                <option <?= $data_koleksi['zona'] == 'Zona C (Wayang)'? 'selected' : 'Zona C (Wayang)' ?> value="Zona C (Wayang)">Zona C (Wayang)</option>
+                                <option <?= $data_koleksi['zona'] == 'Zona D (Naskah)'? 'selected' : 'Zona D (Naskah)' ?> value="Zona D (Naskah)">Zona D (Naskah)</option>
+                                <option <?= $data_koleksi['zona'] == 'Zona E (Etnografika)'? 'selected' : 'Zona E (Etnografika)' ?> value="Zona E (Etnografika)">Zona E (Etnografika)</option>
+                                <option <?= $data_koleksi['zona'] == 'Zona F (Etnografika, Arkeologika, Geologika, Biologika)'? 'selected' : 'Zona F (Etnografika, Arkeologika, Geologika, Biologika)' ?> value="Zona F (Etnografika, Arkeologika, Geologika, Biologika)">Zona F (Etnografika, Arkeologika, Geologika, Biologika)</option>
+                                <option <?= $data_koleksi['zona'] == 'Zona G (Keramik, Gerabah)'? 'selected' : 'Zona G (Keramik, Gerabah)' ?> value="Zona G (Keramik, Gerabah)">Zona G (Keramik, Gerabah)</option>
+                                <option <?= $data_koleksi['zona'] == 'Zona H (Kain)'? 'selected' : 'Zona H (Kain)' ?> value="Zona H (Kain)">Zona H (Kain)</option>
+                                <option <?= $data_koleksi['zona'] == 'Zona I (Etnografika)'? 'selected' : 'Zona I (Etnografika)' ?> value="Zona I (Etnografika)">Zona I (Etnografika)</option>
+                               
+                            </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="email" class="col-sm-2 col-form-label">Lemari</label>
+                    <div class="col-sm-10">
+                            <select class="form-select form-control" type="text" name="lemari" value="<?= $data_koleksi['lemari']; ?>">
+                                <!-- harus sesuai dengan urutan enum pada database -->
+                                <option selected> </option>
+                                <option <?= $data_koleksi['lemari'] == 'Lemari 1'? 'selected' : 'Lemari 1' ?> value="Lemari 1">Lemari 1</option>
+                                <option <?= $data_koleksi['lemari'] == 'Lemari 2'? 'selected' : 'Lemari 2' ?> value="Lemari 2">Lemari 2</option>
+                                <option <?= $data_koleksi['lemari'] == 'Lemari 3'? 'selected' : 'Lemari 3' ?> value="Lemari 3">Lemari 3</option>
+                                <option <?= $data_koleksi['lemari'] == 'Lemari 4'? 'selected' : 'Lemari 4' ?> value="Lemari 4">Lemari 4</option>
+                                <option <?= $data_koleksi['lemari'] == 'Lemari 5'? 'selected' : 'Lemari 5' ?> value="Lemari 5">Lemari 5</option>
+                                <option <?= $data_koleksi['lemari'] == 'Lemari 6'? 'selected' : 'Lemari 6' ?> value="Lemari 6">Lemari 6</option>
+                                <option <?= $data_koleksi['lemari'] == 'Lemari 7'? 'selected' : 'Lemari 7' ?> value="Lemari 7">Lemari 7</option>
+                                <option <?= $data_koleksi['lemari'] == 'Lemari 8'? 'selected' : 'Lemari 8' ?> value="Lemari 8">Lemari 8</option>
+                                <option <?= $data_koleksi['lemari'] == 'Lemari 9'? 'selected' : 'Lemari 9' ?> value="Lemari 9">Lemari 9</option>
+                                <option <?= $data_koleksi['lemari'] == 'Lemari 10'? 'selected' : 'Lemari 10' ?> value="Lemari 10">Lemari 10</option>
+                               
+                                
+                            </select>
+                    </div>
+                </div>
                 <div class="row mb-3">
                     <label for="email" class="col-sm-2 col-form-label">Rak/Laci</label>
                     <div class="col-sm-10">
@@ -144,41 +198,17 @@
                                 <option <?= $data_koleksi['rak'] == 'Rak/Laci 8'? 'selected' : 'Rak/Laci 8' ?> value="Rak/Laci 8">Rak/Laci 8</option>
                                 <option <?= $data_koleksi['rak'] == 'Rak/Laci 9'? 'selected' : 'Rak/Laci 9' ?> value="Rak/Laci 9">Rak/Laci 9</option>
                                 <option <?= $data_koleksi['rak'] == 'Rak/Laci 10'? 'selected' : 'Rak/Laci 10' ?> value="Rak/Laci 10">Rak/Laci 10</option>
+                                <option <?= $data_koleksi['rak'] == 'Lantai'? 'selected' : 'Lantai' ?> value="Lantai">Lantai</option>
                                 
                             </select>
                     </div>
                 </div>
+                
+                
                 <div class="row mb-3">
-                    <label for="email" class="col-sm-2 col-form-label">Lemari</label>
+                    <label for="email" class="col-sm-2 col-form-label">Urutan (Kiri ke Kanan)</label>
                     <div class="col-sm-10">
-                            <select class="form-select form-control" type="text" name="lemari" value="<?= $data_koleksi['lemari']; ?>">
-                                <!-- harus sesuai dengan urutan enum pada database -->
-                                <option selected>Pilih...</option>
-                                <option <?= $data_koleksi['lemari'] == 'Lemari 1'? 'selected' : 'Lemari 1' ?> value="Lemari 1">Lemari 1</option>
-                                <option <?= $data_koleksi['lemari'] == 'Lemari 2'? 'selected' : 'Lemari 2' ?> value="Lemari 2">Lemari 2</option>
-                                <option <?= $data_koleksi['lemari'] == 'Lemari 3'? 'selected' : 'Lemari 3' ?> value="Lemari 3">Lemari 3</option>
-                                <option <?= $data_koleksi['lemari'] == 'Lemari 4'? 'selected' : 'Lemari 4' ?> value="Lemari 4">Lemari 4</option>
-                                <option <?= $data_koleksi['lemari'] == 'Lemari 5'? 'selected' : 'Lemari 5' ?> value="Lemari 5">Lemari 5</option>
-                                <option <?= $data_koleksi['lemari'] == 'Lemari 6'? 'selected' : 'Lemari 6' ?> value="Lemari 6">Lemari 6</option>
-                                <option <?= $data_koleksi['lemari'] == 'Lemari 7'? 'selected' : 'Lemari 7' ?> value="Lemari 7">Lemari 7</option>
-                                <option <?= $data_koleksi['lemari'] == 'Lemari 8'? 'selected' : 'Lemari 8' ?> value="Lemari 8">Lemari 8</option>
-                                <option <?= $data_koleksi['lemari'] == 'Lemari 9'? 'selected' : 'Lemari 9' ?> value="Lemari 9">Lemari 9</option>
-                                <option <?= $data_koleksi['lemari'] == 'Lemari 10'? 'selected' : 'Lemari 10' ?> value="Lemari 10">Lemari 10</option>
-                            </select>
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <label for="email" class="col-sm-2 col-form-label">Lokasi</label>
-                    <div class="col-sm-10">
-                            <select class="form-select form-control" type="text" name="lokasi" value="<?= $data_koleksi['lokasi']; ?>">
-                                <!-- harus sesuai dengan urutan enum pada database -->
-                                <option selected>Pilih Lokasi Koleksi</option>
-                                <option <?= $data_koleksi['lokasi'] == 'Gudang Koleksi Museum NTB'? 'selected' : 'Gudang Koleksi Museum NTB' ?> value="Gudang Koleksi Museum NTB">Gudang Koleksi Museum NTB</option>
-                                <option <?= $data_koleksi['lokasi'] == 'Gudang Atas Ruang TU'? 'selected' : 'Gudang Atas Ruang TU' ?> value="Gudang Atas Ruang TU">Gudang Atas Ruang TU</option>
-                                <option <?= $data_koleksi['lokasi'] == 'Gudang Belakang Museum NTB'? 'selected' : 'Gudang Belakang Museum NTB' ?> value="Gudang Belakang Museum NTB">Gudang Belakang Museum NTB</option>
-                                <option <?= $data_koleksi['lokasi'] == 'Ruang Pameran Tetap Museum NTB'? 'selected' : 'Ruang Pameran Tetap Museum NTB' ?> value="Ruang Pameran Tetap Museum NTB">Ruang Pameran Tetap Museum NTB</option>
-                                <option <?= $data_koleksi['lokasi'] == 'Area/Halaman Museum NTB'? 'selected' : 'Area/Halaman Museum NTB' ?> value="Area/Halaman Museum NTB">Area/Halaman Museum NTB</option>
-                            </select>
+                        <input type="text" class="form-control" name="urutan" value="<?= $data_koleksi['urutan']; ?>">
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -239,6 +269,12 @@
                     </div>
                 </div>
                 <div class="row mb-3">
+                    <label for="email" class="col-sm-2 col-form-label">Fotgrafer</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="fotografer" value="<?= $data_koleksi['fotografer']; ?>">
+                    </div>
+                </div>
+                <div class="row mb-3">
                     <label for="email" class="col-sm-2 col-form-label">Sumber Data</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" name="sumber" value="<?= $data_koleksi['sumber']; ?>">
@@ -257,6 +293,12 @@
                                 <option <?= $data_koleksi['status'] == 'Disclaimer'? 'selected' : 'Disclaimer' ?> value="Disclaimer">Disclaimer</option>
                             </select>
                         </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="email" class="col-sm-2 col-form-label">Kode Lembar Kerja</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="kode_lk" value="<?= $data_koleksi['kode_lk']; ?>">
+                    </div>
                 </div>
 
                 

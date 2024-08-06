@@ -22,6 +22,10 @@ class M_Perpustakaan extends Model
     public function getBuku($id_buku){
         return $this->find($id_buku);
     }
+    public function getBukuRekomendasi($tampilkan){
+        return $this->where('tampilkan', $tampilkan)->findAll();
+        
+    }
 
    
     

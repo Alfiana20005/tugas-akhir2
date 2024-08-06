@@ -440,9 +440,13 @@ class C_LandingPage extends BaseController
     public function perpustakaan2(): string
     {
         $data_buku = $this->M_Perpustakaan->findAll();
+        $buku_rekomendasi = $this->M_Perpustakaan->getBukuRekomendasi('Tampilkan Sebagai Buku Rekomendasi');
+        $buku_favorit = $this->M_Perpustakaan->getBukuRekomendasi('Tampilkan Sebagai Buku Favorit');
         
         $data =[
             'data_buku' => $data_buku,
+            'buku_rekomendasi' => $buku_rekomendasi,
+            'buku_favorit' => $buku_favorit,
             'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
             'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
             'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
