@@ -64,7 +64,7 @@
                 <div class="row mb-3">
                     <label for="name" class="col-sm-3 col-form-label">Nama Benda</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" placeholder="contoh: Keris" name="nama_inv" value="<?= old('nama_inv'); ?>">
+                        <input type="text" class="form-control" placeholder="" name="nama_inv" value="<?= old('nama_inv'); ?>">
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -76,13 +76,14 @@
                 <div class="row mb-3">
                     <label for="username" class="col-sm-3 col-form-label">Usia Benda</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" placeholder="900 tahun" name="usia" value="<?= old('usia'); ?>">
+                        <input type="text" class="form-control" placeholder="" name="usia" value="<?= old('usia'); ?>">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label for="username" class="col-sm-3 col-form-label">Ukuran</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" placeholder="contoh: Panjang: 20 cm, lebar: 5 cm" name="ukuran" value="<?= old('ukuran'); ?>">
+                    <textarea type="text" class="form-control"  name="ukuran" value="<?= old('ukuran'); ?>"></textarea>
+                        <!-- <input type="text" class="form-control" placeholder="contoh: Panjang: 20 cm, lebar: 5 cm" name="ukuran" value="<?= old('ukuran'); ?>"> -->
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -197,7 +198,7 @@
                 <div class="row mb-3">
                     <label for="email" class="col-sm-3 col-form-label">Urutan (Kiri ke kanan)</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" placeholder="6" name="urutan" value="<?= old('urutan'); ?>">
+                        <input type="text" class="form-control" placeholder="" name="urutan" value="<?= old('urutan'); ?>">
                     </div>
                 </div>
                 
@@ -223,14 +224,17 @@
                 <div class="row mb-3">
                     <label for="email" class="col-sm-3 col-form-label">Keterangan</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" placeholder="contoh: Pengadaan koleksi" name="keterangan" value="<?= old('keterangan'); ?>">
+                        <!-- <input type="text" class="form-control" placeholder="contoh: Pengadaan koleksi" name="keterangan" value="<?= old('keterangan'); ?>"> -->
+                        <textarea type="text" class="form-control" name="keterangan" value="<?= old('keterangan'); ?>"></textarea>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label for="email" class="col-sm-3 col-form-label">Uraian</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" placeholder="contoh: Sebuah keris ..." name="uraian" value="<?= old('uraian'); ?>">
+                        <!-- <input type="text" class="form-control" placeholder="contoh: Sebuah keris ..." name="uraian" value="<?= old('uraian'); ?>"> -->
+                        <textarea type="text" class="form-control"  name="uraian" value="<?= old('uraian'); ?>"></textarea>
                     </div>
+                    
                 </div>
                 <div class="row mb-3">
                     <label for="foto" class="col-sm-3 col-form-label">Gambar</label>

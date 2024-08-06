@@ -85,7 +85,8 @@
                 <div class="row mb-3">
                     <label for="username" class="col-sm-2 col-form-label">Ukuran</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="ukuran" value="<?= $data_koleksi['ukuran']; ?>">
+                        <textarea type="text" class="form-control"  name="ukuran" value="<?= $data_koleksi['ukuran']; ?>"><?= $data_koleksi['ukuran']; ?></textarea>
+                        <!-- <input type="text" class="form-control" name="ukuran" value="<?= $data_koleksi['ukuran']; ?>"> -->
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -208,6 +209,7 @@
                 <div class="row mb-3">
                     <label for="email" class="col-sm-2 col-form-label">Urutan (Kiri ke Kanan)</label>
                     <div class="col-sm-10">
+                        
                         <input type="text" class="form-control" name="urutan" value="<?= $data_koleksi['urutan']; ?>">
                     </div>
                 </div>
@@ -244,13 +246,15 @@
                 <div class="row mb-3">
                     <label for="email" class="col-sm-2 col-form-label">Keterangan</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="keterangan" value="<?= $data_koleksi['keterangan']; ?>">
+                        <textarea type="text" class="form-control"  name="keterangan" value="<?= $data_koleksi['keterangan']; ?>"><?= $data_koleksi['keterangan']; ?></textarea>
+                        <!-- <input type="text" class="form-control" name="keterangan" value="<?= $data_koleksi['keterangan']; ?>"> -->
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label for="email" class="col-sm-2 col-form-label">Uraian</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="uraian" value="<?= $data_koleksi['uraian']; ?>">
+                        <textarea type="text" class="form-control"  name="uraian" value="<?= $data_koleksi['uraian']; ?>"><?= $data_koleksi['uraian']; ?></textarea>
+                        <!-- <input type="text" class="form-control" name="uraian" value="<?= $data_koleksi['uraian']; ?>"> -->
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -269,7 +273,7 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label for="email" class="col-sm-2 col-form-label">Fotgrafer</label>
+                    <label for="email" class="col-sm-2 col-form-label">Fotografer</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" name="fotografer" value="<?= $data_koleksi['fotografer']; ?>">
                     </div>
