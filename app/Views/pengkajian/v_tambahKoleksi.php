@@ -82,7 +82,7 @@
                 <div class="row mb-3">
                     <label for="username" class="col-sm-3 col-form-label">Ukuran</label>
                     <div class="col-sm-9">
-                    <textarea type="text" class="form-control"  name="ukuran" value="<?= old('ukuran'); ?>"></textarea>
+                        <textarea type="text" class="form-control"  name="ukuran" value="<?= old('ukuran'); ?>"></textarea>
                         <!-- <input type="text" class="form-control" placeholder="contoh: Panjang: 20 cm, lebar: 5 cm" name="ukuran" value="<?= old('ukuran'); ?>"> -->
                     </div>
                 </div>

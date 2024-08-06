@@ -10,7 +10,7 @@ class M_Koleksi extends Model
     protected $primaryKey = 'id';
     // protected $useTimestamps = true;
 
-    protected $allowedFields = ['rak', 'lemari', 'harga', 'no_registrasi', 'no_inventaris', 'nama_inv','inv_name', 'gambar', 'ukuran', 'tempat_buat', 'tempat_dapat', 'cara_dapat', 'tgl_masuk', 'keadaan', 'lokasi', 'keterangan', 'uraian', 'kode_kategori', 'id_petugas', 'usia','harga_wajar', 'harga_penggantian','sumber','status'];
+    protected $allowedFields = ['kode_lk','fotografer','urutan','zona','rak', 'lemari', 'harga', 'no_registrasi', 'no_inventaris', 'nama_inv','inv_name', 'gambar', 'ukuran', 'tempat_buat', 'tempat_dapat', 'cara_dapat', 'tgl_masuk', 'keadaan', 'lokasi', 'keterangan', 'uraian', 'kode_kategori', 'id_petugas', 'usia','harga_wajar', 'harga_penggantian','sumber','status'];
 
 
     protected $validationMessages = [];
