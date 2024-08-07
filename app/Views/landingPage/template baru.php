@@ -171,8 +171,9 @@
 						</div>							
 						<div class="col-lg-3  col-md-6 col-sm-6">
 							<div class="single-footer-widget">
-								<h6>Total Pengunjung</h6>
-								<p>
+								<h6>Total Pengunjung (1982-Juli 2024)</h6>
+								<h1 class="mb-20" style="color: white;">1.878.543</h1>
+								<!-- <p>
 									Bulan Ini : <?= $totalBulan; ?>									
 								</p>								
 								<p>
@@ -180,7 +181,7 @@
 								</p>								
 								<p>
 									Total Keseluruhan : 	<?= $totalkeseluruhan; ?>								
-								</p>								
+								</p>								 -->
 								
 							</div>
 						</div>
