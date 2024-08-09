@@ -251,9 +251,32 @@ class Filters extends BaseConfig
             'filterKepala' =>[
                 'except' => [
                     '/login', 'C_Login/*', '/logout', '/dashboard', '/halamanLogin', 'C_Login', 
+                    'C_Petugas/*', 'C_Petugas/', 'profile/*', '/profile',  '/updateProfile/*', 
+                    '/petugas','/tambahpetugas', '/save', 'hapuspetugas/*', 'ubahpetugas/*', '/updatepetugas/*','/updateProfile/*', '/profile', 'profile/*', 
+                    'C_LandingPage/*', 'C_LandingPage/', 'C_Admin/*', 'C_Admin/', 
+                    '/pesanAdmin', 'hapuspesan/*',
+                    '/beritaAdmin', '/tambahBerita', '/saveBerita', 'hapusberita/*',  'updateBerita/*',
+                    '/tambahKegiatan', '/saveKegiatan', 'hapusKegiatan/*', 'updateKegiatan/*',
+                    '/tambahPublikasi', '/savePublikasi', 'hapusPublikasi/*', 'updatePublikasi/*',
+                    '/koleksiAdmin', '/saveKoleksi', 'hapusKoleksiAdmin/*', 'updateKoleksiAdmin/*',
+                    '/galleryAdmin', '/saveGallery', 'hapusGallery/*', 'updateGallery/*',
+                    '/saveKajian', '/kajianAdmin', 
+                    '/tulisKajian', '/addSection', '/tulisKajian/*', '/saveIsiKajian', '/tulisKajian/*', 'hapusKajian/*', '/previewKajian/*',
+                    '/petugasMuseum', '/strukturOrganisasi', 'hapusOrganisasi/*', '/updateKaryawan/*',
+
                     '/petugas', '/statistik',  'profile/*', '/updateProfile/*', 'C_Petugas/*', '/profile',
-                    '/koleksi/*', '/detailKoleksi', '/detailKoleksi/*',
-                    '/perawatan', '/dataPerawatan/*', 'detailJadwal/*',
+                    'C_Pengunjung/*', 'C_Pengunjung/',  'profile/*', '/updateProfile/*', 'C_Petugas/*', '/profile', 'ubahpetugas/*', '/updatepetugas/*',
+                    '/tambahPengunjung', '/pengunjung','/rekapitulasi', 'deleteData/*',
+                    '/statistik', '/print', 
+                    'C_Koleksi/*', 'C_Koleksi/',  'profile/*', '/updateProfile/*', 'C_Petugas/*', '/profile','ubahpetugas/*', '/updatepetugas/*',
+                    '/tambahdata','/saveData','/detailKoleksi', '/detailKoleksi/*','hapus/*', 'ubahKoleksi/*', '/seluruhKoleksi',
+                    '/updateKoleksi/*', '/koleksi/*', '/updateKeadaan', '/terakhirDiubah/*',
+                    '/grafikKoleksi',
+                    'C_Perawatan/*', 'C_Perawatan/',
+                    '/dataPerawatan/*', '/tambahPerawatan/*', '/perawatanKuratif', '/perawatanPreventif', '/perawatanRestorasi', '/savePerawatanPreventif',
+                    '/savePerawatanKuratif','deletePerawatan2/*', '/updatePerawatan/*', '/savePerawatanRestorasi',
+                    '/simpanPerawatan/*', '/simpanPerawatan','/perawatan', '/tambahJadwal','/simpanJadwal', 
+                    'detailJadwal/*', '/updateStatus', 'deleteJadwal/*', '/laporan', 
                     
 
                  ]

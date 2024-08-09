@@ -221,21 +221,85 @@
 
     <?php if (session()->get('level') == 'Kepala Museum'): ?>
     <!-- <hr class="sidebar-divider my-0"> -->
+     
     <li class="nav-item">
         <a class="nav-link" href="/petugas">
             <i class="fas fa-fw fa-users"></i>
-            <span>Data Petugas</span></a>
+            <span>Daftar Hak Akses Petugas</span></a>
     </li>
+
+    <div class="sidebar-heading mt-3">
+        Landing Page
+    </div>
+    <li class="nav-item">
+        <a class="nav-link" href="/strukturOrganisasi">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Struktur Organisasi</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/koleksiAdmin">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Koleksi</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/kajianAdmin">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Kajian</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/tambahPublikasi">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Publikasi</span></a>
+    </li>
+    
+    <li class="nav-item">
+        <a class="nav-link" href="/beritaAdmin">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Berita</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/tambahKegiatan">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Kegiatan</span></a>
+    </li>
+    
+    <li class="nav-item">
+        <a class="nav-link" href="/pesanAdmin">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Pesan</span></a>
+    </li>
+    
+    <li class="nav-item">
+        <a class="nav-link" href="/galleryAdmin">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Galeri</span></a>
+    </li>
+    <!-- <li class="nav-item">
+        <a class="nav-link" href="/petugas">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Data Petugas</span></a>
+    </li> -->
+    <div class="sidebar-heading mt-3">
+        Pengunjung
+    </div>
     <li class="nav-item">
         <a class="nav-link" href="/statistik">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Statistik Pengunjung</span></a>
     </li>
+    <div class="sidebar-heading mt-3">
+        Koleksi
+    </div>
+    <li class="nav-item">
+        <a class="nav-link" href="/seluruhKoleksi">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Seluruh Koleksi</span></a>
+    </li>
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
             aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-fw fa-cog"></i>
-            <span>Koleksi</span>
+            <span>Inventaris Koleksi</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
