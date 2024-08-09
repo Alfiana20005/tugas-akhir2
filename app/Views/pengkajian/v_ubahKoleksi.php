@@ -148,8 +148,8 @@
                     <div class="col-sm-10">
                             <select class="form-select form-control" type="text" name="zona" value="<?= $data_koleksi['zona']; ?>">
                                 <!-- harus sesuai dengan urutan enum pada database -->
-                                <option selected>Pilih...</option>
-                                <option <?= $data_koleksi['zona'] == 'Zona A (Meja Besar)'? 'selected' : 'Zona A (Meja Besar)' ?> value="Zona A Meja Besar">Zona A Meja Besar</option>
+                                <option selected></option>
+                                <option <?= $data_koleksi['zona'] == 'Zona A (Meja Besar)'? 'selected' : 'Zona A (Meja Besar)' ?> value="Zona A (Meja Besar)">Zona A (Meja Besar)</option>
                                 <option <?= $data_koleksi['zona'] == 'Zona B (Senjata)'? 'selected' : 'Zona B (Senjata)' ?> value="Zona B (Senjata)">Zona B (Senjata)</option>
                                 <option <?= $data_koleksi['zona'] == 'Zona C (Wayang)'? 'selected' : 'Zona C (Wayang)' ?> value="Zona C (Wayang)">Zona C (Wayang)</option>
                                 <option <?= $data_koleksi['zona'] == 'Zona D (Naskah)'? 'selected' : 'Zona D (Naskah)' ?> value="Zona D (Naskah)">Zona D (Naskah)</option>

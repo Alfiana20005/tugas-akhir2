@@ -181,16 +181,16 @@
                             <select class="form-select form-control" type="text" name="rak"  value="<?= old('rak'); ?>">
                                 <!-- harus sesuai dengan urutan enum pada database -->
                                 <option selected> </option>
-                                <option <?= old("rak") == 'Rak/Laci 1'? 'selected' : 'Rak/laci 1' ?> value="Rak/laci 1">Rak/laci 1</option>
-                                <option <?= old("rak") == 'Rak/laci 2'? 'selected' : 'Rak/laci 2' ?> value="Rak/laci 2">Rak/laci 2</option>
-                                <option <?= old("rak") == 'Rak/laci 3'? 'selected' : 'Rak/laci 3' ?> value="Rak/laci 3">Rak/laci 3</option>
-                                <option <?= old("rak") == 'Rak/laci 4'? 'selected' : 'Rak/laci 4' ?> value="Rak/laci 4">Rak/laci 4</option>
-                                <option <?= old("rak") == 'Rak/laci 5'? 'selected' : 'Rak/laci 5' ?> value="Rak/laci 5">Rak/laci 5</option>
-                                <option <?= old("rak") == 'Rak/laci 6'? 'selected' : 'Rak/laci 6' ?> value="Rak/laci 6">Rak/laci 6</option>
-                                <option <?= old("rak") == 'Rak/laci 7'? 'selected' : 'Rak/laci 7' ?> value="Rak/laci 7">Rak/laci 7</option>
-                                <option <?= old("rak") == 'Rak/laci 8'? 'selected' : 'Rak/laci 8' ?> value="Rak/laci 8">Rak/laci 8</option>
-                                <option <?= old("rak") == 'Rak/laci 9'? 'selected' : 'Rak/laci 9' ?> value="Rak/laci 9">Rak/laci 9</option>
-                                <option <?= old("rak") == 'Rak/laci 10'? 'selected' : 'Rak/laci 10' ?> value="Rak/laci 10">Rak/laci 10</option>
+                                <option <?= old("rak") == 'Rak/Laci 1'? 'selected' : 'Rak/Laci 1' ?> value="Rak/Laci 1">Rak/Laci 1</option>
+                                <option <?= old("rak") == 'Rak/Laci 2'? 'selected' : 'Rak/Laci 2' ?> value="Rak/Laci 2">Rak/Laci 2</option>
+                                <option <?= old("rak") == 'Rak/Laci 3'? 'selected' : 'Rak/Laci 3' ?> value="Rak/Laci 3">Rak/Laci 3</option>
+                                <option <?= old("rak") == 'Rak/Laci 4'? 'selected' : 'Rak/Laci 4' ?> value="Rak/Laci 4">Rak/Laci 4</option>
+                                <option <?= old("rak") == 'Rak/Laci 5'? 'selected' : 'Rak/Laci 5' ?> value="Rak/Laci 5">Rak/Laci 5</option>
+                                <option <?= old("rak") == 'Rak/Laci 6'? 'selected' : 'Rak/Laci 6' ?> value="Rak/Laci 6">Rak/Laci 6</option>
+                                <option <?= old("rak") == 'Rak/Laci 7'? 'selected' : 'Rak/Laci 7' ?> value="Rak/Laci 7">Rak/Laci 7</option>
+                                <option <?= old("rak") == 'Rak/Laci 8'? 'selected' : 'Rak/Laci 8' ?> value="Rak/Laci 8">Rak/Laci 8</option>
+                                <option <?= old("rak") == 'Rak/Laci 9'? 'selected' : 'Rak/Laci 9' ?> value="Rak/Laci 9">Rak/Laci 9</option>
+                                <option <?= old("rak") == 'Rak/Laci 10'? 'selected' : 'Rak/Laci 10' ?> value="Rak/Laci 10">Rak/Laci 10</option>
                                 <option <?= old("rak") == 'Lantai'? 'selected' : 'Lantai' ?> value="Lantai">Lantai</option>
                             </select>
                     </div>
