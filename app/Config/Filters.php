@@ -277,6 +277,8 @@ class Filters extends BaseConfig
                     '/savePerawatanKuratif','deletePerawatan2/*', '/updatePerawatan/*', '/savePerawatanRestorasi',
                     '/simpanPerawatan/*', '/simpanPerawatan','/perawatan', '/tambahJadwal','/simpanJadwal', 
                     'detailJadwal/*', '/updateStatus', 'deleteJadwal/*', '/laporan', 
+                    'C_Perpustakaan/','C_Perpustakaan/*','/inputData', '/saveDataBuku', 'deleteBuku/*', '/updateBuku/*',
+
                     
 
                  ]

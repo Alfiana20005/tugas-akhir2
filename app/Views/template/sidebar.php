@@ -324,6 +324,16 @@
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Perawatan</span></a>
     </li>
+
+    <div class="sidebar-heading mt-3">
+        Perpustakaan
+    </div>
+
+    <li class="nav-item">
+        <a class="nav-link" href="/inputData">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Data Buku</span></a>
+    </li>
     <!-- <hr class="sidebar-divider"> -->
     <?php endif; ?>
 
@@ -507,6 +517,8 @@
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Statistik</span></a>
     </li>
+
+    
 
 
     <?php endif; ?>
