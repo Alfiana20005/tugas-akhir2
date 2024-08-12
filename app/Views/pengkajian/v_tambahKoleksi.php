@@ -191,6 +191,8 @@
                                 <option <?= old("rak") == 'Rak/Laci 8'? 'selected' : 'Rak/Laci 8' ?> value="Rak/Laci 8">Rak/Laci 8</option>
                                 <option <?= old("rak") == 'Rak/Laci 9'? 'selected' : 'Rak/Laci 9' ?> value="Rak/Laci 9">Rak/Laci 9</option>
                                 <option <?= old("rak") == 'Rak/Laci 10'? 'selected' : 'Rak/Laci 10' ?> value="Rak/Laci 10">Rak/Laci 10</option>
+                                <option <?= old("rak") == 'Rak/Laci 11'? 'selected' : 'Rak/Laci 11' ?> value="Rak/Laci 10">Rak/Laci 11</option>
+                                <option <?= old("rak") == 'Rak/Laci 12'? 'selected' : 'Rak/Laci 12' ?> value="Rak/Laci 10">Rak/Laci 12</option>
                                 <option <?= old("rak") == 'Lantai'? 'selected' : 'Lantai' ?> value="Lantai">Lantai</option>
                             </select>
                     </div>
