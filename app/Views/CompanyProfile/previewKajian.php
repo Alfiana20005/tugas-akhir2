@@ -79,7 +79,7 @@
 									<h3 class="mt-20 mb-20"><?= $kajian['judul']; ?></h3>
 									<p ><?= $kajian['created_at']; ?></p>
                                     <?php 
-                                    foreach($isiKajian as $data):
+                                    	foreach($isiKajian as $data):
                                     ?>
 									<?php
 									
@@ -103,7 +103,7 @@
 									<!-- <p class="excert " ><?= nl2p($data['narasi']); ?></p> -->
 									<?= $content=$data['narasi']; ?>
                                     <div class="d-flex align-items-center justify-content-center my-4"> 
-                                        <img src="<?= base_url("img/kajian/". $data['foto']); ?>" class="img-fluid" alt="" style="width: 300px; ">
+                                        <img src="<?= base_url("img/kajian/". $data['foto']); ?>" class="img-fluid" alt="" style="width: auto; ">
                                     </div>
 									<?php endforeach; ?>
 								</div>

@@ -25,7 +25,7 @@ class C_LandingPage extends BaseController
     protected $M_KoleksiLandingPage;
     protected $M_Gallery;
     protected $M_Kajian;
-    protected $M_IsiKajian;
+    protected $M_Isikajian;
     protected $M_Pesan;
     protected $M_Pengunjung;
     protected $M_SemuaPetugas;
@@ -40,7 +40,7 @@ class C_LandingPage extends BaseController
         $this -> M_KoleksiLandingPage = new M_KoleksiLandingPage();
         $this -> M_Gallery = new M_Gallery();
         $this -> M_Kajian = new M_Kajian();
-        $this -> M_IsiKajian = new M_IsiKajian();
+        $this -> M_Isikajian = new M_Isikajian();
         $this -> M_Pesan = new M_Pesan();
         $this -> M_Pengunjung = new M_Pengunjung();
         $this -> M_SemuaPetugas = new M_SemuaPetugas();
@@ -357,7 +357,7 @@ class C_LandingPage extends BaseController
     {
         $kajian = $this->M_Kajian->getKajian($id_kajian);
         $kajianTerbaru = $this->M_Kajian->getKajianTerbaru(5);
-        $IsiKajian = $this->M_IsiKajian->getDataByIdKajian($id_kajian);
+        $IsiKajian = $this->M_Isikajian->getDataByIdKajian($id_kajian);
 
         // var_dump($berita);
         $data =[
