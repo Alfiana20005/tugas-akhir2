@@ -14,6 +14,7 @@ use App\Models\M_Pesan;
 use App\Models\M_Pengunjung;
 use App\Models\M_SemuaPetugas;
 use App\Models\M_Perpustakaan;
+use App\Models\M_Manuskrip;
 
 class C_LandingPage extends BaseController
 {
@@ -30,6 +31,7 @@ class C_LandingPage extends BaseController
     protected $M_Pengunjung;
     protected $M_SemuaPetugas;
     protected $M_Perpustakaan;
+    protected $M_Manuskrip;
 
     public function __construct() {
         helper('form');
@@ -45,6 +47,7 @@ class C_LandingPage extends BaseController
         $this -> M_Pengunjung = new M_Pengunjung();
         $this -> M_SemuaPetugas = new M_SemuaPetugas();
         $this -> M_Perpustakaan = new M_Perpustakaan();
+        $this -> M_Manuskrip= new M_Manuskrip();
 
     }
 
@@ -440,11 +443,11 @@ class C_LandingPage extends BaseController
     public function manuskrip(): string
     {
 
-        // $publikasi = $this->M_Publikasi->findAll();
+        $manuskrip = $this->M_Manuskrip->findAll();
        
         $data =[
             'title' => 'Terjemahan Manuskrip',
-            
+            'manuskrip' => $manuskrip,
             'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
             'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
             'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),

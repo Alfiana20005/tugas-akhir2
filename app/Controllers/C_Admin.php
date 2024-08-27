@@ -12,6 +12,7 @@ use App\Models\M_Kajian;
 use App\Models\M_Isikajian;
 use App\Models\M_Pesan;
 use App\Models\M_SemuaPetugas;
+use App\Models\M_Manuskrip;
 
 class C_Admin extends BaseController
 {
@@ -26,6 +27,7 @@ class C_Admin extends BaseController
     protected $M_Gallery;
     protected $M_Pesan;
     protected $M_SemuaPetugas;
+    protected $M_Manuskrip;
 
     public function __construct() {
         helper('form');
@@ -39,6 +41,7 @@ class C_Admin extends BaseController
         $this -> M_Isikajian = new M_Isikajian();
         $this -> M_Pesan = new M_Pesan();
         $this -> M_SemuaPetugas = new M_SemuaPetugas();
+        $this -> M_Manuskrip = new M_Manuskrip();
     }
     public function strukturOrganisasi(){
 
@@ -768,6 +771,141 @@ class C_Admin extends BaseController
     
         // Redirect ke halaman sebelumnya atau halaman yang sesuai
         return redirect()->to('/tambahPublikasi');
+    }
+
+    public function dataManuskrip(): string
+    {
+        $data_manuskrip = $this->M_Manuskrip->findAll();
+
+
+        $data =[
+            'title' => 'Daftar Kegiatan',
+            'data_manuskrip' => $data_manuskrip
+        ];
+
+        return view('CompanyProfile/data_manuskrip', $data);
+    }
+    public function saveManuskrip()
+    {
+        //validation
+        $rules= [
+            'judul' => [
+                'rules' => 'required',
+                'errors' => ['required'=>'Judul harus diisi']
+            ],
+            'tanggal' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required'=>'tanggal tidak boleh kosong',
+                    
+    
+                ]
+            ],
+        ];
+
+        if(!$this->validate($rules)){
+            // session()->setFlashdata('errors', $this->validator->listErrors());
+            return redirect()->to('/dataManuskrip') ->withInput() -> with('errors', $this->validator->listErrors());
+        }
+
+        $foto = $this->request->getFile('foto');
+    
+        if ($foto->isValid() && !$foto->hasMoved()) {
+            $fotoName = $foto->getRandomName();
+            $foto->move('img/manuskrip', $fotoName);
+        } else {
+            // Handle file upload error
+            return redirect()->to(base_url('/dataManuskrip'))
+                ->withInput()
+                ->with('errors', $foto->getErrorString());
+        }
+
+        //tambahh data
+        // $this->M_Petugas->save($this->request->getPost());
+        $this->M_Manuskrip->save([
+            // 'id_petugas' => $id_petugas,
+            'judul' => $this->request->getVar('judul'),
+            'tanggal' => $this->request->getVar('tanggal'),
+            'link' => $this->request->getVar('link'),
+            'foto' => $fotoName,
+            
+        ]);
+
+        //alert
+        session()->setFlashdata('pesan', 'Data Berhasil Ditambahkan.');
+
+        return redirect()-> to('/dataManuskrip');
+
+        // return view('admin/v_masterpetugas');
+    }
+
+    public function deleteManuskrip($id_manuskrip)
+    {
+        // Saring masukan untuk mencegah SQL injection atau serangan lainnya
+        $id_manuskrip = filter_var($id_manuskrip, FILTER_SANITIZE_NUMBER_INT);
+    
+        // Panggil metode delete pada model atau apapun yang diperlukan
+        $this->M_Manuskrip->delete($id_manuskrip);
+        session()->setFlashdata('pesan', 'Data Berhasil Dihapus.');
+    
+        // Redirect ke halaman yang sesuai
+        return redirect()->to('/dataManuskrip');
+    }
+
+    public function updateManuskrip($id_manuskrip) {
+        // Mengambil data yang akan diupdate dari request
+        $dataToUpdate = [
+            'judul' => $this->request->getVar('judul'),
+            'tanggal' => $this->request->getVar('tanggal'),
+            'link' => $this->request->getVar('link'),
+            'foto' => $this->request->getVar('foto'),
+            
+        ];
+    
+        $foto = $this->request->getFile('foto');
+
+        // Cek apakah file foto diunggah
+        if ($foto && $foto->isValid() && !$foto->hasMoved()) {
+            // Generate nama unik untuk file foto
+            $fotoName = $foto->getRandomName();
+
+            // Pindahkan file foto ke folder yang diinginkan
+            $foto->move('img/manuskrip', $fotoName); // Perbarui path sesuai dengan folder yang diinginkan
+
+            // Tambahkan nama file foto ke data yang akan diupdate
+            $dataToUpdate['foto'] = $fotoName;
+        }
+    
+        // Membersihkan data yang mungkin ada dari inputan form
+        $dataToUpdate = array_filter($dataToUpdate);
+    
+        // Memastikan ada data yang akan diupdate
+        if (!empty($dataToUpdate)) {
+            // Mengeksekusi perintah update
+            $this->M_Manuskrip->update($id_manuskrip, $dataToUpdate);
+    
+            // Ambil data petugas setelah diubah dari database
+            $newDataPublikasi = $this->M_Manuskrip->getManuskrip($id_manuskrip);
+    
+            // Perbarui sesi pengguna dengan data baru
+            if (session()->get('level') != 'Admin') {
+                session()->set([
+                    'judul' => $newDataPublikasi['judul'],
+                    'tanggal' => $newDataPublikasi['tanggal'],
+                    'link' => $newDataPublikasi['link'],
+                    'foto' => $newDataPublikasi['foto'],
+                ]);
+            }
+            //alert
+            session()->setFlashdata('pesan', 'Data Berhasil diubah.');
+        } else {
+            // Jika tidak ada data yang diupdate, munculkan pesan kesalahan
+            session()->setFlashdata('error', 'Tidak ada data yang diupdate.');
+        }
+        // dd('berhasil');
+    
+        // Redirect ke halaman sebelumnya atau halaman yang sesuai
+        return redirect()->to('/dataManuskrip');
     }
 
     public function koleksiAdmin(): string

@@ -49,6 +49,12 @@
             <i class="fas fa-fw fa-users"></i>
             <span>Publikasi</span></a>
     </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="/dataManuskrip">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Manuskrip</span></a>
+    </li>
     
     <li class="nav-item">
         <a class="nav-link" href="/beritaAdmin">
@@ -72,6 +78,7 @@
             <i class="fas fa-fw fa-users"></i>
             <span>Galeri</span></a>
     </li>
+
     <!-- <hr class="sidebar-divider"> -->
     <?php endif; ?>
     <!-- Divider -->

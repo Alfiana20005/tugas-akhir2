@@ -67,7 +67,7 @@ class Filters extends BaseConfig
                     '/kajian2', '/kajianKategori2/*',
                     '/tulisan2','/tulisan2/*',
                     '/koleksi_page2', '/koleksi_detail2', '/koleksi_detail2/*',
-                    '/publikasi2', 'manuskrip',
+                    '/publikasi2', 'manuskrip', '/dataManuskrip', 
                     '/perpustakaan2','/detailBuku/*', 
                     '/sekardiyu',
                     '/rencanaStrategis'
@@ -121,7 +121,7 @@ class Filters extends BaseConfig
                     '/kajian2', '/kajianKategori2/*',
                     '/tulisan2','/tulisan2/*',
                     '/koleksi_page2', '/koleksi_detail2', '/koleksi_detail2/*',
-                    '/publikasi2', 'manuskrip',
+                    '/publikasi2', 'manuskrip',  '/dataManuskrip', 
                     '/perpustakaan2','/detailBuku/*', 
                     '/sekardiyu',
                     '/rencanaStrategis'
@@ -215,6 +215,7 @@ class Filters extends BaseConfig
                     '/beritaAdmin', '/tambahBerita', '/saveBerita', 'hapusberita/*',  'updateBerita/*',
                     '/tambahKegiatan', '/saveKegiatan', 'hapusKegiatan/*', 'updateKegiatan/*',
                     '/tambahPublikasi', '/savePublikasi', 'hapusPublikasi/*', 'updatePublikasi/*',
+                    '/dataManuskrip', '/saveManuskrip', 'hapusManuskrip/*', 'updateManuskrip/*',
                     '/koleksiAdmin', '/saveKoleksi', 'hapusKoleksiAdmin/*', 'updateKoleksiAdmin/*',
                     '/galleryAdmin', '/saveGallery', 'hapusGallery/*', 'updateGallery/*',
                     '/saveKajian', '/kajianAdmin', 
@@ -258,6 +259,7 @@ class Filters extends BaseConfig
                     '/beritaAdmin', '/tambahBerita', '/saveBerita', 'hapusberita/*',  'updateBerita/*',
                     '/tambahKegiatan', '/saveKegiatan', 'hapusKegiatan/*', 'updateKegiatan/*',
                     '/tambahPublikasi', '/savePublikasi', 'hapusPublikasi/*', 'updatePublikasi/*',
+                    '/dataManuskrip', 
                     '/koleksiAdmin', '/saveKoleksi', 'hapusKoleksiAdmin/*', 'updateKoleksiAdmin/*',
                     '/galleryAdmin', '/saveGallery', 'hapusGallery/*', 'updateGallery/*',
                     '/saveKajian', '/kajianAdmin', 
