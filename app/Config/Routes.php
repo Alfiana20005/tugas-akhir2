@@ -192,6 +192,8 @@ $routes->get('/tulisan2', 'C_LandingPage::tulisan');
 $routes->get('/tulisan2/(:segment)', 'C_LandingPage::tulisan2/$1');
 
 
+$routes->get('/manuskrip', 'C_LandingPage::manuskrip');
+
 $routes->get('/koleksi_page2', 'C_LandingPage::koleksi_page2');
 $routes->get('/koleksi_detail2', 'C_LandingPage::koleksi_detail2');
 $routes->get('/koleksi_detail2/(:segment)', 'C_LandingPage::koleksi_detail2/$1');

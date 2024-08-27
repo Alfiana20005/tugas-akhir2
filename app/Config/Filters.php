@@ -67,7 +67,7 @@ class Filters extends BaseConfig
                     '/kajian2', '/kajianKategori2/*',
                     '/tulisan2','/tulisan2/*',
                     '/koleksi_page2', '/koleksi_detail2', '/koleksi_detail2/*',
-                    '/publikasi2',
+                    '/publikasi2', 'manuskrip',
                     '/perpustakaan2','/detailBuku/*', 
                     '/sekardiyu',
                     '/rencanaStrategis'
@@ -85,7 +85,7 @@ class Filters extends BaseConfig
                     '/kajian2', '/kajianKategori2/*',
                     '/tulisan2','/tulisan2/*',
                     '/koleksi_page2', '/koleksi_detail2', '/koleksi_detail2/*',
-                    '/publikasi2',
+                    '/publikasi2', 'manuskrip',
                     '/perpustakaan2','/detailBuku/*', 
                     '/sekardiyu',
                     '/rencanaStrategis'
@@ -103,7 +103,7 @@ class Filters extends BaseConfig
                     '/kajian2', '/kajianKategori2/*',
                     '/tulisan2','/tulisan2/*',
                     '/koleksi_page2', '/koleksi_detail2', '/koleksi_detail2/*',
-                    '/publikasi2',
+                    '/publikasi2', 'manuskrip',
                     '/perpustakaan2','/detailBuku/*', 
                     '/sekardiyu',
                     '/rencanaStrategis'
@@ -121,7 +121,7 @@ class Filters extends BaseConfig
                     '/kajian2', '/kajianKategori2/*',
                     '/tulisan2','/tulisan2/*',
                     '/koleksi_page2', '/koleksi_detail2', '/koleksi_detail2/*',
-                    '/publikasi2',
+                    '/publikasi2', 'manuskrip',
                     '/perpustakaan2','/detailBuku/*', 
                     '/sekardiyu',
                     '/rencanaStrategis'
@@ -139,7 +139,7 @@ class Filters extends BaseConfig
                     '/kajian2', '/kajianKategori2/*',
                     '/tulisan2','/tulisan2/*',
                     '/koleksi_page2', '/koleksi_detail2', '/koleksi_detail2/*',
-                    '/publikasi2',
+                    '/publikasi2', 'manuskrip',
                     '/perpustakaan2','/detailBuku/*', 
                     '/sekardiyu',
                     '/rencanaStrategis'
@@ -157,7 +157,7 @@ class Filters extends BaseConfig
                     '/kajian2', '/kajianKategori2/*',
                     '/tulisan2','/tulisan2/*',
                     '/koleksi_page2', '/koleksi_detail2', '/koleksi_detail2/*',
-                    '/publikasi2',
+                    '/publikasi2', 'manuskrip',
                     '/perpustakaan2', '/detailBuku/*', 
                     '/sekardiyu',
                     '/rencanaStrategis'
@@ -175,7 +175,7 @@ class Filters extends BaseConfig
                     '/kajian2', '/kajianKategori2/*',
                     '/tulisan2','/tulisan2/*',
                     '/koleksi_page2', '/koleksi_detail2', '/koleksi_detail2/*',
-                    '/publikasi2',
+                    '/publikasi2', 'manuskrip',
                     '/perpustakaan2', '/detailBuku/*', 
                     '/sekardiyu',
                     '/rencanaStrategis'
@@ -193,7 +193,7 @@ class Filters extends BaseConfig
                     '/kajian2', '/kajianKategori2/*',
                     '/tulisan2','/tulisan2/*',
                     '/koleksi_page2', '/koleksi_detail2', '/koleksi_detail2/*',
-                    '/publikasi2',
+                    '/publikasi2', 'manuskrip',
                     '/perpustakaan2', '/detailBuku/*', 
                     '/sekardiyu',
                     '/rencanaStrategis'

@@ -437,6 +437,27 @@ class C_LandingPage extends BaseController
 
         return view('landingPage/publikasi2', $data);
     }
+    public function manuskrip(): string
+    {
+
+        // $publikasi = $this->M_Publikasi->findAll();
+       
+        $data =[
+            'title' => 'Terjemahan Manuskrip',
+            
+            'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
+            'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
+            'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
+            'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
+            // 'berita' => $berita
+
+        ];
+        
+
+        return view('landingPage/manuskrip', $data);
+    }
+
+
     public function perpustakaan2(): string
     {
         $data_buku = $this->M_Perpustakaan->findAll();
