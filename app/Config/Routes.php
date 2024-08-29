@@ -28,6 +28,7 @@ $routes->get('/tulisan/(:segment)', 'C_LandingPage::tulisan/$1');
 
 
 $routes->get('/koleksi_page', 'C_LandingPage::koleksi_page');
+$routes->get('/lihatKegiatan/(:segment)', 'C_LandingPage::lihatKegiatan/$1');
 $routes->get('/koleksi_detail', 'C_LandingPage::koleksi_detail');
 $routes->get('/koleksi_detail/(:segment)', 'C_LandingPage::koleksi_detail/$1');
 $routes->get('/publikasi', 'C_LandingPage::publikasi');
@@ -199,6 +200,8 @@ $routes->get('/tulisan2/(:segment)', 'C_LandingPage::tulisan2/$1');
 $routes->get('/manuskrip', 'C_LandingPage::manuskrip');
 
 $routes->get('/koleksi_page2', 'C_LandingPage::koleksi_page2');
+
+$routes->get('/koleksi_kategori/(:segment)', 'C_LandingPage::koleksi_kategori/$1');
 $routes->get('/koleksi_detail2', 'C_LandingPage::koleksi_detail2');
 $routes->get('/koleksi_detail2/(:segment)', 'C_LandingPage::koleksi_detail2/$1');
 $routes->get('/publikasi2', 'C_LandingPage::publikasi2');

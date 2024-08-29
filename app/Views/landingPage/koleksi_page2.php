@@ -22,7 +22,19 @@
       <div class="container">
 
 
-        <div class="row">
+        <div class="row my-4" >
+             <a href="/koleksi_kategori/Geologika" class="genric-btn primary-border small my-2 mx-2"> Geologika</a>
+             <a href="/koleksi_kategori/Biologika" class="genric-btn primary-border small my-2 mx-2"> Biologika</a>
+             <a href="/koleksi_kategori/Etnografika" class="genric-btn primary-border small my-2 mx-2"> Etnografika</a>
+             <a href="/koleksi_kategori/Arkeologika" class="genric-btn primary-border small my-2 mx-2"> Arkeologika</a>
+             <a href="/koleksi_kategori/Historika" class="genric-btn primary-border small my-2 mx-2"> Historika</a>
+             <a href="/koleksi_kategori/Numismatika" class="genric-btn primary-border small my-2 mx-2"> Numismatika</a>
+             <a href="/koleksi_kategori/Filologika" class="genric-btn primary-border small my-2 mx-2"> Filologika</a>
+             <a href="/koleksi_kategori/Kramologika" class="genric-btn primary-border small my-2 mx-2"> Kramologika</a>
+             <a href="/koleksi_kategori/Seni Rupa" class="genric-btn primary-border small my-2 mx-2"> Seni Rupa</a>
+             <a href="/koleksi_kategori/Teknologika" class="genric-btn primary-border small my-2 mx-2"> Teknologika</a>
+             <!-- /<a href="/kegiatanKategori2/Museum Talk" class="genric-btn primary-border small my-2 mx-2"> Lain-lain</a> -->
+
           <div class="col-lg-12 d-flex justify-content-center" data-aos="fade-up" data-aos-delay="100">
 
           </div>

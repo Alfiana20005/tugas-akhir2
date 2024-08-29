@@ -30,6 +30,13 @@ class M_KoleksiLandingPage extends Model
         return $this->orderBy('tanggal', 'DESC')
                     ->findAll();
     }
+    public function getDataByJenis($kategori_koleksi)
+    {
+        return $this->db->table('koleksi')
+        ->where('kategori', $kategori_koleksi)
+        ->get()
+        ->getResultArray();
+    }
     
   
 

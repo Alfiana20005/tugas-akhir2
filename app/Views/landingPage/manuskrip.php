@@ -49,7 +49,7 @@
                     </div> -->
                   </div>
                   <div class="member-info">
-                    <h6><?= $m['judul']; ?></h6>
+                    <h6><a href="<?= $m['link']; ?>" target="_blank" style="color:#850000;"><?= $m['judul']; ?></a></h6>
                     <span><?= $m['tanggal']; ?></span>
                   </div>
                 </div>

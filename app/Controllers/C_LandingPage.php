@@ -389,7 +389,7 @@ class C_LandingPage extends BaseController
         $koleksi = $this->M_KoleksiLandingPage->findAll();
         
         $data =[
-            'title' => 'Daftar Berita',
+            'title' => 'Daftar Koleksi',
             'koleksi' => $koleksi,
             'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
             'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
@@ -399,6 +399,25 @@ class C_LandingPage extends BaseController
         ];
         
         
+        return view('landingPage/koleksi_page2', $data);
+    }
+
+    public function koleksi_kategori($kategori_koleksi): string
+    {
+        
+        $koleksi = $this->M_KoleksiLandingPage->getDataByJenis($kategori_koleksi);
+        
+        $data =[
+            'title' => 'Daftar Kegiatan',
+            'koleksi' => $koleksi,
+            'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
+            'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
+            'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
+            'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
+            
+        ];
+        
+
         return view('landingPage/koleksi_page2', $data);
     }
 
