@@ -163,12 +163,12 @@
     
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Data Buku</h6>
-                        </div>
+                <div class="card-header d-sm-flex py-3  align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Data Buku </h6> 
+                </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" >
+                                <table class="table table-bordered" id="dataTable" width="100%"         cellspacing="0" >
                                     <thead >
                                         <tr>
                                             <th style="text-align: center;">No</th>
@@ -190,7 +190,7 @@
                                     </thead>
                                     
                                     <tbody >
-                                    <?php 
+                                        <?php 
                                         $no=1;
                                         foreach($data_buku as $buku): ?>  
                                         <tr>
@@ -226,7 +226,12 @@
                         </div>
     </div>
 
-    <?php 
+
+
+    
+</div>
+
+<?php 
         $no=1;
         foreach($data_buku as $buku): ?> 
         <div class="modal fade" id="editBuku<?= $buku['id_buku']; ?>" tabindex="-1" aria-labelledby="editBuku" aria-hidden="true">
@@ -369,7 +374,6 @@
         </div>
 
     <?php endforeach; ?>
-</div>
 
 <script async src="https://cdn.jsdelivr.net/npm/es-module-shims@1/dist/es-module-shims.min.js" crossorigin="anonymous"></script>
     <script type="importmap">
