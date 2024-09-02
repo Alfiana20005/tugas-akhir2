@@ -70,7 +70,8 @@ class Filters extends BaseConfig
                     '/publikasi2', 'manuskrip', '/dataManuskrip', 
                     '/perpustakaan2','/detailBuku/*', 
                     '/sekardiyu',
-                    '/rencanaStrategis'
+                    '/rencanaStrategis',
+                    '/etiket'
                     
                 ]
             ],
@@ -88,7 +89,8 @@ class Filters extends BaseConfig
                     '/publikasi2', 'manuskrip',
                     '/perpustakaan2','/detailBuku/*', 
                     '/sekardiyu',
-                    '/rencanaStrategis'
+                    '/rencanaStrategis',
+                    '/etiket'
                     
                 ]
             ],
@@ -106,7 +108,8 @@ class Filters extends BaseConfig
                     '/publikasi2', 'manuskrip',
                     '/perpustakaan2','/detailBuku/*', 
                     '/sekardiyu',
-                    '/rencanaStrategis'
+                    '/rencanaStrategis',
+                    '/etiket'
                     
                 ]
             ],
@@ -124,7 +127,8 @@ class Filters extends BaseConfig
                     '/publikasi2', 'manuskrip',  '/dataManuskrip', 
                     '/perpustakaan2','/detailBuku/*', 
                     '/sekardiyu',
-                    '/rencanaStrategis'
+                    '/rencanaStrategis',
+                    '/etiket'
                     
                 ]
             ],
@@ -142,7 +146,8 @@ class Filters extends BaseConfig
                     '/publikasi2', 'manuskrip',
                     '/perpustakaan2','/detailBuku/*', 
                     '/sekardiyu',
-                    '/rencanaStrategis'
+                    '/rencanaStrategis',
+                    '/etiket'
                     
                 ]
             ],
@@ -160,7 +165,8 @@ class Filters extends BaseConfig
                     '/publikasi2', 'manuskrip',
                     '/perpustakaan2', '/detailBuku/*', 
                     '/sekardiyu',
-                    '/rencanaStrategis'
+                    '/rencanaStrategis',
+                    '/etiket'
                     
                 ]
             ],
@@ -178,7 +184,8 @@ class Filters extends BaseConfig
                     '/publikasi2', 'manuskrip',
                     '/perpustakaan2', '/detailBuku/*', 
                     '/sekardiyu',
-                    '/rencanaStrategis'
+                    '/rencanaStrategis',
+                    '/etiket'
                     
                 ]
             ],
@@ -196,7 +203,8 @@ class Filters extends BaseConfig
                     '/publikasi2', 'manuskrip',
                     '/perpustakaan2', '/detailBuku/*', 
                     '/sekardiyu',
-                    '/rencanaStrategis'
+                    '/rencanaStrategis',
+                    '/etiket'
                     
                 ]
             ],

@@ -90,8 +90,11 @@
                                     </table>
                                     <p class="mt-4" style="color: #850000;">*Bagi pengunjung rombongan mohon hubungiterlebih dahulu nara
                                     hubung atau kirim surat melalui email ke <span>museumntb@gmail.com / museumnegeri@ntbprov.go.id</span>  
-                                    </p>     								
-								</form>							  	
+                                    </p>
+									
+									
+									<!-- <a class="btn  align-items-center my-4" style="background:#850000; color: white;" href="/etiket">Pesan Tiket</a>	 -->
+								</form>						  	
 							  </div>
 							  <div class="tab-pane fade" id="holiday" role="tabpanel" aria-labelledby="holiday-tab">
 								<form class="form-wrap">

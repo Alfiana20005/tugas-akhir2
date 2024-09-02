@@ -223,3 +223,8 @@ $routes->delete('deleteBuku/(:segment)', 'C_Perpustakaan::deleteBuku/$1');
 $routes->post('/updateBuku/(:segment)', 'C_Perpustakaan::updateBuku/$1');
 // 
 
+
+//E-Tiket
+$routes->get('/etiket', 'C_LandingPage::etiket');
+
+

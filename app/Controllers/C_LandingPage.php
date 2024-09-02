@@ -602,6 +602,19 @@ class C_LandingPage extends BaseController
 
         return view('landingPage/rencanaStrategis', $data);
     }
+    public function etiket(): string
+    {
+        $data =[
+            'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
+            'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
+            'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
+            'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
+           
+        ];
+        
+
+        return view('landingPage/etiket', $data);
+    }
 
 
 
