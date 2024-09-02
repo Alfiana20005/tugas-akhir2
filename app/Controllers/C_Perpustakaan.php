@@ -28,7 +28,7 @@ class C_Perpustakaan extends BaseController
             'buku_favorit' => $buku_favorit
         ];
 
-        return view('perpustakaan/inputdata', $data);
+        return view('perpustakaan2/inputdata', $data);
     }
 
     public function saveDataBuku()
@@ -176,7 +176,7 @@ class C_Perpustakaan extends BaseController
 
     public function tambahData()
     {
-        return view('perpustakaan/inputData');
+        return view('perpustakaan2/inputData');
     }
     public function delete($id) 
     {
@@ -280,7 +280,7 @@ class C_Perpustakaan extends BaseController
         ];
 
         // Menampilkan view dengan data yang telah disiapkan
-        return view('perpustakaan/inputData', $data);
+        return view('perpustakaan2/inputData', $data);
     }
 
     
