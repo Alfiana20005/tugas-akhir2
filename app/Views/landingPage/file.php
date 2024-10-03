@@ -113,10 +113,15 @@
 										Ikuti Sosial Media Kami
 									</p>
 									<ul class="social-links">
-										<li><a href="https://www.facebook.com/museumnegerintb/"><i class="fa fa-facebook"></i></a></li>
+										<!-- <li><a href="https://www.facebook.com/museumnegerintb/"><i class="fa fa-facebook"></i></a></li>
 										<li><a href="https://twitter.com/museum_ntb"><i class="fa fa-twitter"></i></a></li>
 										<li><a href="https://www.instagram.com/museumntb?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="><i class="fa fa-instagram"></i></a></li>
-										<li><a href="https://www.youtube.com/@museumntb1284"><i class="fa fa-youtube"></i></a></li>
+										<li><a href="https://www.youtube.com/@museumntb1284"><i class="fa fa-youtube"></i></a></li> -->
+                                        <li><a href="https://www.facebook.com/museumnegerintb/" target="_blank" style="font-size:20px; font-weight:bold;"><i class="fa-brands fa-facebook"></i></a></li>
+								        <li><a href="https://www.youtube.com/@museumntb1284" target="_blank" style="font-size:20px; font-weight:bold;"><i class="fa-brands fa-youtube "></i></a></li>
+								        <li><a href="https://www.instagram.com/museumntb?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" style="font-size:20px; font-weight:bold;"><i class="fa-brands fa-instagram"></i></a></li>
+								        <li><a href="https://twitter.com/museum_ntb" target="_blank" style="font-size:20px; font-weight:bold;"><i class="fa-brands fa-twitter "></i></a></li>
+								        <li><a href="https://www.tiktok.com/@museumntb?_t=8mxmb7tA12H&_r=1" target="_blank" style="font-size:20px; font-weight:bold; "><i class="fa-brands fa-tiktok"></i></a></li>
 									</ul>
 									<p>
 										Klik Untuk Mengunjungi Website
