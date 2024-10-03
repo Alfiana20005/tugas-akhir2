@@ -17,15 +17,10 @@ class C_Perpustakaan extends BaseController
     public function index(): string
     {
         $data_buku = $this->M_Perpustakaan->findAll();
-        $buku_rekomendasi = $this->M_Perpustakaan->getBukuRekomendasi('Tampilkan Sebagai Buku Rekomendasi');
-        $buku_favorit = $this->M_Perpustakaan->getBukuRekomendasi('Tampilkan Sebagai Buku Favorit');
-
 
         $data =[
             'title' => 'Daftar Buku',
             'data_buku' => $data_buku,
-            'buku_rekomendasi' => $buku_rekomendasi,
-            'buku_favorit' => $buku_favorit
         ];
 
         return view('perpustakaan2/inputdata', $data);

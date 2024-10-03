@@ -88,7 +88,7 @@
                                         
 
                                     </table>
-                                    <p class="mt-4" style="color: #850000;">*Bagi pengunjung rombongan mohon hubungiterlebih dahulu nara
+                                    <p class="mt-4" style="color: #850000;">*Bagi pengunjung rombongan mohon menghubungi terlebih dahulu nara
                                     hubung atau kirim surat melalui email ke <span>museumntb@gmail.com / museumnegeri@ntbprov.go.id</span>  
                                     </p>
 									

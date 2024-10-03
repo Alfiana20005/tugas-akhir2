@@ -14,7 +14,9 @@ use App\Models\M_Pesan;
 use App\Models\M_Pengunjung;
 use App\Models\M_SemuaPetugas;
 use App\Models\M_Perpustakaan;
+use App\Models\M_ManuskripKol;
 use App\Models\M_Manuskrip;
+use App\Models\M_Sega;
 
 class C_LandingPage extends BaseController
 {
@@ -31,7 +33,9 @@ class C_LandingPage extends BaseController
     protected $M_Pengunjung;
     protected $M_SemuaPetugas;
     protected $M_Perpustakaan;
+    protected $M_ManuskripKol;
     protected $M_Manuskrip;
+    protected $M_Sega;
 
     public function __construct() {
         helper('form');
@@ -47,18 +51,16 @@ class C_LandingPage extends BaseController
         $this -> M_Pengunjung = new M_Pengunjung();
         $this -> M_SemuaPetugas = new M_SemuaPetugas();
         $this -> M_Perpustakaan = new M_Perpustakaan();
+        $this -> M_ManuskripKol= new M_ManuskripKol();
         $this -> M_Manuskrip= new M_Manuskrip();
+        $this -> M_Sega= new M_Sega();
 
     }
-
-
-
-
 
     // Start Landing Page Baru
     public function home(){
 
-        $kegiatan = $this->M_Kegiatan->findAll();
+        $kegiatan = $this->M_Kegiatan->get();
         $beritaTerbaru = $this->M_Berita->getBeritaTerbaruHome(4);
         $galery = $this->M_Gallery->findAll();
 
@@ -459,6 +461,26 @@ class C_LandingPage extends BaseController
 
         return view('landingPage/publikasi2', $data);
     }
+    public function manuskripKol(): string
+    {
+
+        $manuskrip = $this->M_ManuskripKol->findAll();
+       
+        $data =[
+            'title' => 'Terjemahan Manuskrip',
+            'manuskrip' => $manuskrip,
+            'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
+            'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
+            'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
+            'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
+            // 'berita' => $berita
+
+        ];
+        
+
+        return view('landingPage/manuskrip_koleksi', $data);
+    }
+
     public function manuskrip(): string
     {
 
@@ -615,6 +637,44 @@ class C_LandingPage extends BaseController
 
         return view('landingPage/etiket', $data);
     }
+
+    public function daftarSega(): string
+    {
+        $sega = $this->M_Sega->findAll();
+
+        // var_dump($berita);
+        $data =[
+
+            'sega' => $sega,
+            'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
+            'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
+            'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
+            'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
+        ];
+        
+
+        return view('landingPage/audioGuide', $data);
+    }
+    public function audioGuide($id_sega): string
+    {
+        $sega = $this->M_Sega->getSega($id_sega);
+
+        $data =[
+
+            'sega' => $sega,
+            
+            'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
+            'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
+            'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
+            'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
+        ];
+        
+
+        return view('landingPage/file', $data);
+    }
+
+
+
 
 
 

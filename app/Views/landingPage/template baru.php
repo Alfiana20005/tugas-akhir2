@@ -112,6 +112,7 @@
 				            <ul>
 				              <li><a href="/kajian2">Tulisan</a></li>
 				              <li><a href="/publikasi2">Publikasi</a></li>
+				              <li><a href="/manuskripKol">Manuskrip</a></li>
 				              <li><a href="/manuskrip">Terjemahan Manuskrip</a></li>
 				            </ul>
 				          </li>	

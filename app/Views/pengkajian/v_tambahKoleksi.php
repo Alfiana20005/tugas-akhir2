@@ -172,6 +172,8 @@
                                 <option <?= old("lemari") == 'Lemari 8'? 'selected' : 'Lemari 8' ?> value="Lemari 8">Lemari 8</option>
                                 <option <?= old("lemari") == 'Lemari 9'? 'selected' : 'Lemari 9' ?> value="Lemari 9">Lemari 9</option>
                                 <option <?= old("lemari") == 'Lemari 10'? 'selected' : 'Lemari 10' ?> value="Lemari 10">Lemari 10</option>
+                                <option <?= old("lemari") == 'Lemari 11'? 'selected' : 'Lemari 11' ?> value="Lemari 11">Lemari 11</option>
+                                <option <?= old("lemari") == 'Lemari 12'? 'selected' : 'Lemari 12' ?> value="Lemari 12">Lemari 12</option>
                             </select>
                     </div>
                 </div>

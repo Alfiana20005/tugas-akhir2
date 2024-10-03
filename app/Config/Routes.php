@@ -46,20 +46,28 @@ $routes->get('/beritaAdmin', 'C_Admin::berita');
 $routes->get('/tambahBerita', 'C_Admin::tambahBerita');
 $routes->post('/saveBerita', 'C_Admin::save');
 $routes->delete('hapusberita/(:segment)', 'C_Admin::deleteBerita/$1');
-
 $routes->post('updateBerita/(:segment)', 'C_Admin::updateBerita/$1');
+
 $routes->get('/tambahKegiatan', 'C_Admin::tambahKegiatan');
 $routes->post('/saveKegiatan', 'C_Admin::saveKegiatan');
 $routes->delete('hapusKegiatan/(:segment)', 'C_Admin::deleteKegiatan/$1');
 $routes->post('updateKegiatan/(:segment)', 'C_Admin::updateKegiatan/$1');
+
 $routes->get('/tambahPublikasi', 'C_Admin::tambahPublikasi');
 $routes->post('/savePublikasi', 'C_Admin::savePublikasi');
 $routes->delete('hapusPublikasi/(:segment)', 'C_Admin::deletePublikasi/$1');
 $routes->post('updatePublikasi/(:segment)', 'C_Admin::updatePublikasi/$1');
+
+$routes->get('/dataManuskripKol', 'C_Admin::dataManuskripKol');
+$routes->post('/saveManuskripKol', 'C_Admin::saveManuskripKol');
+$routes->delete('hapusManuskripKol/(:segment)', 'C_Admin::deleteManuskripKol/$1');
+$routes->post('updateManuskripKol/(:segment)', 'C_Admin::updateManuskripKol/$1');
+
 $routes->get('/dataManuskrip', 'C_Admin::dataManuskrip');
 $routes->post('/saveManuskrip', 'C_Admin::saveManuskrip');
 $routes->delete('hapusManuskrip/(:segment)', 'C_Admin::deleteManuskrip/$1');
-$routes->post('updatePublikasi/(:segment)', 'C_Admin::updateManuskrip/$1');
+$routes->post('updateManuskrip/(:segment)', 'C_Admin::updateManuskrip/$1');
+
 $routes->get('/koleksiAdmin', 'C_Admin::koleksiAdmin');
 $routes->post('/saveKoleksi', 'C_Admin::saveKoleksi');
 $routes->delete('hapusKoleksiAdmin/(:segment)', 'C_Admin::deleteKoleksi/$1');
@@ -70,6 +78,7 @@ $routes->get('/galleryAdmin', 'C_Admin::galleryAdmin');
 $routes->post('/saveGallery', 'C_Admin::saveGallery');
 $routes->post('updateGallery/(:segment)', 'C_Admin::updateGallery/$1');
 $routes->delete('hapusGallery/(:segment)', 'C_Admin::deleteGallery/$1');
+
 $routes->post('/saveKajian', 'C_Admin::saveKajian');
 $routes->get('/kajianAdmin', 'C_Admin::kajianAdmin');
 $routes->get('/tulisKajian', 'C_Admin::tulisKajian');
@@ -79,8 +88,16 @@ $routes->post('/saveIsiKajian', 'C_Admin::saveIsiKajian');
 $routes->get('/previewKajian/(:segment)', 'C_Admin::previewKajian/$1');
 $routes->get('/tulisKajian/(:num)', 'C_Admin::tulisKajian/$1');
 $routes->delete('hapusKajian/(:segment)', 'C_Admin::deleteKajian/$1');
+
 $routes->get('/pesanAdmin', 'C_Admin::pesanAdmin');
 $routes->delete('hapuspesan/(:segment)', 'C_Admin::deletePesan/$1');
+
+
+$routes->get('/sega', 'C_Admin::sega');
+
+$routes->post('/saveSega', 'C_Admin::saveSega');
+$routes->get('/previewSega/(:segment)', 'C_Admin::previewSega/$1');
+$routes->delete('deleteSega/(:segment)', 'C_Admin::deleteSega/$1');
 
 
 
@@ -197,6 +214,7 @@ $routes->get('/tulisan2', 'C_LandingPage::tulisan');
 $routes->get('/tulisan2/(:segment)', 'C_LandingPage::tulisan2/$1');
 
 
+$routes->get('/manuskripKol', 'C_LandingPage::manuskripKol');
 $routes->get('/manuskrip', 'C_LandingPage::manuskrip');
 
 $routes->get('/koleksi_page2', 'C_LandingPage::koleksi_page2');
@@ -226,5 +244,11 @@ $routes->post('/updateBuku/(:segment)', 'C_Perpustakaan::updateBuku/$1');
 
 //E-Tiket
 $routes->get('/etiket', 'C_LandingPage::etiket');
+
+//Sega
+
+$routes->get('/daftarSega', 'C_LandingPage::daftarSega');
+
+$routes->get('/audioGuide/(:segment)', 'C_LandingPage::audioGuide/$1');
 
 

@@ -67,11 +67,13 @@ class Filters extends BaseConfig
                     '/kajian2', '/kajianKategori2/*',
                     '/tulisan2','/tulisan2/*',
                     '/koleksi_page2', '/koleksi_detail2', '/koleksi_detail2/*','/koleksi_kategori/*',
-                    '/publikasi2', 'manuskrip', '/dataManuskrip', 
+                    '/publikasi2', 'manuskrip', '/dataManuskrip', '/manuskripKol','/dataManuskripKol', 
                     '/perpustakaan2','/detailBuku/*', 
                     '/sekardiyu',
                     '/rencanaStrategis',
-                    '/etiket'
+                    '/etiket',
+                    '/sega',
+                    '/daftarSega', '/audioGuide/*'
                     
                 ]
             ],
@@ -86,11 +88,12 @@ class Filters extends BaseConfig
                     '/kajian2', '/kajianKategori2/*',
                     '/tulisan2','/tulisan2/*',
                     '/koleksi_page2', '/koleksi_detail2', '/koleksi_detail2/*', '/koleksi_kategori/*',
-                    '/publikasi2', 'manuskrip',
+                    '/publikasi2', 'manuskrip', '/manuskripKol',
                     '/perpustakaan2','/detailBuku/*', 
                     '/sekardiyu',
                     '/rencanaStrategis',
-                    '/etiket'
+                    '/etiket',
+                    '/daftarSega', '/audioGuide/*'
                     
                 ]
             ],
@@ -105,11 +108,12 @@ class Filters extends BaseConfig
                     '/kajian2', '/kajianKategori2/*',
                     '/tulisan2','/tulisan2/*',
                     '/koleksi_page2', '/koleksi_detail2', '/koleksi_detail2/*', '/koleksi_kategori/*',
-                    '/publikasi2', 'manuskrip',
+                    '/publikasi2', 'manuskrip', '/manuskripKol',
                     '/perpustakaan2','/detailBuku/*', 
                     '/sekardiyu',
                     '/rencanaStrategis',
-                    '/etiket'
+                    '/etiket',
+                    '/daftarSega', '/audioGuide/*'
                     
                 ]
             ],
@@ -124,11 +128,12 @@ class Filters extends BaseConfig
                     '/kajian2', '/kajianKategori2/*',
                     '/tulisan2','/tulisan2/*',
                     '/koleksi_page2', '/koleksi_detail2', '/koleksi_detail2/*', '/koleksi_kategori/*',
-                    '/publikasi2', 'manuskrip',  '/dataManuskrip', 
+                    '/publikasi2', 'manuskrip',  '/dataManuskrip', '/manuskripKol',
                     '/perpustakaan2','/detailBuku/*', 
                     '/sekardiyu',
                     '/rencanaStrategis',
-                    '/etiket'
+                    '/etiket',
+                    '/daftarSega', '/audioGuide/*'
                     
                 ]
             ],
@@ -143,11 +148,12 @@ class Filters extends BaseConfig
                     '/kajian2', '/kajianKategori2/*',
                     '/tulisan2','/tulisan2/*',
                     '/koleksi_page2', '/koleksi_detail2', '/koleksi_detail2/*', '/koleksi_kategori/*',
-                    '/publikasi2', 'manuskrip',
+                    '/publikasi2', 'manuskrip', '/manuskripKol',
                     '/perpustakaan2','/detailBuku/*', 
                     '/sekardiyu',
                     '/rencanaStrategis',
-                    '/etiket'
+                    '/etiket',
+                    '/daftarSega', '/audioGuide/*'
                     
                 ]
             ],
@@ -162,11 +168,12 @@ class Filters extends BaseConfig
                     '/kajian2', '/kajianKategori2/*',
                     '/tulisan2','/tulisan2/*',
                     '/koleksi_page2', '/koleksi_detail2', '/koleksi_detail2/*', '/koleksi_kategori/*',
-                    '/publikasi2', 'manuskrip',
+                    '/publikasi2', 'manuskrip', '/manuskripKol',
                     '/perpustakaan2', '/detailBuku/*', 
                     '/sekardiyu',
                     '/rencanaStrategis',
-                    '/etiket'
+                    '/etiket',
+                    '/daftarSega', '/audioGuide/*'
                     
                 ]
             ],
@@ -181,11 +188,12 @@ class Filters extends BaseConfig
                     '/kajian2', '/kajianKategori2/*',
                     '/tulisan2','/tulisan2/*',
                     '/koleksi_page2', '/koleksi_detail2', '/koleksi_detail2/*', '/koleksi_kategori/*',
-                    '/publikasi2', 'manuskrip',
+                    '/publikasi2', 'manuskrip', '/manuskripKol',
                     '/perpustakaan2', '/detailBuku/*', 
                     '/sekardiyu',
                     '/rencanaStrategis',
-                    '/etiket'
+                    '/etiket',
+                    '/daftarSega', '/audioGuide/*'
                     
                 ]
             ],
@@ -200,11 +208,12 @@ class Filters extends BaseConfig
                     '/kajian2', '/kajianKategori2/*',
                     '/tulisan2','/tulisan2/*',
                     '/koleksi_page2', '/koleksi_detail2', '/koleksi_detail2/*', '/koleksi_kategori/*',
-                    '/publikasi2', 'manuskrip',
+                    '/publikasi2', 'manuskrip', '/manuskripKol',
                     '/perpustakaan2', '/detailBuku/*', 
                     '/sekardiyu',
                     '/rencanaStrategis',
-                    '/etiket'
+                    '/etiket',
+                    '/daftarSega', '/audioGuide/*'
                     
                 ]
             ],
@@ -223,12 +232,14 @@ class Filters extends BaseConfig
                     '/beritaAdmin', '/tambahBerita', '/saveBerita', 'hapusberita/*',  'updateBerita/*',
                     '/tambahKegiatan', '/saveKegiatan', 'hapusKegiatan/*', 'updateKegiatan/*',
                     '/tambahPublikasi', '/savePublikasi', 'hapusPublikasi/*', 'updatePublikasi/*',
-                    '/dataManuskrip', '/saveManuskrip', 'hapusManuskrip/*', 'updateManuskrip/*',
+                    '/dataManuskrip', '/saveManuskrip', 'hapusManuskrip/*', 'updateManuskrip/*', 
+                    '/dataManuskripKol',  '/saveManuskripKol', 'hapusManuskripKol/*', 'updateManuskripKol/*',
                     '/koleksiAdmin', '/saveKoleksi', 'hapusKoleksiAdmin/*', 'updateKoleksiAdmin/*',
                     '/galleryAdmin', '/saveGallery', 'hapusGallery/*', 'updateGallery/*',
                     '/saveKajian', '/kajianAdmin', 
                     '/tulisKajian', '/addSection', '/tulisKajian/*', '/saveIsiKajian', '/tulisKajian/*', 'hapusKajian/*', '/previewKajian/*',
                     '/petugasMuseum', '/strukturOrganisasi', 'hapusOrganisasi/*', '/updateKaryawan/*',
+                    '/sega', '/saveSega', '/previewSega/*', '/deleteSega/*',
 
                  ]
             ],

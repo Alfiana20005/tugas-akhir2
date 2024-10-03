@@ -13,6 +13,8 @@ use App\Models\M_Isikajian;
 use App\Models\M_Pesan;
 use App\Models\M_SemuaPetugas;
 use App\Models\M_Manuskrip;
+use App\Models\M_ManuskripKol;
+use App\Models\M_Sega;
 
 class C_Admin extends BaseController
 {
@@ -28,6 +30,8 @@ class C_Admin extends BaseController
     protected $M_Pesan;
     protected $M_SemuaPetugas;
     protected $M_Manuskrip;
+    protected $M_ManuskripKol;
+    protected $M_Sega;
 
     public function __construct() {
         helper('form');
@@ -42,6 +46,8 @@ class C_Admin extends BaseController
         $this -> M_Pesan = new M_Pesan();
         $this -> M_SemuaPetugas = new M_SemuaPetugas();
         $this -> M_Manuskrip = new M_Manuskrip();
+        $this -> M_ManuskripKol = new M_ManuskripKol();
+        $this -> M_Sega = new M_Sega();
     }
     public function strukturOrganisasi(){
 
@@ -785,6 +791,18 @@ class C_Admin extends BaseController
 
         return view('CompanyProfile/data_manuskrip', $data);
     }
+    public function dataManuskripKol(): string
+    {
+        $data_manuskripKol = $this->M_ManuskripKol->findAll();
+
+
+        $data =[
+            'title' => 'Daftar Manuskrip',
+            'data_manuskripKol' => $data_manuskripKol
+        ];
+
+        return view('CompanyProfile/data_manuskripKol', $data);
+    }
     public function saveManuskrip()
     {
         //validation
@@ -838,6 +856,59 @@ class C_Admin extends BaseController
 
         // return view('admin/v_masterpetugas');
     }
+    public function saveManuskripKol()
+    {
+        //validation
+        $rules= [
+            'nama' => [
+                'rules' => 'required',
+                'errors' => ['required'=>'nama harus diisi']
+            ],
+            'link' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required'=>'link tidak boleh kosong',
+                    
+    
+                ]
+            ],
+        ];
+
+        if(!$this->validate($rules)){
+            // session()->setFlashdata('errors', $this->validator->listErrors());
+            return redirect()->to('/dataManuskripKol') ->withInput() -> with('errors', $this->validator->listErrors());
+        }
+
+        $foto = $this->request->getFile('foto');
+    
+        if ($foto->isValid() && !$foto->hasMoved()) {
+            $fotoName = $foto->getRandomName();
+            $foto->move('img/manuskrip', $fotoName);
+        } else {
+            // Handle file upload error
+            return redirect()->to(base_url('/dataManuskripKol'))
+                ->withInput()
+                ->with('errors', $foto->getErrorString());
+        }
+
+
+        //tambahh data
+        // $this->M_Petugas->save($this->request->getPost());
+        $this->M_ManuskripKol->save([
+            // 'id_petugas' => $id_petugas,
+            'nama' => $this->request->getVar('nama'),
+            'link' => $this->request->getVar('link'),
+            'foto' => $fotoName,
+            
+        ]);
+
+        //alert
+        session()->setFlashdata('pesan', 'Data Berhasil Ditambahkan.');
+
+        return redirect()-> to('/dataManuskripKol');
+
+        // return view('admin/v_masterpetugas');
+    }
 
     public function deleteManuskrip($id_manuskrip)
     {
@@ -850,6 +921,18 @@ class C_Admin extends BaseController
     
         // Redirect ke halaman yang sesuai
         return redirect()->to('/dataManuskrip');
+    }
+    public function deleteManuskripKol($id)
+    {
+        // Saring masukan untuk mencegah SQL injection atau serangan lainnya
+        $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
+    
+        // Panggil metode delete pada model atau apapun yang diperlukan
+        $this->M_ManuskripKol->delete($id);
+        session()->setFlashdata('pesan', 'Data Berhasil Dihapus.');
+    
+        // Redirect ke halaman yang sesuai
+        return redirect()->to('/dataManuskripKol');
     }
 
     public function updateManuskrip($id_manuskrip) {
@@ -906,6 +989,60 @@ class C_Admin extends BaseController
     
         // Redirect ke halaman sebelumnya atau halaman yang sesuai
         return redirect()->to('/dataManuskrip');
+    }
+
+    public function updateManuskripKol($id) {
+        // Mengambil data yang akan diupdate dari request
+        $dataToUpdate = [
+            'nama' => $this->request->getVar('nama'),
+            'link' => $this->request->getVar('link'),
+            'foto' => $this->request->getVar('foto'),
+            
+        ];
+    
+        $foto = $this->request->getFile('foto');
+
+        // Cek apakah file foto diunggah
+        if ($foto && $foto->isValid() && !$foto->hasMoved()) {
+            // Generate nama unik untuk file foto
+            $fotoName = $foto->getRandomName();
+
+            // Pindahkan file foto ke folder yang diinginkan
+            $foto->move('img/manuskrip', $fotoName); // Perbarui path sesuai dengan folder yang diinginkan
+
+            // Tambahkan nama file foto ke data yang akan diupdate
+            $dataToUpdate['foto'] = $fotoName;
+        }
+    
+        // Membersihkan data yang mungkin ada dari inputan form
+        $dataToUpdate = array_filter($dataToUpdate);
+    
+        // Memastikan ada data yang akan diupdate
+        if (!empty($dataToUpdate)) {
+            // Mengeksekusi perintah update
+            $this->M_ManuskripKol->update($id, $dataToUpdate);
+    
+            // Ambil data petugas setelah diubah dari database
+            $newDataPublikasi = $this->M_ManuskripKol->getManuskrip($id);
+    
+            // Perbarui sesi pengguna dengan data baru
+            
+                session()->set([
+                    'nama' => $newDataPublikasi['nama'],
+                    'link' => $newDataPublikasi['link'],
+                    'foto' => $newDataPublikasi['foto'],
+                ]);
+            
+            //alert
+            session()->setFlashdata('pesan', 'Data Berhasil diubah.');
+        } else {
+            // Jika tidak ada data yang diupdate, munculkan pesan kesalahan
+            session()->setFlashdata('error', 'Tidak ada data yang diupdate.');
+        }
+        // dd('berhasil');
+    
+        // Redirect ke halaman sebelumnya atau halaman yang sesuai
+        return redirect()->to('/dataManuskripKol');
     }
 
     public function koleksiAdmin(): string
@@ -977,6 +1114,8 @@ class C_Admin extends BaseController
 
         // return view('admin/v_masterpetugas');
     }
+
+    
 
     public function deleteKoleksi($id_koleksi)
     {
@@ -1218,6 +1357,123 @@ class C_Admin extends BaseController
         // Redirect ke halaman yang sesuai
         return redirect()->to('/pesanAdmin');
     }
+
+
+    public function sega(): string
+    {
+        $data_sega = $this->M_Sega->findAll();
+
+
+        $data =[
+            'title' => 'Daftar Sega',
+            'sega' => $data_sega
+        ];
+
+        
+        return view('CompanyProfile/segaAdmin', $data);
+    }
+
+    public function saveSega()
+    {
+        //validation
+        $rules= [
+            'judul' => [
+                'rules' => 'required',
+                'errors' => ['required'=>'Judul harus diisi']
+            ],
+            
+        ];
+
+        if(!$this->validate($rules)){
+            // session()->setFlashdata('errors', $this->validator->listErrors());
+            return redirect()->to('/sega') ->withInput() -> with('errors', $this->validator->listErrors());
+        }
+
+        $foto = $this->request->getFile('foto');
+    
+        if ($foto->isValid() && !$foto->hasMoved()) {
+            $fotoName = $foto->getRandomName();
+            $foto->move('img/sega', $fotoName);
+        } else {
+            // Handle file upload error
+            return redirect()->to(base_url('/sega'))
+                ->withInput()
+                ->with('errors', $foto->getErrorString());
+        }
+
+        $file1 = $this->request->getFile('audio1');
+        
+    
+        if ($file1->isValid() && !$file1->hasMoved()) {
+            $filename1 = $file1->getRandomName();
+            $file1->move('audio', $filename1);
+        } else {
+            // Handle file upload error
+            return redirect()->to(base_url('/sega'))
+                ->withInput()
+                ->with('errors', $file1->getErrorString());
+        }
+
+        $file2 = $this->request->getFile('audio2');
+        // $filename2 = 'null';
+        if ($file2->isValid() && !$file2->hasMoved()) {
+            $filename2 = $file2->getRandomName();
+            $file2->move('audio', $filename2);
+        } else {
+            // Handle file upload error
+            $filename2 = 'null';
+        }
+
+        //tambahh data
+        // $this->M_Petugas->save($this->request->getPost());
+        $this->M_Sega->save([
+            // 'id_petugas' => $id_petugas,
+            'judul' => $this->request->getVar('judul'),
+            'deskripsi_indo' => $this->request->getVar('deskripsi_indo'),
+            'deskripsi_eng' => $this->request->getVar('deskripsi_eng'),
+            'foto' => $fotoName,
+            'audio1' => $filename1,
+            'audio2' => $filename2,
+            
+        ]);
+
+        //alert
+        session()->setFlashdata('pesan', 'Data Berhasil Ditambahkan.');
+
+        return redirect()-> to('/sega');
+
+        // return view('admin/v_masterpetugas');
+    }
+    public function previewSega($id_sega): string
+    {
+        $sega = $this->M_Sega->getSega($id_sega);
+
+        // var_dump($berita);
+        $data =[
+
+            'sega' => $sega,
+        ];
+        
+
+        return view('CompanyProfile/previewSega', $data);
+    }
+    public function deleteSega($id_Sega)
+    {
+        // Saring masukan untuk mencegah SQL injection atau serangan lainnya
+        $id_Sega = filter_var($id_Sega, FILTER_SANITIZE_NUMBER_INT);
+    
+        // Panggil metode delete pada model atau apapun yang diperlukan
+        $this->M_Sega->delete($id_Sega);
+        session()->setFlashdata('pesan', 'Data Berhasil Dihapus.');
+    
+        // Redirect ke halaman yang sesuai
+        return redirect()->to('/sega');
+    }
+
+
+
+
+
    
     
     

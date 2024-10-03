@@ -51,6 +51,11 @@
     </li>
 
     <li class="nav-item">
+        <a class="nav-link" href="/dataManuskripKol">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Koleksi Manuskrip</span></a>
+    </li>
+    <li class="nav-item">
         <a class="nav-link" href="/dataManuskrip">
             <i class="fas fa-fw fa-users"></i>
             <span>Manuskrip</span></a>
@@ -77,6 +82,11 @@
         <a class="nav-link" href="/galleryAdmin">
             <i class="fas fa-fw fa-users"></i>
             <span>Galeri</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/sega">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Sega</span></a>
     </li>
 
     <!-- <hr class="sidebar-divider"> -->
@@ -533,14 +543,14 @@
 
 
     <?php if (session()->get('level') == 'Perpustakaan'): ?>
-    <!-- <hr class="sidebar-divider my-0"> -->
+    
     <li class="nav-item">
         <a class="nav-link" href="/inputData">
             <i class="fas fa-fw fa-users"></i>
             <span>Data Buku</span></a>
     </li>
 
-    <!-- <hr class="sidebar-divider"> -->
+    
     <?php endif; ?>
 
 
