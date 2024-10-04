@@ -1358,10 +1358,25 @@ class C_Admin extends BaseController
         return redirect()->to('/pesanAdmin');
     }
 
+    private function getExcerpt($text, $wordLimit)
+    {
+        $words = explode(' ', strip_tags($text));
+        if (count($words) > $wordLimit) {
+            $excerpt = implode(' ', array_slice($words, 0, $wordLimit)) . '...';
+        } else {
+            $excerpt = implode(' ', $words);
+        }
+        return $excerpt;
+    }
 
     public function sega(): string
     {
         $data_sega = $this->M_Sega->findAll();
+        foreach ($data_sega as &$sega) {
+            $sega['deskripsi_pendek1'] = $this->getExcerpt($sega['deskripsi_indo'], 10);
+            $sega['deskripsi_pendek2'] = $this->getExcerpt($sega['deskripsi_eng'], 10); // 30 adalah jumlah kata yang ingin ditampilkan
+        }
+
 
 
         $data =[

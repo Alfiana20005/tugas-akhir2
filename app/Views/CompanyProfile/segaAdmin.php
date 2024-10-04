@@ -170,7 +170,7 @@
                                             
                                             <td style="text-align: center;"><?= $g['judul']; ?></td>
 
-                                            <td style="text-align: center;"><?= $g['deskripsi_indo']; ?> <?= $g['deskripsi_eng']; ?> </td>
+                                            <td style="text-align: center;"><?= $g['deskripsi_pendek1']; ?> <?= $g['deskripsi_pendek2']; ?> </td>
                                             <td style="text-align: center;">
                                                 <?php if (!empty($g)): ?>
                                                     

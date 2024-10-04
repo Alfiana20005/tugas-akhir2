@@ -31,6 +31,7 @@
 								<div class="col-lg-12 col-md-12">
 									<h3 class="mt-20 mb-20"><?= $kajian['judul']; ?></h3>
 									<p ><?= $kajian['created_at']; ?></p>
+
                                     <?php 
                                     foreach($isiKajian as $data):
                                     ?>
@@ -48,24 +49,40 @@
 									// 	return $text;
 									// }
 
-									if (!function_exists('nl2p')) {
-										function nl2p($text) {
-											$text = trim($text);
-											$paragraphs = preg_split('/\n\s*\n/', $text);
-											$text = '';
-											foreach ($paragraphs as $paragraph) {
-												$paragraph = trim($paragraph);
-												if (!empty($paragraph)) {
-													$text .= '<p>' . esc($paragraph) . '</p>';
-												}
+									// if (!function_exists('nl2p')) {
+									// 	function nl2p($text) {
+									// 		$text = trim($text);
+									// 		$paragraphs = preg_split('/\n\s*\n/', $text);
+									// 		$text = '';
+									// 		foreach ($paragraphs as $paragraph) {
+									// 			$paragraph = trim($paragraph);
+									// 			if (!empty($paragraph)) {
+									// 				$text .= '<p>' . esc($paragraph) . '</p>';
+									// 			}
+									// 		}
+									// 		return $text;
+									// 	}
+									// }
+
+									
+									function nl2p($text) {
+										$text = trim($text);
+										$paragraphs = explode("\n", $text);
+										$text = '';
+										foreach ($paragraphs as $paragraph) {
+											$paragraph = trim($paragraph);
+											if (!empty($paragraph)) {
+												$text .= '<p>' . esc($paragraph) . '</p>';
 											}
-											return $text;
 										}
+										return $text;
 									}
 
+									
+									
 									?>
-									<!-- <p class="excert " ><?= nl2p($data['narasi']); ?></p> -->
-									<?= $content=$data['narasi']; ?>
+									<p class="excert" ><?= nl2p($data['narasi']); ?></p>
+									<!-- <?= $content=$data['narasi']; ?> -->
                                     <div class="d-flex align-items-center justify-content-center my-4"> 
                                         <img src="<?= base_url("img/kajian/". $data['foto']); ?>" class="img-fluid" alt="" style="width: auto; ">
                                     </div>
