@@ -36,6 +36,13 @@
                             <input type="hidden"  name="id_kajian" value="<?= $kajian['id_kajian']; ?>">
                             <div class="mb-3">
                                 <label for="narasi" class="form-label">Tuliskan Narasi</label>
+                                <script>
+                                    tinymce.init({
+                                        selector: 'textarea',
+                                        plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+                                        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+                                    });
+                                </script>
                                 <textarea class="form-control" id="narasi" rows="3" name="narasi"></textarea>
                             </div>
                             <div class="mb-3">  
