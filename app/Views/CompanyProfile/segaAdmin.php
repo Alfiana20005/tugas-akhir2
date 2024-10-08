@@ -204,7 +204,7 @@
                                             <td style="text-align: center;">
                                             
                                                 <a href="<?= base_url("/previewSega/{$g['id_sega']}"); ?>" class="btn btn-warning btn-sm" >Lihat</a>
-                                                <!-- <a href="" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editGallery<?= $g['id_sega']; ?>" data-bs-whatever="@getbootstrap">Edit</a> -->
+                                                <a href="" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editGallery<?= $g['id_sega']; ?>" data-bs-whatever="@getbootstrap">Edit</a>
                                                 <!-- <a href="" class="btn btn-danger" >hapus</a> -->
                                                 <form action="/deleteSega/<?= $g['id_sega']; ?>" method="post" class="d-inline">
                                                     <?= csrf_field(); ?>
@@ -241,15 +241,52 @@
                 </div>
                 
                 <div class="row mb-2">
-                    <label for="message-text" class="col-sm-3 col-form-label">Deskripsi:</label>
+                    <label for="message-text" class="col-sm-3 col-form-label">Deskripsi Indo:</label>
                     <div class="col-sm-9">
                     <textarea class="form-control" id="message-text" name="deskripsi_indo" > <?= $g['deskripsi_indo']; ?></textarea>
                     </div>
                 </div>
                 <div class="row mb-2">
-                    <label for="message-text" class="col-sm-3 col-form-label">Deskripsi:</label>
+                    <label for="message-text" class="col-sm-3 col-form-label">Deskripsi Eng:</label>
                     <div class="col-sm-9">
                     <textarea class="form-control" id="message-text" name="deskripsi_eng" > <?= $g['deskripsi_eng']; ?></textarea>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <label for="mp3" class="col-sm-3 col-form-label">Audio Indo:</label>
+                    <div class="col-sm-9">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input form-control" id="audio1<?= $g['id_sega']; ?>" name="audio1" accept=".mp3" onchange="previewAudio('audio1<?= $g['id_sega']; ?>')">
+                            <label class="custom-file-label" for="customFile">Maksimal 2 Mb (Format MP3)</label>
+                            <?php if (!empty($sega['audio1'])): ?>
+                                <div class="my-2">
+                                    <p>File Saat Ini:</p>
+                                    <audio controls>
+                                        <source src="<?= base_url('audio/' . $sega['audio1']); ?>" type="audio/mpeg">
+                                        Your browser does not support the audio tag.
+                                    </audio>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <label for="mp3" class="col-sm-3 col-form-label">Audio Eng:</label>
+                    <div class="col-sm-9">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input form-control" id="audio2<?= $g['id_sega']; ?>" name="audio2" accept=".mp3" onchange="previewAudio('audio2<?= $g['id_sega']; ?>')">
+                            <label class="custom-file-label" for="customFile">Maksimal 2 Mb (Format MP3)</label>
+                            <?php if (!empty($sega['audio2'])): ?>
+                                <div class="my-2">.
+                                    
+                                    <p>File Saat Ini:</p>
+                                    <audio controls>
+                                        <source src="<?= base_url('audio/' . $sega['audio2']); ?>" type="audio/mpeg">
+                                        Your browser does not support the audio tag. 
+                                    </audio>
+                                </div>
+                            <?php endif; ?>
+                        </div>
                     </div>
                 </div>
                 
@@ -267,7 +304,7 @@
                                 <?php if (!empty($g['foto'])): ?>
                                         <div class="my-4">
                                             <p>Foto Saat Ini:</p>
-                                            <img src="<?= base_url('img/galery/' . $g['foto']); ?>" alt="Foto Kegiatan" width="100">
+                                            <img src="<?= base_url('img/sega/' . $g['foto']); ?>" alt="Foto Kegiatan" width="100">
                                         </div>
                                     <?php endif; ?>
                             </div>

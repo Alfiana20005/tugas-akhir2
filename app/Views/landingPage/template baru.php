@@ -61,12 +61,12 @@
 				<div class="header-top">
 					<div class="container">
 			  		<div class="row align-items-center">
-			  			<div class="col-lg-6 col-sm-6 col-6 header-top-left">
+			  			<!-- <div class="col-lg-6 col-sm-6 col-6 header-top-left"> -->
 			  				<ul>
-			  					<!-- <li><a href="#">Visit Us</a></li>
-			  					<li><a href="#">Buy Tickets</a></li> -->
+			  					<!-- <li><a href="#">Contact Us!</a></li> -->
+			  					<li><a class="btn btn-sm" style="background-color: #850000;" target="_blank" href="https://wa.me/+628973862445">Contact Us!</a></li>
 			  				</ul>			
-			  			</div>
+			  			<!-- </div> -->
 			  			<div class="col-lg-6 col-sm-6 col-6 header-top-right">
 							<div class="header-social">
 								<a href="#"></a>

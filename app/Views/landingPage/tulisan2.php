@@ -65,24 +65,22 @@
 									// }
 
 									
-									function nl2p($text) {
-										$text = trim($text);
-										$paragraphs = explode("\n", $text);
-										$text = '';
-										foreach ($paragraphs as $paragraph) {
-											$paragraph = trim($paragraph);
-											if (!empty($paragraph)) {
-												$text .= '<p>' . esc($paragraph) . '</p>';
-											}
-										}
-										return $text;
-									}
-
-									
-									
+									// function nl2p($text) {
+									// 	$text = trim($text);
+									// 	$paragraphs = explode("\n", $text);
+									// 	$text = '';
+									// 	foreach ($paragraphs as $paragraph) {
+									// 		$paragraph = trim($paragraph);
+									// 		if (!empty($paragraph)) {
+									// 			$text .= '<p>' . esc($paragraph) . '</p>';
+									// 		}
+									// 	}
+									// 	return $text;
+									// }
+								
 									?>
-									<p class="excert" ><?= nl2p($data['narasi']); ?></p>
-									<!-- <?= $content=$data['narasi']; ?> -->
+									
+									<?= $content=$data['narasi']; ?>
                                     <div class="d-flex align-items-center justify-content-center my-4"> 
                                         <img src="<?= base_url("img/kajian/". $data['foto']); ?>" class="img-fluid" alt="" style="width: auto; ">
                                     </div>

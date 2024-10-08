@@ -39,11 +39,11 @@
 								</div>
 
                                 
-
-								<div class="table-row">
-                                <?php 
+								<?php 
                                         $no=1;
                                         foreach($sega as $g): ?>  
+								<div class="table-row">
+                               
 
 									<div class="serial"><?= $no++; ?></div>
 									<div class="country"> <img src="<?= base_url("img/sega/". $g['foto']); ?>" style="width: 60px;" alt="flag"></div>
@@ -53,8 +53,9 @@
 										<a class="btn btn-warning" href="<?= base_url("/audioGuide/{$g['id_sega']}"); ?>">Lihat</a>
 									</div>
 
-                                    <?php endforeach; ?> 
+                                    
 								</div>
+								<?php endforeach; ?> 
 
 							</div>
 						</div>

@@ -1484,6 +1484,90 @@ class C_Admin extends BaseController
         // Redirect ke halaman yang sesuai
         return redirect()->to('/sega');
     }
+    public function updateSega($id_sega)
+    {
+        // Mengambil data yang akan diupdate dari request
+        $dataToUpdate = [
+            'judul' => $this->request->getVar('judul'),
+            'deskripsi_indo' => $this->request->getVar('deskripsi_indo'),
+            'deskripsi_eng' => $this->request->getVar('deskripsi_eng'),
+            'foto' => $this->request->getVar('foto'),
+            'audio1' => $this->request->getVar('audio1'),
+            'audio2' => $this->request->getVar('audio2'),
+            
+        ];
+    
+        $foto = $this->request->getFile('foto');
+
+        // Cek apakah file foto diunggah
+        if ($foto && $foto->isValid() && !$foto->hasMoved()) {
+            // Generate nama unik untuk file foto
+            $fotoName = $foto->getRandomName();
+
+            // Pindahkan file foto ke folder yang diinginkan
+            $foto->move('img/sega', $fotoName); // Perbarui path sesuai dengan folder yang diinginkan
+
+            // Tambahkan nama file foto ke data yang akan diupdate
+            $dataToUpdate['foto'] = $fotoName;
+        }
+
+        $file1 = $this->request->getFile('audio1');    
+        if ($file1->isValid() && !$file1->hasMoved()) {
+            $filename1 = $file1->getRandomName();
+            $file1->move('audio', $filename1);
+            $dataToUpdate['audio1'] = $fotoName;
+        } else {
+            // Handle file upload error
+            return redirect()->to(base_url('/sega'))
+                ->withInput()
+                ->with('errors', $file1->getErrorString());
+        }
+
+        $file2 = $this->request->getFile('audio2');
+        // $filename2 = 'null';
+        if ($file2->isValid() && !$file2->hasMoved()) {
+            $filename2 = $file2->getRandomName();
+            $file2->move('audio', $filename2);
+            $dataToUpdate['audio2'] = $fotoName;
+        } else {
+            // Handle file upload error
+            $filename2 = 'null';
+        }
+    
+        // Membersihkan data yang mungkin ada dari inputan form
+        $dataToUpdate = array_filter($dataToUpdate);
+    
+        // Memastikan ada data yang akan diupdate
+        if (!empty($dataToUpdate)) {
+            // Mengeksekusi perintah update
+            $this->M_Sega->update($id_sega, $dataToUpdate);
+    
+            // Ambil data petugas setelah diubah dari database
+            $newDataGallery = $this->M_Sega->getGallery($id_sega);
+    
+            // Perbarui sesi pengguna dengan data baru
+            if (session()->get('level') == 'Admin') {
+                session()->set([
+                    'judul' => $newDataGallery['judul'],
+                    'deskripsi_indo' => $newDataGallery['deskripsi_indo'],
+                    'deskripsi_eng' => $newDataGallery['deskripsi_eng'],
+                    'foto' => $newDataGallery['foto'],
+                    'audio1' => $newDataGallery['audio1'],
+                    'audio2' => $newDataGallery['audio2'],
+                ]);
+            }
+            //alert
+            session()->setFlashdata('pesan', 'Data Berhasil diubah.');
+        } else {
+            // Jika tidak ada data yang diupdate, munculkan pesan kesalahan
+            session()->setFlashdata('error', 'Tidak ada data yang diupdate.');
+        }
+        // dd('berhasil');
+    
+        // Redirect ke halaman sebelumnya atau halaman yang sesuai
+        return redirect()->to('/galleryAdmin');
+    }
+
 
 
 
