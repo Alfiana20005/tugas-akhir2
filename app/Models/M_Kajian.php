@@ -24,11 +24,21 @@ class M_Kajian extends Model
     {
         return $this->find($id_kajian);
     }
-    public function getKajianterbaru($limit)
+    public function getKajianterbaru($limit = null)
     {
-        return $this->orderBy('created_at', 'DESC')
-                    ->limit($limit)
-                    ->findAll();
+        // return $this->orderBy('created_at', 'DESC')
+        //             ->limit($limit)
+        //             ->findAll();
+
+
+                    $builder = $this->db->table('berita');
+                    $builder->orderBy('created_at', 'DESC');
+            
+                    if ($limit !== null) {
+                        $builder->limit($limit);
+                    }
+            
+                    return $builder->get()->getResultArray();
     }
     public function getDataByKategori($kategori)
     {
