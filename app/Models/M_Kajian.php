@@ -31,7 +31,7 @@ class M_Kajian extends Model
         //             ->findAll();
 
 
-                    $builder = $this->db->table('berita');
+                    $builder = $this->db->table('kajian');
                     $builder->orderBy('created_at', 'DESC');
             
                     if ($limit !== null) {

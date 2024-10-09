@@ -39,6 +39,7 @@ class M_Kegiatan extends Model
     {
         return $this->db->table('kegiatan')
         ->where('kategori_kegiatan', $kategori_kegiatan)
+        ->orderBy('tanggal', 'DESC')
         ->get()
         ->getResultArray();
     }
