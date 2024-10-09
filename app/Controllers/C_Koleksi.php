@@ -86,6 +86,10 @@ class C_Koleksi extends BaseController
                 'rules' => 'required',
                 'errors' => ['required'=>'Uraian harus diisi']
             ],
+            'kode_lk' => [
+                'rules' => 'required|is_unique[data_koleksi.kode_lk]',
+               
+            ],
                   
         ];
 
