@@ -107,7 +107,12 @@ class C_Dashboard extends BaseController
                 ];
             }
             
-            $data_grafik['total']['data'][$kategori[$row['kode_kategori']]] = $row['total'];
+            if (isset($row['kode_kategori']) && isset($kategori[$row['kode_kategori']])) {
+                $data_grafik['total']['data'][$kategori[$row['kode_kategori']]] = $row['total'];
+            } else {
+                // Jika kode_kategori tidak ada atau tidak dikenali, tangani kasus ini
+                $data_grafik['total']['data']['Kategori Tidak Diketahui'] = $row['total'];
+            }
         }
 
         // end grafik koleksi
