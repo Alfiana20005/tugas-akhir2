@@ -16,7 +16,7 @@
     <?php endif; ?>
 
     <!-- DataTales Example -->
-    <div class="card shadow mb-4">
+    <!-- <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Data Buku</h6>
         </div>
@@ -73,7 +73,7 @@
                 </table>
             </div>
         </div>
-    </div>
+    </div> -->
 
 
     <div class="modal fade" id="tambahKegiatan" tabindex="-1" aria-labelledby="tambahKegiatan" aria-hidden="true">
