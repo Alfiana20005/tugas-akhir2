@@ -182,7 +182,7 @@
                                                     
                                                 <?php else: ?>
                                                     <p>Tidak ada audio yang tersedia.</p>
-                                                <?php endif; ?>
+                                                <?php endif; ?> 
 
 
                                             </td>
@@ -278,7 +278,7 @@
                             <label class="custom-file-label" for="customFile">Maksimal 2 Mb (Format MP3)</label>
                             <?php if (!empty($sega['audio2'])): ?>
                                 <div class="my-2">.
-                                    
+
                                     <p>File Saat Ini:</p>
                                     <audio controls>
                                         <source src="<?= base_url('audio/' . $sega['audio2']); ?>" type="audio/mpeg">

@@ -87,7 +87,12 @@ class C_Dashboard extends BaseController
         $datakoleksigrafik=$this->M_Koleksi->koleksi();
 
         foreach ($datakoleksigrafik as $row) {
-            $kategori_labels[] = $kategori[$row['kode_kategori']];
+
+            if (isset($row['kode_kategori']) && isset($kategori[$row['kode_kategori']])) {
+                $kategori_labels[] = $kategori[$row['kode_kategori']];
+            } else {
+                $kategori_labels[] = 'Kategori Tidak Diketahui'; // Jika tidak ditemukan
+            }
             
             if (!isset($data_grafik['total'])) {
                 // Ambil warna pertama dari array acak untuk kategori saat ini

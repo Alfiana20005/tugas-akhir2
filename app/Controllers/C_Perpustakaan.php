@@ -23,7 +23,7 @@ class C_Perpustakaan extends BaseController
             'data_buku' => $data_buku,
         ];
 
-        return view('perpustakaan2/inputdata', $data);
+        return view('perpustakaan/inputdata', $data);
     }
 
     public function saveDataBuku()
