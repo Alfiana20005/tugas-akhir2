@@ -26,6 +26,16 @@ class M_Perpustakaan extends Model
         return $this->where('tampilkan', $tampilkan)->findAll();
         
     }
+    public function countBuku()
+    {
+        // Membuat instansiasi model
+        $model = new M_Perpustakaan();
+
+        // Menghitung jumlah petugas
+        $totalBuku = $model->countAll();
+
+        return $totalBuku;
+    }
 
    
     

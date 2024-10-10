@@ -6,6 +6,7 @@ use App\Models\M_Pengunjung;
 use App\Models\M_Koleksi;
 use App\Models\M_JadwalPrw;
 use App\Models\M_Perawatan2;
+use App\Models\M_Perpustakaan;
 
 class C_Dashboard extends BaseController
 {
@@ -14,6 +15,7 @@ class C_Dashboard extends BaseController
     protected $M_Koleksi;
     protected $M_JadwalPrw;
     protected $M_Perawatan2;
+    protected $M_Perpustakaan;
     public function __construct() {
         helper('form');
         $this -> M_Petugas = new M_Petugas();
@@ -21,6 +23,7 @@ class C_Dashboard extends BaseController
         $this->M_Koleksi = new M_Koleksi();
         $this->M_JadwalPrw = new M_JadwalPrw();
         $this->M_Perawatan2 = new M_Perawatan2();
+        $this->M_Perpustakaan = new M_Perpustakaan();
     }
     public function index()
     {
@@ -193,6 +196,7 @@ class C_Dashboard extends BaseController
 
         $data['totalPetugas'] = $this->M_Petugas->countPetugas();
         $data['totalKoleksi'] = $this->M_Koleksi->countKoleksi();
+        $data['totalBuku'] = $this->M_Perpustakaan->countBuku();
         $data['totalPerawatan'] = $this->M_Perawatan2->totalPerawatan();
         $data['jadwal'] = [$jadwalPrw];
         $data['tahun'] = [$tahun];
