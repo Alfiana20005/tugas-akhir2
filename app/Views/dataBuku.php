@@ -164,6 +164,66 @@
 
     HAlahamn INi dalam Tahhap perbaikan
 
+        <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Data Buku</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center;">No</th>
+                            <th style="text-align: center;">Kode</th>
+                            <th style="text-align: center;">Sampul</th>
+                            <th style="text-align: center;">Judul</th>
+                            <th style="text-align: center;">Pengarang</th>
+                            <th style="text-align: center;">Penerbit</th>
+                            <th style="text-align: center;">Tempat Terbit</th>
+                            <th style="text-align: center;">Tahun Terbit</th>
+                            <th style="text-align: center;">Eksemplar</th>
+                            <th style="text-align: center;">Kategori Buku</th>
+                            <th style="text-align: center;">Lokasi Penyimpanan</th>
+                            <th style="text-align: center;">Status</th>
+                            <th style="text-align: center;">Keterangan</th>
+                            <th style="text-align: center;">OPAC</th>
+                            <th style="text-align: center;">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php $no=1; foreach($data_buku as $buku): ?>
+                        <tr>
+                            <td style="text-align: center;"><?= $no++; ?></td>
+                            <td style="text-align: center;"><?= $buku['kode']; ?></td>
+                            <td style="text-align: center;"><img src="<?= base_url("img/perpustakaan/". $buku['foto']); ?>" alt="" style="width: 60px;" loading="lazy"></td>
+                            <td style="text-align: center;"><?= $buku['judul']; ?></td>
+                            <td style="text-align: center;"><?= $buku['pengarang']; ?></td>
+                            <td style="text-align: center;"><?= $buku['penerbit']; ?></td>
+                            <td style="text-align: center;"><?= $buku['tempatTerbit']; ?></td>
+                            <td style="text-align: center;"><?= $buku['tahunTerbit']; ?></td>
+                            <td style="text-align: center;"><?= $buku['eksemplar']; ?></td>
+                            <td style="text-align: center;"><?= $buku['kategoriBuku']; ?></td>
+                            <td style="text-align: center;"><?= $buku['rak']; ?></td>
+                            <td style="text-align: center;"><?= $buku['status']; ?></td>
+                            <td style="text-align: center;"><?= $buku['keterangan']; ?></td>
+                            <td style="text-align: center;"><?= $buku['tampilkan']; ?></td>
+                            <td style="text-align: center;">
+                                <a href="" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editBuku<?= $buku['id_buku']; ?>" data-bs-whatever="@getbootstrap">Edit</a>
+                                <form action="deleteBuku/<?= $buku['id_buku']; ?>" method="post" class="d-inline">
+                                    <?= csrf_field(); ?>
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('apakah anda yakin?');">Hapus</button>
+                                </form>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
 
 
 
