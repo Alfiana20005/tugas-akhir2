@@ -38,7 +38,7 @@ class C_Perpustakaan extends BaseController
 
         if(!$this->validate($rules)){
             // session()->setFlashdata('errors', $this->validator->listErrors());
-            return redirect()->to('/inputData') ->withInput() -> with('errors', $this->validator->listErrors());
+            return redirect()->to('/dataBuku') ->withInput() -> with('errors', $this->validator->listErrors());
         }
 
         $foto = $this->request->getFile('foto');
@@ -74,7 +74,7 @@ class C_Perpustakaan extends BaseController
         //alert
         session()->setFlashdata('pesan', 'Data Berhasil Ditambahkan.');
 
-        return redirect()-> to('/inputData');
+        return redirect()-> to('/dataBuku');
 
         // return view('admin/v_masterpetugas');
     }
@@ -89,7 +89,7 @@ class C_Perpustakaan extends BaseController
         session()->setFlashdata('pesan', 'Data Berhasil Dihapus.');
     
         // Redirect ke halaman yang sesuai
-        return redirect()->to('/inputData');
+        return redirect()->to('/dataBuku');
     }
 
     public function updateBuku($id_buku) {
@@ -166,7 +166,7 @@ class C_Perpustakaan extends BaseController
         // dd('berhasil');
     
         // Redirect ke halaman sebelumnya atau halaman yang sesuai
-        return redirect()->to('/inputData');
+        return redirect()->to('/dataBuku');
     }
 
     public function tambahData()
@@ -199,7 +199,7 @@ class C_Perpustakaan extends BaseController
         ];
 
         if (!$this->validate($rules)) {
-            return redirect()->to(base_url('/inputData'))
+            return redirect()->to(base_url('/dataBuku'))
                 ->withInput()
                 ->with('errors', $this->validator->listErrors());
         }
@@ -246,7 +246,7 @@ class C_Perpustakaan extends BaseController
         //alert
         session()->setFlashdata('pesan', 'Data Berhasil Ditambahkan.');
 
-        return redirect()-> to('/inputData');
+        return redirect()-> to('/dataBuku');
 
     }
     public function tampilBuku($kategoriBuku) 
@@ -275,7 +275,7 @@ class C_Perpustakaan extends BaseController
         ];
 
         // Menampilkan view dengan data yang telah disiapkan
-        return view('perpustakaan2/inputData', $data);
+        return view('dataBuku', $data);
     }
 
     
