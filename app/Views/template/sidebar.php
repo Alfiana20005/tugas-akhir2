@@ -545,7 +545,7 @@
     <?php if (session()->get('level') == 'Perpustakaan'): ?>
     
     <li class="nav-item">
-        <a class="nav-link" href="<?= base_url();?>inputData">
+        <a class="nav-link" href="/dataBuku">
             <i class="fas fa-fw fa-users"></i>
             <span>Data Buku</span></a>
     </li>

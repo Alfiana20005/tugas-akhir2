@@ -234,13 +234,6 @@ $routes->get('/sekardiyu', 'C_LandingPage::sekardiyu');
 $routes->get('/rencanaStrategis', 'C_LandingPage::rencanaStrategis');
 
 
-// Perpustakaan 
-$routes->get('/inputData', 'C_Perpustakaan::index');
-$routes->post('/saveDataBuku', 'C_Perpustakaan::saveDataBuku');
-$routes->delete('deleteBuku/(:segment)', 'C_Perpustakaan::deleteBuku/$1');
-$routes->post('/updateBuku/(:segment)', 'C_Perpustakaan::updateBuku/$1');
-// 
-
 
 //E-Tiket
 $routes->get('/etiket', 'C_LandingPage::etiket');
@@ -250,5 +243,15 @@ $routes->get('/etiket', 'C_LandingPage::etiket');
 $routes->get('/daftarSega', 'C_LandingPage::daftarSega');
 
 $routes->get('/audioGuide/(:segment)', 'C_LandingPage::audioGuide/$1');
+
+// Perpustakaan 
+// $routes->get('/inputData', 'C_Perpustakaan::index');
+$routes->get('/dataBuku', 'C_Perpustakaan::index');
+$routes->post('/saveDataBuku', 'C_Perpustakaan::saveDataBuku');
+$routes->delete('deleteBuku/(:segment)', 'C_Perpustakaan::deleteBuku/$1');
+$routes->post('/updateBuku/(:segment)', 'C_Perpustakaan::updateBuku/$1');
+// 
+
+
 
 
