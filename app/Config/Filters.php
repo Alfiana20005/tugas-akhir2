@@ -247,7 +247,7 @@ class Filters extends BaseConfig
                 'except' => [
                     '/login', 'C_Login/*', '/logout', '/dashboard', '/halamanLogin', 'C_Login', 
                     'C_Pengunjung/*', 'C_Pengunjung/',  'profile/*', '/updateProfile/*', 'C_Petugas/*', '/profile', 'ubahpetugas/*', '/updatepetugas/*',
-                    '/tambahPengunjung', '/pengunjung','/rekapitulasi', 'deleteData/*',
+                    '/tambahPengunjung', '/pengunjung','/rekapitulasi', 'deleteData/*', '/updatePengunjung/*', 
                     '/statistik', '/print', 
 
                  ]

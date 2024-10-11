@@ -72,6 +72,12 @@ class M_Berita extends Model
         ->get()
         ->getResultArray();
     }
+    public function get()
+    {
+        return $this->db->table('berita')
+        ->get()
+        ->getResultArray();
+    }
     
   
 

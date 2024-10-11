@@ -180,12 +180,16 @@ class C_Admin extends BaseController
     
     public function berita(): string
     {
-        $data_berita = $this->M_Berita->findAll();
+        $dataBerita = $this->M_Berita->findAll();
+        
+        // foreach ($dataBerita as &$dataBerita) {
+        //     $dataBerita['isi'] = $this->getExcerpt($dataBerita['isi'], 10);
+        // }
 
 
         $data =[
             'title' => 'Daftar Berita',
-            'dataBerita' => $data_berita
+            'dataBerita' => $dataBerita
         ];
 
         

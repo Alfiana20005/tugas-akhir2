@@ -208,6 +208,58 @@ class C_Pengunjung extends BaseController
         return view('pelayanan/v_statistik', $data);
     }
 
+    public function updatePengunjung($id_pengunjung) {
+        // Mengambil data yang akan diupdate dari request
+
+        $dataToUpdate = [
+            'nama' => $this->request->getVar('nama'),
+            'alamat' => $this->request->getVar('alamat'),
+            'no_hp' => $this->request->getVar('no_hp'),
+            'kategori' => $this->request->getVar('kategori'),
+            'jumlah' => $this->request->getVar('jumlah'),
+            'created_at' => $this->request->getVar('created_at'),
+            'id_petugas' => session()->get('id_petugas'),
+            
+        ];
+    
+       
+        // Membersihkan data yang mungkin ada dari inputan form
+        $dataToUpdate = array_filter($dataToUpdate);
+    
+        // Memastikan ada data yang akan diupdate
+        if (!empty($dataToUpdate)) {
+            // Mengeksekusi perintah update
+            $this->M_Pengunjung->update($id_pengunjung, $dataToUpdate);
+    
+            // Ambil data petugas setelah diubah dari database
+            $newData = $this->M_Pengunjung->getPengunjung($id_pengunjung);
+    
+            // Perbarui sesi pengguna dengan data baru
+            if (session()->get('level') != 'Admin') {
+                session()->set([
+                    'nama' => $newData['nama'],
+                    'alamat' => $newData['alamat'],
+                    'no_hp' => $newData['no_hp'],
+                    'kategori' => $newData['kategori'],
+                    'jumlah' => $newData['jumlah'],
+                    'created_at' => $newData['created_at'],
+                    'id_petugas' => $newData['id_petugas'],
+                    
+
+                ]);
+            }
+            //alert
+            session()->setFlashdata('pesan', 'Data Berhasil diubah.');
+        } else {
+            // Jika tidak ada data yang diupdate, munculkan pesan kesalahan
+            session()->setFlashdata('error', 'Tidak ada data yang diupdate.');
+        }
+        // dd('berhasil');
+    
+        // Redirect ke halaman sebelumnya atau halaman yang sesuai
+        return redirect()->to('/rekapitulasi');
+    }
+
 
 
 }
