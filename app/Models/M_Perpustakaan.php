@@ -32,6 +32,16 @@ class M_Perpustakaan extends Model
         // Jika ada pencarian, tambahkan kondisi 'like'
         if ($keyword) {
             $builder->like('judul', $keyword); // Ganti dengan kolom yang sesuai jika perlu
+            $builder->orlike('kode', $keyword);    
+            $builder->orlike('pengarang', $keyword);    
+            $builder->orlike('penerbit', $keyword);    
+            $builder->orlike('tempatTerbit', $keyword);    
+            $builder->orlike('tahunTerbit', $keyword);    
+            $builder->orlike('eksemplar', $keyword);    
+            $builder->orlike('rak', $keyword);    
+            $builder->orlike('kategoriBuku', $keyword);    
+            $builder->orlike('status', $keyword);    
+            $builder->orlike('keterangan', $keyword);    
         }
         
         // Kembalikan data paginated dan pager

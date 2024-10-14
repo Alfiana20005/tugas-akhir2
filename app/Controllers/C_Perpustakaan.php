@@ -16,7 +16,8 @@ class C_Perpustakaan extends BaseController
     
     public function index(): string
     {
-        $data_buku = $this->M_Perpustakaan->getPaginated(15); 
+        $keyword = $this->request->getGet('keyword');
+        $data_buku = $this->M_Perpustakaan->getPaginated(15, $keyword); 
         $pager = $this->M_Perpustakaan->pager;
 
         // Siapkan data untuk dikirim ke view

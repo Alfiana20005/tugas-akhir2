@@ -169,7 +169,19 @@
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Data Buku</h6>
         </div>
+
         <div class="card-body">
+            <form action="" method="get" autocomplete="off">
+                <div class="float-right ml-2 mb-4">
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+                </div>
+                <div class="float-right">
+                    <input type="text" name="keyword" id="" class="form-control" style="width: 155pt;" placeholder="search">
+                </div>
+                
+
+            </form>
+
             <div class="table-responsive">
                 <table class="table table-bordered" id="" width="100%" cellspacing="0">
                     <thead>
