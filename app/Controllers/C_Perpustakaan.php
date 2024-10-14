@@ -16,7 +16,7 @@ class C_Perpustakaan extends BaseController
     
     public function index(): string
     {
-        $data_buku = $this->M_Perpustakaan->getPaginated(5); 
+        $data_buku = $this->M_Perpustakaan->getPaginated(15); 
         $pager = $this->M_Perpustakaan->pager;
 
         // Siapkan data untuk dikirim ke view
@@ -25,7 +25,7 @@ class C_Perpustakaan extends BaseController
             'data_buku' => $data_buku,
             'pager' => $pager
         ];
-        
+
         return view('dataBuku', $data);
     }
 

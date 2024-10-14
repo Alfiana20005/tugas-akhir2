@@ -195,7 +195,7 @@
                     <?php 
                     
                     $page = isset($_GET['page']) ? $_GET['page'] : 1;
-                    $no= 1+(5 * ($page - 1)) ; 
+                    $no= 1+(15 * ($page - 1)) ; 
 
                     foreach($data_buku as $buku): ?>
                         <tr>
