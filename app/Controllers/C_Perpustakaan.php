@@ -16,13 +16,16 @@ class C_Perpustakaan extends BaseController
     
     public function index(): string
     {
-        $data_buku = $this->M_Perpustakaan->findAll();
+        $data_buku = $this->M_Perpustakaan->getPaginated(5); 
+        $pager = $this->M_Perpustakaan->pager;
 
-        $data =[
+        // Siapkan data untuk dikirim ke view
+        $data = [
             'title' => 'Daftar Buku',
             'data_buku' => $data_buku,
+            'pager' => $pager
         ];
-
+        
         return view('dataBuku', $data);
     }
 

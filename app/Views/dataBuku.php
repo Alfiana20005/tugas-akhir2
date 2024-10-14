@@ -171,7 +171,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-bordered" id="" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th style="text-align: center;">No</th>
@@ -192,7 +192,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <?php $no=1; foreach($data_buku as $buku): ?>
+                    <?php 
+                    
+                    $page = isset($_GET['page']) ? $_GET['page'] : 1;
+                    $no= 1+(5 * ($page - 1)) ; 
+
+                    foreach($data_buku as $buku): ?>
                         <tr>
                             <td style="text-align: center;"><?= $no++; ?></td>
                             <td style="text-align: center;"><?= $buku['kode']; ?></td>
@@ -220,6 +225,7 @@
                         <?php endforeach; ?>
                     </tbody>
                 </table>
+                <?= $pager->links('default','pagination'); ?>
             </div>
         </div>
     </div>
