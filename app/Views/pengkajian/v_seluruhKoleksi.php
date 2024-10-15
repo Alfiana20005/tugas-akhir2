@@ -87,8 +87,18 @@
         </div>
         
         <div class="card-body">
+        <form action="" method="get" autocomplete="off">
+                <div class="float-right ml-2 mb-4">
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+                </div>
+                <div class="float-right">
+                    <input type="text" name="keyword" id="" class="form-control" style="width: 155pt;" placeholder="search">
+                </div>
+                
+
+            </form>
             <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" >
+                <table class="table table-bordered" id="" width="100%" cellspacing="0" >
                     <thead style="text-align: center; font-size: 10pt;">
                         <tr>
                             <th style="text-align: center;">Kode Lembar Kerja</th>
@@ -112,7 +122,8 @@
                     
                     <tbody style="text-align: center; font-size: 10pt;">
                         <?php 
-                            $no=1;
+                            $page = isset($_GET['page']) ? $_GET['page'] : 1;
+                            $no= 1+(15 * ($page - 1)) ; 
                             foreach($data_koleksi as $k): ?>
                         <tr>
                             <!-- <td style="text-align: center;"><?= $k['kode_kategori']; ?> . <?= $k['no_inventaris']; ?></td>  -->
@@ -175,6 +186,7 @@
                         <?php endforeach; ?>
                     </tbody>
                 </table>
+                <?= $pager->links('default','pagination'); ?>
             </div>
         </div>
     </div>

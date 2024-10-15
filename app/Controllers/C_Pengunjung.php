@@ -98,11 +98,21 @@ class C_Pengunjung extends BaseController
 
         // Jika tidak ada tanggal yang diinputkan, tampilkan semua data
         if (empty($tanggalAwal) || empty($tanggalAkhir)) {
-            $pengunjung = $this->M_Pengunjung->findAll();
+            // $pengunjung = $this->M_Pengunjung->findAll();
+            $keyword = $this->request->getGet('keyword');
+            $pengunjung = $this->M_Pengunjung->getPaginated(15, $keyword); 
+            // $pager = $this->M_Pengunjung->pager;
         } else {
             // Jika ada tanggal yang diinputkan, ambil data sesuai rentang tanggal
+            
+        $keyword = $this->request->getGet('keyword');
             $pengunjung = $this->M_Pengunjung->getDataByDateRange($tanggalAwal, $tanggalAkhir);
+                    // $pager = $this->M_Pengunjung->pager;
         }
+        // $keyword = $this->request->getGet('keyword');
+        // $pengunjung = $this->M_Pengunjung->getPaginated(15, $keyword); 
+        $pager = $this->M_Pengunjung->pager;
+
 
         $data =[
             'title' => 'Daftar Pengunjung',
@@ -110,6 +120,7 @@ class C_Pengunjung extends BaseController
             'M_Pengunjung' => $this->M_Pengunjung,
             'tanggalAwal' => $tanggalAwal,
             'tanggalAkhir' => $tanggalAkhir,
+            'pager' => $pager,
         ];
         return view('pelayanan/v_rekapitulasi', $data);
     }

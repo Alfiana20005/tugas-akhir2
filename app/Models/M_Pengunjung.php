@@ -19,6 +19,25 @@ class M_Pengunjung extends Model
     protected $skipValidation = false;
     protected $cleanValidationRules = true;
 
+    public function getPaginated($num, $keyword=null) {
+        $builder = $this->table('data_pengunjung');
+    
+        // Pilih semua kolom dari tabel
+        $builder->select('*');
+        
+        // Jika ada pencarian, tambahkan kondisi 'like'
+        if ($keyword) {
+            $builder->like('nama', $keyword); // Ganti dengan kolom yang sesuai jika perlu
+            $builder->orlike('alamat', $keyword);    
+            $builder->orlike('no_hp', $keyword);    
+            $builder->orlike('kategori', $keyword);    
+            $builder->orlike('created_at', $keyword);   
+        }
+        
+        // Kembalikan data paginated dan pager
+    return $builder->paginate($num);
+
+    }
     public function getPengunjung($id_pengunjung)
     {
         return $this->find($id_pengunjung);

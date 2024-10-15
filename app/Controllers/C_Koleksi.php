@@ -159,13 +159,16 @@ class C_Koleksi extends BaseController
     public function seluruhKoleksi() 
     {
         // Mendapatkan data koleksi berdasarkan kategori
-        $data_koleksi = $this->M_Koleksi->getkoleksiAll();
+        // $data_koleksi = $this->M_Koleksi->getkoleksiAll();
         $valid = $this->M_Koleksi->countStatus("Valid");
         $validtbc = $this->M_Koleksi->countStatus("Valid tbc");
         $anomali = $this->M_Koleksi->countStatus("Anomali");
         $disclaimer = $this->M_Koleksi->countStatus("Disclaimer");
 
-        
+        $keyword = $this->request->getGet('keyword');
+        $data_koleksi = $this->M_Koleksi->getPaginated(15, $keyword); 
+        $pager = $this->M_Koleksi->pager;
+
 
         // Membuat array data untuk dikirim ke view
         $data = [
@@ -174,7 +177,9 @@ class C_Koleksi extends BaseController
             'valid' => $valid,
             'validtbc' => $validtbc,
             'anomali' => $anomali,
-            'disclaimer' => $disclaimer
+            'disclaimer' => $disclaimer,
+            'pager' => $pager
+
             
         ];
 

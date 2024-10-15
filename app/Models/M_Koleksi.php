@@ -121,6 +121,28 @@ class M_Koleksi extends Model
 
         return $totalKoleksi;
     }
+    public function getPaginated($num, $keyword=null) {
+        $builder = $this->table('data_koleksi');
+    
+        // Pilih semua kolom dari tabel
+        $builder->select('*');
+        $builder->orderBy("CAST(no_registrasi AS UNSIGNED)", 'ASC');
+    
+        
+        // Jika ada pencarian, tambahkan kondisi 'like'
+        if ($keyword) {
+            $builder->like('no_registrasi', $keyword); // Ganti dengan kolom yang sesuai jika perlu
+            $builder->orlike('no_inventaris', $keyword);    
+            $builder->orlike('nama_inv', $keyword);    
+            $builder->orlike('keadaan', $keyword);    
+            $builder->orlike('status', $keyword);    
+            $builder->orlike('kode_lk', $keyword);       
+        }
+
+        // Kembalikan data paginated dan pager
+    return $builder->paginate($num);
+
+    }
     
 }
     

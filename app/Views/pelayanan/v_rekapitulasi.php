@@ -46,8 +46,19 @@
                                                 
                         </div>
                         <div class="card-body">
+                            
+                            <form action="" method="get" autocomplete="off">
+                                <div class="float-right ml-2 mb-4">
+                                    <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+                                </div>
+                                <div class="float-right">
+                                    <input type="text" name="keyword" id="" class="form-control" style="width: 155pt;" placeholder="search">
+                                </div>
+                                
+
+                            </form>
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <table class="table table-bordered" id="" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
                                             <th>No</th>
@@ -63,8 +74,8 @@
                                     </thead>
                                     <tbody>
                                     <?php 
-                                        $no = 1;
-                                        
+                                        $page = isset($_GET['page']) ? $_GET['page'] : 1;
+                                        $no= 1+(15 * ($page - 1)) ; 
                                         foreach($data_pengunjung as $pengunjung): 
                                             // Periksa apakah tanggal kunjungan sama dengan hari ini
                                             // $tanggal_kunjungan = date('Y-m-d', strtotime($pengunjung['created_at']));
@@ -100,7 +111,10 @@
                                 
                                     </tbody>
                                 </table>
-                               
+                                <?php if ($pager): ?>
+                                    <?= $pager->links('default', 'pagination'); ?>
+                                <?php endif; ?>
+
                             </div>
                         </div>
     </div>
