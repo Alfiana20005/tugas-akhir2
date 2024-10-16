@@ -12,7 +12,7 @@ class M_SemuaPetugas extends Model
 
 
     // protected $allowedFields = ['foto', 'nama','password','email','username','level'];
-    protected $allowedFields = ['nip','foto', 'nama', 'jabatan'];
+    protected $allowedFields = ['nip','foto', 'nama', 'jabatan','urutan'];
 
 
     protected $validationRules = [];
@@ -23,6 +23,11 @@ class M_SemuaPetugas extends Model
     public function getKaryawan($id_karyawan)
     {
         return $this->find($id_karyawan);
+    }
+    public function get()
+    {
+        return $this->orderBy('CAST(urutan AS UNSIGNED)', 'ASC')
+        ->findAll();
     }
     public function getDataByLevel($level)
     {

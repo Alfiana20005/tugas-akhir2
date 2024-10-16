@@ -46,6 +46,13 @@
                         </div>
                 </div>
                 <div class="row mb-2">
+                        <label for="isi" class="col-sm-3 col-form-label">Urutan ke-</label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control" name="urutan" id="" value="<?= old("urutan"); ?>"></textarea>
+                            
+                        </div>
+                </div>
+                <div class="row mb-2">
                         <label for="foto" class="col-sm-3 col-form-label">Foto</label>
                         <div class="col-sm-2">
                             <img src="/img/default.jpg" alt="" class="img-thumbnail img-preview">
@@ -94,6 +101,7 @@
                                             <!-- <th style="text-align: center;">Tipe Berita</th> -->
                                             
                                             <th style="text-align: center;">Jabatan</th>
+                                            <th style="text-align: center;">Urutan ke-</th>
                                             
                                             
                                             <th style="text-align: center;">Aksi</th>
@@ -115,6 +123,7 @@
                                             <td style="text-align: center;"><?= $ptgs['nip']; ?></td>
                                             
                                             <td style="text-align: center;"><?= $ptgs['jabatan']; ?></td>
+                                            <td style="text-align: center;"><?= $ptgs['urutan']; ?></td>
                                             
                                             
                                             <td style="text-align: center;">
@@ -166,6 +175,12 @@
                             <label for="isi" class="col-sm-3 col-form-label">Jabatan</label>
                             <div class="col-sm-9">
                                 <textarea class="form-control" name="jabatan" id="keterangan"><?= $ptgs['jabatan']; ?></textarea>
+                            </div>
+                        </div>
+                    <div class="row mb-2">
+                            <label for="isi" class="col-sm-3 col-form-label">Urutan ke-</label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" name="urutan" id="keterangan"><?= $ptgs['urutan']; ?></textarea>
                             </div>
                         </div>
                         <div class="row mb-2">

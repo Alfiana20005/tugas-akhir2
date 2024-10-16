@@ -592,7 +592,7 @@ class C_LandingPage extends BaseController
             'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
             'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
             'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
-            'dataPetugas' => $this->M_SemuaPetugas->findAll(),
+            'dataPetugas' => $this->M_SemuaPetugas->get(),
         ];
         
 

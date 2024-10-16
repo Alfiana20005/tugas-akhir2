@@ -98,6 +98,7 @@ class C_Admin extends BaseController
             'nama' => $this->request->getVar('nama'),
             'nip' => $this->request->getVar('nip'),
             'jabatan' => $this->request->getVar('jabatan'),
+            'urutan' => $this->request->getVar('urutan'),
             'foto' => $fotoName,
             
         ]);
@@ -115,6 +116,7 @@ class C_Admin extends BaseController
             'nama' => $this->request->getVar('nama'),
             'nip' => $this->request->getVar('nip'),
             'jabatan' => $this->request->getVar('jabatan'),
+            'urutan' => $this->request->getVar('urutan'),
             'foto' => $this->request->getVar('foto'),
             
         ];
@@ -150,6 +152,7 @@ class C_Admin extends BaseController
                     'nama' => $newDataKaryawan['nama'],
                     'nip' => $newDataKaryawan['nip'],
                     'jabatan' => $newDataKaryawan['jabatan'],
+                    'urutan' => $newDataKaryawan['urutan'],
                     'foto' => $newDataKaryawan['foto'],
                 ]);
             }
