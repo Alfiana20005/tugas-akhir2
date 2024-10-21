@@ -40,6 +40,18 @@ class M_Kajian extends Model
             
                     return $builder->get()->getResultArray();
     }
+    public function getKajianBaru()
+    {
+        // return $this->orderBy('created_at', 'DESC')
+        //             ->limit($limit)
+        //             ->findAll();
+
+
+                    $builder = $this->db->table('kajian');
+                    $builder->orderBy('created_at', 'DESC');
+            
+                    return $builder->get()->getResultArray();
+    }
     public function getDataByKategori($kategori)
     {
         return $this->db->table('kajian')

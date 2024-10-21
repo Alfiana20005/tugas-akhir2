@@ -319,7 +319,8 @@ class C_LandingPage extends BaseController
 
     public function kajian2(): string
     {
-        $kajian = $this->M_Kajian->findAll();
+        // $kajian = $this->M_Kajian->findAll();
+        $kajian = $this->M_Kajian->getkajianBaru();
         $kajianTerbaru = $this->M_Kajian->getKajianTerbaru(5);
 
 
