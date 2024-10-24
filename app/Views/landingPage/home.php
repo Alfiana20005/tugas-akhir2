@@ -93,7 +93,7 @@
                                     </p>
 									
 									
-									<!-- <a class="btn  align-items-center my-4" style="background:#850000; color: white;" href="/etiket">Pesan Tiket</a>	 -->
+									<a class="btn  align-items-center my-4" style="background:#850000; color: white;" href="/etiket">Pesan Tiket</a>	
 								</form>						  	
 							  </div>
 							  <div class="tab-pane fade" id="holiday" role="tabpanel" aria-labelledby="holiday-tab">
