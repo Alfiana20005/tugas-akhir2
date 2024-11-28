@@ -12,7 +12,7 @@ class M_Manuskrip extends Model
 
 
     // protected $allowedFields = ['foto', 'nama','password','email','username','level'];
-    protected $allowedFields = ['judul','tanggal', 'foto', 'link'];
+    protected $allowedFields = ['judul','tanggal', 'foto', 'link', 'views'];
 
 
     protected $validationRules = [];
@@ -23,6 +23,11 @@ class M_Manuskrip extends Model
     public function getManuskrip($id_manuskrip)
     {
         return $this->find($id_manuskrip);
+    }
+    public function getManuskripTerbaru($limit = null)
+    {
+        return $this->orderBy('tanggal', 'DESC')
+                    ->findAll($limit);
     }
     
   

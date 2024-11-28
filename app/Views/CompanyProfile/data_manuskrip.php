@@ -63,6 +63,7 @@
                         </div>
                 </div>
                 
+                
                 <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary">Simpan</button>
@@ -92,6 +93,7 @@
                                             <th style="text-align: center;">Link</th>
                                             
                                             <th style="text-align: center;">Aksi</th>
+                                            <th style="text-align: center;">Views</th>
                                             
                                         </tr>
                                     </thead>
@@ -121,6 +123,7 @@
                                                 </form>
                                                 
                                             </td>
+                                            <td style="text-align: center;"><?= $m['views']; ?></td>
 
                                         </tr>
                                         <?php endforeach; ?> 

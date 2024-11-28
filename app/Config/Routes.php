@@ -100,6 +100,10 @@ $routes->get('/previewSega/(:segment)', 'C_Admin::previewSega/$1');
 $routes->delete('deleteSega/(:segment)', 'C_Admin::deleteSega/$1');
 
 
+$routes->get('/aksesManuskrip', 'C_Admin::aksesManuskrip');
+$routes->post('/acceptedUpdate', 'C_Admin::acceptedUpdate');
+
+
 
 
 
@@ -110,13 +114,19 @@ $routes->get('/dashboard2', 'C_Dashboard::grafikKoleksi');
 //login
 $routes->post('/login', 'C_Login::login');
 $routes->get('/login', 'C_Login::login');
+$routes->post('/loginUser', 'C_User::loginUser');
+$routes->get('/loginUser', 'C_User::loginUser');
+$routes->post('/registerUser', 'C_User::registerUser');
 //logout
 $routes->get('/logout', 'C_Login::logout');
+$routes->get('/logoutUser', 'C_User::logoutUser');
+$routes->get('/formlogin', 'C_User::index');
+
 
 //filter
 $routes->get('/sidebar', 'C_Dashboard::akses');
 
-//data petugas
+//data petugass
 $routes->get('/petugas', 'C_Petugas::index');
 $routes->get('/tambahpetugas', 'C_Petugas::formtambah');
 $routes->post('/save', 'C_Petugas::save');
@@ -218,6 +228,10 @@ $routes->get('/tulisan2/(:segment)', 'C_LandingPage::tulisan2/$1');
 
 $routes->get('/manuskripKol', 'C_LandingPage::manuskripKol');
 $routes->get('/manuskrip', 'C_LandingPage::manuskrip');
+$routes->get('/manuskripLogin', 'C_LandingPage::manuskripLogin');
+$routes->get('/saveViews/(:num)', 'C_LandingPage::views/$1');
+$routes->get('/saveViews2/(:num)', 'C_LandingPage::views2/$1');
+
 
 $routes->get('/koleksi_page2', 'C_LandingPage::koleksi_page2');
 

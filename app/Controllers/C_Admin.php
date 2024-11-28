@@ -15,6 +15,7 @@ use App\Models\M_SemuaPetugas;
 use App\Models\M_Manuskrip;
 use App\Models\M_ManuskripKol;
 use App\Models\M_Sega;
+use App\Models\M_User;
 
 class C_Admin extends BaseController
 {
@@ -32,6 +33,7 @@ class C_Admin extends BaseController
     protected $M_Manuskrip;
     protected $M_ManuskripKol;
     protected $M_Sega;
+    protected $M_User;
 
     public function __construct() {
         helper('form');
@@ -48,6 +50,7 @@ class C_Admin extends BaseController
         $this -> M_Manuskrip = new M_Manuskrip();
         $this -> M_ManuskripKol = new M_ManuskripKol();
         $this -> M_Sega = new M_Sega();
+        $this -> M_User = new M_User();
     }
     public function strukturOrganisasi(){
 
@@ -1573,6 +1576,43 @@ class C_Admin extends BaseController
     
         // Redirect ke halaman sebelumnya atau halaman yang sesuai
         return redirect()->to('/galleryAdmin');
+    }
+
+    public function aksesManuskrip(): string
+    {
+        $user = $this->M_User->findAll();
+
+
+        $data =[
+            'title' => 'Daftar User',
+            'user' => $user
+        ];
+
+        return view('CompanyProfile/aksesManuskrip', $data);
+    }
+    public function acceptedUpdate()
+    {
+        // Pastikan metode yang digunakan adalah POST
+        if ($this->request->getMethod() == 'post') {
+            // Ambil data ID dan status dari permintaan POST
+            $id_user = $this->request->getPost('id_user');
+            $accepted = $this->request->getPost('accepted');
+
+            // Lakukan pembaruan status di database menggunakan model
+            $result = $this->M_User->UpdateHakAkses($id_user, $accepted);
+
+            // Beri respons berdasarkan hasil pembaruan
+            if ($result) {
+                return redirect()->back();
+                // return $this->response->setJSON(['success' => false, 'message' => 'Berhasil']);
+        
+            } else {
+                return $this->response->setJSON(['success' => false, 'message' => 'Gagal memperbarui status']);
+            }
+        } else {
+            // Jika metode bukan POST, beri respons dengan kesalahan
+            return $this->response->setJSON(['success' => false, 'message' => 'Metode yang tidak valid']);
+        }
     }
 
 

@@ -90,6 +90,7 @@
                                             <th style="text-align: center;">Link</th>
                                             
                                             <th style="text-align: center;">Aksi</th>
+                                            <th style="text-align: center;">Views</th>
                                             
                                         </tr>
                                     </thead>
@@ -118,6 +119,7 @@
                                                 </form>
                                                 
                                             </td>
+                                            <td style="text-align: center;"><?= $m['views']; ?></td>
 
                                         </tr>
                                         <?php endforeach; ?> 

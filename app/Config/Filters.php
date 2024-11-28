@@ -36,6 +36,7 @@ class Filters extends BaseConfig
         'filterAdminPengkajian' => \App\Filters\FilterAdminPengkajian::class,
         'filterAdminPelayanan' => \App\Filters\FilterAdminPelayanan::class,
         'filterPerpustakaan' => \App\Filters\FilterPerpustakaan::class,
+        'filterManuskrip' => \App\Filters\FilterManuskrip::class,
         // 'filterPelayanan' => \App\Filters\FilterPelayanan::class,
         // 'filterPengkajian' => \App\Filters\FilterPengkajian::class,
         // 'filterKepala' => \App\Filters\FilterKepala::class,
@@ -58,7 +59,7 @@ class Filters extends BaseConfig
             // 'invalidchars',
             'filterAdmin' =>[
                 'except' => [
-                    '/login','c_Login/*','/halamanLogin','c_Login', 
+                    '/login','c_Login/*','/halamanLogin','c_Login', '/loginUser','/registerUser','C_User',
                     'c_LandingPage/*',  'c_LandingPage/','/','/home', 
                     '/berita2','/lihatberita2','/lihatberita2/*', '/beritaKategori2/*', 
                     '/visimisi2','/sejarah2','/struktur2', '/semuaPetugas',
@@ -67,19 +68,22 @@ class Filters extends BaseConfig
                     '/kajian2', '/kajianKategori2/*',
                     '/tulisan2','/tulisan2/*',
                     '/koleksi_page2', '/koleksi_detail2', '/koleksi_detail2/*','/koleksi_kategori/*',
-                    '/publikasi2', 'manuskrip', '/dataManuskrip', '/manuskripKol','/dataManuskripKol', 
+                    '/publikasi2', 'manuskrip', '/dataManuskrip', '/manuskripKol','/dataManuskripKol', '/saveViews/*', '/saveViews2/*', 
                     '/perpustakaan2','/detailBuku/*', 
                     '/sekardiyu',
                     '/rencanaStrategis',
                     '/etiket',
                     '/sega',
-                    '/daftarSega', '/audioGuide/*'
+                    '/daftarSega', '/audioGuide/*',
+                    '/formlogin','C_User/*','/logoutUser', 
+
+                   
                     
                 ]
             ],
             'filterPelayanan' =>[
                 'except' => [
-                    '/login','c_Login/*','/halamanLogin','c_Login', 
+                    '/login','c_Login/*','/halamanLogin','c_Login', '/loginUser','/registerUser','C_User',
                     'c_LandingPage/*',  'c_LandingPage/','/','/home', 
                     '/berita2','/lihatberita2','/lihatberita2/*',  '/beritaKategori2/*', 
                     '/visimisi2','/sejarah2','/struktur2', '/semuaPetugas',
@@ -88,18 +92,21 @@ class Filters extends BaseConfig
                     '/kajian2', '/kajianKategori2/*',
                     '/tulisan2','/tulisan2/*',
                     '/koleksi_page2', '/koleksi_detail2', '/koleksi_detail2/*', '/koleksi_kategori/*',
-                    '/publikasi2', 'manuskrip', '/manuskripKol',
+                    '/publikasi2', 'manuskrip', '/manuskripKol', '/saveViews/*', '/saveViews2/*', 
                     '/perpustakaan2','/detailBuku/*', 
                     '/sekardiyu',
                     '/rencanaStrategis',
                     '/etiket',
-                    '/daftarSega', '/audioGuide/*'
+                    '/daftarSega', '/audioGuide/*',
+                    '/formlogin','C_User/*','/logoutUser', 
+
+                    
                     
                 ]
             ],
             'filterPengkajian' =>[
                 'except' => [
-                    '/login','c_Login/*','/halamanLogin','c_Login', 
+                    '/login','c_Login/*','/halamanLogin','c_Login', '/loginUser','/registerUser','C_User',
                     'c_LandingPage/*',  'c_LandingPage/','/','/home', 
                     '/berita2','/lihatberita2','/lihatberita2/*',  '/beritaKategori2/*', 
                     '/visimisi2','/sejarah2','/struktur2', '/semuaPetugas',
@@ -108,18 +115,21 @@ class Filters extends BaseConfig
                     '/kajian2', '/kajianKategori2/*',
                     '/tulisan2','/tulisan2/*',
                     '/koleksi_page2', '/koleksi_detail2', '/koleksi_detail2/*', '/koleksi_kategori/*',
-                    '/publikasi2', 'manuskrip', '/manuskripKol',
+                    '/publikasi2', 'manuskrip', '/manuskripKol', '/saveViews/*', '/saveViews2/*', 
                     '/perpustakaan2','/detailBuku/*', 
                     '/sekardiyu',
                     '/rencanaStrategis',
                     '/etiket',
-                    '/daftarSega', '/audioGuide/*'
+                    '/daftarSega', '/audioGuide/*',
+                   '/formlogin','C_User/*','/logoutUser', 
+
+                    
                     
                 ]
             ],
             'filterKepala' =>[
                 'except' => [
-                    '/login','c_Login/*','/halamanLogin','c_Login', 
+                    '/login','c_Login/*','/halamanLogin','c_Login', '/loginUser','/registerUser','C_User',
                     'c_LandingPage/*',  'c_LandingPage/','/','/home', 
                     '/berita2','/lihatberita2','/lihatberita2/*',  '/beritaKategori2/*', 
                     '/visimisi2','/sejarah2','/struktur2', '/semuaPetugas',
@@ -128,18 +138,21 @@ class Filters extends BaseConfig
                     '/kajian2', '/kajianKategori2/*',
                     '/tulisan2','/tulisan2/*',
                     '/koleksi_page2', '/koleksi_detail2', '/koleksi_detail2/*', '/koleksi_kategori/*',
-                    '/publikasi2', 'manuskrip',  '/dataManuskrip', '/manuskripKol',
+                    '/publikasi2', 'manuskrip',  '/dataManuskrip', '/manuskripKol', '/saveViews/*', '/saveViews2/*', 
                     '/perpustakaan2','/detailBuku/*', 
                     '/sekardiyu',
                     '/rencanaStrategis',
                     '/etiket',
-                    '/daftarSega', '/audioGuide/*'
+                    '/daftarSega', '/audioGuide/*',
+                   '/formlogin','C_User/*','/logoutUser', 
+
+                    
                     
                 ]
             ],
             'fiterKetuaPengkajian' =>[
                 'except' => [
-                    '/login','c_Login/*','/halamanLogin','c_Login', 
+                    '/login','c_Login/*','/halamanLogin','c_Login', '/loginUser','/registerUser','C_User',
                     'c_LandingPage/*',  'c_LandingPage/','/','/home', 
                     '/berita2','/lihatberita2','/lihatberita2/*',  '/beritaKategori2/*', 
                     '/visimisi2','/sejarah2','/struktur2', '/semuaPetugas',
@@ -148,18 +161,21 @@ class Filters extends BaseConfig
                     '/kajian2', '/kajianKategori2/*',
                     '/tulisan2','/tulisan2/*',
                     '/koleksi_page2', '/koleksi_detail2', '/koleksi_detail2/*', '/koleksi_kategori/*',
-                    '/publikasi2', 'manuskrip', '/manuskripKol',
+                    '/publikasi2', 'manuskrip', '/manuskripKol', '/saveViews/*', '/saveViews2/*', 
                     '/perpustakaan2','/detailBuku/*', 
                     '/sekardiyu',
                     '/rencanaStrategis',
                     '/etiket',
-                    '/daftarSega', '/audioGuide/*'
+                    '/daftarSega', '/audioGuide/*',
+                    '/formlogin','C_User/*','/logoutUser', 
+
+                   
                     
                 ]
             ],
             'filterAdminPengkajian' =>[
                 'except' => [
-                    '/login','c_Login/*','/halamanLogin','c_Login', 
+                    '/login','c_Login/*','/halamanLogin','c_Login', '/loginUser','/registerUser','C_User',
                     'c_LandingPage/*',  'c_LandingPage/','/','/home', 
                     '/berita2','/lihatberita2','/lihatberita2/*',  '/beritaKategori2/*', 
                     '/visimisi2','/sejarah2','/struktur2', '/semuaPetugas',
@@ -168,18 +184,21 @@ class Filters extends BaseConfig
                     '/kajian2', '/kajianKategori2/*',
                     '/tulisan2','/tulisan2/*',
                     '/koleksi_page2', '/koleksi_detail2', '/koleksi_detail2/*', '/koleksi_kategori/*',
-                    '/publikasi2', 'manuskrip', '/manuskripKol',
+                    '/publikasi2', 'manuskrip', '/manuskripKol', '/saveViews/*', '/saveViews2/*', 
                     '/perpustakaan2', '/detailBuku/*', 
                     '/sekardiyu',
                     '/rencanaStrategis',
                     '/etiket',
-                    '/daftarSega', '/audioGuide/*'
+                    '/daftarSega', '/audioGuide/*',
+                   '/formlogin','C_User/*','/logoutUser', 
+
+                    
                     
                 ]
             ],
             'filterAdminPelayanan' =>[
                 'except' => [
-                    '/login','c_Login/*','/halamanLogin','c_Login', 
+                    '/login','c_Login/*','/halamanLogin','c_Login', '/loginUser','/registerUser','C_User',
                     'c_LandingPage/*',  'c_LandingPage/','/','/home', 
                     '/berita2','/lihatberita2','/lihatberita2/*',  '/beritaKategori2/*', 
                     '/visimisi2','/sejarah2','/struktur2', '/semuaPetugas',
@@ -188,18 +207,20 @@ class Filters extends BaseConfig
                     '/kajian2', '/kajianKategori2/*',
                     '/tulisan2','/tulisan2/*',
                     '/koleksi_page2', '/koleksi_detail2', '/koleksi_detail2/*', '/koleksi_kategori/*',
-                    '/publikasi2', 'manuskrip', '/manuskripKol',
+                    '/publikasi2', 'manuskrip', '/manuskripKol', '/saveViews/*', '/saveViews2/*', 
                     '/perpustakaan2', '/detailBuku/*', 
                     '/sekardiyu',
                     '/rencanaStrategis',
                     '/etiket',
-                    '/daftarSega', '/audioGuide/*'
+                    '/daftarSega', '/audioGuide/*',
+                   '/formlogin','C_User/*','/logoutUser', 
+                   
                     
                 ]
             ],
             'filterPerpustakaan' =>[
                 'except' => [
-                    '/login','c_Login/*','/halamanLogin','c_Login', 
+                    '/login','c_Login/*','/halamanLogin','c_Login', '/loginUser','/registerUser','C_User',
                     'c_LandingPage/*',  'c_LandingPage/','/','/home', 
                     '/berita2','/lihatberita2','/lihatberita2/*',  '/beritaKategori2/*', 
                     '/visimisi2','/sejarah2','/struktur2', '/semuaPetugas',
@@ -208,17 +229,20 @@ class Filters extends BaseConfig
                     '/kajian2', '/kajianKategori2/*',
                     '/tulisan2','/tulisan2/*',
                     '/koleksi_page2', '/koleksi_detail2', '/koleksi_detail2/*', '/koleksi_kategori/*',
-                    '/publikasi2', 'manuskrip', '/manuskripKol',
+                    '/publikasi2', 'manuskrip', '/manuskripKol', '/saveViews/*', '/saveViews2/*', 
                     '/perpustakaan2', '/detailBuku/*', 
                     '/sekardiyu',
                     '/rencanaStrategis',
                     '/etiket',
-                    '/daftarSega', '/audioGuide/*'
+                    '/daftarSega', '/audioGuide/*',
+                    '/formlogin','C_User/*','/logoutUser', 
+
+                    
                     
                 ]
             ],
             
-
+            
 
         ],
         'after' => [
@@ -233,13 +257,15 @@ class Filters extends BaseConfig
                     '/tambahKegiatan', '/saveKegiatan', 'hapusKegiatan/*', 'updateKegiatan/*',
                     '/tambahPublikasi', '/savePublikasi', 'hapusPublikasi/*', 'updatePublikasi/*',
                     '/dataManuskrip', '/saveManuskrip', 'hapusManuskrip/*', 'updateManuskrip/*', 
-                    '/dataManuskripKol',  '/saveManuskripKol', 'hapusManuskripKol/*', 'updateManuskripKol/*',
+                    '/dataManuskripKol',  '/saveManuskripKol', 'hapusManuskripKol/*', 'updateManuskripKol/*', 
                     '/koleksiAdmin', '/saveKoleksi', 'hapusKoleksiAdmin/*', 'updateKoleksiAdmin/*',
                     '/galleryAdmin', '/saveGallery', 'hapusGallery/*', 'updateGallery/*',
                     '/saveKajian', '/kajianAdmin', 
                     '/tulisKajian', '/addSection', '/tulisKajian/*', '/saveIsiKajian', '/tulisKajian/*', 'hapusKajian/*', '/previewKajian/*',
                     '/petugasMuseum', '/strukturOrganisasi', 'hapusOrganisasi/*', '/updateKaryawan/*',
                     '/sega', '/saveSega', '/previewSega/*', '/deleteSega/*',
+
+                    '/aksesManuskrip', '/acceptedUpdate',
 
                  ]
             ],
@@ -374,6 +400,7 @@ class Filters extends BaseConfig
 
                  ]
             ],
+            
             // 'filterPelayanan' => [
             //     'except' =>[
             //         '/login', 'C_Login/*', '/logout', '/dashboard', '/halamanLogin', 'C_Login',

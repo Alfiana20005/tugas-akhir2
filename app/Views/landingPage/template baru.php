@@ -29,8 +29,8 @@
     
 
   
-<!-- Sertakan Bootstrap JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+		<!-- Sertakan Bootstrap JavaScript -->
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
     
 			<!--
@@ -50,9 +50,6 @@
 
 
 			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-			 
-
-
 
 
 		</head>
@@ -60,22 +57,28 @@
 			<header id="header">
 				<div class="header-top">
 					<div class="container">
-			  		<div class="row align-items-center">
-			  			<!-- <div class="col-lg-6 col-sm-6 col-6 header-top-left"> -->
-			  				<ul>
-			  					<!-- <li><a href="#">Contact Us!</a></li> -->
-			  					<li><a class="btn btn-sm" style="background-color: #850000;" target="_blank" href="https://wa.me/+628973862445">Contact Us!</a></li>
-			  				</ul>			
-			  			<!-- </div> -->
-			  			<div class="col-lg-6 col-sm-6 col-6 header-top-right">
-							<div class="header-social">
-								<a href="#"></a>
-								<a href="#"></a>
-								<a href="#"></a>
-								<a href="#"></a>
+						<div class="row align-items-center">
+							<!-- <div class="col-lg-6 col-sm-6 col-6 header-top-left"> -->
+								<ul>
+									<!-- <li><a href="#">Contact Us!</a></li> -->
+									<li><a class="btn btn-sm" style="background-color: #850000;" target="_blank" href="https://wa.me/+628973862445">Contact Us!</a></li>
+								</ul>			
+							<!-- </div> -->
+							<div class="col-lg-6 col-sm-6 col-6 header-top-right">
+								<div class="header-social">
+									<!-- <a href="#">a</a>
+									<a href="#"></a>
+									<a href="#"></a>
+									<a href="#"></a> -->
+									<!-- <?php if(isset($user['nama'])): ?>
+										<a href="#" class="">Hallo <?= $user['nama']; ?>!</a>
+										<a href="/logoutUser" class="">| logout</a>
+									<?php else: ?>
+										<a href="/formlogin" class="" >Login</a>
+									<?php endif; ?> -->
+								</div>
 							</div>
-			  			</div>
-			  		</div>			  					
+						</div>			  					
 					</div>
 				</div>
 				<div class="container main-menu">
@@ -90,7 +93,7 @@
 				      </div>
 				      <nav id="nav-menu-container">
 				        <ul class="nav-menu" >
-				          <li><a href="/home"><strong>Home</strong></a></li>
+				        	<li><a href="/home"><strong>Home</strong></a></li>
                   			<li class="menu-has-children"><a href=""><strong>Profil</strong></a>
 				            <ul>
 				              <li><a href="/sejarah2">Sejarah</a></li>
@@ -99,7 +102,8 @@
 				              <li><a href="/struktur2">Struktur Organisasi</a></li>
 				              <li><a href="/sekardiyu">Sekardiyu</a></li>
 				            </ul>
-				          </li>	
+				          	</li>
+								
                   			<li class="menu-has-children"><a href=""><strong>Layanan</strong></a>
 				            <ul>
 				              <li><a href="/kontak">Kontak</a></li>
@@ -113,7 +117,7 @@
 				              <li><a href="/kajian2">Tulisan</a></li>
 				              <li><a href="/publikasi2">Publikasi</a></li>
 				              <!-- <li><a href="/manuskripKol">Manuskrip</a></li> -->
-				              <!-- <li><a href="/manuskrip">Terjemahan Manuskrip</a></li> -->
+				              <li><a href="/manuskrip">Manuskrip</a></li>
 				            </ul>
 				          </li>	
                   			<li><a href="/koleksi_page2"><strong>Koleksi</strong></a></li>
@@ -206,6 +210,56 @@
 
 			<!-- <script src="<?= base_url();?>landingPage/assets/vendor/swiper/swiper-bundle.min.js"></script> -->
 
+			<div class="modal fade" id="tambahKegiatan" tabindex="-1" aria-labelledby="tambahKegiatan" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title fs-5" id="tambahKegiatan">Login</h4>
+                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+            </div>
+            <div class="modal-body">
+                <form action="/loginUser" method="post" enctype="multipart/form-data" id="form">
+                    <div class="row mb-2">
+                        <label for="email" class="col-sm-3 col-form-label">Nama</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="recipient-name" name="nama">
+                        </div>
+                    </div>
+                
+                    <div class="row mb-2">
+                        <label for="email" class="col-sm-3 col-form-label">Password</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="recipient-name" name="password">
+                        </div>
+                    </div>
+                
+                    <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#daftar" data-bs-whatever="@getbootstrap">Daftar</button> -->
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                    </div>
+                </form>
+            </div>
+               
+            </div>
+            
+        </div>
+    </div>
+
+
+	<script type="importmap">
+    {
+      "imports": {
+        "@popperjs/core": "https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/esm/popper.min.js",
+        "bootstrap": "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.esm.min.js"
+      }
+    }
+    </script>
+    <script type="module">
+      import * as bootstrap from 'bootstrap'
+
+      new bootstrap.Popover(document.getElementById('popoverButton'))
+    </script>
 
 
 <script>

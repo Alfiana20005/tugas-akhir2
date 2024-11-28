@@ -60,6 +60,11 @@
             <i class="fas fa-fw fa-users"></i>
             <span>Manuskrip</span></a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/aksesManuskrip">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Hak Akses Manuskrip</span></a>
+    </li>
     
     <li class="nav-item">
         <a class="nav-link" href="/beritaAdmin">
