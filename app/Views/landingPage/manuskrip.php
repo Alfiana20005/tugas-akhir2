@@ -237,7 +237,87 @@
                 <?php endif; ?>
 
             <!-- </div> -->
-            
+            <div class="section-top-border">
+						<h3 class="mb-30">Digitalisasi Manuskrip</h3>
+						<div class="row">
+							<div class="col-lg-12">
+								<blockquote class="generic-blockquote">
+									Digitalisasi ini dilakukan oleh Museum Negeri Nusa Tenggara Barat berkolaborasi dengan Badan Riset dan Inovasi Nasional (BRIN) dalam program "Digitasisasi Koleksi".
+                                    Melalui program ini, sejumlah manuskrip telah berhasil terdokumentasikan dalam format digital, yang bertujuan untuk memudahkan pelestarian, aksesibilitas, dan pemanfaatan informasi koleksi oleh masyarakat luas.
+                                    <br><br>
+                                    Daftar Manuskrip:
+                                    <br>
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <li>Kakawin Hariwangsa</li>
+                                                <li>Katika Tajul Muluk</li>
+                                                <li>Pelukatan</li>
+                                                <li>Mantra Bali</li>
+                                                <li>Pasopati Siwa Dewata</li>
+                                                <li>Brahma</li>
+                                                <li>Kakawin Arjuna Wiwaha</li>
+                                                <li>Sang Hyang Dewa</li>
+                                                <li>Sang Hyang Ayu</li>
+                                                <li>Sang Hyang Brahma</li>
+                                                <li>Sang Hyang Darma</li>
+                                                <li>Sang Hyang Widi</li>
+                                                <li>Agama Hindu</li>
+                                                <li>Batara Guru</li>
+                                                <li>Puspakarma</li>
+                                                <li>Bandar Sela</li>
+                                                <li>Surat-surat</li>
+                                                <li>Puspalaya</li>
+                                                <li>Kayat Karbi</li>
+                                                <li>Barunambara</li>
+                                                <li>Badik Walam</li>
+                                                <li>Selojaya Selapati</li>
+                                                <li>Pedang Kamkam</li>
+                                                <li>Rasajati</li>
+                                                <li>Sangka Langit</li>
+                                                <li>Ratna Bungsi</li>
+                                            </td>
+                                            <td>
+                                                
+                                                <li>Subandana</li>
+                                                <li>Markum</li>
+                                                <li>Suradilaga</li>
+                                                <li>Tutur Sari Kuning</li>
+                                                <li>Kakawin Ramayana</li>
+                                                <li>Brahma</li>
+                                                <li>Sang Hyang Dharma</li>
+                                                <li>Hyang Widi</li>
+                                                <li>Agama hindu</li>
+                                                <li>Batara Guru</li>
+                                                <li>Puspakerma</li>
+                                                <li>Manek Pedang Kamkam</li>
+                                                <li>Sang Hyang Widhi</li>
+                                                <li>Angling Darma</li>
+                                                <li>Katika</li>
+                                                <li>Kotaragama</li>
+                                                <li>Indarjaya</li>
+                                                <li>Warung Bali</li>
+                                                <li>Mantra dan Doa</li>
+                                                <li>Perjanjiian Sultan Salahuddin Bima</li>
+                                                <li>Silsilah Raja Bima</li>
+                                                <li>Al-Quran</li>
+                                                <li>Babad Suwung</li>
+                                                <li>Monyeh</li>
+                                                <li>Sejarah Bima</li>
+                                            </td>
+                                        </tr>
+                                        
+                                    </table>
+                                    
+                                    
+                                    
+                                    <br><br>
+                                    Bagi para peneliti, pelajar, atau masyarakat yang ingin mengakses manuskrip ini, dapat mengajukan permohonan resmi kepada pihak museum. Permohonan dapat dikirimkan melalui email resmi museum disertai informasi terkait tujuan dan kebutuhan akses. Kami dengan senang hati akan memproses permohonan tersebut sesuai dengan prosedur yang berlaku.
+                                </blockquote>
+								
+							</div>
+						</div>
+					</div>
 
         </div>
     </section><!-- End Our Team Section -->
