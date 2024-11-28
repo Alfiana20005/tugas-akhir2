@@ -26,7 +26,7 @@ class M_ManuskripKol extends Model
     }
     public function getManuskripKolTerbaru($limit = null)
     {
-        return $this->orderBy('created_at', 'DESC')
+        return $this->orderBy('id', 'DESC')
                     ->findAll($limit);
     }
     
