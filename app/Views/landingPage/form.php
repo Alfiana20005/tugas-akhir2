@@ -136,6 +136,12 @@
                     </div>
                 </div>
                 <div class="row mb-2">
+                    <label for="email" class="col-sm-3 col-form-label">Instansi</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="recipient-name" name="instansi">
+                    </div>
+                </div>
+                <div class="row mb-2">
                     <label for="email" class="col-sm-3 col-form-label">Whatsapp</label>
                     <div class="col-sm-9">
                         <input type="text" class="form-control" id="recipient-name" name="wa">

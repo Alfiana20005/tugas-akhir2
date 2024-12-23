@@ -11,7 +11,7 @@ class M_User extends Model
     protected $useTimestamps = false;
 
 
-    protected $allowedFields = ['id_user', 'nama','password','email','username','pekerjaan', 'wa', 'accepted', 'keperluan'];
+    protected $allowedFields = ['id_user', 'nama','password','email','username','pekerjaan', 'wa', 'accepted', 'keperluan', 'instansi'];
     // protected $allowedFields = ['nama','pekerjaan', 'foto', 'audio1', 'audio2','deskripsi_eng'];
 
 

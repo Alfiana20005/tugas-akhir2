@@ -79,7 +79,7 @@
                                             <th style="text-align: center;">No</th>
                                             <th style="text-align: center;">Nama</th>
                                             <th style="text-align: center;">Pekerjaan</th> 
-                                            
+                                            <th style="text-align: center;">Instansi</th> 
                                             <th style="text-align: center;">Whatsapp</th>
                                             <th style="text-align: center;">Email</th>
                                             <th style="text-align: center;">Password</th>
@@ -100,6 +100,7 @@
                                             <td style="text-align: center;"><?= $no++; ?></td>
                                             <td style="text-align: center;"><?= $u['nama']; ?></td>
                                             <td style="text-align: center;"><?= $u['pekerjaan']; ?></td>
+                                            <td style="text-align: center;"><?= $u['instansi']; ?></td>
                                             <td style="text-align: center;"><?= $u['wa']; ?></td>
                                             <td style="text-align: center;"><?= $u['email']; ?></td>
                                             <td style="text-align: center;"><?= $u['password']; ?></td>

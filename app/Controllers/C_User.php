@@ -57,6 +57,7 @@ class C_User extends BaseController
             'password' => $this->request->getVar('password'),
             'accepted' => 'Menunggu',
             'keperluan' => $this->request->getVar('keperluan'),
+            'instansi' => $this->request->getVar('instansi'),
             
         ]);
 
@@ -106,6 +107,7 @@ class C_User extends BaseController
             session()->set('wa', $cek['wa']);
             session()->set('accepted', $cek['accepted']);
             session()->set('keperluan', $cek['keperluan']);
+            session()->set('instansi', $cek['instansi']);
 
             return redirect()->to(base_url('/manuskrip'));
             // return redirect()->back();
@@ -135,6 +137,7 @@ class C_User extends BaseController
         session()->remove('wa');
         session()->remove('accepted');
         session()->remove('keperluan');
+        session()->remove('instansi');
         
         session()->setFlashdata('pesanlogout', 'Logout Berhasil');
         return redirect()->to(base_url('/manuskrip'));
