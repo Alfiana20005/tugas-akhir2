@@ -150,7 +150,7 @@
                                 <option <?= old("zona") == 'Zona D (Naskah)'? 'selected' : 'Zona D (Naskah)' ?> value="Zona D (Naskah)">Zona D (Naskah)</option>
                                 <option <?= old("zona") == 'Zona E (Etnografika)'? 'selected' : 'Zona E (Etnografika)' ?> value="Zona E (Etnografika)">Zona E (Etnografika)</option>
                                 <option <?= old("zona") == 'Zona F (Etnografika, Arkeologika, Geologika, Biologika)'? 'selected' : 'Zona F (Etnografika, Arkeologika, Geologika, Biologika)' ?> value="Zona F (Etnografika, Arkeologika, Geologika, Biologika)">Zona F (Etnografika, Arkeologika, Geologika, Biologika)</option>
-                                <option <?= old("zona") == 'Zona G (Keramik Gerabah)'? 'selected' : 'Zona G (Keramik Gerabah)' ?> value="Zona G (Keramik Gerabah)">Zona G (Keramik Gerabah)</option>
+                                <option <?= old("zona") == 'Zona G (Keramik, Gerabah)'? 'selected' : 'Zona G (Keramik, Gerabah)' ?> value="Zona G (Keramik, Gerabah)">Zona G (Keramik, Gerabah)</option>
                                 <option <?= old("zona") == 'Zona H (Kain)'? 'selected' : 'Zona H (Kain)' ?> value="Zona H (Kain)">Zona H (Kain)</option>
                                 <option <?= old("zona") == 'Zona I (Etnografika)'? 'selected' : 'Zona I (Etnografika)' ?> value="Zona I (Etnografika)">Zona I (Etnografika)</option>
                             </select>
