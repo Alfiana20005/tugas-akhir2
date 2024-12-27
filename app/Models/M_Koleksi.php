@@ -137,6 +137,9 @@ class M_Koleksi extends Model
             $builder->orlike('keadaan', $keyword);    
             $builder->orlike('status', $keyword);    
             $builder->orlike('kode_lk', $keyword);       
+            $builder->orlike('lemari', $keyword);       
+            $builder->orlike('rak', $keyword);       
+            $builder->orlike('zona', $keyword);       
         }
 
         // Kembalikan data paginated dan pager
