@@ -67,6 +67,7 @@ class M_Koleksi extends Model
     {
         return $this->db->table('data_koleksi')
             ->where('kode_kategori', $kode_kategori)
+            ->orderBy("CAST(no_registrasi AS UNSIGNED)", 'ASC')
             ->get()
             ->getResultArray();
     }
@@ -84,8 +85,6 @@ class M_Koleksi extends Model
     public function getDataByKategori()
     {
         $query = $this->db->query("SELECT kode_kategori, keadaan, COUNT(keadaan) as total, count(id) as jumlah FROM data_koleksi GROUP BY kode_kategori, keadaan");
-    
-        
         $result = $query->getResultArray();
     
         return $result;
