@@ -126,7 +126,7 @@ class M_Koleksi extends Model
     
         // Pilih semua kolom dari tabel
         $builder->select('*');
-        $builder->orderBy("CAST(kode_lk AS UNSIGNED)", 'ASC');
+        $builder->orderBy("CAST(no_registrasi AS UNSIGNED)", 'ASC');
     
         
         // Jika ada pencarian, tambahkan kondisi 'like'
