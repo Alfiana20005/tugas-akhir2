@@ -131,7 +131,7 @@
                             <option selected>Pilih </option>
                             <option <?= $b['jenisBerita'] == 'Pendidikan'? 'selected' : 'Pendidikan' ?> value="Pendidikan">Pendidikan</option>
                             <option <?= $b['jenisBerita'] == 'Sosial Masyarakat'? 'selected' : 'Sosial Masyarakat' ?> value="Sosial Masyarakat">Sosial Masyarakat</option>
-                            <option <?= $b['jenisBerita'] == 'Sejarah dan BUdaya'? 'selected' : 'Sejarah dan BUdaya' ?> value="Sejarah dan BUdaya">Sejarah dan BUdaya</option>
+                            <option <?= $b['jenisBerita'] == 'Sejarah dan Budaya'? 'selected' : 'Sejarah dan Budaya' ?> value="Sejarah dan Budaya">Sejarah dan Budaya</option>
                             <option <?= $b['jenisBerita'] == 'Pemerintahan'? 'selected' : 'Pemerintahan' ?> value="Pemerintahan">Pemerintahan</option>
                             <option <?= $b['jenisBerita'] == 'Pariwisata'? 'selected' : 'Pariwisata' ?> value="Pariwisata">Pariwisata</option>
                             
