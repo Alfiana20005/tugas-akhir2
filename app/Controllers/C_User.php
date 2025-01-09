@@ -58,6 +58,7 @@ class C_User extends BaseController
             'accepted' => 'Menunggu',
             'keperluan' => $this->request->getVar('keperluan'),
             'instansi' => $this->request->getVar('instansi'),
+            'medsos' => $this->request->getVar('medsos'),
             
         ]);
 
@@ -108,6 +109,7 @@ class C_User extends BaseController
             session()->set('accepted', $cek['accepted']);
             session()->set('keperluan', $cek['keperluan']);
             session()->set('instansi', $cek['instansi']);
+            session()->set('medsos', $cek['medsos']);
 
             return redirect()->to(base_url('/manuskrip'));
             // return redirect()->back();
