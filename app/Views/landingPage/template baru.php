@@ -107,12 +107,12 @@
                   			<li class="menu-has-children"><a href=""><strong>Layanan</strong></a>
 				            <ul>
 				              <li><a href="/kontak">Kontak</a></li>
-				              <li><a href="/ruangPamer2">Ruang Pamer</a></li>
+				              <li><a href="/ruangPamer2">Ruang Pamer</a></li>  
 				            </ul>
 				          </li>	
 				          <li><a href="/berita2"><strong>Berita</strong></a></li>
 				          <li><a href="/kegiatan2"><strong>Kegiatan</strong></a></li>
-				          <li class="menu-has-children"><a href=""><strong>Tulisan Museum</strong></a>
+				          <li class="menu-has-children"><a href=""><strong>Tulisan</strong></a>
 				            <ul>
 				              <li><a href="/kajian2">Tulisan</a></li>
 				              <li><a href="/publikasi2">Publikasi</a></li>
@@ -120,6 +120,7 @@
 				              <li><a href="/manuskrip">Manuskrip</a></li>
 				            </ul>
 				          </li>	
+						  	<li><a href="/pameran"><strong>Pameran Museum</strong></a></li>
                   			<li><a href="/koleksi_page2"><strong>Koleksi</strong></a></li>
 				          	<li><a href="/perpustakaan2"><strong>Perpustakaan</strong></a></li>		          					          		          
 				          	<!-- <li><a href="/halamanLogin"><strong>LOGIN</strong></a></li> -->

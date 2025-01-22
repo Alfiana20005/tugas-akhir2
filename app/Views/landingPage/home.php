@@ -6,7 +6,7 @@
             <!-- start banner Area -->
 			<section class="banner-area relative">
 				<video class="video-background" autoplay muted loop>
-					<source src="landingPage/img/video.mp4" type="video/mp4">
+					<source src="landingPage/img/BIENNALE.mp4" type="video/mp4">
 					Your browser does not support the video tag.
 				</video>
 				<div class="overlay overlay-bg">
