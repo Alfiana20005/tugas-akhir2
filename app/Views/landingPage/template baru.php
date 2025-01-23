@@ -120,7 +120,7 @@
 				              <li><a href="/manuskrip">Manuskrip</a></li>
 				            </ul>
 				          </li>	
-						  	<li><a href="/pameran"><strong>Pameran Museum</strong></a></li>
+						  	<!-- <li><a href="/pameran"><strong>Pameran Museum</strong></a></li> -->
                   			<li><a href="/koleksi_page2"><strong>Koleksi</strong></a></li>
 				          	<li><a href="/perpustakaan2"><strong>Perpustakaan</strong></a></li>		          					          		          
 				          	<!-- <li><a href="/halamanLogin"><strong>LOGIN</strong></a></li> -->
