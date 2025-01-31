@@ -145,6 +145,9 @@ class M_Koleksi extends Model
     return $builder->paginate($num);
 
     }
+    public function getKoleksiBatch($limit, $offset) {
+        return $this->db->table('koleksi')->limit($limit, $offset)->get()->getResultArray();
+    }
     
 }
     

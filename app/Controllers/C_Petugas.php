@@ -96,7 +96,8 @@ class C_Petugas extends BaseController
             'nama' => $this->request->getVar('nama'),
             'username' => $this->request->getVar('username'),
             'email' => $this->request->getVar('email'),
-            'password' => $this->request->getVar('password'),
+            // 'password' => $this->request->getVar('password'),
+            'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT), // Hash password
             'level' => $this->request->getVar('level'),
             'nip' => $this->request->getVar('nip'),
         ]);

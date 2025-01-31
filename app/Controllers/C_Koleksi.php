@@ -421,7 +421,7 @@ class C_Koleksi extends BaseController
     //     exit;
 
     // }
-
+    
     // public function exportExcel(){
     //     $koleksiModel = new M_Koleksi();
     //     $koleksi = $koleksiModel->getkoleksiAll();
@@ -443,7 +443,24 @@ class C_Koleksi extends BaseController
     //     $sheet->setCellValue('I1', 'HARGA');
     //     $sheet->setCellValue('J1', 'LOKASI PENYIMPANAN');
     //     $sheet->setCellValue('K1', 'KEADAAN');
-    //     $sheet->setCellValue('L1', 'GAMBAR'); // Kolom untuk gambar
+    //     $sheet->setCellValue('L1', 'GAMBAR');
+    
+    //     // Style header
+    //     $sheet->getStyle('A1:L1')->applyFromArray([
+    //         'font' => [
+    //             'bold' => true,
+    //         ],
+    //         'fill' => [
+    //             'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+    //             'startColor' => [
+    //                 'argb' => 'FFCCCCCC',
+    //             ],
+    //         ],
+    //         'alignment' => [
+    //             'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+    //             'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+    //         ],
+    //     ]);
     
     //     $row = 2;
     
@@ -457,23 +474,42 @@ class C_Koleksi extends BaseController
     //         $sheet->setCellValue('G' . $row, $item['cara_dapat']);
     //         $sheet->setCellValue('H' . $row, $item['tgl_masuk']);
     //         $sheet->setCellValue('I' . $row, $item['harga']);
-    //         $sheet->setCellValue('J' . $row, $item['rak'] . " " .  $item['lemari'] . " " . $item['lokasi']);
+    //         $sheet->setCellValue('J' . $row, $item['rak'] . " " . $item['lemari'] . " " . $item['lokasi']);
     //         $sheet->setCellValue('K' . $row, $item['keadaan']);
     
-    //         // Tambahkan gambar jika ada
-    //         if (!empty($item['gambar']) && file_exists('img/koleksi/' . $item['gambar'])) {
+    //         // Tambahkan gambar
+    //         $path = realpath('img/koleksi/' . $item['gambar']);
+    //         if ($path && file_exists($path)) {
     //             $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
     //             $drawing->setName('Gambar');
     //             $drawing->setDescription('Gambar Koleksi');
-    //             $drawing->setPath('img/koleksi/' . $item['gambar']); // Path ke gambar
-    //             $drawing->setCoordinates('L' . $row); // Kolom gambar
-    //             $drawing->setWidth(50); // Atur lebar gambar
-    //             $drawing->setHeight(50); // Atur tinggi gambar
+    //             $drawing->setPath($path);
+    //             $drawing->setCoordinates('L' . $row);
+    //             $drawing->setWidth(50);
+    //             $drawing->setHeight(50);
     //             $drawing->setWorksheet($sheet);
     //         }
     
+    //         // Atur tinggi baris
+    //         $sheet->getRowDimension($row)->setRowHeight(60);
+    
     //         $row++;
     //     }
+    
+    //     // Atur auto-size kolom
+    //     foreach (range('A', 'L') as $col) {
+    //         $sheet->getColumnDimension($col)->setAutoSize(true);
+    //     }
+    
+    //     // Tambahkan border
+    //     $styleArray = [
+    //         'borders' => [
+    //             'allBorders' => [
+    //                 'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+    //             ],
+    //         ],
+    //     ];
+    //     $sheet->getStyle('A1:L' . $row)->applyFromArray($styleArray);
     
     //     // Simpan dan unduh file Excel
     //     header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
@@ -484,13 +520,12 @@ class C_Koleksi extends BaseController
     //     $writer->save('php://output');
     //     exit;
     // }
-    
-    public function exportExcel(){
+
+    public function exportExcel() {
         $koleksiModel = new M_Koleksi();
-        $koleksi = $koleksiModel->getkoleksiAll();
-    
         $fileName = 'koleksi.xlsx';
     
+        // Inisialisasi Spreadsheet
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
     
@@ -508,7 +543,7 @@ class C_Koleksi extends BaseController
         $sheet->setCellValue('K1', 'KEADAAN');
         $sheet->setCellValue('L1', 'GAMBAR');
     
-        // Style header
+        // Style Header
         $sheet->getStyle('A1:L1')->applyFromArray([
             'font' => [
                 'bold' => true,
@@ -525,38 +560,53 @@ class C_Koleksi extends BaseController
             ],
         ]);
     
-        $row = 2;
+        $batchSize = 500; // Jumlah data per batch
+        $offset = 0;      // Awal offset
+        $row = 2;         // Baris pertama untuk data
     
-        foreach ($koleksi as $item) {
-            $sheet->setCellValue('A' . $row, $item['no_registrasi']);
-            $sheet->setCellValue('B' . $row, $item['kode_kategori'] . " . " . $item['no_inventaris']);
-            $sheet->setCellValue('C' . $row, $item['nama_inv']);
-            $sheet->setCellValue('D' . $row, $item['uraian']);
-            $sheet->setCellValue('E' . $row, $item['tempat_dapat']);
-            $sheet->setCellValue('F' . $row, $item['ukuran']);
-            $sheet->setCellValue('G' . $row, $item['cara_dapat']);
-            $sheet->setCellValue('H' . $row, $item['tgl_masuk']);
-            $sheet->setCellValue('I' . $row, $item['harga']);
-            $sheet->setCellValue('J' . $row, $item['rak'] . " " . $item['lemari'] . " " . $item['lokasi']);
-            $sheet->setCellValue('K' . $row, $item['keadaan']);
+        while (true) {
+            // Ambil batch data
+            $koleksi = $koleksiModel->getKoleksiBatch($batchSize, $offset);
     
-            // Tambahkan gambar
-            $path = realpath('img/koleksi/' . $item['gambar']);
-            if ($path && file_exists($path)) {
-                $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-                $drawing->setName('Gambar');
-                $drawing->setDescription('Gambar Koleksi');
-                $drawing->setPath($path);
-                $drawing->setCoordinates('L' . $row);
-                $drawing->setWidth(50);
-                $drawing->setHeight(50);
-                $drawing->setWorksheet($sheet);
+            // Jika data kosong, hentikan loop
+            if (empty($koleksi)) {
+                break;
             }
     
-            // Atur tinggi baris
-            $sheet->getRowDimension($row)->setRowHeight(60);
+            foreach ($koleksi as $item) {
+                $sheet->setCellValue('A' . $row, $item['no_registrasi']);
+                $sheet->setCellValue('B' . $row, $item['kode_kategori'] . " . " . $item['no_inventaris']);
+                $sheet->setCellValue('C' . $row, $item['nama_inv']);
+                $sheet->setCellValue('D' . $row, $item['uraian']);
+                $sheet->setCellValue('E' . $row, $item['tempat_dapat']);
+                $sheet->setCellValue('F' . $row, $item['ukuran']);
+                $sheet->setCellValue('G' . $row, $item['cara_dapat']);
+                $sheet->setCellValue('H' . $row, $item['tgl_masuk']);
+                $sheet->setCellValue('I' . $row, $item['harga']);
+                $sheet->setCellValue('J' . $row, $item['rak'] . " " . $item['lemari'] . " " . $item['lokasi']);
+                $sheet->setCellValue('K' . $row, $item['keadaan']);
     
-            $row++;
+                // Tambahkan gambar
+                $path = realpath('img/koleksi/' . $item['gambar']);
+                if ($path && file_exists($path)) {
+                    $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+                    $drawing->setName('Gambar');
+                    $drawing->setDescription('Gambar Koleksi');
+                    $drawing->setPath($path);
+                    $drawing->setCoordinates('L' . $row);
+                    $drawing->setWidth(50);
+                    $drawing->setHeight(50);
+                    $drawing->setWorksheet($sheet);
+                }
+    
+                // Atur tinggi baris
+                $sheet->getRowDimension($row)->setRowHeight(60);
+    
+                $row++;
+            }
+    
+            // Tambah offset
+            $offset += $batchSize;
         }
     
         // Atur auto-size kolom
@@ -572,7 +622,7 @@ class C_Koleksi extends BaseController
                 ],
             ],
         ];
-        $sheet->getStyle('A1:L' . $row)->applyFromArray($styleArray);
+        $sheet->getStyle('A1:L' . ($row - 1))->applyFromArray($styleArray);
     
         // Simpan dan unduh file Excel
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
@@ -583,6 +633,7 @@ class C_Koleksi extends BaseController
         $writer->save('php://output');
         exit;
     }
+    
     
 
     public function terakhirDiubah($id){
