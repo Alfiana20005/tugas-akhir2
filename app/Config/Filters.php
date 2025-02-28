@@ -588,7 +588,7 @@ class Filters extends BaseConfig
                     '/previewSega/*',
                     '/deleteSega/*',
                     '/penelitian',
-                    '/savePenelitian/*',
+                    '/savePenelitian',
                     '/hapusPenelitian/*',
                     '/updatePenelitian/*',
 
