@@ -93,6 +93,11 @@
                 <i class="fas fa-fw fa-users"></i>
                 <span>Sega</span></a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/penelitian">
+                <i class="fas fa-fw fa-users"></i>
+                <span>penelitian</span></a>
+        </li>
 
         <!-- <hr class="sidebar-divider"> -->
     <?php endif; ?>

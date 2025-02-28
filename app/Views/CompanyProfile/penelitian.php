@@ -4,11 +4,10 @@
 
 <div class="container-fluid">
     <!-- Page Heading -->
-    <!-- <h1 class="h3 mb-4 text-gray-800">Data Petugas Terdaftar</h1> -->
+    <!-- <h1 class="h3 mb-4 text-gray-800">Data Penelitian Terdaftar</h1> -->
 
-    <!-- <button class="btn btn-primary mb-3">Tambah data</button> -->
     <?php if (session()->get('level') == 'Admin'): ?>
-        <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#tambahKegiatan" data-bs-whatever="@getbootstrap">Tambah Publikasi</button>
+        <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#tambahPenelitian" data-bs-whatever="@getbootstrap">Tambah Penelitian</button>
         <?php if (session()->getFlashdata('pesan')): ?>
             <div class="alert alert-success" role="alert">
                 <?= session()->getFlashdata('pesan'); ?>
@@ -16,31 +15,43 @@
         <?php endif; ?>
     <?php endif; ?>
 
-    <div class="modal fade" id="tambahKegiatan" tabindex="-1" aria-labelledby="tambahKegiatan" aria-hidden="true">
+    <div class="modal fade" id="tambahPenelitian" tabindex="-1" aria-labelledby="tambahPenelitian" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title fs-5" id="tambahKegiatan">Tambahkan Publikasi</h4>
+                    <h4 class="modal-title fs-5" id="tambahPenelitian">Tambahkan Penelitian</h4>
                     <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
                 </div>
                 <div class="modal-body">
-                    <form action="/savePublikasi" method="post" enctype="multipart/form-data" id="form">
+                    <form action="/savePenelitian" method="post" enctype="multipart/form-data" id="form">
                         <div class="row mb-2">
-                            <label for="email" class="col-sm-3 col-form-label">Judul</label>
+                            <label for="nama" class="col-sm-3 col-form-label">Nama</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="recipient-name" name="judul">
+                                <input type="text" class="form-control" id="recipient-name" name="nama">
                             </div>
                         </div>
                         <div class="row mb-2">
-                            <label for="email" class="col-sm-3 col-form-label">Tanggal</label>
+                            <label for="nim" class="col-sm-3 col-form-label">NIM</label>
                             <div class="col-sm-9">
-                                <input type="date" class="form-control" id="recipient-name" name="tanggal">
+                                <input type="text" class="form-control" id="recipient-name" name="nim">
                             </div>
                         </div>
                         <div class="row mb-2">
-                            <label for="email" class="col-sm-3 col-form-label">link</label>
+                            <label for="instansi" class="col-sm-3 col-form-label">Instansi</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="recipient-name" name="link">
+                                <input type="text" class="form-control" id="recipient-name" name="instansi">
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <label for="judul_penelitian" class="col-sm-3 col-form-label">Judul Penelitian</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="recipient-name" name="judul_penelitian">
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <label for="tanggal_penelitian" class="col-sm-3 col-form-label">Tanggal</label>
+                            <div class="col-sm-9">
+                                <input type="date" class="form-control" id="recipient-name" name="tanggal_penelitian">
                             </div>
                         </div>
 
@@ -53,12 +64,6 @@
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input form-control" id="gambar" name="foto" onchange="previewImg('gambar')">
                                     <label class="custom-file-label" for="customFile">Gambar Maksimal 2 Mb</label>
-                                    <?php if (!empty($data_publikasi['foto'])): ?>
-                                        <div class="my-2">
-                                            <p>Foto Saat Ini:</p>
-                                            <img src="<?= base_url('img/publikasi/' . $data_publikasi['foto']); ?>" alt="Foto Petugas" width="100">
-                                        </div>
-                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>
@@ -77,7 +82,7 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Data Publikasi</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Data Penelitian</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -85,12 +90,12 @@
                     <thead>
                         <tr>
                             <th style="text-align: center;">No</th>
-                            <th style="text-align: center;">Sampul</th>
-                            <th style="text-align: center;">Judul</th>
-
+                            <th style="text-align: center;">Foto</th>
+                            <th style="text-align: center;">Nama</th>
+                            <th style="text-align: center;">NIM</th>
+                            <th style="text-align: center;">Instansi</th>
+                            <th style="text-align: center;">Judul Penelitian</th>
                             <th style="text-align: center;">Tanggal</th>
-                            <th style="text-align: center;">Link</th>
-
                             <th style="text-align: center;">Aksi</th>
 
                         </tr>
@@ -99,29 +104,25 @@
                     <tbody>
                         <?php
                         $no = 1;
-                        foreach ($data_publikasi as $p): ?>
+                        foreach ($penelitian as $p): ?>
                             <tr>
-                                <!-- <td style="text-align: center;">1</td> -->
-                                <!-- <td style="text-align: center;"><img src="" alt="" style="width: 60px;"></td> -->
                                 <td style="text-align: center;"><?= $no++; ?></td>
-                                <td style="text-align: center;"><img src="<?= base_url("img/publikasi/" . $p['foto']); ?>" alt="" style="width: 60px;"></td>
-
-                                <td style="text-align: center;"><?= $p['judul']; ?></td>
-                                <td style="text-align: center;"><?= $p['tanggal']; ?></td>
-                                <td style="text-align: center;"><?= $p['link']; ?></td>
-
+                                <td style="text-align: center;"><img src="<?= base_url("img/penelitian/" . $p['foto_penelitian']); ?>" alt="" style="width: 60px;"></td>
+                                <td style="text-align: center;"><?= $p['nama']; ?></td>
+                                <td style="text-align: center;"><?= $p['nim']; ?></td>
+                                <td style="text-align: center;"><?= $p['instansi']; ?></td>
+                                <td style="text-align: center;"><?= $p['judul_penelitian']; ?></td>
+                                <td style="text-align: center;"><?= $p['tanggal_penelitian']; ?></td>
                                 <td style="text-align: center;">
 
-                                    <a href="" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editPublikasi<?= $p['id_publikasi']; ?>" data-bs-whatever="@getbootstrap">Edit</a>
-                                    <!-- <a href="" class="btn btn-danger" >hapus</a> -->
-                                    <form action="/hapusPublikasi/<?= $p['id_publikasi']; ?>" method="post" class="d-inline">
+                                    <a href="" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editPenelitian<?= $p['id_penelitian']; ?>" data-bs-whatever="@getbootstrap">Edit</a>
+                                    <form action="/hapusPenelitian/<?= $p['id_penelitian']; ?>" method="post" class="d-inline">
                                         <?= csrf_field(); ?>
                                         <input type="hidden" name="_method" value="DELETE">
                                         <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('apakah anda yakin?');">Hapus</button>
                                     </form>
 
                                 </td>
-
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -132,57 +133,65 @@
 
     <?php
     $no = 1;
-    foreach ($data_publikasi as $p): ?>
-        <div class="modal fade" id="editPublikasi<?= $p['id_publikasi']; ?>" tabindex="-1" aria-labelledby="editPublikasi" aria-hidden="true">
+    foreach ($penelitian as $p): ?>
+        <div class="modal fade" id="editPenelitian<?= $p['id_penelitian']; ?>" tabindex="-1" aria-labelledby="editPenelitian" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title fs-5" id="editPublikasi">Edit Berita</h4>
+                        <h4 class="modal-title fs-5" id="editPenelitian">Edit Penelitian</h4>
                         <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
                     </div>
                     <div class="modal-body">
-                        <form action="<?= base_url() ?>updatePublikasi/<?= $p['id_publikasi']; ?>" method="post" enctype="multipart/form-data" id="form">
+                        <form action="<?= base_url() ?>updatePenelitian/<?= $p['id_penelitian']; ?>" method="post" enctype="multipart/form-data" id="form">
                             <div class="row mb-2">
-                                <label for="email" class="col-sm-3 col-form-label">Judul</label>
+                                <label for="nama" class="col-sm-3 col-form-label">Nama</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="recipient-name" name="judul" value="<?= $p['judul']; ?>">
+                                    <input type="text" class="form-control" id="recipient-name" name="nama" value="<?= $p['nama']; ?>">
                                 </div>
                             </div>
                             <div class="row mb-2">
-                                <label for="email" class="col-sm-3 col-form-label">Tanggal</label>
+                                <label for="nim" class="col-sm-3 col-form-label">NIM</label>
                                 <div class="col-sm-9">
-                                    <input type="date" class="form-control" id="recipient-name" name="tanggal" value="<?= $p['tanggal']; ?>">
+                                    <input type="text" class="form-control" id="recipient-name" name="nim" value="<?= $p['nim']; ?>">
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <label for="instansi" class="col-sm-3 col-form-label">Instansi</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="recipient-name" name="instansi" value="<?= $p['instansi']; ?>">
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <label for="judul_penelitian" class="col-sm-3 col-form-label">Judul Penelitian</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="recipient-name" name="judul_penelitian" value="<?= $p['judul_penelitian']; ?>">
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <label for="tanggal_penelitian" class="col-sm-3 col-form-label">Tanggal</label>
+                                <div class="col-sm-9">
+                                    <input type="date" class="form-control" id="recipient-name" name="tanggal_penelitian" value="<?= $p['tanggal_penelitian']; ?>">
                                 </div>
                             </div>
 
-
                             <div class="row mb-2">
-                                <label for="isi" class="col-sm-3 col-form-label">Link</label>
-                                <div class="col-sm-9">
-                                    <textarea class="form-control" name="link" id="link"><?= $p['link']; ?></textarea>
-                                </div>
-                            </div>
-                            <div class="row mb-2">
-                                <label for="foto" class="col-sm-3 col-form-label">Sampul</label>
+                                <label for="foto" class="col-sm-3 col-form-label">Foto</label>
                                 <div class="col-sm-2">
-                                    <img src="/img/default.jpg" alt="" class="img-thumbnail img-preview" id="img-preview-<?= $p['id_publikasi']; ?>">
+                                    <img src="/img/default.jpg" alt="" class="img-thumbnail img-preview" id="img-preview-<?= $p['id_penelitian']; ?>">
                                 </div>
                                 <div class="col-sm-7">
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input form-control" id="gambar<?= $p['id_publikasi']; ?>" name="foto" onchange="previewImg('gambar<?= $p['id_publikasi']; ?>')">
+                                        <input type="file" class="custom-file-input form-control" id="gambar<?= $p['id_penelitian']; ?>" name="foto" onchange="previewImg('gambar<?= $p['id_penelitian']; ?>')">
                                         <label class="custom-file-label" for="customFile">Gambar Maksimal 2 Mb</label>
-
                                     </div>
                                     <?php if (!empty($p['foto'])): ?>
                                         <div class="my-4">
                                             <p>Foto Saat Ini:</p>
-                                            <img src="<?= base_url('img/publikasi/' . $p['foto']); ?>" alt="Foto Petugas" width="100">
+                                            <img src="<?= base_url('img/penelitian/' . $p['foto']); ?>" alt="Foto Peneliti" width="100">
                                         </div>
                                     <?php endif; ?>
                                 </div>
-
                             </div>
-
 
                             <div class="modal-footer my-4">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -191,10 +200,8 @@
                     </div>
                     </form>
                 </div>
-
             </div>
         </div>
-
     <?php endforeach; ?>
 </div>
 

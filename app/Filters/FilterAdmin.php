@@ -12,18 +12,18 @@ class FilterAdmin implements FilterInterface
     {
         // $id_berita = $arguments[0] ?? null;
         // Do something here
-        if (session()->level=='') {
+        if (session()->level == '') {
             # code...
-            return redirect()->to (base_url('/halamanLogin'));
+            return redirect()->to(base_url('/halamanLogin'));
         }
     }
 
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
         // Do something here
-        if (session()->level=='Admin') {
+        if (session()->level == 'Admin') {
             # code...
-            return redirect()->to (base_url('/dashboard'));
+            return redirect()->to(base_url('/dashboard'));
         }
     }
 }

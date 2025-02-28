@@ -16,6 +16,7 @@ use App\Models\M_Manuskrip;
 use App\Models\M_ManuskripKol;
 use App\Models\M_Sega;
 use App\Models\M_User;
+use App\Models\M_Penelitian;
 
 class C_Admin extends BaseController
 {
@@ -34,63 +35,68 @@ class C_Admin extends BaseController
     protected $M_ManuskripKol;
     protected $M_Sega;
     protected $M_User;
+    protected $M_Penelitian;
 
-    public function __construct() {
+    public function __construct()
+    {
         helper('form');
-        $this -> M_Petugas = new M_Petugas();
-        $this -> M_Berita = new M_Berita();
-        $this -> M_Kegiatan = new M_Kegiatan();
-        $this -> M_Publikasi = new M_Publikasi();
-        $this -> M_KoleksiLandingPage = new M_KoleksiLandingPage();
-        $this -> M_Gallery = new M_Gallery();
-        $this -> M_Kajian = new M_Kajian();
-        $this -> M_Isikajian = new M_Isikajian();
-        $this -> M_Pesan = new M_Pesan();
-        $this -> M_SemuaPetugas = new M_SemuaPetugas();
-        $this -> M_Manuskrip = new M_Manuskrip();
-        $this -> M_ManuskripKol = new M_ManuskripKol();
-        $this -> M_Sega = new M_Sega();
-        $this -> M_User = new M_User();
+        $this->M_Petugas = new M_Petugas();
+        $this->M_Berita = new M_Berita();
+        $this->M_Kegiatan = new M_Kegiatan();
+        $this->M_Publikasi = new M_Publikasi();
+        $this->M_KoleksiLandingPage = new M_KoleksiLandingPage();
+        $this->M_Gallery = new M_Gallery();
+        $this->M_Kajian = new M_Kajian();
+        $this->M_Isikajian = new M_Isikajian();
+        $this->M_Pesan = new M_Pesan();
+        $this->M_SemuaPetugas = new M_SemuaPetugas();
+        $this->M_Manuskrip = new M_Manuskrip();
+        $this->M_ManuskripKol = new M_ManuskripKol();
+        $this->M_Sega = new M_Sega();
+        $this->M_User = new M_User();
+        $this->M_Penelitian = new M_Penelitian();
     }
-    public function strukturOrganisasi(){
+
+    public function strukturOrganisasi()
+    {
 
         $dataPetugas = $this->M_SemuaPetugas->findAll();
 
-        $data =[
+        $data = [
             'title' => 'Struktur Organisasi',
             'dataPetugas' => $dataPetugas,
-            
+
         ];
 
-        
+
         return view('CompanyProfile/strukturAdmin', $data);
     }
 
     public function petugasMuseum()
     {
         //validation
-        $rules= [
+        $rules = [
             'nama' => [
                 'rules' => 'required',
-                'errors' => ['required'=>'Judul harus diisi']
+                'errors' => ['required' => 'Judul harus diisi']
             ],
-            
+
         ];
 
-        if(!$this->validate($rules)){
+        if (!$this->validate($rules)) {
             // session()->setFlashdata('errors', $this->validator->listErrors());
-            return redirect()->to('/strukturOrganisasi') ->withInput() -> with('errors', $this->validator->listErrors());
+            return redirect()->to('/strukturOrganisasi')->withInput()->with('errors', $this->validator->listErrors());
         }
 
         $foto = $this->request->getFile('foto');
-    
+
         if ($foto->isValid() && !$foto->hasMoved()) {
             $fotoName = $foto->getRandomName();
             $foto->move('img/semuaPetugas', $fotoName);
         } else {
             // Handle file upload error
             return redirect()->to(base_url('/strukturOrganisasi'))
-                -> withInput()
+                ->withInput()
                 ->with('errors', $foto->getErrorString());
         }
 
@@ -103,17 +109,18 @@ class C_Admin extends BaseController
             'jabatan' => $this->request->getVar('jabatan'),
             'urutan' => $this->request->getVar('urutan'),
             'foto' => $fotoName,
-            
+
         ]);
 
         //alert
         session()->setFlashdata('pesan', 'Data Berhasil Ditambahkan.');
 
-        return redirect()-> to('/strukturOrganisasi');
+        return redirect()->to('/strukturOrganisasi');
 
         // return view('admin/v_masterpetugas');
     }
-    public function updateKaryawan($id_karyawan) {
+    public function updateKaryawan($id_karyawan)
+    {
         // Mengambil data yang akan diupdate dari request
         $dataToUpdate = [
             'nama' => $this->request->getVar('nama'),
@@ -121,9 +128,9 @@ class C_Admin extends BaseController
             'jabatan' => $this->request->getVar('jabatan'),
             'urutan' => $this->request->getVar('urutan'),
             'foto' => $this->request->getVar('foto'),
-            
+
         ];
-    
+
         $foto = $this->request->getFile('foto');
 
         // Cek apakah file foto diunggah
@@ -137,18 +144,18 @@ class C_Admin extends BaseController
             // Tambahkan nama file foto ke data yang akan diupdate
             $dataToUpdate['foto'] = $fotoName;
         }
-    
+
         // Membersihkan data yang mungkin ada dari inputan form
         $dataToUpdate = array_filter($dataToUpdate);
-    
+
         // Memastikan ada data yang akan diupdate
         if (!empty($dataToUpdate)) {
             // Mengeksekusi perintah update
             $this->M_SemuaPetugas->update($id_karyawan, $dataToUpdate);
-    
+
             // Ambil data petugas setelah diubah dari database
             $newDataKaryawan = $this->M_SemuaPetugas->getKaryawan($id_karyawan);
-    
+
             // Perbarui sesi pengguna dengan data baru
             if (session()->get('level') != 'Admin') {
                 session()->set([
@@ -166,39 +173,39 @@ class C_Admin extends BaseController
             session()->setFlashdata('error', 'Tidak ada data yang diupdate.');
         }
         // dd('berhasil');
-    
+
         // Redirect ke halaman sebelumnya atau halaman yang sesuai
         return redirect()->to('/strukturOrganisasi');
     }
 
-    public function hapusOrganisasi($id_karyawan) 
+    public function hapusOrganisasi($id_karyawan)
     {
         // Saring masukan untuk mencegah SQL injection atau serangan lainnya
         $id_karyawan = filter_var($id_karyawan, FILTER_SANITIZE_NUMBER_INT);
-    
+
         // Panggil metode delete pada model atau apapun yang diperlukan
         $this->M_SemuaPetugas->delete($id_karyawan);
         session()->setFlashdata('pesan', 'Data Berhasil Dihapus.');
-    
+
         // Redirect ke halaman yang sesuai
         return redirect()->to('/strukturOrganisasi');
     }
-    
+
     public function berita(): string
     {
         $dataBerita = $this->M_Berita->findAll();
-        
+
         // foreach ($dataBerita as &$dataBerita) {
         //     $dataBerita['isi'] = $this->getExcerpt($dataBerita['isi'], 10);
         // }
 
 
-        $data =[
+        $data = [
             'title' => 'Daftar Berita',
             'dataBerita' => $dataBerita
         ];
 
-        
+
         return view('CompanyProfile/beritaAdmin', $data);
     }
 
@@ -211,28 +218,28 @@ class C_Admin extends BaseController
     public function save()
     {
         //validation
-        $rules= [
+        $rules = [
             'judul' => [
                 'rules' => 'required',
-                'errors' => ['required'=>'Judul harus diisi']
+                'errors' => ['required' => 'Judul harus diisi']
             ],
             'tanggal' => [
                 'rules' => 'required',
                 'errors' => [
-                    'required'=>'tanggal tidak boleh kosong',
-                    
-    
+                    'required' => 'tanggal tidak boleh kosong',
+
+
                 ]
             ],
         ];
 
-        if(!$this->validate($rules)){
+        if (!$this->validate($rules)) {
             // session()->setFlashdata('errors', $this->validator->listErrors());
-            return redirect()->to('/beritaAdmin') ->withInput() -> with('errors', $this->validator->listErrors());
+            return redirect()->to('/beritaAdmin')->withInput()->with('errors', $this->validator->listErrors());
         }
 
         $foto = $this->request->getFile('foto');
-    
+
         $removeFoto = $this->request->getVar('removeFoto');
 
         // Handle the photo removal or upload
@@ -259,31 +266,32 @@ class C_Admin extends BaseController
             'ketgambar' => $this->request->getVar('ketgambar'),
             'jenisBerita' => $this->request->getVar('jenisBerita'),
             'foto' => $fotoName,
-            
+
         ]);
 
         //alert
         session()->setFlashdata('pesan', 'Data Berhasil Ditambahkan.');
 
-        return redirect()-> to('/beritaAdmin');
+        return redirect()->to('/beritaAdmin');
 
         // return view('admin/v_masterpetugas');
     }
 
-    public function deleteBerita($id_berita) 
+    public function deleteBerita($id_berita)
     {
         // Saring masukan untuk mencegah SQL injection atau serangan lainnya
         $id_berita = filter_var($id_berita, FILTER_SANITIZE_NUMBER_INT);
-    
+
         // Panggil metode delete pada model atau apapun yang diperlukan
         $this->M_Berita->delete($id_berita);
         session()->setFlashdata('pesan', 'Data Berhasil Dihapus.');
-    
+
         // Redirect ke halaman yang sesuai
         return redirect()->to('/beritaAdmin');
     }
 
-    public function updateBerita($id_berita) {
+    public function updateBerita($id_berita)
+    {
         // Mengambil data yang akan diupdate dari request
         $dataToUpdate = [
             'judul' => $this->request->getVar('judul'),
@@ -294,9 +302,9 @@ class C_Admin extends BaseController
             'foto' => $this->request->getVar('foto'),
             'ketgambar' => $this->request->getVar('ketgambar'),
             'jenisBerita' => $this->request->getVar('jenisBerita'),
-            
+
         ];
-    
+
         $foto = $this->request->getFile('foto');
 
         // Cek apakah file foto diunggah
@@ -310,18 +318,18 @@ class C_Admin extends BaseController
             // Tambahkan nama file foto ke data yang akan diupdate
             $dataToUpdate['foto'] = $fotoName;
         }
-    
+
         // Membersihkan data yang mungkin ada dari inputan form
         $dataToUpdate = array_filter($dataToUpdate);
-    
+
         // Memastikan ada data yang akan diupdate
         if (!empty($dataToUpdate)) {
             // Mengeksekusi perintah update
             $this->M_Berita->update($id_berita, $dataToUpdate);
-    
+
             // Ambil data petugas setelah diubah dari database
             $newDataBerita = $this->M_Berita->getBerita($id_berita);
-    
+
             // Perbarui sesi pengguna dengan data baru
             if (session()->get('level') != 'Admin') {
                 session()->set([
@@ -343,7 +351,7 @@ class C_Admin extends BaseController
             session()->setFlashdata('error', 'Tidak ada data yang diupdate.');
         }
         // dd('berhasil');
-    
+
         // Redirect ke halaman sebelumnya atau halaman yang sesuai
         return redirect()->to('/beritaAdmin');
     }
@@ -354,7 +362,7 @@ class C_Admin extends BaseController
         $data_kegiatan = $this->M_Kegiatan->findAll();
 
 
-        $data =[
+        $data = [
             'title' => 'Daftar Kegiatan',
             'dataKegiatan' => $data_kegiatan
         ];
@@ -365,28 +373,28 @@ class C_Admin extends BaseController
     public function saveKegiatan()
     {
         //validation
-        $rules= [
+        $rules = [
             'judul' => [
                 'rules' => 'required',
-                'errors' => ['required'=>'Judul harus diisi']
+                'errors' => ['required' => 'Judul harus diisi']
             ],
             'tanggal' => [
                 'rules' => 'required',
                 'errors' => [
-                    'required'=>'tanggal tidak boleh kosong',
-                    
-    
+                    'required' => 'tanggal tidak boleh kosong',
+
+
                 ]
             ],
         ];
 
-        if(!$this->validate($rules)){
+        if (!$this->validate($rules)) {
             // session()->setFlashdata('errors', $this->validator->listErrors());
-            return redirect()->to('/tambahKegiatan') ->withInput() -> with('errors', $this->validator->listErrors());
+            return redirect()->to('/tambahKegiatan')->withInput()->with('errors', $this->validator->listErrors());
         }
 
         $foto = $this->request->getFile('foto');
-    
+
         if ($foto->isValid() && !$foto->hasMoved()) {
             $fotoName = $foto->getRandomName();
             $foto->move('img/kegiatan', $fotoName);
@@ -407,13 +415,13 @@ class C_Admin extends BaseController
             'tampilkan' => $this->request->getVar('tampilkan'),
             'kategori_kegiatan' => $this->request->getVar('kategori_kegiatan'),
             'foto' => $fotoName,
-            
+
         ]);
 
         //alert
         session()->setFlashdata('pesan', 'Data Berhasil Ditambahkan.');
 
-        return redirect()-> to('/tambahKegiatan');
+        return redirect()->to('/tambahKegiatan');
 
         // return view('admin/v_masterpetugas');
     }
@@ -422,16 +430,17 @@ class C_Admin extends BaseController
     {
         // Saring masukan untuk mencegah SQL injection atau serangan lainnya
         $id_kegiatan = filter_var($id_kegiatan, FILTER_SANITIZE_NUMBER_INT);
-    
+
         // Panggil metode delete pada model atau apapun yang diperlukan
         $this->M_Kegiatan->delete($id_kegiatan);
         session()->setFlashdata('pesan', 'Data Berhasil Dihapus.');
-    
+
         // Redirect ke halaman yang sesuai
         return redirect()->to('/tambahKegiatan');
     }
 
-    public function updateKegiatan($id_kegiatan) {
+    public function updateKegiatan($id_kegiatan)
+    {
         // Mengambil data yang akan diupdate dari request
         $dataToUpdate = [
             'judul' => $this->request->getVar('judul'),
@@ -440,9 +449,9 @@ class C_Admin extends BaseController
             'keterangan' => $this->request->getVar('keterangan'),
             'kategori_kegiatan' => $this->request->getVar('kategori_kegiatan'),
             'foto' => $this->request->getVar('foto'),
-            
+
         ];
-    
+
         $foto = $this->request->getFile('foto');
 
         // Cek apakah file foto diunggah
@@ -456,18 +465,18 @@ class C_Admin extends BaseController
             // Tambahkan nama file foto ke data yang akan diupdate
             $dataToUpdate['foto'] = $fotoName;
         }
-    
+
         // Membersihkan data yang mungkin ada dari inputan form
         $dataToUpdate = array_filter($dataToUpdate);
-    
+
         // Memastikan ada data yang akan diupdate
         if (!empty($dataToUpdate)) {
             // Mengeksekusi perintah update
             $this->M_Kegiatan->update($id_kegiatan, $dataToUpdate);
-    
+
             // Ambil data petugas setelah diubah dari database
             $newDataKegiatan = $this->M_Kegiatan->getKegiatan($id_kegiatan);
-    
+
             // Perbarui sesi pengguna dengan data baru
             if (session()->get('level') != 'Admin') {
                 session()->set([
@@ -486,7 +495,7 @@ class C_Admin extends BaseController
             session()->setFlashdata('error', 'Tidak ada data yang diupdate.');
         }
         // dd('berhasil');
-    
+
         // Redirect ke halaman sebelumnya atau halaman yang sesuai
         return redirect()->to('/tambahKegiatan');
     }
@@ -495,40 +504,40 @@ class C_Admin extends BaseController
         $kajian = $this->M_Kajian->findAll();
 
 
-        $data =[
+        $data = [
             'title' => 'Daftar Kajian',
             'kajian' => $kajian
         ];
 
-       
+
         return view('CompanyProfile/kajianAdmin', $data);
     }
     public function saveKajian()
     {
         //validation
-        $rules= [
+        $rules = [
             'judul' => [
                 'rules' => 'required',
-                'errors' => ['required'=>'Judul harus diisi']
+                'errors' => ['required' => 'Judul harus diisi']
             ],
             'tanggal' => [
                 'rules' => 'required',
                 'errors' => [
-                    'required'=>'tanggal tidak boleh kosong',
-                    
-    
+                    'required' => 'tanggal tidak boleh kosong',
+
+
                 ]
             ],
         ];
 
-        if(!$this->validate($rules)){
+        if (!$this->validate($rules)) {
             // session()->setFlashdata('errors', $this->validator->listErrors());
-            return redirect()->to('/kajianAdmin') ->withInput() -> with('errors', $this->validator->listErrors());
+            return redirect()->to('/kajianAdmin')->withInput()->with('errors', $this->validator->listErrors());
         }
-        
+
 
         $foto = $this->request->getFile('sampul');
-    
+
         if ($foto->isValid() && !$foto->hasMoved()) {
             $fotoName = $foto->getRandomName();
             $foto->move('img/kajian', $fotoName);
@@ -545,17 +554,17 @@ class C_Admin extends BaseController
             // 'id_petugas' => $id_petugas,
             'judul' => $this->request->getVar('judul'),
             'created_at' => $this->request->getVar('tanggal'),
-            
+
             'penulis' => $this->request->getVar('penulis'),
             'kategori' => $this->request->getVar('kategori'),
             'sampul' => $fotoName,
-            
+
         ]);
 
         //alert
         session()->setFlashdata('pesan', 'Data Berhasil Ditambahkan.');
 
-        return redirect()-> to('/kajianAdmin');
+        return redirect()->to('/kajianAdmin');
 
         // return view('admin/v_masterpetugas');
     }
@@ -564,33 +573,33 @@ class C_Admin extends BaseController
         $data_kajian = $this->M_Isikajian->findAll();
         // $kajian = $this->M_Kajian->findAll();
         $kajian = $this->M_Kajian->getKajian($id_kajian);
-        
 
 
-        $data =[
+
+        $data = [
             'title' => 'Daftar Kegiatan',
             'kajian' => $kajian,
-            
+
             'data_kajian' => $data_kajian,
-           
+
 
         ];
 
-       
+
         return view('CompanyProfile/tulisKajian', $data);
     }
-    
+
 
 
     public function saveIsiKajian()
     {
-       // Ambil data dari form
-    //    $narasi = $this->request->getPost('narasi');
-       $id_kajian = $this->request->getPost('id_kajian');
-   
+        // Ambil data dari form
+        //    $narasi = $this->request->getPost('narasi');
+        $id_kajian = $this->request->getPost('id_kajian');
+
 
         $foto = $this->request->getFile('foto');
-    
+
         $removeFoto = $this->request->getVar('removeFoto');
 
         // Handle the photo removal or upload
@@ -612,13 +621,13 @@ class C_Admin extends BaseController
             'narasi' => $this->request->getVar('narasi'),
             'id_kajian' => $this->request->getVar('id_kajian'),
             'foto' => $fotoName,
-            
+
         ]);
 
         //alert
         session()->setFlashdata('pesan', 'Data Berhasil Ditambahkan.');
 
-       return redirect()->to('/tulisKajian/' . $id_kajian);
+        return redirect()->to('/tulisKajian/' . $id_kajian);
     }
 
     public function previewKajian($id_kajian): string
@@ -628,13 +637,13 @@ class C_Admin extends BaseController
         $IsiKajian = $this->M_Isikajian->getDataByIdKajian($id_kajian);
 
         // var_dump($berita);
-        $data =[
+        $data = [
 
             'kajian' => $kajian,
             'kajianTerbaru' => $kajianTerbaru,
             'isiKajian' => $IsiKajian,
         ];
-        
+
 
         return view('CompanyProfile/previewKajian', $data);
     }
@@ -644,11 +653,11 @@ class C_Admin extends BaseController
     {
         // Saring masukan untuk mencegah SQL injection atau serangan lainnya
         $id_kajian = filter_var($id_kajian, FILTER_SANITIZE_NUMBER_INT);
-    
+
         // Panggil metode delete pada model atau apapun yang diperlukan
         $this->M_Kajian->delete($id_kajian);
         session()->setFlashdata('pesan', 'Data Berhasil Dihapus.');
-    
+
         // Redirect ke halaman yang sesuai
         return redirect()->to('/kajianAdmin');
     }
@@ -658,7 +667,7 @@ class C_Admin extends BaseController
         $data_publikasi = $this->M_Publikasi->findAll();
 
 
-        $data =[
+        $data = [
             'title' => 'Daftar Kegiatan',
             'data_publikasi' => $data_publikasi
         ];
@@ -669,28 +678,28 @@ class C_Admin extends BaseController
     public function savePublikasi()
     {
         //validation
-        $rules= [
+        $rules = [
             'judul' => [
                 'rules' => 'required',
-                'errors' => ['required'=>'Judul harus diisi']
+                'errors' => ['required' => 'Judul harus diisi']
             ],
             'tanggal' => [
                 'rules' => 'required',
                 'errors' => [
-                    'required'=>'tanggal tidak boleh kosong',
-                    
-    
+                    'required' => 'tanggal tidak boleh kosong',
+
+
                 ]
             ],
         ];
 
-        if(!$this->validate($rules)){
+        if (!$this->validate($rules)) {
             // session()->setFlashdata('errors', $this->validator->listErrors());
-            return redirect()->to('/tambahPublikasi') ->withInput() -> with('errors', $this->validator->listErrors());
+            return redirect()->to('/tambahPublikasi')->withInput()->with('errors', $this->validator->listErrors());
         }
 
         $foto = $this->request->getFile('foto');
-    
+
         if ($foto->isValid() && !$foto->hasMoved()) {
             $fotoName = $foto->getRandomName();
             $foto->move('img/publikasi', $fotoName);
@@ -709,13 +718,13 @@ class C_Admin extends BaseController
             'tanggal' => $this->request->getVar('tanggal'),
             'link' => $this->request->getVar('link'),
             'foto' => $fotoName,
-            
+
         ]);
 
         //alert
         session()->setFlashdata('pesan', 'Data Berhasil Ditambahkan.');
 
-        return redirect()-> to('/tambahPublikasi');
+        return redirect()->to('/tambahPublikasi');
 
         // return view('admin/v_masterpetugas');
     }
@@ -724,25 +733,26 @@ class C_Admin extends BaseController
     {
         // Saring masukan untuk mencegah SQL injection atau serangan lainnya
         $id_publikasi = filter_var($id_publikasi, FILTER_SANITIZE_NUMBER_INT);
-    
+
         // Panggil metode delete pada model atau apapun yang diperlukan
         $this->M_Publikasi->delete($id_publikasi);
         session()->setFlashdata('pesan', 'Data Berhasil Dihapus.');
-    
+
         // Redirect ke halaman yang sesuai
         return redirect()->to('/tambahPublikasi');
     }
 
-    public function updatePublikasi($id_publikasi) {
+    public function updatePublikasi($id_publikasi)
+    {
         // Mengambil data yang akan diupdate dari request
         $dataToUpdate = [
             'judul' => $this->request->getVar('judul'),
             'tanggal' => $this->request->getVar('tanggal'),
             'link' => $this->request->getVar('link'),
             'foto' => $this->request->getVar('foto'),
-            
+
         ];
-    
+
         $foto = $this->request->getFile('foto');
 
         // Cek apakah file foto diunggah
@@ -756,18 +766,18 @@ class C_Admin extends BaseController
             // Tambahkan nama file foto ke data yang akan diupdate
             $dataToUpdate['foto'] = $fotoName;
         }
-    
+
         // Membersihkan data yang mungkin ada dari inputan form
         $dataToUpdate = array_filter($dataToUpdate);
-    
+
         // Memastikan ada data yang akan diupdate
         if (!empty($dataToUpdate)) {
             // Mengeksekusi perintah update
             $this->M_Publikasi->update($id_publikasi, $dataToUpdate);
-    
+
             // Ambil data petugas setelah diubah dari database
             $newDataPublikasi = $this->M_Publikasi->getPublikasi($id_publikasi);
-    
+
             // Perbarui sesi pengguna dengan data baru
             if (session()->get('level') != 'Admin') {
                 session()->set([
@@ -784,7 +794,7 @@ class C_Admin extends BaseController
             session()->setFlashdata('error', 'Tidak ada data yang diupdate.');
         }
         // dd('berhasil');
-    
+
         // Redirect ke halaman sebelumnya atau halaman yang sesuai
         return redirect()->to('/tambahPublikasi');
     }
@@ -794,7 +804,7 @@ class C_Admin extends BaseController
         $data_manuskrip = $this->M_Manuskrip->findAll();
 
 
-        $data =[
+        $data = [
             'title' => 'Daftar Kegiatan',
             'data_manuskrip' => $data_manuskrip
         ];
@@ -806,7 +816,7 @@ class C_Admin extends BaseController
         $data_manuskripKol = $this->M_ManuskripKol->findAll();
 
 
-        $data =[
+        $data = [
             'title' => 'Daftar Manuskrip',
             'data_manuskripKol' => $data_manuskripKol
         ];
@@ -816,28 +826,28 @@ class C_Admin extends BaseController
     public function saveManuskrip()
     {
         //validation
-        $rules= [
+        $rules = [
             'judul' => [
                 'rules' => 'required',
-                'errors' => ['required'=>'Judul harus diisi']
+                'errors' => ['required' => 'Judul harus diisi']
             ],
             'tanggal' => [
                 'rules' => 'required',
                 'errors' => [
-                    'required'=>'tanggal tidak boleh kosong',
-                    
-    
+                    'required' => 'tanggal tidak boleh kosong',
+
+
                 ]
             ],
         ];
 
-        if(!$this->validate($rules)){
+        if (!$this->validate($rules)) {
             // session()->setFlashdata('errors', $this->validator->listErrors());
-            return redirect()->to('/dataManuskrip') ->withInput() -> with('errors', $this->validator->listErrors());
+            return redirect()->to('/dataManuskrip')->withInput()->with('errors', $this->validator->listErrors());
         }
 
         $foto = $this->request->getFile('foto');
-    
+
         if ($foto->isValid() && !$foto->hasMoved()) {
             $fotoName = $foto->getRandomName();
             $foto->move('img/manuskrip', $fotoName);
@@ -856,41 +866,41 @@ class C_Admin extends BaseController
             'tanggal' => $this->request->getVar('tanggal'),
             'link' => $this->request->getVar('link'),
             'foto' => $fotoName,
-            
+
         ]);
 
         //alert
         session()->setFlashdata('pesan', 'Data Berhasil Ditambahkan.');
 
-        return redirect()-> to('/dataManuskrip');
+        return redirect()->to('/dataManuskrip');
 
         // return view('admin/v_masterpetugas');
     }
     public function saveManuskripKol()
     {
         //validation
-        $rules= [
+        $rules = [
             'nama' => [
                 'rules' => 'required',
-                'errors' => ['required'=>'nama harus diisi']
+                'errors' => ['required' => 'nama harus diisi']
             ],
             'link' => [
                 'rules' => 'required',
                 'errors' => [
-                    'required'=>'link tidak boleh kosong',
-                    
-    
+                    'required' => 'link tidak boleh kosong',
+
+
                 ]
             ],
         ];
 
-        if(!$this->validate($rules)){
+        if (!$this->validate($rules)) {
             // session()->setFlashdata('errors', $this->validator->listErrors());
-            return redirect()->to('/dataManuskripKol') ->withInput() -> with('errors', $this->validator->listErrors());
+            return redirect()->to('/dataManuskripKol')->withInput()->with('errors', $this->validator->listErrors());
         }
 
         $foto = $this->request->getFile('foto');
-    
+
         if ($foto->isValid() && !$foto->hasMoved()) {
             $fotoName = $foto->getRandomName();
             $foto->move('img/manuskrip', $fotoName);
@@ -909,13 +919,13 @@ class C_Admin extends BaseController
             'nama' => $this->request->getVar('nama'),
             'link' => $this->request->getVar('link'),
             'foto' => $fotoName,
-            
+
         ]);
 
         //alert
         session()->setFlashdata('pesan', 'Data Berhasil Ditambahkan.');
 
-        return redirect()-> to('/dataManuskripKol');
+        return redirect()->to('/dataManuskripKol');
 
         // return view('admin/v_masterpetugas');
     }
@@ -924,11 +934,11 @@ class C_Admin extends BaseController
     {
         // Saring masukan untuk mencegah SQL injection atau serangan lainnya
         $id_manuskrip = filter_var($id_manuskrip, FILTER_SANITIZE_NUMBER_INT);
-    
+
         // Panggil metode delete pada model atau apapun yang diperlukan
         $this->M_Manuskrip->delete($id_manuskrip);
         session()->setFlashdata('pesan', 'Data Berhasil Dihapus.');
-    
+
         // Redirect ke halaman yang sesuai
         return redirect()->to('/dataManuskrip');
     }
@@ -936,25 +946,26 @@ class C_Admin extends BaseController
     {
         // Saring masukan untuk mencegah SQL injection atau serangan lainnya
         $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
-    
+
         // Panggil metode delete pada model atau apapun yang diperlukan
         $this->M_ManuskripKol->delete($id);
         session()->setFlashdata('pesan', 'Data Berhasil Dihapus.');
-    
+
         // Redirect ke halaman yang sesuai
         return redirect()->to('/dataManuskripKol');
     }
 
-    public function updateManuskrip($id_manuskrip) {
+    public function updateManuskrip($id_manuskrip)
+    {
         // Mengambil data yang akan diupdate dari request
         $dataToUpdate = [
             'judul' => $this->request->getVar('judul'),
             'tanggal' => $this->request->getVar('tanggal'),
             'link' => $this->request->getVar('link'),
             'foto' => $this->request->getVar('foto'),
-            
+
         ];
-    
+
         $foto = $this->request->getFile('foto');
 
         // Cek apakah file foto diunggah
@@ -968,18 +979,18 @@ class C_Admin extends BaseController
             // Tambahkan nama file foto ke data yang akan diupdate
             $dataToUpdate['foto'] = $fotoName;
         }
-    
+
         // Membersihkan data yang mungkin ada dari inputan form
         $dataToUpdate = array_filter($dataToUpdate);
-    
+
         // Memastikan ada data yang akan diupdate
         if (!empty($dataToUpdate)) {
             // Mengeksekusi perintah update
             $this->M_Manuskrip->update($id_manuskrip, $dataToUpdate);
-    
+
             // Ambil data petugas setelah diubah dari database
             $newDataPublikasi = $this->M_Manuskrip->getManuskrip($id_manuskrip);
-    
+
             // Perbarui sesi pengguna dengan data baru
             if (session()->get('level') != 'Admin') {
                 session()->set([
@@ -996,20 +1007,21 @@ class C_Admin extends BaseController
             session()->setFlashdata('error', 'Tidak ada data yang diupdate.');
         }
         // dd('berhasil');
-    
+
         // Redirect ke halaman sebelumnya atau halaman yang sesuai
         return redirect()->to('/dataManuskrip');
     }
 
-    public function updateManuskripKol($id) {
+    public function updateManuskripKol($id)
+    {
         // Mengambil data yang akan diupdate dari request
         $dataToUpdate = [
             'nama' => $this->request->getVar('nama'),
             'link' => $this->request->getVar('link'),
             'foto' => $this->request->getVar('foto'),
-            
+
         ];
-    
+
         $foto = $this->request->getFile('foto');
 
         // Cek apakah file foto diunggah
@@ -1023,26 +1035,26 @@ class C_Admin extends BaseController
             // Tambahkan nama file foto ke data yang akan diupdate
             $dataToUpdate['foto'] = $fotoName;
         }
-    
+
         // Membersihkan data yang mungkin ada dari inputan form
         $dataToUpdate = array_filter($dataToUpdate);
-    
+
         // Memastikan ada data yang akan diupdate
         if (!empty($dataToUpdate)) {
             // Mengeksekusi perintah update
             $this->M_ManuskripKol->update($id, $dataToUpdate);
-    
+
             // Ambil data petugas setelah diubah dari database
             $newDataPublikasi = $this->M_ManuskripKol->getManuskrip($id);
-    
+
             // Perbarui sesi pengguna dengan data baru
-            
-                session()->set([
-                    'nama' => $newDataPublikasi['nama'],
-                    'link' => $newDataPublikasi['link'],
-                    'foto' => $newDataPublikasi['foto'],
-                ]);
-            
+
+            session()->set([
+                'nama' => $newDataPublikasi['nama'],
+                'link' => $newDataPublikasi['link'],
+                'foto' => $newDataPublikasi['foto'],
+            ]);
+
             //alert
             session()->setFlashdata('pesan', 'Data Berhasil diubah.');
         } else {
@@ -1050,7 +1062,7 @@ class C_Admin extends BaseController
             session()->setFlashdata('error', 'Tidak ada data yang diupdate.');
         }
         // dd('berhasil');
-    
+
         // Redirect ke halaman sebelumnya atau halaman yang sesuai
         return redirect()->to('/dataManuskripKol');
     }
@@ -1060,40 +1072,40 @@ class C_Admin extends BaseController
         $koleksi = $this->M_KoleksiLandingPage->findAll();
 
 
-        $data =[
+        $data = [
             'title' => 'Daftar Koleksi',
             'koleksi' => $koleksi
         ];
 
-        
+
         return view('CompanyProfile/koleksiAdmin', $data);
     }
 
     public function saveKoleksi()
     {
         //validation
-        $rules= [
+        $rules = [
             'nama' => [
                 'rules' => 'required',
-                'errors' => ['required'=>'Judul harus diisi']
+                'errors' => ['required' => 'Judul harus diisi']
             ],
             'no' => [
                 'rules' => 'required',
                 'errors' => [
-                    'required'=>'tanggal tidak boleh kosong',
-                    
-    
+                    'required' => 'tanggal tidak boleh kosong',
+
+
                 ]
             ],
         ];
 
-        if(!$this->validate($rules)){
+        if (!$this->validate($rules)) {
             // session()->setFlashdata('errors', $this->validator->listErrors());
-            return redirect()->to('/koleksiAdmin') ->withInput() -> with('errors', $this->validator->listErrors());
+            return redirect()->to('/koleksiAdmin')->withInput()->with('errors', $this->validator->listErrors());
         }
 
         $foto = $this->request->getFile('foto');
-    
+
         if ($foto->isValid() && !$foto->hasMoved()) {
             $fotoName = $foto->getRandomName();
             $foto->move('img/koleksiAdmin', $fotoName);
@@ -1114,28 +1126,28 @@ class C_Admin extends BaseController
             'ukuran' => $this->request->getVar('ukuran'),
             'kategori' => $this->request->getVar('kategori'),
             'foto' => $fotoName,
-            
+
         ]);
 
         //alert
         session()->setFlashdata('pesan', 'Data Berhasil Ditambahkan.');
 
-        return redirect()-> to('/koleksiAdmin');
+        return redirect()->to('/koleksiAdmin');
 
         // return view('admin/v_masterpetugas');
     }
 
-    
+
 
     public function deleteKoleksi($id_koleksi)
     {
         // Saring masukan untuk mencegah SQL injection atau serangan lainnya
         $id_koleksi = filter_var($id_koleksi, FILTER_SANITIZE_NUMBER_INT);
-    
+
         // Panggil metode delete pada model atau apapun yang diperlukan
         $this->M_KoleksiLandingPage->delete($id_koleksi);
         session()->setFlashdata('pesan', 'Data Berhasil Dihapus.');
-    
+
         // Redirect ke halaman yang sesuai
         return redirect()->to('/koleksiAdmin');
     }
@@ -1150,9 +1162,9 @@ class C_Admin extends BaseController
             'ukuran' => $this->request->getVar('ukuran'),
             'deskripsi' => $this->request->getVar('deskripsi'),
             'foto' => $this->request->getVar('foto'),
-            
+
         ];
-    
+
         $foto = $this->request->getFile('foto');
 
         // Cek apakah file foto diunggah
@@ -1166,18 +1178,18 @@ class C_Admin extends BaseController
             // Tambahkan nama file foto ke data yang akan diupdate
             $dataToUpdate['foto'] = $fotoName;
         }
-    
+
         // Membersihkan data yang mungkin ada dari inputan form
         $dataToUpdate = array_filter($dataToUpdate);
-    
+
         // Memastikan ada data yang akan diupdate
         if (!empty($dataToUpdate)) {
             // Mengeksekusi perintah update
             $this->M_KoleksiLandingPage->update($id_koleksi, $dataToUpdate);
-    
+
             // Ambil data petugas setelah diubah dari database
             $newDataKoleksi = $this->M_KoleksiLandingPage->getKOleksiById($id_koleksi);
-    
+
             // Perbarui sesi pengguna dengan data baru
             if (session()->get('level') != 'Admin') {
                 session()->set([
@@ -1196,7 +1208,7 @@ class C_Admin extends BaseController
             session()->setFlashdata('error', 'Tidak ada data yang diupdate.');
         }
         // dd('berhasil');
-    
+
         // Redirect ke halaman sebelumnya atau halaman yang sesuai
         return redirect()->to('/koleksiAdmin');
     }
@@ -1207,40 +1219,40 @@ class C_Admin extends BaseController
         $gallery = $this->M_Gallery->findAll();
 
 
-        $data =[
+        $data = [
             'title' => 'Daftar gallery',
             'gallery' => $gallery
         ];
 
-        
+
         return view('CompanyProfile/galleryAdmin', $data);
     }
 
     public function saveGallery()
     {
         //validation
-        $rules= [
+        $rules = [
             'judul' => [
                 'rules' => 'required',
-                'errors' => ['required'=>'Judul harus diisi']
+                'errors' => ['required' => 'Judul harus diisi']
             ],
             'deskripsi' => [
                 'rules' => 'required',
                 'errors' => [
-                    'required'=>'tanggal tidak boleh kosong',
-                    
-    
+                    'required' => 'tanggal tidak boleh kosong',
+
+
                 ]
             ],
         ];
 
-        if(!$this->validate($rules)){
+        if (!$this->validate($rules)) {
             // session()->setFlashdata('errors', $this->validator->listErrors());
-            return redirect()->to('/galleryAdmin') ->withInput() -> with('errors', $this->validator->listErrors());
+            return redirect()->to('/galleryAdmin')->withInput()->with('errors', $this->validator->listErrors());
         }
 
         $foto = $this->request->getFile('foto');
-    
+
         if ($foto->isValid() && !$foto->hasMoved()) {
             $fotoName = $foto->getRandomName();
             $foto->move('img/galery', $fotoName);
@@ -1258,13 +1270,13 @@ class C_Admin extends BaseController
             'judul' => $this->request->getVar('judul'),
             'deskripsi' => $this->request->getVar('deskripsi'),
             'foto' => $fotoName,
-            
+
         ]);
 
         //alert
         session()->setFlashdata('pesan', 'Data Berhasil Ditambahkan.');
 
-        return redirect()-> to('/galleryAdmin');
+        return redirect()->to('/galleryAdmin');
 
         // return view('admin/v_masterpetugas');
     }
@@ -1273,16 +1285,16 @@ class C_Admin extends BaseController
     {
         // Saring masukan untuk mencegah SQL injection atau serangan lainnya
         $id_gallery = filter_var($id_gallery, FILTER_SANITIZE_NUMBER_INT);
-    
+
         // Panggil metode delete pada model atau apapun yang diperlukan
         $this->M_Gallery->delete($id_gallery);
         session()->setFlashdata('pesan', 'Data Berhasil Dihapus.');
-    
+
         // Redirect ke halaman yang sesuai
         return redirect()->to('/galleryAdmin');
     }
 
-    
+
     public function updateGallery($id_gallery)
     {
         // Mengambil data yang akan diupdate dari request
@@ -1291,9 +1303,9 @@ class C_Admin extends BaseController
             'no' => $this->request->getVar('no'),
             'deskripsi' => $this->request->getVar('deskripsi'),
             'foto' => $this->request->getVar('foto'),
-            
+
         ];
-    
+
         $foto = $this->request->getFile('foto');
 
         // Cek apakah file foto diunggah
@@ -1307,18 +1319,18 @@ class C_Admin extends BaseController
             // Tambahkan nama file foto ke data yang akan diupdate
             $dataToUpdate['foto'] = $fotoName;
         }
-    
+
         // Membersihkan data yang mungkin ada dari inputan form
         $dataToUpdate = array_filter($dataToUpdate);
-    
+
         // Memastikan ada data yang akan diupdate
         if (!empty($dataToUpdate)) {
             // Mengeksekusi perintah update
             $this->M_Gallery->update($id_gallery, $dataToUpdate);
-    
+
             // Ambil data petugas setelah diubah dari database
             $newDataGallery = $this->M_Gallery->getGallery($id_gallery);
-    
+
             // Perbarui sesi pengguna dengan data baru
             if (session()->get('level') != 'Admin') {
                 session()->set([
@@ -1335,7 +1347,7 @@ class C_Admin extends BaseController
             session()->setFlashdata('error', 'Tidak ada data yang diupdate.');
         }
         // dd('berhasil');
-    
+
         // Redirect ke halaman sebelumnya atau halaman yang sesuai
         return redirect()->to('/galleryAdmin');
     }
@@ -1346,12 +1358,12 @@ class C_Admin extends BaseController
         $data_pesan = $this->M_Pesan->findAll();
 
 
-        $data =[
+        $data = [
             'title' => 'Daftar Pesan',
             'pesan' => $data_pesan
         ];
 
-        
+
         return view('CompanyProfile/pesanAdmin', $data);
     }
 
@@ -1359,11 +1371,11 @@ class C_Admin extends BaseController
     {
         // Saring masukan untuk mencegah SQL injection atau serangan lainnya
         $id_pesan = filter_var($id_pesan, FILTER_SANITIZE_NUMBER_INT);
-    
+
         // Panggil metode delete pada model atau apapun yang diperlukan
         $this->M_Pesan->delete($id_pesan);
         session()->setFlashdata('pesan', 'Data Berhasil Dihapus.');
-    
+
         // Redirect ke halaman yang sesuai
         return redirect()->to('/pesanAdmin');
     }
@@ -1389,33 +1401,33 @@ class C_Admin extends BaseController
 
 
 
-        $data =[
+        $data = [
             'title' => 'Daftar Sega',
             'sega' => $data_sega
         ];
 
-        
+
         return view('CompanyProfile/segaAdmin', $data);
     }
 
     public function saveSega()
     {
         //validation
-        $rules= [
+        $rules = [
             'judul' => [
                 'rules' => 'required',
-                'errors' => ['required'=>'Judul harus diisi']
+                'errors' => ['required' => 'Judul harus diisi']
             ],
-            
+
         ];
 
-        if(!$this->validate($rules)){
+        if (!$this->validate($rules)) {
             // session()->setFlashdata('errors', $this->validator->listErrors());
-            return redirect()->to('/sega') ->withInput() -> with('errors', $this->validator->listErrors());
+            return redirect()->to('/sega')->withInput()->with('errors', $this->validator->listErrors());
         }
 
         $foto = $this->request->getFile('foto');
-    
+
         if ($foto->isValid() && !$foto->hasMoved()) {
             $fotoName = $foto->getRandomName();
             $foto->move('img/sega', $fotoName);
@@ -1427,8 +1439,8 @@ class C_Admin extends BaseController
         }
 
         $file1 = $this->request->getFile('audio1');
-        
-    
+
+
         if ($file1->isValid() && !$file1->hasMoved()) {
             $filename1 = $file1->getRandomName();
             $file1->move('audio', $filename1);
@@ -1459,13 +1471,13 @@ class C_Admin extends BaseController
             'foto' => $fotoName,
             'audio1' => $filename1,
             'audio2' => $filename2,
-            
+
         ]);
 
         //alert
         session()->setFlashdata('pesan', 'Data Berhasil Ditambahkan.');
 
-        return redirect()-> to('/sega');
+        return redirect()->to('/sega');
 
         // return view('admin/v_masterpetugas');
     }
@@ -1474,11 +1486,11 @@ class C_Admin extends BaseController
         $sega = $this->M_Sega->getSega($id_sega);
 
         // var_dump($berita);
-        $data =[
+        $data = [
 
             'sega' => $sega,
         ];
-        
+
 
         return view('CompanyProfile/previewSega', $data);
     }
@@ -1486,11 +1498,11 @@ class C_Admin extends BaseController
     {
         // Saring masukan untuk mencegah SQL injection atau serangan lainnya
         $id_Sega = filter_var($id_Sega, FILTER_SANITIZE_NUMBER_INT);
-    
+
         // Panggil metode delete pada model atau apapun yang diperlukan
         $this->M_Sega->delete($id_Sega);
         session()->setFlashdata('pesan', 'Data Berhasil Dihapus.');
-    
+
         // Redirect ke halaman yang sesuai
         return redirect()->to('/sega');
     }
@@ -1504,9 +1516,9 @@ class C_Admin extends BaseController
             'foto' => $this->request->getVar('foto'),
             'audio1' => $this->request->getVar('audio1'),
             'audio2' => $this->request->getVar('audio2'),
-            
+
         ];
-    
+
         $foto = $this->request->getFile('foto');
 
         // Cek apakah file foto diunggah
@@ -1521,7 +1533,7 @@ class C_Admin extends BaseController
             $dataToUpdate['foto'] = $fotoName;
         }
 
-        $file1 = $this->request->getFile('audio1');    
+        $file1 = $this->request->getFile('audio1');
         if ($file1->isValid() && !$file1->hasMoved()) {
             $filename1 = $file1->getRandomName();
             $file1->move('audio', $filename1);
@@ -1543,18 +1555,18 @@ class C_Admin extends BaseController
             // Handle file upload error
             $filename2 = 'null';
         }
-    
+
         // Membersihkan data yang mungkin ada dari inputan form
         $dataToUpdate = array_filter($dataToUpdate);
-    
+
         // Memastikan ada data yang akan diupdate
         if (!empty($dataToUpdate)) {
             // Mengeksekusi perintah update
             $this->M_Sega->update($id_sega, $dataToUpdate);
-    
+
             // Ambil data petugas setelah diubah dari database
             $newDataGallery = $this->M_Sega->getGallery($id_sega);
-    
+
             // Perbarui sesi pengguna dengan data baru
             if (session()->get('level') == 'Admin') {
                 session()->set([
@@ -1573,7 +1585,7 @@ class C_Admin extends BaseController
             session()->setFlashdata('error', 'Tidak ada data yang diupdate.');
         }
         // dd('berhasil');
-    
+
         // Redirect ke halaman sebelumnya atau halaman yang sesuai
         return redirect()->to('/galleryAdmin');
     }
@@ -1583,7 +1595,7 @@ class C_Admin extends BaseController
         $user = $this->M_User->findAll();
 
 
-        $data =[
+        $data = [
             'title' => 'Daftar User',
             'user' => $user
         ];
@@ -1605,7 +1617,7 @@ class C_Admin extends BaseController
             if ($result) {
                 return redirect()->back();
                 // return $this->response->setJSON(['success' => false, 'message' => 'Berhasil']);
-        
+
             } else {
                 return $this->response->setJSON(['success' => false, 'message' => 'Gagal memperbarui status']);
             }
@@ -1615,17 +1627,144 @@ class C_Admin extends BaseController
         }
     }
 
+    public function tambahPenelitian()
+    {
+        $data = [
+            'title' => 'Daftar Penelitian',
+            'penelitian' => $this->M_Penelitian->findAll()
+        ];
 
+        return view('CompanyProfile/penelitian', $data);
+    }
 
+    public function savePenelitian()
+    {
+        //validation
+        $rules = [
+            'nama' => [
+                'rules' => 'required',
+                'errors' => ['required' => 'Nama peneliti harus diisi']
+            ],
+            'nim' => [
+                'rules' => 'required',
+                'errors' => ['required' => 'NIM tidak boleh kosong']
+            ],
+            'instansi' => [
+                'rules' => 'required',
+                'errors' => ['required' => 'Instansi tidak boleh kosong']
+            ],
+            'judul_penelitian' => [
+                'rules' => 'required',
+                'errors' => ['required' => 'Judul penelitian harus diisi']
+            ],
+            'tanggal_penelitian' => [
+                'rules' => 'required',
+                'errors' => ['required' => 'Tanggal penelitian tidak boleh kosong']
+            ],
+        ];
 
+        if (!$this->validate($rules)) {
+            return redirect()->to('/penelitian')->withInput()->with('errors', $this->validator->listErrors());
+        }
 
+        $foto = $this->request->getFile('foto');
 
-   
-    
-    
-        
+        if ($foto->isValid() && !$foto->hasMoved()) {
+            $fotoName = $foto->getRandomName();
+            $foto->move('img/penelitian', $fotoName);
+        } else {
+            // Handle file upload error
+            return redirect()->to(base_url('/penelitian'))
+                ->withInput()
+                ->with('errors', $foto->getErrorString());
+        }
 
+        //tambah data
+        $this->M_Penelitian->save([
+            'nama' => $this->request->getVar('nama'),
+            'nim' => $this->request->getVar('nim'),
+            'instansi' => $this->request->getVar('instansi'),
+            'judul_penelitian' => $this->request->getVar('judul_penelitian'),
+            'tanggal_penelitian' => $this->request->getVar('tanggal_penelitian'),
+            'foto' => $fotoName,
+        ]);
 
-    
+        //alert
+        session()->setFlashdata('pesan', 'Data Penelitian Berhasil Ditambahkan.');
 
+        return redirect()->to('/penelitian');
+    }
+
+    public function deletePenelitian($id_penelitian)
+    {
+        $id_penelitian = filter_var($id_penelitian, FILTER_SANITIZE_NUMBER_INT);
+
+        // Ambil data foto untuk dihapus
+        $penelitian = $this->M_Penelitian->find($id_penelitian);
+
+        // Hapus file foto jika ada
+        if (!empty($penelitian['foto']) && file_exists('img/penelitian/' . $penelitian['foto'])) {
+            unlink('img/penelitian/' . $penelitian['foto']);
+        }
+
+        // Explicitly use where clause
+        $this->M_Penelitian->where('id_penelitian', $id_penelitian)->delete();
+        // OR use the deleteWhere method
+        // $this->M_Penelitian->delete(['id_penelitian' => $id_penelitian]);
+
+        session()->setFlashdata('pesan', 'Data Penelitian Berhasil Dihapus.');
+
+        // Redirect ke halaman yang sesuai
+        return redirect()->to('/penelitian');
+    }
+    public function updatePenelitian($id_penelitian)
+    {
+        // Mengambil data yang akan diupdate dari request
+        $dataToUpdate = [
+            'nama' => $this->request->getVar('nama'),
+            'instansi' => $this->request->getVar('instansi'),
+            'judul_penelitian' => $this->request->getVar('judul_penelitian'),
+            'tanggal_penelitian' => $this->request->getVar('tanggal_penelitian'),
+        ];
+
+        $foto = $this->request->getFile('foto');
+
+        // Cek apakah file foto diunggah
+        if ($foto && $foto->isValid() && !$foto->hasMoved()) {
+            // Generate nama unik untuk file foto
+            $fotoName = $foto->getRandomName();
+
+            // Hapus foto lama jika ada
+            $penelitianLama = $this->M_Penelitian->find($id_penelitian);
+            if (!empty($penelitianLama['foto']) && file_exists('uploads/penelitian/' . $penelitianLama['foto'])) {
+                unlink('uploads/penelitian/' . $penelitianLama['foto']);
+            }
+
+            // Pindahkan file foto ke folder yang diinginkan
+            $foto->move('uploads/penelitian', $fotoName);
+
+            // Tambahkan nama file foto ke data yang akan diupdate
+            $dataToUpdate['foto'] = $fotoName;
+        }
+
+        // Membersihkan data kosong yang mungkin ada dari inputan form
+        $dataToUpdate = array_filter($dataToUpdate, function ($var) {
+            return $var !== null && $var !== '';
+        });
+
+        // Memastikan ada data yang akan diupdate
+        if (!empty($dataToUpdate)) {
+            // Mengeksekusi perintah update
+            $this->M_Penelitian->update($id_penelitian, $dataToUpdate);
+
+            //alert
+            session()->setFlashdata('pesan', 'Data Penelitian Berhasil diubah.');
+        } else {
+            // Jika tidak ada data yang diupdate, munculkan pesan kesalahan
+            session()->setFlashdata('error', 'Tidak ada data yang diupdate.');
+        }
+
+        // Redirect ke halaman daftar penelitian
+        return redirect()->to('/penelitian');
+    }
 }

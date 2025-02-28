@@ -92,6 +92,11 @@ $routes->delete('hapusKajian/(:segment)', 'C_Admin::deleteKajian/$1');
 $routes->get('/pesanAdmin', 'C_Admin::pesanAdmin');
 $routes->delete('hapuspesan/(:segment)', 'C_Admin::deletePesan/$1');
 
+$routes->get('/penelitian', 'C_Admin::tambahPenelitian');
+$routes->post('/savePenelitian', 'C_Admin::savePenelitian');
+$routes->delete('hapusPenelitian/(:segment)', 'C_Admin::deletePenelitian/$1');
+$routes->post('updatePenelitian/(:segment)', 'C_Admin::updatePenelitian/$1');
+
 
 $routes->get('/sega', 'C_Admin::sega');
 
@@ -268,7 +273,3 @@ $routes->delete('deleteBuku/(:segment)', 'C_Perpustakaan::deleteBuku/$1');
 $routes->post('/updateBuku/(:segment)', 'C_Perpustakaan::updateBuku/$1');
 $routes->get('/daftarSega', 'C_LandingPage::daftarSega');
 // 
-
-
-
-

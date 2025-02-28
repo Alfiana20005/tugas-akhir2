@@ -12,7 +12,7 @@ class M_Publikasi extends Model
 
 
     // protected $allowedFields = ['foto', 'nama','password','email','username','level'];
-    protected $allowedFields = ['judul','tanggal', 'foto', 'link'];
+    protected $allowedFields = ['judul', 'tanggal', 'foto', 'link'];
 
 
     protected $validationRules = [];
@@ -27,11 +27,6 @@ class M_Publikasi extends Model
     public function getKegiatanTeratas()
     {
         return $this->orderBy('tanggal', 'DESC')
-                    ->findAll();
+            ->findAll();
     }
-    
-  
-
-    
 }
-    
