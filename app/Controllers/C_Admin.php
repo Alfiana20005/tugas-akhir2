@@ -1673,13 +1673,11 @@ class C_Admin extends BaseController
             $fotoName = $foto->getRandomName();
             $foto->move('img/penelitian', $fotoName);
         } else {
-            // Handle file upload error
             return redirect()->to(base_url('/penelitian'))
                 ->withInput()
                 ->with('errors', $foto->getErrorString());
         }
 
-        //tambah data
         $this->M_Penelitian->save([
             'nama' => $this->request->getVar('nama'),
             'nim' => $this->request->getVar('nim'),
@@ -1689,7 +1687,6 @@ class C_Admin extends BaseController
             'foto' => $fotoName,
         ]);
 
-        //alert
         session()->setFlashdata('pesan', 'Data Penelitian Berhasil Ditambahkan.');
 
         return redirect()->to('/penelitian');
@@ -1699,22 +1696,16 @@ class C_Admin extends BaseController
     {
         $id_penelitian = filter_var($id_penelitian, FILTER_SANITIZE_NUMBER_INT);
 
-        // Ambil data foto untuk dihapus
         $penelitian = $this->M_Penelitian->find($id_penelitian);
 
-        // Hapus file foto jika ada
         if (!empty($penelitian['foto']) && file_exists('img/penelitian/' . $penelitian['foto'])) {
             unlink('img/penelitian/' . $penelitian['foto']);
         }
 
-        // Explicitly use where clause
         $this->M_Penelitian->where('id_penelitian', $id_penelitian)->delete();
-        // OR use the deleteWhere method
-        // $this->M_Penelitian->delete(['id_penelitian' => $id_penelitian]);
 
         session()->setFlashdata('pesan', 'Data Penelitian Berhasil Dihapus.');
 
-        // Redirect ke halaman yang sesuai
         return redirect()->to('/penelitian');
     }
     public function updatePenelitian($id_penelitian)

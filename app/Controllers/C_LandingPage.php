@@ -18,6 +18,7 @@ use App\Models\M_ManuskripKol;
 use App\Models\M_Manuskrip;
 use App\Models\M_Sega;
 use App\Models\M_User;
+use App\Models\M_Penelitian;
 
 class C_LandingPage extends BaseController
 {
@@ -38,30 +39,33 @@ class C_LandingPage extends BaseController
     protected $M_Manuskrip;
     protected $M_Sega;
     protected $M_User;
+    protected $M_Penelitian;
 
-    public function __construct() {
+    public function __construct()
+    {
         helper('form');
-        $this -> M_Petugas = new M_Petugas();
-        $this -> M_Berita = new M_Berita();
-        $this -> M_Kegiatan = new M_Kegiatan();
-        $this -> M_Publikasi = new M_Publikasi();
-        $this -> M_KoleksiLandingPage = new M_KoleksiLandingPage();
-        $this -> M_Gallery = new M_Gallery();
-        $this -> M_Kajian = new M_Kajian();
-        $this -> M_Isikajian = new M_Isikajian();
-        $this -> M_Pesan = new M_Pesan();
-        $this -> M_Pengunjung = new M_Pengunjung();
-        $this -> M_SemuaPetugas = new M_SemuaPetugas();
-        $this -> M_Perpustakaan = new M_Perpustakaan();
-        $this -> M_ManuskripKol= new M_ManuskripKol();
-        $this -> M_Manuskrip= new M_Manuskrip();
-        $this -> M_Sega= new M_Sega();
-        $this -> M_User= new M_User();
-
+        $this->M_Petugas = new M_Petugas();
+        $this->M_Berita = new M_Berita();
+        $this->M_Kegiatan = new M_Kegiatan();
+        $this->M_Publikasi = new M_Publikasi();
+        $this->M_KoleksiLandingPage = new M_KoleksiLandingPage();
+        $this->M_Gallery = new M_Gallery();
+        $this->M_Kajian = new M_Kajian();
+        $this->M_Isikajian = new M_Isikajian();
+        $this->M_Pesan = new M_Pesan();
+        $this->M_Pengunjung = new M_Pengunjung();
+        $this->M_SemuaPetugas = new M_SemuaPetugas();
+        $this->M_Perpustakaan = new M_Perpustakaan();
+        $this->M_ManuskripKol = new M_ManuskripKol();
+        $this->M_Manuskrip = new M_Manuskrip();
+        $this->M_Sega = new M_Sega();
+        $this->M_User = new M_User();
+        $this->M_Penelitian = new M_Penelitian();
     }
 
     // Start Landing Page Baru
-    public function home(){
+    public function home()
+    {
 
         $kegiatan = $this->M_Kegiatan->get();
         $beritaTerbaru = $this->M_Berita->getBeritaTerbaruHome(4);
@@ -80,9 +84,9 @@ class C_LandingPage extends BaseController
         }
 
         // var_dump($berita);
-        $data =[
+        $data = [
             // 'title' => 'Daftar Berita',
-            
+
             'beritaterbaru' => $beritaTerbaru,
             'kegiatan' => $kegiatan,
             'gallery' => $galery,
@@ -112,7 +116,7 @@ class C_LandingPage extends BaseController
         // $id_user = $session->get('id_user');
         // $user = $this->M_User->getUser($id_user);
 
-        $data =[
+        $data = [
             'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
             'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
             'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
@@ -126,7 +130,7 @@ class C_LandingPage extends BaseController
         // $session = session();
         // $id_user = $session->get('id_user');
         // $user = $this->M_User->getUser($id_user);
-        $data =[
+        $data = [
             'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
             'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
             'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
@@ -140,7 +144,7 @@ class C_LandingPage extends BaseController
         // $session = session();
         // $id_user = $session->get('id_user');
         // $user = $this->M_User->getUser($id_user);
-        $data =[
+        $data = [
             'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
             'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
             'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
@@ -154,7 +158,7 @@ class C_LandingPage extends BaseController
         // $session = session();
         // $id_user = $session->get('id_user');
         // $user = $this->M_User->getUser($id_user);
-        $data =[
+        $data = [
             'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
             'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
             'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
@@ -168,7 +172,7 @@ class C_LandingPage extends BaseController
         // $session = session();
         // $id_user = $session->get('id_user');
         // $user = $this->M_User->getUser($id_user);
-        $data =[
+        $data = [
             'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
             'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
             'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
@@ -185,7 +189,7 @@ class C_LandingPage extends BaseController
         $kategoriBerita = $this->request->getPost('kategoriBerita') ?? 'Regional'; // Default ke 'Regional'
         $lihatSemua = $this->request->getGet('lihatSemua') ?? false;
         $limit = $lihatSemua ? null : 4; // Jika 'lihatSemua' aktif, tampilkan semua berita. Jika tidak, tampilkan 2 berita.
-    
+
         if ($lihatSemua) {
             $data['berita'] = $this->M_Berita->getBeritaByKategoriAll($kategoriBerita);
         } else {
@@ -198,7 +202,7 @@ class C_LandingPage extends BaseController
             $berita['isi_pendek'] = $this->getExcerpt($berita['isi'], 20); // 30 adalah jumlah kata yang ingin ditampilkan
         }
 
-        $data =[
+        $data = [
             'title' => 'Daftar Berita',
             'dataBerita' => $data_berita,
             'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
@@ -207,11 +211,11 @@ class C_LandingPage extends BaseController
             'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
             'berita' => $data['berita'],
             'kategoriBerita' => $kategoriBerita,
-            'lihatSemua' => $lihatSemua, 
+            'lihatSemua' => $lihatSemua,
             // 'user' => $user
             // 'berita' => $berita
         ];
-        
+
         return view('landingPage/berita2', $data);
     }
     public function lihatberita2($id_berita): string
@@ -228,7 +232,7 @@ class C_LandingPage extends BaseController
         } else {
             $data['berita2'] = $this->M_Berita->getBeritaByKategori($kategoriBerita, $limit);
         }
-        
+
 
         $data_berita = $this->M_Berita->findAll();
         $berita = $this->M_Berita->getBerita($id_berita);
@@ -237,7 +241,7 @@ class C_LandingPage extends BaseController
         $data['kategoriBerita'] = $kategoriBerita;
 
         // var_dump($berita);
-        $data =[
+        $data = [
             // 'title' => 'Daftar Berita',
             'dataBerita' => $data_berita,
             'berita' => $berita,
@@ -248,10 +252,10 @@ class C_LandingPage extends BaseController
             'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
             'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
             'kategoriBerita' => $kategoriBerita,
-            'lihatSemua' => $lihatSemua, 
+            'lihatSemua' => $lihatSemua,
             // 'user' => $user
         ];
-        
+
         return view('landingPage/lihatBerita2', $data);
     }
     public function beritaKategori2($jenisBerita): string
@@ -266,8 +270,8 @@ class C_LandingPage extends BaseController
 
         $kategoriBerita = $this->request->getPost('kategoriBerita') ?? 'Regional'; // Default ke 'Regional'
         $lihatSemua = $this->request->getGet('lihatSemua') ?? false;
-        $limit = $lihatSemua ? null : 4; 
-    
+        $limit = $lihatSemua ? null : 4;
+
         if ($lihatSemua) {
             $data['berita'] = $this->M_Berita->getBeritaByKategoriAll($kategoriBerita);
         } else {
@@ -282,7 +286,7 @@ class C_LandingPage extends BaseController
 
 
 
-        $data =[
+        $data = [
             'title' => 'Daftar Kegiatan',
             // 'dataBerita' => $data_berita,
             'beritaTerbaru' => $beritaTerbaru,
@@ -293,16 +297,16 @@ class C_LandingPage extends BaseController
             'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
             'berita' => $data['berita'],
             'kategoriBerita' => $kategoriBerita,
-            'lihatSemua' => $lihatSemua, 
+            'lihatSemua' => $lihatSemua,
             // 'user' => $user
         ];
-        
+
 
         return view('landingPage/berita2', $data);
     }
 
     public function kegiatan2(): string
-    { 
+    {
         // $session = session();
         // $id_user = $session->get('id_user');
         // $user = $this->M_User->getUser($id_user);
@@ -311,7 +315,7 @@ class C_LandingPage extends BaseController
 
 
 
-        $data =[
+        $data = [
             'title' => 'Daftar Kegiatan',
             'kegiatan' => $kegiatan,
             'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
@@ -321,7 +325,7 @@ class C_LandingPage extends BaseController
             // 'user' => $user
             // 'berita' => $berita
         ];
-        
+
 
 
         return view('landingPage/kegiatan2', $data);
@@ -332,24 +336,25 @@ class C_LandingPage extends BaseController
         // $session = session();
         // $id_user = $session->get('id_user');
         // $user = $this->M_User->getUser($id_user);
-        
+
         $kegiatanKategori = $this->M_Kegiatan->getDataByJenis($kategori_kegiatan);
-        
-        $data =[
+
+        $data = [
             'title' => 'Daftar Kegiatan',
-            'kegiatan'=> $kegiatanKategori,
+            'kegiatan' => $kegiatanKategori,
             'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
             'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
             'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
             'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
             // 'user' => $user
-            
+
         ];
-        
+
 
         return view('landingPage/kegiatan2', $data);
     }
-    public function lihatKegiatan2($id_kegiatan){
+    public function lihatKegiatan2($id_kegiatan)
+    {
         // $data_berita = $this->M_Berita->findAll();
         $kegiatan = $this->M_Kegiatan->getKegiatan($id_kegiatan);
         $kegiatanTerbaru = $this->M_Kegiatan->getKegiatanTeratas(10);
@@ -358,8 +363,8 @@ class C_LandingPage extends BaseController
         // $user = $this->M_User->getUser($id_user);
 
         // var_dump($berita);
-        $data =[
-            
+        $data = [
+
             'kegiatan' => $kegiatan,
             'kegiatanTerbaru' => $kegiatanTerbaru,
             'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
@@ -368,7 +373,7 @@ class C_LandingPage extends BaseController
             'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
             // 'user' => $user
         ];
-        
+
 
         return view('landingPage/lihatKegiatan2', $data);
     }
@@ -381,10 +386,10 @@ class C_LandingPage extends BaseController
         // $session = session();
         // $id_user = $session->get('id_user');
         // $user = $this->M_User->getUser($id_user);
-        
 
 
-        $data =[
+
+        $data = [
             'title' => 'Daftar Kegiatan',
             'kajian' => $kajian,
             'kajianTerbaru' => $kajianTerbaru,
@@ -394,7 +399,7 @@ class C_LandingPage extends BaseController
             'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
             // 'user' => $user
         ];
-        
+
 
         return view('landingPage/kajian2', $data);
     }
@@ -408,7 +413,7 @@ class C_LandingPage extends BaseController
         $kajianKategori = $this->M_Kajian->getDataByKategori($kategori);
 
 
-        $data =[
+        $data = [
             'title' => 'Daftar Kegiatan',
             // 'kajian' => $kajian,
             'kajianTerbaru' => $kajianTerbaru,
@@ -419,7 +424,7 @@ class C_LandingPage extends BaseController
             'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
             // 'user' => $user
         ];
-        
+
 
         return view('landingPage/kajian2', $data);
     }
@@ -434,7 +439,7 @@ class C_LandingPage extends BaseController
         $IsiKajian = $this->M_Isikajian->getDataByIdKajian($id_kajian);
 
         // var_dump($berita);
-        $data =[
+        $data = [
 
             'kajian' => $kajian,
             'kajianTerbaru' => $kajianTerbaru,
@@ -445,7 +450,7 @@ class C_LandingPage extends BaseController
             'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
             // 'user' => $user
         ];
-        
+
 
         return view('landingPage/tulisan2', $data);
     }
@@ -462,8 +467,8 @@ class C_LandingPage extends BaseController
         // $id_user = $session->get('id_user');
         // $user = $this->M_User->getUser($id_user);
         $koleksi = $this->M_KoleksiLandingPage->findAll();
-        
-        $data =[
+
+        $data = [
             'title' => 'Daftar Koleksi',
             'koleksi' => $koleksi,
             'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
@@ -473,20 +478,20 @@ class C_LandingPage extends BaseController
             // 'user' => $user
             // 'berita' => $berita
         ];
-        
-        
+
+
         return view('landingPage/koleksi_page2', $data);
     }
 
     public function koleksi_kategori($kategori_koleksi): string
     {
-        
+
         $koleksi = $this->M_KoleksiLandingPage->getDataByJenis($kategori_koleksi);
         // $session = session();
         // $id_user = $session->get('id_user');
         // $user = $this->M_User->getUser($id_user);
 
-        $data =[
+        $data = [
             'title' => 'Daftar Kegiatan',
             'koleksi' => $koleksi,
             'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
@@ -494,25 +499,25 @@ class C_LandingPage extends BaseController
             'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
             'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
             // 'user' => $user
-            
+
         ];
-        
+
 
         return view('landingPage/koleksi_page2', $data);
     }
 
     public function koleksi_detail2($id_koleksi)
     {
-        
+
         $koleksi = $this->M_KoleksiLandingPage->getKOleksiById($id_koleksi);
         // $kegiatanTerbaru = $this->M_Kegiatan->getKegiatanTeratas(10);
         // $session = session();
         // $id_user = $session->get('id_user');
         // $user = $this->M_User->getUser($id_user);
 
-        
-        $data =[
-            
+
+        $data = [
+
             'koleksi' => $koleksi,
             'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
             'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
@@ -520,8 +525,8 @@ class C_LandingPage extends BaseController
             'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
             // 'user' => $user
         ];
-        
-            
+
+
         return view('landingPage/koleksi_detail2', $data);
     }
 
@@ -532,8 +537,8 @@ class C_LandingPage extends BaseController
         $session = session();
         $id_user = $session->get('id_user');
         $user = $this->M_User->getUser($id_user);
-       
-        $data =[
+
+        $data = [
             'title' => 'Daftar Publikasi',
             'publikasi' => $publikasi,
             'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
@@ -543,7 +548,7 @@ class C_LandingPage extends BaseController
             'user' => $user
             // 'berita' => $berita
         ];
-        
+
 
         return view('landingPage/publikasi2', $data);
     }
@@ -551,8 +556,8 @@ class C_LandingPage extends BaseController
     {
 
         $manuskrip = $this->M_ManuskripKol->findAll();
-       
-        $data =[
+
+        $data = [
             'title' => 'Terjemahan Manuskrip',
             'manuskrip' => $manuskrip,
             'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
@@ -562,7 +567,7 @@ class C_LandingPage extends BaseController
             // 'berita' => $berita
 
         ];
-        
+
 
         return view('landingPage/manuskrip_koleksi', $data);
     }
@@ -578,8 +583,8 @@ class C_LandingPage extends BaseController
             'id_user' => session()->get('id_user'),
             'nama' => session()->get('nama')
         ];
-       
-        $data =[
+
+        $data = [
             'title' => 'Terjemahan Manuskrip',
             'manuskrip' => $manuskrip,
             'manuskripTerbaru' => $manuskripTerbaru,
@@ -593,7 +598,7 @@ class C_LandingPage extends BaseController
             // 'berita' => $berita
 
         ];
-        
+
 
         return view('landingPage/manuskrip', $data);
     }
@@ -606,14 +611,14 @@ class C_LandingPage extends BaseController
         $user = $this->M_User->getUser($id_user);
 
         // $manuskrip = $this->M_Manuskrip->getManuskrip($id_manuskrip);
-       
+
         // if ($manuskrip) {
         //     $this->M_Manuskrip->update($id_manuskrip, [
         //         'views' => $manuskrip['views'] + 1
         //     ]);
         // }
-    
-        $data =[
+
+        $data = [
             'title' => 'Terjemahan Manuskrip',
             'manuskrip' => $manuskrip,
             'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
@@ -623,19 +628,20 @@ class C_LandingPage extends BaseController
             'user' => $user
 
         ];
-        
+
 
         return view('landingPage/manuskripLogin', $data);
     }
-    public function views($id_manuskrip){
-        
+    public function views($id_manuskrip)
+    {
+
         // $manuskrip = $this->M_Manuskrip->findAll();
         $session = session();
         $id_user = $session->get('id_user');
         $user = $this->M_User->getUser($id_user);
 
         $manuskrip = $this->M_Manuskrip->getManuskrip($id_manuskrip);
-       
+
         if ($manuskrip) {
             $this->M_Manuskrip->update($id_manuskrip, [
                 'views' => $manuskrip['views'] + 1
@@ -643,8 +649,8 @@ class C_LandingPage extends BaseController
             return redirect()->to($manuskrip['link']);
         }
         return redirect()->back();
-        
-    
+
+
         // $data =[
         //     'title' => 'Terjemahan Manuskrip',
         //     'manuskrip' => $manuskrip,
@@ -655,31 +661,32 @@ class C_LandingPage extends BaseController
         //     'user' => $user
 
         // ];
-        
+
 
         // return view('landingPage/manuskripLogin', $data);
     }
-    public function views2($id){
-        
+    public function views2($id)
+    {
+
         // $manuskrip = $this->M_Manuskrip->findAll();
         $session = session();
         $id_user = $session->get('id_user');
         $user = $this->M_User->getUser($id_user);
 
         $manuskrip = $this->M_ManuskripKol->getManuskrip($id);
-       
+
         if ($manuskrip) {
             $this->M_ManuskripKol->update($id, [
                 'views' => $manuskrip['views'] + 1
             ]);
             return redirect()->to($manuskrip['link']);
-        }else {
+        } else {
             // Jika manuskrip tidak ditemukan
             return redirect()->back();
         }
         // return redirect()->back();
-        
-    
+
+
         // $data =[
         //     'title' => 'Terjemahan Manuskrip',
         //     'manuskrip' => $manuskrip,
@@ -690,7 +697,7 @@ class C_LandingPage extends BaseController
         //     'user' => $user
 
         // ];
-        
+
 
         // return view('landingPage/manuskripLogin', $data);
     }
@@ -702,8 +709,8 @@ class C_LandingPage extends BaseController
         $data_buku = $this->M_Perpustakaan->findAll();
         $buku_rekomendasi = $this->M_Perpustakaan->getBukuRekomendasi('Tampilkan Sebagai Buku Rekomendasi');
         $buku_favorit = $this->M_Perpustakaan->getBukuRekomendasi('Tampilkan Sebagai Buku Favorit');
-        
-        $data =[
+
+        $data = [
             'data_buku' => $data_buku,
             'buku_rekomendasi' => $buku_rekomendasi,
             'buku_favorit' => $buku_favorit,
@@ -718,8 +725,8 @@ class C_LandingPage extends BaseController
     public function detailBuku($id_buku): string
     {
         $data_buku = $this->M_Perpustakaan->getBuku($id_buku);
-        
-        $data =[
+
+        $data = [
             'data_buku' => $data_buku,
             'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
             'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
@@ -731,36 +738,36 @@ class C_LandingPage extends BaseController
     }
     public function kontak(): string
     {
-        $data =[
+        $data = [
             'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
             'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
             'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
             'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
         ];
-        
+
 
         return view('landingPage/kontak', $data);
     }
     public function pesanUser()
     {
-        $rules= [
+        $rules = [
             'nama' => [
                 'rules' => 'required',
-                'errors' => ['required'=>'Judul harus diisi']
+                'errors' => ['required' => 'Judul harus diisi']
             ],
             'pesan' => [
                 'rules' => 'required',
                 'errors' => [
-                    'required'=>'tanggal tidak boleh kosong',
-                    
-    
+                    'required' => 'tanggal tidak boleh kosong',
+
+
                 ]
             ],
         ];
 
-        if(!$this->validate($rules)){
+        if (!$this->validate($rules)) {
             // session()->setFlashdata('errors', $this->validator->listErrors());
-            return redirect()->to('/kontak') ->withInput() -> with('errors', $this->validator->listErrors());
+            return redirect()->to('/kontak')->withInput()->with('errors', $this->validator->listErrors());
         }
 
 
@@ -770,69 +777,69 @@ class C_LandingPage extends BaseController
             'email' => $this->request->getVar('email'),
             'pesan' => $this->request->getVar('pesan'),
 
-            
+
         ]);
 
         //alert
         session()->setFlashdata('pesan', 'Pesan Anda Berhasil Dikirim.');
 
-        return redirect()-> to('/kontak');
+        return redirect()->to('/kontak');
 
         // return view('landingPage/kontak');
     }
-    
+
     public function semuaPetugas(): string
     {
-        $data =[
+        $data = [
             'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
             'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
             'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
             'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
             'dataPetugas' => $this->M_SemuaPetugas->get(),
         ];
-        
+
 
         return view('landingPage/semuaPetugas', $data);
     }
 
     public function sekardiyu(): string
     {
-        $data =[
+        $data = [
             'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
             'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
             'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
             'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
-           
+
         ];
-        
+
 
         return view('landingPage/sekardiyu', $data);
     }
 
     public function rencanaStrategis(): string
     {
-        $data =[
+        $data = [
             'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
             'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
             'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
             'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
-           
+
         ];
-        
+
 
         return view('landingPage/rencanaStrategis', $data);
     }
 
     public function etiket(): string
     {
-        $data =[
+        $data = [
             'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
             'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
             'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
             'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
-           
+
         ];
-        
+
 
         return view('landingPage/etiket', $data);
     }
@@ -842,7 +849,7 @@ class C_LandingPage extends BaseController
         $sega = $this->M_Sega->findAll();
 
         // var_dump($berita);
-        $data =[
+        $data = [
 
             'sega' => $sega,
             'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
@@ -850,7 +857,7 @@ class C_LandingPage extends BaseController
             'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
             'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
         ];
-        
+
 
         return view('landingPage/audioGuide', $data);
     }
@@ -859,26 +866,35 @@ class C_LandingPage extends BaseController
     {
         $sega = $this->M_Sega->getSega($id_sega);
 
-        $data =[
+        $data = [
 
             'sega' => $sega,
-            
+
             'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
             'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
             'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
             'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
         ];
-        
+
 
         return view('landingPage/file', $data);
     }
 
+    public function penelitian()
+    {
+        $penelitianModel = new \App\Models\M_Penelitian();
 
+        $data = [
+            'title' => 'Penelitian',
+            'penelitian' => $penelitianModel->paginate(10),
+            'pager' => $penelitianModel->pager,
 
+            'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
+            'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
+            'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
+            'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
+        ];
 
-
-
-
-    
-
+        return view('landingPage/penelitian', $data);
+    }
 }

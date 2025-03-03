@@ -111,6 +111,7 @@ class Filters extends BaseConfig
                     '/formlogin',
                     'C_User/*',
                     '/logoutUser',
+                    '/penelitian'
 
 
 
@@ -167,6 +168,7 @@ class Filters extends BaseConfig
                     '/formlogin',
                     'C_User/*',
                     '/logoutUser',
+                    '/penelitian'
 
 
 
@@ -223,6 +225,7 @@ class Filters extends BaseConfig
                     '/formlogin',
                     'C_User/*',
                     '/logoutUser',
+                    '/penelitian'
 
 
 
@@ -280,6 +283,7 @@ class Filters extends BaseConfig
                     '/formlogin',
                     'C_User/*',
                     '/logoutUser',
+                    '/penelitian'
 
 
 
@@ -336,6 +340,7 @@ class Filters extends BaseConfig
                     '/formlogin',
                     'C_User/*',
                     '/logoutUser',
+                    '/penelitian'
 
 
 
@@ -392,6 +397,7 @@ class Filters extends BaseConfig
                     '/formlogin',
                     'C_User/*',
                     '/logoutUser',
+                    '/penelitian'
 
 
 
@@ -448,6 +454,7 @@ class Filters extends BaseConfig
                     '/formlogin',
                     'C_User/*',
                     '/logoutUser',
+                    '/penelitian'
 
 
                 ]
@@ -503,6 +510,7 @@ class Filters extends BaseConfig
                     '/formlogin',
                     'C_User/*',
                     '/logoutUser',
+                    '/penelitian'
 
 
 
@@ -587,7 +595,7 @@ class Filters extends BaseConfig
                     '/saveSega',
                     '/previewSega/*',
                     '/deleteSega/*',
-                    '/penelitian',
+                    '/dataPenelitian',
                     '/savePenelitian',
                     '/hapusPenelitian/*',
                     '/updatePenelitian/*',

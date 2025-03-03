@@ -33,6 +33,7 @@ $routes->get('/koleksi_detail', 'C_LandingPage::koleksi_detail');
 $routes->get('/koleksi_detail/(:segment)', 'C_LandingPage::koleksi_detail/$1');
 $routes->get('/publikasi', 'C_LandingPage::publikasi');
 $routes->get('/perpustakaan', 'C_LandingPage::perpustakaan');
+$routes->get('/penelitian', 'C_LandingPage::penelitian');
 
 
 //Admin
@@ -92,7 +93,7 @@ $routes->delete('hapusKajian/(:segment)', 'C_Admin::deleteKajian/$1');
 $routes->get('/pesanAdmin', 'C_Admin::pesanAdmin');
 $routes->delete('hapuspesan/(:segment)', 'C_Admin::deletePesan/$1');
 
-$routes->get('/penelitian', 'C_Admin::tambahPenelitian');
+$routes->get('/dataPenelitian', 'C_Admin::tambahPenelitian');
 $routes->post('/savePenelitian', 'C_Admin::savePenelitian');
 $routes->delete('hapusPenelitian/(:segment)', 'C_Admin::deletePenelitian/$1');
 $routes->post('updatePenelitian/(:segment)', 'C_Admin::updatePenelitian/$1');

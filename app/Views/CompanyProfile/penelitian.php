@@ -107,7 +107,7 @@
                         foreach ($penelitian as $p): ?>
                             <tr>
                                 <td style="text-align: center;"><?= $no++; ?></td>
-                                <td style="text-align: center;"><img src="<?= base_url("img/penelitian/" . $p['foto_penelitian']); ?>" alt="" style="width: 60px;"></td>
+                                <td style="text-align: center;"><img src="<?= base_url("img/penelitian/" . $p['foto']); ?>" alt="" style="width: 60px;"></td>
                                 <td style="text-align: center;"><?= $p['nama']; ?></td>
                                 <td style="text-align: center;"><?= $p['nim']; ?></td>
                                 <td style="text-align: center;"><?= $p['instansi']; ?></td>
