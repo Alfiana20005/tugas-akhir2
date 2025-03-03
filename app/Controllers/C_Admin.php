@@ -1668,12 +1668,19 @@ class C_Admin extends BaseController
         }
 
         $foto = $this->request->getFile('foto');
+        $fotoName = 'default.jpg'; // Default value
 
-        if ($foto->isValid() && !$foto->hasMoved()) {
-            $fotoName = $foto->getRandomName();
-            $foto->move('img/penelitian', $fotoName);
-        } else {
-            // Handle file upload error, using the same approach as saveManuskrip
+        if ($foto->isValid()) {
+            if (!$foto->hasMoved()) {
+                $fotoName = $foto->getRandomName();
+                $foto->move('img/penelitian', $fotoName);
+            } else {
+                return redirect()->to(base_url('/penelitian'))
+                    ->withInput()
+                    ->with('errors', 'File already moved');
+            }
+        } else if ($foto->getError() !== UPLOAD_ERR_NO_FILE) {
+            // Only show error if there was an attempt to upload (not when no file is selected)
             return redirect()->to(base_url('/penelitian'))
                 ->withInput()
                 ->with('errors', $foto->getErrorString());
@@ -1685,12 +1692,13 @@ class C_Admin extends BaseController
             'instansi' => $this->request->getVar('instansi'),
             'judul_penelitian' => $this->request->getVar('judul_penelitian'),
             'tanggal_penelitian' => $this->request->getVar('tanggal_penelitian'),
+            'link' => $this->request->getVar('link'),
             'foto' => $fotoName,
         ]);
 
         session()->setFlashdata('pesan', 'Data Penelitian Berhasil Ditambahkan.');
 
-        return redirect()->to('/penelitian');
+        return redirect()->to('/dataPenelitian');
     }
 
     public function deletePenelitian($id_penelitian)
@@ -1707,7 +1715,7 @@ class C_Admin extends BaseController
 
         session()->setFlashdata('pesan', 'Data Penelitian Berhasil Dihapus.');
 
-        return redirect()->to('/penelitian');
+        return redirect()->to('/dataPenelitian');
     }
     public function updatePenelitian($id_penelitian)
     {
@@ -1757,6 +1765,6 @@ class C_Admin extends BaseController
         }
 
         // Redirect ke halaman daftar penelitian
-        return redirect()->to('/penelitian');
+        return redirect()->to('/dataPenelitian');
     }
 }

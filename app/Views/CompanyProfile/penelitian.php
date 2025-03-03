@@ -64,6 +64,12 @@
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input form-control" id="gambar" name="foto" onchange="previewImg('gambar')">
                                     <label class="custom-file-label" for="customFile">Gambar Maksimal 2 Mb</label>
+                                    <?php if (!empty($penelitian['foto'])): ?>
+                                        <div class="my-2">
+                                            <p>Foto Saat Ini:</p>
+                                            <img src="<?= base_url('img/penelitian/' . $penelitian['foto']); ?>" alt="Foto Petugas" width="100">
+                                        </div>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>
