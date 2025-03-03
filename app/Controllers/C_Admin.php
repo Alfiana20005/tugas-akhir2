@@ -1673,6 +1673,7 @@ class C_Admin extends BaseController
             $fotoName = $foto->getRandomName();
             $foto->move('img/penelitian', $fotoName);
         } else {
+            // Handle file upload error, using the same approach as saveManuskrip
             return redirect()->to(base_url('/penelitian'))
                 ->withInput()
                 ->with('errors', $foto->getErrorString());
