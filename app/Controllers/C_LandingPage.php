@@ -884,11 +884,83 @@ class C_LandingPage extends BaseController
     {
         $penelitianModel = new \App\Models\M_Penelitian();
 
+        // Get filter parameters
+        $instansi = $this->request->getGet('instansi');
+        $tahun = $this->request->getGet('tahun');
+        $search = $this->request->getGet('q');
+
+        // Store original query before pagination
+        $baseQuery = clone $penelitianModel;
+
+        // Apply filters to the model
+        if (!empty($instansi)) {
+            $penelitianModel->where('instansi', $instansi);
+            $baseQuery->where('instansi', $instansi);
+        }
+
+        if (!empty($tahun)) {
+            $penelitianModel->where("EXTRACT(YEAR FROM tanggal_penelitian) = '$tahun'");
+            $baseQuery->where("EXTRACT(YEAR FROM tanggal_penelitian) = '$tahun'");
+        }
+
+        if (!empty($search)) {
+            $penelitianModel->groupStart()
+                ->like('judul_penelitian', $search)
+                ->orLike('nama', $search)
+                ->orLike('instansi', $search)
+                ->groupEnd();
+
+            $baseQuery->groupStart()
+                ->like('judul_penelitian', $search)
+                ->orLike('nama', $search)
+                ->orLike('instansi', $search)
+                ->groupEnd();
+        }
+
+        // Get database connection
+        $db = \Config\Database::connect();
+
+        // Get list of all institutions with count
+        $instansi_list = $db->query("
+        SELECT instansi, COUNT(*) as jumlah 
+        FROM penelitian 
+        GROUP BY instansi 
+        ORDER BY jumlah DESC, instansi ASC
+    ")->getResultArray();
+
+        // Get list of all years with count
+        $tahun_list = $db->query("
+        SELECT EXTRACT(YEAR FROM tanggal_penelitian) as tahun, COUNT(*) as jumlah 
+        FROM penelitian 
+        GROUP BY EXTRACT(YEAR FROM tanggal_penelitian) 
+        ORDER BY tahun DESC
+    ")->getResultArray();
+
+        // Get the latest research without filters
+        $latestModel = new \App\Models\M_Penelitian();
+        $latest_penelitian = $latestModel->orderBy('tanggal_penelitian', 'DESC')
+            ->limit(5)
+            ->find();
+
+        // Prepare data for view
         $data = [
             'title' => 'Penelitian',
-            'penelitian' => $penelitianModel->paginate(10),
+            'penelitian' => $penelitianModel->paginate(10, 'default'),
             'pager' => $penelitianModel->pager,
 
+            // Add filter data
+            'instansi_list' => $instansi_list,
+            'tahun_list' => $tahun_list,
+            'latest_penelitian' => $latest_penelitian,
+
+            // Add current filters to help with UI highlighting
+            'current_filters' => [
+                'instansi' => $instansi,
+                'tahun' => $tahun,
+                'search' => $search
+            ],
+
+            // Keep your visitor counter data
             'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
             'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
             'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
