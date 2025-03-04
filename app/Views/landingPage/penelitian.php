@@ -70,7 +70,7 @@
                                             <a class="text-decoration-none"><?= $p['judul_penelitian']; ?></a>
                                         </h4>
                                         <div class="card-meta d-flex align-items-center mb-3">
-                                            <span class="text-muted"><i class="far fa-calendar-alt me-1"></i>
+                                            <span class="researcher-text"><i class="far fa-calendar-alt me-1 researcher-text"></i>
                                                 <?php
                                                 $bulan = ['January' => 'Januari', 'February' => 'Februari', 'March' => 'Maret', 'April' => 'April', 'May' => 'Mei', 'June' => 'Juni', 'July' => 'Juli', 'August' => 'Agustus', 'September' => 'September', 'October' => 'Oktober', 'November' => 'November', 'December' => 'Desember'];
 
@@ -91,20 +91,22 @@
                                                 ?>
                                             </span>
                                         </div>
+
+
                                         <div class="researcher-info p-3 bg-light rounded">
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <p class="mb-1"><i class="fas fa-user-graduate me-2"></i> <strong>Peneliti:</strong> <?= $p['nama']; ?></p>
-                                                    <p class="mb-1"><i class="fas fa-layer-group me-2"></i> <strong>Kategori:</strong>
-                                                        <a href="<?= base_url('penelitian?kategori_objek=' . urlencode($p['kategori_objek'])); ?>" class="text-decoration-none">
+                                                    <p class="mb-1 researcher-text"><i class="fas fa-user-graduate me-2"></i> Peneliti: <?= $p['nama']; ?></p>
+                                                    <p class="mb-1 researcher-text"><i class="fas fa-layer-group me-2"></i> Kategori:
+                                                        <a href="<?= base_url('penelitian?kategori_objek=' . urlencode($p['kategori_objek'])); ?>" class="text-decoration-none researcher-text">
                                                             <?= $p['kategori_objek']; ?>
                                                         </a>
                                                     </p>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <p class="mb-1"><i class="fas fa-book me-2"></i> <strong>Program Studi:</strong> <?= $p['program_studi']; ?></p>
-                                                    <p class="mb-1"><i class="fas fa-university me-2"></i> <strong>Instansi:</strong>
-                                                        <a href="<?= base_url('penelitian?instansi=' . urlencode($p['instansi'])); ?>" class="text-decoration-none">
+                                                    <p class="mb-1 researcher-text"><i class="fas fa-book me-2"></i> Program Studi: <?= $p['program_studi']; ?></p>
+                                                    <p class="mb-1 researcher-text"><i class="fas fa-university me-2"></i> Instansi:
+                                                        <a href="<?= base_url('penelitian?instansi=' . urlencode($p['instansi'])); ?>" class="text-decoration-none researcher-text">
                                                             <?= $p['instansi']; ?>
                                                         </a>
                                                     </p>

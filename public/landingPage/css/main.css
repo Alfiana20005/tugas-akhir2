@@ -4986,6 +4986,12 @@ body.mobile-nav-active #mobile-nav-toggle {
     justify-content: center;
 }
 
+.researcher-text {
+    font-weight: 400;
+    font-size: 0.95rem;
+    color: #212529;
+}
+
 a:hover {
     color: #850000;
 }
