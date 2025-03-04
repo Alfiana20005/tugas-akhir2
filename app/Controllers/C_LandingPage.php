@@ -927,6 +927,9 @@ class C_LandingPage extends BaseController
                 ->groupEnd();
         }
 
+        // Sort by date from oldest to newest
+        $penelitianModel->orderBy('tanggal_mulai', 'ASC');
+
         // Get database connection
         $db = \Config\Database::connect();
 
@@ -954,7 +957,7 @@ class C_LandingPage extends BaseController
         ORDER BY tahun DESC
     ")->getResultArray();
 
-        // Get the latest research without filters
+        // Get the latest research without filters - keep this as DESC to show the latest
         $latestModel = new \App\Models\M_Penelitian();
         $latest_penelitian = $latestModel->orderBy('tanggal_mulai', 'DESC')
             ->limit(5)
@@ -963,7 +966,7 @@ class C_LandingPage extends BaseController
         // Prepare data for view
         $data = [
             'title' => 'Penelitian',
-            'penelitian' => $penelitianModel->paginate(10, 'default'),
+            'penelitian' => $penelitianModel->paginate(5, 'default'),
             'pager' => $penelitianModel->pager,
 
             // Add filter data
