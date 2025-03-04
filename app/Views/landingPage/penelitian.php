@@ -95,7 +95,6 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <p class="mb-1"><i class="fas fa-user-graduate me-2"></i> <strong>Peneliti:</strong> <?= $p['nama']; ?></p>
-                                                    <p class="mb-1"><strong>No. Identitas:</strong> <?= $p['no_identitas']; ?></p>
                                                     <p class="mb-1"><i class="fas fa-layer-group me-2"></i> <strong>Kategori:</strong>
                                                         <a href="<?= base_url('penelitian?kategori_objek=' . urlencode($p['kategori_objek'])); ?>" class="text-decoration-none">
                                                             <?= $p['kategori_objek']; ?>
