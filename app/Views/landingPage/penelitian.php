@@ -125,38 +125,11 @@
 
                         <!-- Pagination -->
                         <?php if (isset($pager)) : ?>
-                            <div class="pagination-container mt-5 mb-4">
-                                <nav aria-label="Page navigation">
-                                    <ul class="pagination justify-content-center">
-                                        <?php
-                                        // Add Previous button with clear styling
-                                        $prevUrl = $pager->getPrevious();
-                                        echo '<li class="page-item ' . (!$prevUrl ? 'disabled' : '') . '">';
-                                        echo '<a class="page-link" href="' . ($prevUrl ?: '#') . '" aria-label="Previous">';
-                                        echo '<span aria-hidden="true"><i class="fas fa-chevron-left"></i></span>';
-                                        echo '</a></li>';
-
-                                        // Page numbers - directly use the pager methods instead of links()
-                                        $currentPage = $pager->getCurrentPage();
-                                        $totalPages = $pager->getPageCount();
-
-                                        for ($i = 1; $i <= $totalPages; $i++) {
-                                            $activeClass = ($i == $currentPage) ? 'active' : '';
-                                            echo '<li class="page-item ' . $activeClass . '">';
-                                            echo '<a class="page-link" href="' . $pager->getPageURI($i) . '">' . $i . '</a>';
-                                            echo '</li>';
-                                        }
-
-                                        // Add Next button with clear styling
-                                        $nextUrl = $pager->getNext();
-                                        echo '<li class="page-item ' . (!$nextUrl ? 'disabled' : '') . '">';
-                                        echo '<a class="page-link" href="' . ($nextUrl ?: '#') . '" aria-label="Next">';
-                                        echo '<span aria-hidden="true"><i class="fas fa-chevron-right"></i></span>';
-                                        echo '</a></li>';
-                                        ?>
-                                    </ul>
-                                </nav>
-                            </div>
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination justify-content-center mt-4">
+                                    <?= $pager->links('default', 'bootstrap4_pagination') ?>
+                                </ul>
+                            </nav>
                         <?php endif; ?>
                     <?php endif; ?>
                 </div>
