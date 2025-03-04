@@ -4992,14 +4992,18 @@ body.mobile-nav-active #mobile-nav-toggle {
     color: white;
 }
 
-.pagination .page-item.active .page-link {
-    background-color: #650000;
-    border-color: #650000;
+.pagination .page-item.active .page-link,
+.pagination .page-link:hover,
+.pagination .page-link:focus {
+    background-color: #650000 !important; /* Warna lebih gelap untuk hover/aktif */
+    border-color: #650000 !important;
+    color: white !important;
 }
 
-.pagination .page-link:hover {
-    background-color: #650000;
-    border-color: #650000;
+.pagination .page-link:active {
+    background-color: #500000 !important; /* Warna lebih gelap saat ditekan */
+    border-color: #500000 !important;
+    color: white !important;
 }
 
 .doctors .member .social a {
