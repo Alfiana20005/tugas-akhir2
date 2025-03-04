@@ -11,7 +11,7 @@ class M_Penelitian extends Model
     protected $useTimestamps = false;
 
 
-    protected $allowedFields = ['nama', 'nim', 'instansi', 'judul_penelitian', 'tanggal_penelitian',  'foto'];
+    protected $allowedFields = ['nama', 'no_identitas', 'judul_penelitian', 'kategori_objek', 'jenjang_pendidikan', 'program_studi', 'instansi', 'tanggal_mulai', 'tanggal_akhir'];
 
 
     protected $validationRules = [];

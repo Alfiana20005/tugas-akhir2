@@ -23,54 +23,59 @@
                     <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
                 </div>
                 <div class="modal-body">
-                    <form action="/savePenelitian" method="post" enctype="multipart/form-data" id="form">
+                    <form action="/savePenelitian" method="post" id="form">
                         <div class="row mb-2">
                             <label for="nama" class="col-sm-3 col-form-label">Nama</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="recipient-name" name="nama">
+                                <input type="text" class="form-control" id="nama" name="nama">
                             </div>
                         </div>
                         <div class="row mb-2">
-                            <label for="nim" class="col-sm-3 col-form-label">NIM</label>
+                            <label for="no_identitas" class="col-sm-3 col-form-label">Nomor Identitas</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="recipient-name" name="nim">
-                            </div>
-                        </div>
-                        <div class="row mb-2">
-                            <label for="instansi" class="col-sm-3 col-form-label">Instansi</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" id="recipient-name" name="instansi">
+                                <input type="text" class="form-control" id="no_identitas" name="no_identitas">
                             </div>
                         </div>
                         <div class="row mb-2">
                             <label for="judul_penelitian" class="col-sm-3 col-form-label">Judul Penelitian</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="recipient-name" name="judul_penelitian">
+                                <input type="text" class="form-control" id="judul_penelitian" name="judul_penelitian">
                             </div>
                         </div>
                         <div class="row mb-2">
-                            <label for="tanggal_penelitian" class="col-sm-3 col-form-label">Tanggal</label>
+                            <label for="kategori_objek" class="col-sm-3 col-form-label">Kategori Objek</label>
                             <div class="col-sm-9">
-                                <input type="date" class="form-control" id="recipient-name" name="tanggal_penelitian">
+                                <input type="text" class="form-control" id="kategori_objek" name="kategori_objek">
                             </div>
                         </div>
-
                         <div class="row mb-2">
-                            <label for="foto" class="col-sm-3 col-form-label">Foto</label>
-                            <div class="col-sm-2">
-                                <img src="/img/default.jpg" alt="" class="img-thumbnail img-preview">
+                            <label for="jenjang_pendidikan" class="col-sm-3 col-form-label">Jenjang Pendidikan</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="jenjang_pendidikan" name="jenjang_pendidikan">
                             </div>
-                            <div class="col-sm-7">
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input form-control" id="gambar" name="foto" onchange="previewImg('gambar')">
-                                    <label class="custom-file-label" for="customFile">Gambar Maksimal 2 Mb</label>
-                                    <?php if (!empty($penelitian['foto'])): ?>
-                                        <div class="my-2">
-                                            <p>Foto Saat Ini:</p>
-                                            <img src="<?= base_url('img/penelitian/' . $penelitian['foto']); ?>" alt="Foto Petugas" width="100">
-                                        </div>
-                                    <?php endif; ?>
-                                </div>
+                        </div>
+                        <div class="row mb-2">
+                            <label for="program_studi" class="col-sm-3 col-form-label">Program Studi</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="program_studi" name="program_studi">
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <label for="instansi" class="col-sm-3 col-form-label">Instansi</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="instansi" name="instansi">
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <label for="tanggal_mulai" class="col-sm-3 col-form-label">Tanggal Mulai</label>
+                            <div class="col-sm-9">
+                                <input type="date" class="form-control" id="tanggal_mulai" name="tanggal_mulai">
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <label for="tanggal_akhir" class="col-sm-3 col-form-label">Tanggal Akhir</label>
+                            <div class="col-sm-9">
+                                <input type="date" class="form-control" id="tanggal_akhir" name="tanggal_akhir">
                             </div>
                         </div>
 
@@ -78,10 +83,10 @@
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>
+                    </form>
                 </div>
-                </form>
-            </div>
 
+            </div>
         </div>
     </div>
 
@@ -96,14 +101,16 @@
                     <thead>
                         <tr>
                             <th style="text-align: center;">No</th>
-                            <th style="text-align: center;">Foto</th>
                             <th style="text-align: center;">Nama</th>
-                            <th style="text-align: center;">NIM</th>
-                            <th style="text-align: center;">Instansi</th>
+                            <th style="text-align: center;">No Identitas</th>
                             <th style="text-align: center;">Judul Penelitian</th>
-                            <th style="text-align: center;">Tanggal</th>
+                            <th style="text-align: center;">Kategori Objek</th>
+                            <th style="text-align: center;">Jenjang Pendidikan</th>
+                            <th style="text-align: center;">Program Studi</th>
+                            <th style="text-align: center;">Instansi</th>
+                            <th style="text-align: center;">Tanggal Mulai</th>
+                            <th style="text-align: center;">Tanggal Akhir</th>
                             <th style="text-align: center;">Aksi</th>
-
                         </tr>
                     </thead>
 
@@ -113,21 +120,22 @@
                         foreach ($penelitian as $p): ?>
                             <tr>
                                 <td style="text-align: center;"><?= $no++; ?></td>
-                                <td style="text-align: center;"><img src="<?= base_url("img/penelitian/" . $p['foto']); ?>" alt="" style="width: 60px;"></td>
                                 <td style="text-align: center;"><?= $p['nama']; ?></td>
-                                <td style="text-align: center;"><?= $p['nim']; ?></td>
-                                <td style="text-align: center;"><?= $p['instansi']; ?></td>
+                                <td style="text-align: center;"><?= $p['no_identitas']; ?></td>
                                 <td style="text-align: center;"><?= $p['judul_penelitian']; ?></td>
-                                <td style="text-align: center;"><?= $p['tanggal_penelitian']; ?></td>
+                                <td style="text-align: center;"><?= $p['kategori_objek']; ?></td>
+                                <td style="text-align: center;"><?= $p['jenjang_pendidikan']; ?></td>
+                                <td style="text-align: center;"><?= $p['program_studi']; ?></td>
+                                <td style="text-align: center;"><?= $p['instansi']; ?></td>
+                                <td style="text-align: center;"><?= $p['tanggal_mulai']; ?></td>
+                                <td style="text-align: center;"><?= $p['tanggal_akhir']; ?></td>
                                 <td style="text-align: center;">
-
                                     <a href="" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editPenelitian<?= $p['id_penelitian']; ?>" data-bs-whatever="@getbootstrap">Edit</a>
                                     <form action="/hapusPenelitian/<?= $p['id_penelitian']; ?>" method="post" class="d-inline">
                                         <?= csrf_field(); ?>
                                         <input type="hidden" name="_method" value="DELETE">
                                         <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('apakah anda yakin?');">Hapus</button>
                                     </form>
-
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -148,54 +156,59 @@
                         <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
                     </div>
                     <div class="modal-body">
-                        <form action="<?= base_url() ?>updatePenelitian/<?= $p['id_penelitian']; ?>" method="post" enctype="multipart/form-data" id="form">
+                        <form action="<?= base_url() ?>updatePenelitian/<?= $p['id_penelitian']; ?>" method="post" id="form">
                             <div class="row mb-2">
                                 <label for="nama" class="col-sm-3 col-form-label">Nama</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="recipient-name" name="nama" value="<?= $p['nama']; ?>">
+                                    <input type="text" class="form-control" id="nama-<?= $p['id_penelitian']; ?>" name="nama" value="<?= $p['nama']; ?>">
                                 </div>
                             </div>
                             <div class="row mb-2">
-                                <label for="nim" class="col-sm-3 col-form-label">NIM</label>
+                                <label for="no_identitas" class="col-sm-3 col-form-label">Nomor Identitas</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="recipient-name" name="nim" value="<?= $p['nim']; ?>">
-                                </div>
-                            </div>
-                            <div class="row mb-2">
-                                <label for="instansi" class="col-sm-3 col-form-label">Instansi</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="recipient-name" name="instansi" value="<?= $p['instansi']; ?>">
+                                    <input type="text" class="form-control" id="no_identitas-<?= $p['id_penelitian']; ?>" name="no_identitas" value="<?= $p['no_identitas']; ?>">
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <label for="judul_penelitian" class="col-sm-3 col-form-label">Judul Penelitian</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="recipient-name" name="judul_penelitian" value="<?= $p['judul_penelitian']; ?>">
+                                    <input type="text" class="form-control" id="judul_penelitian-<?= $p['id_penelitian']; ?>" name="judul_penelitian" value="<?= $p['judul_penelitian']; ?>">
                                 </div>
                             </div>
                             <div class="row mb-2">
-                                <label for="tanggal_penelitian" class="col-sm-3 col-form-label">Tanggal</label>
+                                <label for="kategori_objek" class="col-sm-3 col-form-label">Kategori Objek</label>
                                 <div class="col-sm-9">
-                                    <input type="date" class="form-control" id="recipient-name" name="tanggal_penelitian" value="<?= $p['tanggal_penelitian']; ?>">
+                                    <input type="text" class="form-control" id="kategori_objek-<?= $p['id_penelitian']; ?>" name="kategori_objek" value="<?= $p['kategori_objek']; ?>">
                                 </div>
                             </div>
-
                             <div class="row mb-2">
-                                <label for="foto" class="col-sm-3 col-form-label">Foto</label>
-                                <div class="col-sm-2">
-                                    <img src="/img/default.jpg" alt="" class="img-thumbnail img-preview" id="img-preview-<?= $p['id_penelitian']; ?>">
+                                <label for="jenjang_pendidikan" class="col-sm-3 col-form-label">Jenjang Pendidikan</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="jenjang_pendidikan-<?= $p['id_penelitian']; ?>" name="jenjang_pendidikan" value="<?= $p['jenjang_pendidikan']; ?>">
                                 </div>
-                                <div class="col-sm-7">
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input form-control" id="gambar<?= $p['id_penelitian']; ?>" name="foto" onchange="previewImg('gambar<?= $p['id_penelitian']; ?>')">
-                                        <label class="custom-file-label" for="customFile">Gambar Maksimal 2 Mb</label>
-                                    </div>
-                                    <?php if (!empty($p['foto'])): ?>
-                                        <div class="my-4">
-                                            <p>Foto Saat Ini:</p>
-                                            <img src="<?= base_url('img/penelitian/' . $p['foto']); ?>" alt="Foto Peneliti" width="100">
-                                        </div>
-                                    <?php endif; ?>
+                            </div>
+                            <div class="row mb-2">
+                                <label for="program_studi" class="col-sm-3 col-form-label">Program Studi</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="program_studi-<?= $p['id_penelitian']; ?>" name="program_studi" value="<?= $p['program_studi']; ?>">
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <label for="instansi" class="col-sm-3 col-form-label">Instansi</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="instansi-<?= $p['id_penelitian']; ?>" name="instansi" value="<?= $p['instansi']; ?>">
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <label for="tanggal_mulai" class="col-sm-3 col-form-label">Tanggal Mulai</label>
+                                <div class="col-sm-9">
+                                    <input type="date" class="form-control" id="tanggal_mulai-<?= $p['id_penelitian']; ?>" name="tanggal_mulai" value="<?= $p['tanggal_mulai']; ?>">
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <label for="tanggal_akhir" class="col-sm-3 col-form-label">Tanggal Akhir</label>
+                                <div class="col-sm-9">
+                                    <input type="date" class="form-control" id="tanggal_akhir-<?= $p['id_penelitian']; ?>" name="tanggal_akhir" value="<?= $p['tanggal_akhir']; ?>">
                                 </div>
                             </div>
 
@@ -203,8 +216,8 @@
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                             </div>
+                        </form>
                     </div>
-                    </form>
                 </div>
             </div>
         </div>

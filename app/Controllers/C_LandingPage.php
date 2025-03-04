@@ -885,6 +885,7 @@ class C_LandingPage extends BaseController
         $penelitianModel = new \App\Models\M_Penelitian();
 
         // Get filter parameters
+        $kategori_objek = $this->request->getGet('kategori_objek');
         $instansi = $this->request->getGet('instansi');
         $tahun = $this->request->getGet('tahun');
         $search = $this->request->getGet('q');
@@ -893,14 +894,19 @@ class C_LandingPage extends BaseController
         $baseQuery = clone $penelitianModel;
 
         // Apply filters to the model
+        if (!empty($kategori_objek)) {
+            $penelitianModel->where('kategori_objek', $kategori_objek);
+            $baseQuery->where('kategori_objek', $kategori_objek);
+        }
+
         if (!empty($instansi)) {
             $penelitianModel->where('instansi', $instansi);
             $baseQuery->where('instansi', $instansi);
         }
 
         if (!empty($tahun)) {
-            $penelitianModel->where("EXTRACT(YEAR FROM tanggal_penelitian) = '$tahun'");
-            $baseQuery->where("EXTRACT(YEAR FROM tanggal_penelitian) = '$tahun'");
+            $penelitianModel->where("EXTRACT(YEAR FROM tanggal_mulai) = '$tahun'");
+            $baseQuery->where("EXTRACT(YEAR FROM tanggal_mulai) = '$tahun'");
         }
 
         if (!empty($search)) {
@@ -908,17 +914,29 @@ class C_LandingPage extends BaseController
                 ->like('judul_penelitian', $search)
                 ->orLike('nama', $search)
                 ->orLike('instansi', $search)
+                ->orLike('kategori_objek', $search)
+                ->orLike('program_studi', $search)
                 ->groupEnd();
 
             $baseQuery->groupStart()
                 ->like('judul_penelitian', $search)
                 ->orLike('nama', $search)
                 ->orLike('instansi', $search)
+                ->orLike('kategori_objek', $search)
+                ->orLike('program_studi', $search)
                 ->groupEnd();
         }
 
         // Get database connection
         $db = \Config\Database::connect();
+
+        // Get list of all categories with count
+        $kategori_list = $db->query("
+        SELECT kategori_objek, COUNT(*) as jumlah 
+        FROM penelitian 
+        GROUP BY kategori_objek 
+        ORDER BY jumlah DESC, kategori_objek ASC
+    ")->getResultArray();
 
         // Get list of all institutions with count
         $instansi_list = $db->query("
@@ -930,15 +948,15 @@ class C_LandingPage extends BaseController
 
         // Get list of all years with count
         $tahun_list = $db->query("
-        SELECT EXTRACT(YEAR FROM tanggal_penelitian) as tahun, COUNT(*) as jumlah 
+        SELECT EXTRACT(YEAR FROM tanggal_mulai) as tahun, COUNT(*) as jumlah 
         FROM penelitian 
-        GROUP BY EXTRACT(YEAR FROM tanggal_penelitian) 
+        GROUP BY EXTRACT(YEAR FROM tanggal_mulai) 
         ORDER BY tahun DESC
     ")->getResultArray();
 
         // Get the latest research without filters
         $latestModel = new \App\Models\M_Penelitian();
-        $latest_penelitian = $latestModel->orderBy('tanggal_penelitian', 'DESC')
+        $latest_penelitian = $latestModel->orderBy('tanggal_mulai', 'DESC')
             ->limit(5)
             ->find();
 
@@ -949,12 +967,14 @@ class C_LandingPage extends BaseController
             'pager' => $penelitianModel->pager,
 
             // Add filter data
+            'kategori_list' => $kategori_list,
             'instansi_list' => $instansi_list,
             'tahun_list' => $tahun_list,
             'latest_penelitian' => $latest_penelitian,
 
             // Add current filters to help with UI highlighting
             'current_filters' => [
+                'kategori_objek' => $kategori_objek,
                 'instansi' => $instansi,
                 'tahun' => $tahun,
                 'search' => $search

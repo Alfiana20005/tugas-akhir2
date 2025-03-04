@@ -1645,56 +1645,58 @@ class C_Admin extends BaseController
                 'rules' => 'required',
                 'errors' => ['required' => 'Nama peneliti harus diisi']
             ],
-            'nim' => [
+            'no_identitas' => [
                 'rules' => 'required',
-                'errors' => ['required' => 'NIM tidak boleh kosong']
-            ],
-            'instansi' => [
-                'rules' => 'required',
-                'errors' => ['required' => 'Instansi tidak boleh kosong']
+                'errors' => ['required' => 'Nomor identitas tidak boleh kosong']
             ],
             'judul_penelitian' => [
                 'rules' => 'required',
                 'errors' => ['required' => 'Judul penelitian harus diisi']
             ],
-            'tanggal_penelitian' => [
+            'kategori_objek' => [
                 'rules' => 'required',
-                'errors' => ['required' => 'Tanggal penelitian tidak boleh kosong']
+                'errors' => ['required' => 'Kategori objek tidak boleh kosong']
             ],
+            'jenjang_pendidikan' => [
+                'rules' => 'required',
+                'errors' => ['required' => 'Jenjang pendidikan harus diisi']
+            ],
+            'program_studi' => [
+                'rules' => 'required',
+                'errors' => ['required' => 'Program studi harus diisi']
+            ],
+            'instansi' => [
+                'rules' => 'required',
+                'errors' => ['required' => 'Instansi tidak boleh kosong']
+            ],
+            'tanggal_mulai' => [
+                'rules' => 'required',
+                'errors' => ['required' => 'Tanggal mulai penelitian tidak boleh kosong']
+            ],
+            // tanggal_akhir is optional, so no validation rule
         ];
 
         if (!$this->validate($rules)) {
             return redirect()->to('/penelitian')->withInput()->with('errors', $this->validator->listErrors());
         }
 
-        $foto = $this->request->getFile('foto');
-        $fotoName = 'default.jpg'; // Default value
+        $data = [
+            'nama' => $this->request->getVar('nama'),
+            'no_identitas' => $this->request->getVar('no_identitas'),
+            'judul_penelitian' => $this->request->getVar('judul_penelitian'),
+            'kategori_objek' => $this->request->getVar('kategori_objek'),
+            'jenjang_pendidikan' => $this->request->getVar('jenjang_pendidikan'),
+            'program_studi' => $this->request->getVar('program_studi'),
+            'instansi' => $this->request->getVar('instansi'),
+            'tanggal_mulai' => $this->request->getVar('tanggal_mulai'),
+        ];
 
-        if ($foto->isValid()) {
-            if (!$foto->hasMoved()) {
-                $fotoName = $foto->getRandomName();
-                $foto->move('img/penelitian', $fotoName);
-            } else {
-                return redirect()->to(base_url('/penelitian'))
-                    ->withInput()
-                    ->with('errors', 'File already moved');
-            }
-        } else if ($foto->getError() !== UPLOAD_ERR_NO_FILE) {
-            // Only show error if there was an attempt to upload (not when no file is selected)
-            return redirect()->to(base_url('/penelitian'))
-                ->withInput()
-                ->with('errors', $foto->getErrorString());
+        // Only add tanggal_akhir if it's not empty
+        if ($this->request->getVar('tanggal_akhir')) {
+            $data['tanggal_akhir'] = $this->request->getVar('tanggal_akhir');
         }
 
-        $this->M_Penelitian->save([
-            'nama' => $this->request->getVar('nama'),
-            'nim' => $this->request->getVar('nim'),
-            'instansi' => $this->request->getVar('instansi'),
-            'judul_penelitian' => $this->request->getVar('judul_penelitian'),
-            'tanggal_penelitian' => $this->request->getVar('tanggal_penelitian'),
-            'link' => $this->request->getVar('link'),
-            'foto' => $fotoName,
-        ]);
+        $this->M_Penelitian->save($data);
 
         session()->setFlashdata('pesan', 'Data Penelitian Berhasil Ditambahkan.');
 
@@ -1705,46 +1707,30 @@ class C_Admin extends BaseController
     {
         $id_penelitian = filter_var($id_penelitian, FILTER_SANITIZE_NUMBER_INT);
 
-        $penelitian = $this->M_Penelitian->find($id_penelitian);
-
-        if (!empty($penelitian['foto']) && file_exists('img/penelitian/' . $penelitian['foto'])) {
-            unlink('img/penelitian/' . $penelitian['foto']);
-        }
-
         $this->M_Penelitian->where('id_penelitian', $id_penelitian)->delete();
 
         session()->setFlashdata('pesan', 'Data Penelitian Berhasil Dihapus.');
 
         return redirect()->to('/dataPenelitian');
     }
+
     public function updatePenelitian($id_penelitian)
     {
         // Mengambil data yang akan diupdate dari request
         $dataToUpdate = [
             'nama' => $this->request->getVar('nama'),
-            'instansi' => $this->request->getVar('instansi'),
+            'no_identitas' => $this->request->getVar('no_identitas'),
             'judul_penelitian' => $this->request->getVar('judul_penelitian'),
-            'tanggal_penelitian' => $this->request->getVar('tanggal_penelitian'),
+            'kategori_objek' => $this->request->getVar('kategori_objek'),
+            'jenjang_pendidikan' => $this->request->getVar('jenjang_pendidikan'),
+            'program_studi' => $this->request->getVar('program_studi'),
+            'instansi' => $this->request->getVar('instansi'),
+            'tanggal_mulai' => $this->request->getVar('tanggal_mulai'),
         ];
 
-        $foto = $this->request->getFile('foto');
-
-        // Cek apakah file foto diunggah
-        if ($foto && $foto->isValid() && !$foto->hasMoved()) {
-            // Generate nama unik untuk file foto
-            $fotoName = $foto->getRandomName();
-
-            // Hapus foto lama jika ada
-            $penelitianLama = $this->M_Penelitian->find($id_penelitian);
-            if (!empty($penelitianLama['foto']) && file_exists('uploads/penelitian/' . $penelitianLama['foto'])) {
-                unlink('uploads/penelitian/' . $penelitianLama['foto']);
-            }
-
-            // Pindahkan file foto ke folder yang diinginkan
-            $foto->move('uploads/penelitian', $fotoName);
-
-            // Tambahkan nama file foto ke data yang akan diupdate
-            $dataToUpdate['foto'] = $fotoName;
+        // Only add tanggal_akhir if it's not empty
+        if ($this->request->getVar('tanggal_akhir')) {
+            $dataToUpdate['tanggal_akhir'] = $this->request->getVar('tanggal_akhir');
         }
 
         // Membersihkan data kosong yang mungkin ada dari inputan form
