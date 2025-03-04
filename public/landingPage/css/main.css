@@ -4986,6 +4986,22 @@ body.mobile-nav-active #mobile-nav-toggle {
     justify-content: center;
 }
 
+.pagination .page-link {
+    background-color: #850000;
+    border-color: #850000;
+    color: white;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #650000;
+    border-color: #650000;
+}
+
+.pagination .page-link:hover {
+    background-color: #650000;
+    border-color: #650000;
+}
+
 .doctors .member .social a {
     transition: color 0.3s;
     color: #555555;
