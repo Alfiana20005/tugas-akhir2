@@ -960,7 +960,7 @@ class C_LandingPage extends BaseController
         // Get the latest research without filters - keep this as DESC to show the latest
         $latestModel = new \App\Models\M_Penelitian();
         $latest_penelitian = $latestModel->orderBy('tanggal_mulai', 'DESC')
-            ->limit(5)
+            ->limit(3)
             ->find();
 
         // Prepare data for view

@@ -67,7 +67,7 @@
                                 <div class="card mb-4 shadow-sm">
                                     <div class="card-body">
                                         <h4 class="card-title fw-bold mb-2">
-                                            <a href="<?= base_url('penelitian/detail/' . $p['id_penelitian']); ?>" class="text-decoration-none"><?= $p['judul_penelitian']; ?></a>
+                                            <a class="text-decoration-none"><?= $p['judul_penelitian']; ?></a>
                                         </h4>
                                         <div class="card-meta d-flex align-items-center mb-3">
                                             <span class="text-muted"><i class="far fa-calendar-alt me-1"></i>
@@ -135,7 +135,6 @@
                 </div>
             </div>
 
-            <!-- Sidebar with Filters -->
             <div class="col-lg-4">
                 <div class="sidebar-widgets">
                     <!-- Search Box -->
@@ -153,9 +152,14 @@
                     <div class="widget-wrap">
                         <div class="single-sidebar-widget">
                             <h4 class="widget-title mb-3">Filter Berdasarkan Kategori</h4>
-                            <ul class="list-group">
-                                <?php foreach ($kategori_list as $kategori): ?>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <ul class="list-group" id="kategoriList">
+                                <?php
+                                $count = 0;
+                                foreach ($kategori_list as $kategori):
+                                    $hidden = ($count >= 3) ? 'style="display: none;"' : '';
+                                    $count++;
+                                ?>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center kategori-item" <?= $hidden ?>>
                                         <a href="<?= base_url('penelitian?kategori_objek=' . urlencode($kategori['kategori_objek'])); ?>"
                                             class="text-decoration-none <?= (isset($_GET['kategori_objek']) && $_GET['kategori_objek'] == $kategori['kategori_objek']) ? 'fw-bold' : ''; ?>">
                                             <?= $kategori['kategori_objek']; ?>
@@ -164,6 +168,11 @@
                                     </li>
                                 <?php endforeach; ?>
                             </ul>
+                            <?php if (count($kategori_list) > 3): ?>
+                                <div class="text-center mt-2">
+                                    <button class="btn btn-sm btn-outline-secondary" id="showMoreKategori">Show More</button>
+                                </div>
+                            <?php endif; ?>
                         </div>
                     </div>
 
@@ -171,9 +180,14 @@
                     <div class="widget-wrap">
                         <div class="single-sidebar-widget">
                             <h4 class="widget-title mb-3">Filter Berdasarkan Instansi</h4>
-                            <ul class="list-group">
-                                <?php foreach ($instansi_list as $instansi): ?>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <ul class="list-group" id="instansiList">
+                                <?php
+                                $count = 0;
+                                foreach ($instansi_list as $instansi):
+                                    $hidden = ($count >= 3) ? 'style="display: none;"' : '';
+                                    $count++;
+                                ?>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center instansi-item" <?= $hidden ?>>
                                         <a href="<?= base_url('penelitian?instansi=' . urlencode($instansi['instansi'])); ?>"
                                             class="text-decoration-none <?= (isset($_GET['instansi']) && $_GET['instansi'] == $instansi['instansi']) ? 'fw-bold' : ''; ?>">
                                             <?= $instansi['instansi']; ?>
@@ -182,6 +196,11 @@
                                     </li>
                                 <?php endforeach; ?>
                             </ul>
+                            <?php if (count($instansi_list) > 3): ?>
+                                <div class="text-center mt-2">
+                                    <button class="btn btn-sm btn-outline-secondary" id="showMoreInstansi">Show More</button>
+                                </div>
+                            <?php endif; ?>
                         </div>
                     </div>
 
@@ -189,9 +208,14 @@
                     <div class="widget-wrap">
                         <div class="single-sidebar-widget">
                             <h4 class="widget-title mb-3">Filter Berdasarkan Tahun</h4>
-                            <ul class="list-group">
-                                <?php foreach ($tahun_list as $tahun): ?>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <ul class="list-group" id="tahunList">
+                                <?php
+                                $count = 0;
+                                foreach ($tahun_list as $tahun):
+                                    $hidden = ($count >= 3) ? 'style="display: none;"' : '';
+                                    $count++;
+                                ?>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center tahun-item" <?= $hidden ?>>
                                         <a href="<?= base_url('penelitian?tahun=' . $tahun['tahun']); ?>"
                                             class="text-decoration-none <?= (isset($_GET['tahun']) && $_GET['tahun'] == $tahun['tahun']) ? 'fw-bold' : ''; ?>">
                                             <?= $tahun['tahun']; ?>
@@ -200,6 +224,11 @@
                                     </li>
                                 <?php endforeach; ?>
                             </ul>
+                            <?php if (count($tahun_list) > 3): ?>
+                                <div class="text-center mt-2">
+                                    <button class="btn btn-sm btn-outline-secondary" id="showMoreTahun">Show More</button>
+                                </div>
+                            <?php endif; ?>
                         </div>
                     </div>
 
@@ -232,6 +261,100 @@
         </div>
     </div>
 </section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Kategori Show More
+        const showMoreKategoriBtn = document.getElementById('showMoreKategori');
+        if (showMoreKategoriBtn) {
+            showMoreKategoriBtn.addEventListener('click', function() {
+                const items = document.querySelectorAll('.kategori-item');
+                items.forEach(item => {
+                    item.style.display = 'flex';
+                });
+                this.style.display = 'none';
+
+                // Add Show Less button
+                const showLessBtn = document.createElement('button');
+                showLessBtn.className = 'btn btn-sm btn-outline-secondary';
+                showLessBtn.textContent = 'Show Less';
+                showLessBtn.addEventListener('click', function() {
+                    let count = 0;
+                    items.forEach(item => {
+                        if (count >= 3) {
+                            item.style.display = 'none';
+                        }
+                        count++;
+                    });
+                    this.parentNode.replaceChild(showMoreKategoriBtn, this);
+                    showMoreKategoriBtn.style.display = 'inline-block';
+                });
+                this.parentNode.appendChild(showLessBtn);
+                this.parentNode.removeChild(this);
+            });
+        }
+
+        // Instansi Show More
+        const showMoreInstansiBtn = document.getElementById('showMoreInstansi');
+        if (showMoreInstansiBtn) {
+            showMoreInstansiBtn.addEventListener('click', function() {
+                const items = document.querySelectorAll('.instansi-item');
+                items.forEach(item => {
+                    item.style.display = 'flex';
+                });
+                this.style.display = 'none';
+
+                // Add Show Less button
+                const showLessBtn = document.createElement('button');
+                showLessBtn.className = 'btn btn-sm btn-outline-secondary';
+                showLessBtn.textContent = 'Show Less';
+                showLessBtn.addEventListener('click', function() {
+                    let count = 0;
+                    items.forEach(item => {
+                        if (count >= 3) {
+                            item.style.display = 'none';
+                        }
+                        count++;
+                    });
+                    this.parentNode.replaceChild(showMoreInstansiBtn, this);
+                    showMoreInstansiBtn.style.display = 'inline-block';
+                });
+                this.parentNode.appendChild(showLessBtn);
+                this.parentNode.removeChild(this);
+            });
+        }
+
+        // Tahun Show More
+        const showMoreTahunBtn = document.getElementById('showMoreTahun');
+        if (showMoreTahunBtn) {
+            showMoreTahunBtn.addEventListener('click', function() {
+                const items = document.querySelectorAll('.tahun-item');
+                items.forEach(item => {
+                    item.style.display = 'flex';
+                });
+                this.style.display = 'none';
+
+                // Add Show Less button
+                const showLessBtn = document.createElement('button');
+                showLessBtn.className = 'btn btn-sm btn-outline-secondary';
+                showLessBtn.textContent = 'Show Less';
+                showLessBtn.addEventListener('click', function() {
+                    let count = 0;
+                    items.forEach(item => {
+                        if (count >= 3) {
+                            item.style.display = 'none';
+                        }
+                        count++;
+                    });
+                    this.parentNode.replaceChild(showMoreTahunBtn, this);
+                    showMoreTahunBtn.style.display = 'inline-block';
+                });
+                this.parentNode.appendChild(showLessBtn);
+                this.parentNode.removeChild(this);
+            });
+        }
+    });
+</script>
 <!-- End penelitian list Area -->
 
 <?= $this->endSection(); ?>

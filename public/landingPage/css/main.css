@@ -4986,9 +4986,17 @@ body.mobile-nav-active #mobile-nav-toggle {
     justify-content: center;
 }
 
+a:hover {
+    color: #850000;
+}
+
 .pagination .page-link {
     background-color: #850000;
     border-color: #850000;
+    color: white;
+}
+
+.pagination .page-item .page-link {
     color: white;
 }
 
