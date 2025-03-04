@@ -1639,7 +1639,7 @@ class C_Admin extends BaseController
 
     public function savePenelitian()
     {
-        //validation
+        // validation
         $rules = [
             'nama' => [
                 'rules' => 'required',
@@ -1661,10 +1661,6 @@ class C_Admin extends BaseController
                 'rules' => 'required',
                 'errors' => ['required' => 'Jenjang pendidikan harus diisi']
             ],
-            'program_studi' => [
-                'rules' => 'required',
-                'errors' => ['required' => 'Program studi harus diisi']
-            ],
             'instansi' => [
                 'rules' => 'required',
                 'errors' => ['required' => 'Instansi tidak boleh kosong']
@@ -1673,7 +1669,6 @@ class C_Admin extends BaseController
                 'rules' => 'required',
                 'errors' => ['required' => 'Tanggal mulai penelitian tidak boleh kosong']
             ],
-            // tanggal_akhir is optional, so no validation rule
         ];
 
         if (!$this->validate($rules)) {
@@ -1686,12 +1681,11 @@ class C_Admin extends BaseController
             'judul_penelitian' => $this->request->getVar('judul_penelitian'),
             'kategori_objek' => $this->request->getVar('kategori_objek'),
             'jenjang_pendidikan' => $this->request->getVar('jenjang_pendidikan'),
-            'program_studi' => $this->request->getVar('program_studi'),
+            'program_studi' => $this->request->getVar('program_studi') ?: null, // Bisa null
             'instansi' => $this->request->getVar('instansi'),
             'tanggal_mulai' => $this->request->getVar('tanggal_mulai'),
         ];
 
-        // Only add tanggal_akhir if it's not empty
         if ($this->request->getVar('tanggal_akhir')) {
             $data['tanggal_akhir'] = $this->request->getVar('tanggal_akhir');
         }
@@ -1716,41 +1710,32 @@ class C_Admin extends BaseController
 
     public function updatePenelitian($id_penelitian)
     {
-        // Mengambil data yang akan diupdate dari request
         $dataToUpdate = [
             'nama' => $this->request->getVar('nama'),
             'no_identitas' => $this->request->getVar('no_identitas'),
             'judul_penelitian' => $this->request->getVar('judul_penelitian'),
             'kategori_objek' => $this->request->getVar('kategori_objek'),
             'jenjang_pendidikan' => $this->request->getVar('jenjang_pendidikan'),
-            'program_studi' => $this->request->getVar('program_studi'),
+            'program_studi' => $this->request->getVar('program_studi') ?: null, // Bisa null
             'instansi' => $this->request->getVar('instansi'),
             'tanggal_mulai' => $this->request->getVar('tanggal_mulai'),
         ];
 
-        // Only add tanggal_akhir if it's not empty
         if ($this->request->getVar('tanggal_akhir')) {
             $dataToUpdate['tanggal_akhir'] = $this->request->getVar('tanggal_akhir');
         }
 
-        // Membersihkan data kosong yang mungkin ada dari inputan form
         $dataToUpdate = array_filter($dataToUpdate, function ($var) {
             return $var !== null && $var !== '';
         });
 
-        // Memastikan ada data yang akan diupdate
         if (!empty($dataToUpdate)) {
-            // Mengeksekusi perintah update
             $this->M_Penelitian->update($id_penelitian, $dataToUpdate);
-
-            //alert
             session()->setFlashdata('pesan', 'Data Penelitian Berhasil diubah.');
         } else {
-            // Jika tidak ada data yang diupdate, munculkan pesan kesalahan
             session()->setFlashdata('error', 'Tidak ada data yang diupdate.');
         }
 
-        // Redirect ke halaman daftar penelitian
         return redirect()->to('/dataPenelitian');
     }
 }
