@@ -135,6 +135,7 @@
                 </div>
             </div>
 
+            <!-- Sidebar with Filters -->
             <div class="col-lg-4">
                 <div class="sidebar-widgets">
                     <!-- Search Box -->
@@ -152,14 +153,9 @@
                     <div class="widget-wrap">
                         <div class="single-sidebar-widget">
                             <h4 class="widget-title mb-3">Filter Berdasarkan Kategori</h4>
-                            <ul class="list-group" id="kategoriList">
-                                <?php
-                                $count = 0;
-                                foreach ($kategori_list as $kategori):
-                                    $hidden = ($count >= 3) ? 'style="display: none;"' : '';
-                                    $count++;
-                                ?>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center kategori-item" <?= $hidden ?>>
+                            <ul class="list-group">
+                                <?php foreach ($kategori_list as $kategori): ?>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
                                         <a href="<?= base_url('penelitian?kategori_objek=' . urlencode($kategori['kategori_objek'])); ?>"
                                             class="text-decoration-none <?= (isset($_GET['kategori_objek']) && $_GET['kategori_objek'] == $kategori['kategori_objek']) ? 'fw-bold' : ''; ?>">
                                             <?= $kategori['kategori_objek']; ?>
@@ -168,11 +164,6 @@
                                     </li>
                                 <?php endforeach; ?>
                             </ul>
-                            <?php if (count($kategori_list) > 3): ?>
-                                <div class="text-center mt-2">
-                                    <button class="btn btn-sm btn-outline-secondary" id="showMoreKategori">Show More</button>
-                                </div>
-                            <?php endif; ?>
                         </div>
                     </div>
 
@@ -180,14 +171,9 @@
                     <div class="widget-wrap">
                         <div class="single-sidebar-widget">
                             <h4 class="widget-title mb-3">Filter Berdasarkan Instansi</h4>
-                            <ul class="list-group" id="instansiList">
-                                <?php
-                                $count = 0;
-                                foreach ($instansi_list as $instansi):
-                                    $hidden = ($count >= 3) ? 'style="display: none;"' : '';
-                                    $count++;
-                                ?>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center instansi-item" <?= $hidden ?>>
+                            <ul class="list-group">
+                                <?php foreach ($instansi_list as $instansi): ?>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
                                         <a href="<?= base_url('penelitian?instansi=' . urlencode($instansi['instansi'])); ?>"
                                             class="text-decoration-none <?= (isset($_GET['instansi']) && $_GET['instansi'] == $instansi['instansi']) ? 'fw-bold' : ''; ?>">
                                             <?= $instansi['instansi']; ?>
@@ -196,11 +182,6 @@
                                     </li>
                                 <?php endforeach; ?>
                             </ul>
-                            <?php if (count($instansi_list) > 3): ?>
-                                <div class="text-center mt-2">
-                                    <button class="btn btn-sm btn-outline-secondary" id="showMoreInstansi">Show More</button>
-                                </div>
-                            <?php endif; ?>
                         </div>
                     </div>
 
@@ -208,14 +189,9 @@
                     <div class="widget-wrap">
                         <div class="single-sidebar-widget">
                             <h4 class="widget-title mb-3">Filter Berdasarkan Tahun</h4>
-                            <ul class="list-group" id="tahunList">
-                                <?php
-                                $count = 0;
-                                foreach ($tahun_list as $tahun):
-                                    $hidden = ($count >= 3) ? 'style="display: none;"' : '';
-                                    $count++;
-                                ?>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center tahun-item" <?= $hidden ?>>
+                            <ul class="list-group">
+                                <?php foreach ($tahun_list as $tahun): ?>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
                                         <a href="<?= base_url('penelitian?tahun=' . $tahun['tahun']); ?>"
                                             class="text-decoration-none <?= (isset($_GET['tahun']) && $_GET['tahun'] == $tahun['tahun']) ? 'fw-bold' : ''; ?>">
                                             <?= $tahun['tahun']; ?>
@@ -224,11 +200,6 @@
                                     </li>
                                 <?php endforeach; ?>
                             </ul>
-                            <?php if (count($tahun_list) > 3): ?>
-                                <div class="text-center mt-2">
-                                    <button class="btn btn-sm btn-outline-secondary" id="showMoreTahun">Show More</button>
-                                </div>
-                            <?php endif; ?>
                         </div>
                     </div>
 

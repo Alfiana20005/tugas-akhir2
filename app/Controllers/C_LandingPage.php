@@ -966,7 +966,7 @@ class C_LandingPage extends BaseController
         // Prepare data for view
         $data = [
             'title' => 'Penelitian',
-            'penelitian' => $penelitianModel->paginate(5, 'default'),
+            'penelitian' => $penelitianModel->paginate(10, 'default'),
             'pager' => $penelitianModel->pager,
 
             // Add filter data
