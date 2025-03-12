@@ -166,7 +166,7 @@ class M_Koleksi extends Model
 
         // Filter untuk koleksi tanpa gambar
         $builder->where('gambar', '')
-            ->orWhere('gambar', 'default.jpg');
+            ->orWhere('gambar', 'images.jpeg');
 
         return $builder->paginate($perPage, 'group1');
     }
