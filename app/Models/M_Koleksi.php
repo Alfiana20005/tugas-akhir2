@@ -10,16 +10,17 @@ class M_Koleksi extends Model
     protected $primaryKey = 'id';
     // protected $useTimestamps = true;
 
-    protected $allowedFields = ['kode_lk','fotografer','urutan','zona','rak', 'lemari', 'harga', 'no_registrasi', 'no_inventaris', 'nama_inv','inv_name', 'gambar', 'ukuran', 'tempat_buat', 'tempat_dapat', 'cara_dapat', 'tgl_masuk', 'keadaan', 'lokasi', 'keterangan', 'uraian', 'kode_kategori', 'id_petugas', 'usia','harga_wajar', 'harga_penggantian','sumber','status'];
+    protected $allowedFields = ['kode_lk', 'fotografer', 'urutan', 'zona', 'rak', 'lemari', 'harga', 'no_registrasi', 'no_inventaris', 'nama_inv', 'inv_name', 'gambar', 'ukuran', 'tempat_buat', 'tempat_dapat', 'cara_dapat', 'tgl_masuk', 'keadaan', 'lokasi', 'keterangan', 'uraian', 'kode_kategori', 'id_petugas', 'usia', 'harga_wajar', 'harga_penggantian', 'sumber', 'status'];
 
 
     protected $validationMessages = [];
     protected $skipValidation = false;
     protected $cleanValidationRules = true;
 
-    public function getkoleksiAll() {
+    public function getkoleksiAll()
+    {
         return $this->orderBy('CAST(no_registrasi AS UNSIGNED)', 'ASC')
-                    ->findAll();
+            ->findAll();
     }
     public function getPerawatanKoleksi($no_registrasi)
     {
@@ -28,7 +29,7 @@ class M_Koleksi extends Model
             ->get()
             ->getResultArray();
 
-       
+
         if (empty($result)) {
             return null; // Or you can return an empty array depending on your preference
         }
@@ -40,10 +41,12 @@ class M_Koleksi extends Model
     {
         return $this->db->table($this->table)->where($this->primaryKey, $id)->update($data);
     }
-    public function getKoleksi2($no_registrasi){
+    public function getKoleksi2($no_registrasi)
+    {
         return $this->find($no_registrasi);
     }
-    public function getKoleksi($id){
+    public function getKoleksi($id)
+    {
         return $this->find($id);
     }
     public function getPetugasName($id_petugas)
@@ -86,13 +89,14 @@ class M_Koleksi extends Model
     {
         $query = $this->db->query("SELECT kode_kategori, keadaan, COUNT(keadaan) as total, count(id) as jumlah FROM data_koleksi GROUP BY kode_kategori, keadaan");
         $result = $query->getResultArray();
-    
+
         return $result;
     }
-    public function koleksi(){
-        $query = $this->db->query("SELECT kode_kategori, count(id) as total FROM data_koleksi GROUP BY kode_kategori" );
+    public function koleksi()
+    {
+        $query = $this->db->query("SELECT kode_kategori, count(id) as total FROM data_koleksi GROUP BY kode_kategori");
         $result = $query->getResultArray();
-    
+
         return $result;
     }
     public function getKoleksiName($id_koleksi)
@@ -120,34 +124,50 @@ class M_Koleksi extends Model
 
         return $totalKoleksi;
     }
-    public function getPaginated($num, $keyword=null) {
+    public function getPaginated($num, $keyword = null)
+    {
         $builder = $this->table('data_koleksi');
-    
+
         // Pilih semua kolom dari tabel
         $builder->select('*');
         $builder->orderBy("CAST(no_registrasi AS UNSIGNED)", 'ASC');
-    
-        
+
+
         // Jika ada pencarian, tambahkan kondisi 'like'
         if ($keyword) {
             $builder->like('no_registrasi', $keyword); // Ganti dengan kolom yang sesuai jika perlu
-            $builder->orlike('no_inventaris', $keyword);    
-            $builder->orlike('nama_inv', $keyword);    
-            $builder->orlike('keadaan', $keyword);    
-            $builder->orlike('status', $keyword);    
-            $builder->orlike('kode_lk', $keyword);       
-            $builder->orlike('lemari', $keyword);       
-            $builder->orlike('rak', $keyword);       
-            $builder->orlike('zona', $keyword);       
+            $builder->orlike('no_inventaris', $keyword);
+            $builder->orlike('nama_inv', $keyword);
+            $builder->orlike('keadaan', $keyword);
+            $builder->orlike('status', $keyword);
+            $builder->orlike('kode_lk', $keyword);
+            $builder->orlike('lemari', $keyword);
+            $builder->orlike('rak', $keyword);
+            $builder->orlike('zona', $keyword);
         }
 
         // Kembalikan data paginated dan pager
-    return $builder->paginate($num);
-
+        return $builder->paginate($num);
     }
-    public function getKoleksiBatch($limit, $offset) {
+    public function getKoleksiBatch($limit, $offset)
+    {
         return $this->db->table('koleksi')->limit($limit, $offset)->get()->getResultArray();
     }
-    
+
+    public function getKoleksiNoImage($perPage = 15, $keyword = null)
+    {
+        $builder = $this->table('data_koleksi'); // Ganti dengan nama tabel yang benar
+
+        if ($keyword) {
+            $builder->like('nama_inv', $keyword)
+                ->orLike('no_registrasi', $keyword)
+                ->orLike('no_inventaris', $keyword);
+        }
+
+        // Filter untuk koleksi tanpa gambar
+        $builder->where('gambar', '')
+            ->orWhere('gambar', 'default.jpg');
+
+        return $builder->paginate($perPage, 'group1');
+    }
 }
-    
