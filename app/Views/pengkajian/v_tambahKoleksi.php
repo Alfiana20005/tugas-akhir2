@@ -134,6 +134,7 @@
                             <option <?= old("lokasi") == 'Gudang Atas Ruang TU' ? 'selected' : 'Gudang Atas Ruang TU' ?> value="Gudang Atas Ruang TU">Gudang Atas Ruang TU</option>
                             <option <?= old("lokasi") == 'Ruang Rapat Tambora Museum NTB' ? 'selected' : 'Ruang Rapat Tambora Museum NTB' ?> value="Ruang Rapat Tambora Museum NTB">Ruang Rapat Tambora Museum NTB</option>
                             <option <?= old("lokasi") == 'Ruang Pameran Tetap Museum NTB' ? 'selected' : 'Ruang Pameran Tetap Museum NTB' ?> value="Ruang Pameran Tetap Museum NTB">Ruang Pameran Tetap Museum NTB</option>
+                            <option <?= old("lokasi") == 'Ruang Pengkajian Museum NTB' ? 'selected' : 'Ruang Pengkajian Museum NTB' ?> value="Ruang Pengkajian Museum NTB">Ruang Pengkajian Museum NTB</option>
                             <option <?= old("lokasi") == 'Area/Halaman Museum NTB' ? 'selected' : 'Area/Halaman Museum NTB' ?> value="Area/Halaman Museum NTB">Area/Halaman Museum NTB</option>
                             <option <?= old("lokasi") == 'Brankas Ruang Koleksi Museum NTB' ? 'selected' : 'Brankas Ruang Koleksi Museum NTB' ?> value="Brankas Ruang Koleksi Museum NTB">Brankas Ruang Koleksi Museum NTB</option>
                         </select>

@@ -13,18 +13,60 @@ class C_Perpustakaan extends BaseController
         $this->M_Perpustakaan = new M_Perpustakaan();
     }
 
-    
+
     public function index(): string
     {
+        // Get all filter parameters from GET request
         $keyword = $this->request->getGet('keyword');
-        $data_buku = $this->M_Perpustakaan->getPaginated(15, $keyword); 
+        $pengarang = $this->request->getGet('pengarang');
+        $penerbit = $this->request->getGet('penerbit');   // Added this line
+        $tempatTerbit = $this->request->getGet('tempatTerbit');
+        $tahunTerbit = $this->request->getGet('tahunTerbit');   // Added this line
+        $kategoriBuku = $this->request->getGet('kategoriBuku');
+        $status = $this->request->getGet('status');
+
+        // Get filtered and paginated data
+        $data_buku = $this->M_Perpustakaan->getPaginatedWithFilters(
+            15,
+            $keyword,
+            $pengarang,
+            $penerbit,        // Added this parameter
+            $tempatTerbit,
+            $tahunTerbit,     // Added this parameter
+            $kategoriBuku,
+            $status
+        );
+
         $pager = $this->M_Perpustakaan->pager;
 
-        // Siapkan data untuk dikirim ke view
+        // Get unique values for dropdowns
+        $pengarang_list = $this->M_Perpustakaan->getUniqueValues('pengarang');
+        $penerbit_list = $this->M_Perpustakaan->getUniqueValues('penerbit');     // Added this line
+        $tempatTerbit_list = $this->M_Perpustakaan->getUniqueValues('tempatTerbit');
+        $tahunTerbit_list = $this->M_Perpustakaan->getUniqueValues('tahunTerbit'); // Added this line
+        $kategoriBuku_list = $this->M_Perpustakaan->getUniqueValues('kategoriBuku');
+        $status_list = $this->M_Perpustakaan->getUniqueValues('status');
+
+        // Prepare data to send to view
         $data = [
             'title' => 'Daftar Buku',
             'data_buku' => $data_buku,
-            'pager' => $pager
+            'pager' => $pager,
+            'pengarang_list' => $pengarang_list,
+            'penerbit_list' => $penerbit_list,           // Added this line
+            'tempatTerbit_list' => $tempatTerbit_list,
+            'tahunTerbit_list' => $tahunTerbit_list,     // Added this line
+            'kategoriBuku_list' => $kategoriBuku_list,
+            'status_list' => $status_list,
+            'filters' => [
+                'keyword' => $keyword,
+                'pengarang' => $pengarang,
+                'penerbit' => $penerbit,                // Added this line
+                'tempatTerbit' => $tempatTerbit,
+                'tahunTerbit' => $tahunTerbit,          // Added this line
+                'kategoriBuku' => $kategoriBuku,
+                'status' => $status
+            ]
         ];
 
         return view('dataBuku', $data);
@@ -33,21 +75,21 @@ class C_Perpustakaan extends BaseController
     public function saveDataBuku()
     {
         //validation
-        $rules= [
+        $rules = [
             'judul' => [
                 'rules' => 'required',
-                'errors' => ['required'=>'Judul harus diisi']
+                'errors' => ['required' => 'Judul harus diisi']
             ],
         ];
 
-        if(!$this->validate($rules)){
+        if (!$this->validate($rules)) {
             // session()->setFlashdata('errors', $this->validator->listErrors());
-            return redirect()->to('/dataBuku') ->withInput() -> with('errors', $this->validator->listErrors());
+            return redirect()->to('/dataBuku')->withInput()->with('errors', $this->validator->listErrors());
         }
 
         $foto = $this->request->getFile('foto');
         $dafaultImg = 'no_cover.jpg';
-    
+
         if ($foto->isValid() && !$foto->hasMoved()) {
             $fotoName = $foto->getRandomName();
             $foto->move('img/perpustakaan', $fotoName);
@@ -56,7 +98,7 @@ class C_Perpustakaan extends BaseController
             $fotoName = $dafaultImg;
         }
 
-       
+
         $this->M_Perpustakaan->save([
             // 'id_petugas' => $id_petugas,
             'kode' => $this->request->getVar('kode'),
@@ -69,16 +111,16 @@ class C_Perpustakaan extends BaseController
             'eksemplar' => $this->request->getVar('eksemplar'),
             'status' => $this->request->getVar('status'),
             'keterangan' => $this->request->getVar('keterangan'),
-            'kategoriBuku' => $this->request->getVar('kategoriBuku'),            
-            'tampilkan' => $this->request->getVar('tampilkan'),            
+            'kategoriBuku' => $this->request->getVar('kategoriBuku'),
+            'tampilkan' => $this->request->getVar('tampilkan'),
             'foto' => $fotoName,
-            
+
         ]);
 
         //alert
         session()->setFlashdata('pesan', 'Data Berhasil Ditambahkan.');
 
-        return redirect()-> to('/dataBuku');
+        return redirect()->to('/dataBuku');
 
         // return view('admin/v_masterpetugas');
     }
@@ -87,16 +129,17 @@ class C_Perpustakaan extends BaseController
     {
         // Saring masukan untuk mencegah SQL injection atau serangan lainnya
         $id_buku = filter_var($id_buku, FILTER_SANITIZE_NUMBER_INT);
-    
+
         // Panggil metode delete pada model atau apapun yang diperlukan
         $this->M_Perpustakaan->delete($id_buku);
         session()->setFlashdata('pesan', 'Data Berhasil Dihapus.');
-    
+
         // Redirect ke halaman yang sesuai
         return redirect()->to('/dataBuku');
     }
 
-    public function updateBuku($id_buku) {
+    public function updateBuku($id_buku)
+    {
         // Mengambil data yang akan diupdate dari request
         $dataToUpdate = [
             'kode' => $this->request->getVar('kode'),
@@ -109,14 +152,14 @@ class C_Perpustakaan extends BaseController
             'eksemplar' => $this->request->getVar('eksemplar'),
             'status' => $this->request->getVar('status'),
             'keterangan' => $this->request->getVar('keterangan'),
-            'kategoriBuku' => $this->request->getVar('kategoriBuku'),            
-            'tampilkan' => $this->request->getVar('tampilkan'),            
-            'foto' => $this->request->getVar('foto'), 
-            
+            'kategoriBuku' => $this->request->getVar('kategoriBuku'),
+            'tampilkan' => $this->request->getVar('tampilkan'),
+            'foto' => $this->request->getVar('foto'),
+
         ];
-    
+
         $foto = $this->request->getFile('foto');
-        
+
 
         // Cek apakah file foto diunggah
         if ($foto && $foto->isValid() && !$foto->hasMoved()) {
@@ -129,22 +172,22 @@ class C_Perpustakaan extends BaseController
             // Tambahkan nama file foto ke data yang akan diupdate
             $dataToUpdate['foto'] = $fotoName;
         }
-    
+
         // Membersihkan data yang mungkin ada dari inputan form
         $dataToUpdate = array_filter($dataToUpdate);
-    
+
         // Memastikan ada data yang akan diupdate
         if (!empty($dataToUpdate)) {
             // Mengeksekusi perintah update
             $this->M_Perpustakaan->update($id_buku, $dataToUpdate);
-    
+
             // Ambil data petugas setelah diubah dari database
             $newDataBuku = $this->M_Perpustakaan->getBuku($id_buku);
-    
+
             // Perbarui sesi pengguna dengan data baru
             if (session()->get('level') != 'Admin') {
                 session()->set([
-                    
+
 
                     'kode' => $newDataBuku['kode'],
                     'judul' => $newDataBuku['judul'],
@@ -156,8 +199,8 @@ class C_Perpustakaan extends BaseController
                     'eksemplar' => $newDataBuku['eksemplar'],
                     'status' => $newDataBuku['status'],
                     'keterangan' => $newDataBuku['keterangan'],
-                    'kategoriBuku' => $newDataBuku['kategoriBuku'],         
-                    'tampilkan' =>$newDataBuku['tampilkan'],      
+                    'kategoriBuku' => $newDataBuku['kategoriBuku'],
+                    'tampilkan' => $newDataBuku['tampilkan'],
                     'foto' => $newDataBuku['foto'],
                 ]);
             }
@@ -168,7 +211,7 @@ class C_Perpustakaan extends BaseController
             session()->setFlashdata('error', 'Tidak ada data yang diupdate.');
         }
         // dd('berhasil');
-    
+
         // Redirect ke halaman sebelumnya atau halaman yang sesuai
         return redirect()->to('/dataBuku');
     }
@@ -177,29 +220,29 @@ class C_Perpustakaan extends BaseController
     {
         return view('perpustakaan2/inputData');
     }
-    public function delete($id) 
+    public function delete($id)
     {
         // Saring masukan untuk mencegah SQL injection atau serangan lainnya
         $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
-    
+
         // Panggil metode delete pada model atau apapun yang diperlukan
         $this->M_Perpustakaan->delete($id);
         session()->setFlashdata('pesan', 'Data Berhasil Dihapus.');
-    
+
         // Redirect ke halaman yang sesuai
         return redirect()->back();
-    }  
+    }
 
     public function saveData()
     {
-        
+
         //validation
-        $rules= [
+        $rules = [
             'judul' => [
                 'rules' => 'required',
-                'errors' => ['required'=>'Judul harus diisi']
+                'errors' => ['required' => 'Judul harus diisi']
             ]
-                  
+
         ];
 
         if (!$this->validate($rules)) {
@@ -207,15 +250,15 @@ class C_Perpustakaan extends BaseController
                 ->withInput()
                 ->with('errors', $this->validator->listErrors());
         }
-    
+
         $idPetugas = session()->get('id_petugas');
         if (empty($idPetugas)) {
             die('Error: id_petugas tidak valid');
         }
-    
+
         $foto = $this->request->getFile('gambar');
         $dafaultImg = 'no_cover.jpeg';
-    
+
         if ($foto->isValid() && !$foto->hasMoved()) {
             $fotoName = $foto->getRandomName();
             $foto->move('img/perpustakaan', $fotoName);
@@ -228,35 +271,34 @@ class C_Perpustakaan extends BaseController
         }
         // Simpan data pengunjung
         $this->M_Perpustakaan->save([
-            
-                'kode' => $this->request->getVar('kode'),
-                'judul' => $this->request->getVar('judul'),
-                'pengarang' => $this->request->getVar('pengarang'),
-                'penerbit' => $this->request->getVar('penerbit'),
-                'tempatTerbit' => $this->request->getVar('tempatTerbit'),
-                'tahunTerbit' => $this->request->getVar('tahunTerbit'),
-                'rak' => $this->request->getVar('rak'),
-                'eksemplar' => $this->request->getVar('eksemplar'),
-                'status' => $this->request->getVar('status'),
-                'keterangan' => $this->request->getVar('keterangan'),
-                'kategoriBuku' => $this->request->getVar('kategoriBuku'),
-                'id_petugas' => $idPetugas,
-                'foto' => $fotoName,
-                
 
-            
+            'kode' => $this->request->getVar('kode'),
+            'judul' => $this->request->getVar('judul'),
+            'pengarang' => $this->request->getVar('pengarang'),
+            'penerbit' => $this->request->getVar('penerbit'),
+            'tempatTerbit' => $this->request->getVar('tempatTerbit'),
+            'tahunTerbit' => $this->request->getVar('tahunTerbit'),
+            'rak' => $this->request->getVar('rak'),
+            'eksemplar' => $this->request->getVar('eksemplar'),
+            'status' => $this->request->getVar('status'),
+            'keterangan' => $this->request->getVar('keterangan'),
+            'kategoriBuku' => $this->request->getVar('kategoriBuku'),
+            'id_petugas' => $idPetugas,
+            'foto' => $fotoName,
+
+
+
         ]);
 
         //alert
         session()->setFlashdata('pesan', 'Data Berhasil Ditambahkan.');
 
-        return redirect()-> to('/dataBuku');
-
+        return redirect()->to('/dataBuku');
     }
-    public function tampilBuku($kategoriBuku) 
+    public function tampilBuku($kategoriBuku)
     {
         // Mendapatkan data koleksi berdasarkan kategori
-        $data_buku= $this->M_Perpustakaan->getKoleksiByKategori($kategoriBuku);
+        $data_buku = $this->M_Perpustakaan->getKoleksiByKategori($kategoriBuku);
 
         // Mendapatkan nama kategori
         $kategoriName = $this->M_Perpustakaan->getKategoriName($kategoriBuku);
@@ -281,7 +323,4 @@ class C_Perpustakaan extends BaseController
         // Menampilkan view dengan data yang telah disiapkan
         return view('dataBuku', $data);
     }
-
-    
-
 }

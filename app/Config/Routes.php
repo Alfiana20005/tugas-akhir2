@@ -116,6 +116,7 @@ $routes->post('/acceptedUpdate', 'C_Admin::acceptedUpdate');
 $routes->get('/halamanLogin', 'C_Login::index');
 $routes->get('/dashboard', 'C_Dashboard::index');
 $routes->get('/dashboard2', 'C_Dashboard::grafikKoleksi');
+$routes->get('dashboard/getDataPerawatanByYear/(:num)', 'C_Dashboard::getDataPerawatanByYear/$1');
 
 //login
 $routes->post('/login', 'C_Login::login');

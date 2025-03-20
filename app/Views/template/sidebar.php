@@ -180,11 +180,11 @@
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Perawatan</span></a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <a class="nav-link" href="/laporan">
                 <i class="fas fa-print fa-sm mr-2 text-gray-400"></i>
                 <span>Laporan Perawatan</span></a>
-        </li>
+        </li> -->
     <?php endif; ?>
 
 

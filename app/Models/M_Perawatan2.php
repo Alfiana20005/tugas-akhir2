@@ -10,20 +10,20 @@ class M_Perawatan2 extends Model
     protected $primaryKey = 'id_perawatan2';
     // protected $useTimestamps = true;
 
-    protected $allowedFields = ['kode_kategori','penanggung_jawab','no_registrasi','nama_inv','kode_jenisprw','deskripsi','tanggal_sebelum','tanggal_sesudah','foto_sebelum','foto_setelah','status','rak','lokasi', 'lemari', 'id_petugas'];
+    protected $allowedFields = ['kode_kategori', 'penanggung_jawab', 'no_registrasi', 'nama_inv', 'kode_jenisprw', 'deskripsi', 'tanggal_sebelum', 'tanggal_sesudah', 'foto_sebelum', 'foto_setelah', 'status', 'rak', 'lokasi', 'lemari', 'id_petugas'];
 
 
     protected $validationMessages = [];
     protected $skipValidation = false;
     protected $cleanValidationRules = true;
-    
+
     // public function getPerawatan($id){
     //     return $this->db->table('data_perawatan')
     //         ->where('id_koleksi', $id)
     //         ->get()
     //         ->getRowArray();
     // }
-    
+
     public function getPerawatanKoleksi($no_registrasi)
     {
         $result = $this->db->table('data_perawatan2')
@@ -112,20 +112,20 @@ class M_Perawatan2 extends Model
     //         ->getResultArray();
     // }
 
-    public function getPreventif(){
+    public function getPreventif()
+    {
 
         return $this->where('kode_jenisPrw', '01')->findAll();
-        
     }
-    public function getKuratif(){
+    public function getKuratif()
+    {
 
         return $this->where('kode_jenisPrw', '02')->findAll();
-        
     }
-    public function getRestorasi(){
+    public function getRestorasi()
+    {
 
         return $this->where('kode_jenisPrw', '03')->findAll();
-        
     }
     public function getKoleksiByNoRegistrasi($noRegistrasi)
     {
@@ -135,61 +135,69 @@ class M_Perawatan2 extends Model
 
     public function getPerawatanInRange2($mulai, $berakhir, $kode_kategori, $kode_jenisprw)
     {
-    return $this->db->table('data_perawatan2')
-        ->select('data_perawatan2.*, data_koleksi.kode_kategori, jadwal_prw.kode_jenisprw')
-        ->join('data_koleksi', 'data_koleksi.no_registrasi = data_perawatan2.no_registrasi', 'left')
-        ->join('jadwal_prw', 'jadwal_prw.kode_jenisprw = data_perawatan2.kode_jenisprw', 'left') // Join dengan tabel jadwal_prw
-        ->where('tanggal_sebelum >=', $mulai)
-        ->where('tanggal_sesudah <=', $berakhir)
-        ->where('data_koleksi.kode_kategori', $kode_kategori)
-        ->where('jadwal_prw.kode_jenisprw', $kode_jenisprw)
-        ->get()
-        ->getResultArray();
+        return $this->db->table('data_perawatan2')
+            ->select('data_perawatan2.*, data_koleksi.kode_kategori, jadwal_prw.kode_jenisprw')
+            ->join('data_koleksi', 'data_koleksi.no_registrasi = data_perawatan2.no_registrasi', 'left')
+            ->join('jadwal_prw', 'jadwal_prw.kode_jenisprw = data_perawatan2.kode_jenisprw', 'left') // Join dengan tabel jadwal_prw
+            ->where('tanggal_sebelum >=', $mulai)
+            ->where('tanggal_sesudah <=', $berakhir)
+            ->where('data_koleksi.kode_kategori', $kode_kategori)
+            ->where('jadwal_prw.kode_jenisprw', $kode_jenisprw)
+            ->get()
+            ->getResultArray();
     }
 
     public function getDataByYear($tahun)
     {
         $query = $this->db->query("SELECT MONTH(tanggal_sebelum) as bulan, kode_jenisprw, count(id_perawatan2) as total FROM data_perawatan2 WHERE YEAR(tanggal_sebelum) = ? GROUP BY bulan, kode_jenisprw", [$tahun]);
-    
+
         // Ambil hasil query sebagai array
         $result = $query->getResultArray();
-    
+
         // Konversi nomor bulan menjadi nama bulan
         foreach ($result as &$row) {
             if (isset($row['bulan'])) {
                 $row['bulan'] = date("F", mktime(0, 0, 0, $row['bulan'], 1));
-            }        }
-    
+            }
+        }
+
         return $result;
     }
-    
-    public function getDataByMonth($tahun){
+
+    public function getDataByMonth($tahun)
+    {
         $query = $this->db->query("SELECT MONTH(tanggal_sebelum) as bulan, count(id_perawatan2) as total FROM data_perawatan2 WHERE YEAR(tanggal_sebelum) = ? GROUP BY bulan", [$tahun]);
-    
+
         // Ambil hasil query sebagai array
         $result = $query->getResultArray();
-        
+
         // Konversi nomor bulan menjadi nama bulan
         foreach ($result as &$row) {
             $row['bulan'] = date("F", mktime(0, 0, 0, $row['bulan'], 1));
         }
-    
-    return $result;
+
+        return $result;
     }
 
-    public function totalPerawatan() {
+    public function totalPerawatan()
+    {
         $query = $this->db->table('data_perawatan2')
-                          ->select('COUNT(id_perawatan2) as jumlah')
-                          ->get();
-        
+            ->select('
+                SUM(CASE WHEN kode_jenisprw = 1 THEN 1 ELSE 0 END) as preventif,
+                SUM(CASE WHEN kode_jenisprw = 2 THEN 1 ELSE 0 END) as kuratif,
+                SUM(CASE WHEN kode_jenisprw = 3 THEN 1 ELSE 0 END) as restorasi,
+                COUNT(id_perawatan2) as total
+            ')
+            ->get();
+
         $result = $query->getRow();
-        return $result ? $result->jumlah : 0;
+
+        // Return the counts as object properties
+        return [
+            'preventif' => $result ? (int)$result->preventif : 0,
+            'kuratif' => $result ? (int)$result->kuratif : 0,
+            'restorasi' => $result ? (int)$result->restorasi : 0,
+            'total' => $result ? (int)$result->total : 0
+        ];
     }
-
-
-
-    
-    
-
 }
-    

@@ -582,7 +582,6 @@ class C_Admin extends BaseController
 
             'data_kajian' => $data_kajian,
 
-
         ];
 
 

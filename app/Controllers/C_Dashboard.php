@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controllers;
+
 use App\Models\M_Petugas;
 use App\Models\M_Pengunjung;
 use App\Models\M_Koleksi;
@@ -16,9 +17,10 @@ class C_Dashboard extends BaseController
     protected $M_JadwalPrw;
     protected $M_Perawatan2;
     protected $M_Perpustakaan;
-    public function __construct() {
+    public function __construct()
+    {
         helper('form');
-        $this -> M_Petugas = new M_Petugas();
+        $this->M_Petugas = new M_Petugas();
         $this->M_Pengunjung = new M_Pengunjung();
         $this->M_Koleksi = new M_Koleksi();
         $this->M_JadwalPrw = new M_JadwalPrw();
@@ -34,7 +36,7 @@ class C_Dashboard extends BaseController
         foreach ($data_pengunjung as $row) {
             $bulan_labels[] = $row['bulan'];
         }
-       
+
 
         $dataset = [
             'label' => 'Jumlah Pengunjung',
@@ -58,8 +60,7 @@ class C_Dashboard extends BaseController
             $jadwalItem['jenisprwNames'] = isset($jenisprwNames[0]['jenis_prw']) ? $jenisprwNames[0]['jenis_prw'] : 'Nama Kategori Tidak Tersedia';
             // $perawatanData =
             // $jadwalData = $this->M_JadwalPrw->find($jadwalItem['id']);
-            $jadwalItem['perawatan']= $this->M_JadwalPrw->countPerawatanInRange($jadwalItem['mulai'], $jadwalItem['berakhir'], $jadwalItem['kode_jenisprw']);
-            
+            $jadwalItem['perawatan'] = $this->M_JadwalPrw->countPerawatanInRange($jadwalItem['mulai'], $jadwalItem['berakhir'], $jadwalItem['kode_jenisprw']);
         }
         // end statistik pengunjung
 
@@ -79,7 +80,16 @@ class C_Dashboard extends BaseController
             '11' => 'Lain-Lain',
         ];
         $randomColors = [
-            '#78A083', '#344955', '#1B3C73', '#944E63', '#f8a5c2', '#FFCD4B', '#720455', '#2b59c3', '#f5365c', '#FB8B24'
+            '#78A083',
+            '#344955',
+            '#1B3C73',
+            '#944E63',
+            '#f8a5c2',
+            '#FFCD4B',
+            '#720455',
+            '#2b59c3',
+            '#f5365c',
+            '#FB8B24'
         ];
         shuffle($randomColors);
 
@@ -87,7 +97,7 @@ class C_Dashboard extends BaseController
         $data_grafik = [];
 
         // Mengelompokkan data berdasarkan kode kategori
-        $datakoleksigrafik=$this->M_Koleksi->koleksi();
+        $datakoleksigrafik = $this->M_Koleksi->koleksi();
 
         foreach ($datakoleksigrafik as $row) {
 
@@ -96,11 +106,11 @@ class C_Dashboard extends BaseController
             } else {
                 $kategori_labels[] = 'Kategori Tidak Diketahui'; // Jika tidak ditemukan
             }
-            
+
             if (!isset($data_grafik['total'])) {
                 // Ambil warna pertama dari array acak untuk kategori saat ini
                 $currentColor = array_shift($randomColors);
-            
+
                 $data_grafik['total'] = [
                     'label' => 'Total Koleksi',
                     'backgroundColor' => $currentColor,
@@ -109,7 +119,7 @@ class C_Dashboard extends BaseController
                     'data' => [],
                 ];
             }
-            
+
             if (isset($row['kode_kategori']) && isset($kategori[$row['kode_kategori']])) {
                 $data_grafik['total']['data'][$kategori[$row['kode_kategori']]] = $row['total'];
             } else {
@@ -149,15 +159,24 @@ class C_Dashboard extends BaseController
         $data_grafik2 = [];
 
         $randomColors = [
-            '#78A083', '#344955', '#1B3C73', '#944E63', '#f8a5c2', '#FFCD4B', '#720455', '#2b59c3', '#f5365c', '#FB8B24'
+            '#78A083',
+            '#344955',
+            '#1B3C73',
+            '#944E63',
+            '#f8a5c2',
+            '#FFCD4B',
+            '#720455',
+            '#2b59c3',
+            '#f5365c',
+            '#FB8B24'
         ];
-        
+
         // Shuffle the $randomColors array to make sure colors are unique for each category
         shuffle($randomColors);
-        
+
         foreach ($data_perawatan as $row) {
             $bulan_labels2[] = $bulanMapping[$row['bulan']];
-        
+
             if (!isset($data_grafik2[$row['kode_jenisprw']])) {
                 // Take the first color from the shuffled array for the current category
                 $currentColor = array_shift($randomColors);
@@ -169,7 +188,7 @@ class C_Dashboard extends BaseController
                     // Tangani error atau berikan nama default jika tidak ditemukan
                     $jenisPerawatan = 'Jenis Perawatan Tidak Diketahui';
                 }
-        
+
                 $data_grafik2[$row['kode_jenisprw']] = [
                     'label' =>  $jenisPerawatan,
                     'backgroundColor' => $currentColor,
@@ -178,18 +197,14 @@ class C_Dashboard extends BaseController
                     'data' => [],
                 ];
             }
-        
+
             $data_grafik2[$row['kode_jenisprw']]['data'][$bulanMapping[$row['bulan']]] = $row['total'];
         }
-
-       
-
-
-
         // end grafik perawatan
+        $perawatan = $this->M_Perawatan2->totalPerawatan();
 
         $data['bulan_labels'] = json_encode(array_unique($bulan_labels));
-       
+
         $data['datasets'] = [$dataset];
         // Tambahkan data_pengunjung ke dalam variabel $data
         $data['data_pengunjung'] = $data_pengunjung;
@@ -197,28 +212,125 @@ class C_Dashboard extends BaseController
         $data['totalPetugas'] = $this->M_Petugas->countPetugas();
         $data['totalKoleksi'] = $this->M_Koleksi->countKoleksi();
         $data['totalBuku'] = $this->M_Perpustakaan->countBuku();
-        $data['totalPerawatan'] = $this->M_Perawatan2->totalPerawatan();
+        $data['totalPreventif'] = $perawatan['preventif'];
+        $data['totalKuratif'] = $perawatan['kuratif'];
+        $data['totalRestorasi'] = $perawatan['restorasi'];
+        $data['totalPerawatan'] = $perawatan['total'];
         $data['jadwal'] = [$jadwalPrw];
         $data['tahun'] = [$tahun];
         $data['jadwalPrw'] = $this->M_JadwalPrw->getJadwalPrw();
         // var_dump($jadwalPrw);
         $data['kategori_labels'] = json_encode(array_unique($kategori_labels));
         $data['data_grafik'] = json_encode(array_values($data_grafik));
-        
+
         $data['jumlah'] = $this->M_Koleksi->getDataByKategori();
         // grafik perawatan
         $data['bulan_labels2'] = json_encode(array_unique($bulan_labels2));
         $data['data_grafik2'] = json_encode(array_values($data_grafik2));
         $data['data_perawatan'] = $data_perawatan;
         // $data['jumlah'] = $this->M_Perawatan2->getDataByMonth($tahun);
-
-
-
-
         return view('v_dashboard', $data);
     }
 
-    
+    public function getDataPerawatanByYear($tahun = null)
+    {
+        if ($tahun === null) {
+            $tahun = date('Y');
+        }
 
+        $data_perawatan = $this->M_Perawatan2->getDataByYear($tahun);
 
+        $bulanMapping = [
+            'January' => 'Januari',
+            'February' => 'Februari',
+            'March' => 'Maret',
+            'April' => 'April',
+            'May' => 'Mei',
+            'June' => 'Juni',
+            'July' => 'Juli',
+            'August' => 'Agustus',
+            'September' => 'September',
+            'October' => 'Oktober',
+            'November' => 'November',
+            'December' => 'Desember',
+        ];
+
+        $jenisPerawatanMapping = [
+            '1' => 'Preventif',
+            '2' => 'Kuratif',
+            '3' => 'Restorasi'
+        ];
+
+        $randomColors = [
+            '#78A083',
+            '#344955',
+            '#1B3C73',
+            '#944E63',
+            '#f8a5c2',
+            '#FFCD4B',
+            '#720455',
+            '#2b59c3',
+            '#f5365c',
+            '#FB8B24'
+        ];
+
+        shuffle($randomColors);
+
+        // Create full array of all 12 months in order
+        $allMonths = [
+            'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+            'August',
+            'September',
+            'October',
+            'November',
+            'December'
+        ];
+
+        // Translate to Indonesian
+        $allMonthsIndonesian = array_map(function ($month) use ($bulanMapping) {
+            return $bulanMapping[$month];
+        }, $allMonths);
+
+        $data_grafik = [];
+
+        // Initialize data structure with all care types
+        foreach (array_keys($jenisPerawatanMapping) as $jenisKey) {
+            $currentColor = array_shift($randomColors);
+            array_push($randomColors, $currentColor); // Put it back at the end for reuse if needed
+
+            $jenisPerawatan = $jenisPerawatanMapping[$jenisKey];
+
+            $data_grafik[$jenisKey] = [
+                'label' => $jenisPerawatan,
+                'backgroundColor' => $currentColor,
+                'hoverBackgroundColor' => $currentColor,
+                'borderColor' => $currentColor,
+                'data' => array_fill(0, count($allMonths), 0) // Initialize with zeros for all months
+            ];
+        }
+
+        // Fill in actual values
+        foreach ($data_perawatan as $row) {
+            $monthIndex = array_search($row['bulan'], $allMonths);
+            if ($monthIndex !== false) {
+                $jenisKey = $row['kode_jenisprw'];
+                if (isset($data_grafik[$jenisKey])) {
+                    $data_grafik[$jenisKey]['data'][$monthIndex] = (int)$row['total'];
+                }
+            }
+        }
+
+        $response = [
+            'labels' => $allMonthsIndonesian,
+            'datasets' => array_values($data_grafik)
+        ];
+
+        return $this->response->setJSON($response);
+    }
 }

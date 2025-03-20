@@ -10,27 +10,25 @@ class C_Perawatan2 extends BaseController
     protected $M_Petugas; //agar bisa digunakan oleh semua kelas
     protected $M_Perawatan2;
 
-    public function __construct() {
+    public function __construct()
+    {
 
         //mendefinisikan model yang digunakan
-        $this -> M_Petugas = new M_Petugas();
-        $this -> M_Perawatan2 = new M_Perawatan2();
-        
+        $this->M_Petugas = new M_Petugas();
+        $this->M_Perawatan2 = new M_Perawatan2();
     }
-    public function perawatanPreventif() 
-    
+    public function perawatanPreventif()
+
     {
         $dataPerawatan = $this->M_Perawatan2->getPreventif();
         if (!is_null($dataPerawatan)) {
             foreach ($dataPerawatan as &$perawatanItem) {
                 $petugasName = $this->M_Perawatan2->getPetugasName($perawatanItem['id_petugas']);
                 $perawatanItem['petugas_name'] = isset($petugasName['nama']) ? $petugasName['nama'] : 'Nama Petugas Tidak Tersedia';
-                
+
                 $jenisprwData = $this->M_Perawatan2->getJenisPrwName($perawatanItem['kode_jenisprw']);
                 $perawatanItem['jenisprw'] = isset($jenisprwData['jenis_prw']) ? $jenisprwData['jenis_prw'] : 'Nama Kategori Tidak Tersedia';
-                
             }
-            
         } else {
             $pesanKosong = 'Data Perawatan tidak tersedia untuk koleksi ini.';
             return view('pengkajian/v_dataPerawatan', ['perawatan' => [], 'koleksi' => [], 'pesan_kosong' => $pesanKosong]);
@@ -38,27 +36,26 @@ class C_Perawatan2 extends BaseController
 
 
 
-        $data =[
+        $data = [
             'title' => 'Daftar gallery',
             'dataPerawatan' => $dataPerawatan
         ];
-    
-        return view('pengkajian/v_perawatanPreventif', $data);
 
+        return view('pengkajian/v_perawatanPreventif', $data);
     }
 
-    public function savePerawatanPreventif() {
+    public function savePerawatanPreventif()
+    {
 
         $foto = $this->request->getFile('foto_sebelum');
         $dafaultImg = 'images.jpeg';
-    
+
         if ($foto->isValid() && !$foto->hasMoved()) {
             $fotoName = $foto->getRandomName();
             $foto->move('img/sebelum', $fotoName);
         } else {
             // Handle file upload error
             $fotoName = $dafaultImg;
-            
         }
 
         //tambahh data
@@ -76,61 +73,55 @@ class C_Perawatan2 extends BaseController
             'penanggung_jawab' => $this->request->getVar('penanggung_jawab'),
             'kode_kategori' => $this->request->getVar('kode_kategori'),
             'foto_sebelum' => $fotoName,
-            'status'=> 'Selesai',
+            'status' => 'Selesai',
             'id_petugas' => session()->get('id_petugas'),
-
-            
         ]);
 
         //alert
         session()->setFlashdata('pesan', 'Data Berhasil Ditambahkan.');
 
-        return redirect()-> to('/perawatanPreventif');
-
-        
+        return redirect()->to('/perawatanPreventif');
     }
-    public function perawatanKuratif() 
+    public function perawatanKuratif()
     {
         $dataPerawatan = $this->M_Perawatan2->getKuratif();
-        
+
         if (!is_null($dataPerawatan)) {
             foreach ($dataPerawatan as &$perawatanItem) {
                 $petugasName = $this->M_Perawatan2->getPetugasName($perawatanItem['id_petugas']);
                 $perawatanItem['petugas_name'] = isset($petugasName['nama']) ? $petugasName['nama'] : 'Nama Petugas Tidak Tersedia';
-                
+
                 $jenisprwData = $this->M_Perawatan2->getJenisPrwName($perawatanItem['kode_jenisprw']);
                 $perawatanItem['jenisprw'] = isset($jenisprwData['jenis_prw']) ? $jenisprwData['jenis_prw'] : 'Nama Kategori Tidak Tersedia';
-                
             }
-            
         } else {
             $pesanKosong = 'Data Perawatan tidak tersedia untuk koleksi ini.';
             return view('pengkajian/v_dataPerawatan', ['perawatan' => [], 'koleksi' => [], 'pesan_kosong' => $pesanKosong]);
         }
 
 
-        $data =[
+        $data = [
             'title' => 'Daftar gallery',
             'dataPerawatan' => $dataPerawatan
         ];
-    
-        
-    
+
+
+
         return view('pengkajian/v_perawatanKuratif', $data);
     }
 
-    public function savePerawatanKuratif() {
+    public function savePerawatanKuratif()
+    {
 
         $foto = $this->request->getFile('foto_sebelum');
         $dafaultImg = 'images.jpeg';
-    
+
         if ($foto->isValid() && !$foto->hasMoved()) {
             $fotoName = $foto->getRandomName();
             $foto->move('img/sebelum', $fotoName);
         } else {
             // Handle file upload error
             $fotoName = $dafaultImg;
-            
         }
 
 
@@ -149,33 +140,32 @@ class C_Perawatan2 extends BaseController
             'penanggung_jawab' => $this->request->getVar('penanggung_jawab'),
             'kode_kategori' => $this->request->getVar('kode_kategori'),
             'foto_sebelum' => $fotoName,
-            'status'=> 'Sedang Dirawat',
+            'status' => 'Sedang Dirawat',
             'id_petugas' => session()->get('id_petugas'),
-            
+
         ]);
 
         //alert
         session()->setFlashdata('pesan', 'Data Berhasil Ditambahkan.');
 
-        return redirect()-> to('/perawatanKuratif');
-
-        
+        return redirect()->to('/perawatanKuratif');
     }
-    
-    public function delete($id_perawatan2) 
+
+    public function delete($id_perawatan2)
     {
         // Saring masukan untuk mencegah SQL injection atau serangan lainnya
         $id_perawatan2 = filter_var($id_perawatan2, FILTER_SANITIZE_NUMBER_INT);
-    
+
         // Panggil metode delete pada model atau apapun yang diperlukan
         $this->M_Perawatan2->delete($id_perawatan2);
         session()->setFlashdata('pesan', 'Data Berhasil Dihapus.');
-    
+
         // Redirect ke halaman yang sesuai
         return redirect()->back();
     }
-    
-    public function updatePerawatan($id_perawatan2) {
+
+    public function updatePerawatan($id_perawatan2)
+    {
         // Mengambil data yang akan diupdate dari request
         $dataToUpdate = [
 
@@ -192,11 +182,11 @@ class C_Perawatan2 extends BaseController
             'kode_kategori' => $this->request->getVar('kode_kategori'),
             'foto_sebelum' => $this->request->getVar('foto_sebelum'),
             'foto_setelah' => $this->request->getVar('foto_setelah'),
-            'status'=>  $this->request->getVar('status'),
+            'status' =>  $this->request->getVar('status'),
             'id_petugas' => session()->get('id_petugas'),
-            
+
         ];
-    
+
         $foto = $this->request->getFile('foto_sebelum');
 
         // Cek apakah file foto diunggah
@@ -210,7 +200,7 @@ class C_Perawatan2 extends BaseController
             // Tambahkan nama file foto ke data yang akan diupdate
             $dataToUpdate['foto_sebelum'] = $fotoName;
         }
-        
+
         $foto = $this->request->getFile('foto_setelah');
 
         // Cek apakah file foto diunggah
@@ -237,22 +227,22 @@ class C_Perawatan2 extends BaseController
             // Tambahkan nama file foto ke data yang akan diupdate
             $dataToUpdate['foto_setelah'] = $fotoName;
         }
-    
+
         // Membersihkan data yang mungkin ada dari inputan form
         $dataToUpdate = array_filter($dataToUpdate);
-    
+
         // Memastikan ada data yang akan diupdate
         if (!empty($dataToUpdate)) {
             // Mengeksekusi perintah update
             $this->M_Perawatan2->update($id_perawatan2, $dataToUpdate);
-    
+
             // Ambil data petugas setelah diubah dari database
             $newDataPerawatan = $this->M_Perawatan2->getPerawatan2($id_perawatan2);
-    
+
             // Perbarui sesi pengguna dengan data baru
             if (session()->get('level') != 'Admin') {
                 session()->set([
-                    
+
                     'no_registrasi' => $newDataPerawatan['no_registrasi'],
                     'nama_inv' => $newDataPerawatan['nama_inv'],
                     'deskripsi' => $newDataPerawatan['deskripsi'],
@@ -262,10 +252,10 @@ class C_Perawatan2 extends BaseController
                     'lokasi' => $newDataPerawatan['lokasi'],
                     'tanggal_sebelum' => $newDataPerawatan['tanggal_sebelum'],
                     'tanggal_sesudah' => $newDataPerawatan['tanggal_sesudah'],
-                    'foto_sebelum' =>$newDataPerawatan['foto_sebelum'],
-                    'foto_setelah' =>$newDataPerawatan['foto_setelah'],
-                    'kode_kategori' =>$newDataPerawatan['kode_kategori'],
-                    'status'=>  $newDataPerawatan['status'],
+                    'foto_sebelum' => $newDataPerawatan['foto_sebelum'],
+                    'foto_setelah' => $newDataPerawatan['foto_setelah'],
+                    'kode_kategori' => $newDataPerawatan['kode_kategori'],
+                    'status' =>  $newDataPerawatan['status'],
                     'id_petugas' => $newDataPerawatan['id_petugas'],
                 ]);
             }
@@ -276,7 +266,7 @@ class C_Perawatan2 extends BaseController
             session()->setFlashdata('error', 'Tidak ada data yang diupdate.');
         }
         // dd('berhasil');
-    
+
         // Redirect ke halaman sebelumnya atau halaman yang sesuai
         return redirect()->back();
     }
@@ -284,45 +274,43 @@ class C_Perawatan2 extends BaseController
 
 
 
-    public function perawatanRestorasi() 
+    public function perawatanRestorasi()
     {
         $dataPerawatan = $this->M_Perawatan2->getRestorasi();
-        
+
         if (!is_null($dataPerawatan)) {
             foreach ($dataPerawatan as &$perawatanItem) {
                 $petugasName = $this->M_Perawatan2->getPetugasName($perawatanItem['id_petugas']);
                 $perawatanItem['petugas_name'] = isset($petugasName['nama']) ? $petugasName['nama'] : 'Nama Petugas Tidak Tersedia';
-                
+
                 $jenisprwData = $this->M_Perawatan2->getJenisPrwName($perawatanItem['kode_jenisprw']);
                 $perawatanItem['jenisprw'] = isset($jenisprwData['jenis_prw']) ? $jenisprwData['jenis_prw'] : 'Nama Kategori Tidak Tersedia';
-                
             }
-            
         } else {
             $pesanKosong = 'Data Perawatan tidak tersedia untuk koleksi ini.';
             return view('pengkajian/v_dataPerawatan', ['perawatan' => [], 'koleksi' => [], 'pesan_kosong' => $pesanKosong]);
         }
 
 
-        $data =[
+        $data = [
             'title' => 'Daftar Perawatan',
             'dataPerawatan' => $dataPerawatan
         ];
-    
+
         return view('pengkajian/v_perawatanRestorasi', $data);
     }
-    public function savePerawatanRestorasi() {
+    public function savePerawatanRestorasi()
+    {
 
         $foto = $this->request->getFile('foto_sebelum');
         $dafaultImg = 'images.jpeg';
-    
+
         if ($foto->isValid() && !$foto->hasMoved()) {
             $fotoName = $foto->getRandomName();
             $foto->move('img/sebelum', $fotoName);
         } else {
             // Handle file upload error
             $fotoName = $dafaultImg;
-           
         }
 
 
@@ -341,18 +329,14 @@ class C_Perawatan2 extends BaseController
             'penanggung_jawab' => $this->request->getVar('penanggung_jawab'),
             'kode_kategori' => $this->request->getVar('kode_kategori'),
             'foto_sebelum' => $fotoName,
-            'status'=> 'Sedang Dirawat',
+            'status' => 'Sedang Dirawat',
             'id_petugas' => session()->get('id_petugas'),
-            
+
         ]);
 
         //alert
         session()->setFlashdata('pesan', 'Data Berhasil Ditambahkan.');
 
-        return redirect()-> to('/perawatanRestorasi');
+        return redirect()->to('/perawatanRestorasi');
     }
-
-    
-
-    
 }
