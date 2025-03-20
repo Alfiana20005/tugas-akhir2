@@ -547,24 +547,29 @@
         return response.json();
       })
       .then(data => {
-        // No need to transform labels - just use them directly
-        myBarChart.data.labels = data.labels;
+        console.log("Data Fetched:", data);
 
-        // Format the datasets correctly
-        myBarChart.data.datasets = data.datasets.map(dataset => {
-          // If dataset.data is an object, convert it to array in correct order
-          if (dataset.data && typeof dataset.data === 'object' && !Array.isArray(dataset.data)) {
+        if (!Array.isArray(data.labels)) {
+          console.error("Error: Labels harus berupa array!", data.labels);
+          return;
+        }
+
+        // Transform the datasets
+        const transformedDatasets = data.datasets.map(dataset => {
+          if (typeof dataset.data === 'object' && !Array.isArray(dataset.data)) {
             const orderedData = [];
-            // For each label, find the corresponding data point
             data.labels.forEach(label => {
-              orderedData.push(dataset.data[label] || 0);
+              // Convert the value to a number (if it's a string)
+              orderedData.push(Number(dataset.data[label]) || 0);
             });
             dataset.data = orderedData;
           }
           return dataset;
         });
 
-        // Update chart
+        // Update the chart
+        myBarChart.data.labels = data.labels;
+        myBarChart.data.datasets = transformedDatasets;
         myBarChart.update();
       })
       .catch(error => {
