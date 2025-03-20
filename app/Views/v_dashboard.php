@@ -3,7 +3,6 @@
 <?= $this->section('content'); ?>
 
 <div class="container-fluid">
-
   <!-- Page Heading -->
   <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
@@ -463,7 +462,9 @@
 
 
 <script>
-  // JavaScript Fix
+  // Declare myBarChart as a global variable
+  var myBarChart;
+
   document.addEventListener('DOMContentLoaded', function() {
     var ctx = document.getElementById("statistikPerawatan");
 
@@ -536,6 +537,12 @@
   });
 
   function updateChartPerawatan(year) {
+    // Check if chart is initialized
+    if (typeof myBarChart === 'undefined') {
+      console.error("Chart is not initialized yet");
+      return;
+    }
+
     console.log("Function called with year:", year);
 
     // Fetch data for the selected year
@@ -549,8 +556,9 @@
       .then(data => {
         console.log("Data Fetched:", data);
 
-        if (!Array.isArray(data.labels)) {
-          console.error("Error: Labels harus berupa array!", data.labels);
+        // Validate data structure
+        if (!data || !data.labels || !Array.isArray(data.labels)) {
+          console.error("Invalid data format received:", data);
           return;
         }
 
@@ -575,6 +583,30 @@
       .catch(error => {
         console.error('Error fetching data:', error);
       });
+  }
+
+  // Make sure number_format function exists
+  if (typeof number_format === 'undefined') {
+    function number_format(number, decimals, dec_point, thousands_sep) {
+      // Default values
+      decimals = decimals || 0;
+      dec_point = dec_point || '.';
+      thousands_sep = thousands_sep || ',';
+
+      number = Number(number);
+
+      var negative = number < 0 ? '-' : '';
+      number = Math.abs(number);
+
+      // Format the number
+      var i = parseInt(number.toFixed(decimals)) + '';
+      var j = (i.length > 3) ? i.length % 3 : 0;
+
+      return negative +
+        (j ? i.substr(0, j) + thousands_sep : '') +
+        i.substr(j).replace(/(\d{3})(?=\d)/g, '$1' + thousands_sep) +
+        (decimals ? dec_point + Math.abs(number - i).toFixed(decimals).slice(2) : '');
+    }
   }
 </script>
 
