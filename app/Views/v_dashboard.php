@@ -468,72 +468,96 @@
   document.addEventListener('DOMContentLoaded', function() {
     var ctx = document.getElementById("statistikPerawatan");
 
-    // Create initial chart with the data
-    myBarChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: <?= $bulan_labels2; ?>,
-        datasets: <?= $data_grafik2; ?>
-      },
-      options: {
-        maintainAspectRatio: false,
-        layout: {
-          padding: {
-            left: 10,
-            right: 25,
-            top: 25,
-            bottom: 0
-          }
-        },
-        scales: {
-          xAxes: [{
-            gridLines: {
-              display: false,
-              drawBorder: false
-            }
-          }],
-          yAxes: [{
-            ticks: {
-              min: 0,
-              padding: 10,
-              callback: function(value) {
-                return number_format(value);
-              }
-            },
-            gridLines: {
-              color: "rgb(234, 236, 244)",
-              zeroLineColor: "rgb(234, 236, 244)",
-              drawBorder: false,
-              borderDash: [2],
-              zeroLineBorderDash: [2]
-            }
-          }],
-        },
-        legend: {
-          display: true,
-          position: 'top'
-        },
-        tooltips: {
-          titleMarginBottom: 10,
-          titleFontColor: '#6e707e',
-          titleFontSize: 14,
-          backgroundColor: "rgb(255,255,255)",
-          bodyFontColor: "#858796",
-          borderColor: '#dddfeb',
-          borderWidth: 1,
-          xPadding: 15,
-          yPadding: 15,
-          displayColors: false,
-          caretPadding: 10,
-          callbacks: {
-            label: function(tooltipItem, chart) {
-              var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-              return datasetLabel + ': ' + number_format(tooltipItem.yLabel);
-            }
-          }
-        },
+    // Make sure we have valid data before initializing the chart
+    try {
+      // Parse the PHP variables safely
+      var labels = JSON.parse('<?= json_encode($bulan_labels2); ?>');
+      var datasets = JSON.parse('<?= json_encode($data_grafik2); ?>');
+
+      // Ensure labels is an array
+      if (!Array.isArray(labels)) {
+        console.error("Labels is not an array:", labels);
+        labels = [];
       }
-    });
+
+      // Ensure datasets is an array
+      if (!Array.isArray(datasets)) {
+        console.error("Datasets is not an array:", datasets);
+        datasets = [];
+      }
+
+      // Create initial chart with the validated data
+      myBarChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: datasets
+        },
+        options: {
+          maintainAspectRatio: false,
+          layout: {
+            padding: {
+              left: 10,
+              right: 25,
+              top: 25,
+              bottom: 0
+            }
+          },
+          scales: {
+            xAxes: [{
+              gridLines: {
+                display: false,
+                drawBorder: false
+              }
+            }],
+            yAxes: [{
+              ticks: {
+                min: 0,
+                padding: 10,
+                callback: function(value) {
+                  return number_format(value);
+                }
+              },
+              gridLines: {
+                color: "rgb(234, 236, 244)",
+                zeroLineColor: "rgb(234, 236, 244)",
+                drawBorder: false,
+                borderDash: [2],
+                zeroLineBorderDash: [2]
+              }
+            }],
+          },
+          legend: {
+            display: true,
+            position: 'top'
+          },
+          tooltips: {
+            titleMarginBottom: 10,
+            titleFontColor: '#6e707e',
+            titleFontSize: 14,
+            backgroundColor: "rgb(255,255,255)",
+            bodyFontColor: "#858796",
+            borderColor: '#dddfeb',
+            borderWidth: 1,
+            xPadding: 15,
+            yPadding: 15,
+            displayColors: false,
+            caretPadding: 10,
+            callbacks: {
+              label: function(tooltipItem, chart) {
+                var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+                return datasetLabel + ': ' + number_format(tooltipItem.yLabel);
+              }
+            }
+          },
+        }
+      });
+    } catch (error) {
+      console.error("Error initializing chart:", error);
+      // Create a fallback placeholder
+      document.getElementById("statistikPerawatan").parentNode.innerHTML =
+        '<div class="alert alert-danger">Error loading chart. Please try again later.</div>';
+    }
   });
 
   function updateChartPerawatan(year) {
@@ -545,11 +569,19 @@
 
     console.log("Function called with year:", year);
 
+    // Build the URL with a cache-busting parameter to prevent caching
+    var url = '<?= base_url('dashboard/getDataPerawatanByYear/'); ?>' + year + '?_=' + new Date().getTime();
+
     // Fetch data for the selected year
-    fetch('<?= base_url('dashboard/getDataPerawatanByYear/'); ?>' + year)
+    fetch(url)
       .then(response => {
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error('Network response was not ok: ' + response.status);
+        }
+        // Check if the response is JSON
+        const contentType = response.headers.get('content-type');
+        if (!contentType || !contentType.includes('application/json')) {
+          throw new Error('Response is not JSON: ' + contentType);
         }
         return response.json();
       })
@@ -582,6 +614,9 @@
       })
       .catch(error => {
         console.error('Error fetching data:', error);
+        // Display a user-friendly error message
+        document.getElementById("chart-error-message").innerHTML =
+          '<div class="alert alert-warning">Failed to load chart data. Please try again later.</div>';
       });
   }
 
