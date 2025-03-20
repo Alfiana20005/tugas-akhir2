@@ -3,6 +3,7 @@
 <?= $this->section('content'); ?>
 
 <div class="container-fluid">
+
   <!-- Page Heading -->
   <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
@@ -463,185 +464,176 @@
 
 <script>
   // Declare myBarChart as a global variable
-  var myBarChart;
+  // JavaScript Fix untuk Grafik Kedua
+  var myBarChart; // Definisikan variabel global
 
   document.addEventListener('DOMContentLoaded', function() {
     var ctx = document.getElementById("statistikPerawatan");
 
-    // Make sure we have valid data before initializing the chart
-    try {
-      // Parse the PHP variables safely
-      var labels = JSON.parse('<?= json_encode($bulan_labels2); ?>');
-      var datasets = JSON.parse('<?= json_encode($data_grafik2); ?>');
-
-      // Ensure labels is an array
-      if (!Array.isArray(labels)) {
-        console.error("Labels is not an array:", labels);
-        labels = [];
-      }
-
-      // Ensure datasets is an array
-      if (!Array.isArray(datasets)) {
-        console.error("Datasets is not an array:", datasets);
-        datasets = [];
-      }
-
-      // Create initial chart with the validated data
-      myBarChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: labels,
-          datasets: datasets
+    // Buat chart awal dengan data
+    myBarChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: <?= json_encode($bulan_labels2); ?>, // Pastikan data dalam format JSON
+        datasets: <?= json_encode($data_grafik2); ?> // Pastikan data dalam format JSON
+      },
+      options: {
+        maintainAspectRatio: false,
+        layout: {
+          padding: {
+            left: 10,
+            right: 25,
+            top: 25,
+            bottom: 0
+          }
         },
-        options: {
-          maintainAspectRatio: false,
-          layout: {
-            padding: {
-              left: 10,
-              right: 25,
-              top: 25,
-              bottom: 0
+        scales: {
+          xAxes: [{
+            gridLines: {
+              display: false,
+              drawBorder: false
             }
-          },
-          scales: {
-            xAxes: [{
-              gridLines: {
-                display: false,
-                drawBorder: false
+          }],
+          yAxes: [{
+            ticks: {
+              min: 0,
+              padding: 10,
+              callback: function(value) {
+                return number_format(value);
               }
-            }],
-            yAxes: [{
-              ticks: {
-                min: 0,
-                padding: 10,
-                callback: function(value) {
-                  return number_format(value);
-                }
-              },
-              gridLines: {
-                color: "rgb(234, 236, 244)",
-                zeroLineColor: "rgb(234, 236, 244)",
-                drawBorder: false,
-                borderDash: [2],
-                zeroLineBorderDash: [2]
-              }
-            }],
-          },
-          legend: {
-            display: true,
-            position: 'top'
-          },
-          tooltips: {
-            titleMarginBottom: 10,
-            titleFontColor: '#6e707e',
-            titleFontSize: 14,
-            backgroundColor: "rgb(255,255,255)",
-            bodyFontColor: "#858796",
-            borderColor: '#dddfeb',
-            borderWidth: 1,
-            xPadding: 15,
-            yPadding: 15,
-            displayColors: false,
-            caretPadding: 10,
-            callbacks: {
-              label: function(tooltipItem, chart) {
-                var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-                return datasetLabel + ': ' + number_format(tooltipItem.yLabel);
-              }
+            },
+            gridLines: {
+              color: "rgb(234, 236, 244)",
+              zeroLineColor: "rgb(234, 236, 244)",
+              drawBorder: false,
+              borderDash: [2],
+              zeroLineBorderDash: [2]
             }
-          },
-        }
-      });
-    } catch (error) {
-      console.error("Error initializing chart:", error);
-      // Create a fallback placeholder
-      document.getElementById("statistikPerawatan").parentNode.innerHTML =
-        '<div class="alert alert-danger">Error loading chart. Please try again later.</div>';
-    }
+          }],
+        },
+        legend: {
+          display: true,
+          position: 'top'
+        },
+        tooltips: {
+          titleMarginBottom: 10,
+          titleFontColor: '#6e707e',
+          titleFontSize: 14,
+          backgroundColor: "rgb(255,255,255)",
+          bodyFontColor: "#858796",
+          borderColor: '#dddfeb',
+          borderWidth: 1,
+          xPadding: 15,
+          yPadding: 15,
+          displayColors: false,
+          caretPadding: 10,
+          callbacks: {
+            label: function(tooltipItem, chart) {
+              var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+              return datasetLabel + ': ' + number_format(tooltipItem.yLabel);
+            }
+          }
+        },
+      }
+    });
   });
 
   function updateChartPerawatan(year) {
-    // Check if chart is initialized
-    if (typeof myBarChart === 'undefined') {
-      console.error("Chart is not initialized yet");
+    console.log("Function called with year:", year);
+
+    // Pastikan myBarChart sudah dibuat
+    if (!myBarChart) {
+      console.error("Chart belum diinisialisasi");
       return;
     }
 
-    console.log("Function called with year:", year);
-
-    // Build the URL with a cache-busting parameter to prevent caching
-    var url = '<?= base_url('dashboard/getDataPerawatanByYear/'); ?>' + year + '?_=' + new Date().getTime();
-
-    // Fetch data for the selected year
-    fetch(url)
+    // Fetch data untuk tahun yang dipilih
+    fetch('<?= base_url('dashboard/getDataPerawatanByYear/'); ?>' + year)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok: ' + response.status);
-        }
-        // Check if the response is JSON
-        const contentType = response.headers.get('content-type');
-        if (!contentType || !contentType.includes('application/json')) {
-          throw new Error('Response is not JSON: ' + contentType);
         }
         return response.json();
       })
       .then(data => {
         console.log("Data Fetched:", data);
 
-        // Validate data structure
-        if (!data || !data.labels || !Array.isArray(data.labels)) {
-          console.error("Invalid data format received:", data);
+        // Validasi data
+        if (!data || !data.labels || !data.datasets) {
+          console.error("Format data tidak valid:", data);
           return;
         }
 
-        // Transform the datasets
+        // Pastikan labels adalah array
+        if (!Array.isArray(data.labels)) {
+          console.error("Error: Labels harus berupa array!", data.labels);
+          return;
+        }
+
+        // Pastikan datasets adalah array
+        if (!Array.isArray(data.datasets)) {
+          console.error("Error: Datasets harus berupa array!", data.datasets);
+          return;
+        }
+
+        // Transform datasets jika diperlukan
         const transformedDatasets = data.datasets.map(dataset => {
+          // Pastikan dataset memiliki properti data
+          if (!dataset.data) {
+            console.error("Dataset tidak memiliki data:", dataset);
+            dataset.data = Array(data.labels.length).fill(0);
+            return dataset;
+          }
+
+          // Jika data adalah object, ubah menjadi array berdasarkan urutan labels
           if (typeof dataset.data === 'object' && !Array.isArray(dataset.data)) {
             const orderedData = [];
             data.labels.forEach(label => {
-              // Convert the value to a number (if it's a string)
+              // Konversi nilai ke number (jika string)
               orderedData.push(Number(dataset.data[label]) || 0);
             });
             dataset.data = orderedData;
+          } else if (!Array.isArray(dataset.data)) {
+            // Jika data bukan array atau object, buat array kosong
+            dataset.data = Array(data.labels.length).fill(0);
           }
+
           return dataset;
         });
 
-        // Update the chart
+        // Update chart
         myBarChart.data.labels = data.labels;
         myBarChart.data.datasets = transformedDatasets;
         myBarChart.update();
       })
       .catch(error => {
         console.error('Error fetching data:', error);
-        // Display a user-friendly error message
-        document.getElementById("chart-error-message").innerHTML =
-          '<div class="alert alert-warning">Failed to load chart data. Please try again later.</div>';
       });
   }
 
-  // Make sure number_format function exists
-  if (typeof number_format === 'undefined') {
-    function number_format(number, decimals, dec_point, thousands_sep) {
-      // Default values
-      decimals = decimals || 0;
-      dec_point = dec_point || '.';
-      thousands_sep = thousands_sep || ',';
-
-      number = Number(number);
-
-      var negative = number < 0 ? '-' : '';
-      number = Math.abs(number);
-
-      // Format the number
-      var i = parseInt(number.toFixed(decimals)) + '';
-      var j = (i.length > 3) ? i.length % 3 : 0;
-
-      return negative +
-        (j ? i.substr(0, j) + thousands_sep : '') +
-        i.substr(j).replace(/(\d{3})(?=\d)/g, '$1' + thousands_sep) +
-        (decimals ? dec_point + Math.abs(number - i).toFixed(decimals).slice(2) : '');
+  // Pastikan fungsi number_format tersedia
+  function number_format(number, decimals, dec_point, thousands_sep) {
+    // Pastikan number adalah angka
+    number = (number + '').replace(/[^0-9+\-Ee.]/g, '');
+    var n = !isFinite(+number) ? 0 : +number,
+      prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+      sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
+      dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+      s = '',
+      toFixedFix = function(n, prec) {
+        var k = Math.pow(10, prec);
+        return '' + Math.round(n * k) / k;
+      };
+    // Fix untuk IE parseFloat(0.55).toFixed(0) = 0;
+    s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+    if (s[0].length > 3) {
+      s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
     }
+    if ((s[1] || '').length < prec) {
+      s[1] = s[1] || '';
+      s[1] += new Array(prec - s[1].length + 1).join('0');
+    }
+    return s.join(dec);
   }
 </script>
 

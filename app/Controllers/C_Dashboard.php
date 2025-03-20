@@ -331,6 +331,8 @@ class C_Dashboard extends BaseController
             'datasets' => array_values($data_grafik)
         ];
 
+        $this->response->setHeader('Content-Type', 'application/json');
+
         return $this->response->setJSON($response);
     }
 }
