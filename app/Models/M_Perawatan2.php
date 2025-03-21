@@ -200,4 +200,23 @@ class M_Perawatan2 extends Model
             'total' => $result ? (int)$result->total : 0
         ];
     }
+
+    public function getAvailableYears()
+    {
+        $query = $this->db->query("SELECT DISTINCT YEAR(tanggal_sebelum) as year FROM data_perawatan2 ORDER BY year DESC");
+        $result = $query->getResultArray();
+
+        // Extract only the year values
+        $years = array_column($result, 'year');
+
+        // Make sure current year is included even if no data exists yet
+        $currentYear = date('Y');
+        if (!in_array($currentYear, $years)) {
+            $years[] = $currentYear;
+            sort($years);
+            $years = array_reverse($years); // Keep descending order
+        }
+
+        return $years;
+    }
 }

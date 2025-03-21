@@ -27,16 +27,22 @@ class C_Dashboard extends BaseController
         $this->M_Perawatan2 = new M_Perawatan2();
         $this->M_Perpustakaan = new M_Perpustakaan();
     }
+
     public function index()
     {
+        // Get selected year from dropdown, default to current year
+        $selectedYear = $this->request->getGet('year') ?? date('Y');
+        $tahun = $selectedYear;
+
+        // Get available years for dropdown
+        $availableYears = $this->M_Perawatan2->getAvailableYears();
+
         // stastistik pengunjung 
-        $tahun = date('Y');
         $jadwalPrw = $this->M_JadwalPrw->getJadwalPrw();
         $data_pengunjung = $this->M_Pengunjung->getTotalPengunjungPerBulan();
         foreach ($data_pengunjung as $row) {
             $bulan_labels[] = $row['bulan'];
         }
-
 
         $dataset = [
             'label' => 'Jumlah Pengunjung',
@@ -63,7 +69,6 @@ class C_Dashboard extends BaseController
             $jadwalItem['perawatan'] = $this->M_JadwalPrw->countPerawatanInRange($jadwalItem['mulai'], $jadwalItem['berakhir'], $jadwalItem['kode_jenisprw']);
         }
         // end statistik pengunjung
-
 
         // grafik koleksi
         $kategori = [
@@ -127,12 +132,9 @@ class C_Dashboard extends BaseController
                 $data_grafik['total']['data']['Kategori Tidak Diketahui'] = $row['total'];
             }
         }
-
         // end grafik koleksi
 
-
-        // gerafik perawatan 
-
+        // grafik perawatan 
         $data_perawatan = $this->M_Perawatan2->getDataByYear($tahun);
 
         $bulanMapping = [
@@ -204,7 +206,6 @@ class C_Dashboard extends BaseController
         $perawatan = $this->M_Perawatan2->totalPerawatan();
 
         $data['bulan_labels'] = json_encode(array_unique($bulan_labels));
-
         $data['datasets'] = [$dataset];
         // Tambahkan data_pengunjung ke dalam variabel $data
         $data['data_pengunjung'] = $data_pengunjung;
@@ -217,7 +218,8 @@ class C_Dashboard extends BaseController
         $data['totalRestorasi'] = $perawatan['restorasi'];
         $data['totalPerawatan'] = $perawatan['total'];
         $data['jadwal'] = [$jadwalPrw];
-        $data['tahun'] = [$tahun];
+        $data['tahun'] = $tahun;
+        $data['availableYears'] = $availableYears;
         $data['jadwalPrw'] = $this->M_JadwalPrw->getJadwalPrw();
         // var_dump($jadwalPrw);
         $data['kategori_labels'] = json_encode(array_unique($kategori_labels));
@@ -229,110 +231,7 @@ class C_Dashboard extends BaseController
         $data['data_grafik2'] = json_encode(array_values($data_grafik2));
         $data['data_perawatan'] = $data_perawatan;
         // $data['jumlah'] = $this->M_Perawatan2->getDataByMonth($tahun);
+
         return view('v_dashboard', $data);
-    }
-
-    public function getDataPerawatanByYear($tahun = null)
-    {
-        if ($tahun === null) {
-            $tahun = date('Y');
-        }
-
-        $data_perawatan = $this->M_Perawatan2->getDataByYear($tahun);
-
-        $bulanMapping = [
-            'January' => 'Januari',
-            'February' => 'Februari',
-            'March' => 'Maret',
-            'April' => 'April',
-            'May' => 'Mei',
-            'June' => 'Juni',
-            'July' => 'Juli',
-            'August' => 'Agustus',
-            'September' => 'September',
-            'October' => 'Oktober',
-            'November' => 'November',
-            'December' => 'Desember',
-        ];
-
-        $jenisPerawatanMapping = [
-            '1' => 'Preventif',
-            '2' => 'Kuratif',
-            '3' => 'Restorasi'
-        ];
-
-        $randomColors = [
-            '#78A083',
-            '#344955',
-            '#1B3C73',
-            '#944E63',
-            '#f8a5c2',
-            '#FFCD4B',
-            '#720455',
-            '#2b59c3',
-            '#f5365c',
-            '#FB8B24'
-        ];
-
-        shuffle($randomColors);
-
-        // Create full array of all 12 months in order
-        $allMonths = [
-            'January',
-            'February',
-            'March',
-            'April',
-            'May',
-            'June',
-            'July',
-            'August',
-            'September',
-            'October',
-            'November',
-            'December'
-        ];
-
-        // Translate to Indonesian
-        $allMonthsIndonesian = array_map(function ($month) use ($bulanMapping) {
-            return $bulanMapping[$month];
-        }, $allMonths);
-
-        $data_grafik = [];
-
-        // Initialize data structure with all care types
-        foreach (array_keys($jenisPerawatanMapping) as $jenisKey) {
-            $currentColor = array_shift($randomColors);
-            array_push($randomColors, $currentColor); // Put it back at the end for reuse if needed
-
-            $jenisPerawatan = $jenisPerawatanMapping[$jenisKey];
-
-            $data_grafik[$jenisKey] = [
-                'label' => $jenisPerawatan,
-                'backgroundColor' => $currentColor,
-                'hoverBackgroundColor' => $currentColor,
-                'borderColor' => $currentColor,
-                'data' => array_fill(0, count($allMonths), 0) // Initialize with zeros for all months
-            ];
-        }
-
-        // Fill in actual values
-        foreach ($data_perawatan as $row) {
-            $monthIndex = array_search($row['bulan'], $allMonths);
-            if ($monthIndex !== false) {
-                $jenisKey = $row['kode_jenisprw'];
-                if (isset($data_grafik[$jenisKey])) {
-                    $data_grafik[$jenisKey]['data'][$monthIndex] = (int)$row['total'];
-                }
-            }
-        }
-
-        $response = [
-            'labels' => $allMonthsIndonesian,
-            'datasets' => array_values($data_grafik)
-        ];
-
-        $this->response->setHeader('Content-Type', 'application/json');
-
-        return $this->response->setJSON($response);
     }
 }
