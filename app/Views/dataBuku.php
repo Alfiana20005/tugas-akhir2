@@ -3,8 +3,6 @@
 <?= $this->section('content'); ?>
 
 <div class="container-fluid">
-
-
     <!-- <button class="btn btn-primary mb-3">Tambah data</button> -->
     <?php if (session()->get('level') == 'Perpustakaan'): ?>
         <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#tambahKegiatan" data-bs-whatever="@getbootstrap">Tambah Data</button>
@@ -14,8 +12,6 @@
             </div>
         <?php endif; ?>
     <?php endif; ?>
-
-
 
     <div class="modal fade" id="tambahKegiatan" tabindex="-1" aria-labelledby="tambahKegiatan" aria-hidden="true">
         <div class="modal-dialog">
@@ -165,137 +161,110 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex justify-content-between align-items-center">
             <h6 class="m-0 font-weight-bold text-primary">Data Buku</h6>
+            <button type="button" class="btn btn-info" onclick="printTable()"><i class="fas fa-print"></i> Cetak Data</button>
         </div>
 
         <div class="card-body">
-            <form action="" method="get" autocomplete="off">
-                <div class="row mb-4">
-                    <!-- Filter dropdowns moved to the left -->
-                    <div class="col-md-10 mb-2">
-                        <div class="row">
-                            <div class="col-md-2 mb-2">
-                                <select name="pengarang" class="form-control" onchange="this.form.submit()">
-                                    <option value="">Pengarang</option>
-                                    <?php foreach ($pengarang_list as $p):
-                                        $selected = ($filters['pengarang'] ?? '') == $p['pengarang'] ? 'selected' : '';
-                                    ?>
-                                        <option value="<?= $p['pengarang']; ?>" <?= $selected; ?>><?= $p['pengarang']; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-
-                            <div class="col-md-2 mb-2">
-                                <select name="penerbit" class="form-control" onchange="this.form.submit()">
-                                    <option value="">Penerbit</option>
-                                    <?php foreach ($penerbit_list as $p):
-                                        $selected = ($filters['penerbit'] ?? '') == $p['penerbit'] ? 'selected' : '';
-                                    ?>
-                                        <option value="<?= $p['penerbit']; ?>" <?= $selected; ?>><?= $p['penerbit']; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-
-                            <div class="col-md-2 mb-2">
-                                <select name="tempatTerbit" class="form-control" onchange="this.form.submit()">
-                                    <option value="">Tempat Terbit</option>
-                                    <?php foreach ($tempatTerbit_list as $t):
-                                        $selected = ($filters['tempatTerbit'] ?? '') == $t['tempatTerbit'] ? 'selected' : '';
-                                    ?>
-                                        <option value="<?= $t['tempatTerbit']; ?>" <?= $selected; ?>><?= $t['tempatTerbit']; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-
-                            <div class="col-md-2 mb-2">
-                                <select name="tahunTerbit" class="form-control" onchange="this.form.submit()">
-                                    <option value="">Tahun Terbit</option>
-                                    <?php foreach ($tahunTerbit_list as $t):
-                                        $selected = ($filters['tahunTerbit'] ?? '') == $t['tahunTerbit'] ? 'selected' : '';
-                                    ?>
-                                        <option value="<?= $t['tahunTerbit']; ?>" <?= $selected; ?>><?= $t['tahunTerbit']; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-
-                            <div class="col-md-2 mb-2">
-                                <select name="kategoriBuku" class="form-control" onchange="this.form.submit()">
-                                    <option value="">Kategori</option>
-                                    <?php foreach ($kategoriBuku_list as $k):
-                                        $selected = ($filters['kategoriBuku'] ?? '') == $k['kategoriBuku'] ? 'selected' : '';
-                                    ?>
-                                        <option value="<?= $k['kategoriBuku']; ?>" <?= $selected; ?>><?= $k['kategoriBuku']; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-
-                            <div class="col-md-2 mb-2">
-                                <select name="status" class="form-control" onchange="this.form.submit()">
-                                    <option value="">Status</option>
-                                    <?php foreach ($status_list as $s):
-                                        $selected = ($filters['status'] ?? '') == $s['status'] ? 'selected' : '';
-                                    ?>
-                                        <option value="<?= $s['status']; ?>" <?= $selected; ?>><?= $s['status']; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                        </div>
+            <!-- Filter section -->
+            <div class="mb-4">
+                <div class="row">
+                    <div class="col-md-2 mb-2">
+                        <select id="filterPengarang" class="form-control">
+                            <option value="">Semua Pengarang</option>
+                            <?php foreach ($pengarang_list as $p): ?>
+                                <option value="<?= $p['pengarang']; ?>"><?= $p['pengarang']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
                     </div>
 
-                    <!-- Search input moved to the right -->
                     <div class="col-md-2 mb-2">
-                        <div class="d-flex">
-                            <input type="text" name="keyword" class="form-control form-control-sm mr-2" placeholder="search" value="<?= $filters['keyword'] ?? ''; ?>">
-                            <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-search"></i></button>
-                        </div>
+                        <select id="filterPenerbit" class="form-control">
+                            <option value="">Semua Penerbit</option>
+                            <?php foreach ($penerbit_list as $p): ?>
+                                <option value="<?= $p['penerbit']; ?>"><?= $p['penerbit']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
+                    <div class="col-md-2 mb-2">
+                        <select id="filterTempatTerbit" class="form-control">
+                            <option value="">Semua Tempat Terbit</option>
+                            <?php foreach ($tempatTerbit_list as $t): ?>
+                                <option value="<?= $t['tempatTerbit']; ?>"><?= $t['tempatTerbit']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
+                    <div class="col-md-2 mb-2">
+                        <select id="filterTahunTerbit" class="form-control">
+                            <option value="">Semua Tahun</option>
+                            <?php foreach ($tahunTerbit_list as $t): ?>
+                                <option value="<?= $t['tahunTerbit']; ?>"><?= $t['tahunTerbit']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
+                    <div class="col-md-2 mb-2">
+                        <select id="filterKategori" class="form-control">
+                            <option value="">Semua Kategori</option>
+                            <?php foreach ($kategoriBuku_list as $k): ?>
+                                <option value="<?= $k['kategoriBuku']; ?>"><?= $k['kategoriBuku']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
+                    <div class="col-md-2 mb-2">
+                        <select id="filterStatus" class="form-control">
+                            <option value="">Semua Status</option>
+                            <?php foreach ($status_list as $s): ?>
+                                <option value="<?= $s['status']; ?>"><?= $s['status']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
                     </div>
                 </div>
-            </form>
+            </div>
 
-            <!-- The rest of your table code remains the same -->
             <div class="table-responsive">
-                <table class="table table-bordered" width="100%" cellspacing="0">
-                    <!-- Table header and body remain unchanged -->
-                    <thead>
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="font-size: 11pt;">
+                    <thead style="text-align: center;">
                         <tr>
-                            <th style="text-align: center;">No</th>
-                            <th style="text-align: center;">Kode</th>
-                            <th style="text-align: center;">Sampul</th>
-                            <th style="text-align: center;">Judul</th>
-                            <th style="text-align: center;">Pengarang</th>
-                            <th style="text-align: center;">Penerbit</th>
-                            <th style="text-align: center;">Tempat Terbit</th>
-                            <th style="text-align: center;">Tahun Terbit</th>
-                            <th style="text-align: center;">Eksemplar</th>
-                            <th style="text-align: center;">Kategori Buku</th>
-                            <th style="text-align: center;">Lokasi Penyimpanan</th>
-                            <th style="text-align: center;">Status</th>
-                            <th style="text-align: center;">Keterangan</th>
-                            <th style="text-align: center;">OPAC</th>
-                            <th style="text-align: center;">Aksi</th>
+                            <th>No</th>
+                            <th>Kode</th>
+                            <th>Sampul</th>
+                            <th>Judul</th>
+                            <th>Pengarang</th>
+                            <th>Penerbit</th>
+                            <th>Tempat Terbit</th>
+                            <th>Tahun Terbit</th>
+                            <th>Eksemplar</th>
+                            <th>Kategori Buku</th>
+                            <th>Lokasi Penyimpanan</th>
+                            <th>Status</th>
+                            <th>Keterangan</th>
+                            <th>OPAC</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody style="text-align: center;">
                         <?php
-                        $page = isset($_GET['page']) ? $_GET['page'] : 1;
-                        $no = 1 + (15 * ($page - 1));
-
+                        $no = 1;
                         foreach ($data_buku as $buku): ?>
                             <tr>
-                                <td style="text-align: center;"><?= $no++; ?></td>
-                                <td style="text-align: center;"><?= $buku['kode']; ?></td>
-                                <td style="text-align: center;"><img src="<?= base_url("img/perpustakaan/" . $buku['foto']); ?>" alt="" style="width: 60px;" loading="lazy"></td>
-                                <td style="text-align: center;"><?= $buku['judul']; ?></td>
-                                <td style="text-align: center;"><?= $buku['pengarang']; ?></td>
-                                <td style="text-align: center;"><?= $buku['penerbit']; ?></td>
-                                <td style="text-align: center;"><?= $buku['tempatTerbit']; ?></td>
-                                <td style="text-align: center;"><?= $buku['tahunTerbit']; ?></td>
-                                <td style="text-align: center;"><?= $buku['eksemplar']; ?></td>
-                                <td style="text-align: center;"><?= $buku['kategoriBuku']; ?></td>
-                                <td style="text-align: center;"><?= $buku['rak']; ?></td>
-                                <td style="text-align: center;"><?= $buku['status']; ?></td>
-                                <td style="text-align: center;"><?= $buku['keterangan']; ?></td>
-                                <td style="text-align: center;"><?= $buku['tampilkan']; ?></td>
-                                <td style="text-align: center;">
+                                <td><?= $no++; ?></td>
+                                <td><?= $buku['kode']; ?></td>
+                                <td><img src="<?= base_url("img/perpustakaan/" . $buku['foto']); ?>" alt="" style="width: 60px;" loading="lazy"></td>
+                                <td><?= $buku['judul']; ?></td>
+                                <td><?= $buku['pengarang']; ?></td>
+                                <td><?= $buku['penerbit']; ?></td>
+                                <td><?= $buku['tempatTerbit']; ?></td>
+                                <td><?= $buku['tahunTerbit']; ?></td>
+                                <td><?= $buku['eksemplar']; ?></td>
+                                <td><?= $buku['kategoriBuku']; ?></td>
+                                <td><?= $buku['rak']; ?></td>
+                                <td><?= $buku['status']; ?></td>
+                                <td><?= $buku['keterangan']; ?></td>
+                                <td><?= $buku['tampilkan']; ?></td>
+                                <td>
                                     <a href="" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editBuku<?= $buku['id_buku']; ?>" data-bs-whatever="@getbootstrap">Edit</a>
                                     <form action="deleteBuku/<?= $buku['id_buku']; ?>" method="post" class="d-inline">
                                         <?= csrf_field(); ?>
@@ -307,28 +276,232 @@
                         <?php endforeach; ?>
                     </tbody>
                 </table>
-                <?= $pager->links('default', 'pagination'); ?>
             </div>
         </div>
     </div>
-
-
-
-
-
 </div>
+
+
+<!-- Initialize DataTables with custom options -->
+<script>
+    $(document).ready(function() {
+        var table = $('#dataTable').DataTable({
+            responsive: true,
+            lengthMenu: [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            order: [
+                [0, 'asc']
+            ],
+            columnDefs: [{
+                    orderable: false,
+                    targets: [2, 14]
+                } // Disable sorting for image and action columns
+            ]
+        });
+
+        // Apply custom filters
+        $('#filterPengarang').on('change', function() {
+            table.column(4).search(this.value).draw();
+        });
+
+        $('#filterPenerbit').on('change', function() {
+            table.column(5).search(this.value).draw();
+        });
+
+        $('#filterTempatTerbit').on('change', function() {
+            table.column(6).search(this.value).draw();
+        });
+
+        $('#filterTahunTerbit').on('change', function() {
+            table.column(7).search(this.value).draw();
+        });
+
+        $('#filterKategori').on('change', function() {
+            table.column(9).search(this.value).draw();
+        });
+
+        $('#filterStatus').on('change', function() {
+            table.column(11).search(this.value).draw();
+        });
+    });
+
+    function printTable() {
+        // Create a new window for printing
+        const printWindow = window.open('', '_blank');
+
+        // Get the current date for the report header
+        const currentDate = new Date().toLocaleDateString('id-ID');
+
+        // Create the content to be printed
+        printWindow.document.write(`
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Data Konservasi Preventif</title>
+    <style>
+        body {
+            font-family: Times New Roman, sans-serif;
+            margin: 20px;
+        }
+        h2, h3 {
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            table-layout: fixed;
+        }
+        th, td {
+            border: 0.5px solid #808080;
+            padding: 4px;
+            text-align: center;
+            font-size: 11px;
+            vertical-align: middle;
+            word-wrap: break-word; /* Allow words to break */
+            white-space: normal; /* Allow text to wrap */
+            height: auto; /* Let height adjust to content */
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        th:nth-child(1), td:nth-child(1) { width: 5%; } /* No */
+        th:nth-child(2), td:nth-child(2) { width: 8%; } /* Kode */
+        th:nth-child(3), td:nth-child(3) { width: 15%; } /* Judul */
+        th:nth-child(4), td:nth-child(4) { width: 12%; } /* Pengarang */
+        th:nth-child(5), td:nth-child(5) { width: 15%; } /* Penerbit */
+        th:nth-child(6), td:nth-child(6) { width: 10%; } /* Tempat Terbit */
+        th:nth-child(7), td:nth-child(7) { width: 5%; } /* Tahun */
+        th:nth-child(8), td:nth-child(8) { width: 15%; } /* Kategori */
+        th:nth-child(9), td:nth-child(9) { width: 7%; } /* Rak */
+        th:nth-child(10), td:nth-child(10) { width: 8%; } /* Status */
+        .date {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+        .no-print {
+            display: none;
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        .logo {
+            height: 56px;
+        }
+        .logo-right {
+            height: 80px;
+        }
+        .header-text {
+            text-align: center;
+            margin: 0 20px;
+        }
+        @media print {
+            .no-print {
+                display: none;
+            }
+            /* Ensure table cells show all content when printing */
+            td {
+                page-break-inside: avoid;
+                overflow: visible;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="logo-container">
+        <img src="${window.location.origin}/img/download.png" alt="" class="logo">
+        <div class="header-text">
+            <h6 style="margin: 0; font-weight: bold; text-transform: uppercase;">DATA BUKU PERPUSTAKAAN</h6>
+            <h6 style="margin: 0; font-weight: bold;">MUSEUM NEGERI NUSA TENGGARA BARAT (NTB)</h6>
+        </div>
+        <img src="${window.location.origin}/img/logo-.png" alt="" class="logo-right">
+    </div>
+    <div class="date">Tanggal Cetak: ${currentDate}</div>
+    <table>
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Kode</th>
+                <th>Judul</th>
+                <th>Pengarang</th>
+                <th>Penerbit</th>
+                <th>Tempat Terbit</th>
+                <th>Tahun Terbit</th>
+                <th>Kategori</th>
+                <th>Rak</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+`);
+
+        // Get the filtered data from DataTables
+        var table = $('#dataTable').DataTable();
+        var filteredData = table.rows({
+            search: 'applied'
+        }).data();
+
+        // Add rows to the print window
+        for (var i = 0; i < filteredData.length; i++) {
+            var rowData = filteredData[i];
+            printWindow.document.write('<tr>');
+
+            // Add No column
+            printWindow.document.write(`<td>${i+1}</td>`);
+
+            // Add other columns in the correct order
+            printWindow.document.write(`<td>${rowData[1]}</td>`); // Kode
+            printWindow.document.write(`<td>${rowData[3]}</td>`); // Judul
+            printWindow.document.write(`<td>${rowData[4]}</td>`); // Pengarang
+            printWindow.document.write(`<td>${rowData[5]}</td>`); // Penerbit
+            printWindow.document.write(`<td>${rowData[6]}</td>`); // Tempat Terbit
+            printWindow.document.write(`<td>${rowData[7]}</td>`); // Tahun Terbit
+            printWindow.document.write(`<td>${rowData[9]}</td>`); // Kategori
+            printWindow.document.write(`<td>${rowData[10]}</td>`); // Rak
+            printWindow.document.write(`<td>${rowData[11]}</td>`); // Status
+
+            printWindow.document.write('</tr>');
+        }
+
+        // Close the HTML structure
+        printWindow.document.write(`
+        </tbody>
+    </table>
+    <div style="margin-top: 50px; text-align: right;">
+        <p>................................, ${currentDate}</p>
+        <br><br><br>
+        <p>(_________________________)</p>
+        <p>Petugas Perpustakaan</p>
+    </div>
+    <div class="no-print">
+        <button onclick="window.print()" style="margin-top: 20px;">Print</button>
+    </div>
+</body>
+</html>
+`);
+
+        // Finish writing and focus on the print window
+        printWindow.document.close();
+        printWindow.focus();
+    }
+</script>
+
 <script async src="https://cdn.jsdelivr.net/npm/es-module-shims@1/dist/es-module-shims.min.js" crossorigin="anonymous"></script>
 <script type="importmap">
     {
-        "imports": {
-            "@popperjs/core": "https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/esm/popper.min.js",
-            "bootstrap": "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.esm.min.js"
-        }
-        }
-    </script>
+    "imports": {
+        "@popperjs/core": "https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/esm/popper.min.js",
+        "bootstrap": "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.esm.min.js"
+    }
+}
+</script>
 <script type="module">
     import * as bootstrap from 'bootstrap'
-
     new bootstrap.Popover(document.getElementById('popoverButton'))
 </script>
 

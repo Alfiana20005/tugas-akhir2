@@ -14,17 +14,17 @@
     <link rel="icon" href="img/logomuseum2.png">
 
     <!-- Custom fonts for this template-->
-    <link href="<?= base_url();?>/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="<?= base_url(); ?>/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
-    <link href="<?= base_url();?>/vendor/datatables/datatables.min.css" rel="stylesheet">
+    <link href="<?= base_url(); ?>/vendor/datatables/datatables.min.css" rel="stylesheet">
     <!-- Custom styles for this template-->
-    <link href="<?= base_url();?>/css/sb-admin-2.min.css" rel="stylesheet">
-    <link href="<?= base_url();?>/css/myStyle.css" rel="stylesheet">
-    <link href="<?= base_url();?>/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
-    <link href="<?= base_url();?>/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-    
+    <link href="<?= base_url(); ?>/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="<?= base_url(); ?>/css/myStyle.css" rel="stylesheet">
+    <link href="<?= base_url(); ?>/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+    <link href="<?= base_url(); ?>/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
 
     <!-- Memuat Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -39,7 +39,7 @@
     <!-- Memuat DataTables -->
     <!-- <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script> -->
     <script src="https://cdn.datatables.net/2.0.1/css/dataTables.dataTables.min.css"></script>
-    
+
 
     <!-- <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script> -->
     <script src="https://cdn.tiny.cloud/1/gtj01mmywsyppz5gtyrpv6yzaw511bybybikku5m2o97dzl1/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
@@ -107,7 +107,7 @@
                 </div>
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal" >Cancel</button>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                     <a class="btn btn-primary" href="<?= base_url('/logout'); ?>">Logout</a>
                 </div>
             </div>
@@ -131,12 +131,12 @@
                         <div class="row mb-3">
                             <label for="jenis" class="col-sm-3 col-form-label">Jenis Perawatan</label>
                             <div class="col-sm-9">
-                                <select class="form-select form-control" type="text" name="jenisprw" >
+                                <select class="form-select form-control" type="text" name="jenisprw">
                                     <!-- harus sesuai dengan urutan enum pada database -->
                                     <option selected>Pilih Jenis Perawatan</option>
-                                    <option  value="01">Preventif</option>
-                                    <option  value="02">Kuratif</option>
-                                    <option  value="03">Restorasi</option>
+                                    <option value="01">Preventif</option>
+                                    <option value="02">Kuratif</option>
+                                    <option value="03">Restorasi</option>
                                 </select>
                             </div>
                         </div>
@@ -151,46 +151,46 @@
                             <div class="col-sm-9">
                                 <input type="date" class="form-control" placeholder="berakhir" aria-label="tahun" name="hingga">
                             </div>
-                        </div>                
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal" >Cancel</button>
-                    <a class="btn btn-primary" href="" type="submit" >Cetak</a>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="" type="submit">Cetak</a>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="<?= base_url();?>/vendor/jquery/jquery.min.js"></script>
-    <script src="<?= base_url();?>/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="<?= base_url(); ?>/vendor/jquery/jquery.min.js"></script>
+    <script src="<?= base_url(); ?>/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="<?= base_url();?>/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="<?= base_url(); ?>/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="<?= base_url();?>/js/sb-admin-2.min.js"></script>
+    <script src="<?= base_url(); ?>/js/sb-admin-2.min.js"></script>
 
     <!-- dashboard -->
 
     <!-- Page level plugins -->
-    <script src="<?= base_url();?>vendor/chart.js/Chart.min.js"></script>
-    <script src="<?= base_url();?>/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="<?= base_url();?>/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="<?= base_url(); ?>vendor/chart.js/Chart.min.js"></script>
+    <script src="<?= base_url(); ?>/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="<?= base_url(); ?>/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="<?= base_url();?>/js/demo/chart-area-demo.js"></script>
-    <script src="<?= base_url();?>/js/demo/chart-pie-demo.js"></script>
-    <script src="<?= base_url();?>/js/demo/chart-bar-demo.js"></script>
-    <script src="<?= base_url();?>/js/demo/datatables-demo.js"></script>
+    <script src="<?= base_url(); ?>/js/demo/chart-area-demo.js"></script>
+    <script src="<?= base_url(); ?>/js/demo/chart-pie-demo.js"></script>
+    <script src="<?= base_url(); ?>/js/demo/chart-bar-demo.js"></script>
+    <script src="<?= base_url(); ?>/js/demo/datatables-demo.js"></script>
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.datatables.net/2.0.1/js/dataTables.min.js"></script>
-    <script src="<?= base_url();?>/vendor/datatables/datatables.min.js"></script>
+    <script src="<?= base_url(); ?>/vendor/datatables/datatables.min.js"></script>
 
     <!-- <script>
         function previewImg(){
@@ -210,7 +210,7 @@
         
     </script> -->
     <script>
-        function previewImg(id){
+        function previewImg(id) {
             const gambar = document.querySelector(`#${id}`);
             const gambarLabel = gambar.nextElementSibling;
             const imgPreview = gambar.closest('.row').querySelector('.img-preview');
@@ -220,12 +220,12 @@
             const fileGambar = new FileReader();
             fileGambar.readAsDataURL(gambar.files[0]);
 
-            fileGambar.onload = function(e){
-                imgPreview.src= e.target.result;
+            fileGambar.onload = function(e) {
+                imgPreview.src = e.target.result;
             }
         }
     </script>
-    
+
 
 </body>
 

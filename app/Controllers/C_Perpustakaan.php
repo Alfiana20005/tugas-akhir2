@@ -26,8 +26,7 @@ class C_Perpustakaan extends BaseController
         $status = $this->request->getGet('status');
 
         // Get filtered and paginated data
-        $data_buku = $this->M_Perpustakaan->getPaginatedWithFilters(
-            15,
+        $data_buku = $this->M_Perpustakaan->getAllWithFilters(
             $keyword,
             $pengarang,
             $penerbit,        // Added this parameter

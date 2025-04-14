@@ -63,53 +63,47 @@ class M_Perpustakaan extends Model
     /**
      * Get paginated data with filters
      */
-    public function getPaginatedWithFilters(
-        int $perPage = 15,
-        ?string $keyword = null,
-        ?string $pengarang = null,
-        ?string $penerbit = null,          // Added this parameter
-        ?string $tempatTerbit = null,
-        ?string $tahunTerbit = null,       // Added this parameter
-        ?string $kategoriBuku = null,
-        ?string $status = null
-    ) {
-        // Apply keyword search if provided
+    public function getAllWithFilters($keyword = null, $pengarang = null, $penerbit = null, $tempatTerbit = null, $tahunTerbit = null, $kategoriBuku = null, $status = null)
+    {
+        $builder = $this->builder();
+
+        // Apply keyword filter (search across multiple columns)
         if (!empty($keyword)) {
-            $this->groupStart()
-                ->like('judul', $keyword)
-                ->orLike('kode', $keyword)
-                ->orLike('pengarang', $keyword)
-                ->orLike('penerbit', $keyword)
+            $builder->groupStart()
+                ->like('judul', "%$keyword%")
+                ->orLike('pengarang', "%$keyword%")
+                ->orLike('penerbit', "%$keyword%")
+                ->orLike('kategoriBuku', "%$keyword%")
                 ->groupEnd();
         }
 
-        // Apply column filters if provided
+        // Apply specific filters
         if (!empty($pengarang)) {
-            $this->where('pengarang', $pengarang);
+            $builder->where('pengarang', $pengarang);
         }
 
-        if (!empty($penerbit)) {           // Added this block
-            $this->where('penerbit', $penerbit);
+        if (!empty($penerbit)) {
+            $builder->where('penerbit', $penerbit);
         }
 
         if (!empty($tempatTerbit)) {
-            $this->where('tempatTerbit', $tempatTerbit);
+            $builder->where('tempatTerbit', $tempatTerbit);
         }
 
-        if (!empty($tahunTerbit)) {        // Added this block
-            $this->where('tahunTerbit', $tahunTerbit);
+        if (!empty($tahunTerbit)) {
+            $builder->where('tahunTerbit', $tahunTerbit);
         }
 
         if (!empty($kategoriBuku)) {
-            $this->where('kategoriBuku', $kategoriBuku);
+            $builder->where('kategoriBuku', $kategoriBuku);
         }
 
         if (!empty($status)) {
-            $this->where('status', $status);
+            $builder->where('status', $status);
         }
 
-        // Return paginated results
-        return $this->paginate($perPage);
+        // Get all results without pagination
+        return $builder->get()->getResultArray();
     }
 
     /**
