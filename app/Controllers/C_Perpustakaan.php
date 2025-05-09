@@ -3,10 +3,12 @@
 namespace App\Controllers;
 
 use App\Models\M_Perpustakaan;
+use CodeIgniter\API\ResponseTrait;
 
 class C_Perpustakaan extends BaseController
 {
     protected $M_Perpustakaan;
+    use ResponseTrait;
 
     public function __construct()
     {
@@ -69,6 +71,19 @@ class C_Perpustakaan extends BaseController
         ];
 
         return view('dataBuku', $data);
+    }
+
+    public function cekJudulBuku()
+    {
+        $judul = $this->request->getGet('judul');
+        $existingBook = $this->M_Perpustakaan->where('judul', $judul)->first();
+
+        $response = [
+            'exists' => ($existingBook !== null)
+        ];
+
+        $this->response->setHeader('Content-Type', 'application/json');
+        return $this->response->setJSON($response);
     }
 
     public function saveDataBuku()

@@ -122,4 +122,9 @@ class M_Perpustakaan extends Model
             ->get()
             ->getResultArray();
     }
+
+    public function isJudulExists($judul)
+    {
+        return $this->where('judul', $judul)->countAllResults() > 0;
+    }
 }

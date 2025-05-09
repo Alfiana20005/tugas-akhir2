@@ -274,4 +274,5 @@ $routes->post('/saveDataBuku', 'C_Perpustakaan::saveDataBuku');
 $routes->delete('deleteBuku/(:segment)', 'C_Perpustakaan::deleteBuku/$1');
 $routes->post('/updateBuku/(:segment)', 'C_Perpustakaan::updateBuku/$1');
 $routes->get('/daftarSega', 'C_LandingPage::daftarSega');
+$routes->get('cekJudulBuku', 'C_Perpustakaan::cekJudulBuku');
 // 

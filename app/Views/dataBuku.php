@@ -31,7 +31,11 @@
                         <div class="row mb-2">
                             <label for="email" class="col-sm-3 col-form-label">Judul</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="recipient-name" name="judul">
+                                <!-- Alert untuk judul duplikat akan muncul di sini -->
+                                <div id="judulAlert" class="alert alert-warning d-none" role="alert">
+                                    Judul buku ini sudah terdaftar di database!
+                                </div>
+                                <input type="text" class="form-control" id="judul-buku" name="judul">
                             </div>
                         </div>
                         <div class="row mb-2">
@@ -282,6 +286,7 @@
 </div>
 
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- Initialize DataTables with custom options -->
 <script>
     $(document).ready(function() {
@@ -326,6 +331,58 @@
             table.column(11).search(this.value).draw();
         });
     });
+
+    $(document).ready(function() {
+        $('#tambahKegiatan').on('shown.bs.modal', function() {
+            const judulInput = document.getElementById('judul-buku');
+            const judulAlert = document.getElementById('judulAlert');
+            const submitBtn = document.querySelector('button[type="submit"]');
+            let typingTimer;
+            const doneTypingInterval = 500;
+
+            function doneTyping() {
+                const judul = judulInput.value.trim();
+
+                if (judul.length > 0) {
+                    $.ajax({
+                        url: '/cekJudulBuku', // Use absolute URL
+                        type: 'GET',
+                        dataType: 'json',
+                        data: {
+                            judul: judul
+                        },
+                        success: function(data) {
+                            if (data.exists) {
+                                judulAlert.classList.remove('d-none');
+                                if (submitBtn) submitBtn.disabled = true;
+                            } else {
+                                judulAlert.classList.add('d-none');
+                                if (submitBtn) submitBtn.disabled = false;
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error('Error checking judul:', error);
+                            judulAlert.textContent = 'Error saat memeriksa judul buku.';
+                            judulAlert.classList.remove('d-none');
+                        }
+                    });
+                } else {
+                    judulAlert.classList.add('d-none');
+                    if (submitBtn) submitBtn.disabled = false;
+                }
+            }
+
+            judulInput.addEventListener('keyup', function() {
+                clearTimeout(typingTimer);
+                typingTimer = setTimeout(doneTyping, doneTypingInterval);
+            });
+
+            judulInput.addEventListener('keydown', function() {
+                clearTimeout(typingTimer);
+            });
+        });
+    });
+
 
     function printTable() {
         // Create a new window for printing
