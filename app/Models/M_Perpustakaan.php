@@ -10,7 +10,7 @@ class M_Perpustakaan extends Model
     protected $primaryKey = 'id_buku';
     // protected $useTimestamps = true;
 
-    protected $allowedFields = ['kode', 'judul', 'pengarang', 'penerbit', 'tempatTerbit', 'tahunTerbit', 'eksemplar', 'rak', 'kategoriBuku', 'status', 'keterangan', 'foto', 'tampilkan'];
+    protected $allowedFields = ['kode', 'judul', 'pengarang', 'penerbit', 'tempatTerbit', 'tahunTerbit', 'eksemplar', 'nomorSeri', 'rak', 'kategoriBuku', 'status', 'keterangan', 'foto', 'tampilkan'];
 
     protected $validationMessages = [];
     protected $skipValidation = false;

@@ -82,6 +82,11 @@ class C_Perpustakaan extends BaseController
             'exists' => ($existingBook !== null)
         ];
 
+        // Tambahkan informasi rak jika buku ditemukan
+        if ($existingBook !== null) {
+            $response['rak'] = $existingBook['rak'];
+        }
+
         $this->response->setHeader('Content-Type', 'application/json');
         return $this->response->setJSON($response);
     }
@@ -123,6 +128,7 @@ class C_Perpustakaan extends BaseController
             'tahunTerbit' => $this->request->getVar('tahunTerbit'),
             'rak' => $this->request->getVar('rak'),
             'eksemplar' => $this->request->getVar('eksemplar'),
+            'nomorSeri' => $this->request->getVar('nomorSeri'),
             'status' => $this->request->getVar('status'),
             'keterangan' => $this->request->getVar('keterangan'),
             'kategoriBuku' => $this->request->getVar('kategoriBuku'),

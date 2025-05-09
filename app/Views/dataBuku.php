@@ -28,12 +28,12 @@
                                 <input type="text" class="form-control" id="recipient-name" name="kode">
                             </div>
                         </div>
+
                         <div class="row mb-2">
                             <label for="email" class="col-sm-3 col-form-label">Judul</label>
                             <div class="col-sm-9">
                                 <!-- Alert untuk judul duplikat akan muncul di sini -->
-                                <div id="judulAlert" class="alert alert-warning d-none" role="alert">
-                                    Judul buku ini sudah terdaftar di database!
+                                <div id="judulAlert" class="alert alert-warning d-none" role="alert">Buku ini sudah ada di rak <span id="rakLocation"></span>
                                 </div>
                                 <input type="text" class="form-control" id="judul-buku" name="judul">
                             </div>
@@ -74,7 +74,7 @@
                         <div class="row mb-2">
                             <label for="" class="col-sm-3 col-form-label">Kategori Buku</label>
                             <div class="col-sm-9">
-                                <select class="form-select form-control" type="text" name="kategoriBuku" value="<?= old('kategoriBuku'); ?>">
+                                <select class="form-select form-control" type="text" name="kategoriBuku" id="kategoriBuku" value="<?= old('kategoriBuku'); ?>">
                                     <!-- harus sesuai dengan urutan enum pada database -->
                                     <option selected>Pilih </option>
                                     <option <?= old("kategoriBuku") == 'Ilmu Filsafat' ? 'selected' : 'Ilmu Filsafat' ?> value="Ilmu Filsafat">Ilmu Filsafat</option>
@@ -82,16 +82,24 @@
                                     <option <?= old("kategoriBuku") == 'Ilmu Bahasa' ? 'selected' : 'Ilmu Bahasa' ?> value="Ilmu Bahasa">Ilmu Bahasa</option>
                                     <option <?= old("kategoriBuku") == 'Ilmu Sosial' ? 'selected' : 'Ilmu Sosial' ?> value="Ilmu Sosial">Ilmu Sosial</option>
                                     <option <?= old("kategoriBuku") == 'Ilmu Murni/Pasti' ? 'selected' : 'Ilmu Murni/Pasti' ?> value="Ilmu Murni/Pasti">Ilmu Murni/Pasti</option>
-                                    <option <?= old("kategoriBuku") == 'Teknologi' ? 'selected' : 'Teknologi' ?> value="Teknologi">Teknologi</option>
                                     <option <?= old("kategoriBuku") == 'Kesenian' ? 'selected' : 'Kesenian' ?> value="Kesenian">Kesenian</option>
                                     <option <?= old("kategoriBuku") == 'Sejarah/Geografi' ? 'selected' : 'Sejarah/Geografi' ?> value="Sejarah/Geografi">Sejarah/Geografi</option>
                                     <option <?= old("kategoriBuku") == 'Kesusastraan' ? 'selected' : 'Kesusastraan' ?> value="Kesusastraan">Kesusastraan</option>
                                     <option <?= old("kategoriBuku") == 'Koleksi NTB' ? 'selected' : 'Koleksi NTB' ?> value="Koleksi NTB">Koleksi NTB</option>
                                     <option <?= old("kategoriBuku") == 'Koleksi NTB' ? 'selected' : 'Koleksi NTB' ?> value="Koleksi NTB">Majalah</option>
                                     <option <?= old("kategoriBuku") == 'Koleksi NTB' ? 'selected' : 'Koleksi NTB' ?> value="Koleksi NTB">Koran</option>
-                                    <option <?= old("kategoriBuku") == 'Lainnya' ? 'selected' : 'Lainnya' ?> value="Lainnya">Lainnya</option>
-
+                                    <option <?= old("kategoriBuku") == 'Hasil Penelitian' ? 'selected' : 'Hasil Penelitian' ?> value="Hasil Penelitian">Hasil Penelitian</option>
+                                    <option <?= old("kategoriBuku") == 'Buku Anak' ? 'selected' : 'Buku Anak' ?> value="Buku Anak">Buku Anak</option>
+                                    <option <?= old("kategoriBuku") == 'Arsip' ? 'selected' : 'Arsip' ?> value="Arsip">Arsip</option>
+                                    <option <?= old("kategoriBuku") == 'Berkala' ? 'selected' : 'Berkala' ?> value="Berkala">Berkala</option>
+                                    <option <?= old("kategoriBuku") == 'Buletin' ? 'selected' : 'Buletin' ?> value="Buletin">Buletin</option>
                                 </select>
+                            </div>
+                        </div>
+                        <div class="row mb-2" id="nomorSeriContainer" style="display: none;">
+                            <label for="nomorSeri" class="col-sm-3 col-form-label">Nomor Seri</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="nomorSeri" name="nomorSeri">
                             </div>
                         </div>
                         <div class="row mb-2">
@@ -241,6 +249,7 @@
                             <th>Tempat Terbit</th>
                             <th>Tahun Terbit</th>
                             <th>Eksemplar</th>
+                            <th>Nomor Seri</th>
                             <th>Kategori Buku</th>
                             <th>Lokasi Penyimpanan</th>
                             <th>Status</th>
@@ -263,6 +272,7 @@
                                 <td><?= $buku['tempatTerbit']; ?></td>
                                 <td><?= $buku['tahunTerbit']; ?></td>
                                 <td><?= $buku['eksemplar']; ?></td>
+                                <td><?= $buku['nomorSeri'] === null || $buku['nomorSeri'] === '' ? '-' : $buku['nomorSeri']; ?></td>
                                 <td><?= $buku['kategoriBuku']; ?></td>
                                 <td><?= $buku['rak']; ?></td>
                                 <td><?= $buku['status']; ?></td>
@@ -336,6 +346,7 @@
         $('#tambahKegiatan').on('shown.bs.modal', function() {
             const judulInput = document.getElementById('judul-buku');
             const judulAlert = document.getElementById('judulAlert');
+            const rakLocation = document.getElementById('rakLocation');
             const submitBtn = document.querySelector('button[type="submit"]');
             let typingTimer;
             const doneTypingInterval = 500;
@@ -345,7 +356,7 @@
 
                 if (judul.length > 0) {
                     $.ajax({
-                        url: '/cekJudulBuku', // Use absolute URL
+                        url: window.location.origin + '/cekJudulBuku',
                         type: 'GET',
                         dataType: 'json',
                         data: {
@@ -353,8 +364,13 @@
                         },
                         success: function(data) {
                             if (data.exists) {
+                                // Tampilkan informasi rak
+                                if (data.rak) {
+                                    rakLocation.textContent = data.rak;
+                                } else {
+                                    rakLocation.textContent = "tidak diketahui";
+                                }
                                 judulAlert.classList.remove('d-none');
-                                if (submitBtn) submitBtn.disabled = true;
                             } else {
                                 judulAlert.classList.add('d-none');
                                 if (submitBtn) submitBtn.disabled = false;
@@ -383,6 +399,28 @@
         });
     });
 
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get the category select element
+        const kategoriSelect = document.getElementById('kategoriBuku');
+        const nomorSeriContainer = document.getElementById('nomorSeriContainer');
+
+        // Add event listener for changes in the select
+        kategoriSelect.addEventListener('change', function() {
+            // Check if "Berkala" is selected
+            if (this.value === 'Berkala') {
+                // Show the Nomor Seri field
+                nomorSeriContainer.style.display = 'flex';
+            } else {
+                // Hide the Nomor Seri field
+                nomorSeriContainer.style.display = 'none';
+            }
+        });
+
+        // Check initial value in case of form reload
+        if (kategoriSelect.value === 'Berkala') {
+            nomorSeriContainer.style.display = 'flex';
+        }
+    });
 
     function printTable() {
         // Create a new window for printing

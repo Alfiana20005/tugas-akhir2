@@ -1073,7 +1073,8 @@ class Filters extends BaseConfig
                     '/saveDataBuku',
                     'deleteBuku/*',
                     '/updateBuku/*',
-                    '/dataBuku'
+                    '/dataBuku',
+                    '/cekJudulBuku'
 
                 ]
             ],
