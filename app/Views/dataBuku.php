@@ -64,7 +64,7 @@
                             </div>
                         </div>
                         <div class="row mb-2">
-                            <label for="email" class="col-sm-3 col-form-label">Rak</label>
+                            <label for="email" class="col-sm-3 col-form-label">Lokasi Buku</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="recipient-name" name="rak">
                             </div>
@@ -92,7 +92,6 @@
                                     <option <?= old("kategoriBuku") == 'Buku Anak' ? 'selected' : 'Buku Anak' ?> value="Buku Anak">Buku Anak</option>
                                     <option <?= old("kategoriBuku") == 'Arsip' ? 'selected' : 'Arsip' ?> value="Arsip">Arsip</option>
                                     <option <?= old("kategoriBuku") == 'Berkala' ? 'selected' : 'Berkala' ?> value="Berkala">Berkala</option>
-                                    <option <?= old("kategoriBuku") == 'Buletin' ? 'selected' : 'Buletin' ?> value="Buletin">Buletin</option>
                                 </select>
                             </div>
                         </div>
@@ -291,6 +290,137 @@
                     </tbody>
                 </table>
             </div>
+
+            <?php foreach ($data_buku as $buku): ?>
+                <!-- Modal Edit Buku -->
+                <div class="modal fade" id="editBuku<?= $buku['id_buku']; ?>" tabindex="-1" aria-labelledby="editBukuLabel<?= $buku['id_buku']; ?>" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="editBukuLabel<?= $buku['id_buku']; ?>">Edit Buku</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="<?= base_url('updateBuku/' . $buku['id_buku']); ?>" method="post" enctype="multipart/form-data">
+                                    <?= csrf_field(); ?>
+
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="kode" class="form-label">Kode Buku</label>
+                                            <input type="text" class="form-control" id="kode" name="kode" value="<?= $buku['kode']; ?>" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="judul" class="form-label">Judul Buku</label>
+                                            <input type="text" class="form-control" id="judul" name="judul" value="<?= $buku['judul']; ?>" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="pengarang" class="form-label">Pengarang</label>
+                                            <input type="text" class="form-control" id="pengarang" name="pengarang" value="<?= $buku['pengarang']; ?>" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="penerbit" class="form-label">Penerbit</label>
+                                            <input type="text" class="form-control" id="penerbit" name="penerbit" value="<?= $buku['penerbit']; ?>" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="tempatTerbit" class="form-label">Tempat Terbit</label>
+                                            <input type="text" class="form-control" id="tempatTerbit" name="tempatTerbit" value="<?= $buku['tempatTerbit']; ?>" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="tahunTerbit" class="form-label">Tahun Terbit</label>
+                                            <input type="text" class="form-control" id="tahunTerbit" name="tahunTerbit" value="<?= $buku['tahunTerbit']; ?>" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="eksemplar" class="form-label">Eksemplar</label>
+                                            <input type="number" class="form-control" id="eksemplar" name="eksemplar" value="<?= $buku['eksemplar']; ?>" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="nomorSeri" class="form-label">Nomor Seri</label>
+                                            <input type="text" class="form-control" id="nomorSeri" name="nomorSeri" value="<?= $buku['nomorSeri']; ?>">
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="kategoriBuku" class="form-label">Kategori Buku</label>
+                                            <select class="form-select form-control" id="kategoriBuku" name="kategoriBuku" required>
+                                                <option value="Ilmu Filsafat" <?= ($buku['kategoriBuku'] == 'Ilmu Filsafat') ? 'selected' : ''; ?>>Ilmu Filsafat</option>
+                                                <option value="Ilmu Agama" <?= ($buku['kategoriBuku'] == 'Ilmu Agama') ? 'selected' : ''; ?>>Ilmu Agama</option>
+                                                <option value="Ilmu Bahasa" <?= ($buku['kategoriBuku'] == 'Ilmu Bahasa') ? 'selected' : ''; ?>>Ilmu Bahasa</option>
+                                                <option value="Ilmu Sosial" <?= ($buku['kategoriBuku'] == 'Ilmu Sosial') ? 'selected' : ''; ?>>Ilmu Sosial</option>
+                                                <option value="Ilmu Murni/Pasti" <?= ($buku['kategoriBuku'] == 'Ilmu Murni/Pasti') ? 'selected' : ''; ?>>Ilmu Murni/Pasti</option>
+                                                <option value="Kesenian" <?= ($buku['kategoriBuku'] == 'Kesenian') ? 'selected' : ''; ?>>Kesenian</option>
+                                                <option value="Sejarah/Geografi" <?= ($buku['kategoriBuku'] == 'Sejarah/Geografi') ? 'selected' : ''; ?>>Sejarah/Geografi</option>
+                                                <option value="Kesusastraan" <?= ($buku['kategoriBuku'] == 'Kesusastraan') ? 'selected' : ''; ?>>Kesusastraan</option>
+                                                <option value="Koleksi NTB" <?= ($buku['kategoriBuku'] == 'Koleksi NTB') ? 'selected' : ''; ?>>Koleksi NTB</option>
+                                                <option value="Majalah" <?= ($buku['kategoriBuku'] == 'Majalah') ? 'selected' : ''; ?>>Majalah</option>
+                                                <option value="Koran" <?= ($buku['kategoriBuku'] == 'Koran') ? 'selected' : ''; ?>>Koran</option>
+                                                <option value="Hasil Penelitian" <?= ($buku['kategoriBuku'] == 'Hasil Penelitian') ? 'selected' : ''; ?>>Hasil Penelitian</option>
+                                                <option value="Buku Anak" <?= ($buku['kategoriBuku'] == 'Buku Anak') ? 'selected' : ''; ?>>Buku Anak</option>
+                                                <option value="Arsip" <?= ($buku['kategoriBuku'] == 'Arsip') ? 'selected' : ''; ?>>Arsip</option>
+                                                <option value="Berkala" <?= ($buku['kategoriBuku'] == 'Berkala') ? 'selected' : ''; ?>>Berkala</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="rak" class="form-label">Lokasi Penyimpanan</label>
+                                            <input type="text" class="form-control" id="rak" name="rak" value="<?= $buku['rak']; ?>" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="status" class="form-label">Status</label>
+                                            <select class="form-select form-control" id="status" name="status" required>
+                                                <option value="Tersedia" <?= ($buku['status'] == 'Tersedia') ? 'selected' : ''; ?>>Tersedia</option>
+                                                <option value="Dipinjam" <?= ($buku['status'] == 'Dipinjam') ? 'selected' : ''; ?>>Dipinjam</option>
+                                                <option value="Dalam Perbaikan" <?= ($buku['status'] == 'Dalam Perbaikan') ? 'selected' : ''; ?>>Dalam Perbaikan</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="tampilkan" class="form-label">Tampilkan di OPAC</label>
+                                            <select class="form-select form-control" id="tampilkan" name="tampilkan" required>
+                                                <option value="Ya" <?= ($buku['tampilkan'] == 'Ya') ? 'selected' : ''; ?>>Ya</option>
+                                                <option value="Tidak" <?= ($buku['tampilkan'] == 'Tidak') ? 'selected' : ''; ?>>Tidak</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="keterangan" class="form-label">Keterangan</label>
+                                        <textarea class="form-control" id="keterangan" name="keterangan" rows="3"><?= $buku['keterangan']; ?></textarea>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="foto" class="form-label">Sampul Buku</label>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <img src="<?= base_url("img/perpustakaan/" . $buku['foto']); ?>" class="img-thumbnail mb-2" alt="Sampul Buku">
+                                            </div>
+                                            <div class="col-md-9">
+                                                <input type="file" class="form-control" id="foto" name="foto">
+                                                <div class="form-text">Upload gambar baru jika ingin mengganti sampul</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
         </div>
     </div>
 </div>
@@ -399,6 +529,7 @@
         });
     });
 
+
     document.addEventListener('DOMContentLoaded', function() {
         // Get the category select element
         const kategoriSelect = document.getElementById('kategoriBuku');
@@ -406,8 +537,8 @@
 
         // Add event listener for changes in the select
         kategoriSelect.addEventListener('change', function() {
-            // Check if "Berkala" is selected
-            if (this.value === 'Berkala') {
+            // Check if "Berkala", "Majalah", or "Koran" is selected
+            if (this.value === 'Berkala' || this.value === 'Majalah' || this.value === 'Koran') {
                 // Show the Nomor Seri field
                 nomorSeriContainer.style.display = 'flex';
             } else {
@@ -417,7 +548,9 @@
         });
 
         // Check initial value in case of form reload
-        if (kategoriSelect.value === 'Berkala') {
+        if (kategoriSelect.value === 'Berkala' ||
+            kategoriSelect.value === 'Majalah' ||
+            kategoriSelect.value === 'Koran') {
             nomorSeriContainer.style.display = 'flex';
         }
     });

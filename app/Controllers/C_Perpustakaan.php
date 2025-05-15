@@ -170,16 +170,14 @@ class C_Perpustakaan extends BaseController
             'tahunTerbit' => $this->request->getVar('tahunTerbit'),
             'rak' => $this->request->getVar('rak'),
             'eksemplar' => $this->request->getVar('eksemplar'),
+            'nomorSeri' => $this->request->getVar('nomorSeri'),
             'status' => $this->request->getVar('status'),
             'keterangan' => $this->request->getVar('keterangan'),
             'kategoriBuku' => $this->request->getVar('kategoriBuku'),
-            'tampilkan' => $this->request->getVar('tampilkan'),
-            'foto' => $this->request->getVar('foto'),
-
+            'tampilkan' => $this->request->getVar('tampilkan')
         ];
 
         $foto = $this->request->getFile('foto');
-
 
         // Cek apakah file foto diunggah
         if ($foto && $foto->isValid() && !$foto->hasMoved()) {
@@ -187,50 +185,23 @@ class C_Perpustakaan extends BaseController
             $fotoName = $foto->getRandomName();
 
             // Pindahkan file foto ke folder yang diinginkan
-            $foto->move('img/perpustakaan', $fotoName); // Perbarui path sesuai dengan folder yang diinginkan
+            $foto->move('img/perpustakaan', $fotoName);
 
             // Tambahkan nama file foto ke data yang akan diupdate
             $dataToUpdate['foto'] = $fotoName;
-        }
 
-        // Membersihkan data yang mungkin ada dari inputan form
-        $dataToUpdate = array_filter($dataToUpdate);
+            // Hapus foto lama jika ada
+            $oldBuku = $this->M_Perpustakaan->getBuku($id_buku);
+            if ($oldBuku && !empty($oldBuku['foto']) && file_exists('img/perpustakaan/' . $oldBuku['foto'])) {
+                unlink('img/perpustakaan/' . $oldBuku['foto']);
+            }
+        }
 
         // Memastikan ada data yang akan diupdate
-        if (!empty($dataToUpdate)) {
-            // Mengeksekusi perintah update
-            $this->M_Perpustakaan->update($id_buku, $dataToUpdate);
+        $this->M_Perpustakaan->update($id_buku, $dataToUpdate);
 
-            // Ambil data petugas setelah diubah dari database
-            $newDataBuku = $this->M_Perpustakaan->getBuku($id_buku);
-
-            // Perbarui sesi pengguna dengan data baru
-            if (session()->get('level') != 'Admin') {
-                session()->set([
-
-
-                    'kode' => $newDataBuku['kode'],
-                    'judul' => $newDataBuku['judul'],
-                    'pengarang' => $newDataBuku['pengarang'],
-                    'penerbit' => $newDataBuku['penerbit'],
-                    'tempatTerbit' => $newDataBuku['tempatTerbit'],
-                    'tahunTerbit' => $newDataBuku['tahunTerbit'],
-                    'rak' => $newDataBuku['rak'],
-                    'eksemplar' => $newDataBuku['eksemplar'],
-                    'status' => $newDataBuku['status'],
-                    'keterangan' => $newDataBuku['keterangan'],
-                    'kategoriBuku' => $newDataBuku['kategoriBuku'],
-                    'tampilkan' => $newDataBuku['tampilkan'],
-                    'foto' => $newDataBuku['foto'],
-                ]);
-            }
-            //alert
-            session()->setFlashdata('pesan', 'Data Berhasil diubah.');
-        } else {
-            // Jika tidak ada data yang diupdate, munculkan pesan kesalahan
-            session()->setFlashdata('error', 'Tidak ada data yang diupdate.');
-        }
-        // dd('berhasil');
+        // Set flash message
+        session()->setFlashdata('pesan', 'Data Buku Berhasil diubah.');
 
         // Redirect ke halaman sebelumnya atau halaman yang sesuai
         return redirect()->to('/dataBuku');
