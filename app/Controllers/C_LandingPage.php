@@ -632,74 +632,56 @@ class C_LandingPage extends BaseController
 
         return view('landingPage/manuskripLogin', $data);
     }
-    public function views($id_manuskrip)
+    public function saveViews($id_manuskrip)
     {
+        // Check if user is logged in
+        if (!session()->get('id_user')) {
+            return redirect()->to('/formlogin')->with('error', 'Silakan login terlebih dahulu!');
+        }
 
-        // $manuskrip = $this->M_Manuskrip->findAll();
-        $session = session();
-        $id_user = $session->get('id_user');
-        $user = $this->M_User->getUser($id_user);
-
+        // Get the manuscript data
         $manuskrip = $this->M_Manuskrip->getManuskrip($id_manuskrip);
 
         if ($manuskrip) {
+            // Increment the view count
             $this->M_Manuskrip->update($id_manuskrip, [
                 'views' => $manuskrip['views'] + 1
             ]);
+
+            // Redirect to the manuscript page/link
             return redirect()->to($manuskrip['link']);
         }
-        return redirect()->back();
 
-
-        // $data =[
-        //     'title' => 'Terjemahan Manuskrip',
-        //     'manuskrip' => $manuskrip,
-        //     'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
-        //     'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
-        //     'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
-        //     'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
-        //     'user' => $user
-
-        // ];
-
-
-        // return view('landingPage/manuskripLogin', $data);
+        return redirect()->back()->with('error', 'Manuskrip tidak ditemukan!');
     }
-    public function views2($id)
+
+    /**
+     * Increment view count for manuscript collections and redirect to manuscript page
+     * 
+     * @param int $id The manuscript collection ID
+     * @return \CodeIgniter\HTTP\RedirectResponse
+     */
+    public function saveViews2($id)
     {
+        // Check if user is logged in
+        if (!session()->get('id_user')) {
+            return redirect()->to('/formlogin')->with('error', 'Silakan login terlebih dahulu!');
+        }
 
-        // $manuskrip = $this->M_Manuskrip->findAll();
-        $session = session();
-        $id_user = $session->get('id_user');
-        $user = $this->M_User->getUser($id_user);
-
+        // Get the manuscript collection data
         $manuskrip = $this->M_ManuskripKol->getManuskrip($id);
 
         if ($manuskrip) {
+            // Increment the view count
             $this->M_ManuskripKol->update($id, [
                 'views' => $manuskrip['views'] + 1
             ]);
+
+            // Redirect to the manuscript page/link
             return redirect()->to($manuskrip['link']);
-        } else {
-            // Jika manuskrip tidak ditemukan
-            return redirect()->back();
         }
-        // return redirect()->back();
 
-
-        // $data =[
-        //     'title' => 'Terjemahan Manuskrip',
-        //     'manuskrip' => $manuskrip,
-        //     'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
-        //     'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
-        //     'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
-        //     'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
-        //     'user' => $user
-
-        // ];
-
-
-        // return view('landingPage/manuskripLogin', $data);
+        return redirect()->back()->with('error', 'Koleksi manuskrip tidak ditemukan!');
     }
 
 
