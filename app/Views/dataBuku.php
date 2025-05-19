@@ -64,9 +64,17 @@
                             </div>
                         </div>
                         <div class="row mb-2">
-                            <label for="email" class="col-sm-3 col-form-label">Lokasi Buku</label>
+                            <label for="rak" class="col-sm-3 col-form-label">Lokasi Buku</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="recipient-name" name="rak">
+                                <select class="form-control" id="rak" name="rak">
+                                    <option value="">Pilih Lokasi</option>
+                                    <option value="Lemari 1">Lemari 1</option>
+                                    <option value="Lemari 2">Lemari 2</option>
+                                    <option value="Lemari 3">Lemari 3</option>
+                                    <option value="Lemari 4">Lemari 4</option>
+                                    <option value="Lemari 5">Lemari 5</option>
+                                    <option value="Lemari 6">Lemari 6</option>
+                                </select>
                             </div>
                         </div>
 
@@ -371,7 +379,15 @@
                                         </div>
                                         <div class="col-md-6">
                                             <label for="rak" class="form-label">Lokasi Penyimpanan</label>
-                                            <input type="text" class="form-control" id="rak" name="rak" value="<?= $buku['rak']; ?>" required>
+                                            <select class="form-control" id="rak" name="rak" required>
+                                                <option value="">Pilih Lokasi</option>
+                                                <option value="Lemari 1" <?= ($buku['rak'] == 'Lemari 1') ? 'selected' : ''; ?>>Lemari 1</option>
+                                                <option value="Lemari 2" <?= ($buku['rak'] == 'Lemari 2') ? 'selected' : ''; ?>>Lemari 2</option>
+                                                <option value="Lemari 3" <?= ($buku['rak'] == 'Lemari 3') ? 'selected' : ''; ?>>Lemari 3</option>
+                                                <option value="Lemari 4" <?= ($buku['rak'] == 'Lemari 4') ? 'selected' : ''; ?>>Lemari 4</option>
+                                                <option value="Lemari 5" <?= ($buku['rak'] == 'Lemari 5') ? 'selected' : ''; ?>>Lemari 5</option>
+                                                <option value="Lemari 6" <?= ($buku['rak'] == 'Lemari 6') ? 'selected' : ''; ?>>Lemari 6</option>
+                                            </select>
                                         </div>
                                     </div>
 
