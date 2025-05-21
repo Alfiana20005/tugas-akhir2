@@ -517,6 +517,8 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- Initialize DataTables with custom options -->
 <script>
+    var totalBuku = <?php echo $totalBuku; ?>;
+    var totalJumlahBuku = <?php echo $totalJumlahBuku; ?>;
     $(document).ready(function() {
         var table = $('#dataTable').DataTable({
             responsive: true,
@@ -655,7 +657,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Data Konservasi Preventif</title>
+    <title>Data Buku</title>
     <style>
         body {
             font-family: Times New Roman, sans-serif;
@@ -683,19 +685,26 @@
         th {
             background-color: #f2f2f2;
         }
-        th:nth-child(1), td:nth-child(1) { width: 5%; } /* No */
-        th:nth-child(2), td:nth-child(2) { width: 8%; } /* Kode */
-        th:nth-child(3), td:nth-child(3) { width: 15%; } /* Judul */
+        th:nth-child(1), td:nth-child(1) { width: 4%; } /* No */
+        th:nth-child(2), td:nth-child(2) { width: 7%; } /* Kode */
+        th:nth-child(3), td:nth-child(3) { width: 14%; } /* Judul */
         th:nth-child(4), td:nth-child(4) { width: 12%; } /* Pengarang */
-        th:nth-child(5), td:nth-child(5) { width: 15%; } /* Penerbit */
-        th:nth-child(6), td:nth-child(6) { width: 10%; } /* Tempat Terbit */
+        th:nth-child(5), td:nth-child(5) { width: 13%; } /* Penerbit */
+        th:nth-child(6), td:nth-child(6) { width: 9%; } /* Tempat Terbit */
         th:nth-child(7), td:nth-child(7) { width: 5%; } /* Tahun */
-        th:nth-child(8), td:nth-child(8) { width: 15%; } /* Kategori */
-        th:nth-child(9), td:nth-child(9) { width: 7%; } /* Rak */
-        th:nth-child(10), td:nth-child(10) { width: 8%; } /* Status */
+        th:nth-child(8), td:nth-child(8) { width: 13%; } /* Kategori */
+        th:nth-child(9), td:nth-child(9) { width: 6%; } /* Rak */
+        th:nth-child(10), td:nth-child(10) { width: 7%; } /* Status */
+        th:nth-child(11), td:nth-child(11) { width: 6%; } /* Eksemplar */
         .date {
             text-align: right;
-            margin-bottom: 20px;
+        }
+        .summary-info {
+            text-align: left;
+        }
+        .summary-info p {
+            margin: 3px 0;
+            font-size: 12px;
         }
         .no-print {
             display: none;
@@ -737,7 +746,13 @@
         </div>
         <img src="${window.location.origin}/img/logo-.png" alt="" class="logo-right">
     </div>
-    <div class="date">Tanggal Cetak: ${currentDate}</div>
+    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+        <div class="summary-info">
+            <p>Total Judul Buku: ${totalBuku}</p>
+            <p>Total Jumlah Buku (Eksemplar): ${totalJumlahBuku}</p>
+        </div>
+        <div class="date">Tanggal Cetak: ${currentDate}</div>
+    </div>
     <table>
         <thead>
             <tr>
@@ -751,6 +766,7 @@
                 <th>Kategori</th>
                 <th>Rak</th>
                 <th>Status</th>
+                <th>Eksemplar</th>
             </tr>
         </thead>
         <tbody>
@@ -780,6 +796,7 @@
             printWindow.document.write(`<td>${rowData[9]}</td>`); // Kategori
             printWindow.document.write(`<td>${rowData[10]}</td>`); // Rak
             printWindow.document.write(`<td>${rowData[11]}</td>`); // Status
+            printWindow.document.write(`<td>${rowData[8]}</td>`); // Eksemplar
 
             printWindow.document.write('</tr>');
         }
