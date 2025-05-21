@@ -48,6 +48,12 @@ class C_Perpustakaan extends BaseController
         $kategoriBuku_list = $this->M_Perpustakaan->getUniqueValues('kategoriBuku');
         $status_list = $this->M_Perpustakaan->getUniqueValues('status');
 
+        // Get totals for dashboard cards
+        $totalBuku = $this->M_Perpustakaan->countBuku();
+        $totalJumlahBuku = $this->M_Perpustakaan->sumEksemplar();
+        // Get book counts by category
+        $kategoriCounts = $this->M_Perpustakaan->countByCategory();
+
         // Prepare data to send to view
         $data = [
             'title' => 'Daftar Buku',
@@ -67,7 +73,10 @@ class C_Perpustakaan extends BaseController
                 'tahunTerbit' => $tahunTerbit,          // Added this line
                 'kategoriBuku' => $kategoriBuku,
                 'status' => $status
-            ]
+            ],
+            'totalBuku' => $totalBuku,                  // Added for dashboard card
+            'totalJumlahBuku' => $totalJumlahBuku,       // Added for dashboard card
+            'kategoriCounts' => $kategoriCounts
         ];
 
         return view('dataBuku', $data);

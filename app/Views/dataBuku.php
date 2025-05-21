@@ -3,6 +3,78 @@
 <?= $this->section('content'); ?>
 
 <div class="container-fluid">
+    <!-- Dashboard Cards -->
+    <h6 class="mb-3 font-weight-bold text-primary">Total Buku</h6>
+    <div class="row mb-2">
+        <!-- Total Book Titles Card -->
+        <div class="col-xl-6 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Total Judul Buku</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $totalBuku; ?></div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-book fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Total Book Copies Card -->
+        <div class="col-xl-6 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                Total Eksemplar Buku</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $totalJumlahBuku; ?></div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-copy fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category Cards -->
+    </div>
+    <h6 class="mb-3 font-weight-bold text-primary">Jumlah Buku Berdasarkan Kategori</h6>
+    <div class="row mb-4">
+        <?php
+        // Define some color variations for the cards
+        $colors = ['primary', 'success', 'info', 'warning', 'danger', 'secondary'];
+        $colorIndex = 0;
+
+        // Loop through each category and create a card
+        foreach ($kategoriCounts as $kategori => $count):
+            // Get current color and increment index
+            $currentColor = $colors[$colorIndex % count($colors)];
+            $colorIndex++;
+        ?>
+            <div class="col-xl-3 col-md-4 col-sm-6 mb-4">
+                <div class="card border-left-<?= $currentColor ?> shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-<?= $currentColor ?> text-uppercase mb-1">
+                                    <?= $kategori ?></div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $count ?></div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-book-open fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
     <!-- <button class="btn btn-primary mb-3">Tambah data</button> -->
     <?php if (session()->get('level') == 'Perpustakaan'): ?>
         <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#tambahKegiatan" data-bs-whatever="@getbootstrap">Tambah Data</button>
@@ -94,8 +166,8 @@
                                     <option <?= old("kategoriBuku") == 'Sejarah/Geografi' ? 'selected' : 'Sejarah/Geografi' ?> value="Sejarah/Geografi">Sejarah/Geografi</option>
                                     <option <?= old("kategoriBuku") == 'Kesusastraan' ? 'selected' : 'Kesusastraan' ?> value="Kesusastraan">Kesusastraan</option>
                                     <option <?= old("kategoriBuku") == 'Koleksi NTB' ? 'selected' : 'Koleksi NTB' ?> value="Koleksi NTB">Koleksi NTB</option>
-                                    <option <?= old("kategoriBuku") == 'Koleksi NTB' ? 'selected' : 'Koleksi NTB' ?> value="Koleksi NTB">Majalah</option>
-                                    <option <?= old("kategoriBuku") == 'Koleksi NTB' ? 'selected' : 'Koleksi NTB' ?> value="Koleksi NTB">Koran</option>
+                                    <option <?= old("kategoriBuku") == 'Majalah' ? 'selected' : 'Majalah' ?> value="Majalah">Majalah</option>
+                                    <option <?= old("kategoriBuku") == 'Koran' ? 'selected' : 'Koran' ?> value="Koran">Koran</option>
                                     <option <?= old("kategoriBuku") == 'Hasil Penelitian' ? 'selected' : 'Hasil Penelitian' ?> value="Hasil Penelitian">Hasil Penelitian</option>
                                     <option <?= old("kategoriBuku") == 'Buku Anak' ? 'selected' : 'Buku Anak' ?> value="Buku Anak">Buku Anak</option>
                                     <option <?= old("kategoriBuku") == 'Arsip' ? 'selected' : 'Arsip' ?> value="Arsip">Arsip</option>

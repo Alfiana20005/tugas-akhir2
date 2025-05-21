@@ -60,6 +60,26 @@ class M_Perpustakaan extends Model
         return $totalBuku;
     }
 
+    public function sumEksemplar()
+    {
+        return $this->db->table('perpustakaan')->selectSum('eksemplar')->get()->getRow()->eksemplar ?? 0;
+    }
+
+    public function countByCategory()
+    {
+        $query = $this->db->table('perpustakaan')
+            ->select('kategoriBuku, COUNT(*) as total')
+            ->groupBy('kategoriBuku')
+            ->get();
+
+        $result = [];
+        foreach ($query->getResult() as $row) {
+            $result[$row->kategoriBuku] = $row->total;
+        }
+
+        return $result;
+    }
+
     /**
      * Get paginated data with filters
      */
