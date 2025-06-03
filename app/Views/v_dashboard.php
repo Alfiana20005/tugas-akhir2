@@ -41,7 +41,7 @@
               <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $totalBuku; ?></div>
             </div>
             <div class="col-auto">
-              <i class="fas fa-calendar fa-2x text-gray-300"></i>
+              <i class="fas fa-book fa-2x text-gray-300"></i>
             </div>
           </div>
         </div>
@@ -212,7 +212,7 @@
               <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $totalRestorasi; ?></div>
             </div>
             <div class="col-auto">
-              <i class="fas fa-tooth fa-2x text-gray-300"></i>
+              <i class="fas fa-tools fa-2x text-gray-300"></i>
             </div>
           </div>
         </div>
