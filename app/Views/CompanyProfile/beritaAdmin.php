@@ -32,12 +32,9 @@
                             <th style="text-align: center;">Link</th>
                             <th style="text-align: center;">Sifat Berita</th>
                             <th style="text-align: center;">Kategori</th>
-
                             <th style="text-align: center;">Tanggal</th>
                             <th style="text-align: center;">Ket.Gambar</th>
-
                             <th style="text-align: center;">Aksi</th>
-
                         </tr>
                     </thead>
 
@@ -46,11 +43,12 @@
                         $no = 1;
                         foreach ($dataBerita as $b): ?>
                             <tr>
-
                                 <td style="text-align: center;"><?= $no++; ?></td>
                                 <td style="text-align: center;"><img src="<?= base_url("img/berita/" . $b['foto']); ?>" alt="" style="width: 60px;"></td>
                                 <td style="text-align: center;"><?= $b['judul']; ?></td>
-                                <td style="text-align: center; width: 400px; max-width: 400px;"><?= $b['isi']; ?></td>
+                                <td style="text-align: center; width: 400px; max-width: 400px;">
+                                    <?= strlen($b['isi']) > 40 ? substr($b['isi'], 0, 40) . '...' : $b['isi']; ?>
+                                </td>
                                 <td style="text-align: center;"><?= $b['type']; ?></td>
                                 <td style="text-align: center;"><?= $b['sumber']; ?></td>
                                 <td style="text-align: center;"><?= $b['link']; ?></td>
@@ -66,9 +64,7 @@
                                         <input type="hidden" name="_method" value="DELETE">
                                         <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('apakah anda yakin?');">Hapus</button>
                                     </form>
-
                                 </td>
-
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

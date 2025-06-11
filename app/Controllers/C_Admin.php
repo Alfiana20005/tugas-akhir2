@@ -193,7 +193,11 @@ class C_Admin extends BaseController
 
     public function berita(): string
     {
-        $dataBerita = $this->M_Berita->findAll();
+        // Ambil data berita diurutkan berdasarkan tanggal terbaru
+        $dataBerita = $this->M_Berita->orderBy('tanggal', 'DESC')->findAll();
+
+        // Atau jika ingin berdasarkan ID (biasanya auto increment)
+        // $dataBerita = $this->M_Berita->orderBy('id_berita', 'DESC')->findAll();
 
         // foreach ($dataBerita as &$dataBerita) {
         //     $dataBerita['isi'] = $this->getExcerpt($dataBerita['isi'], 10);
