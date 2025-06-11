@@ -42,7 +42,42 @@
 
 					<div class="col-lg-12 col-md-12">
 						<h3 class="mt-20 mb-20"><?= $berita['judul']; ?></h3>
-						<p><i class="fa-solid fa-calendar-days" style="padding-right: 4pt;"></i> <?= $berita['tanggal']; ?></p>
+
+						<!-- Sumber dan Link Berita -->
+						<?php if (!empty($berita['sumber']) || !empty($berita['link']) || !empty($berita['tanggal'])): ?>
+							<div class="mb-3" style="border-bottom: 1px solid #e0e0e0; padding-bottom: 10px;">
+								<?php if (!empty($berita['sumber'])): ?>
+									<span style="color: #666; font-size: 14px;">
+										<i class="fa-solid fa-newspaper" style="padding-right: 4pt;"></i>
+										<strong>Dikutip dari:</strong> <?= esc($berita['sumber']); ?>
+									</span>
+								<?php endif; ?>
+
+								<?php if (!empty($berita['sumber']) && !empty($berita['tanggal'])): ?>
+									<span style="color: #ccc; margin: 0 10px;">|</span>
+								<?php endif; ?>
+
+								<?php if (!empty($berita['tanggal'])): ?>
+									<span style="color: #666; font-size: 14px;">
+										<i class="fa-solid fa-calendar-days" style="padding-right: 4pt;"></i>
+										<?= $berita['tanggal']; ?>
+									</span>
+								<?php endif; ?>
+
+								<?php if ((!empty($berita['sumber']) || !empty($berita['tanggal'])) && !empty($berita['link'])): ?>
+									<span style="color: #ccc; margin: 0 10px;">|</span>
+								<?php endif; ?>
+
+								<?php if (!empty($berita['link'])): ?>
+									<span style="color: #666; font-size: 14px;">
+										<i class="fa-solid fa-link" style="padding-right: 4pt;"></i>
+										<a href="<?= esc($berita['link']); ?>" target="_blank" rel="noopener noreferrer" style="color: #007bff; text-decoration: none;">
+											Link Berita
+										</a>
+									</span>
+								<?php endif; ?>
+							</div>
+						<?php endif; ?>
 
 						<?php
 						function nl2p($text)

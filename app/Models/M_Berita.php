@@ -12,7 +12,7 @@ class M_Berita extends Model
 
 
     // protected $allowedFields = ['foto', 'nama','password','email','username','level'];
-    protected $allowedFields = ['judul','tanggal', 'type','isi', 'foto', 'penulis', 'kategoriBerita', 'ketgambar', 'jenisBerita'];
+    protected $allowedFields = ['judul', 'tanggal', 'type', 'isi', 'foto', 'penulis', 'sumber', 'link', 'kategoriBerita', 'ketgambar', 'jenisBerita'];
 
 
     protected $validationRules = [];
@@ -23,7 +23,7 @@ class M_Berita extends Model
     public function getBeritaBaru()
     {
         return $this->orderBy('tanggal', 'DESC')
-                    ->findAll();
+            ->findAll();
     }
     public function getBerita($id_berita)
     {
@@ -36,15 +36,15 @@ class M_Berita extends Model
     public function getBeritaTerbaruHome($limit = null)
     {
         return $this->where('type', 'Narasi')
-                    ->orderBy('tanggal', 'DESC')
-                    ->findAll($limit);
+            ->orderBy('tanggal', 'DESC')
+            ->findAll($limit);
     }
 
     public function getBeritaTerbaru($limit = null)
     {
         return $this->where('type', 'Link')
-                    ->orderBy('tanggal', 'DESC')
-                    ->findAll($limit);
+            ->orderBy('tanggal', 'DESC')
+            ->findAll($limit);
     }
 
     public function getBeritaByKategori($kategoriBerita, $limit = null)
@@ -59,28 +59,24 @@ class M_Berita extends Model
 
         return $builder->get()->getResultArray();
     }
-    public function getBeritaByKategoriAll($kategoriBerita) {
+    public function getBeritaByKategoriAll($kategoriBerita)
+    {
         return $this->where('kategoriBerita', $kategoriBerita)
-                    ->orderBy('tanggal', 'DESC')
-                    ->findAll();
+            ->orderBy('tanggal', 'DESC')
+            ->findAll();
     }
 
     public function getDataByJenis($jenisBerita)
     {
         return $this->db->table('berita')
-        ->where('jenisBerita', $jenisBerita)
-        ->get()
-        ->getResultArray();
+            ->where('jenisBerita', $jenisBerita)
+            ->get()
+            ->getResultArray();
     }
     public function get()
     {
         return $this->db->table('berita')
-        ->get()
-        ->getResultArray();
+            ->get()
+            ->getResultArray();
     }
-    
-  
-
-    
 }
-    

@@ -199,19 +199,16 @@ class C_Admin extends BaseController
         //     $dataBerita['isi'] = $this->getExcerpt($dataBerita['isi'], 10);
         // }
 
-
         $data = [
             'title' => 'Daftar Berita',
             'dataBerita' => $dataBerita
         ];
-
 
         return view('CompanyProfile/beritaAdmin', $data);
     }
 
     public function tambahBerita(): string
     {
-
         return view('CompanyProfile/tambahBerita');
     }
 
@@ -227,8 +224,6 @@ class C_Admin extends BaseController
                 'rules' => 'required',
                 'errors' => [
                     'required' => 'tanggal tidak boleh kosong',
-
-
                 ]
             ],
         ];
@@ -239,7 +234,6 @@ class C_Admin extends BaseController
         }
 
         $foto = $this->request->getFile('foto');
-
         $removeFoto = $this->request->getVar('removeFoto');
 
         // Handle the photo removal or upload
@@ -266,7 +260,8 @@ class C_Admin extends BaseController
             'ketgambar' => $this->request->getVar('ketgambar'),
             'jenisBerita' => $this->request->getVar('jenisBerita'),
             'foto' => $fotoName,
-
+            'sumber' => $this->request->getVar('sumber'),
+            'link' => $this->request->getVar('link'),
         ]);
 
         //alert
@@ -302,7 +297,8 @@ class C_Admin extends BaseController
             'foto' => $this->request->getVar('foto'),
             'ketgambar' => $this->request->getVar('ketgambar'),
             'jenisBerita' => $this->request->getVar('jenisBerita'),
-
+            'sumber' => $this->request->getVar('sumber'),
+            'link' => $this->request->getVar('link'),
         ];
 
         $foto = $this->request->getFile('foto');
@@ -341,7 +337,8 @@ class C_Admin extends BaseController
                     'foto' => $newDataBerita['foto'],
                     'ketgambar' => $newDataBerita['ketgambar'],
                     'jenisBerita' => $newDataBerita['jenisBerita'],
-
+                    'sumber' => $newDataBerita['sumber'],
+                    'link' => $newDataBerita['link'],
                 ]);
             }
             //alert
