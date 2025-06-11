@@ -51,7 +51,9 @@
                                 </td>
                                 <td style="text-align: center;"><?= $b['type']; ?></td>
                                 <td style="text-align: center;"><?= $b['sumber']; ?></td>
-                                <td style="text-align: center;"><?= $b['link']; ?></td>
+                                <td style="text-align: center; width: 400px; max-width: 400px;">
+                                    <?= strlen($b['link']) > 40 ? substr($b['link'], 0, 40) . '...' : $b['link']; ?>
+                                </td>
                                 <td style="text-align: center;"><?= $b['kategoriBerita']; ?></td>
                                 <td style="text-align: center;"><?= $b['jenisBerita']; ?></td>
                                 <td style="text-align: center;"><?= $b['tanggal']; ?></td>
