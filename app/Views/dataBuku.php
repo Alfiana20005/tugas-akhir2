@@ -519,88 +519,56 @@
 <script>
     var totalBuku = <?php echo $totalBuku; ?>;
     var totalJumlahBuku = <?php echo $totalJumlahBuku; ?>;
-
     $(document).ready(function() {
         var table = $('#dataTable').DataTable({
-            // Optimasi untuk performa
+            // Optimasi performa
             processing: true,
-            serverSide: false, // Jika ingin server-side processing, ubah ke true
-            deferRender: true, // Render row hanya ketika diperlukan
-            stateSave: true, // Simpan state table (pagination, sorting, dll)
+            deferRender: true,
+            orderCellsTop: true,
+            stateSave: false, // Matikan jika tidak diperlukan
 
             // Konfigurasi responsif
-            responsive: true,
+            responsive: {
+                details: {
+                    type: 'column',
+                    target: 'tr'
+                }
+            },
 
-            // Konfigurasi pagination
+            // Optimasi paging
             lengthMenu: [
-                [25, 50, 100, 250],
-                [25, 50, 100, 250]
+                [10, 25, 50, 100],
+                [10, 25, 50, 100]
             ],
-            pageLength: 25, // Default 25 rows per page
+            pageLength: 25, // Default lebih rendah
 
-            // Konfigurasi sorting
+            // Optimasi sorting
             order: [
                 [0, 'asc']
             ],
-
-            // Optimasi kolom
             columnDefs: [{
                     orderable: false,
-                    targets: [2, 14] // Disable sorting for image and action columns
+                    targets: [2, 14] // Kolom gambar dan aksi
                 },
                 {
-                    // Optimasi rendering untuk kolom tertentu
-                    targets: '_all',
-                    render: function(data, type, row) {
-                        if (type === 'display' && data && data.length > 50) {
-                            return data.substr(0, 50) + '...';
-                        }
-                        return data;
-                    }
+                    // Nonaktifkan search pada kolom tertentu jika tidak diperlukan
+                    searchable: false,
+                    targets: [2, 14]
                 }
             ],
 
-            // Konfigurasi DOM
-            dom: '<"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>' +
-                '<"row"<"col-sm-12"tr>>' +
-                '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+            // Optimasi DOM
+            dom: '<"row"<"col-sm-6"l><"col-sm-6"f>>rtip',
 
-            // Optimasi search
-            search: {
-                smart: true,
-                regex: false,
-                caseInsensitive: true
-            },
-
-            // Konfigurasi bahasa
+            // Optimasi language untuk loading
             language: {
                 processing: "Memproses data...",
-                lengthMenu: "Tampilkan _MENU_ data per halaman",
-                zeroRecords: "Data tidak ditemukan",
-                info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
-                infoEmpty: "Menampilkan 0 sampai 0 dari 0 data",
-                infoFiltered: "(difilter dari _MAX_ total data)",
-                search: "Cari:",
-                paginate: {
-                    first: "Pertama",
-                    last: "Terakhir",
-                    next: "Selanjutnya",
-                    previous: "Sebelumnya"
-                }
-            },
-
-            // Callback untuk optimasi
-            initComplete: function() {
-                console.log('DataTable initialized successfully');
-            },
-
-            drawCallback: function() {
-                // Callback setelah table di-draw
-                console.log('Table redrawn');
+                loadingRecords: "Memuat...",
+                zeroRecords: "Data tidak ditemukan"
             }
         });
 
-        // Optimasi filter dengan debounce
+        // Optimasi event handler dengan debouncing
         function debounce(func, wait) {
             let timeout;
             return function executedFunction(...args) {
@@ -613,9 +581,9 @@
             };
         }
 
-        // Apply custom filters dengan debounce
-        const debouncedFilter = debounce(function(columnIndex, value) {
-            table.column(columnIndex).search(value).draw();
+        // Apply custom filters dengan debouncing
+        const debouncedFilter = debounce(function(column, value) {
+            table.column(column).search(value).draw();
         }, 300);
 
         $('#filterPengarang').on('change', function() {
@@ -641,43 +609,38 @@
         $('#filterStatus').on('change', function() {
             debouncedFilter(12, this.value);
         });
-
-        // Optimasi search global dengan debounce
-        $('#dataTable_filter input').off('keyup search input').on('keyup search input', debounce(function() {
-            table.search(this.value).draw();
-        }, 300));
     });
 
-    // Modal optimization
+    // Optimasi untuk modal dan AJAX
     $(document).ready(function() {
+        let judulCheckTimeout;
+
         $('#tambahKegiatan').on('shown.bs.modal', function() {
             const judulInput = document.getElementById('judul-buku');
             const judulAlert = document.getElementById('judulAlert');
             const rakLocation = document.getElementById('rakLocation');
             const submitBtn = document.querySelector('button[type="submit"]');
-            let typingTimer;
-            const doneTypingInterval = 800; // Increased interval for better performance
 
-            function doneTyping() {
+            function checkJudul() {
                 const judul = judulInput.value.trim();
 
-                if (judul.length > 2) { // Minimum 3 characters for search
-                    $.ajax({
+                if (judul.length > 2) { // Hanya cek jika lebih dari 2 karakter
+                    // Batalkan request sebelumnya jika ada
+                    if (window.currentJudulRequest) {
+                        window.currentJudulRequest.abort();
+                    }
+
+                    window.currentJudulRequest = $.ajax({
                         url: window.location.origin + '/cekJudulBuku',
                         type: 'GET',
                         dataType: 'json',
                         data: {
                             judul: judul
                         },
-                        timeout: 5000, // 5 second timeout
+                        timeout: 5000, // Timeout 5 detik
                         success: function(data) {
                             if (data.exists) {
-                                // Tampilkan informasi rak
-                                if (data.rak) {
-                                    rakLocation.textContent = data.rak;
-                                } else {
-                                    rakLocation.textContent = "tidak diketahui";
-                                }
+                                rakLocation.textContent = data.rak || "tidak diketahui";
                                 judulAlert.classList.remove('d-none');
                             } else {
                                 judulAlert.classList.add('d-none');
@@ -685,9 +648,14 @@
                             }
                         },
                         error: function(xhr, status, error) {
-                            console.error('Error checking judul:', error);
-                            judulAlert.textContent = 'Error saat memeriksa judul buku.';
-                            judulAlert.classList.remove('d-none');
+                            if (status !== 'abort') {
+                                console.error('Error checking judul:', error);
+                                judulAlert.textContent = 'Error saat memeriksa judul buku.';
+                                judulAlert.classList.remove('d-none');
+                            }
+                        },
+                        complete: function() {
+                            window.currentJudulRequest = null;
                         }
                     });
                 } else {
@@ -696,42 +664,39 @@
                 }
             }
 
-            judulInput.addEventListener('keyup', function() {
-                clearTimeout(typingTimer);
-                typingTimer = setTimeout(doneTyping, doneTypingInterval);
-            });
-
-            judulInput.addEventListener('keydown', function() {
-                clearTimeout(typingTimer);
+            // Debounced event handler
+            judulInput.addEventListener('input', function() {
+                clearTimeout(judulCheckTimeout);
+                judulCheckTimeout = setTimeout(checkJudul, 500);
             });
         });
     });
 
-    // Category selection optimization
+    // Optimasi untuk kategori selection
     document.addEventListener('DOMContentLoaded', function() {
         const kategoriSelect = document.getElementById('kategoriBuku');
         const nomorSeriContainer = document.getElementById('nomorSeriContainer');
 
         if (kategoriSelect && nomorSeriContainer) {
-            kategoriSelect.addEventListener('change', function() {
-                const shouldShow = ['Berkala', 'Majalah', 'Koran'].includes(this.value);
-                nomorSeriContainer.style.display = shouldShow ? 'flex' : 'none';
-            });
+            const periodicCategories = ['Berkala', 'Majalah', 'Koran'];
 
-            // Check initial value
-            const initialValue = kategoriSelect.value;
-            if (['Berkala', 'Majalah', 'Koran'].includes(initialValue)) {
-                nomorSeriContainer.style.display = 'flex';
+            function toggleNomorSeri() {
+                const isPeriodicCategory = periodicCategories.includes(kategoriSelect.value);
+                nomorSeriContainer.style.display = isPeriodicCategory ? 'flex' : 'none';
             }
+
+            kategoriSelect.addEventListener('change', toggleNomorSeri);
+            toggleNomorSeri(); // Check initial value
         }
     });
 
-    // Optimized print function
+    // Optimasi print function
     function printTable() {
         // Show loading indicator
-        const loadingDiv = document.createElement('div');
-        loadingDiv.innerHTML = '<div style="position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:white;padding:20px;border:1px solid #ccc;z-index:9999;">Memproses data untuk print...</div>';
-        document.body.appendChild(loadingDiv);
+        const loadingIndicator = document.createElement('div');
+        loadingIndicator.innerHTML = 'Menyiapkan data untuk print...';
+        loadingIndicator.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:white;padding:20px;border:1px solid #ccc;z-index:9999;';
+        document.body.appendChild(loadingIndicator);
 
         // Use setTimeout to allow UI to update
         setTimeout(function() {
@@ -739,65 +704,78 @@
                 const printWindow = window.open('', '_blank');
                 const currentDate = new Date().toLocaleDateString('id-ID');
 
-                // Get filtered data
+                // Optimasi: Ambil data secara batch
                 const table = $('#dataTable').DataTable();
                 const filteredData = table.rows({
                     search: 'applied'
-                }).data();
+                }).data().toArray();
 
-                // Build HTML content
-                let tableRows = '';
-                for (let i = 0; i < filteredData.length; i++) {
-                    const rowData = filteredData[i];
-                    tableRows += `
-                        <tr>
-                            <td>${i + 1}</td>
-                            <td>${rowData[1] || ''}</td>
-                            <td>${rowData[3] || ''}</td>
-                            <td>${rowData[4] || ''}</td>
-                            <td>${rowData[5] || ''}</td>
-                            <td>${rowData[6] || ''}</td>
-                            <td>${rowData[7] || ''}</td>
-                            <td>${rowData[9] || ''}</td>
-                            <td>${rowData[10] || ''}</td>
-                            <td>${rowData[11] || ''}</td>
-                            <td>${rowData[8] || ''}</td>
-                        </tr>
-                    `;
+                // Build HTML lebih efisien
+                const htmlParts = [
+                    '<!DOCTYPE html><html><head><title>Data Buku</title>',
+                    getOptimizedPrintStyles(),
+                    '</head><body>',
+                    getPrintHeader(),
+                    getPrintSummary(currentDate),
+                    '<table><thead><tr>',
+                    '<th>No</th><th>Kode</th><th>Judul</th><th>Pengarang</th><th>Penerbit</th>',
+                    '<th>Tempat Terbit</th><th>Tahun Terbit</th><th>Kategori</th><th>Rak</th>',
+                    '<th>Status</th><th>Eksemplar</th>',
+                    '</tr></thead><tbody>'
+                ];
+
+                // Batch process rows
+                const batchSize = 50;
+                for (let i = 0; i < filteredData.length; i += batchSize) {
+                    const batch = filteredData.slice(i, i + batchSize);
+                    htmlParts.push(processBatch(batch, i));
                 }
 
-                const htmlContent = `
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Data Buku</title>
-    <style>
-        body {
-            font-family: Times New Roman, sans-serif;
-            margin: 20px;
-        }
-        h2, h3 {
-            text-align: center;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            table-layout: fixed;
-        }
-        th, td {
-            border: 0.5px solid #808080;
-            padding: 4px;
-            text-align: center;
-            font-size: 11px;
-            vertical-align: middle;
-            word-wrap: break-word;
-            white-space: normal;
-            height: auto;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
+                htmlParts.push('</tbody></table>');
+                htmlParts.push(getPrintFooter(currentDate));
+                htmlParts.push('</body></html>');
+
+                printWindow.document.write(htmlParts.join(''));
+                printWindow.document.close();
+                printWindow.focus();
+
+            } catch (error) {
+                console.error('Error during print:', error);
+                alert('Terjadi error saat menyiapkan print. Silakan coba lagi.');
+            } finally {
+                // Remove loading indicator
+                document.body.removeChild(loadingIndicator);
+            }
+        }, 100);
+    }
+
+    function processBatch(batch, startIndex) {
+        return batch.map((rowData, index) => {
+            const rowIndex = startIndex + index + 1;
+            return `<tr>
+            <td>${rowIndex}</td>
+            <td>${rowData[1]}</td>
+            <td>${rowData[3]}</td>
+            <td>${rowData[4]}</td>
+            <td>${rowData[5]}</td>
+            <td>${rowData[6]}</td>
+            <td>${rowData[7]}</td>
+            <td>${rowData[9]}</td>
+            <td>${rowData[10]}</td>
+            <td>${rowData[11]}</td>
+            <td>${rowData[8]}</td>
+        </tr>`;
+        }).join('');
+    }
+
+    function getOptimizedPrintStyles() {
+        return `<style>
+        body { font-family: Times New Roman, sans-serif; margin: 20px; }
+        h2, h3 { text-align: center; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; table-layout: fixed; }
+        th, td { border: 0.5px solid #808080; padding: 4px; text-align: center; font-size: 11px; 
+                 vertical-align: middle; word-wrap: break-word; white-space: normal; height: auto; }
+        th { background-color: #f2f2f2; }
         th:nth-child(1), td:nth-child(1) { width: 4%; }
         th:nth-child(2), td:nth-child(2) { width: 7%; }
         th:nth-child(3), td:nth-child(3) { width: 14%; }
@@ -809,104 +787,45 @@
         th:nth-child(9), td:nth-child(9) { width: 6%; }
         th:nth-child(10), td:nth-child(10) { width: 7%; }
         th:nth-child(11), td:nth-child(11) { width: 6%; }
-        .date {
-            text-align: right;
-        }
-        .summary-info {
-            text-align: left;
-        }
-        .summary-info p {
-            margin: 3px 0;
-            font-size: 12px;
-        }
-        .logo-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 10px;
-        }
-        .logo {
-            height: 56px;
-        }
-        .logo-right {
-            height: 80px;
-        }
-        .header-text {
-            text-align: center;
-            margin: 0 20px;
-        }
-        @media print {
-            td {
-                page-break-inside: avoid;
-                overflow: visible;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="logo-container">
+        .date { text-align: right; }
+        .summary-info { text-align: left; }
+        .summary-info p { margin: 3px 0; font-size: 12px; }
+        .logo-container { display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
+        .logo { height: 56px; }
+        .logo-right { height: 80px; }
+        .header-text { text-align: center; margin: 0 20px; }
+        @media print { td { page-break-inside: avoid; overflow: visible; } }
+    </style>`;
+    }
+
+    function getPrintHeader() {
+        return `<div class="logo-container">
         <img src="${window.location.origin}/img/download.png" alt="" class="logo">
         <div class="header-text">
             <h6 style="margin: 0; font-weight: bold; text-transform: uppercase;">DATA BUKU PERPUSTAKAAN</h6>
             <h6 style="margin: 0; font-weight: bold;">MUSEUM NEGERI NUSA TENGGARA BARAT (NTB)</h6>
         </div>
         <img src="${window.location.origin}/img/logo-.png" alt="" class="logo-right">
-    </div>
-    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+    </div>`;
+    }
+
+    function getPrintSummary(currentDate) {
+        return `<div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
         <div class="summary-info">
             <p>Total Judul Buku: ${totalBuku}</p>
             <p>Total Jumlah Buku (Eksemplar): ${totalJumlahBuku}</p>
         </div>
         <div class="date">Tanggal Cetak: ${currentDate}</div>
-    </div>
-    <table>
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Kode</th>
-                <th>Judul</th>
-                <th>Pengarang</th>
-                <th>Penerbit</th>
-                <th>Tempat Terbit</th>
-                <th>Tahun Terbit</th>
-                <th>Kategori</th>
-                <th>Rak</th>
-                <th>Status</th>
-                <th>Eksemplar</th>
-            </tr>
-        </thead>
-        <tbody>
-            ${tableRows}
-        </tbody>
-    </table>
-    <div style="margin-top: 50px; text-align: right;">
+    </div>`;
+    }
+
+    function getPrintFooter(currentDate) {
+        return `<div style="margin-top: 50px; text-align: right;">
         <p>................................, ${currentDate}</p>
         <br><br><br>
         <p>(_________________________)</p>
         <p>Petugas Perpustakaan</p>
-    </div>
-</body>
-</html>
-                `;
-
-                printWindow.document.write(htmlContent);
-                printWindow.document.close();
-                printWindow.focus();
-
-                // Remove loading indicator
-                document.body.removeChild(loadingDiv);
-
-                // Auto print after a short delay
-                setTimeout(() => {
-                    printWindow.print();
-                }, 500);
-
-            } catch (error) {
-                console.error('Error in print function:', error);
-                alert('Terjadi error saat mencetak data');
-                document.body.removeChild(loadingDiv);
-            }
-        }, 100);
+    </div>`;
     }
 </script>
 
