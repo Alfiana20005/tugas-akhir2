@@ -554,11 +554,11 @@
         });
 
         $('#filterKategori').on('change', function() {
-            table.column(9).search(this.value).draw();
+            table.column(10).search(this.value).draw();
         });
 
         $('#filterStatus').on('change', function() {
-            table.column(11).search(this.value).draw();
+            table.column(12).search(this.value).draw();
         });
     });
 
