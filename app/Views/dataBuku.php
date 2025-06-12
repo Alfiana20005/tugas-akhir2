@@ -519,49 +519,136 @@
 <script>
     var totalBuku = <?php echo $totalBuku; ?>;
     var totalJumlahBuku = <?php echo $totalJumlahBuku; ?>;
+
     $(document).ready(function() {
         var table = $('#dataTable').DataTable({
+            // Optimasi untuk performa
+            processing: true,
+            serverSide: false, // Jika ingin server-side processing, ubah ke true
+            deferRender: true, // Render row hanya ketika diperlukan
+            stateSave: true, // Simpan state table (pagination, sorting, dll)
+
+            // Konfigurasi responsif
             responsive: true,
+
+            // Konfigurasi pagination
             lengthMenu: [
-                [10, 25, 50, -1],
-                [10, 25, 50, "All"]
+                [25, 50, 100, 250],
+                [25, 50, 100, 250]
             ],
+            pageLength: 25, // Default 25 rows per page
+
+            // Konfigurasi sorting
             order: [
                 [0, 'asc']
             ],
+
+            // Optimasi kolom
             columnDefs: [{
                     orderable: false,
-                    targets: [2, 14]
-                } // Disable sorting for image and action columns
-            ]
+                    targets: [2, 14] // Disable sorting for image and action columns
+                },
+                {
+                    // Optimasi rendering untuk kolom tertentu
+                    targets: '_all',
+                    render: function(data, type, row) {
+                        if (type === 'display' && data && data.length > 50) {
+                            return data.substr(0, 50) + '...';
+                        }
+                        return data;
+                    }
+                }
+            ],
+
+            // Konfigurasi DOM
+            dom: '<"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>' +
+                '<"row"<"col-sm-12"tr>>' +
+                '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+
+            // Optimasi search
+            search: {
+                smart: true,
+                regex: false,
+                caseInsensitive: true
+            },
+
+            // Konfigurasi bahasa
+            language: {
+                processing: "Memproses data...",
+                lengthMenu: "Tampilkan _MENU_ data per halaman",
+                zeroRecords: "Data tidak ditemukan",
+                info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+                infoEmpty: "Menampilkan 0 sampai 0 dari 0 data",
+                infoFiltered: "(difilter dari _MAX_ total data)",
+                search: "Cari:",
+                paginate: {
+                    first: "Pertama",
+                    last: "Terakhir",
+                    next: "Selanjutnya",
+                    previous: "Sebelumnya"
+                }
+            },
+
+            // Callback untuk optimasi
+            initComplete: function() {
+                console.log('DataTable initialized successfully');
+            },
+
+            drawCallback: function() {
+                // Callback setelah table di-draw
+                console.log('Table redrawn');
+            }
         });
 
-        // Apply custom filters
+        // Optimasi filter dengan debounce
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // Apply custom filters dengan debounce
+        const debouncedFilter = debounce(function(columnIndex, value) {
+            table.column(columnIndex).search(value).draw();
+        }, 300);
+
         $('#filterPengarang').on('change', function() {
-            table.column(4).search(this.value).draw();
+            debouncedFilter(4, this.value);
         });
 
         $('#filterPenerbit').on('change', function() {
-            table.column(5).search(this.value).draw();
+            debouncedFilter(5, this.value);
         });
 
         $('#filterTempatTerbit').on('change', function() {
-            table.column(6).search(this.value).draw();
+            debouncedFilter(6, this.value);
         });
 
         $('#filterTahunTerbit').on('change', function() {
-            table.column(7).search(this.value).draw();
+            debouncedFilter(7, this.value);
         });
 
         $('#filterKategori').on('change', function() {
-            table.column(10).search(this.value).draw();
+            debouncedFilter(10, this.value);
         });
 
         $('#filterStatus').on('change', function() {
-            table.column(12).search(this.value).draw();
+            debouncedFilter(12, this.value);
         });
+
+        // Optimasi search global dengan debounce
+        $('#dataTable_filter input').off('keyup search input').on('keyup search input', debounce(function() {
+            table.search(this.value).draw();
+        }, 300));
     });
 
+    // Modal optimization
     $(document).ready(function() {
         $('#tambahKegiatan').on('shown.bs.modal', function() {
             const judulInput = document.getElementById('judul-buku');
@@ -569,12 +656,12 @@
             const rakLocation = document.getElementById('rakLocation');
             const submitBtn = document.querySelector('button[type="submit"]');
             let typingTimer;
-            const doneTypingInterval = 500;
+            const doneTypingInterval = 800; // Increased interval for better performance
 
             function doneTyping() {
                 const judul = judulInput.value.trim();
 
-                if (judul.length > 0) {
+                if (judul.length > 2) { // Minimum 3 characters for search
                     $.ajax({
                         url: window.location.origin + '/cekJudulBuku',
                         type: 'GET',
@@ -582,6 +669,7 @@
                         data: {
                             judul: judul
                         },
+                        timeout: 5000, // 5 second timeout
                         success: function(data) {
                             if (data.exists) {
                                 // Tampilkan informasi rak
@@ -619,41 +707,66 @@
         });
     });
 
-
+    // Category selection optimization
     document.addEventListener('DOMContentLoaded', function() {
-        // Get the category select element
         const kategoriSelect = document.getElementById('kategoriBuku');
         const nomorSeriContainer = document.getElementById('nomorSeriContainer');
 
-        // Add event listener for changes in the select
-        kategoriSelect.addEventListener('change', function() {
-            // Check if "Berkala", "Majalah", or "Koran" is selected
-            if (this.value === 'Berkala' || this.value === 'Majalah' || this.value === 'Koran') {
-                // Show the Nomor Seri field
-                nomorSeriContainer.style.display = 'flex';
-            } else {
-                // Hide the Nomor Seri field
-                nomorSeriContainer.style.display = 'none';
-            }
-        });
+        if (kategoriSelect && nomorSeriContainer) {
+            kategoriSelect.addEventListener('change', function() {
+                const shouldShow = ['Berkala', 'Majalah', 'Koran'].includes(this.value);
+                nomorSeriContainer.style.display = shouldShow ? 'flex' : 'none';
+            });
 
-        // Check initial value in case of form reload
-        if (kategoriSelect.value === 'Berkala' ||
-            kategoriSelect.value === 'Majalah' ||
-            kategoriSelect.value === 'Koran') {
-            nomorSeriContainer.style.display = 'flex';
+            // Check initial value
+            const initialValue = kategoriSelect.value;
+            if (['Berkala', 'Majalah', 'Koran'].includes(initialValue)) {
+                nomorSeriContainer.style.display = 'flex';
+            }
         }
     });
 
+    // Optimized print function
     function printTable() {
-        // Create a new window for printing
-        const printWindow = window.open('', '_blank');
+        // Show loading indicator
+        const loadingDiv = document.createElement('div');
+        loadingDiv.innerHTML = '<div style="position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:white;padding:20px;border:1px solid #ccc;z-index:9999;">Memproses data untuk print...</div>';
+        document.body.appendChild(loadingDiv);
 
-        // Get the current date for the report header
-        const currentDate = new Date().toLocaleDateString('id-ID');
+        // Use setTimeout to allow UI to update
+        setTimeout(function() {
+            try {
+                const printWindow = window.open('', '_blank');
+                const currentDate = new Date().toLocaleDateString('id-ID');
 
-        // Create the content to be printed
-        printWindow.document.write(`
+                // Get filtered data
+                const table = $('#dataTable').DataTable();
+                const filteredData = table.rows({
+                    search: 'applied'
+                }).data();
+
+                // Build HTML content
+                let tableRows = '';
+                for (let i = 0; i < filteredData.length; i++) {
+                    const rowData = filteredData[i];
+                    tableRows += `
+                        <tr>
+                            <td>${i + 1}</td>
+                            <td>${rowData[1] || ''}</td>
+                            <td>${rowData[3] || ''}</td>
+                            <td>${rowData[4] || ''}</td>
+                            <td>${rowData[5] || ''}</td>
+                            <td>${rowData[6] || ''}</td>
+                            <td>${rowData[7] || ''}</td>
+                            <td>${rowData[9] || ''}</td>
+                            <td>${rowData[10] || ''}</td>
+                            <td>${rowData[11] || ''}</td>
+                            <td>${rowData[8] || ''}</td>
+                        </tr>
+                    `;
+                }
+
+                const htmlContent = `
 <!DOCTYPE html>
 <html>
 <head>
@@ -678,24 +791,24 @@
             text-align: center;
             font-size: 11px;
             vertical-align: middle;
-            word-wrap: break-word; /* Allow words to break */
-            white-space: normal; /* Allow text to wrap */
-            height: auto; /* Let height adjust to content */
+            word-wrap: break-word;
+            white-space: normal;
+            height: auto;
         }
         th {
             background-color: #f2f2f2;
         }
-        th:nth-child(1), td:nth-child(1) { width: 4%; } /* No */
-        th:nth-child(2), td:nth-child(2) { width: 7%; } /* Kode */
-        th:nth-child(3), td:nth-child(3) { width: 14%; } /* Judul */
-        th:nth-child(4), td:nth-child(4) { width: 12%; } /* Pengarang */
-        th:nth-child(5), td:nth-child(5) { width: 13%; } /* Penerbit */
-        th:nth-child(6), td:nth-child(6) { width: 9%; } /* Tempat Terbit */
-        th:nth-child(7), td:nth-child(7) { width: 5%; } /* Tahun */
-        th:nth-child(8), td:nth-child(8) { width: 13%; } /* Kategori */
-        th:nth-child(9), td:nth-child(9) { width: 6%; } /* Rak */
-        th:nth-child(10), td:nth-child(10) { width: 7%; } /* Status */
-        th:nth-child(11), td:nth-child(11) { width: 6%; } /* Eksemplar */
+        th:nth-child(1), td:nth-child(1) { width: 4%; }
+        th:nth-child(2), td:nth-child(2) { width: 7%; }
+        th:nth-child(3), td:nth-child(3) { width: 14%; }
+        th:nth-child(4), td:nth-child(4) { width: 12%; }
+        th:nth-child(5), td:nth-child(5) { width: 13%; }
+        th:nth-child(6), td:nth-child(6) { width: 9%; }
+        th:nth-child(7), td:nth-child(7) { width: 5%; }
+        th:nth-child(8), td:nth-child(8) { width: 13%; }
+        th:nth-child(9), td:nth-child(9) { width: 6%; }
+        th:nth-child(10), td:nth-child(10) { width: 7%; }
+        th:nth-child(11), td:nth-child(11) { width: 6%; }
         .date {
             text-align: right;
         }
@@ -705,9 +818,6 @@
         .summary-info p {
             margin: 3px 0;
             font-size: 12px;
-        }
-        .no-print {
-            display: none;
         }
         .logo-container {
             display: flex;
@@ -726,10 +836,6 @@
             margin: 0 20px;
         }
         @media print {
-            .no-print {
-                display: none;
-            }
-            /* Ensure table cells show all content when printing */
             td {
                 page-break-inside: avoid;
                 overflow: visible;
@@ -770,39 +876,7 @@
             </tr>
         </thead>
         <tbody>
-`);
-
-        // Get the filtered data from DataTables
-        var table = $('#dataTable').DataTable();
-        var filteredData = table.rows({
-            search: 'applied'
-        }).data();
-
-        // Add rows to the print window
-        for (var i = 0; i < filteredData.length; i++) {
-            var rowData = filteredData[i];
-            printWindow.document.write('<tr>');
-
-            // Add No column
-            printWindow.document.write(`<td>${i+1}</td>`);
-
-            // Add other columns in the correct order
-            printWindow.document.write(`<td>${rowData[1]}</td>`); // Kode
-            printWindow.document.write(`<td>${rowData[3]}</td>`); // Judul
-            printWindow.document.write(`<td>${rowData[4]}</td>`); // Pengarang
-            printWindow.document.write(`<td>${rowData[5]}</td>`); // Penerbit
-            printWindow.document.write(`<td>${rowData[6]}</td>`); // Tempat Terbit
-            printWindow.document.write(`<td>${rowData[7]}</td>`); // Tahun Terbit
-            printWindow.document.write(`<td>${rowData[9]}</td>`); // Kategori
-            printWindow.document.write(`<td>${rowData[10]}</td>`); // Rak
-            printWindow.document.write(`<td>${rowData[11]}</td>`); // Status
-            printWindow.document.write(`<td>${rowData[8]}</td>`); // Eksemplar
-
-            printWindow.document.write('</tr>');
-        }
-
-        // Close the HTML structure
-        printWindow.document.write(`
+            ${tableRows}
         </tbody>
     </table>
     <div style="margin-top: 50px; text-align: right;">
@@ -811,16 +885,28 @@
         <p>(_________________________)</p>
         <p>Petugas Perpustakaan</p>
     </div>
-    <div class="no-print">
-        <button onclick="window.print()" style="margin-top: 20px;">Print</button>
-    </div>
 </body>
 </html>
-`);
+                `;
 
-        // Finish writing and focus on the print window
-        printWindow.document.close();
-        printWindow.focus();
+                printWindow.document.write(htmlContent);
+                printWindow.document.close();
+                printWindow.focus();
+
+                // Remove loading indicator
+                document.body.removeChild(loadingDiv);
+
+                // Auto print after a short delay
+                setTimeout(() => {
+                    printWindow.print();
+                }, 500);
+
+            } catch (error) {
+                console.error('Error in print function:', error);
+                alert('Terjadi error saat mencetak data');
+                document.body.removeChild(loadingDiv);
+            }
+        }, 100);
     }
 </script>
 
