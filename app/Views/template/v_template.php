@@ -24,6 +24,34 @@
     <link href="<?= base_url(); ?>/css/myStyle.css" rel="stylesheet">
     <link href="<?= base_url(); ?>/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
     <link href="<?= base_url(); ?>/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <style>
+        .book-cover-container:hover .view-cover-btn,
+        .book-cover-container:hover .hide-cover-btn {
+            opacity: 1;
+        }
+
+        .view-cover-btn,
+        .hide-cover-btn {
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .view-cover-btn:hover,
+        .hide-cover-btn:hover {
+            opacity: 1;
+        }
+
+        /* Loading animation */
+        @keyframes spin {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+    </style>
 
 
     <!-- Memuat Chart.js -->
