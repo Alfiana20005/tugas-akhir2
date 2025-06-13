@@ -85,4 +85,18 @@
     </div>
 </div>
 
+<script>
+    $(document).ready(function() {
+        $('#dataTable').DataTable({
+            "order": [
+                [2, "asc"]
+            ], // Mengurutkan berdasarkan kolom No Registrasi (kolom ke-3, index 2)
+            "columnDefs": [{
+                "targets": [3, 6, 7], // Menonaktifkan sorting pada kolom Gambar, Aksi, dan Perawatan
+                "orderable": false
+            }]
+        });
+    });
+</script>
+
 <?= $this->endSection(); ?>
