@@ -11,8 +11,8 @@ class M_Gallery extends Model
     protected $useTimestamps = false;
 
 
-    
-    protected $allowedFields = ['judul','foto', 'deskripsi'];
+
+    protected $allowedFields = ['judul', 'foto', 'deskripsi'];
 
 
     protected $validationRules = [];
@@ -31,11 +31,7 @@ class M_Gallery extends Model
     public function getBeritaTerbaru($limit)
     {
         return $this->orderBy('tanggal', 'DESC')
-                    ->limit($limit)
-                    ->findAll();
+            ->limit($limit)
+            ->findAll();
     }
-  
-
-    
 }
-    
