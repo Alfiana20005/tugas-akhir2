@@ -9,14 +9,46 @@
         </div>
     <?php endif; ?>
     <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Data Koleksi <?= $judul ?> </h6>
+        <div class="card-header py-3 d-flex justify-content-between align-items-center">
+            <h6 class="m-0 font-weight-bold text-primary">Data Koleksi <?= $judul ?></h6>
+            <small class="text-muted">
+                Showing <?= (($currentPage - 1) * $perPage) + 1 ?> to <?= min($currentPage * $perPage, $totalData) ?> of <?= $totalData ?> entries
+            </small>
         </div>
         <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <form method="GET" action="<?= base_url("/koleksi/{$kode_kategori}"); ?>" class="d-flex">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="search"
+                                placeholder="Cari berdasarkan nama, no registrasi, no inventaris, kode LK, atau keadaan..."
+                                value="<?= esc($search); ?>">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="submit">
+                                    <i class="fas fa-search"></i> Cari
+                                </button>
+                                <?php if (!empty($search)): ?>
+                                    <a href="<?= base_url("/koleksi/{$kode_kategori}"); ?>" class="btn btn-secondary">
+                                        <i class="fas fa-times"></i> Reset
+                                    </a>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <?php if (!empty($search)): ?>
+                    <div class="col-md-6">
+                        <div class="alert alert-info mb-0 py-2">
+                            <small><i class="fas fa-info-circle"></i> Menampilkan hasil pencarian untuk: <strong>"<?= esc($search); ?>"</strong></small>
+                        </div>
+                    </div>
+                <?php endif; ?>
+            </div>
             <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <thead style="text-align: center; font-size: 10pt;">
+                <table class="table table-bordered table-striped" width="100%" cellspacing="0">
+                    <thead class="table-dark" style="text-align: center; font-size: 10pt;">
                         <tr>
+                            <th style="text-align: center;">No</th>
                             <th style="text-align: center;">Kode Lembar Kerja</th>
                             <th style="text-align: center;">No Inventarisasi</th>
                             <th style="text-align: center;">No Registrasi</th>
@@ -30,9 +62,10 @@
 
                     <tbody style="text-align: center; font-size: 10pt;">
                         <?php
-                        $no = 1;
+                        $no = (($currentPage - 1) * $perPage) + 1;
                         foreach ($data_koleksi as $k): ?>
                             <tr>
+                                <td style="text-align: center;"><?= $no++; ?></td>
                                 <td style="text-align: center;"><?= $k['kode_lk']; ?></td>
                                 <td style="text-align: center;"><?= $k['kode_kategori']; ?> . <?= $k['no_inventaris']; ?></td>
                                 <td style="text-align: center;"><?= $k['no_registrasi']; ?></td>
@@ -81,22 +114,83 @@
                     </tbody>
                 </table>
             </div>
+
+            <!-- Pagination Controls -->
+            <div class="d-flex justify-content-between align-items-center mt-3">
+                <div>
+                    <small class="text-muted">
+                        Halaman <?= $currentPage ?> dari <?= ceil($totalData / $perPage) ?>
+                    </small>
+                </div>
+                <nav aria-label="Page navigation">
+                    <ul class="pagination pagination-sm mb-0">
+                        <!-- Previous Button -->
+                        <?php if ($currentPage > 1): ?>
+                            <li class="page-item">
+                                <a class="page-link" href="<?= base_url("/koleksi/{$kode_kategori}?page=" . ($currentPage - 1)); ?>">
+                                    &laquo; Previous
+                                </a>
+                            </li>
+                        <?php else: ?>
+                            <li class="page-item disabled">
+                                <span class="page-link">&laquo; Previous</span>
+                            </li>
+                        <?php endif; ?>
+
+                        <!-- Page Numbers -->
+                        <?php
+                        $totalPages = ceil($totalData / $perPage);
+                        $startPage = max(1, $currentPage - 2);
+                        $endPage = min($totalPages, $currentPage + 2);
+
+                        // Show first page if not in range
+                        if ($startPage > 1): ?>
+                            <li class="page-item">
+                                <a class="page-link" href="<?= base_url("/koleksi/{$kode_kategori}?page=1"); ?>">1</a>
+                            </li>
+                            <?php if ($startPage > 2): ?>
+                                <li class="page-item disabled">
+                                    <span class="page-link">...</span>
+                                </li>
+                            <?php endif; ?>
+                        <?php endif; ?>
+
+                        <!-- Page range -->
+                        <?php for ($i = $startPage; $i <= $endPage; $i++): ?>
+                            <li class="page-item <?= ($i == $currentPage) ? 'active' : ''; ?>">
+                                <a class="page-link" href="<?= base_url("/koleksi/{$kode_kategori}?page={$i}"); ?>"><?= $i; ?></a>
+                            </li>
+                        <?php endfor; ?>
+
+                        <!-- Show last page if not in range -->
+                        <?php if ($endPage < $totalPages): ?>
+                            <?php if ($endPage < $totalPages - 1): ?>
+                                <li class="page-item disabled">
+                                    <span class="page-link">...</span>
+                                </li>
+                            <?php endif; ?>
+                            <li class="page-item">
+                                <a class="page-link" href="<?= base_url("/koleksi/{$kode_kategori}?page={$totalPages}"); ?>"><?= $totalPages; ?></a>
+                            </li>
+                        <?php endif; ?>
+
+                        <!-- Next Button -->
+                        <?php if ($currentPage < $totalPages): ?>
+                            <li class="page-item">
+                                <a class="page-link" href="<?= base_url("/koleksi/{$kode_kategori}?page=" . ($currentPage + 1)); ?>">
+                                    Next &raquo;
+                                </a>
+                            </li>
+                        <?php else: ?>
+                            <li class="page-item disabled">
+                                <span class="page-link">Next &raquo;</span>
+                            </li>
+                        <?php endif; ?>
+                    </ul>
+                </nav>
+            </div>
         </div>
     </div>
 </div>
-
-<script>
-    $(document).ready(function() {
-        $('#dataTable').DataTable({
-            "order": [
-                [2, "asc"]
-            ], // Mengurutkan berdasarkan kolom No Registrasi (kolom ke-3, index 2)
-            "columnDefs": [{
-                "targets": [3, 6, 7], // Menonaktifkan sorting pada kolom Gambar, Aksi, dan Perawatan
-                "orderable": false
-            }]
-        });
-    });
-</script>
 
 <?= $this->endSection(); ?>

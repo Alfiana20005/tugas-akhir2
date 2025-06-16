@@ -66,13 +66,47 @@ class M_Koleksi extends Model
             ->get()
             ->getRowArray();
     }
-    public function getKoleksiByKategori($kode_kategori)
+    public function getKoleksiByKategoriPaginated($kode_kategori, $perPage, $page, $search = '')
     {
-        return $this->db->table('data_koleksi')
-            ->where('kode_kategori', $kode_kategori)
-            ->orderBy("CAST(no_registrasi AS UNSIGNED)", 'ASC')
+        $offset = ($page - 1) * $perPage;
+
+        $builder = $this->db->table('data_koleksi')
+            ->where('kode_kategori', $kode_kategori);
+
+        // Tambahkan kondisi search jika ada
+        if (!empty($search)) {
+            $builder->groupStart()
+                ->like('nama_inv', $search)
+                ->orLike('no_registrasi', $search)
+                ->orLike('no_inventaris', $search)
+                ->orLike('kode_lk', $search)
+                ->orLike('keadaan', $search)
+                ->groupEnd();
+        }
+
+        return $builder->orderBy("CAST(no_registrasi AS UNSIGNED)", 'ASC')
+            ->limit($perPage, $offset)
             ->get()
             ->getResultArray();
+    }
+
+    public function getTotalKoleksiByKategori($kode_kategori, $search = '')
+    {
+        $builder = $this->db->table('data_koleksi')
+            ->where('kode_kategori', $kode_kategori);
+
+        // Tambahkan kondisi search jika ada
+        if (!empty($search)) {
+            $builder->groupStart()
+                ->like('nama_inv', $search)
+                ->orLike('no_registrasi', $search)
+                ->orLike('no_inventaris', $search)
+                ->orLike('kode_lk', $search)
+                ->orLike('keadaan', $search)
+                ->groupEnd();
+        }
+
+        return $builder->countAllResults();
     }
     public function countKoleksi()
     {
