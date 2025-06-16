@@ -153,8 +153,8 @@
 				if ($b['type'] == 'Narasi'): ?>
 					<div class="col-lg-3 col-md-6">
 						<div class="single-other-issue">
-							<div class="feature-img mb-2 embed-responsive embed-responsive-4by3">
-								<img class="embed-responsive-item" style="object-fit: cover;" src="<?= base_url("img/berita/" . $b['foto']); ?>" alt="">
+							<div class="thumb">
+								<img class="img-fluid" src="<?= base_url("img/berita/" . $b['foto']); ?>" alt="">
 							</div>
 							<br>
 							<a href="<?= base_url("/lihatberita2/{$b['id_berita']}"); ?>">
