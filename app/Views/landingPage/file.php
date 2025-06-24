@@ -1,4 +1,4 @@
-<?= $this->extend('landingPage/template baru'); ?>
+  <?= $this->extend('landingPage/template baru'); ?>
 
 <?= $this-> section('content'); ?>
 

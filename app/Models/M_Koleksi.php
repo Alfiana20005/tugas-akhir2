@@ -176,6 +176,7 @@ class M_Koleksi extends Model
             $builder->orlike('status', $keyword);
             $builder->orlike('kode_lk', $keyword);
             $builder->orlike('lemari', $keyword);
+            $builder->orlike('lokasi', $keyword);
             $builder->orlike('rak', $keyword);
             $builder->orlike('zona', $keyword);
         }

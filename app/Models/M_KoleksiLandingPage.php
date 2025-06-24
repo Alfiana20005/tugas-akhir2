@@ -28,18 +28,13 @@ class M_KoleksiLandingPage extends Model
     public function getKegiatanTeratas()
     {
         return $this->orderBy('tanggal', 'DESC')
-                    ->findAll();
+            ->findAll();
     }
     public function getDataByJenis($kategori_koleksi)
     {
         return $this->db->table('koleksi')
-        ->where('kategori', $kategori_koleksi)
-        ->get()
-        ->getResultArray();
+            ->where('kategori', $kategori_koleksi)
+            ->get()
+            ->getResultArray();
     }
-    
-  
-
-    
 }
-    

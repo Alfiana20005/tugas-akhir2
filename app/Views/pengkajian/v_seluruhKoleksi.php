@@ -97,7 +97,6 @@
                     <?php endif; ?>
                 </div>
                 <div class="float-right ml-2 mb-4">
-
                     <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
                 </div>
                 <div class="float-right">
