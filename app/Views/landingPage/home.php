@@ -157,7 +157,10 @@
 							<div class="row align-items-center">
 								<div class="col-lg-6 col-md-6">
 									<div class="koleksi-thumb">
-										<img class="img-fluid rounded shadow" src="<?= base_url("img/koleksiAdmin/" . $k['foto']); ?>" alt="<?= $k['nama']; ?>" style="width: 100%; height: 300px; object-fit: cover;">
+										<img class="img-fluid rounded shadow"
+											src="<?= base_url("img/koleksiAdmin/" . $k['foto']); ?>"
+											alt="<?= $k['nama']; ?>"
+											style="width: 100%; height: 300px; object-fit: contain;">
 									</div>
 								</div>
 								<div class="col-lg-6 col-md-6">
@@ -170,7 +173,6 @@
 											strpos($deskripsi, 'Origin:') !== false ||
 											strpos($deskripsi, 'Materials:') !== false ||
 											strpos($deskripsi, 'Procurement Method:') !== false);
-
 										if ($isStructuredDesc):
 											// Parse structured description
 											$lines = explode("\n", $deskripsi);
@@ -214,15 +216,55 @@
 							<div class="row align-items-center">
 								<div class="col-lg-6 col-md-6">
 									<div class="koleksi-content pr-4">
-										<h4 class="mb-3" style="color: #850000;"><?= $k['nama']; ?></h4>
-										<p style="text-align: justify; line-height: 1.6;">
-											<?= $k['deskripsi']; ?>
-										</p>
+										<h3 class="mb-3" style="color: #850000;"><?= $k['nama']; ?></h3>
+										<?php
+										// Parse deskripsi untuk format khusus
+										$deskripsi = $k['deskripsi'];
+										$isStructuredDesc = (strpos($deskripsi, 'Age:') !== false ||
+											strpos($deskripsi, 'Origin:') !== false ||
+											strpos($deskripsi, 'Materials:') !== false ||
+											strpos($deskripsi, 'Procurement Method:') !== false);
+										if ($isStructuredDesc):
+											// Parse structured description
+											$lines = explode("\n", $deskripsi);
+										?>
+											<div class="koleksi-details">
+												<?php foreach ($lines as $line):
+													$line = trim($line);
+													if (!empty($line)):
+														if (strpos($line, ':') !== false):
+															$parts = explode(':', $line, 2);
+															$label = trim($parts[0]);
+															$value = trim($parts[1]);
+												?>
+															<div class="detail-item mb-2">
+																<strong style="color: #850000;"><?= $label ?>:</strong>
+																<span><?= $value ?></span>
+															</div>
+														<?php
+														else:
+														?>
+															<div class="detail-item mb-2">
+																<span><?= $line ?></span>
+															</div>
+												<?php
+														endif;
+													endif;
+												endforeach; ?>
+											</div>
+										<?php else: ?>
+											<p style="text-align: justify; line-height: 1.6;">
+												<?= nl2br($deskripsi); ?>
+											</p>
+										<?php endif; ?>
 									</div>
 								</div>
 								<div class="col-lg-6 col-md-6">
 									<div class="koleksi-thumb">
-										<img class="img-fluid rounded shadow" src="<?= base_url("img/koleksi/" . $k['foto']); ?>" alt="<?= $k['nama']; ?>" style="width: 100%; height: 300px; object-fit: cover;">
+										<img class="img-fluid rounded shadow"
+											src="<?= base_url("img/koleksiAdmin/" . $k['foto']); ?>"
+											alt="<?= $k['nama']; ?>"
+											style="width: 100%; height: 300px; object-fit: contain;">
 									</div>
 								</div>
 							</div>

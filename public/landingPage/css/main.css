@@ -690,6 +690,16 @@ th {
     font-weight: 400;
 }
 
+.koleksi-thumb {
+    overflow: hidden;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.koleksi-thumb:hover {
+    transform: translateY(-2px);
+}
+
 .flex {
     display: -webkit-box;
     display: -webkit-flex;
