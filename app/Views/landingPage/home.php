@@ -157,7 +157,7 @@
 							<div class="row align-items-center">
 								<div class="col-lg-6 col-md-6">
 									<div class="koleksi-thumb">
-										<img class="img-fluid rounded shadow" src="<?= base_url("img/koleksi/" . $k['foto']); ?>" alt="<?= $k['nama']; ?>" style="width: 100%; height: 300px; object-fit: cover;">
+										<img class="img-fluid rounded shadow" src="<?= base_url("img/koleksiAdmin/" . $k['foto']); ?>" alt="<?= $k['nama']; ?>" style="width: 100%; height: 300px; object-fit: cover;">
 									</div>
 								</div>
 								<div class="col-lg-6 col-md-6">
