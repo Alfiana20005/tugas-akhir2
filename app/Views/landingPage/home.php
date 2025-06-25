@@ -137,6 +137,110 @@
 </section>
 <!-- End banner Area -->
 
+<!-- Start Koleksi Area -->
+<section class="koleksi-area section-gap">
+	<div class="container">
+		<div class="row d-flex justify-content-center">
+			<div class="menu-content pb-40 col-lg-9">
+				<div class="title text-center">
+					<h1 class="mb-10">Koleksi</h1>
+					<p>Temukan berbagai koleksi berharga yang tersimpan di Museum Negeri NTB</p>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<?php if (!empty($koleksi)): ?>
+				<?php foreach ($koleksi as $index => $k): ?>
+					<?php if ($index % 2 == 0): ?>
+						<!-- Layout: Foto Kiri, Deskripsi Kanan -->
+						<div class="col-lg-12 mb-5">
+							<div class="row align-items-center">
+								<div class="col-lg-6 col-md-6">
+									<div class="koleksi-thumb">
+										<img class="img-fluid rounded shadow" src="<?= base_url("img/koleksi/" . $k['foto']); ?>" alt="<?= $k['nama']; ?>" style="width: 100%; height: 300px; object-fit: cover;">
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-6">
+									<div class="koleksi-content pl-4">
+										<h3 class="mb-3" style="color: #850000;"><?= $k['nama']; ?></h3>
+										<?php
+										// Parse deskripsi untuk format khusus
+										$deskripsi = $k['deskripsi'];
+										$isStructuredDesc = (strpos($deskripsi, 'Age:') !== false ||
+											strpos($deskripsi, 'Origin:') !== false ||
+											strpos($deskripsi, 'Materials:') !== false ||
+											strpos($deskripsi, 'Procurement Method:') !== false);
+
+										if ($isStructuredDesc):
+											// Parse structured description
+											$lines = explode("\n", $deskripsi);
+										?>
+											<div class="koleksi-details">
+												<?php foreach ($lines as $line):
+													$line = trim($line);
+													if (!empty($line)):
+														if (strpos($line, ':') !== false):
+															$parts = explode(':', $line, 2);
+															$label = trim($parts[0]);
+															$value = trim($parts[1]);
+												?>
+															<div class="detail-item mb-2">
+																<strong style="color: #850000;"><?= $label ?>:</strong>
+																<span><?= $value ?></span>
+															</div>
+														<?php
+														else:
+														?>
+															<div class="detail-item mb-2">
+																<span><?= $line ?></span>
+															</div>
+												<?php
+														endif;
+													endif;
+												endforeach; ?>
+											</div>
+										<?php else: ?>
+											<p style="text-align: justify; line-height: 1.6;">
+												<?= nl2br($deskripsi); ?>
+											</p>
+										<?php endif; ?>
+									</div>
+								</div>
+							</div>
+						</div>
+					<?php else: ?>
+						<!-- Layout: Deskripsi Kiri, Foto Kanan -->
+						<div class="col-lg-12 mb-5">
+							<div class="row align-items-center">
+								<div class="col-lg-6 col-md-6">
+									<div class="koleksi-content pr-4">
+										<h4 class="mb-3" style="color: #850000;"><?= $k['nama']; ?></h4>
+										<p style="text-align: justify; line-height: 1.6;">
+											<?= $k['deskripsi']; ?>
+										</p>
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-6">
+									<div class="koleksi-thumb">
+										<img class="img-fluid rounded shadow" src="<?= base_url("img/koleksi/" . $k['foto']); ?>" alt="<?= $k['nama']; ?>" style="width: 100%; height: 300px; object-fit: cover;">
+									</div>
+								</div>
+							</div>
+						</div>
+					<?php endif; ?>
+				<?php endforeach; ?>
+			<?php else: ?>
+				<div class="col-lg-12">
+					<div class="text-center">
+						<p>Belum ada koleksi yang tersedia.</p>
+					</div>
+				</div>
+			<?php endif; ?>
+		</div>
+	</div>
+</section>
+<!-- End Koleksi Area -->
+
 <!-- Start other-issue Area -->
 <section class="other-issue-area section-gap">
 	<div class="container">

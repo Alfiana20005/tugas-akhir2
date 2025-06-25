@@ -66,30 +66,37 @@ class C_LandingPage extends BaseController
     // Start Landing Page Baru
     public function home()
     {
-
         $kegiatan = $this->M_Kegiatan->get();
         $beritaTerbaru = $this->M_Berita->getBeritaTerbaruHome(4);
         $galery = $this->M_Gallery->findAll();
-        // $session = session();
-        // $id_user = $session->get('id_user');
-        // $user = $this->M_User->getUser($id_user);
+        // Mengambil data koleksi menggunakan model M_KoleksiLandingPage
+        try {
+            $koleksi = $this->M_KoleksiLandingPage->orderBy('id_koleksi', 'DESC')->findAll(6);
+        } catch (Exception $e) {
+            $koleksi = []; // Jika terjadi error, buat array kosong
+        }
+
         $user = [
             'id_user' => session()->get('id_user'),
             'nama' => session()->get('nama')
         ];
 
-
         foreach ($beritaTerbaru as &$berita) {
-            $berita['isi_pendek'] = $this->getExcerpt($berita['isi'], 20); // 30 adalah jumlah kata yang ingin ditampilkan
+            $berita['isi_pendek'] = $this->getExcerpt($berita['isi'], 20);
         }
 
-        // var_dump($berita);
-        $data = [
-            // 'title' => 'Daftar Berita',
+        // Tambahkan excerpt untuk deskripsi koleksi jika terlalu panjang
+        foreach ($koleksi as &$k) {
+            if (strlen($k['deskripsi']) > 200) {
+                $k['deskripsi'] = $this->getExcerpt($k['deskripsi'], 30);
+            }
+        }
 
+        $data = [
             'beritaterbaru' => $beritaTerbaru,
             'kegiatan' => $kegiatan,
             'gallery' => $galery,
+            'koleksi' => $koleksi,
             'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
             'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
             'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
@@ -99,6 +106,7 @@ class C_LandingPage extends BaseController
 
         return view('landingPage/home', $data);
     }
+
     private function getExcerpt($text, $wordLimit)
     {
         $words = explode(' ', strip_tags($text));

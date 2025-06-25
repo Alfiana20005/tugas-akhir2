@@ -20,7 +20,7 @@ class M_KoleksiLandingPage extends Model
     protected $skipValidation = false;
     protected $cleanValidationRules = true;
 
-    public function getKOleksiById($id_koleksi)
+    public function getKoleksiById($id_koleksi)
     {
         return $this->find($id_koleksi);
     }
@@ -30,6 +30,7 @@ class M_KoleksiLandingPage extends Model
         return $this->orderBy('tanggal', 'DESC')
             ->findAll();
     }
+
     public function getDataByJenis($kategori_koleksi)
     {
         return $this->db->table('koleksi')

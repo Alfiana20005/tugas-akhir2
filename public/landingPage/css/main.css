@@ -666,6 +666,30 @@ th {
     text-align: right;
 }
 
+.koleksi-details {
+    border-radius: 8px;
+    /* padding: 20px; */
+    margin-bottom: 5px;
+}
+
+.detail-item {
+    padding: 4px 0;
+}
+
+.detail-item strong {
+    min-width: 140px;
+    margin-right: 10px;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.detail-item span {
+    flex: 1;
+    font-size: 16px;
+    color: #000;
+    font-weight: 400;
+}
+
 .flex {
     display: -webkit-box;
     display: -webkit-flex;
