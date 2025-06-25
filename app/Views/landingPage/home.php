@@ -137,7 +137,6 @@
 </section>
 <!-- End banner Area -->
 
-<!-- Start Koleksi Area -->
 <section class="koleksi-area section-gap">
 	<div class="container">
 		<div class="row d-flex justify-content-center">
@@ -155,7 +154,7 @@
 						<!-- Layout: Foto Kiri, Deskripsi Kanan -->
 						<div class="col-lg-12 mb-5">
 							<div class="row align-items-center">
-								<div class="col-lg-6 col-md-6">
+								<div class="col-lg-6 col-md-6 order-1 order-lg-1">
 									<div class="koleksi-thumb">
 										<img class="img-fluid rounded shadow"
 											src="<?= base_url("img/koleksiAdmin/" . $k['foto']); ?>"
@@ -163,8 +162,8 @@
 											style="width: 100%; height: 300px; object-fit: contain;">
 									</div>
 								</div>
-								<div class="col-lg-6 col-md-6">
-									<div class="koleksi-content pl-4">
+								<div class="col-lg-6 col-md-6 order-2 order-lg-2">
+									<div class="koleksi-content pl-4 mt-3 mt-lg-0">
 										<h3 class="mb-3" style="color: #850000;"><?= $k['nama']; ?></h3>
 										<?php
 										// Parse deskripsi untuk format khusus
@@ -214,8 +213,8 @@
 						<!-- Layout: Deskripsi Kiri, Foto Kanan -->
 						<div class="col-lg-12 mb-5">
 							<div class="row align-items-center">
-								<div class="col-lg-6 col-md-6">
-									<div class="koleksi-content pr-4">
+								<div class="col-lg-6 col-md-6 order-2 order-lg-1">
+									<div class="koleksi-content pr-4 mt-3 mt-lg-0">
 										<h3 class="mb-3" style="color: #850000;"><?= $k['nama']; ?></h3>
 										<?php
 										// Parse deskripsi untuk format khusus
@@ -259,7 +258,7 @@
 										<?php endif; ?>
 									</div>
 								</div>
-								<div class="col-lg-6 col-md-6">
+								<div class="col-lg-6 col-md-6 order-1 order-lg-2">
 									<div class="koleksi-thumb">
 										<img class="img-fluid rounded shadow"
 											src="<?= base_url("img/koleksiAdmin/" . $k['foto']); ?>"
@@ -281,7 +280,6 @@
 		</div>
 	</div>
 </section>
-<!-- End Koleksi Area -->
 
 <!-- Start other-issue Area -->
 <section class="other-issue-area section-gap">
