@@ -159,7 +159,7 @@
 										<img class="img-fluid rounded shadow"
 											src="<?= base_url("img/koleksiAdmin/" . $k['foto']); ?>"
 											alt="<?= $k['nama']; ?>"
-											style="width: 100%; height: 300px; object-fit: contain;">
+											style="width: 120%; height: 320px; object-fit: contain;">
 									</div>
 								</div>
 								<div class="col-lg-6 col-md-6 order-2 order-lg-2">
@@ -214,7 +214,7 @@
 						<div class="col-lg-12 mb-5">
 							<div class="row align-items-center">
 								<div class="col-lg-6 col-md-6 order-2 order-lg-1">
-									<div class="koleksi-content pr-4 mt-3 mt-lg-0">
+									<div class="koleksi-content pl-4 mt-3 mt-lg-0">
 										<h3 class="mb-3" style="color: #850000;"><?= $k['nama']; ?></h3>
 										<?php
 										// Parse deskripsi untuk format khusus
@@ -263,7 +263,7 @@
 										<img class="img-fluid rounded shadow"
 											src="<?= base_url("img/koleksiAdmin/" . $k['foto']); ?>"
 											alt="<?= $k['nama']; ?>"
-											style="width: 100%; height: 300px; object-fit: contain;">
+											style="width: 100%; height: 320px; object-fit: contain;">
 									</div>
 								</div>
 							</div>
