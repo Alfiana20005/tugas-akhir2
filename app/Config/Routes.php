@@ -240,7 +240,7 @@ $routes->get('/saveViews/(:num)', 'C_LandingPage::views/$1');
 $routes->get('/saveViews2/(:num)', 'C_LandingPage::views2/$1');
 
 
-$routes->get('/koleksi_page2', 'C_LandingPage::koleksi_page2');
+$routes->get('/koleksi', 'C_LandingPage::koleksi_page2');
 
 $routes->get('/koleksi_kategori/(:segment)', 'C_LandingPage::koleksi_kategori/$1');
 $routes->get('/koleksi_detail2', 'C_LandingPage::koleksi_detail2');

@@ -28,7 +28,7 @@
 
 					<div class="col-lg-12 col-md-12 ">
 						<div class="feature-img mb-2">
-							<img class="img-fluid" src="<?= base_url("img/koleksiAdmin/" . $koleksi['foto']); ?>" alt="">
+							<img class="img-fluid" src="<?= base_url("img/koleksiAdmin/" . $koleksi['foto']); ?>" alt="" style="width: 120%; height: 320px; object-fit: contain;">>
 						</div>
 						<!-- -->
 					</div>

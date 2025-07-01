@@ -137,6 +137,7 @@
 </section>
 <!-- End banner Area -->
 
+<!-- Koleksi Section -->
 <section class="koleksi-area section-gap">
 	<div class="container">
 		<div class="row d-flex justify-content-center">
@@ -277,6 +278,18 @@
 					</div>
 				</div>
 			<?php endif; ?>
+		</div>
+
+		<!-- Tombol Lihat Semua Koleksi -->
+		<div class="row mt-4">
+			<div class="col-lg-12">
+				<div class="text-center">
+					<a href="<?= base_url('/koleksi'); ?>" class="btn btn-primary px-4 py-2"
+						style="background-color: #850000; border-color: #850000; font-weight: 500; border-radius: 5px;">
+						Lihat Semua Koleksi
+					</a>
+				</div>
+			</div>
 		</div>
 	</div>
 </section>
