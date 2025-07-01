@@ -71,7 +71,7 @@ class C_LandingPage extends BaseController
         $galery = $this->M_Gallery->findAll();
         // Mengambil data koleksi menggunakan model M_KoleksiLandingPage
         try {
-            $koleksi = $this->M_KoleksiLandingPage->orderBy('id_koleksi', 'DESC')->findAll(6);
+            $koleksi = $this->M_KoleksiLandingPage->orderBy('id_koleksi', 'DESC')->findAll(4);
         } catch (Exception $e) {
             $koleksi = []; // Jika terjadi error, buat array kosong
         }
