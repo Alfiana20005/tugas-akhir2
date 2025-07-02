@@ -172,6 +172,7 @@
                                     <option <?= old("kategoriBuku") == 'Buku Anak' ? 'selected' : 'Buku Anak' ?> value="Buku Anak">Buku Anak</option>
                                     <option <?= old("kategoriBuku") == 'Arsip' ? 'selected' : 'Arsip' ?> value="Arsip">Arsip</option>
                                     <option <?= old("kategoriBuku") == 'Berkala' ? 'selected' : 'Berkala' ?> value="Berkala">Berkala</option>
+                                    <option <?= old("kategoriBuku") == 'Karya Umum' ? 'selected' : 'Karya Umum' ?> value="Karya Umum">Karya Umum</option>
                                 </select>
                             </div>
                         </div>
@@ -447,6 +448,7 @@
                                                 <option value="Buku Anak" <?= ($buku['kategoriBuku'] == 'Buku Anak') ? 'selected' : ''; ?>>Buku Anak</option>
                                                 <option value="Arsip" <?= ($buku['kategoriBuku'] == 'Arsip') ? 'selected' : ''; ?>>Arsip</option>
                                                 <option value="Berkala" <?= ($buku['kategoriBuku'] == 'Berkala') ? 'selected' : ''; ?>>Berkala</option>
+                                                <option value="Karya Umum" <?= ($buku['kategoriBuku'] == 'Karya Umum') ? 'selected' : ''; ?>>Karya Umum</option>
                                             </select>
                                         </div>
                                         <div class="col-md-6">
