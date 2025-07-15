@@ -537,7 +537,7 @@ class C_Koleksi extends BaseController
         // 3. Nonaktifkan kalkulasi otomatis untuk menghemat memory
         $spreadsheet->getActiveSheet()->setAutoFilter(false);
 
-        // Header
+        // Header - Menambahkan kolom KODE_LK
         $headers = [
             'A1' => 'NO REGISTRASI',
             'B1' => 'NO INVENTARIS',
@@ -550,7 +550,8 @@ class C_Koleksi extends BaseController
             'I1' => 'HARGA',
             'J1' => 'LOKASI PENYIMPANAN',
             'K1' => 'KEADAAN',
-            'L1' => 'GAMBAR'
+            'L1' => 'KODE_LK',
+            'M1' => 'GAMBAR'
         ];
 
         // Set header dengan loop
@@ -558,8 +559,8 @@ class C_Koleksi extends BaseController
             $sheet->setCellValue($cell, $value);
         }
 
-        // Style Header
-        $sheet->getStyle('A1:L1')->applyFromArray([
+        // Style Header - Update range ke M1
+        $sheet->getStyle('A1:M1')->applyFromArray([
             'font' => ['bold' => true],
             'fill' => [
                 'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
@@ -590,7 +591,7 @@ class C_Koleksi extends BaseController
 
             foreach ($koleksi as $item) {
                 try {
-                    // 6. Gunakan array untuk mengurangi memory overhead
+                    // 6. Gunakan array untuk mengurangi memory overhead - Tambahkan kode_lk
                     $rowData = [
                         'A' => $item['no_registrasi'] ?? '',
                         'B' => ($item['kode_kategori'] ?? '') . " . " . ($item['no_inventaris'] ?? ''),
@@ -603,7 +604,8 @@ class C_Koleksi extends BaseController
                         'I' => $item['harga'] ?? '',
                         'J' => ($item['rak'] ?? '') . " " . ($item['lemari'] ?? '') . " " . ($item['lokasi'] ?? ''),
                         'K' => $item['keadaan'] ?? '',
-                        'L' => $item['gambar'] ?? 'Tidak ada gambar'
+                        'L' => $item['kode_lk'] ?? '',
+                        'M' => $item['gambar'] ?? 'Tidak ada gambar'
                     ];
 
                     // Set data ke spreadsheet
@@ -645,8 +647,8 @@ class C_Koleksi extends BaseController
             }
         }
 
-        // 11. Set auto-size hanya untuk kolom yang diperlukan
-        $autoSizeColumns = ['A', 'B', 'C', 'K', 'L'];
+        // 11. Set auto-size hanya untuk kolom yang diperlukan - Tambahkan L untuk kode_lk
+        $autoSizeColumns = ['A', 'B', 'C', 'K', 'L', 'M'];
         foreach ($autoSizeColumns as $col) {
             $sheet->getColumnDimension($col)->setAutoSize(true);
         }
@@ -660,7 +662,7 @@ class C_Koleksi extends BaseController
         $sheet->getColumnDimension('I')->setWidth(15); // Harga
         $sheet->getColumnDimension('J')->setWidth(25); // Lokasi
 
-        // 12. Tambahkan border hanya jika data tidak terlalu banyak
+        // 12. Tambahkan border hanya jika data tidak terlalu banyak - Update range ke M
         if ($totalProcessed < 5000) {
             $styleArray = [
                 'borders' => [
@@ -669,7 +671,7 @@ class C_Koleksi extends BaseController
                     ],
                 ],
             ];
-            $sheet->getStyle('A1:L' . ($row - 1))->applyFromArray($styleArray);
+            $sheet->getStyle('A1:M' . ($row - 1))->applyFromArray($styleArray);
         }
 
         // 13. Bersihkan memory sebelum save
