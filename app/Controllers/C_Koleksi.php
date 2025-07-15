@@ -523,37 +523,47 @@ class C_Koleksi extends BaseController
 
     public function exportExcel()
     {
-        $koleksiModel = new M_Koleksi();
-        $fileName = 'koleksi.xlsx';
+        // 1. Tingkatkan memory limit dan execution time
+        ini_set('memory_limit', '512M');
+        ini_set('max_execution_time', 300); // 5 menit
 
-        // Inisialisasi Spreadsheet
+        $koleksiModel = new M_Koleksi();
+        $fileName = 'koleksi_' . date('Y-m-d_H-i-s') . '.xlsx';
+
+        // 2. Inisialisasi Spreadsheet dengan setting yang dioptimasi
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
 
+        // 3. Nonaktifkan kalkulasi otomatis untuk menghemat memory
+        $spreadsheet->getActiveSheet()->setAutoFilter(false);
+
         // Header
-        $sheet->setCellValue('A1', 'NO REGISTRASI');
-        $sheet->setCellValue('B1', 'NO INVENTARIS');
-        $sheet->setCellValue('C1', 'NAMA BENDA');
-        $sheet->setCellValue('D1', 'URAIAN');
-        $sheet->setCellValue('E1', 'ASAL DIDAPAT');
-        $sheet->setCellValue('F1', 'UKURAN');
-        $sheet->setCellValue('G1', 'CARA DIDAPAT');
-        $sheet->setCellValue('H1', 'TANGGAL');
-        $sheet->setCellValue('I1', 'HARGA');
-        $sheet->setCellValue('J1', 'LOKASI PENYIMPANAN');
-        $sheet->setCellValue('K1', 'KEADAAN');
-        $sheet->setCellValue('L1', 'GAMBAR');
+        $headers = [
+            'A1' => 'NO REGISTRASI',
+            'B1' => 'NO INVENTARIS',
+            'C1' => 'NAMA BENDA',
+            'D1' => 'URAIAN',
+            'E1' => 'ASAL DIDAPAT',
+            'F1' => 'UKURAN',
+            'G1' => 'CARA DIDAPAT',
+            'H1' => 'TANGGAL',
+            'I1' => 'HARGA',
+            'J1' => 'LOKASI PENYIMPANAN',
+            'K1' => 'KEADAAN',
+            'L1' => 'GAMBAR'
+        ];
+
+        // Set header dengan loop
+        foreach ($headers as $cell => $value) {
+            $sheet->setCellValue($cell, $value);
+        }
 
         // Style Header
         $sheet->getStyle('A1:L1')->applyFromArray([
-            'font' => [
-                'bold' => true,
-            ],
+            'font' => ['bold' => true],
             'fill' => [
                 'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
-                'startColor' => [
-                    'argb' => 'FFCCCCCC',
-                ],
+                'startColor' => ['argb' => 'FFCCCCCC'],
             ],
             'alignment' => [
                 'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
@@ -561,77 +571,143 @@ class C_Koleksi extends BaseController
             ],
         ]);
 
-        $batchSize = 500; // Jumlah data per batch
-        $offset = 0;      // Awal offset
-        $row = 2;         // Baris pertama untuk data
+        // 4. Proses data dalam batch yang lebih kecil
+        $batchSize = 100; // Kurangi dari 500 ke 100
+        $offset = 0;
+        $row = 2;
+        $totalProcessed = 0;
 
-        while (true) {
+        // 5. Hitung total data terlebih dahulu
+        $totalData = $koleksiModel->countAll();
+
+        while ($offset < $totalData) {
             // Ambil batch data
             $koleksi = $koleksiModel->getKoleksiBatch($batchSize, $offset);
 
-            // Jika data kosong, hentikan loop
             if (empty($koleksi)) {
                 break;
             }
 
             foreach ($koleksi as $item) {
-                $sheet->setCellValue('A' . $row, $item['no_registrasi']);
-                $sheet->setCellValue('B' . $row, $item['kode_kategori'] . " . " . $item['no_inventaris']);
-                $sheet->setCellValue('C' . $row, $item['nama_inv']);
-                $sheet->setCellValue('D' . $row, $item['uraian']);
-                $sheet->setCellValue('E' . $row, $item['tempat_dapat']);
-                $sheet->setCellValue('F' . $row, $item['ukuran']);
-                $sheet->setCellValue('G' . $row, $item['cara_dapat']);
-                $sheet->setCellValue('H' . $row, $item['tgl_masuk']);
-                $sheet->setCellValue('I' . $row, $item['harga']);
-                $sheet->setCellValue('J' . $row, $item['rak'] . " " . $item['lemari'] . " " . $item['lokasi']);
-                $sheet->setCellValue('K' . $row, $item['keadaan']);
+                try {
+                    // 6. Gunakan array untuk mengurangi memory overhead
+                    $rowData = [
+                        'A' => $item['no_registrasi'] ?? '',
+                        'B' => ($item['kode_kategori'] ?? '') . " . " . ($item['no_inventaris'] ?? ''),
+                        'C' => $item['nama_inv'] ?? '',
+                        'D' => $item['uraian'] ?? '',
+                        'E' => $item['tempat_dapat'] ?? '',
+                        'F' => $item['ukuran'] ?? '',
+                        'G' => $item['cara_dapat'] ?? '',
+                        'H' => $item['tgl_masuk'] ?? '',
+                        'I' => $item['harga'] ?? '',
+                        'J' => ($item['rak'] ?? '') . " " . ($item['lemari'] ?? '') . " " . ($item['lokasi'] ?? ''),
+                        'K' => $item['keadaan'] ?? '',
+                        'L' => $item['gambar'] ?? 'Tidak ada gambar'
+                    ];
 
-                // Tambahkan gambar
-                $path = realpath('img/koleksi/' . $item['gambar']);
-                if ($path && file_exists($path)) {
-                    $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-                    $drawing->setName('Gambar');
-                    $drawing->setDescription('Gambar Koleksi');
-                    $drawing->setPath($path);
-                    $drawing->setCoordinates('L' . $row);
-                    $drawing->setWidth(50);
-                    $drawing->setHeight(50);
-                    $drawing->setWorksheet($sheet);
+                    // Set data ke spreadsheet
+                    foreach ($rowData as $col => $value) {
+                        $sheet->setCellValue($col . $row, $value);
+                    }
+
+                    // 7. SKIP GAMBAR untuk menghemat memory
+                    // Hanya tampilkan nama file tanpa embed gambar
+
+                    // Set tinggi baris standar
+                    $sheet->getRowDimension($row)->setRowHeight(20);
+
+                    $row++;
+                    $totalProcessed++;
+
+                    // 8. Bersihkan memory setiap 50 baris
+                    if ($totalProcessed % 50 == 0) {
+                        gc_collect_cycles();
+                    }
+                } catch (Exception $e) {
+                    // Skip baris yang error
+                    log_message('error', 'Error processing row: ' . $e->getMessage());
+                    continue;
                 }
-
-                // Atur tinggi baris
-                $sheet->getRowDimension($row)->setRowHeight(60);
-
-                $row++;
             }
 
-            // Tambah offset
+            // Update offset
             $offset += $batchSize;
+
+            // 9. Bersihkan memory setiap batch
+            unset($koleksi);
+            gc_collect_cycles();
+
+            // 10. Cek memory usage
+            if (memory_get_usage() > 400 * 1024 * 1024) { // 400MB
+                log_message('error', 'Memory usage too high, stopping export');
+                break;
+            }
         }
 
-        // Atur auto-size kolom
-        foreach (range('A', 'L') as $col) {
+        // 11. Set auto-size hanya untuk kolom yang diperlukan
+        $autoSizeColumns = ['A', 'B', 'C', 'K', 'L'];
+        foreach ($autoSizeColumns as $col) {
             $sheet->getColumnDimension($col)->setAutoSize(true);
         }
 
-        // Tambahkan border
-        $styleArray = [
-            'borders' => [
-                'allBorders' => [
-                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-                ],
-            ],
-        ];
-        $sheet->getStyle('A1:L' . ($row - 1))->applyFromArray($styleArray);
+        // Set width manual untuk kolom lainnya
+        $sheet->getColumnDimension('D')->setWidth(30); // Uraian
+        $sheet->getColumnDimension('E')->setWidth(20); // Asal didapat
+        $sheet->getColumnDimension('F')->setWidth(15); // Ukuran
+        $sheet->getColumnDimension('G')->setWidth(20); // Cara didapat
+        $sheet->getColumnDimension('H')->setWidth(15); // Tanggal
+        $sheet->getColumnDimension('I')->setWidth(15); // Harga
+        $sheet->getColumnDimension('J')->setWidth(25); // Lokasi
 
-        // Simpan dan unduh file Excel
+        // 12. Tambahkan border hanya jika data tidak terlalu banyak
+        if ($totalProcessed < 5000) {
+            $styleArray = [
+                'borders' => [
+                    'allBorders' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    ],
+                ],
+            ];
+            $sheet->getStyle('A1:L' . ($row - 1))->applyFromArray($styleArray);
+        }
+
+        // 13. Bersihkan memory sebelum save
+        gc_collect_cycles();
+
+        // 14. Output dengan buffer yang dioptimasi
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header('Content-Disposition: attachment; filename="' . $fileName . '"');
         header('Cache-Control: max-age=0');
+        header('Cache-Control: max-age=1');
+        header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+        header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
+        header('Cache-Control: cache, must-revalidate');
+        header('Pragma: public');
 
-        $writer = new Xlsx($spreadsheet);
-        $writer->save('php://output');
+        // 15. Gunakan output buffering
+        ob_start();
+
+        try {
+            $writer = new Xlsx($spreadsheet);
+
+            // Optimasi writer
+            $writer->setPreCalculateFormulas(false);
+            $writer->setUseDiskCaching(true);
+
+            $writer->save('php://output');
+        } catch (Exception $e) {
+            ob_end_clean();
+            log_message('error', 'Export error: ' . $e->getMessage());
+            session()->setFlashdata('error', 'Export gagal: ' . $e->getMessage());
+            return redirect()->back();
+        }
+
+        // 16. Bersihkan memory
+        $spreadsheet->disconnectWorksheets();
+        unset($spreadsheet);
+
+        ob_end_flush();
         exit;
     }
 
