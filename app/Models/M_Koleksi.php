@@ -151,7 +151,7 @@ class M_Koleksi extends Model
     }
     public function getKoleksiBatch($limit, $offset)
     {
-        return $this->db->table('koleksi')->limit($limit, $offset)->get()->getResultArray();
+        return $this->db->table('data_koleksi')->limit($limit, $offset)->get()->getResultArray();
     }
 
     public function getKoleksiNoImage($perPage = 15, $keyword = null)
