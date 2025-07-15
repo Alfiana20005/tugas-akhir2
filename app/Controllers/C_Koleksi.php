@@ -189,23 +189,8 @@ class C_Koleksi extends BaseController
 
     public function tampilKoleksi($kode_kategori)
     {
-        // Inisialisasi pager
-        $pager = \Config\Services::pager();
-
-        // Menentukan jumlah data per halaman
-        $perPage = 10;
-
-        // Mendapatkan halaman saat ini dari URL
-        $page = $this->request->getVar('page') ?? 1;
-
-        // Mendapatkan keyword search dari URL
-        $search = $this->request->getVar('search') ?? '';
-
-        // Mendapatkan data koleksi berdasarkan kategori dengan pagination dan search
-        $data_koleksi = $this->M_Koleksi->getKoleksiByKategoriPaginated($kode_kategori, $perPage, $page, $search);
-
-        // Mendapatkan total data untuk pagination dengan search
-        $totalData = $this->M_Koleksi->getTotalKoleksiByKategori($kode_kategori, $search);
+        // Mendapatkan data koleksi berdasarkan kategori
+        $data_koleksi = $this->M_Koleksi->getKoleksiByKategori($kode_kategori);
 
         // Mendapatkan nama kategori
         $kategoriName = $this->M_Koleksi->getKategoriName($kode_kategori);
@@ -225,18 +210,11 @@ class C_Koleksi extends BaseController
             'data_koleksi' => $data_koleksi,
             'kategori' => $kategoriName,
             'judul' => $judulKategori,
-            'pager' => $pager,
-            'currentPage' => $page,
-            'perPage' => $perPage,
-            'totalData' => $totalData,
-            'kode_kategori' => $kode_kategori,
-            'search' => $search
         ];
 
         // Menampilkan view dengan data yang telah disiapkan
         return view('pengkajian/v_dataKoleksi', $data);
     }
-
     public function detailKoleksi($id)
     {
         // $this->M_Koleksi->enableQueryLog();

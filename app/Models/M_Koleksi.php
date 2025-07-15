@@ -66,47 +66,13 @@ class M_Koleksi extends Model
             ->get()
             ->getRowArray();
     }
-    public function getKoleksiByKategoriPaginated($kode_kategori, $perPage, $page, $search = '')
+    public function getKoleksiByKategori($kode_kategori)
     {
-        $offset = ($page - 1) * $perPage;
-
-        $builder = $this->db->table('data_koleksi')
-            ->where('kode_kategori', $kode_kategori);
-
-        // Tambahkan kondisi search jika ada
-        if (!empty($search)) {
-            $builder->groupStart()
-                ->like('nama_inv', $search)
-                ->orLike('no_registrasi', $search)
-                ->orLike('no_inventaris', $search)
-                ->orLike('kode_lk', $search)
-                ->orLike('keadaan', $search)
-                ->groupEnd();
-        }
-
-        return $builder->orderBy("CAST(no_registrasi AS UNSIGNED)", 'ASC')
-            ->limit($perPage, $offset)
+        return $this->db->table('data_koleksi')
+            ->where('kode_kategori', $kode_kategori)
+            ->orderBy("CAST(no_registrasi AS UNSIGNED)", 'ASC')
             ->get()
             ->getResultArray();
-    }
-
-    public function getTotalKoleksiByKategori($kode_kategori, $search = '')
-    {
-        $builder = $this->db->table('data_koleksi')
-            ->where('kode_kategori', $kode_kategori);
-
-        // Tambahkan kondisi search jika ada
-        if (!empty($search)) {
-            $builder->groupStart()
-                ->like('nama_inv', $search)
-                ->orLike('no_registrasi', $search)
-                ->orLike('no_inventaris', $search)
-                ->orLike('kode_lk', $search)
-                ->orLike('keadaan', $search)
-                ->groupEnd();
-        }
-
-        return $builder->countAllResults();
     }
     public function countKoleksi()
     {
@@ -164,7 +130,7 @@ class M_Koleksi extends Model
 
         // Pilih semua kolom dari tabel
         $builder->select('*');
-        $builder->orderBy("CAST(kode_lk AS UNSIGNED)", 'ASC');
+        $builder->orderBy("CAST(no_registrasi AS UNSIGNED)", 'ASC');
 
 
         // Jika ada pencarian, tambahkan kondisi 'like'
@@ -176,7 +142,6 @@ class M_Koleksi extends Model
             $builder->orlike('status', $keyword);
             $builder->orlike('kode_lk', $keyword);
             $builder->orlike('lemari', $keyword);
-            $builder->orlike('lokasi', $keyword);
             $builder->orlike('rak', $keyword);
             $builder->orlike('zona', $keyword);
         }
