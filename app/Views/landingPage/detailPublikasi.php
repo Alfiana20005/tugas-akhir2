@@ -24,11 +24,37 @@
         <div class="row">
             <div class="col-lg-8 mx-auto">
                 <div class="publication-detail">
-                    <!-- Publication Image -->
-                    <div class="mb-4 text-center">
-                        <img src="<?= base_url("img/publikasi/" . $publikasi['foto']); ?>"
-                            alt="<?= $publikasi['judul']; ?>"
-                            class="img-fluid rounded shadow">
+                    <!-- Publication Preview -->
+                    <div class="mb-4">
+                        <?php
+                        // Convert Google Drive link to embed format
+                        $embedUrl = '';
+                        if (strpos($publikasi['link'], 'drive.google.com') !== false) {
+                            // Extract file ID from Google Drive URL
+                            preg_match('/\/d\/([a-zA-Z0-9-_]+)/', $publikasi['link'], $matches);
+                            if (isset($matches[1])) {
+                                $fileId = $matches[1];
+                                $embedUrl = "https://drive.google.com/file/d/{$fileId}/preview";
+                            }
+                        }
+                        ?>
+
+                        <?php if ($embedUrl): ?>
+                            <!-- Google Drive Preview -->
+                            <div class="embed-responsive" style="position: relative; width: 100%; height: 600px; overflow: hidden; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                                <iframe src="<?= $embedUrl; ?>"
+                                    style="width: 100%; height: 100%; border: none;"
+                                    allow="autoplay">
+                                </iframe>
+                            </div>
+                        <?php else: ?>
+                            <!-- Fallback: Show image if not Google Drive link -->
+                            <div class="text-center">
+                                <img src="<?= base_url("img/publikasi/" . $publikasi['foto']); ?>"
+                                    alt="<?= $publikasi['judul']; ?>"
+                                    class="img-fluid rounded shadow">
+                            </div>
+                        <?php endif; ?>
                     </div>
 
                     <!-- Publication Title -->
@@ -47,12 +73,21 @@
 
                     <!-- Action Buttons -->
                     <div class="text-center">
-                        <a href="<?= $publikasi['link']; ?>"
-                            target="_blank"
-                            class="btn btn-primary btn-lg mb-3"
-                            style="background-color:#850000; border-color:#850000;">
-                            <i class="fa fa-external-link"></i> Baca Publikasi Lengkap
-                        </a>
+                        <?php if ($embedUrl): ?>
+                            <a href="<?= $publikasi['link']; ?>"
+                                target="_blank"
+                                class="btn btn-primary btn-lg mb-3"
+                                style="background-color:#850000; border-color:#850000;">
+                                <i class="fa fa-download"></i> Download / Buka di Google Drive
+                            </a>
+                        <?php else: ?>
+                            <a href="<?= $publikasi['link']; ?>"
+                                target="_blank"
+                                class="btn btn-primary btn-lg mb-3"
+                                style="background-color:#850000; border-color:#850000;">
+                                <i class="fa fa-external-link"></i> Baca Publikasi Lengkap
+                            </a>
+                        <?php endif; ?>
                         <br>
                         <a href="<?= base_url('publikasi2'); ?>"
                             class="btn btn-outline-secondary">
