@@ -246,6 +246,7 @@ $routes->get('/koleksi_kategori/(:segment)', 'C_LandingPage::koleksi_kategori/$1
 $routes->get('/koleksi_detail2', 'C_LandingPage::koleksi_detail2');
 $routes->get('/koleksi_detail2/(:segment)', 'C_LandingPage::koleksi_detail2/$1');
 $routes->get('/publikasi2', 'C_LandingPage::publikasi2');
+$routes->get('/publikasi2_detail/(:num)', 'C_LandingPage::publikasi2_detail/$1');
 $routes->get('/perpustakaan2', 'C_LandingPage::perpustakaan2');
 $routes->get('/detailBuku/(:segment)', 'C_LandingPage::detailBuku/$1');
 

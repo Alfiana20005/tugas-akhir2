@@ -538,9 +538,9 @@ class C_LandingPage extends BaseController
         return view('landingPage/koleksi_detail2', $data);
     }
 
+    // Add this new method to your Controller
     public function publikasi2(): string
     {
-
         $publikasi = $this->M_Publikasi->findAll();
         $session = session();
         $id_user = $session->get('id_user');
@@ -554,12 +554,37 @@ class C_LandingPage extends BaseController
             'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
             'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
             'user' => $user
-            // 'berita' => $berita
         ];
-
 
         return view('landingPage/publikasi2', $data);
     }
+
+    // Add this new method for publication detail
+    public function publikasi2_detail($id_publikasi): string
+    {
+        $publikasi = $this->M_Publikasi->getPublikasi($id_publikasi);
+
+        if (!$publikasi) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException('Publikasi tidak ditemukan');
+        }
+
+        $session = session();
+        $id_user = $session->get('id_user');
+        $user = $this->M_User->getUser($id_user);
+
+        $data = [
+            'title' => 'Detail Publikasi - ' . $publikasi['judul'],
+            'publikasi' => $publikasi,
+            'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
+            'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
+            'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
+            'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
+            'user' => $user
+        ];
+
+        return view('landingPage/detailPublikasi', $data);
+    }
+
     public function manuskripKol(): string
     {
 
