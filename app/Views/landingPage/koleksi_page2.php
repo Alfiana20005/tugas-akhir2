@@ -10,7 +10,7 @@
         <h1 class="text-white">
           Koleksi
         </h1>
-        <p class="text-white link-nav"><a href="/home">Home </a> <span class="lnr lnr-arrow-right"></span> <a href="/koleksi_page2"> Koleksi</a></p>
+        <p class="text-white link-nav"><a href="/home">Home </a> <span class="fa fa-chevron-right"></span> <a href="/koleksi_page2"> Koleksi</a></p>
       </div>
     </div>
   </div>

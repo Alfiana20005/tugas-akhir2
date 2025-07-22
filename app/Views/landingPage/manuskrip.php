@@ -11,7 +11,7 @@
                 <h1 class="text-white">
                     Manuskrip
                 </h1>
-                <p class="text-white link-nav"><a href="/home">Home </a> <span class="lnr lnr-arrow-right"></span> <a href="/Manuskrip">Manuskrip</a></p>
+                <p class="text-white link-nav"><a href="/home">Home </a> <span class="fa fa-chevron-right"></span> <a href="/Manuskrip">Manuskrip</a></p>
             </div>
         </div>
     </div>

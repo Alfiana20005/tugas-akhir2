@@ -12,7 +12,7 @@
 				<h1 class="text-white">
 					Berita
 				</h1>
-				<p class="text-white link-nav"><a href="/home">Home </a> <span class="lnr lnr-arrow-right"></span> <a href="/berita2"> Berita</a></p>
+				<p class="text-white link-nav"><a href="/home">Home </a> <span class="fa fa-chevron-right"></span> <a href="/berita2"> Berita</a></p>
 			</div>
 		</div>
 	</div>

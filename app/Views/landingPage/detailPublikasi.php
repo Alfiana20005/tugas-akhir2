@@ -11,7 +11,7 @@
                 <h1 class="text-white">
                     Detail Publikasi
                 </h1>
-                <p class="text-white link-nav"><a href="/home">Home </a> <span class="lnr lnr-arrow-right"></span> <a href="/publikasi2"> Publikasi</a> <span class="lnr lnr-arrow-right"></span> Detail</p>
+                <p class="text-white link-nav"><a href="/home">Home </a> <span class="fa fa-chevron-right"></span> <a href="/publikasi2"> Publikasi</a> <span class="fa fa-chevron-right"></span> Detail</p>
             </div>
         </div>
     </div>
