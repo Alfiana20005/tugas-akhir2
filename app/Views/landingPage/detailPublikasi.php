@@ -76,7 +76,7 @@
                         <?php if ($embedUrl): ?>
                             <a href="<?= $publikasi['link']; ?>"
                                 target="_blank"
-                                class="btn btn-primary btn-lg mb-3"
+                                class="btn btn-primary btn-md mb-3"
                                 style="background-color:#850000; border-color:#850000;">
                                 <i class="fa fa-download"></i> Download / Buka di Google Drive
                             </a>
