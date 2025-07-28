@@ -21,37 +21,44 @@ class C_Perpustakaan extends BaseController
         // Get all filter parameters from GET request
         $keyword = $this->request->getGet('keyword');
         $pengarang = $this->request->getGet('pengarang');
-        $penerbit = $this->request->getGet('penerbit');   // Added this line
+        $penerbit = $this->request->getGet('penerbit');
         $tempatTerbit = $this->request->getGet('tempatTerbit');
-        $tahunTerbit = $this->request->getGet('tahunTerbit');   // Added this line
+        $tahunTerbit = $this->request->getGet('tahunTerbit');
         $kategoriBuku = $this->request->getGet('kategoriBuku');
         $status = $this->request->getGet('status');
+        $filter = $this->request->getGet('filter'); // untuk filter no_image
+
+        // Get current page
+        $currentPage = $this->request->getGet('page') ?? 1;
 
         // Get filtered and paginated data
         $data_buku = $this->M_Perpustakaan->getAllWithFilters(
             $keyword,
             $pengarang,
-            $penerbit,        // Added this parameter
+            $penerbit,
             $tempatTerbit,
-            $tahunTerbit,     // Added this parameter
+            $tahunTerbit,
             $kategoriBuku,
-            $status
+            $status,
+            $filter,
+            15, // items per page
+            $currentPage
         );
 
+        // Get pager from model
         $pager = $this->M_Perpustakaan->pager;
 
         // Get unique values for dropdowns
         $pengarang_list = $this->M_Perpustakaan->getUniqueValues('pengarang');
-        $penerbit_list = $this->M_Perpustakaan->getUniqueValues('penerbit');     // Added this line
+        $penerbit_list = $this->M_Perpustakaan->getUniqueValues('penerbit');
         $tempatTerbit_list = $this->M_Perpustakaan->getUniqueValues('tempatTerbit');
-        $tahunTerbit_list = $this->M_Perpustakaan->getUniqueValues('tahunTerbit'); // Added this line
+        $tahunTerbit_list = $this->M_Perpustakaan->getUniqueValues('tahunTerbit');
         $kategoriBuku_list = $this->M_Perpustakaan->getUniqueValues('kategoriBuku');
         $status_list = $this->M_Perpustakaan->getUniqueValues('status');
 
         // Get totals for dashboard cards
         $totalBuku = $this->M_Perpustakaan->countBuku();
         $totalJumlahBuku = $this->M_Perpustakaan->sumEksemplar();
-        // Get book counts by category
         $kategoriCounts = $this->M_Perpustakaan->countByCategory();
 
         // Prepare data to send to view
@@ -60,22 +67,23 @@ class C_Perpustakaan extends BaseController
             'data_buku' => $data_buku,
             'pager' => $pager,
             'pengarang_list' => $pengarang_list,
-            'penerbit_list' => $penerbit_list,           // Added this line
+            'penerbit_list' => $penerbit_list,
             'tempatTerbit_list' => $tempatTerbit_list,
-            'tahunTerbit_list' => $tahunTerbit_list,     // Added this line
+            'tahunTerbit_list' => $tahunTerbit_list,
             'kategoriBuku_list' => $kategoriBuku_list,
             'status_list' => $status_list,
+            'filter' => $filter, // Add current filter
             'filters' => [
                 'keyword' => $keyword,
                 'pengarang' => $pengarang,
-                'penerbit' => $penerbit,                // Added this line
+                'penerbit' => $penerbit,
                 'tempatTerbit' => $tempatTerbit,
-                'tahunTerbit' => $tahunTerbit,          // Added this line
+                'tahunTerbit' => $tahunTerbit,
                 'kategoriBuku' => $kategoriBuku,
                 'status' => $status
             ],
-            'totalBuku' => $totalBuku,                  // Added for dashboard card
-            'totalJumlahBuku' => $totalJumlahBuku,       // Added for dashboard card
+            'totalBuku' => $totalBuku,
+            'totalJumlahBuku' => $totalJumlahBuku,
             'kategoriCounts' => $kategoriCounts
         ];
 

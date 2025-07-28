@@ -83,49 +83,61 @@ class M_Perpustakaan extends Model
     /**
      * Get paginated data with filters
      */
-    public function getAllWithFilters($keyword = null, $pengarang = null, $penerbit = null, $tempatTerbit = null, $tahunTerbit = null, $kategoriBuku = null, $status = null)
-    {
-        $builder = $this->builder();
-
-        // Apply keyword filter (search across multiple columns)
+    public function getAllWithFilters(
+        $keyword = null,
+        $pengarang = null,
+        $penerbit = null,
+        $tempatTerbit = null,
+        $tahunTerbit = null,
+        $kategoriBuku = null,
+        $status = null,
+        $filter = null,
+        $perPage = 15
+    ) {
+        // Apply filters using the model's query builder
         if (!empty($keyword)) {
-            $builder->groupStart()
-                ->like('judul', "%$keyword%")
-                ->orLike('pengarang', "%$keyword%")
-                ->orLike('penerbit', "%$keyword%")
-                ->orLike('kategoriBuku', "%$keyword%")
+            $this->groupStart()
+                ->like('judul', $keyword)
+                ->orLike('pengarang', $keyword)
+                ->orLike('kode', $keyword)
                 ->groupEnd();
         }
 
-        // Apply specific filters
         if (!empty($pengarang)) {
-            $builder->where('pengarang', $pengarang);
+            $this->where('pengarang', $pengarang);
         }
 
         if (!empty($penerbit)) {
-            $builder->where('penerbit', $penerbit);
+            $this->where('penerbit', $penerbit);
         }
 
         if (!empty($tempatTerbit)) {
-            $builder->where('tempatTerbit', $tempatTerbit);
+            $this->where('tempatTerbit', $tempatTerbit);
         }
 
         if (!empty($tahunTerbit)) {
-            $builder->where('tahunTerbit', $tahunTerbit);
+            $this->where('tahunTerbit', $tahunTerbit);
         }
 
         if (!empty($kategoriBuku)) {
-            $builder->where('kategoriBuku', $kategoriBuku);
+            $this->where('kategoriBuku', $kategoriBuku);
         }
 
         if (!empty($status)) {
-            $builder->where('status', $status);
+            $this->where('status', $status);
         }
 
-        // Get all results without pagination
-        return $builder->get()->getResultArray();
-    }
+        // Filter untuk data tanpa sampul
+        if ($filter === 'no_image') {
+            $this->where('foto', 'default.jpg');
+        }
 
+        // Order by untuk konsistensi
+        $this->orderBy('id_buku', 'DESC');
+
+        // Return paginated results
+        return $this->paginate($perPage);
+    }
     /**
      * Get unique values for a specific column
      */
