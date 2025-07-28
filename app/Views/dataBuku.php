@@ -395,12 +395,6 @@
                                     </td>
                                     <td style="text-align: center;">
                                         <div class="btn-group" role="group">
-                                            <a href="<?= base_url("/detailBuku/{$buku['id_buku']}"); ?>"
-                                                class="btn btn-info btn-sm"
-                                                title="Detail Buku">
-                                                <i class="fas fa-eye"></i> Detail
-                                            </a>
-
                                             <?php if (session()->get('level') == 'Perpustakaan'): ?>
                                                 <a href="#"
                                                     class="btn btn-primary btn-sm"
