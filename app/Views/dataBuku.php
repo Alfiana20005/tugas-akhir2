@@ -146,6 +146,7 @@
                                     <option value="Lemari 4">Lemari 4</option>
                                     <option value="Lemari 5">Lemari 5</option>
                                     <option value="Lemari 6">Lemari 6</option>
+                                    <option value="Lemari Berkala">Lemari Berkala</option>
                                 </select>
                             </div>
                         </div>
@@ -171,7 +172,6 @@
                                     <option <?= old("kategoriBuku") == 'Hasil Penelitian' ? 'selected' : 'Hasil Penelitian' ?> value="Hasil Penelitian">Hasil Penelitian</option>
                                     <option <?= old("kategoriBuku") == 'Buku Anak' ? 'selected' : 'Buku Anak' ?> value="Buku Anak">Buku Anak</option>
                                     <option <?= old("kategoriBuku") == 'Arsip' ? 'selected' : 'Arsip' ?> value="Arsip">Arsip</option>
-                                    <option <?= old("kategoriBuku") == 'Berkala' ? 'selected' : 'Berkala' ?> value="Berkala">Berkala</option>
                                     <option <?= old("kategoriBuku") == 'Karya Umum' ? 'selected' : 'Karya Umum' ?> value="Karya Umum">Karya Umum</option>
                                 </select>
                             </div>
@@ -316,33 +316,59 @@
                 </div>
             </div>
 
+            <!-- Search Box -->
+            <div class="mb-3">
+                <div class="row">
+                    <div class="col-md-6">
+                        <input type="text" id="searchInput" class="form-control" placeholder="Cari berdasarkan judul, pengarang, atau kode buku...">
+                    </div>
+                    <div class="col-md-3">
+                        <select id="entriesPerPage" class="form-control">
+                            <option value="10">10 entries per page</option>
+                            <option value="25" selected>25 entries per page</option>
+                            <option value="50">50 entries per page</option>
+                            <option value="100">100 entries per page</option>
+                            <option value="all">Show all</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="button" class="btn btn-secondary" onclick="resetFilters()">Reset Filter</button>
+                    </div>
+                </div>
+            </div>
+
             <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="font-size: 11pt;">
-                    <thead style="text-align: center;">
+                <table class="table table-bordered table-striped" id="" width="100%" cellspacing="0" style="font-size: 11pt;">
+                    <thead style="text-align: center; background-color: #f8f9fc;">
                         <tr>
-                            <th>No</th>
-                            <th>Kode</th>
+                            <th onclick="sortTable(0)" style="cursor: pointer;">No <i class="fas fa-sort"></i></th>
+                            <th onclick="sortTable(1)" style="cursor: pointer;">Kode <i class="fas fa-sort"></i></th>
                             <th>Sampul</th>
-                            <th>Judul</th>
-                            <th>Pengarang</th>
-                            <th>Penerbit</th>
-                            <th>Tempat Terbit</th>
-                            <th>Tahun Terbit</th>
-                            <th>Eksemplar</th>
-                            <th>Nomor Seri</th>
-                            <th>Kategori Buku</th>
-                            <th>Lokasi Penyimpanan</th>
-                            <th>Status</th>
-                            <th>Keterangan</th>
-                            <th>OPAC</th>
+                            <th onclick="sortTable(3)" style="cursor: pointer;">Judul <i class="fas fa-sort"></i></th>
+                            <th onclick="sortTable(4)" style="cursor: pointer;">Pengarang <i class="fas fa-sort"></i></th>
+                            <th onclick="sortTable(5)" style="cursor: pointer;">Penerbit <i class="fas fa-sort"></i></th>
+                            <th onclick="sortTable(6)" style="cursor: pointer;">Tempat Terbit <i class="fas fa-sort"></i></th>
+                            <th onclick="sortTable(7)" style="cursor: pointer;">Tahun Terbit <i class="fas fa-sort"></i></th>
+                            <th onclick="sortTable(8)" style="cursor: pointer;">Eksemplar <i class="fas fa-sort"></i></th>
+                            <th onclick="sortTable(9)" style="cursor: pointer;">Nomor Seri <i class="fas fa-sort"></i></th>
+                            <th onclick="sortTable(10)" style="cursor: pointer;">Kategori Buku <i class="fas fa-sort"></i></th>
+                            <th onclick="sortTable(11)" style="cursor: pointer;">Lokasi Penyimpanan <i class="fas fa-sort"></i></th>
+                            <th onclick="sortTable(12)" style="cursor: pointer;">Status <i class="fas fa-sort"></i></th>
+                            <th onclick="sortTable(13)" style="cursor: pointer;">Keterangan <i class="fas fa-sort"></i></th>
+                            <th onclick="sortTable(14)" style="cursor: pointer;">OPAC <i class="fas fa-sort"></i></th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
-                    <tbody style="text-align: center;">
+                    <tbody id="tableBody" style="text-align: center;">
                         <?php
                         $no = 1;
                         foreach ($data_buku as $buku): ?>
-                            <tr>
+                            <tr data-pengarang="<?= $buku['pengarang']; ?>"
+                                data-penerbit="<?= $buku['penerbit']; ?>"
+                                data-tempatTerbit="<?= $buku['tempatTerbit']; ?>"
+                                data-tahunTerbit="<?= $buku['tahunTerbit']; ?>"
+                                data-kategori="<?= $buku['kategoriBuku']; ?>"
+                                data-status="<?= $buku['status']; ?>">
                                 <td><?= $no++; ?></td>
                                 <td><?= $buku['kode']; ?></td>
                                 <td><img src="<?= base_url("img/perpustakaan/" . $buku['foto']); ?>" alt="" style="width: 60px;" loading="lazy"></td>
@@ -370,6 +396,20 @@
                         <?php endforeach; ?>
                     </tbody>
                 </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <div id="showingInfo" class="text-muted"></div>
+                </div>
+                <div class="col-md-6">
+                    <nav aria-label="Table navigation">
+                        <ul class="pagination justify-content-end" id="pagination">
+                            <!-- Pagination will be generated by JavaScript -->
+                        </ul>
+                    </nav>
+                </div>
             </div>
 
             <?php foreach ($data_buku as $buku): ?>
@@ -447,7 +487,6 @@
                                                 <option value="Hasil Penelitian" <?= ($buku['kategoriBuku'] == 'Hasil Penelitian') ? 'selected' : ''; ?>>Hasil Penelitian</option>
                                                 <option value="Buku Anak" <?= ($buku['kategoriBuku'] == 'Buku Anak') ? 'selected' : ''; ?>>Buku Anak</option>
                                                 <option value="Arsip" <?= ($buku['kategoriBuku'] == 'Arsip') ? 'selected' : ''; ?>>Arsip</option>
-                                                <option value="Berkala" <?= ($buku['kategoriBuku'] == 'Berkala') ? 'selected' : ''; ?>>Berkala</option>
                                                 <option value="Karya Umum" <?= ($buku['kategoriBuku'] == 'Karya Umum') ? 'selected' : ''; ?>>Karya Umum</option>
                                             </select>
                                         </div>
@@ -461,6 +500,7 @@
                                                 <option value="Lemari 4" <?= ($buku['rak'] == 'Lemari 4') ? 'selected' : ''; ?>>Lemari 4</option>
                                                 <option value="Lemari 5" <?= ($buku['rak'] == 'Lemari 5') ? 'selected' : ''; ?>>Lemari 5</option>
                                                 <option value="Lemari 6" <?= ($buku['rak'] == 'Lemari 6') ? 'selected' : ''; ?>>Lemari 6</option>
+                                                <option value="Lemari Berkala" <?= ($buku['rak'] == 'Lemari Berkala') ? 'selected' : ''; ?>>Lemari Berkala</option>
                                             </select>
                                         </div>
                                     </div>
@@ -521,97 +561,183 @@
 <script>
     var totalBuku = <?php echo $totalBuku; ?>;
     var totalJumlahBuku = <?php echo $totalJumlahBuku; ?>;
+
+    let currentPage = 1;
+    let itemsPerPage = 25;
+    let filteredRows = [];
+    let allRows = [];
+    let sortDirection = {};
+
     $(document).ready(function() {
-        var table = $('#dataTable').DataTable({
-            // Optimasi performa
-            processing: true,
-            deferRender: true,
-            orderCellsTop: true,
-            stateSave: false, // Matikan jika tidak diperlukan
+        // Initialize
+        allRows = $('#tableBody tr').toArray();
+        filteredRows = [...allRows];
+        updateTable();
 
-            // Konfigurasi responsif
-            responsive: {
-                details: {
-                    type: 'column',
-                    target: 'tr'
-                }
-            },
-
-            // Optimasi paging
-            lengthMenu: [
-                [10, 25, 50, 100],
-                [10, 25, 50, 100]
-            ],
-            pageLength: 25, // Default lebih rendah
-
-            // Optimasi sorting
-            order: [
-                [0, 'asc']
-            ],
-            columnDefs: [{
-                    orderable: false,
-                    targets: [2, 14] // Kolom gambar dan aksi
-                },
-                {
-                    // Nonaktifkan search pada kolom tertentu jika tidak diperlukan
-                    searchable: false,
-                    targets: [2, 14]
-                }
-            ],
-
-            // Optimasi DOM
-            dom: '<"row"<"col-sm-6"l><"col-sm-6"f>>rtip',
-
-            // Optimasi language untuk loading
-            language: {
-                processing: "Memproses data...",
-                loadingRecords: "Memuat...",
-                zeroRecords: "Data tidak ditemukan"
-            }
+        // Search functionality
+        $('#searchInput').on('input', function() {
+            applyFilters();
         });
 
-        // Optimasi event handler dengan debouncing
-        function debounce(func, wait) {
-            let timeout;
-            return function executedFunction(...args) {
-                const later = () => {
-                    clearTimeout(timeout);
-                    func(...args);
-                };
-                clearTimeout(timeout);
-                timeout = setTimeout(later, wait);
-            };
-        }
-
-        // Apply custom filters dengan debouncing
-        const debouncedFilter = debounce(function(column, value) {
-            table.column(column).search(value).draw();
-        }, 300);
-
-        $('#filterPengarang').on('change', function() {
-            debouncedFilter(4, this.value);
+        // Entries per page
+        $('#entriesPerPage').on('change', function() {
+            itemsPerPage = this.value === 'all' ? filteredRows.length : parseInt(this.value);
+            currentPage = 1;
+            updateTable();
         });
 
-        $('#filterPenerbit').on('change', function() {
-            debouncedFilter(5, this.value);
-        });
-
-        $('#filterTempatTerbit').on('change', function() {
-            debouncedFilter(6, this.value);
-        });
-
-        $('#filterTahunTerbit').on('change', function() {
-            debouncedFilter(7, this.value);
-        });
-
-        $('#filterKategori').on('change', function() {
-            debouncedFilter(10, this.value);
-        });
-
-        $('#filterStatus').on('change', function() {
-            debouncedFilter(12, this.value);
+        // Filter dropdowns
+        $('#filterPengarang, #filterPenerbit, #filterTempatTerbit, #filterTahunTerbit, #filterKategori, #filterStatus').on('change', function() {
+            applyFilters();
         });
     });
+
+    function applyFilters() {
+        const searchTerm = $('#searchInput').val().toLowerCase();
+        const pengarangFilter = $('#filterPengarang').val();
+        const penerbitFilter = $('#filterPenerbit').val();
+        const tempatTerbitFilter = $('#filterTempatTerbit').val();
+        const tahunTerbitFilter = $('#filterTahunTerbit').val();
+        const kategoriFilter = $('#filterKategori').val();
+        const statusFilter = $('#filterStatus').val();
+
+        filteredRows = allRows.filter(row => {
+            const $row = $(row);
+            const rowText = $row.text().toLowerCase();
+
+            // Search filter
+            if (searchTerm && !rowText.includes(searchTerm)) {
+                return false;
+            }
+
+            // Dropdown filters
+            if (pengarangFilter && $row.data('pengarang') !== pengarangFilter) return false;
+            if (penerbitFilter && $row.data('penerbit') !== penerbitFilter) return false;
+            if (tempatTerbitFilter && $row.data('tempatterbit') !== tempatTerbitFilter) return false;
+            if (tahunTerbitFilter && $row.data('tahunterbit') !== tahunTerbitFilter) return false;
+            if (kategoriFilter && $row.data('kategori') !== kategoriFilter) return false;
+            if (statusFilter && $row.data('status') !== statusFilter) return false;
+
+            return true;
+        });
+
+        currentPage = 1;
+        updateTable();
+    }
+
+    function updateTable() {
+        const tbody = $('#tableBody');
+        tbody.empty();
+
+        if (filteredRows.length === 0) {
+            tbody.append('<tr><td colspan="16" class="text-center">Tidak ada data yang ditemukan</td></tr>');
+            updatePagination();
+            updateShowingInfo();
+            return;
+        }
+
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = itemsPerPage === filteredRows.length ? filteredRows.length : Math.min(startIndex + itemsPerPage, filteredRows.length);
+
+        // Update row numbers and display rows
+        for (let i = startIndex; i < endIndex; i++) {
+            const $row = $(filteredRows[i]);
+            $row.find('td:first').text(i + 1);
+            tbody.append($row);
+        }
+
+        updatePagination();
+        updateShowingInfo();
+    }
+
+    function updatePagination() {
+        const totalPages = Math.ceil(filteredRows.length / itemsPerPage);
+        const pagination = $('#pagination');
+        pagination.empty();
+
+        if (totalPages <= 1) return;
+
+        // Previous button
+        pagination.append(`
+        <li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
+            <a class="page-link" href="#" onclick="changePage(${currentPage - 1})">Previous</a>
+        </li>
+    `);
+
+        // Page numbers
+        for (let i = 1; i <= totalPages; i++) {
+            if (i === 1 || i === totalPages || (i >= currentPage - 2 && i <= currentPage + 2)) {
+                pagination.append(`
+                <li class="page-item ${currentPage === i ? 'active' : ''}">
+                    <a class="page-link" href="#" onclick="changePage(${i})">${i}</a>
+                </li>
+            `);
+            } else if (i === currentPage - 3 || i === currentPage + 3) {
+                pagination.append('<li class="page-item disabled"><span class="page-link">...</span></li>');
+            }
+        }
+
+        // Next button
+        pagination.append(`
+        <li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
+            <a class="page-link" href="#" onclick="changePage(${currentPage + 1})">Next</a>
+        </li>
+    `);
+    }
+
+    function updateShowingInfo() {
+        const startIndex = (currentPage - 1) * itemsPerPage + 1;
+        const endIndex = Math.min(currentPage * itemsPerPage, filteredRows.length);
+
+        $('#showingInfo').text(`Showing ${startIndex} to ${endIndex} of ${filteredRows.length} entries`);
+    }
+
+    function changePage(page) {
+        const totalPages = Math.ceil(filteredRows.length / itemsPerPage);
+        if (page >= 1 && page <= totalPages) {
+            currentPage = page;
+            updateTable();
+        }
+    }
+
+    function sortTable(columnIndex) {
+        const currentDirection = sortDirection[columnIndex] || 'asc';
+        const newDirection = currentDirection === 'asc' ? 'desc' : 'asc';
+        sortDirection[columnIndex] = newDirection;
+
+        filteredRows.sort((a, b) => {
+            let aVal = $(a).find('td').eq(columnIndex).text().trim();
+            let bVal = $(b).find('td').eq(columnIndex).text().trim();
+
+            // Handle numeric columns
+            if (columnIndex === 0 || columnIndex === 7 || columnIndex === 8) {
+                aVal = parseInt(aVal) || 0;
+                bVal = parseInt(bVal) || 0;
+            }
+
+            if (aVal < bVal) return newDirection === 'asc' ? -1 : 1;
+            if (aVal > bVal) return newDirection === 'asc' ? 1 : -1;
+            return 0;
+        });
+
+        // Update sort icons
+        $('th i').removeClass('fa-sort-up fa-sort-down').addClass('fa-sort');
+        $(`th:eq(${columnIndex}) i`).removeClass('fa-sort').addClass(newDirection === 'asc' ? 'fa-sort-up' : 'fa-sort-down');
+
+        updateTable();
+    }
+
+    function resetFilters() {
+        $('#searchInput').val('');
+        $('#filterPengarang, #filterPenerbit, #filterTempatTerbit, #filterTahunTerbit, #filterKategori, #filterStatus').val('');
+        $('#entriesPerPage').val('25');
+        itemsPerPage = 25;
+        filteredRows = [...allRows];
+        currentPage = 1;
+        sortDirection = {};
+        $('th i').removeClass('fa-sort-up fa-sort-down').addClass('fa-sort');
+        updateTable();
+    }
 
     // Optimasi untuk modal dan AJAX
     $(document).ready(function() {
