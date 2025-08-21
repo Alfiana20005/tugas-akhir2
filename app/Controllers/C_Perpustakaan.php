@@ -35,8 +35,8 @@ class C_Perpustakaan extends BaseController
         // Get current page
         $currentPage = $this->request->getGet('page') ?? 1;
 
-        // Get filtered and paginated data
-        $data_buku = $this->M_Perpustakaan->getAllWithFilters(
+        // Get filtered and paginated data with grouping by title
+        $data_buku = $this->M_Perpustakaan->getAllWithFiltersGrouped(
             $keyword,
             $pengarang,
             $penerbit,
@@ -91,7 +91,7 @@ class C_Perpustakaan extends BaseController
             'bahasa_list' => $bahasa_list,
             'rak_list' => $rak_list,
             'jenisPengarang_list' => $jenisPengarang_list,
-            'filter' => $filter, // Add current filter
+            'filter' => $filter,
             'filters' => [
                 'keyword' => $keyword,
                 'pengarang' => $pengarang,
@@ -480,6 +480,69 @@ class C_Perpustakaan extends BaseController
         // Redirect ke halaman yang sesuai
         return redirect()->back();
     }
+
+    /**
+     * Method untuk menghapus multiple buku sekaligus
+     */
+    public function deleteMultipleBuku()
+    {
+        // Check if user has permission
+        if (session()->get('level') !== 'Perpustakaan') {
+            return redirect()->back()->with('error', 'Anda tidak memiliki akses untuk menghapus data buku.');
+        }
+
+        $bookIds = $this->request->getPost('book_ids');
+
+        if (empty($bookIds)) {
+            return redirect()->back()->with('error', 'Tidak ada buku yang dipilih untuk dihapus.');
+        }
+
+        // Convert comma-separated IDs to array
+        $idsArray = explode(',', $bookIds);
+        $idsArray = array_map('trim', $idsArray);
+
+        $db = \Config\Database::connect();
+        $db->transStart();
+
+        try {
+            $deletedCount = 0;
+
+            foreach ($idsArray as $id) {
+                if (is_numeric($id)) {
+                    // Get book data first to delete image file
+                    $buku = $this->M_Perpustakaan->find($id);
+
+                    if ($buku) {
+                        // Delete image file if exists and not default
+                        if (!empty($buku['foto']) && !in_array($buku['foto'], ['no_cover.jpeg', 'default.jpg'])) {
+                            $imagePath = FCPATH . 'img/perpustakaan/' . $buku['foto'];
+                            if (file_exists($imagePath)) {
+                                unlink($imagePath);
+                            }
+                        }
+
+                        // Delete from database
+                        if ($this->M_Perpustakaan->delete($id)) {
+                            $deletedCount++;
+                        }
+                    }
+                }
+            }
+
+            $db->transComplete();
+
+            if ($db->transStatus() === false) {
+                return redirect()->back()->with('error', 'Gagal menghapus data buku.');
+            }
+
+            $message = "Berhasil menghapus {$deletedCount} eksemplar buku.";
+            return redirect()->back()->with('success', $message);
+        } catch (\Exception $e) {
+            $db->transRollback();
+            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
+    }
+
 
     public function tampilBuku($kategoriBuku)
     {

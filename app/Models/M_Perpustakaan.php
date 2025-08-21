@@ -34,7 +34,6 @@ class M_Perpustakaan extends Model
         'foto'
     ];
 
-
     protected $validationMessages = [];
     protected $skipValidation = false;
     protected $cleanValidationRules = true;
@@ -86,6 +85,17 @@ class M_Perpustakaan extends Model
     public function sumEksemplar()
     {
         return $this->db->table('perpustakaan')->selectSum('eksemplar')->get()->getRow()->eksemplar ?? 0;
+    }
+
+    /**
+     * Get total eksemplar from grouped data (alternative method)
+     */
+    public function sumEksemplarGrouped()
+    {
+        $builder = $this->db->table($this->table);
+        $builder->select('SUM(eksemplar) as total_eksemplar');
+        $result = $builder->get()->getRow();
+        return $result ? $result->total_eksemplar : 0;
     }
 
     public function countByCategory()
@@ -155,12 +165,294 @@ class M_Perpustakaan extends Model
             $this->where('foto', 'default.jpg');
         }
 
-        // Order by untuk konsistensi
+        // Order by untuk konsistensi - urutkan dari yang paling akhir ditambahkan
         $this->orderBy('id_buku', 'DESC');
 
         // Return paginated results
         return $this->paginate($perPage);
     }
+
+    /**
+     * Get paginated data with filters and grouped by title (NEW METHOD)
+     */
+    public function getAllWithFiltersGrouped(
+        $keyword = null,
+        $pengarang = null,
+        $penerbit = null,
+        $tempatTerbit = null,
+        $tahunTerbit = null,
+        $jenisBuku = null,
+        $kategoriBuku = null,
+        $status = null,
+        $keadaan = null,
+        $bahasa = null,
+        $rak = null,
+        $tampilkan = null,
+        $filter = null,
+        $perPage = 15,
+        $page = 1
+    ) {
+        // First, build the base query
+        $builder = $this->db->table($this->table);
+
+        // Select fields with COUNT as jumlah_eksemplar dan GROUP_CONCAT untuk multiple kode eksemplar
+        $builder->select('
+            MIN(id_buku) as id_buku,
+            MIN(kode) as kode,
+            GROUP_CONCAT(DISTINCT kodeEksemplar ORDER BY kodeEksemplar SEPARATOR ", ") as kodeEksemplar,
+            MIN(foto) as foto,
+            judul,
+            MIN(pengarang) as pengarang,
+            MIN(jenisPengarang) as jenisPengarang,
+            MIN(penerbit) as penerbit,
+            MIN(tempatTerbit) as tempatTerbit,
+            MIN(tahunTerbit) as tahunTerbit,
+            MIN(jenisBuku) as jenisBuku,
+            MIN(kategoriBuku) as kategoriBuku,
+            MIN(bahasa) as bahasa,
+            MIN(rak) as rak,
+            MIN(isbn) as isbn,
+            MIN(subjek) as subjek,
+            MIN(status) as status,
+            MIN(keadaan) as keadaan,
+            MIN(eksemplar) as eksemplar,
+            MIN(nomorSeri) as nomorSeri,
+            MIN(keterangan) as keterangan,
+            MIN(tampilkan) as tampilkan,
+            COUNT(*) as jumlah_eksemplar,
+            SUM(eksemplar) as total_eksemplar,
+            GROUP_CONCAT(DISTINCT id_buku ORDER BY id_buku SEPARATOR ",") as all_ids
+        ');
+
+        // Apply filters
+        if (!empty($keyword)) {
+            $builder->groupStart()
+                ->like('judul', $keyword)
+                ->orLike('pengarang', $keyword)
+                ->orLike('penerbit', $keyword)
+                ->orLike('subjek', $keyword)
+                ->orLike('isbn', $keyword)
+                ->groupEnd();
+        }
+
+        if (!empty($pengarang)) {
+            $builder->where('pengarang', $pengarang);
+        }
+
+        if (!empty($penerbit)) {
+            $builder->where('penerbit', $penerbit);
+        }
+
+        if (!empty($tempatTerbit)) {
+            $builder->where('tempatTerbit', $tempatTerbit);
+        }
+
+        if (!empty($tahunTerbit)) {
+            $builder->where('tahunTerbit', $tahunTerbit);
+        }
+
+        if (!empty($jenisBuku)) {
+            $builder->where('jenisBuku', $jenisBuku);
+        }
+
+        if (!empty($kategoriBuku)) {
+            $builder->where('kategoriBuku', $kategoriBuku);
+        }
+
+        if (!empty($status)) {
+            $builder->where('status', $status);
+        }
+
+        if (!empty($keadaan)) {
+            $builder->where('keadaan', $keadaan);
+        }
+
+        if (!empty($bahasa)) {
+            $builder->where('bahasa', $bahasa);
+        }
+
+        if (!empty($rak)) {
+            $builder->where('rak', $rak);
+        }
+
+        // Filter untuk buku tanpa gambar
+        if ($filter === 'no_image') {
+            $builder->groupStart()
+                ->where('foto', '')
+                ->orWhere('foto', 'no_cover.jpeg')
+                ->orWhere('foto', 'default.jpg')
+                ->orWhere('foto', null)
+                ->groupEnd();
+        }
+
+        // Group by judul untuk menggabungkan buku dengan judul sama
+        $builder->groupBy(['judul', 'pengarang', 'penerbit']);
+
+        // Order by
+        if (!empty($tampilkan)) {
+            switch ($tampilkan) {
+                case 'terbaru':
+                    $builder->orderBy('MIN(tahunTerbit)', 'DESC');
+                    break;
+                case 'terlama':
+                    $builder->orderBy('MIN(tahunTerbit)', 'ASC');
+                    break;
+                case 'a-z':
+                    $builder->orderBy('judul', 'ASC');
+                    break;
+                case 'z-a':
+                    $builder->orderBy('judul', 'DESC');
+                    break;
+                default:
+                    // Default: urutkan berdasarkan ID terbesar (paling akhir ditambahkan)
+                    $builder->orderBy('MAX(id_buku)', 'DESC');
+            }
+        } else {
+            // Default: urutkan berdasarkan ID terbesar (paling akhir ditambahkan)
+            $builder->orderBy('MAX(id_buku)', 'DESC');
+        }
+
+        // Manual pagination
+        $offset = ($page - 1) * $perPage;
+        $builder->limit($perPage, $offset);
+
+        // Get the results
+        $results = $builder->get()->getResultArray();
+
+        // Create pager manually for grouped data
+        $this->pager = \Config\Services::pager();
+
+        // Get total count for pagination
+        $totalCount = $this->getGroupedBooksCount(
+            $keyword,
+            $pengarang,
+            $penerbit,
+            $tempatTerbit,
+            $tahunTerbit,
+            $jenisBuku,
+            $kategoriBuku,
+            $status,
+            $keadaan,
+            $bahasa,
+            $rak,
+            $filter
+        );
+
+        // Set pager manually
+        $this->pager->store('default', $page, $perPage, $totalCount);
+
+        return $results;
+    }
+
+    /**
+     * Get total count of grouped books for pagination
+     */
+    public function getGroupedBooksCount(
+        $keyword = null,
+        $pengarang = null,
+        $penerbit = null,
+        $tempatTerbit = null,
+        $tahunTerbit = null,
+        $jenisBuku = null,
+        $kategoriBuku = null,
+        $status = null,
+        $keadaan = null,
+        $bahasa = null,
+        $rak = null,
+        $filter = null
+    ) {
+        // Create subquery to count grouped results
+        $subQuery = $this->db->table($this->table);
+
+        // Apply same filters as getAllWithFiltersGrouped
+        if (!empty($keyword)) {
+            $subQuery->groupStart()
+                ->like('judul', $keyword)
+                ->orLike('pengarang', $keyword)
+                ->orLike('penerbit', $keyword)
+                ->orLike('subjek', $keyword)
+                ->orLike('isbn', $keyword)
+                ->groupEnd();
+        }
+
+        if (!empty($pengarang)) {
+            $subQuery->where('pengarang', $pengarang);
+        }
+
+        if (!empty($penerbit)) {
+            $subQuery->where('penerbit', $penerbit);
+        }
+
+        if (!empty($tempatTerbit)) {
+            $subQuery->where('tempatTerbit', $tempatTerbit);
+        }
+
+        if (!empty($tahunTerbit)) {
+            $subQuery->where('tahunTerbit', $tahunTerbit);
+        }
+
+        if (!empty($jenisBuku)) {
+            $subQuery->where('jenisBuku', $jenisBuku);
+        }
+
+        if (!empty($kategoriBuku)) {
+            $subQuery->where('kategoriBuku', $kategoriBuku);
+        }
+
+        if (!empty($status)) {
+            $subQuery->where('status', $status);
+        }
+
+        if (!empty($keadaan)) {
+            $subQuery->where('keadaan', $keadaan);
+        }
+
+        if (!empty($bahasa)) {
+            $subQuery->where('bahasa', $bahasa);
+        }
+
+        if (!empty($rak)) {
+            $subQuery->where('rak', $rak);
+        }
+
+        if ($filter === 'no_image') {
+            $subQuery->groupStart()
+                ->where('foto', '')
+                ->orWhere('foto', 'no_cover.jpeg')
+                ->orWhere('foto', 'default.jpg')
+                ->orWhere('foto', null)
+                ->groupEnd();
+        }
+
+        // Select and group by to get distinct combinations
+        $subQuery->select('judul, pengarang, penerbit')
+            ->groupBy(['judul', 'pengarang', 'penerbit']);
+
+        // Get the SQL and count the results
+        $sql = $subQuery->getCompiledSelect();
+
+        // Count the grouped results
+        $countQuery = $this->db->query("SELECT COUNT(*) as total FROM ($sql) as grouped_results");
+        $result = $countQuery->getRow();
+
+        return $result ? $result->total : 0;
+    }
+
+    /**
+     * Get multiple books by IDs for bulk operations
+     */
+    public function getBulkBooks($ids)
+    {
+        if (is_string($ids)) {
+            $ids = explode(',', $ids);
+        }
+
+        $ids = array_map('trim', $ids);
+        $ids = array_filter($ids, 'is_numeric');
+
+        return $this->whereIn('id_buku', $ids)->findAll();
+    }
+
     /**
      * Get unique values for a specific column
      */

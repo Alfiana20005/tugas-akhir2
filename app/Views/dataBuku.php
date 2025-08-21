@@ -189,11 +189,11 @@
                             <div class="col-sm-9">
                                 <select class="form-control" id="rak" name="rak">
                                     <option value="">Pilih Lokasi</option>
-                                    <option value="Lemari 300">Lemari 300</option>
-                                    <option value="Lemari 900">Lemari 900</option>
-                                    <option value="Lemari 700">Lemari 700</option>
                                     <option value="Lemari 000">Lemari 000</option>
                                     <option value="Lemari 100">Lemari 100</option>
+                                    <option value="Lemari 300">Lemari 300</option>
+                                    <option value="Lemari 700">Lemari 700</option>
+                                    <option value="Lemari 900">Lemari 900</option>
                                     <!-- <option value="Lemari 6">Lemari 6</option>
                                     <option value="Lemari Berkala">Lemari Berkala</option> -->
                                 </select>
@@ -215,8 +215,6 @@
                                     <option value="Kesenian dan Olahraga">Kesenian dan Olahraga</option>
                                     <option value="Kesusastraan">Kesusastraan</option>
                                     <option value="Sejarah dan Geografi">Sejarah dan Geografi</option>
-                                    <option value="Majalah">Majalah</option>
-                                    <option value="Koran">Koran</option>
                                     <option value="Arsip">Arsip</option>
                                 </select>
                             </div>
@@ -310,7 +308,7 @@
                         </div>
 
                         <div class="row mb-2">
-                            <label for="isi" class="col-sm-3 col-form-label">keterangan</label>
+                            <label for="isi" class="col-sm-3 col-form-label">Deskripsi Fisik</label>
                             <div class="col-sm-9">
                                 <textarea class="form-control" name="keterangan" id=""></textarea>
                             </div>
@@ -439,6 +437,7 @@
                             <th style="text-align: center;">Rak</th>
                             <th style="text-align: center;">ISBN</th>
                             <th style="text-align: center;">Subjek</th>
+                            <th style="text-align: center;" title="Jumlah copy buku dan total eksemplar">Eksemplar</th>
                             <th style="text-align: center;">Aksi</th>
                         </tr>
                     </thead>
@@ -455,7 +454,12 @@
                                 <tr>
                                     <td style="text-align: center;"><?= $no++; ?></td>
                                     <td style="text-align: center;"><?= esc($buku['kode']); ?></td>
-                                    <td style="text-align: center;"><?= esc($buku['kodeEksemplar']); ?></td>
+                                    <td style="text-align: center; max-width: 120px;">
+                                        <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
+                                            title="<?= esc($buku['kodeEksemplar']); ?>">
+                                            <?= esc($buku['kodeEksemplar']); ?>
+                                        </div>
+                                    </td>
                                     <td style="text-align: center;">
                                         <?php if (!empty($buku['foto']) && file_exists(FCPATH . "img/perpustakaan/" . $buku['foto']) && $buku['foto'] !== 'no_cover.jpeg'): ?>
                                             <img src="<?= base_url("img/perpustakaan/" . $buku['foto']); ?>"
@@ -500,28 +504,74 @@
                                         </div>
                                     </td>
                                     <td style="text-align: center;">
+                                        <span class="badge bg-primary" style="font-size: 14px; color: white; padding: 10px">
+                                            <?= esc($buku['jumlah_eksemplar']); ?> copy
+                                        </span>
+                                        <?php if (isset($buku['total_eksemplar']) && $buku['total_eksemplar'] > $buku['jumlah_eksemplar']): ?>
+                                            <br><small class="text-muted">(<?= esc($buku['total_eksemplar']); ?> total eksemplar)</small>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td style="text-align: center;">
                                         <div class="btn-group" role="group">
                                             <?php if (session()->get('level') == 'Perpustakaan'): ?>
-                                                <a href="#"
-                                                    class="btn btn-primary btn-sm"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#editBuku<?= $buku['id_buku']; ?>"
-                                                    title="Edit Buku">
-                                                    <i class="fas fa-edit"></i> Edit
-                                                </a>
+                                                <!-- Dropdown untuk multiple action jika ada lebih dari 1 eksemplar -->
+                                                <?php if ($buku['jumlah_eksemplar'] > 1): ?>
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-primary btn-sm dropdown-toggle" type="button"
+                                                            data-bs-toggle="dropdown" aria-expanded="false" title="Kelola Eksemplar">
+                                                            <i class="fas fa-cog"></i> Kelola
+                                                        </button>
+                                                        <ul class="dropdown-menu">
+                                                            <li>
+                                                                <h6 class="dropdown-header">Pilih Eksemplar untuk Edit:</h6>
+                                                            </li>
+                                                            <?php
+                                                            $allIds = explode(',', $buku['all_ids']);
+                                                            $kodeEksemplars = explode(', ', $buku['kodeEksemplar']);
+                                                            for ($i = 0; $i < count($allIds); $i++):
+                                                            ?>
+                                                                <li>
+                                                                    <a class="dropdown-item" href="#"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#editBuku<?= trim($allIds[$i]); ?>">
+                                                                        <i class="fas fa-edit"></i> Edit <?= isset($kodeEksemplars[$i]) ? $kodeEksemplars[$i] : 'Eksemplar ' . ($i + 1); ?>
+                                                                    </a>
+                                                                </li>
+                                                            <?php endfor; ?>
+                                                            <li>
+                                                                <hr class="dropdown-divider">
+                                                            </li>
+                                                            <li>
+                                                                <a class="dropdown-item text-danger" href="#"
+                                                                    onclick="deleteAllCopies('<?= implode(',', $allIds); ?>', '<?= esc($buku['judul']); ?>')">
+                                                                    <i class="fas fa-trash"></i> Hapus Semua Eksemplar
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                <?php else: ?>
+                                                    <!-- Single action untuk 1 eksemplar -->
+                                                    <a href="#"
+                                                        class="btn btn-primary btn-sm"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#editBuku<?= $buku['id_buku']; ?>"
+                                                        title="Edit Buku">
+                                                        <i class="fas fa-edit"></i> Edit
+                                                    </a>
 
-                                                <form action="<?= base_url("deleteBuku/{$buku['id_buku']}"); ?>"
-                                                    method="post"
-                                                    class="d-inline"
-                                                    onsubmit="return confirm('Apakah Anda yakin ingin menghapus buku ini?');">
-                                                    <?= csrf_field(); ?>
-                                                    <input type="hidden" name="_method" value="DELETE">
-                                                    <button type="submit"
-                                                        class="btn btn-danger btn-sm"
-                                                        title="Hapus Buku">
-                                                        <i class="fas fa-trash"></i> Hapus
-                                                    </button>
-                                                </form>
+                                                    <form action="<?= base_url("deleteBuku/{$buku['id_buku']}"); ?>"
+                                                        method="post"
+                                                        class="d-inline"
+                                                        onsubmit="return confirm('Apakah Anda yakin ingin menghapus buku ini?');">
+                                                        <?= csrf_field(); ?>
+                                                        <input type="hidden" name="_method" value="DELETE">
+                                                        <button type="submit"
+                                                            class="btn btn-danger btn-sm"
+                                                            title="Hapus Buku">
+                                                            <i class="fas fa-trash"></i> Hapus
+                                                        </button>
+                                                    </form>
+                                                <?php endif; ?>
                                             <?php endif; ?>
                                         </div>
                                     </td>
@@ -531,7 +581,7 @@
                         else:
                             ?>
                             <tr>
-                                <td colspan="16" style="text-align: center; padding: 20px; color: #666;">
+                                <td colspan="17" style="text-align: center; padding: 20px; color: #666;">
                                     <i class="fas fa-book-open fa-2x mb-2"></i><br>
                                     Tidak ada data buku yang ditemukan
                                     <?php if (!empty($filters['keyword']) || !empty($filters['pengarang']) || !empty($filters['penerbit'])): ?>
@@ -707,11 +757,11 @@
                             <div class="col-sm-9">
                                 <select class="form-control" id="rak<?= $buku['id_buku']; ?>" name="rak" required>
                                     <option value="">Pilih Lokasi</option>
-                                    <option value="Lemari 300" <?= ($buku['rak'] == 'Lemari 300') ? 'selected' : ''; ?>>Lemari 1</option>
-                                    <option value="Lemari 900" <?= ($buku['rak'] == 'Lemari 900') ? 'selected' : ''; ?>>Lemari 900</option>
-                                    <option value="Lemari 700" <?= ($buku['rak'] == 'Lemari 700') ? 'selected' : ''; ?>>Lemari 700</option>
                                     <option value="Lemari 000" <?= ($buku['rak'] == 'Lemari 000') ? 'selected' : ''; ?>>Lemari 000</option>
                                     <option value="Lemari 100" <?= ($buku['rak'] == 'Lemari 100') ? 'selected' : ''; ?>>Lemari 100</option>
+                                    <option value="Lemari 300" <?= ($buku['rak'] == 'Lemari 300') ? 'selected' : ''; ?>>Lemari 300</option>
+                                    <option value="Lemari 700" <?= ($buku['rak'] == 'Lemari 700') ? 'selected' : ''; ?>>Lemari 700</option>
+                                    <option value="Lemari 900" <?= ($buku['rak'] == 'Lemari 900') ? 'selected' : ''; ?>>Lemari 900</option>
                                 </select>
                             </div>
                         </div>
@@ -731,8 +781,6 @@
                                     <option value="Kesenian dan Olahraga" <?= ($buku['kategoriBuku'] == 'Kesenian dan Olahraga') ? 'selected' : ''; ?>>Kesenian dan Olahraga</option>
                                     <option value="Kesusastraan" <?= ($buku['kategoriBuku'] == 'Kesusastraan') ? 'selected' : ''; ?>>Kesusastraan</option>
                                     <option value="Sejarah dan Geografi" <?= ($buku['kategoriBuku'] == 'Sejarah dan Geografi') ? 'selected' : ''; ?>>Sejarah dan Geografi</option>
-                                    <option value="Majalah" <?= ($buku['kategoriBuku'] == 'Majalah') ? 'selected' : ''; ?>>Majalah</option>
-                                    <option value="Koran" <?= ($buku['kategoriBuku'] == 'Koran') ? 'selected' : ''; ?>>Koran</option>
                                     <option value="Arsip" <?= ($buku['kategoriBuku'] == 'Arsip') ? 'selected' : ''; ?>>Arsip</option>
                                 </select>
                             </div>
@@ -955,7 +1003,6 @@
     }
 </style>
 
-// Ganti bagian script di akhir file dengan ini:
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -1484,6 +1531,39 @@
     document.addEventListener('DOMContentLoaded', function() {
         generatePreviewKodeEksemplar();
     });
+
+    function deleteAllCopies(allIds, judul) {
+        if (confirm(`Apakah Anda yakin ingin menghapus semua eksemplar dari buku "${judul}"?`)) {
+            // Create form to delete multiple books
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '<?= base_url("deleteMultipleBuku"); ?>';
+
+            // Add CSRF token
+            const csrfField = document.createElement('input');
+            csrfField.type = 'hidden';
+            csrfField.name = '<?= csrf_token(); ?>';
+            csrfField.value = '<?= csrf_hash(); ?>';
+            form.appendChild(csrfField);
+
+            // Add method field
+            const methodField = document.createElement('input');
+            methodField.type = 'hidden';
+            methodField.name = '_method';
+            methodField.value = 'DELETE';
+            form.appendChild(methodField);
+
+            // Add IDs field
+            const idsField = document.createElement('input');
+            idsField.type = 'hidden';
+            idsField.name = 'book_ids';
+            idsField.value = allIds;
+            form.appendChild(idsField);
+
+            document.body.appendChild(form);
+            form.submit();
+        }
+    }
 </script>
 
 <?= $this->endSection(); ?>
