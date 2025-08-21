@@ -10,7 +10,30 @@ class M_Perpustakaan extends Model
     protected $primaryKey = 'id_buku';
     // protected $useTimestamps = true;
 
-    protected $allowedFields = ['kode', 'judul', 'pengarang', 'penerbit', 'tempatTerbit', 'tahunTerbit', 'eksemplar', 'nomorSeri', 'rak', 'kategoriBuku', 'status', 'keterangan', 'foto', 'tampilkan'];
+    protected $allowedFields = [
+        'kode',
+        'judul',
+        'pengarang',
+        'jenisPengarang',
+        'penerbit',
+        'tempatTerbit',
+        'tahunTerbit',
+        'jenisBuku',
+        'bahasa',
+        'eksemplar',
+        'kodeEksemplar',
+        'isbn',
+        'nomorSeri',
+        'keadaan',
+        'rak',
+        'kategoriBuku',
+        'status',
+        'subjek',
+        'keterangan',
+        'tampilkan',
+        'foto'
+    ];
+
 
     protected $validationMessages = [];
     protected $skipValidation = false;
@@ -158,5 +181,10 @@ class M_Perpustakaan extends Model
     public function isJudulExists($judul)
     {
         return $this->where('judul', $judul)->countAllResults() > 0;
+    }
+
+    public function getAllBooks()
+    {
+        return $this->findAll();
     }
 }

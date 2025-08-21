@@ -15,7 +15,6 @@ class C_Perpustakaan extends BaseController
         $this->M_Perpustakaan = new M_Perpustakaan();
     }
 
-
     public function index(): string
     {
         // Get all filter parameters from GET request
@@ -24,8 +23,13 @@ class C_Perpustakaan extends BaseController
         $penerbit = $this->request->getGet('penerbit');
         $tempatTerbit = $this->request->getGet('tempatTerbit');
         $tahunTerbit = $this->request->getGet('tahunTerbit');
+        $jenisBuku = $this->request->getGet('jenisBuku');
         $kategoriBuku = $this->request->getGet('kategoriBuku');
         $status = $this->request->getGet('status');
+        $keadaan = $this->request->getGet('keadaan');
+        $bahasa = $this->request->getGet('bahasa');
+        $rak = $this->request->getGet('rak');
+        $tampilkan = $this->request->getGet('tampilkan');
         $filter = $this->request->getGet('filter'); // untuk filter no_image
 
         // Get current page
@@ -38,8 +42,13 @@ class C_Perpustakaan extends BaseController
             $penerbit,
             $tempatTerbit,
             $tahunTerbit,
+            $jenisBuku,
             $kategoriBuku,
             $status,
+            $keadaan,
+            $bahasa,
+            $rak,
+            $tampilkan,
             $filter,
             15, // items per page
             $currentPage
@@ -53,12 +62,17 @@ class C_Perpustakaan extends BaseController
         $penerbit_list = $this->M_Perpustakaan->getUniqueValues('penerbit');
         $tempatTerbit_list = $this->M_Perpustakaan->getUniqueValues('tempatTerbit');
         $tahunTerbit_list = $this->M_Perpustakaan->getUniqueValues('tahunTerbit');
+        $jenisBuku_list = $this->M_Perpustakaan->getUniqueValues('jenisBuku');
         $kategoriBuku_list = $this->M_Perpustakaan->getUniqueValues('kategoriBuku');
         $status_list = $this->M_Perpustakaan->getUniqueValues('status');
+        $keadaan_list = $this->M_Perpustakaan->getUniqueValues('keadaan');
+        $bahasa_list = $this->M_Perpustakaan->getUniqueValues('bahasa');
+        $rak_list = $this->M_Perpustakaan->getUniqueValues('rak');
+        $jenisPengarang_list = $this->M_Perpustakaan->getUniqueValues('jenisPengarang');
 
         // Get totals for dashboard cards
         $totalBuku = $this->M_Perpustakaan->countBuku();
-        $totalJumlahBuku = $this->M_Perpustakaan->sumEksemplar();
+        $totalEksemplar = $this->M_Perpustakaan->sumEksemplar();
         $kategoriCounts = $this->M_Perpustakaan->countByCategory();
 
         // Prepare data to send to view
@@ -70,8 +84,13 @@ class C_Perpustakaan extends BaseController
             'penerbit_list' => $penerbit_list,
             'tempatTerbit_list' => $tempatTerbit_list,
             'tahunTerbit_list' => $tahunTerbit_list,
+            'jenisBuku_list' => $jenisBuku_list,
             'kategoriBuku_list' => $kategoriBuku_list,
             'status_list' => $status_list,
+            'keadaan_list' => $keadaan_list,
+            'bahasa_list' => $bahasa_list,
+            'rak_list' => $rak_list,
+            'jenisPengarang_list' => $jenisPengarang_list,
             'filter' => $filter, // Add current filter
             'filters' => [
                 'keyword' => $keyword,
@@ -79,15 +98,31 @@ class C_Perpustakaan extends BaseController
                 'penerbit' => $penerbit,
                 'tempatTerbit' => $tempatTerbit,
                 'tahunTerbit' => $tahunTerbit,
+                'jenisBuku' => $jenisBuku,
                 'kategoriBuku' => $kategoriBuku,
-                'status' => $status
+                'status' => $status,
+                'keadaan' => $keadaan,
+                'bahasa' => $bahasa,
+                'rak' => $rak,
+                'tampilkan' => $tampilkan
             ],
             'totalBuku' => $totalBuku,
-            'totalJumlahBuku' => $totalJumlahBuku,
-            'kategoriCounts' => $kategoriCounts
+            'totalEksemplar' => $totalEksemplar,
+            'kategoriCounts' => $kategoriCounts,
         ];
 
         return view('dataBuku', $data);
+    }
+
+    public function getAllDataBuku()
+    {
+        // Ambil SEMUA data tanpa limit
+        $data = $this->M_Perpustakaan->getAllBooks(); // tanpa pagination
+
+        return $this->response->setJSON([
+            'success' => true,
+            'data' => $data
+        ]);
     }
 
     public function cekJudulBuku()
@@ -110,56 +145,167 @@ class C_Perpustakaan extends BaseController
 
     public function saveDataBuku()
     {
-        //validation
+        // Validation
         $rules = [
             'judul' => [
                 'rules' => 'required',
                 'errors' => ['required' => 'Judul harus diisi']
-            ],
+            ]
         ];
 
         if (!$this->validate($rules)) {
-            // session()->setFlashdata('errors', $this->validator->listErrors());
-            return redirect()->to('/dataBuku')->withInput()->with('errors', $this->validator->listErrors());
+            if ($this->request->isAJAX()) {
+                return $this->response->setJSON([
+                    'success' => false,
+                    'message' => 'Validasi gagal: ' . $this->validator->listErrors()
+                ]);
+            }
+            return redirect()->to(base_url('/dataBuku'))
+                ->withInput()
+                ->with('errors', $this->validator->listErrors());
         }
 
-        $foto = $this->request->getFile('foto');
-        $dafaultImg = 'no_cover.jpg';
-
-        if ($foto->isValid() && !$foto->hasMoved()) {
-            $fotoName = $foto->getRandomName();
-            $foto->move('img/perpustakaan', $fotoName);
-        } else {
-            // Handle file upload error
-            $fotoName = $dafaultImg;
+        $idPetugas = session()->get('id_petugas');
+        if (empty($idPetugas)) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Error: id_petugas tidak valid'
+            ]);
         }
 
+        try {
+            // Handle file upload
+            $foto = $this->request->getFile('foto');
+            $defaultImg = 'no_cover.jpeg';
 
-        $this->M_Perpustakaan->save([
-            // 'id_petugas' => $id_petugas,
-            'kode' => $this->request->getVar('kode'),
-            'judul' => $this->request->getVar('judul'),
-            'pengarang' => $this->request->getVar('pengarang'),
-            'penerbit' => $this->request->getVar('penerbit'),
-            'tempatTerbit' => $this->request->getVar('tempatTerbit'),
-            'tahunTerbit' => $this->request->getVar('tahunTerbit'),
-            'rak' => $this->request->getVar('rak'),
-            'eksemplar' => $this->request->getVar('eksemplar'),
-            'nomorSeri' => $this->request->getVar('nomorSeri'),
-            'status' => $this->request->getVar('status'),
-            'keterangan' => $this->request->getVar('keterangan'),
-            'kategoriBuku' => $this->request->getVar('kategoriBuku'),
-            'tampilkan' => $this->request->getVar('tampilkan'),
-            'foto' => $fotoName,
+            if ($foto && $foto->isValid() && !$foto->hasMoved()) {
+                $fotoName = $foto->getRandomName();
+                $foto->move('img/perpustakaan', $fotoName);
+            } else {
+                $fotoName = $defaultImg;
+            }
 
-        ]);
+            // Process pengarang data (handle array of authors)
+            $pengarangData = $this->request->getVar('pengarang');
+            $pengarangString = '';
+            $jenisPengarangString = '';
 
-        //alert
-        session()->setFlashdata('pesan', 'Data Berhasil Ditambahkan.');
+            if (is_array($pengarangData)) {
+                $pengarangList = [];
+                $jenisPengarangList = [];
 
-        return redirect()->to('/dataBuku');
+                foreach ($pengarangData as $index => $author) {
+                    if (!empty($author['nama'])) {
+                        $pengarangList[] = trim($author['nama']);
+                        $jenisPengarangList[] = trim($author['jenisPengarang'] ?? '');
+                    }
+                }
 
-        // return view('admin/v_masterpetugas');
+                $pengarangString = implode('; ', $pengarangList);
+                $jenisPengarangString = implode('; ', $jenisPengarangList);
+            } else {
+                // Fallback for single author (backward compatibility)
+                $pengarangString = $this->request->getVar('pengarang') ?? '';
+                $jenisPengarangString = $this->request->getVar('jenisPengarang') ?? '';
+            }
+
+            // Handle multiple eksemplar creation
+            $jumlahEksemplar = (int)$this->request->getVar('eksemplar') ?: 1;
+            $kodeEksemplarArray = json_decode($this->request->getVar('kode_eksemplar_array'), true);
+
+            // Get the base kode (different from kodeEksemplar)
+            $baseKode = $this->request->getVar('kode') ?? '';
+
+            // If kode eksemplar array is not provided, create simple codes
+            if (!$kodeEksemplarArray) {
+                $kodeEksemplarArray = [];
+                for ($i = 1; $i <= $jumlahEksemplar; $i++) {
+                    $kodeEksemplarArray[] = $baseKode . '-' . str_pad($i, 3, '0', STR_PAD_LEFT);
+                }
+            }
+
+            $db = \Config\Database::connect();
+            $db->transStart();
+
+            $successCount = 0;
+            $errors = [];
+
+            // Create base book data
+            $baseData = [
+                'judul' => $this->request->getVar('judul'),
+                'pengarang' => $pengarangString,
+                'jenisPengarang' => $jenisPengarangString,
+                'penerbit' => $this->request->getVar('penerbit'),
+                'tempatTerbit' => $this->request->getVar('tempatTerbit'),
+                'tahunTerbit' => $this->request->getVar('tahunTerbit'),
+                'jenisBuku' => $this->request->getVar('jenisBuku'),
+                'bahasa' => $this->request->getVar('bahasa'),
+                'rak' => $this->request->getVar('rak'),
+                'isbn' => $this->request->getVar('isbn'),
+                'nomorSeri' => $this->request->getVar('nomorSeri'),
+                'keadaan' => $this->request->getVar('keadaan'),
+                'status' => $this->request->getVar('status'),
+                'subjek' => $this->request->getVar('subjek'),
+                'keterangan' => $this->request->getVar('keterangan'),
+                'kategoriBuku' => $this->request->getVar('kategoriBuku'),
+                'tampilkan' => $this->request->getVar('tampilkan'),
+                'foto' => $fotoName,
+                'id_petugas' => $idPetugas,
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+                'kode' => $baseKode // Base kode for the book
+            ];
+
+            // Create each eksemplar as separate record
+            foreach ($kodeEksemplarArray as $index => $kodeEksemplar) {
+                $data = $baseData;
+                $data['kodeEksemplar'] = $kodeEksemplar; // Unique code for each copy
+                $data['eksemplar'] = 1; // Each record represents 1 copy
+
+                try {
+                    if ($this->M_Perpustakaan->save($data)) {
+                        $successCount++;
+                    } else {
+                        $errors[] = "Gagal menyimpan eksemplar: {$kodeEksemplar}";
+                    }
+                } catch (\Exception $e) {
+                    $errors[] = "Error pada eksemplar {$kodeEksemplar}: " . $e->getMessage();
+                    log_message('error', "Error saving eksemplar {$kodeEksemplar}: " . $e->getMessage());
+                }
+            }
+
+            $db->transComplete();
+
+            // Check transaction status
+            if ($db->transStatus() === false) {
+                log_message('error', 'Database transaction failed');
+                return $this->response->setJSON([
+                    'success' => false,
+                    'message' => 'Gagal menyimpan data ke database (transaction failed)'
+                ]);
+            }
+
+            // Set flash message for non-AJAX requests
+            if (!$this->request->isAJAX()) {
+                session()->setFlashdata('pesan', "Data Berhasil Ditambahkan. {$successCount} eksemplar berhasil disimpan.");
+            }
+
+            // Always return JSON response
+            return $this->response->setJSON([
+                'success' => true,
+                'message' => "{$successCount} eksemplar berhasil disimpan",
+                'count' => $successCount,
+                'errors' => $errors
+            ]);
+        } catch (\Exception $e) {
+            log_message('error', 'Error saving book data: ' . $e->getMessage());
+            log_message('error', 'Stack trace: ' . $e->getTraceAsString());
+
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Terjadi kesalahan: ' . $e->getMessage()
+            ]);
+        }
     }
 
     public function deleteBuku($id_buku)
@@ -177,57 +323,151 @@ class C_Perpustakaan extends BaseController
 
     public function updateBuku($id_buku)
     {
-        // Mengambil data yang akan diupdate dari request
-        $dataToUpdate = [
-            'kode' => $this->request->getVar('kode'),
-            'judul' => $this->request->getVar('judul'),
-            'pengarang' => $this->request->getVar('pengarang'),
-            'penerbit' => $this->request->getVar('penerbit'),
-            'tempatTerbit' => $this->request->getVar('tempatTerbit'),
-            'tahunTerbit' => $this->request->getVar('tahunTerbit'),
-            'rak' => $this->request->getVar('rak'),
-            'eksemplar' => $this->request->getVar('eksemplar'),
-            'nomorSeri' => $this->request->getVar('nomorSeri'),
-            'status' => $this->request->getVar('status'),
-            'keterangan' => $this->request->getVar('keterangan'),
-            'kategoriBuku' => $this->request->getVar('kategoriBuku'),
-            'tampilkan' => $this->request->getVar('tampilkan')
-        ];
+        try {
+            // Process pengarang data (handle array of authors) - same logic as saveDataBuku
+            $pengarangData = $this->request->getVar('pengarang');
+            $pengarangString = '';
+            $jenisPengarangString = '';
 
-        $foto = $this->request->getFile('foto');
+            if (is_array($pengarangData)) {
+                $pengarangList = [];
+                $jenisPengarangList = [];
 
-        // Cek apakah file foto diunggah
-        if ($foto && $foto->isValid() && !$foto->hasMoved()) {
-            // Generate nama unik untuk file foto
-            $fotoName = $foto->getRandomName();
+                foreach ($pengarangData as $index => $author) {
+                    if (!empty($author['nama'])) {
+                        $pengarangList[] = trim($author['nama']);
+                        $jenisPengarangList[] = trim($author['jenisPengarang'] ?? '');
+                    }
+                }
 
-            // Pindahkan file foto ke folder yang diinginkan
-            $foto->move('img/perpustakaan', $fotoName);
-
-            // Tambahkan nama file foto ke data yang akan diupdate
-            $dataToUpdate['foto'] = $fotoName;
-
-            // Hapus foto lama jika ada
-            $oldBuku = $this->M_Perpustakaan->getBuku($id_buku);
-            if ($oldBuku && !empty($oldBuku['foto']) && file_exists('img/perpustakaan/' . $oldBuku['foto'])) {
-                unlink('img/perpustakaan/' . $oldBuku['foto']);
+                $pengarangString = implode('; ', $pengarangList);
+                $jenisPengarangString = implode('; ', $jenisPengarangList);
+            } else {
+                // Fallback for single author (backward compatibility)
+                $pengarangString = $this->request->getVar('pengarang') ?? '';
+                $jenisPengarangString = $this->request->getVar('jenisPengarang') ?? '';
             }
+
+            // Get existing data to preserve kodeEksemplar if not provided in form
+            $existingBuku = $this->M_Perpustakaan->getBuku($id_buku);
+            $kodeEksemplar = $this->request->getVar('kodeEksemplar');
+
+            // If kodeEksemplar is empty in form but exists in database, preserve it
+            if (empty($kodeEksemplar) && !empty($existingBuku['kodeEksemplar'])) {
+                $kodeEksemplar = $existingBuku['kodeEksemplar'];
+            }
+
+            // Mengambil data yang akan diupdate dari request
+            $dataToUpdate = [
+                'kode' => $this->request->getVar('kode'),
+                'judul' => $this->request->getVar('judul'),
+                'pengarang' => $pengarangString, // Use processed string
+                'jenisPengarang' => $jenisPengarangString, // Use processed string
+                'penerbit' => $this->request->getVar('penerbit'),
+                'tempatTerbit' => $this->request->getVar('tempatTerbit'),
+                'tahunTerbit' => $this->request->getVar('tahunTerbit'),
+                'jenisBuku' => $this->request->getVar('jenisBuku'),
+                'bahasa' => $this->request->getVar('bahasa'),
+                'rak' => $this->request->getVar('rak'),
+                'eksemplar' => $this->request->getVar('eksemplar'),
+                'kodeEksemplar' => $kodeEksemplar, // Use preserved or updated kodeEksemplar
+                'isbn' => $this->request->getVar('isbn'),
+                'nomorSeri' => $this->request->getVar('nomorSeri'),
+                'keadaan' => $this->request->getVar('keadaan'),
+                'status' => $this->request->getVar('status'),
+                'subjek' => $this->request->getVar('subjek'),
+                'keterangan' => $this->request->getVar('keterangan'),
+                'kategoriBuku' => $this->request->getVar('kategoriBuku'),
+                'tampilkan' => $this->request->getVar('tampilkan'),
+                'updated_at' => date('Y-m-d H:i:s') // Add updated timestamp
+            ];
+
+            $foto = $this->request->getFile('foto');
+
+            // Cek apakah file foto diunggah
+            if ($foto && $foto->isValid() && !$foto->hasMoved()) {
+                // Validate file size (max 2MB)
+                if ($foto->getSize() > 2097152) { // 2MB in bytes
+                    throw new \Exception('Ukuran file foto tidak boleh lebih dari 2MB');
+                }
+
+                // Validate file type
+                $allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
+                if (!in_array($foto->getMimeType(), $allowedTypes)) {
+                    throw new \Exception('Format file tidak didukung. Gunakan JPEG, JPG, PNG, atau GIF');
+                }
+
+                // Generate nama unik untuk file foto
+                $fotoName = $foto->getRandomName();
+
+                // Pindahkan file foto ke folder yang diinginkan
+                $foto->move('img/perpustakaan', $fotoName);
+
+                // Tambahkan nama file foto ke data yang akan diupdate
+                $dataToUpdate['foto'] = $fotoName;
+
+                // Hapus foto lama jika ada dan bukan foto default
+                if (
+                    $existingBuku && !empty($existingBuku['foto']) &&
+                    $existingBuku['foto'] !== 'no_cover.jpeg' &&
+                    file_exists('img/perpustakaan/' . $existingBuku['foto'])
+                ) {
+                    unlink('img/perpustakaan/' . $existingBuku['foto']);
+                }
+            }
+
+            // Log data yang akan diupdate untuk debugging
+            log_message('info', 'Update data for book ID ' . $id_buku . ': ' . json_encode($dataToUpdate));
+
+            // Memastikan ada data yang akan diupdate
+            $updateResult = $this->M_Perpustakaan->update($id_buku, $dataToUpdate);
+
+            if ($updateResult) {
+                // Set flash message
+                session()->setFlashdata('pesan', 'Data Buku Berhasil diubah.');
+
+                // Check if it's an AJAX request
+                if ($this->request->isAJAX()) {
+                    return $this->response->setJSON([
+                        'success' => true,
+                        'message' => 'Data Buku Berhasil diubah.',
+                        'data' => $dataToUpdate // Return updated data for debugging
+                    ]);
+                }
+            } else {
+                if ($this->request->isAJAX()) {
+                    return $this->response->setJSON([
+                        'success' => false,
+                        'message' => 'Gagal mengupdate data buku.'
+                    ]);
+                }
+                session()->setFlashdata('error', 'Gagal mengupdate data buku.');
+            }
+
+            // Redirect ke halaman sebelumnya atau halaman yang sesuai
+            return redirect()->to('/dataBuku');
+        } catch (\Exception $e) {
+            log_message('error', 'Error updating book data: ' . $e->getMessage());
+            log_message('error', 'Stack trace: ' . $e->getTraceAsString());
+            log_message('error', 'Request data: ' . json_encode($this->request->getVar()));
+
+            if ($this->request->isAJAX()) {
+                return $this->response->setJSON([
+                    'success' => false,
+                    'message' => 'Terjadi kesalahan: ' . $e->getMessage()
+                ]);
+            }
+
+            session()->setFlashdata('error', 'Terjadi kesalahan saat mengupdate data: ' . $e->getMessage());
+            return redirect()->to('/dataBuku');
         }
-
-        // Memastikan ada data yang akan diupdate
-        $this->M_Perpustakaan->update($id_buku, $dataToUpdate);
-
-        // Set flash message
-        session()->setFlashdata('pesan', 'Data Buku Berhasil diubah.');
-
-        // Redirect ke halaman sebelumnya atau halaman yang sesuai
-        return redirect()->to('/dataBuku');
     }
 
     public function tambahData()
     {
         return view('perpustakaan2/inputData');
     }
+
     public function delete($id)
     {
         // Saring masukan untuk mencegah SQL injection atau serangan lainnya
@@ -241,68 +481,6 @@ class C_Perpustakaan extends BaseController
         return redirect()->back();
     }
 
-    public function saveData()
-    {
-
-        //validation
-        $rules = [
-            'judul' => [
-                'rules' => 'required',
-                'errors' => ['required' => 'Judul harus diisi']
-            ]
-
-        ];
-
-        if (!$this->validate($rules)) {
-            return redirect()->to(base_url('/dataBuku'))
-                ->withInput()
-                ->with('errors', $this->validator->listErrors());
-        }
-
-        $idPetugas = session()->get('id_petugas');
-        if (empty($idPetugas)) {
-            die('Error: id_petugas tidak valid');
-        }
-
-        $foto = $this->request->getFile('gambar');
-        $dafaultImg = 'no_cover.jpeg';
-
-        if ($foto->isValid() && !$foto->hasMoved()) {
-            $fotoName = $foto->getRandomName();
-            $foto->move('img/perpustakaan', $fotoName);
-        } else {
-            // Handle file upload error
-            // return redirect()->to(base_url('/inputData'))
-            //     ->withInput()
-            //     ->with('errors', $foto->getErrorString());
-            $fotoName = $dafaultImg;
-        }
-        // Simpan data pengunjung
-        $this->M_Perpustakaan->save([
-
-            'kode' => $this->request->getVar('kode'),
-            'judul' => $this->request->getVar('judul'),
-            'pengarang' => $this->request->getVar('pengarang'),
-            'penerbit' => $this->request->getVar('penerbit'),
-            'tempatTerbit' => $this->request->getVar('tempatTerbit'),
-            'tahunTerbit' => $this->request->getVar('tahunTerbit'),
-            'rak' => $this->request->getVar('rak'),
-            'eksemplar' => $this->request->getVar('eksemplar'),
-            'status' => $this->request->getVar('status'),
-            'keterangan' => $this->request->getVar('keterangan'),
-            'kategoriBuku' => $this->request->getVar('kategoriBuku'),
-            'id_petugas' => $idPetugas,
-            'foto' => $fotoName,
-
-
-
-        ]);
-
-        //alert
-        session()->setFlashdata('pesan', 'Data Berhasil Ditambahkan.');
-
-        return redirect()->to('/dataBuku');
-    }
     public function tampilBuku($kategoriBuku)
     {
         // Mendapatkan data koleksi berdasarkan kategori

@@ -41,7 +41,7 @@
       <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
         <div class="member" data-aos="fade-up">
           <div class="member-img">
-            <img src="img/strukturOrgan/kamus.png" class="img-fluid" alt="">
+            <img src="img/strukturOrgan/kamus new.JPG" class="img-fluid" alt="">
             <div class="social">
               <a href=""><i class="bi bi-twitter"></i></a>
               <a href=""><i class="bi bi-facebook"></i></a>
@@ -59,7 +59,7 @@
       <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
         <div class="member" data-aos="fade-up" data-aos-delay="100">
           <div class="member-img">
-            <img src="img/strukturOrgan/ktu.png" class="img-fluid" alt="">
+            <img src="img/strukturOrgan/ktu new.JPG" class="img-fluid" alt="">
             <div class="social">
               <a href=""><i class="bi bi-twitter"></i></a>
               <a href=""><i class="bi bi-facebook"></i></a>
@@ -77,7 +77,7 @@
       <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
         <div class="member" data-aos="fade-up" data-aos-delay="200">
           <div class="member-img">
-            <img src="img/strukturOrgan/edukasi.png" class="img-fluid" alt="">
+            <img src="img/strukturOrgan/kasi layanan.JPG" class="img-fluid" alt="">
             <div class="social">
               <a href=""><i class="bi bi-twitter"></i></a>
               <a href=""><i class="bi bi-facebook"></i></a>
@@ -95,7 +95,7 @@
       <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
         <div class="member" data-aos="fade-up" data-aos-delay="300">
           <div class="member-img">
-            <img src="img/strukturOrgan/pengkajian.png" class="img-fluid" alt="">
+            <img src="img/strukturOrgan/kasi pengkajian.JPG" class="img-fluid" alt="">
             <div class="social">
               <a href=""><i class="bi bi-twitter"></i></a>
               <a href=""><i class="bi bi-facebook"></i></a>
