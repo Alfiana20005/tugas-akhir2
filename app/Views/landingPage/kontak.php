@@ -28,31 +28,31 @@
 			<a href="https://maps.app.goo.gl/SWsce1nC6HhRKZ5v8" target="_blank"><img src="/img/map.png" id="maps" alt="" class="img-map align-items-center justify-content-center pb-30" style=""></a>
 			<div class="col-lg-4 d-flex flex-column address-wrap">
 				<div class="single-contact-address d-flex flex-row">
-					<div class="icon">
-						<span class="lnr lnr-home"></span>
+					<div class="icon" style="margin-right: 15px; color:#850000; font-size: 20px;">
+						<span class="fa fa-map-marker-alt"></span>
 					</div>
 					<div class="contact-details">
-						<h5>Museum MuseumNTB</h5>
-						<p>
+						<h5>Museum NTB</h5>
+						<h5>
 							Jl. Panji Tilar Negara No.6, <br>
 							Taman Sari,Kec. Ampenan, Kota Mataram,
 							Nusa Tenggara Barat. 83117 <br><br>
 
-						</p>
+						</h5>
 					</div>
 				</div>
-				<div class="single-contact-address d-flex flex-row">
-					<div class="icon">
-						<span class="lnr lnr-phone-handset"></span>
+				<div class="single-contact-address d-flex flex-row" style="margin-top: -15px;">
+					<div class="icon" style="margin-right: 15px; color:#850000; font-size: 20px;">
+						<span class="fa fa-phone"></span>
 					</div>
 					<div class="contact-details">
 						<h5>+62 897-3862-445</h5>
-						<p>Humas</p>
+						<h5>Humas</h5>
 					</div>
 				</div>
 				<div class="single-contact-address d-flex flex-row">
-					<div class="icon">
-						<span class="lnr lnr-envelope"></span>
+					<div class="icon" style="margin-right: 15px; color:#850000; font-size: 20px;">
+						<span class="fa fa-envelope"></span>
 					</div>
 					<div class="contact-details">
 						<h5>museumnegeri@ntbprov.go.id</h5>
