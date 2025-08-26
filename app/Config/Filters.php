@@ -827,7 +827,8 @@ class Filters extends BaseConfig
                     '/saveDataBuku',
                     'deleteBuku/*',
                     '/updateBuku/*',
-                    'deleteMultipleBuku/*'
+                    'deleteMultipleBuku/*',
+                    '/previewKodeEksemplar'
 
 
 
@@ -1082,6 +1083,7 @@ class Filters extends BaseConfig
                     '/saveDataBuku',
                     'deleteBuku/*',
                     'deleteMultipleBuku/*',
+                    '/previewKodeEksemplar',
                     '/updateBuku/*',
                     '/dataBuku',
                     '/cekJudulBuku'

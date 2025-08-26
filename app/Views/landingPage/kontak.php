@@ -32,7 +32,7 @@
 						<span class="fa fa-map-marker-alt"></span>
 					</div>
 					<div class="contact-details">
-						<h5>Museum NTB</h5>
+						<h5>Museum dNTB</h5>
 						<h5>
 							Jl. Panji Tilar Negara No.6, <br>
 							Taman Sari,Kec. Ampenan, Kota Mataram,

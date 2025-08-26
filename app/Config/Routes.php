@@ -274,6 +274,8 @@ $routes->get('/dataBuku', 'C_Perpustakaan::index');
 $routes->post('/saveDataBuku', 'C_Perpustakaan::saveDataBuku');
 $routes->delete('deleteBuku/(:segment)', 'C_Perpustakaan::deleteBuku/$1');
 $routes->post('/updateBuku/(:segment)', 'C_Perpustakaan::updateBuku/$1');
+// New routes for enhanced eksemplar functionality
+$routes->post('/previewKodeEksemplar', 'C_Perpustakaan::previewKodeEksemplar');
 $routes->delete('/deleteMultipleBuku', 'C_Perpustakaan::deleteMultipleBuku');
 $routes->get('/daftarSega', 'C_LandingPage::daftarSega');
 $routes->get('/cekJudulBuku', 'C_Perpustakaan::cekJudulBuku');

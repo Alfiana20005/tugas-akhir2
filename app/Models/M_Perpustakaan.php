@@ -479,4 +479,101 @@ class M_Perpustakaan extends Model
     {
         return $this->findAll();
     }
+
+    public function getExistingCopiesByBook($judul, $pengarang, $penerbit)
+    {
+        return $this->where([
+            'judul' => $judul,
+            'pengarang' => $pengarang,
+            'penerbit' => $penerbit
+        ])->orderBy('id_buku', 'ASC')->findAll();
+    }
+
+    /**
+     * Check if a kode eksemplar already exists
+     */
+    public function isKodeEksemplarExists($kodeEksemplar)
+    {
+        return $this->where('kodeEksemplar', $kodeEksemplar)->first() !== null;
+    }
+
+    /**
+     * Get all unique kode eksemplar for a specific book group
+     */
+    public function getExistingKodeEksemplar($judul, $pengarang, $penerbit)
+    {
+        $result = $this->select('kodeEksemplar')
+            ->where([
+                'judul' => $judul,
+                'pengarang' => $pengarang,
+                'penerbit' => $penerbit
+            ])
+            ->whereNotNull('kodeEksemplar')
+            ->where('kodeEksemplar !=', '')
+            ->orderBy('kodeEksemplar', 'ASC')
+            ->findAll();
+
+        return array_column($result, 'kodeEksemplar');
+    }
+
+    /**
+     * Count total eksemplar for a specific book
+     */
+    public function countEksemplarByBook($judul, $pengarang, $penerbit)
+    {
+        return $this->where([
+            'judul' => $judul,
+            'pengarang' => $pengarang,
+            'penerbit' => $penerbit
+        ])->countAllResults();
+    }
+
+    /**
+     * Delete multiple books by IDs
+     */
+    public function deleteMultiple($ids)
+    {
+        if (empty($ids)) {
+            return false;
+        }
+
+        return $this->whereIn('id_buku', $ids)->delete();
+    }
+
+    /**
+     * Get the next available number for kode eksemplar generation
+     */
+    public function getNextAvailableNumber($prefix = '', $suffix = '')
+    {
+        $builder = $this->db->table($this->table);
+
+        if (!empty($prefix) && !empty($suffix)) {
+            $builder->like('kodeEksemplar', $prefix, 'after')
+                ->like('kodeEksemplar', $suffix, 'before');
+        } elseif (!empty($prefix)) {
+            $builder->like('kodeEksemplar', $prefix, 'after');
+        }
+
+        $result = $builder->select('kodeEksemplar')
+            ->orderBy('kodeEksemplar', 'DESC')
+            ->get()
+            ->getResultArray();
+
+        if (empty($result)) {
+            return 1;
+        }
+
+        $maxNumber = 0;
+        foreach ($result as $row) {
+            $kode = $row['kodeEksemplar'];
+            // Extract number from kode eksemplar
+            preg_match_all('/\d+/', $kode, $matches);
+            if (!empty($matches[0])) {
+                $number = (int)end($matches[0]);
+                $maxNumber = max($maxNumber, $number);
+            }
+        }
+
+        return $maxNumber + 1;
+    }
 }

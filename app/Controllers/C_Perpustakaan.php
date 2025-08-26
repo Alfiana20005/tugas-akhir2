@@ -324,7 +324,13 @@ class C_Perpustakaan extends BaseController
     public function updateBuku($id_buku)
     {
         try {
-            // Process pengarang data (handle array of authors) - same logic as saveDataBuku
+            // Get existing data first
+            $existingBuku = $this->M_Perpustakaan->getBuku($id_buku);
+            if (!$existingBuku) {
+                throw new \Exception('Buku tidak ditemukan');
+            }
+
+            // Process pengarang data (handle array of authors)
             $pengarangData = $this->request->getVar('pengarang');
             $pengarangString = '';
             $jenisPengarangString = '';
@@ -343,34 +349,32 @@ class C_Perpustakaan extends BaseController
                 $pengarangString = implode('; ', $pengarangList);
                 $jenisPengarangString = implode('; ', $jenisPengarangList);
             } else {
-                // Fallback for single author (backward compatibility)
                 $pengarangString = $this->request->getVar('pengarang') ?? '';
                 $jenisPengarangString = $this->request->getVar('jenisPengarang') ?? '';
             }
 
-            // Get existing data to preserve kodeEksemplar if not provided in form
-            $existingBuku = $this->M_Perpustakaan->getBuku($id_buku);
-            $kodeEksemplar = $this->request->getVar('kodeEksemplar');
+            // Get ALL existing copies of this book by judul (since that's what groups them)
+            $allCopies = $this->M_Perpustakaan->getExistingCopiesByBook(
+                $existingBuku['judul'],
+                $existingBuku['pengarang'],
+                $existingBuku['penerbit']
+            );
 
-            // If kodeEksemplar is empty in form but exists in database, preserve it
-            if (empty($kodeEksemplar) && !empty($existingBuku['kodeEksemplar'])) {
-                $kodeEksemplar = $existingBuku['kodeEksemplar'];
-            }
+            $currentTotalEksemplar = count($allCopies); // This is the real current count
+            $newTotalEksemplar = (int)$this->request->getVar('eksemplar'); // Target count
 
-            // Mengambil data yang akan diupdate dari request
-            $dataToUpdate = [
+            // Base data for all updates
+            $baseDataToUpdate = [
                 'kode' => $this->request->getVar('kode'),
                 'judul' => $this->request->getVar('judul'),
-                'pengarang' => $pengarangString, // Use processed string
-                'jenisPengarang' => $jenisPengarangString, // Use processed string
+                'pengarang' => $pengarangString,
+                'jenisPengarang' => $jenisPengarangString,
                 'penerbit' => $this->request->getVar('penerbit'),
                 'tempatTerbit' => $this->request->getVar('tempatTerbit'),
                 'tahunTerbit' => $this->request->getVar('tahunTerbit'),
                 'jenisBuku' => $this->request->getVar('jenisBuku'),
                 'bahasa' => $this->request->getVar('bahasa'),
                 'rak' => $this->request->getVar('rak'),
-                'eksemplar' => $this->request->getVar('eksemplar'),
-                'kodeEksemplar' => $kodeEksemplar, // Use preserved or updated kodeEksemplar
                 'isbn' => $this->request->getVar('isbn'),
                 'nomorSeri' => $this->request->getVar('nomorSeri'),
                 'keadaan' => $this->request->getVar('keadaan'),
@@ -379,15 +383,16 @@ class C_Perpustakaan extends BaseController
                 'keterangan' => $this->request->getVar('keterangan'),
                 'kategoriBuku' => $this->request->getVar('kategoriBuku'),
                 'tampilkan' => $this->request->getVar('tampilkan'),
-                'updated_at' => date('Y-m-d H:i:s') // Add updated timestamp
+                'updated_at' => date('Y-m-d H:i:s')
             ];
 
+            // Handle photo upload
             $foto = $this->request->getFile('foto');
+            $fotoName = $existingBuku['foto']; // Keep existing photo by default
 
-            // Cek apakah file foto diunggah
             if ($foto && $foto->isValid() && !$foto->hasMoved()) {
                 // Validate file size (max 2MB)
-                if ($foto->getSize() > 2097152) { // 2MB in bytes
+                if ($foto->getSize() > 2097152) {
                     throw new \Exception('Ukuran file foto tidak boleh lebih dari 2MB');
                 }
 
@@ -397,18 +402,12 @@ class C_Perpustakaan extends BaseController
                     throw new \Exception('Format file tidak didukung. Gunakan JPEG, JPG, PNG, atau GIF');
                 }
 
-                // Generate nama unik untuk file foto
                 $fotoName = $foto->getRandomName();
-
-                // Pindahkan file foto ke folder yang diinginkan
                 $foto->move('img/perpustakaan', $fotoName);
 
-                // Tambahkan nama file foto ke data yang akan diupdate
-                $dataToUpdate['foto'] = $fotoName;
-
-                // Hapus foto lama jika ada dan bukan foto default
+                // Delete old photo if it's not default
                 if (
-                    $existingBuku && !empty($existingBuku['foto']) &&
+                    !empty($existingBuku['foto']) &&
                     $existingBuku['foto'] !== 'no_cover.jpeg' &&
                     file_exists('img/perpustakaan/' . $existingBuku['foto'])
                 ) {
@@ -416,51 +415,268 @@ class C_Perpustakaan extends BaseController
                 }
             }
 
-            // Log data yang akan diupdate untuk debugging
-            log_message('info', 'Update data for book ID ' . $id_buku . ': ' . json_encode($dataToUpdate));
+            $baseDataToUpdate['foto'] = $fotoName;
 
-            // Memastikan ada data yang akan diupdate
-            $updateResult = $this->M_Perpustakaan->update($id_buku, $dataToUpdate);
+            $db = \Config\Database::connect();
+            $db->transStart();
 
-            if ($updateResult) {
-                // Set flash message
-                session()->setFlashdata('pesan', 'Data Buku Berhasil diubah.');
+            if ($newTotalEksemplar > $currentTotalEksemplar) {
+                // CASE 1: Adding more eksemplar - create new records
+                $copiesToAdd = $newTotalEksemplar - $currentTotalEksemplar;
 
-                // Check if it's an AJAX request
-                if ($this->request->isAJAX()) {
-                    return $this->response->setJSON([
-                        'success' => true,
-                        'message' => 'Data Buku Berhasil diubah.',
-                        'data' => $dataToUpdate // Return updated data for debugging
-                    ]);
+                // First, update all existing copies with new data
+                foreach ($allCopies as $copy) {
+                    $updateData = $baseDataToUpdate;
+                    $updateData['kodeEksemplar'] = $copy['kodeEksemplar']; // Keep original kode
+                    $updateData['eksemplar'] = 1; // Each record represents 1 copy
+                    $this->M_Perpustakaan->update($copy['id_buku'], $updateData);
                 }
+
+                // Generate kode eksemplar for new copies
+                $existingKodes = array_column($allCopies, 'kodeEksemplar');
+
+                // Get prefix and suffix from form input or detect from existing codes
+                $prefix = $this->request->getVar('kode_prefix') ?? '';
+                $suffix = $this->request->getVar('kode_suffix') ?? '';
+                $nomorMulai = (int)$this->request->getVar('nomor_mulai') ?? 1;
+
+                // If no prefix/suffix provided, try to detect from existing codes
+                if (empty($prefix) && empty($suffix) && !empty($existingKodes)) {
+                    $pattern = $this->detectKodePattern($existingKodes);
+                    if ($pattern) {
+                        $prefix = $pattern['prefix'];
+                        $suffix = $pattern['suffix'];
+                    }
+                }
+
+                // Generate new kode eksemplar
+                $newKodeEksemplar = [];
+                $maxNumber = $this->getMaxNumberFromKodes($existingKodes);
+
+                for ($i = 1; $i <= $copiesToAdd; $i++) {
+                    $newNumber = $maxNumber + $i;
+                    $formattedNumber = str_pad($newNumber, 5, '0', STR_PAD_LEFT);
+                    $newKodeEksemplar[] = $prefix . $formattedNumber . $suffix;
+                }
+
+                // Create new records
+                $createdCount = 0;
+                foreach ($newKodeEksemplar as $kode) {
+                    $newData = $baseDataToUpdate;
+                    $newData['kodeEksemplar'] = $kode;
+                    $newData['eksemplar'] = 1;
+                    $newData['created_at'] = date('Y-m-d H:i:s');
+                    $newData['id_petugas'] = session()->get('id_petugas');
+
+                    if ($this->M_Perpustakaan->save($newData)) {
+                        $createdCount++;
+                    }
+                }
+
+                $message = "Data berhasil diupdate. Ditambahkan {$createdCount} eksemplar baru (dari {$currentTotalEksemplar} menjadi " . ($currentTotalEksemplar + $createdCount) . " eksemplar).";
+            } elseif ($newTotalEksemplar < $currentTotalEksemplar) {
+                // CASE 2: Reducing eksemplar - delete excess records
+                $copiesToDelete = $currentTotalEksemplar - $newTotalEksemplar;
+
+                // Sort by ID to keep the original ones and delete the newest
+                usort($allCopies, function ($a, $b) {
+                    return $a['id_buku'] - $b['id_buku'];
+                });
+
+                $deletedCount = 0;
+                $updatedCount = 0;
+
+                // Delete excess records (starting from the newest)
+                for ($i = count($allCopies) - 1; $i >= 0 && $deletedCount < $copiesToDelete; $i--) {
+                    // Delete photo if it's not default and not used by other records
+                    if (
+                        !empty($allCopies[$i]['foto']) &&
+                        $allCopies[$i]['foto'] !== 'no_cover.jpeg' &&
+                        $allCopies[$i]['foto'] !== $fotoName
+                    ) {
+                        $imagePath = FCPATH . 'img/perpustakaan/' . $allCopies[$i]['foto'];
+                        if (file_exists($imagePath)) {
+                            unlink($imagePath);
+                        }
+                    }
+
+                    if ($this->M_Perpustakaan->delete($allCopies[$i]['id_buku'])) {
+                        $deletedCount++;
+                    }
+                }
+
+                // Update remaining records with new data
+                for ($i = 0; $i < count($allCopies) - $deletedCount; $i++) {
+                    $updateData = $baseDataToUpdate;
+                    $updateData['kodeEksemplar'] = $allCopies[$i]['kodeEksemplar'];
+                    $updateData['eksemplar'] = 1;
+                    $this->M_Perpustakaan->update($allCopies[$i]['id_buku'], $updateData);
+                    $updatedCount++;
+                }
+
+                $message = "Data berhasil diupdate. Dihapus {$deletedCount} eksemplar (dari {$currentTotalEksemplar} menjadi {$newTotalEksemplar} eksemplar).";
             } else {
-                if ($this->request->isAJAX()) {
-                    return $this->response->setJSON([
-                        'success' => false,
-                        'message' => 'Gagal mengupdate data buku.'
-                    ]);
+                // CASE 3: Same eksemplar count - just update all existing records
+                $updatedCount = 0;
+                foreach ($allCopies as $copy) {
+                    $updateData = $baseDataToUpdate;
+                    $updateData['kodeEksemplar'] = $copy['kodeEksemplar'];
+                    $updateData['eksemplar'] = 1;
+                    $this->M_Perpustakaan->update($copy['id_buku'], $updateData);
+                    $updatedCount++;
                 }
-                session()->setFlashdata('error', 'Gagal mengupdate data buku.');
+
+                $message = "Data buku berhasil diupdate ({$updatedCount} eksemplar).";
             }
 
-            // Redirect ke halaman sebelumnya atau halaman yang sesuai
+            $db->transComplete();
+
+            if ($db->transStatus() === false) {
+                throw new \Exception('Gagal menyimpan perubahan ke database');
+            }
+
+            session()->setFlashdata('pesan', $message);
+
+            if ($this->request->isAJAX()) {
+                return $this->response->setJSON([
+                    'success' => true,
+                    'message' => $message
+                ]);
+            }
+
             return redirect()->to('/dataBuku');
         } catch (\Exception $e) {
-            log_message('error', 'Error updating book data: ' . $e->getMessage());
-            log_message('error', 'Stack trace: ' . $e->getTraceAsString());
-            log_message('error', 'Request data: ' . json_encode($this->request->getVar()));
+            log_message('error', 'Error updating book with eksemplar logic: ' . $e->getMessage());
+
+            $errorMessage = 'Terjadi kesalahan: ' . $e->getMessage();
 
             if ($this->request->isAJAX()) {
                 return $this->response->setJSON([
                     'success' => false,
-                    'message' => 'Terjadi kesalahan: ' . $e->getMessage()
+                    'message' => $errorMessage
                 ]);
             }
 
-            session()->setFlashdata('error', 'Terjadi kesalahan saat mengupdate data: ' . $e->getMessage());
+            session()->setFlashdata('error', $errorMessage);
             return redirect()->to('/dataBuku');
         }
+    }
+
+    /**
+     * Get maximum number from existing kode eksemplar
+     */
+    private function getMaxNumberFromKodes($existingKodes)
+    {
+        $maxNumber = 0;
+
+        foreach ($existingKodes as $kode) {
+            // Extract all numbers from the code and take the last/largest one
+            preg_match_all('/\d+/', $kode, $matches);
+            if (!empty($matches[0])) {
+                $numbers = array_map('intval', $matches[0]);
+                $maxNumber = max($maxNumber, max($numbers));
+            }
+        }
+
+        return $maxNumber;
+    }
+
+    /**
+     * Generate next kode eksemplar based on existing patterns
+     */
+    private function generateNextKodeEksemplar($existingKodes, $countNeeded)
+    {
+        if (empty($existingKodes)) {
+            // If no existing codes, start with simple pattern
+            $nextKodes = [];
+            for ($i = 1; $i <= $countNeeded; $i++) {
+                $nextKodes[] = 'BK-' . str_pad($i, 5, '0', STR_PAD_LEFT);
+            }
+            return $nextKodes;
+        }
+
+        // Try to detect pattern from existing codes
+        $pattern = $this->detectKodePattern($existingKodes);
+
+        if ($pattern) {
+            return $this->generateKodesFromPattern($pattern, $countNeeded);
+        }
+
+        // Fallback: simple incremental pattern
+        $maxNumber = 0;
+        foreach ($existingKodes as $kode) {
+            // Extract numbers from the code
+            preg_match_all('/\d+/', $kode, $matches);
+            if (!empty($matches[0])) {
+                $number = (int)end($matches[0]);
+                $maxNumber = max($maxNumber, $number);
+            }
+        }
+
+        $nextKodes = [];
+        for ($i = 1; $i <= $countNeeded; $i++) {
+            $newNumber = $maxNumber + $i;
+            $nextKodes[] = 'BK-' . str_pad($newNumber, 5, '0', STR_PAD_LEFT);
+        }
+
+        return $nextKodes;
+    }
+
+    /**
+     * Detect pattern from existing kode eksemplar
+     */
+    private function detectKodePattern($existingKodes)
+    {
+        if (empty($existingKodes)) {
+            return null;
+        }
+
+        // Take the first code as pattern reference
+        $firstKode = $existingKodes[0];
+
+        // Try to extract prefix, number, and suffix
+        if (preg_match('/^(.*?)(\d+)(.*)$/', $firstKode, $matches)) {
+            return [
+                'prefix' => $matches[1],
+                'suffix' => $matches[3],
+                'number_length' => strlen($matches[2]),
+                'existing_numbers' => $this->extractNumbersFromKodes($existingKodes)
+            ];
+        }
+
+        return null;
+    }
+
+    /**
+     * Extract all numbers from existing kodes
+     */
+    private function extractNumbersFromKodes($kodes)
+    {
+        $numbers = [];
+        foreach ($kodes as $kode) {
+            if (preg_match('/(\d+)/', $kode, $matches)) {
+                $numbers[] = (int)$matches[1];
+            }
+        }
+        return $numbers;
+    }
+
+    /**
+     * Generate new kodes from detected pattern
+     */
+    private function generateKodesFromPattern($pattern, $countNeeded)
+    {
+        $existingNumbers = $pattern['existing_numbers'];
+        $maxNumber = empty($existingNumbers) ? 0 : max($existingNumbers);
+
+        $newKodes = [];
+        for ($i = 1; $i <= $countNeeded; $i++) {
+            $newNumber = $maxNumber + $i;
+            $paddedNumber = str_pad($newNumber, $pattern['number_length'], '0', STR_PAD_LEFT);
+            $newKodes[] = $pattern['prefix'] . $paddedNumber . $pattern['suffix'];
+        }
+
+        return $newKodes;
     }
 
     public function tambahData()
@@ -571,5 +787,54 @@ class C_Perpustakaan extends BaseController
 
         // Menampilkan view dengan data yang telah disiapkan
         return view('dataBuku', $data);
+    }
+
+    // Add this method to your C_Perpustakaan controller
+
+    /**
+     * Preview kode eksemplar for new copies
+     */
+    public function previewKodeEksemplar()
+    {
+        if (!$this->request->isAJAX()) {
+            return $this->response->setStatusCode(400)->setJSON([
+                'success' => false,
+                'message' => 'Invalid request'
+            ]);
+        }
+
+        try {
+            $input = json_decode($this->request->getBody(), true);
+            $judul = $input['judul'] ?? '';
+            $pengarang = $input['pengarang'] ?? '';
+            $penerbit = $input['penerbit'] ?? '';
+            $count = (int)($input['count'] ?? 1);
+
+            if (empty($judul) || $count < 1) {
+                return $this->response->setJSON([
+                    'success' => false,
+                    'message' => 'Invalid parameters'
+                ]);
+            }
+
+            // Get existing kode eksemplar for this book
+            $existingKodes = $this->M_Perpustakaan->getExistingKodeEksemplar($judul, $pengarang, $penerbit);
+
+            // Generate next kode eksemplar
+            $nextKodes = $this->generateNextKodeEksemplar($existingKodes, $count);
+
+            return $this->response->setJSON([
+                'success' => true,
+                'codes' => $nextKodes,
+                'existing_count' => count($existingKodes)
+            ]);
+        } catch (\Exception $e) {
+            log_message('error', 'Error previewing kode eksemplar: ' . $e->getMessage());
+
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Terjadi kesalahan: ' . $e->getMessage()
+            ]);
+        }
     }
 }
