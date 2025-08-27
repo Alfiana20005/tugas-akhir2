@@ -746,7 +746,7 @@ class C_Admin extends BaseController
         // Mengambil data yang akan diupdate dari request
         $dataToUpdate = [
             'judul' => $this->request->getVar('judul'),
-            'publikasi' => $this->request->getVar('publikasi'),
+            'penulis' => $this->request->getVar('penulis'),
             'tanggal' => $this->request->getVar('tanggal'),
             'link' => $this->request->getVar('link'),
             'foto' => $this->request->getVar('foto'),
