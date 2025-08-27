@@ -64,9 +64,6 @@ $routes->get('/tulisan2/(:segment)', 'C_LandingPage::tulisan2/$1');
 $routes->get('/manuskripKol', 'C_LandingPage::manuskripKol');
 $routes->get('/manuskrip', 'C_LandingPage::manuskrip');
 $routes->get('/manuskripLogin', 'C_LandingPage::manuskripLogin');
-$routes->get('/saveViews/(:num)', 'C_LandingPage::views/$1');
-$routes->get('/saveViews2/(:num)', 'C_LandingPage::views2/$1');
-
 
 $routes->get('/koleksi', 'C_LandingPage::koleksi_page2');
 
@@ -298,3 +295,13 @@ $routes->group('', ['filter' => 'filterPerpustakaan'], function ($routes) {
     $routes->get('/cekJudulBuku', 'C_Perpustakaan::cekJudulBuku');
 });
 // 
+
+// Routes yang memerlukan login user publik untuk akses manuskrip
+$routes->group('', ['filter' => 'filterManuskrip'], function ($routes) {
+    $routes->get('/saveViews/(:num)', 'C_LandingPage::views/$1');
+    $routes->get('/saveViews2/(:num)', 'C_LandingPage::views2/$1');
+
+    // Mungkin ada routes manuskrip lainnya yang perlu login user publik:
+    // $routes->get('/manuskrip', 'C_LandingPage::manuskrip');  // Jika perlu login
+    // $routes->get('/manuskripKol', 'C_LandingPage::manuskripKol');  // Jika perlu login
+});

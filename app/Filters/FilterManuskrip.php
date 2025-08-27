@@ -10,19 +10,15 @@ class FilterManuskrip implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
-        // Do something here
+        // Cek apakah user publik sudah login untuk akses manuskrip
         if (session()->get('logUser') != true) {
-            # code...
-            return redirect()->to (base_url('/formlogin'));
+            return redirect()->to(base_url('/formlogin'));
         }
     }
 
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
-        // Do something here
-        if (session()->get('logUser') == true) {
-            # code...
-            return redirect()->to (base_url('/home'));
-        }
+        // Kosong - tidak perlu redirect di after()
+        // Logika asli tidak masuk akal (redirect user yang sudah login)
     }
 }
