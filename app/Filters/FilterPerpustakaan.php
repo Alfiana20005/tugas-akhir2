@@ -10,20 +10,20 @@ class FilterPerpustakaan implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
-        // $id_berita = $arguments[0] ?? null;
-        // Do something here
-        if (session()->level=='') {
-            # code...
-            return redirect()->to (base_url('/halamanLogin'));
+        // Cek apakah user sudah login
+        if (empty(session()->level) || session()->level == '') {
+            return redirect()->to(base_url('/halamanLogin'));
+        }
+
+        // Cek apakah user memiliki akses ke perpustakaan
+        // Misalnya hanya level 'Admin' atau 'Perpustakaan' yang bisa akses
+        $allowedLevels = ['Perpustakaan']; // Sesuaikan dengan level yang diizinkan
+
+        if (!in_array(session()->level, $allowedLevels)) {
+            // Redirect ke halaman yang sesuai berdasarkan level
+            return redirect()->to(base_url('/dashboard'))->with('error', 'Akses ditolak!');
         }
     }
 
-    public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
-    {
-        // Do something here
-        if (session()->level=='Perpustakaan') {
-            # code...
-            return redirect()->to (base_url('/dashboard'));
-        }
-    }
+    public function after(RequestInterface $request, ResponseInterface $response, $arguments = null) {}
 }

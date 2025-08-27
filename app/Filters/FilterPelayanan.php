@@ -10,20 +10,24 @@ class FilterPelayanan implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
-        // $id_berita = $arguments[0] ?? null;
-        // Do something here
-        if (session()->level=='') {
-            # code...
-            return redirect()->to (base_url('/halamanLogin'));
+        // 1. Cek login dulu
+        if (empty(session()->level)) {
+            return redirect()->to(base_url('/halamanLogin'));
+        }
+
+        // 2. Cek akses pelayanan - level yang boleh akses modul pelayanan
+        $allowedLevels = ['Petugas Pelayanan']; // Admin dan Petugas Pelayanan
+
+        if (!in_array(session()->level, $allowedLevels)) {
+            return redirect()->to(base_url('/dashboard'))
+                ->with('error', 'Anda tidak memiliki akses ke modul pelayanan');
         }
     }
 
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
-        // Do something here
-        if (session()->level=='Petugas Pelayanan') {
-            # code...
-            return redirect()->to (base_url('/dashboard'));
-        }
+        // Kosong - tidak perlu redirect di after()
+        // Bisa digunakan untuk logging jika perlu
+        // log_message('info', 'User ' . session()->username . ' accessed pelayanan module');
     }
 }
