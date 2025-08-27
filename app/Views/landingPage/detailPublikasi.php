@@ -1,5 +1,52 @@
 <?= $this->extend('landingPage/template baru'); ?>
 
+<?= $this->section('head'); ?>
+<!-- Open Graph Meta Tags untuk Social Media Preview -->
+<meta property="og:title" content="<?= htmlspecialchars($publikasi['judul']); ?> - Museum Negeri NTB">
+<meta property="og:description" content="Publikasi Museum Negeri NTB: <?= htmlspecialchars(substr(strip_tags($publikasi['judul']), 0, 160)); ?>. Dipublikasikan pada <?= $publikasi['tanggal']; ?>">
+<meta property="og:image" content="<?= base_url('img/publikasi/' . $publikasi['foto']); ?>">
+<meta property="og:url" content="<?= current_url(); ?>">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Museum Negeri NTB">
+
+<!-- Twitter Card Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="<?= htmlspecialchars($publikasi['judul']); ?> - Museum Negeri NTB">
+<meta name="twitter:description" content="Publikasi Museum Negeri NTB: <?= htmlspecialchars(substr(strip_tags($publikasi['judul']), 0, 160)); ?>">
+<meta name="twitter:image" content="<?= base_url('img/publikasi/' . $publikasi['foto']); ?>">
+
+<!-- Meta Tags Standar -->
+<meta name="description" content="<?= htmlspecialchars(substr(strip_tags($publikasi['judul']), 0, 160)); ?> - Publikasi resmi Museum Negeri NTB">
+<title><?= htmlspecialchars($publikasi['judul']); ?> - Museum Negeri NTB</title>
+
+<!-- Structured Data (JSON-LD) untuk SEO -->
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "<?= htmlspecialchars($publikasi['judul']); ?>",
+        "image": "<?= base_url('img/publikasi/' . $publikasi['foto']); ?>",
+        "datePublished": "<?= $publikasi['tanggal']; ?>",
+        "author": {
+            "@type": "Organization",
+            "name": "Museum Negeri NTB"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Museum Negeri NTB",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "<?= base_url('img/logo-museum.png'); ?>"
+            }
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "<?= current_url(); ?>"
+        }
+    }
+</script>
+<?= $this->endSection(); ?>
+
 <?= $this->section('content'); ?>
 
 <!-- start banner Area -->

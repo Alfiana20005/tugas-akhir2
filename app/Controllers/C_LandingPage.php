@@ -571,10 +571,21 @@ class C_LandingPage extends BaseController
         $session = session();
         $id_user = $session->get('id_user');
         $user = $this->M_User->getUser($id_user);
+        // Siapkan informasi penulis
+        $author_info = !empty($publikasi['penulis']) ? $publikasi['penulis'] : 'Museum Negeri NTB';
 
         $data = [
             'title' => 'Detail Publikasi - ' . $publikasi['judul'],
             'publikasi' => $publikasi,
+            'page_title' => $publikasi['judul'] . ' - Museum Negeri NTB',
+            'meta_description' => 'Publikasi oleh ' . $author_info . ': ' . $publikasi['judul'] . '. Dipublikasikan pada ' . date('d F Y', strtotime($publikasi['tanggal'])),
+            'meta_keywords' => 'museum NTB, publikasi, ' . strtolower($publikasi['judul']) . ', ' . strtolower($author_info) . ', budaya, sejarah',
+
+            // Open Graph tags untuk social media preview
+            'og_title' => $publikasi['judul'] . ' - Museum Negeri NTB',
+            'og_description' => 'Publikasi oleh ' . $author_info . ': ' . $publikasi['judul'] . '. Diterbitkan pada ' . date('d F Y', strtotime($publikasi['tanggal'])) . '. Kunjungi website resmi Museum Negeri NTB.',
+            'og_image' => base_url('img/publikasi/' . $publikasi['foto']),
+            'og_type' => 'article',
             'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
             'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
             'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),

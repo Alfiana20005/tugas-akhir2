@@ -17,6 +17,20 @@
 	<!-- Site Title -->
 	<title>MuseumNegeri-NTB</title>
 
+	<!-- Open Graph Meta Tags untuk Social Media Preview -->
+	<meta property="og:title" content="<?= isset($og_title) ? $og_title : 'MuseumNegeri-NTB'; ?>">
+	<meta property="og:description" content="<?= isset($og_description) ? $og_description : 'Website resmi Museum Negeri NTB - Melestarikan warisan budaya dan sejarah Nusa Tenggara Barat'; ?>">
+	<meta property="og:image" content="<?= isset($og_image) ? $og_image : base_url('img/logomuseum2.png'); ?>">
+	<meta property="og:url" content="<?= current_url(); ?>">
+	<meta property="og:type" content="<?= isset($og_type) ? $og_type : 'website'; ?>">
+	<meta property="og:site_name" content="Museum Negeri NTB">
+
+	<!-- Twitter Card Meta Tags -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="<?= isset($og_title) ? $og_title : 'MuseumNegeri-NTB'; ?>">
+	<meta name="twitter:description" content="<?= isset($og_description) ? $og_description : 'Website resmi Museum Negeri NTB'; ?>">
+	<meta name="twitter:image" content="<?= isset($og_image) ? $og_image : base_url('img/logomuseum2.png'); ?>">
+
 	<!-- Google Tag Manager -->
 	<script>
 		(function(w, d, s, l, i) {

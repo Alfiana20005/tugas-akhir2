@@ -687,8 +687,6 @@ class C_Admin extends BaseController
                 'rules' => 'required',
                 'errors' => [
                     'required' => 'tanggal tidak boleh kosong',
-
-
                 ]
             ],
         ];
@@ -715,6 +713,7 @@ class C_Admin extends BaseController
         $this->M_Publikasi->save([
             // 'id_petugas' => $id_petugas,
             'judul' => $this->request->getVar('judul'),
+            'penulis' => $this->request->getVar('penulis'),
             'tanggal' => $this->request->getVar('tanggal'),
             'link' => $this->request->getVar('link'),
             'foto' => $fotoName,

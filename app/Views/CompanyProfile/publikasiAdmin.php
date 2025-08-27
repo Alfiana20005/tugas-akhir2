@@ -32,6 +32,12 @@
                             </div>
                         </div>
                         <div class="row mb-2">
+                            <label for="email" class="col-sm-3 col-form-label">Penulis</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="recipient-name" name="penulis">
+                            </div>
+                        </div>
+                        <div class="row mb-2">
                             <label for="email" class="col-sm-3 col-form-label">Tanggal</label>
                             <div class="col-sm-9">
                                 <input type="date" class="form-control" id="recipient-name" name="tanggal">
@@ -146,6 +152,12 @@
                                 <label for="email" class="col-sm-3 col-form-label">Judul</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="recipient-name" name="judul" value="<?= $p['judul']; ?>">
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <label for="email" class="col-sm-3 col-form-label">Penulis</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="recipient-name" name="penulis" value="<?= $p['penulis']; ?>">
                                 </div>
                             </div>
                             <div class="row mb-2">
