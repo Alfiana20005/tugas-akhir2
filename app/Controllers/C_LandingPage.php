@@ -571,21 +571,51 @@ class C_LandingPage extends BaseController
         $session = session();
         $id_user = $session->get('id_user');
         $user = $this->M_User->getUser($id_user);
+
         // Siapkan informasi penulis
         $author_info = !empty($publikasi['penulis']) ? $publikasi['penulis'] : 'Museum Negeri NTB';
 
+        // Bersihkan dan potong deskripsi jika terlalu panjang
+        $description = 'Publikasi oleh ' . $author_info . ': ' . $publikasi['judul'] . '. Dipublikasikan pada ' . date('d F Y', strtotime($publikasi['tanggal'])) . ' - Museum Negeri NTB.';
+
+        // Pastikan deskripsi tidak lebih dari 160 karakter untuk optimal SEO
+        if (strlen($description) > 160) {
+            $description = substr($description, 0, 157) . '...';
+        }
+
+        // Pastikan URL gambar absolut dan dapat diakses
+        $image_url = base_url('img/publikasi/' . $publikasi['foto']);
+
+        // URL canonical
+        $canonical_url = base_url('publikasi2_detail/' . $id_publikasi);
+
         $data = [
-            'title' => 'Detail Publikasi - ' . $publikasi['judul'],
+            'title' => $publikasi['judul'] . ' - Museum Negeri NTB',
             'publikasi' => $publikasi,
             'page_title' => $publikasi['judul'] . ' - Museum Negeri NTB',
-            'meta_description' => 'Publikasi oleh ' . $author_info . ': ' . $publikasi['judul'] . '. Dipublikasikan pada ' . date('d F Y', strtotime($publikasi['tanggal'])),
+            'meta_description' => $description,
             'meta_keywords' => 'museum NTB, publikasi, ' . strtolower($publikasi['judul']) . ', ' . strtolower($author_info) . ', budaya, sejarah',
+            'canonical_url' => $canonical_url,
 
             // Open Graph tags untuk social media preview
-            'og_title' => $publikasi['judul'] . ' - Museum Negeri NTB',
-            'og_description' => 'Publikasi oleh ' . $author_info . ': ' . $publikasi['judul'] . '. Diterbitkan pada ' . date('d F Y', strtotime($publikasi['tanggal'])) . '. Kunjungi website resmi Museum Negeri NTB.',
-            'og_image' => base_url('img/publikasi/' . $publikasi['foto']),
+            'og_title' => $publikasi['judul'],
+            'og_description' => $description,
+            'og_image' => $image_url,
+            'og_url' => $canonical_url,
             'og_type' => 'article',
+            'og_site_name' => 'Museum Negeri NTB',
+
+            // Twitter Card
+            'twitter_card' => 'summary_large_image',
+            'twitter_title' => $publikasi['judul'],
+            'twitter_description' => $description,
+            'twitter_image' => $image_url,
+
+            // Article specific meta (untuk Facebook dan platform lain)
+            'article_author' => $author_info,
+            'article_published_time' => date('c', strtotime($publikasi['tanggal'])), // ISO 8601 format
+            'article_section' => 'Publikasi',
+
             'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
             'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
             'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),

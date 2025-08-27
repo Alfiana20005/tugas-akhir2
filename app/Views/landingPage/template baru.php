@@ -6,30 +6,51 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<!-- Favicon-->
 	<link rel="shortcut icon" href="<?= base_url(); ?>img/logomuseum2.png">
-	<!-- Author Meta -->
-	<meta name="author" content="colorlib">
-	<!-- Meta Description -->
-	<meta name="description" content="">
-	<!-- Meta Keyword -->
-	<meta name="keywords" content="">
-	<!-- meta character set -->
-	<meta charset="UTF-8">
-	<!-- Site Title -->
-	<title>MuseumNegeri-NTB</title>
 
-	<!-- Open Graph Meta Tags untuk Social Media Preview -->
-	<meta property="og:title" content="<?= isset($og_title) ? $og_title : 'MuseumNegeri-NTB'; ?>">
-	<meta property="og:description" content="<?= isset($og_description) ? $og_description : 'Website resmi Museum Negeri NTB - Melestarikan warisan budaya dan sejarah Nusa Tenggara Barat'; ?>">
+	<!-- Basic Meta -->
+	<meta name="author" content="Museum Negeri NTB">
+	<meta name="description" content="<?= isset($meta_description) ? esc($meta_description) : 'Website resmi Museum Negeri NTB - Melestarikan warisan budaya dan sejarah Nusa Tenggara Barat'; ?>">
+	<meta name="keywords" content="<?= isset($meta_keywords) ? esc($meta_keywords) : 'museum NTB, budaya, sejarah, nusa tenggara barat'; ?>">
+	<meta charset="UTF-8">
+
+	<!-- Canonical URL -->
+	<link rel="canonical" href="<?= isset($canonical_url) ? $canonical_url : current_url(); ?>">
+
+	<!-- Site Title -->
+	<title><?= isset($title) ? esc($title) : 'MuseumNegeri-NTB'; ?></title>
+
+	<!-- Open Graph Meta Tags untuk Facebook, WhatsApp, dll -->
+	<meta property="og:title" content="<?= isset($og_title) ? esc($og_title) : (isset($title) ? esc($title) : 'MuseumNegeri-NTB'); ?>">
+	<meta property="og:description" content="<?= isset($og_description) ? esc($og_description) : (isset($meta_description) ? esc($meta_description) : 'Website resmi Museum Negeri NTB - Melestarikan warisan budaya dan sejarah Nusa Tenggara Barat'); ?>">
 	<meta property="og:image" content="<?= isset($og_image) ? $og_image : base_url('img/logomuseum2.png'); ?>">
-	<meta property="og:url" content="<?= current_url(); ?>">
+	<meta property="og:image:width" content="1200">
+	<meta property="og:image:height" content="630">
+	<meta property="og:url" content="<?= isset($og_url) ? $og_url : current_url(); ?>">
 	<meta property="og:type" content="<?= isset($og_type) ? $og_type : 'website'; ?>">
-	<meta property="og:site_name" content="Museum Negeri NTB">
+	<meta property="og:site_name" content="<?= isset($og_site_name) ? esc($og_site_name) : 'Museum Negeri NTB'; ?>">
+	<meta property="og:locale" content="id_ID">
+
+	<?php if (isset($og_type) && $og_type === 'article'): ?>
+		<!-- Article specific meta -->
+		<meta property="article:author" content="<?= isset($article_author) ? esc($article_author) : 'Museum Negeri NTB'; ?>">
+		<meta property="article:published_time" content="<?= isset($article_published_time) ? $article_published_time : ''; ?>">
+		<meta property="article:section" content="<?= isset($article_section) ? esc($article_section) : 'Publikasi'; ?>">
+	<?php endif; ?>
 
 	<!-- Twitter Card Meta Tags -->
-	<meta name="twitter:card" content="summary_large_image">
-	<meta name="twitter:title" content="<?= isset($og_title) ? $og_title : 'MuseumNegeri-NTB'; ?>">
-	<meta name="twitter:description" content="<?= isset($og_description) ? $og_description : 'Website resmi Museum Negeri NTB'; ?>">
-	<meta name="twitter:image" content="<?= isset($og_image) ? $og_image : base_url('img/logomuseum2.png'); ?>">
+	<meta name="twitter:card" content="<?= isset($twitter_card) ? $twitter_card : 'summary_large_image'; ?>">
+	<meta name="twitter:title" content="<?= isset($twitter_title) ? esc($twitter_title) : (isset($og_title) ? esc($og_title) : 'MuseumNegeri-NTB'); ?>">
+	<meta name="twitter:description" content="<?= isset($twitter_description) ? esc($twitter_description) : (isset($og_description) ? esc($og_description) : 'Website resmi Museum Negeri NTB'); ?>">
+	<meta name="twitter:image" content="<?= isset($twitter_image) ? $twitter_image : (isset($og_image) ? $og_image : base_url('img/logomuseum2.png')); ?>">
+	<meta name="twitter:site" content="@museumnegerintb">
+
+	<!-- WhatsApp specific (menggunakan Open Graph) -->
+	<meta property="og:image:alt" content="<?= isset($og_title) ? esc($og_title) : 'Museum Negeri NTB'; ?>">
+
+	<!-- Additional meta untuk better preview -->
+	<meta name="robots" content="index, follow">
+	<meta name="language" content="Indonesian">
+
 
 	<!-- Google Tag Manager -->
 	<script>
