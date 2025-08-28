@@ -38,12 +38,12 @@
 								<div class="feature-img mb-2 embed-responsive embed-responsive-4by3">
 									<img class="embed-responsive-item" style="object-fit: cover;" src="<?= base_url("img/berita/" . $b['foto']); ?>" alt="">
 								</div>
-								<a class="posts-title " href="<?= base_url("/lihatberita2/{$b['id_berita']}"); ?>">
+								<a href="<?= base_url("/berita/{$b['slug']}"); ?>">
 									<h5 style="padding-bottom: 6pt;"><?= $b['judul']; ?></h5>
 								</a>
 								<p><i class="fa-solid fa-calendar-days" style="padding-right: 4pt;"></i><?= $b['tanggal']; ?></p>
 								<p class="excert"><?= $b['isi_pendek']; ?></p>
-								<a href="<?= base_url("/lihatberita2/{$b['id_berita']}"); ?>" class="primary-btn">Baca Berita</a>
+								<a href="<?= base_url("/berita/{$b['slug']}"); ?>" class="primary-btn">Baca Berita</a>
 							</div>
 						<?php endif; ?>
 					<?php endforeach; ?>

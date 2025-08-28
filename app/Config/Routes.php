@@ -15,7 +15,12 @@ $routes->get('/ruangPamer', 'C_LandingPage::ruangPamer');
 $routes->get('/tatatertib', 'C_LandingPage::tatatertib');
 $routes->get('/berita', 'C_LandingPage::berita');
 $routes->get('/lihatberita', 'C_LandingPage::lihatberita');
-$routes->get('/lihatberita/(:segment)', 'C_LandingPage::lihatberita/$1');
+$routes->get('/berita/(:segment)', 'C_LandingPage::lihatberita/$1');
+// Route untuk generate slug (jalankan sekali saja, lalu hapus)
+$routes->get('/generate-slugs', 'C_LandingPage::generateSlugsForExisting');
+
+// Route untuk backward compatibility (redirect ID lama ke slug)
+$routes->get('/berita-id/(:num)', 'C_LandingPage::redirectToSlug/$1');
 
 $routes->get('/kegiatan', 'C_LandingPage::kegiatan');
 $routes->get('/lihatKegiatan', 'C_LandingPage::lihatKegiatan');
@@ -42,11 +47,9 @@ $routes->get('/visimisi2', 'C_LandingPage::visiMisi2');
 $routes->get('/struktur2', 'C_LandingPage::struktur2');
 $routes->get('/ruangPamer2', 'C_LandingPage::ruangPamer2');
 $routes->get('/tatatertib2', 'C_LandingPage::tatatertib2');
-$routes->get('/berita2', 'C_LandingPage::berita2');
-$routes->post('/berita2', 'C_LandingPage::berita2');
-$routes->get('/lihatberita2', 'C_LandingPage::lihatberita2');
-$routes->get('/lihatberita2/(:segment)', 'C_LandingPage::lihatberita2/$1');
-$routes->post('/lihatberita2/(:segment)', 'C_LandingPage::lihatberita2/$1');
+// $routes->get('/lihatberita2', 'C_LandingPage::lihatberita2');
+// $routes->get('/lihatberita2/(:segment)', 'C_LandingPage::lihatberita2/$1');
+// $routes->post('/lihatberita2/(:segment)', 'C_LandingPage::lihatberita2/$1');
 $routes->get('/beritaKategori2/(:segment)', 'C_LandingPage::beritaKategori2/$1');
 
 $routes->get('/kegiatan2', 'C_LandingPage::kegiatan2');

@@ -2,23 +2,23 @@
 
 namespace App\Controllers;
 
-use App\Models\M_Petugas;
-use App\Models\M_Berita;
-use App\Models\M_Kegiatan;
-use App\Models\M_Publikasi;
-use App\Models\M_KoleksiLandingPage;
-use App\Models\M_Gallery;
-use App\Models\M_Kajian;
-use App\Models\M_IsiKajian;
-use App\Models\M_Pesan;
-use App\Models\M_Pengunjung;
-use App\Models\M_SemuaPetugas;
-use App\Models\M_Perpustakaan;
-use App\Models\M_ManuskripKol;
-use App\Models\M_Manuskrip;
 use App\Models\M_Sega;
 use App\Models\M_User;
+use App\Models\M_Pesan;
+use App\Models\M_Berita;
+use App\Models\M_Kajian;
+use App\Models\M_Gallery;
+use App\Models\M_Petugas;
+use App\Models\M_Kegiatan;
+use App\Models\M_IsiKajian;
+use App\Models\M_Manuskrip;
+use App\Models\M_Publikasi;
 use App\Models\M_Penelitian;
+use App\Models\M_Pengunjung;
+use App\Models\M_ManuskripKol;
+use App\Models\M_Perpustakaan;
+use App\Models\M_SemuaPetugas;
+use App\Models\M_KoleksiLandingPage;
 
 class C_LandingPage extends BaseController
 {
@@ -189,14 +189,11 @@ class C_LandingPage extends BaseController
         ];
         return view('landingPage/tatatertib2', $data);
     }
-    public function berita2(): string
+    public function berita(): string
     {
-        // $session = session();
-        // $id_user = $session->get('id_user');
-        // $user = $this->M_User->getUser($id_user);
-        $kategoriBerita = $this->request->getPost('kategoriBerita') ?? 'Regional'; // Default ke 'Regional'
+        $kategoriBerita = $this->request->getPost('kategoriBerita') ?? 'Regional';
         $lihatSemua = $this->request->getGet('lihatSemua') ?? false;
-        $limit = $lihatSemua ? null : 4; // Jika 'lihatSemua' aktif, tampilkan semua berita. Jika tidak, tampilkan 2 berita.
+        $limit = $lihatSemua ? null : 4;
 
         if ($lihatSemua) {
             $data['berita'] = $this->M_Berita->getBeritaByKategoriAll($kategoriBerita);
@@ -206,8 +203,9 @@ class C_LandingPage extends BaseController
 
         $data['kategoriBerita'] = $kategoriBerita;
         $data_berita = $this->M_Berita->getBeritaBaru();
+
         foreach ($data_berita as &$berita) {
-            $berita['isi_pendek'] = $this->getExcerpt($berita['isi'], 20); // 30 adalah jumlah kata yang ingin ditampilkan
+            $berita['isi_pendek'] = $this->getExcerpt($berita['isi'], 20);
         }
 
         $data = [
@@ -220,20 +218,17 @@ class C_LandingPage extends BaseController
             'berita' => $data['berita'],
             'kategoriBerita' => $kategoriBerita,
             'lihatSemua' => $lihatSemua,
-            // 'user' => $user
-            // 'berita' => $berita
         ];
 
         return view('landingPage/berita2', $data);
     }
-    public function lihatberita2($id_berita): string
+
+    // Method baru untuk handle slug
+    public function lihatberita($slug): string
     {
-        // $session = session();
-        // $id_user = $session->get('id_user');
-        // $user = $this->M_User->getUser($id_user);
-        $kategoriBerita = $this->request->getPost('kategoriBerita') ?? 'Regional'; // Default ke 'Regional'
+        $kategoriBerita = $this->request->getPost('kategoriBerita') ?? 'Regional';
         $lihatSemua = $this->request->getGet('lihatSemua') ?? false;
-        $limit = $lihatSemua ? null : 4; // Jika 'lihatSemua' aktif, tampilkan semua berita. Jika tidak, tampilkan 2 berita.
+        $limit = $lihatSemua ? null : 4;
 
         if ($lihatSemua) {
             $data['berita2'] = $this->M_Berita->getBeritaByKategoriAll($kategoriBerita);
@@ -241,16 +236,37 @@ class C_LandingPage extends BaseController
             $data['berita2'] = $this->M_Berita->getBeritaByKategori($kategoriBerita, $limit);
         }
 
-
         $data_berita = $this->M_Berita->findAll();
-        $berita = $this->M_Berita->getBerita($id_berita);
-        $beritaTerbaru = $this->M_Berita->getBeritaTerbaru(10);
 
+        // Ganti getBerita dengan getBeritaBySlug
+        $berita = $this->M_Berita->getBeritaBySlug($slug);
+
+        // Handle jika berita tidak ditemukan
+        if (!$berita) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException('Berita tidak ditemukan');
+        }
+
+        $beritaTerbaru = $this->M_Berita->getBeritaTerbaru(10);
         $data['kategoriBerita'] = $kategoriBerita;
 
-        // var_dump($berita);
+        // Siapkan informasi sumber berita
+        $source_info = !empty($berita['sumber']) ? $berita['sumber'] : 'Museum Negeri NTB';
+
+        // Buat deskripsi untuk meta dan OG tags
+        $description = 'Berita dari ' . $source_info . ': ' . $berita['judul'] . '. Dipublikasikan pada ' . date('d F Y', strtotime($berita['tanggal'])) . ' - Museum Negeri NTB.';
+
+        // Pastikan deskripsi tidak lebih dari 160 karakter untuk optimal SEO
+        if (strlen($description) > 160) {
+            $description = substr($description, 0, 157) . '...';
+        }
+
+        // Pastikan URL gambar absolut dan dapat diakses
+        $image_url = base_url('img/berita/' . $berita['foto']);
+
+        // URL canonical
+        $canonical_url = base_url('lihatberita/' . $slug);
+
         $data = [
-            // 'title' => 'Daftar Berita',
             'dataBerita' => $data_berita,
             'berita' => $berita,
             'berita2' => $data['berita2'],
@@ -261,11 +277,67 @@ class C_LandingPage extends BaseController
             'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
             'kategoriBerita' => $kategoriBerita,
             'lihatSemua' => $lihatSemua,
-            // 'user' => $user
+
+            // SEO Meta Tags
+            'title' => $berita['judul'] . ' - Museum Negeri NTB',
+            'page_title' => $berita['judul'] . ' - Museum Negeri NTB',
+            'meta_description' => $description,
+            'meta_keywords' => 'museum NTB, berita, ' . strtolower($berita['judul']) . ', ' . strtolower($source_info) . ', budaya, sejarah',
+            'canonical_url' => $canonical_url,
+
+            // Open Graph tags untuk social media preview
+            'og_title' => $berita['judul'],
+            'og_description' => $description,
+            'og_image' => $image_url,
+            'og_url' => $canonical_url,
+            'og_type' => 'article',
+            'og_site_name' => 'Museum Negeri NTB',
+
+            // Twitter Card
+            'twitter_card' => 'summary_large_image',
+            'twitter_title' => $berita['judul'],
+            'twitter_description' => $description,
+            'twitter_image' => $image_url,
+
+            // Article specific meta (untuk Facebook dan platform lain)
+            'article_author' => $source_info,
+            'article_published_time' => date('c', strtotime($berita['tanggal'])), // ISO 8601 format
+            'article_section' => 'Berita',
         ];
 
         return view('landingPage/lihatBerita2', $data);
     }
+
+    // Method untuk generate slug untuk data existing (jalankan sekali saja)
+    // Method untuk generate slug untuk data existing (one-time execution)
+    public function generateSlugsForExisting()
+    {
+        $allBerita = $this->M_Berita->findAll();
+        $updated = 0;
+
+        foreach ($allBerita as $berita) {
+            if (empty($berita['slug'])) {
+                // Panggil method dari Model, bukan SlugHelper
+                $slug = $this->M_Berita->generateSlugFromTitle($berita['judul'], $berita['id_berita']);
+
+                $this->M_Berita->update($berita['id_berita'], ['slug' => $slug]);
+                $updated++;
+            }
+        }
+
+        return "Berhasil generate slug untuk {$updated} berita!";
+    }
+
+    // Method untuk handle backward compatibility (redirect dari ID lama ke slug)
+    public function redirectToSlug($id_berita)
+    {
+        $berita = $this->M_Berita->getBerita($id_berita);
+
+        if (!$berita || empty($berita['slug'])) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException('Berita tidak ditemukan');
+        }
+    }
+
     public function beritaKategori2($jenisBerita): string
     {
         // $kajian = $this->M_Kajian->findAll();
