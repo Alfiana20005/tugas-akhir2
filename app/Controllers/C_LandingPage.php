@@ -253,7 +253,7 @@ class C_LandingPage extends BaseController
         $source_info = !empty($berita['sumber']) ? $berita['sumber'] : 'Museum Negeri NTB';
 
         // Buat deskripsi untuk meta dan OG tags
-        $description = 'Berita dari ' . $source_info . ': ' . $berita['judul'] . '. Dipublikasikan pada ' . date('d F Y', strtotime($berita['tanggal'])) . ' - Museum Negeri NTB.';
+        $description = 'Berita dari ' . $source_info . ': ' .  '. Dipublikasikan pada ' . date('d F Y', strtotime($berita['tanggal'])) . ' - Museum Negeri NTB.';
 
         // Pastikan deskripsi tidak lebih dari 160 karakter untuk optimal SEO
         if (strlen($description) > 160) {
