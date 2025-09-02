@@ -314,7 +314,7 @@
 								<img class="img-fluid" src="<?= base_url("img/berita/" . $b['foto']); ?>" alt="">
 							</div>
 							<br>
-							<a href="<?= base_url("/lihatberita2/{$b['id_berita']}"); ?>">
+							<a href="<?= base_url("/berita/{$b['slug']}"); ?>">
 								<h5><?= $b['judul']; ?></h5>
 							</a>
 							<p style="text-align: justify; color:#850000;">
