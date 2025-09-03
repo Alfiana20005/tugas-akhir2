@@ -70,7 +70,6 @@ $routes->get('/koleksi_detail', 'C_LandingPage::koleksi_detail');
 $routes->get('/koleksi_detail/(:segment)', 'C_LandingPage::koleksi_detail/$1');
 $routes->get('/publikasi', 'C_LandingPage::publikasi');
 $routes->get('/publikasi/detail/(:num)', 'C_LandingPage::publikasi2_detail/$1');
-$routes->get('/perpustakaan2', 'C_LandingPage::perpustakaan2');
 $routes->get('/detailBuku/(:segment)', 'C_LandingPage::detailBuku/$1');
 
 $routes->get('/kontak', 'C_LandingPage::kontak');

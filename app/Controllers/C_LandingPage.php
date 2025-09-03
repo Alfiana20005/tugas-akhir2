@@ -850,7 +850,7 @@ class C_LandingPage extends BaseController
 
 
 
-    public function perpustakaan2(): string
+    public function perpustakaan(): string
     {
         $data_buku = $this->M_Perpustakaan->findAll();
         $buku_rekomendasi = $this->M_Perpustakaan->getBukuRekomendasi('Tampilkan Sebagai Buku Rekomendasi');
