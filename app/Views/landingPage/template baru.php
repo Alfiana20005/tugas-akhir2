@@ -100,7 +100,7 @@
 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-
+	<meta name="google-site-verification" content="nKA_92eDKH2NmPW-HLDbjt3Qs8_WnjER0fUSxaxIEjw" />
 </head>
 
 <body>
