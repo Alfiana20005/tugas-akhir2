@@ -367,7 +367,7 @@ class C_LandingPage extends BaseController
 
 
         $data = [
-            'title' => 'Daftar Kegiatan',
+            'title' => 'Daftar Berita',
             // 'dataBerita' => $data_berita,
             'beritaTerbaru' => $beritaTerbaru,
             'dataBerita' => $beritaKategori,
