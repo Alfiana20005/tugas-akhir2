@@ -50,7 +50,7 @@ $routes->get('/tatatertib2', 'C_LandingPage::tatatertib2');
 // $routes->get('/lihatberita2', 'C_LandingPage::lihatberita2');
 // $routes->get('/lihatberita2/(:segment)', 'C_LandingPage::lihatberita2/$1');
 // $routes->post('/lihatberita2/(:segment)', 'C_LandingPage::lihatberita2/$1');
-$routes->get('/beritaKategori2/(:segment)', 'C_LandingPage::beritaKategori2/$1');
+$routes->get('/berita/kategori/(:segment)', 'C_LandingPage::beritaKategori2/$1');
 
 $routes->get('/kegiatan2', 'C_LandingPage::kegiatan2');
 $routes->get('/lihatKegiatan2', 'C_LandingPage::lihatKegiatan2');
