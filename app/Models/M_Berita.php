@@ -139,6 +139,7 @@ class M_Berita extends Model
     {
         return $this->db->table('berita')
             ->where('jenisBerita', $jenisBerita)
+            ->orderBy('tanggal', 'DESC') // Mengurutkan dari tanggal terbaru
             ->get()
             ->getResultArray();
     }
