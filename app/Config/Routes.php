@@ -8,10 +8,6 @@ use CodeIgniter\Router\RouteCollection;
 
 //Landing PAge
 $routes->get('/', 'C_LandingPage::home');
-$routes->get('/sejarah', 'C_LandingPage::sejarah');
-$routes->get('/visimisi', 'C_LandingPage::visiMisi');
-$routes->get('/struktur', 'C_LandingPage::struktur');
-$routes->get('/ruangPamer', 'C_LandingPage::ruangPamer');
 $routes->get('/tatatertib', 'C_LandingPage::tatatertib');
 $routes->get('/berita', 'C_LandingPage::berita');
 $routes->get('/lihatberita', 'C_LandingPage::lihatberita');
@@ -36,45 +32,44 @@ $routes->get('/koleksi_page', 'C_LandingPage::koleksi_page');
 $routes->get('/lihatKegiatan/(:segment)', 'C_LandingPage::lihatKegiatan/$1');
 $routes->get('/koleksi_detail', 'C_LandingPage::koleksi_detail');
 $routes->get('/koleksi_detail/(:segment)', 'C_LandingPage::koleksi_detail/$1');
-$routes->get('/publikasi', 'C_LandingPage::publikasi');
 $routes->get('/perpustakaan', 'C_LandingPage::perpustakaan');
 $routes->get('/penelitian', 'C_LandingPage::penelitian');
 
 //Home
 $routes->get('/home', 'C_LandingPage::home');
-$routes->get('/sejarah2', 'C_LandingPage::sejarah2');
-$routes->get('/visimisi2', 'C_LandingPage::visiMisi2');
-$routes->get('/struktur2', 'C_LandingPage::struktur2');
-$routes->get('/ruangPamer2', 'C_LandingPage::ruangPamer2');
-$routes->get('/tatatertib2', 'C_LandingPage::tatatertib2');
+$routes->get('/sejarah', 'C_LandingPage::sejarah');
+$routes->get('/visimisi', 'C_LandingPage::visiMisi');
+$routes->get('/struktur', 'C_LandingPage::struktur');
+$routes->get('/ruang-pamer', 'C_LandingPage::ruangPamer');
+$routes->get('/tatatertib', 'C_LandingPage::tatatertib');
 // $routes->get('/lihatberita2', 'C_LandingPage::lihatberita2');
 // $routes->get('/lihatberita2/(:segment)', 'C_LandingPage::lihatberita2/$1');
 // $routes->post('/lihatberita2/(:segment)', 'C_LandingPage::lihatberita2/$1');
-$routes->get('/berita/kategori/(:segment)', 'C_LandingPage::beritaKategori2/$1');
+$routes->get('/berita/kategori/(:segment)', 'C_LandingPage::beritaKategori/$1');
 
-$routes->get('/kegiatan2', 'C_LandingPage::kegiatan2');
-$routes->get('/lihatKegiatan2', 'C_LandingPage::lihatKegiatan2');
-$routes->get('/lihatKegiatan2/(:segment)', 'C_LandingPage::lihatKegiatan2/$1');
-$routes->get('/kegiatan2', 'C_LandingPage::kegiatan2');
-$routes->get('/kegiatanKategori2/(:segment)', 'C_LandingPage::kegiatanKategori2/$1');
+$routes->get('/kegiatan', 'C_LandingPage::kegiatan2');
+$routes->get('/lihatKegiatan', 'C_LandingPage::lihatKegiatan');
+$routes->get('/lihatKegiatan/(:segment)', 'C_LandingPage::lihatKegiatan/$1');
+$routes->get('/kegiatan', 'C_LandingPage::kegiatan');
+$routes->get('/kegiatanKategori/(:segment)', 'C_LandingPage::kegiatanKategori/$1');
 
-$routes->get('/kajian2', 'C_LandingPage::kajian2');
-$routes->get('/kajianKategori2/(:segment)', 'C_LandingPage::kajianKategori2/$1');
-$routes->get('/tulisan2', 'C_LandingPage::tulisan');
-$routes->get('/tulisan2/(:segment)', 'C_LandingPage::tulisan2/$1');
+$routes->get('/kajian', 'C_LandingPage::kajian2');
+$routes->get('/kajianKategori/(:segment)', 'C_LandingPage::kajianKategori2/$1');
+$routes->get('/tulisan', 'C_LandingPage::tulisan');
+$routes->get('/tulisan/(:segment)', 'C_LandingPage::tulisan/$1');
 
 
 $routes->get('/manuskripKol', 'C_LandingPage::manuskripKol');
 $routes->get('/manuskrip', 'C_LandingPage::manuskrip');
 $routes->get('/manuskripLogin', 'C_LandingPage::manuskripLogin');
 
-$routes->get('/koleksi', 'C_LandingPage::koleksi_page2');
+$routes->get('/koleksi', 'C_LandingPage::koleksi_page');
 
 $routes->get('/koleksi_kategori/(:segment)', 'C_LandingPage::koleksi_kategori/$1');
-$routes->get('/koleksi_detail2', 'C_LandingPage::koleksi_detail2');
-$routes->get('/koleksi_detail2/(:segment)', 'C_LandingPage::koleksi_detail2/$1');
-$routes->get('/publikasi2', 'C_LandingPage::publikasi2');
-$routes->get('/publikasi2_detail/(:num)', 'C_LandingPage::publikasi2_detail/$1');
+$routes->get('/koleksi_detail', 'C_LandingPage::koleksi_detail');
+$routes->get('/koleksi_detail/(:segment)', 'C_LandingPage::koleksi_detail/$1');
+$routes->get('/publikasi', 'C_LandingPage::publikasi');
+$routes->get('/publikasi/detail/(:num)', 'C_LandingPage::publikasi2_detail/$1');
 $routes->get('/perpustakaan2', 'C_LandingPage::perpustakaan2');
 $routes->get('/detailBuku/(:segment)', 'C_LandingPage::detailBuku/$1');
 
@@ -83,7 +78,7 @@ $routes->post('/pesanUser', 'C_LandingPage::pesanUser');
 $routes->get('/pesanUser', 'C_LandingPage::pesanUser');
 $routes->get('/semuaPetugas', 'C_LandingPage::semuaPetugas');
 $routes->get('/sekardiyu', 'C_LandingPage::sekardiyu');
-$routes->get('/rencanaStrategis', 'C_LandingPage::rencanaStrategis');
+$routes->get('/rencana-strategis', 'C_LandingPage::rencanaStrategis');
 
 
 $routes->group('', ['filter' => 'filterAdmin'], function ($routes) {

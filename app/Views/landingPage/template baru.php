@@ -146,10 +146,10 @@
 						<li><a href="/home"><strong>Home</strong></a></li>
 						<li class="menu-has-children"><a href=""><strong>Profil</strong></a>
 							<ul>
-								<li><a href="/sejarah2">Sejarah</a></li>
-								<li><a href="/visimisi2">Visi Misi</a></li>
-								<li><a href="/rencanaStrategis">Rencana Strategis</a></li>
-								<li><a href="/struktur2">Struktur Organisasi</a></li>
+								<li><a href="/sejarah">Sejarah</a></li>
+								<li><a href="/visimisi">Visi Misi</a></li>
+								<li><a href="/rencana-strategis">Rencana Strategis</a></li>
+								<li><a href="/struktur">Struktur Organisasi</a></li>
 								<li><a href="/sekardiyu">Sekardiyu</a></li>
 							</ul>
 						</li>
@@ -157,15 +157,15 @@
 						<li class="menu-has-children"><a href=""><strong>Layanan</strong></a>
 							<ul>
 								<li><a href="/kontak">Kontak</a></li>
-								<li><a href="/ruangPamer2">Ruang Pamer</a></li>
+								<li><a href="/ruang-pamer">Ruang Pamer</a></li>
 							</ul>
 						</li>
 						<li><a href="/berita"><strong>Berita</strong></a></li>
-						<li><a href="/kegiatan2"><strong>Kegiatan</strong></a></li>
+						<li><a href="/kegiatan"><strong>Kegiatan</strong></a></li>
 						<li class="menu-has-children"><a href=""><strong>Tulisan</strong></a>
 							<ul>
-								<li><a href="/kajian2">Tulisan</a></li>
-								<li><a href="/publikasi2">Publikasi</a></li>
+								<li><a href="/kajian">Tulisan</a></li>
+								<li><a href="/publikasi">Publikasi</a></li>
 								<!-- <li><a href="/manuskripKol">Manuskrip</a></li> -->
 								<li><a href="/manuskrip">Manuskrip</a></li>
 								<li><a href="/penelitian">Penelitian</a></li>
@@ -173,7 +173,7 @@
 						</li>
 						<!-- <li><a href="/pameran"><strong>Pameran Museum</strong></a></li> -->
 						<li><a href="/koleksi"><strong>Koleksi</strong></a></li>
-						<li><a href="/perpustakaan2"><strong>Perpustakaan</strong></a></li>
+						<li><a href="/perpustakaan"><strong>Perpustakaan</strong></a></li>
 						<!-- <li><a href="/halamanLogin"><strong>LOGIN</strong></a></li> -->
 					</ul>
 				</nav><!-- #nav-menu-container -->

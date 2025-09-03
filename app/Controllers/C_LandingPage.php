@@ -118,7 +118,7 @@ class C_LandingPage extends BaseController
         return $excerpt;
     }
 
-    public function sejarah2(): string
+    public function sejarah(): string
     {
         // $session = session();
         // $id_user = $session->get('id_user');
@@ -133,7 +133,7 @@ class C_LandingPage extends BaseController
         ];
         return view('landingPage/sejarah2', $data);
     }
-    public function visiMisi2(): string
+    public function visiMisi(): string
     {
         // $session = session();
         // $id_user = $session->get('id_user');
@@ -147,7 +147,7 @@ class C_LandingPage extends BaseController
         ];
         return view('landingPage/visiMisi2', $data);
     }
-    public function struktur2(): string
+    public function struktur(): string
     {
         // $session = session();
         // $id_user = $session->get('id_user');
@@ -161,7 +161,7 @@ class C_LandingPage extends BaseController
         ];
         return view('landingPage/struktur2', $data);
     }
-    public function ruangPamer2(): string
+    public function ruangPamer(): string
     {
         // $session = session();
         // $id_user = $session->get('id_user');
@@ -175,7 +175,7 @@ class C_LandingPage extends BaseController
         ];
         return view('landingPage/ruangPamer2', $data);
     }
-    public function tataTertib2(): string
+    public function tataTertib(): string
     {
         // $session = session();
         // $id_user = $session->get('id_user');
@@ -338,7 +338,7 @@ class C_LandingPage extends BaseController
         }
     }
 
-    public function beritaKategori2($jenisBerita): string
+    public function beritaKategori($jenisBerita): string
     {
         // $kajian = $this->M_Kajian->findAll();
         // $session = session();
@@ -385,7 +385,7 @@ class C_LandingPage extends BaseController
         return view('landingPage/berita2', $data);
     }
 
-    public function kegiatan2(): string
+    public function kegiatan(): string
     {
         // $session = session();
         // $id_user = $session->get('id_user');
@@ -411,7 +411,7 @@ class C_LandingPage extends BaseController
         return view('landingPage/kegiatan2', $data);
     }
 
-    public function kegiatanKategori2($kategori_kegiatan): string
+    public function kegiatanKategori($kategori_kegiatan): string
     {
         // $session = session();
         // $id_user = $session->get('id_user');
@@ -433,7 +433,7 @@ class C_LandingPage extends BaseController
 
         return view('landingPage/kegiatan2', $data);
     }
-    public function lihatKegiatan2($id_kegiatan)
+    public function lihatKegiatan($id_kegiatan)
     {
         // $data_berita = $this->M_Berita->findAll();
         $kegiatan = $this->M_Kegiatan->getKegiatan($id_kegiatan);
@@ -458,7 +458,7 @@ class C_LandingPage extends BaseController
         return view('landingPage/lihatKegiatan2', $data);
     }
 
-    public function kajian2(): string
+    public function kajian(): string
     {
         // $kajian = $this->M_Kajian->findAll();
         $kajian = $this->M_Kajian->getkajianBaru();
@@ -483,7 +483,7 @@ class C_LandingPage extends BaseController
 
         return view('landingPage/kajian2', $data);
     }
-    public function kajianKategori2($kategori): string
+    public function kajianKategori($kategori): string
     {
         // $kajian = $this->M_Kajian->findAll();
         // $session = session();
@@ -509,7 +509,7 @@ class C_LandingPage extends BaseController
         return view('landingPage/kajian2', $data);
     }
 
-    public function tulisan2($id_kajian): string
+    public function tulisan($id_kajian): string
     {
         // $session = session();
         // $id_user = $session->get('id_user');
@@ -541,7 +541,7 @@ class C_LandingPage extends BaseController
         return view('landingPage/tambahBerita2');
     }
 
-    public function koleksi_page2(): string
+    public function koleksi_page(): string
     {
         // $session = session();
         // $id_user = $session->get('id_user');
@@ -586,7 +586,7 @@ class C_LandingPage extends BaseController
         return view('landingPage/koleksi_page2', $data);
     }
 
-    public function koleksi_detail2($id_koleksi)
+    public function koleksi_detail($id_koleksi)
     {
 
         $koleksi = $this->M_KoleksiLandingPage->getKOleksiById($id_koleksi);
@@ -611,7 +611,7 @@ class C_LandingPage extends BaseController
     }
 
     // Add this new method to your Controller
-    public function publikasi2(): string
+    public function publikasi(): string
     {
         $publikasi = $this->M_Publikasi->findAll();
         $session = session();
