@@ -146,7 +146,7 @@
 				<div class="iklan-image">
 					<?php if (!empty($kegiatan)): ?>
 						<?php foreach ($kegiatan as $k): ?>
-							<?php if ($k['tampilkan'] == 'iklan'): ?>
+							<?php if ($k['tampilkan'] == 'Iklan'): ?>
 								<div class="single-iklan-image mb-3">
 									<div class="thumb relative">
 										<div class="overlay"></div>
