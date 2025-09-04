@@ -137,6 +137,64 @@
 </section>
 <!-- End banner Area -->
 
+<!-- Section Iklan -->
+<section class="iklan-area section-gap" style="background-color: #f8f9fa;">
+	<div class="container">
+		<div class="row align-items-center">
+			<!-- Kolom Kiri - Gambar -->
+			<div class="col-lg-6 col-md-6">
+				<div class="iklan-image">
+					<?php if (!empty($kegiatan)): ?>
+						<?php foreach ($kegiatan as $k): ?>
+							<?php if ($k['tampilkan'] == 'iklan'): ?>
+								<div class="single-iklan-image mb-3">
+									<div class="thumb relative">
+										<div class="overlay"></div>
+										<a href="<?= $k['keterangan'] ?>" target="_blank">
+											<img class="img-fluid rounded shadow"
+												src="<?= base_url('img/kegiatan/' . $k['foto']); ?>"
+												alt="Kegiatan Museum"
+												style="width: 100%; height: 300px; object-fit: cover;">
+										</a>
+									</div>
+								</div>
+							<?php endif; ?>
+						<?php endforeach; ?>
+					<?php else: ?>
+						<!-- Placeholder jika tidak ada gambar -->
+						<div class="placeholder-image d-flex align-items-center justify-content-center bg-light rounded shadow"
+							style="height: 300px;">
+							<p class="text-muted">Gambar kegiatan akan ditampilkan di sini</p>
+						</div>
+					<?php endif; ?>
+				</div>
+			</div>
+
+			<!-- Kolom Kanan - Teks -->
+			<div class="col-lg-6 col-md-6">
+				<div class="iklan-content pl-4 mt-3 mt-lg-0">
+					<h3 class="mb-4" style="color: #850000;">Rencana Strategis</h3>
+					<p style="text-align: justify; line-height: 1; font-size: 16px;">
+						Museum yang Unggul Berbasis Penelitian
+					</p>
+					<p style="text-align: justify; line-height: 1; font-size: 16px;">
+						Kotaku Museumku Kampungku Museumku
+					</p>
+
+					<!-- Tombol Call to Action -->
+					<div class="mt-4">
+						<a href="/rencana-strategis" class="btn btn-primary px-4 py-2"
+							style="background-color: #850000; border-color: #850000; font-weight: 500; border-radius: 5px;">
+							Pelajari Lebih Lanjut
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End Section Iklan -->
+
 <!-- Koleksi Section -->
 <section class="koleksi-area section-gap">
 	<div class="container">

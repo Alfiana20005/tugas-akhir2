@@ -26,7 +26,7 @@
 			<div class="col-lg-6 info-left">
 				<img class="img-fluid" src="img/rencanaStrategis/logo kmkm.png" alt="">
 			</div>
-			<div class="col-lg-6 info-right">
+			<div class="col-lg-6 info-right" style="text-align: left;">
 				<h6>Rencana Strategis Museum Negeri NTB</h6>
 				<h1>Kotaku Museumku Kampungku Museumku</h1>
 				<!-- <p >
