@@ -383,8 +383,6 @@ class C_Admin extends BaseController
                 'rules' => 'required',
                 'errors' => [
                     'required' => 'tanggal tidak boleh kosong',
-
-
                 ]
             ],
         ];

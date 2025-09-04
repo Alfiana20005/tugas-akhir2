@@ -196,6 +196,7 @@
                                         <option selected>Pilih </option>
                                         <option <?= $k['tampilkan'] == 'Home' ? 'selected' : 'Home' ?> value="Home">Home</option>
                                         <option <?= $k['tampilkan'] == 'Kegiatan' ? 'selected' : 'Kegiatan' ?> value="Kegiatan">Kegiatan</option>
+                                        <option <?= $k['tampilkan'] == 'Iklan' ? 'selected' : 'Iklan' ?> value="Iklan">Iklan</option>
 
                                     </select>
                                 </div>
