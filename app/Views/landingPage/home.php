@@ -140,9 +140,9 @@
 <!-- Section Iklan -->
 <section class="iklan-area section-gap" style="background-color: #f8f9fa;">
 	<div class="container">
-		<div class="row align-items-center">
+		<div class="row align-items-center justify-content-center">
 			<!-- Kolom Kiri - Gambar -->
-			<div class="col-lg-6 col-md-6">
+			<div class="col-lg-5 col-md-6 pr-lg-2">
 				<div class="iklan-image">
 					<?php if (!empty($kegiatan)): ?>
 						<?php foreach ($kegiatan as $k): ?>
@@ -154,7 +154,7 @@
 											<img class="img-fluid rounded shadow"
 												src="<?= base_url('img/kegiatan/' . $k['foto']); ?>"
 												alt="Kegiatan Museum"
-												style="width: 100%; height: 300px; object-fit: cover;">
+												style="width: 100%; height: 400px; object-fit:scale-down">
 										</a>
 									</div>
 								</div>
@@ -171,8 +171,8 @@
 			</div>
 
 			<!-- Kolom Kanan - Teks -->
-			<div class="col-lg-6 col-md-6">
-				<div class="iklan-content pl-4 mt-3 mt-lg-0">
+			<div class="col-lg-5 col-md-6 pl-lg-2">
+				<div class="iklan-content mt-3 mt-lg-0">
 					<h3 class="mb-4" style="color: #850000;">Rencana Strategis</h3>
 					<p style="text-align: justify; line-height: 1; font-size: 16px;">
 						Museum yang Unggul Berbasis Penelitian
