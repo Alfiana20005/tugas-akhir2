@@ -687,6 +687,12 @@ class C_Admin extends BaseController
                     'required' => 'tanggal tidak boleh kosong',
                 ]
             ],
+            'sinopsis' => [
+                'rules' => 'max_length[1000]',
+                'errors' => [
+                    'max_length' => 'Sinopsis tidak boleh lebih dari 1000 karakter',
+                ]
+            ],
         ];
 
         if (!$this->validate($rules)) {
@@ -706,24 +712,22 @@ class C_Admin extends BaseController
                 ->with('errors', $foto->getErrorString());
         }
 
-        //tambahh data
+        //tambah data
         // $this->M_Petugas->save($this->request->getPost());
         $this->M_Publikasi->save([
             // 'id_petugas' => $id_petugas,
             'judul' => $this->request->getVar('judul'),
             'penulis' => $this->request->getVar('penulis'),
+            'sinopsis' => $this->request->getVar('sinopsis'),
             'tanggal' => $this->request->getVar('tanggal'),
             'link' => $this->request->getVar('link'),
             'foto' => $fotoName,
-
         ]);
 
         //alert
         session()->setFlashdata('pesan', 'Data Berhasil Ditambahkan.');
 
         return redirect()->to('/tambahPublikasi');
-
-        // return view('admin/v_masterpetugas');
     }
 
     public function deletePublikasi($id_publikasi)
@@ -741,14 +745,12 @@ class C_Admin extends BaseController
 
     public function updatePublikasi($id_publikasi)
     {
-        // Mengambil data yang akan diupdate dari request
         $dataToUpdate = [
             'judul' => $this->request->getVar('judul'),
             'penulis' => $this->request->getVar('penulis'),
+            'sinopsis' => $this->request->getVar('sinopsis'),
             'tanggal' => $this->request->getVar('tanggal'),
             'link' => $this->request->getVar('link'),
-            'foto' => $this->request->getVar('foto'),
-
         ];
 
         $foto = $this->request->getFile('foto');
@@ -765,21 +767,25 @@ class C_Admin extends BaseController
             $dataToUpdate['foto'] = $fotoName;
         }
 
-        // Membersihkan data yang mungkin ada dari inputan form
-        $dataToUpdate = array_filter($dataToUpdate);
+        // Membersihkan data yang mungkin ada dari inputan form (menghapus nilai kosong)
+        $dataToUpdate = array_filter($dataToUpdate, function ($value) {
+            return $value !== null && $value !== '';
+        });
 
         // Memastikan ada data yang akan diupdate
         if (!empty($dataToUpdate)) {
             // Mengeksekusi perintah update
             $this->M_Publikasi->update($id_publikasi, $dataToUpdate);
 
-            // Ambil data petugas setelah diubah dari database
+            // Ambil data publikasi setelah diubah dari database
             $newDataPublikasi = $this->M_Publikasi->getPublikasi($id_publikasi);
 
-            // Perbarui sesi pengguna dengan data baru
+            // Perbarui sesi pengguna dengan data baru (jika diperlukan)
             if (session()->get('level') != 'Admin') {
                 session()->set([
                     'judul' => $newDataPublikasi['judul'],
+                    'penulis' => $newDataPublikasi['penulis'],
+                    'sinopsis' => $newDataPublikasi['sinopsis'],
                     'tanggal' => $newDataPublikasi['tanggal'],
                     'link' => $newDataPublikasi['link'],
                     'foto' => $newDataPublikasi['foto'],

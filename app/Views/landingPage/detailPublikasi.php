@@ -76,26 +76,43 @@
                         </p>
                     </div>
 
+                    <!-- Sinopsis Section -->
+                    <?php if (!empty($publikasi['sinopsis'])): ?>
+                        <div class="mb-5">
+                            <h4 style="color:#850000; border-bottom: 2px solid #850000; padding-bottom: 10px;">
+                                <i class="fa fa-file-text-o"></i> Sinopsis
+                            </h4>
+                            <div class="card" style="border: none; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px;">
+                                <div class="card-body" style="padding: 25px;">
+                                    <p class="text-justify" style="line-height: 1.7; font-size: 16px; color: #555;">
+                                        <?= nl2br(htmlspecialchars($publikasi['sinopsis'])); ?>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+
                     <!-- Action Buttons -->
                     <div class="text-center">
                         <?php if ($embedUrl): ?>
                             <a href="<?= $publikasi['link']; ?>"
                                 target="_blank"
                                 class="btn btn-primary btn-md mb-3"
-                                style="background-color:#850000; border-color:#850000;">
+                                style="background-color:#850000; border-color:#850000; padding: 12px 30px;">
                                 <i class="fa fa-download"></i> Download / Buka di Google Drive
                             </a>
                         <?php else: ?>
                             <a href="<?= $publikasi['link']; ?>"
                                 target="_blank"
                                 class="btn btn-primary btn-lg mb-3"
-                                style="background-color:#850000; border-color:#850000;">
+                                style="background-color:#850000; border-color:#850000; padding: 12px 30px;">
                                 <i class="fa fa-external-link"></i> Baca Publikasi Lengkap
                             </a>
                         <?php endif; ?>
                         <br>
                         <a href="<?= base_url('publikasi2'); ?>"
-                            class="btn btn-outline-secondary">
+                            class="btn btn-outline-secondary"
+                            style="padding: 10px 25px;">
                             <i class="fa fa-arrow-left"></i> Kembali ke Daftar Publikasi
                         </a>
                     </div>

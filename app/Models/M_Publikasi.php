@@ -12,7 +12,7 @@ class M_Publikasi extends Model
 
 
     // protected $allowedFields = ['foto', 'nama','password','email','username','level'];
-    protected $allowedFields = ['judul', 'penulis', 'tanggal', 'foto', 'link'];
+    protected $allowedFields = ['judul', 'penulis', 'sinopsis', 'tanggal', 'foto', 'link'];
 
 
     protected $validationRules = [];

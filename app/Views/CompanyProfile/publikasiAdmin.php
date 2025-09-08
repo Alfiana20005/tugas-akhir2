@@ -17,7 +17,7 @@
     <?php endif; ?>
 
     <div class="modal fade" id="tambahKegiatan" tabindex="-1" aria-labelledby="tambahKegiatan" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title fs-5" id="tambahKegiatan">Tambahkan Publikasi</h4>
@@ -38,13 +38,19 @@
                             </div>
                         </div>
                         <div class="row mb-2">
+                            <label for="sinopsis" class="col-sm-3 col-form-label">Sinopsis</label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" name="sinopsis" id="sinopsis" rows="4" placeholder="Masukkan sinopsis singkat publikasi..."></textarea>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
                             <label for="email" class="col-sm-3 col-form-label">Tanggal</label>
                             <div class="col-sm-9">
                                 <input type="date" class="form-control" id="recipient-name" name="tanggal">
                             </div>
                         </div>
                         <div class="row mb-2">
-                            <label for="email" class="col-sm-3 col-form-label">link</label>
+                            <label for="email" class="col-sm-3 col-form-label">Link</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="recipient-name" name="link">
                             </div>
@@ -93,12 +99,10 @@
                             <th style="text-align: center;">No</th>
                             <th style="text-align: center;">Sampul</th>
                             <th style="text-align: center;">Judul</th>
-
+                            <th style="text-align: center;">Sinopsis</th>
                             <th style="text-align: center;">Tanggal</th>
                             <th style="text-align: center;">Link</th>
-
                             <th style="text-align: center;">Aksi</th>
-
                         </tr>
                     </thead>
 
@@ -107,17 +111,19 @@
                         $no = 1;
                         foreach ($data_publikasi as $p): ?>
                             <tr>
-                                <!-- <td style="text-align: center;">1</td> -->
-                                <!-- <td style="text-align: center;"><img src="" alt="" style="width: 60px;"></td> -->
                                 <td style="text-align: center;"><?= $no++; ?></td>
                                 <td style="text-align: center;"><img src="<?= base_url("img/publikasi/" . $p['foto']); ?>" alt="" style="width: 60px;"></td>
-
                                 <td style="text-align: center;"><?= $p['judul']; ?></td>
+                                <td style="text-align: left; max-width: 200px;">
+                                    <?php if (!empty($p['sinopsis'])): ?>
+                                        <?= strlen($p['sinopsis']) > 100 ? substr($p['sinopsis'], 0, 100) . '...' : $p['sinopsis']; ?>
+                                    <?php else: ?>
+                                        <em class="text-muted">Tidak ada sinopsis</em>
+                                    <?php endif; ?>
+                                </td>
                                 <td style="text-align: center;"><?= $p['tanggal']; ?></td>
                                 <td style="text-align: center;"><?= $p['link']; ?></td>
-
                                 <td style="text-align: center;">
-
                                     <a href="" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editPublikasi<?= $p['id_publikasi']; ?>" data-bs-whatever="@getbootstrap">Edit</a>
                                     <!-- <a href="" class="btn btn-danger" >hapus</a> -->
                                     <form action="/hapusPublikasi/<?= $p['id_publikasi']; ?>" method="post" class="d-inline">
@@ -125,9 +131,7 @@
                                         <input type="hidden" name="_method" value="DELETE">
                                         <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('apakah anda yakin?');">Hapus</button>
                                     </form>
-
                                 </td>
-
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -140,10 +144,10 @@
     $no = 1;
     foreach ($data_publikasi as $p): ?>
         <div class="modal fade" id="editPublikasi<?= $p['id_publikasi']; ?>" tabindex="-1" aria-labelledby="editPublikasi" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title fs-5" id="editPublikasi">Edit Berita</h4>
+                        <h4 class="modal-title fs-5" id="editPublikasi">Edit Publikasi</h4>
                         <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
                     </div>
                     <div class="modal-body">
@@ -161,12 +165,17 @@
                                 </div>
                             </div>
                             <div class="row mb-2">
+                                <label for="sinopsis" class="col-sm-3 col-form-label">Sinopsis</label>
+                                <div class="col-sm-9">
+                                    <textarea class="form-control" name="sinopsis" id="sinopsis_edit_<?= $p['id_publikasi']; ?>" rows="4"><?= isset($p['sinopsis']) ? $p['sinopsis'] : ''; ?></textarea>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
                                 <label for="email" class="col-sm-3 col-form-label">Tanggal</label>
                                 <div class="col-sm-9">
                                     <input type="date" class="form-control" id="recipient-name" name="tanggal" value="<?= $p['tanggal']; ?>">
                                 </div>
                             </div>
-
 
                             <div class="row mb-2">
                                 <label for="isi" class="col-sm-3 col-form-label">Link</label>
@@ -194,7 +203,6 @@
                                 </div>
 
                             </div>
-
 
                             <div class="modal-footer my-4">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
