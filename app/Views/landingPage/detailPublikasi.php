@@ -110,7 +110,7 @@
                             </a>
                         <?php endif; ?>
                         <br>
-                        <a href="<?= base_url('publikasi2'); ?>"
+                        <a href="<?= base_url('publikasi'); ?>"
                             class="btn btn-outline-secondary"
                             style="padding: 10px 25px;">
                             <i class="fa fa-arrow-left"></i> Kembali ke Daftar Publikasi

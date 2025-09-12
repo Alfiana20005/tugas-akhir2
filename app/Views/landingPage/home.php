@@ -137,7 +137,6 @@
 </section>
 <!-- End banner Area -->
 
-<!-- Section Iklan -->
 <section class="iklan-area section-gap" style="background-color: #f8f9fa;">
 	<div class="container">
 		<div class="row align-items-center justify-content-center">
@@ -148,15 +147,31 @@
 						<?php foreach ($kegiatan as $k): ?>
 							<?php if ($k['tampilkan'] == 'Iklan'): ?>
 								<div class="single-iklan-image mb-3">
-									<div class="thumb relative">
-										<div class="overlay"></div>
-										<a href="<?= $k['keterangan'] ?>" target="_blank">
+									<!-- Link gambar menggunakan variabel keterangan -->
+									<?php if (!empty($k['keterangan'])): ?>
+										<a href="<?= htmlspecialchars($k['keterangan'], ENT_QUOTES, 'UTF-8') ?>"
+											target="_blank"
+											rel="noopener noreferrer"
+											title="Klik untuk melihat detail kegiatan"
+											style="position: relative; display: block; z-index: 10;">
+											<div class="thumb relative">
+												<div class="overlay"></div>
+												<img class="img-fluid rounded shadow"
+													src="<?= base_url('img/kegiatan/' . $k['foto']); ?>"
+													alt="<?= htmlspecialchars($k['nama'] ?? 'Kegiatan Museum', ENT_QUOTES, 'UTF-8') ?>"
+													style="width: 100%; height: 400px; object-fit:scale-down; cursor: pointer;">
+											</div>
+										</a>
+									<?php else: ?>
+										<div class="thumb relative">
+											<div class="overlay"></div>
+											<!-- Jika tidak ada link, tampilkan gambar tanpa link -->
 											<img class="img-fluid rounded shadow"
 												src="<?= base_url('img/kegiatan/' . $k['foto']); ?>"
-												alt="Kegiatan Museum"
-												style="width: 100%; height: 400px; object-fit:scale-down">
-										</a>
-									</div>
+												alt="<?= htmlspecialchars($k['nama'] ?? 'Kegiatan Museum', ENT_QUOTES, 'UTF-8') ?>"
+												style="width: 100%; height: 400px; object-fit:scale-down;">
+										</div>
+									<?php endif; ?>
 								</div>
 							<?php endif; ?>
 						<?php endforeach; ?>
