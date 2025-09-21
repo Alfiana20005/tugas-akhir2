@@ -41,7 +41,7 @@
 										</div>
 										<div class="details">
 
-											<a href="<?= base_url("/tulisan2/{$kj['id_kajian']}"); ?>">
+											<a href="<?= base_url("/tulisan/{$kj['id_kajian']}"); ?>">
 												<h4 class="title"><?= $kj['judul']; ?></h4>
 											</a>
 											<!-- <p>
