@@ -155,7 +155,7 @@
 										<img class="img-fluid" style="width: 80px;" src="<?= base_url("img/kajian/" . $kajian['sampul']); ?>" alt="">
 									</div>
 									<div class="details">
-										<a href="<?= base_url("/tulisan2/{$kajian['id_kajian']}"); ?>">
+										<a href="<?= base_url("/tulisan/{$kajian['id_kajian']}"); ?>">
 											<h6><?= $kajian['judul']; ?></h6>
 										</a>
 										<p><?= $kajian['created_at']; ?></p>
