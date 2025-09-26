@@ -199,6 +199,8 @@
                                     <option value="Rak 700">Rak 700</option>
                                     <option value="Rak 800">Rak 800</option>
                                     <option value="Rak 900">Rak 900</option>
+                                    <option value="Rak Koleksi Khusus">Rak Koleksi Khusus</option>
+                                    <option value="Rak Koleksi Unggulan">Rak Koleksi Unggulan</option>
                                     <!-- <option value="Lemari 6">Lemari 6</option>
                                     <option value="Lemari Berkala">Lemari Berkala</option> -->
                                 </select>
@@ -688,6 +690,8 @@
                                     <option value="Rak 700" <?= ($buku['rak'] === 'Rak 700') ? 'selected' : ''; ?>>Rak 700</option>
                                     <option value="Rak 800" <?= ($buku['rak'] === 'Rak 800') ? 'selected' : ''; ?>>Rak 800</option>
                                     <option value="Rak 900" <?= ($buku['rak'] === 'Rak 900') ? 'selected' : ''; ?>>Rak 900</option>
+                                    <option value="Rak Koleksi Khusus" <?= ($buku['rak'] === 'Rak Koleksi Khusus') ? 'selected' : ''; ?>>Rak Koleksi Khusus</option>
+                                    <option value="Rak Koleksi Unggulan" <?= ($buku['rak'] === 'Rak Koleksi Unggulan') ? 'selected' : ''; ?>>Rak Koleksi Unggulan</option>
                                 </select>
                             </div>
                         </div>
