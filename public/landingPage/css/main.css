@@ -166,6 +166,10 @@ a:hover {
     background: #f9f9ff;
 }
 
+.bg-museum {
+    background-color: #850000;
+}
+
 h1,
 h2,
 h3,
@@ -2842,6 +2846,9 @@ body.mobile-nav-active #mobile-nav-toggle {
     -moz-transition: all 0.3s ease 0s;
     -o-transition: all 0.3s ease 0s;
     transition: all 0.3s ease 0s;
+    height: 150px;
+    object-fit: cover;
+    display: block;
 }
 
 .single-other-issue h4 {
