@@ -34,6 +34,7 @@ $routes->get('/koleksi_detail', 'C_LandingPage::koleksi_detail');
 $routes->get('/koleksi_detail/(:segment)', 'C_LandingPage::koleksi_detail/$1');
 $routes->get('/perpustakaan', 'C_LandingPage::perpustakaan');
 $routes->get('/penelitian', 'C_LandingPage::penelitian');
+$routes->get('/penelitian/detail/(:num)', 'C_LandingPage::detailPenelitian/$1');
 
 //Home
 $routes->get('/home', 'C_LandingPage::home');
@@ -78,6 +79,10 @@ $routes->get('/pesanUser', 'C_LandingPage::pesanUser');
 $routes->get('/semuaPetugas', 'C_LandingPage::semuaPetugas');
 $routes->get('/sekardiyu', 'C_LandingPage::sekardiyu');
 $routes->get('/rencana-strategis', 'C_LandingPage::rencanaStrategis');
+
+$routes->get('/heritage-walk/si-biru', 'C_LandingPage::siBiru');
+$routes->get('/heritage-walk/gereja-st-antonius', 'C_LandingPage::gereja');
+$routes->get('/heritage-walk/jalan-langko', 'C_LandingPage::langko');
 
 
 $routes->group('', ['filter' => 'filterAdmin'], function ($routes) {

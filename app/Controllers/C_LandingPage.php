@@ -1034,12 +1034,16 @@ class C_LandingPage extends BaseController
         $kategori_objek = $this->request->getGet('kategori_objek');
         $instansi = $this->request->getGet('instansi');
         $tahun = $this->request->getGet('tahun');
+        $jenis = $this->request->getGet('jenis');
         $search = $this->request->getGet('q');
 
-        // Store original query before pagination
+        // Store original query before pagination for general research (excluding museum)
         $baseQuery = clone $penelitianModel;
+        $baseQuery->where('jenis !=', 'museum');
 
-        // Apply filters to the model
+        // Apply filters to the main model for general research
+        $penelitianModel->where('jenis !=', 'museum'); // Exclude museum research from general list
+
         if (!empty($kategori_objek)) {
             $penelitianModel->where('kategori_objek', $kategori_objek);
             $baseQuery->where('kategori_objek', $kategori_objek);
@@ -1053,6 +1057,11 @@ class C_LandingPage extends BaseController
         if (!empty($tahun)) {
             $penelitianModel->where("EXTRACT(YEAR FROM tanggal_mulai) = '$tahun'");
             $baseQuery->where("EXTRACT(YEAR FROM tanggal_mulai) = '$tahun'");
+        }
+
+        if (!empty($jenis) && $jenis != 'museum') {
+            $penelitianModel->where('jenis', $jenis);
+            $baseQuery->where('jenis', $jenis);
         }
 
         if (!empty($search)) {
@@ -1073,35 +1082,50 @@ class C_LandingPage extends BaseController
                 ->groupEnd();
         }
 
-        // Sort by date from oldest to newest
+        // Sort by date from oldest to newest for general research
         $penelitianModel->orderBy('tanggal_mulai', 'ASC');
+
+        // Get museum research separately (always show at top)
+        $museumModel = new \App\Models\M_Penelitian();
+        $penelitian_museum = $museumModel->where('jenis', 'museum')
+            ->orderBy('tanggal_mulai', 'DESC')
+            ->findAll();
 
         // Get database connection
         $db = \Config\Database::connect();
 
-        // Get list of all categories with count
+        // Get list of all categories with count (excluding museum research for filters)
         $kategori_list = $db->query("
         SELECT kategori_objek, COUNT(*) as jumlah 
         FROM penelitian 
+        WHERE jenis != 'museum'
         GROUP BY kategori_objek 
         ORDER BY jumlah DESC, kategori_objek ASC
     ")->getResultArray();
 
-        // Get list of all institutions with count
+        // Get list of all institutions with count (excluding museum research for filters)
         $instansi_list = $db->query("
         SELECT instansi, COUNT(*) as jumlah 
         FROM penelitian 
+        WHERE jenis != 'museum'
         GROUP BY instansi 
         ORDER BY jumlah DESC, instansi ASC
     ")->getResultArray();
 
-        // Get list of all years with count
+        // Get list of all years with count (excluding museum research for filters)
         $tahun_list = $db->query("
         SELECT EXTRACT(YEAR FROM tanggal_mulai) as tahun, COUNT(*) as jumlah 
         FROM penelitian 
+        WHERE jenis != 'museum'
         GROUP BY EXTRACT(YEAR FROM tanggal_mulai) 
         ORDER BY tahun DESC
     ")->getResultArray();
+
+        // Get count by jenis
+        $jenis_count = [
+            'museum' => $db->query("SELECT COUNT(*) as count FROM penelitian WHERE jenis = 'museum'")->getRow()->count,
+            'umum' => $db->query("SELECT COUNT(*) as count FROM penelitian WHERE jenis = 'umum'")->getRow()->count
+        ];
 
         // Get the latest research without filters - keep this as DESC to show the latest
         $latestModel = new \App\Models\M_Penelitian();
@@ -1113,12 +1137,14 @@ class C_LandingPage extends BaseController
         $data = [
             'title' => 'Penelitian',
             'penelitian' => $penelitianModel->paginate(10, 'default'),
+            'penelitian_museum' => $penelitian_museum,
             'pager' => $penelitianModel->pager,
 
             // Add filter data
             'kategori_list' => $kategori_list,
             'instansi_list' => $instansi_list,
             'tahun_list' => $tahun_list,
+            'jenis_count' => $jenis_count,
             'latest_penelitian' => $latest_penelitian,
 
             // Add current filters to help with UI highlighting
@@ -1126,6 +1152,7 @@ class C_LandingPage extends BaseController
                 'kategori_objek' => $kategori_objek,
                 'instansi' => $instansi,
                 'tahun' => $tahun,
+                'jenis' => $jenis,
                 'search' => $search
             ],
 
@@ -1137,5 +1164,86 @@ class C_LandingPage extends BaseController
         ];
 
         return view('landingPage/penelitian', $data);
+    }
+
+    public function detailPenelitian($id)
+    {
+        $penelitianModel = new \App\Models\M_Penelitian();
+
+        // Get the specific research by ID
+        $penelitian = $penelitianModel->find($id);
+
+        // If research not found, redirect to 404
+        if (!$penelitian) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException('Penelitian tidak ditemukan');
+        }
+
+        // Get related research (same category, excluding current research)
+        $related_penelitian = $penelitianModel
+            ->where('kategori_objek', $penelitian['kategori_objek'])
+            ->where('id_penelitian !=', $id)
+            ->orderBy('tanggal_mulai', 'DESC')
+            ->limit(3)
+            ->find();
+
+        $data = [
+            'title' => $penelitian['judul_penelitian'] . ' - Detail Penelitian',
+            'penelitian' => $penelitian,
+            'related_penelitian' => $related_penelitian,
+
+            // Keep your visitor counter data
+            'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
+            'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
+            'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
+            'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
+        ];
+
+        return view('landingPage/penelitian_detail', $data);
+    }
+
+
+    public function siBiru(): string
+    {
+        // $session = session();
+        // $id_user = $session->get('id_user');
+        // $user = $this->M_User->getUser($id_user);
+        $data = [
+            'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
+            'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
+            'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
+            'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
+            // 'user' => $user
+        ];
+        return view('landingPage/heritage-walk/si-biru', $data);
+    }
+
+    public function gereja(): string
+    {
+        // $session = session();
+        // $id_user = $session->get('id_user');
+        // $user = $this->M_User->getUser($id_user);
+        $data = [
+            'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
+            'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
+            'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
+            'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
+            // 'user' => $user
+        ];
+        return view('landingPage/heritage-walk/gereja', $data);
+    }
+
+    public function langko(): string
+    {
+        // $session = session();
+        // $id_user = $session->get('id_user');
+        // $user = $this->M_User->getUser($id_user);
+        $data = [
+            'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
+            'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
+            'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
+            'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
+            // 'user' => $user
+        ];
+        return view('landingPage/heritage-walk/jalan-langko', $data);
     }
 }
