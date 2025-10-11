@@ -5428,7 +5428,7 @@ a:hover {
 }
 @media (max-width: 991px) {
     .ket {
-        font-size: 8pt;
+        font-size: 10pt;
     }
 }
 @media (max-width: 991px) {
@@ -5481,11 +5481,11 @@ a:hover {
 }
 @media (max-width: 991px) {
     #ket {
-        font-size: 7pt;
+        font-size: 10pt;
     }
 }
 @media (min-width: 991px) {
     #ket {
-        font-size: 9pt;
+        font-size: 10pt;
     }
 }

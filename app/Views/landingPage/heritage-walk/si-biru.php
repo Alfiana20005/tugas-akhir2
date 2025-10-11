@@ -32,26 +32,22 @@
 							<div></div>
 						</button>
 						<div class="feature-img">
-							<img class="img-fluid" src="<?= base_url('img/si-biru.jpg'); ?>" alt="">
+							<img class="img-fluid mt-4" style="max-height: 400px; object-fit:scale-down;" src="<?= base_url('img/si-biru.jpg'); ?>" alt="">
 						</div>
-						<div class="ket" id="ket"><i class="fa-solid fa-camera" style="padding-right: 4pt;"> </i>Si Biru yang dikenal sebagai Ikon Ampenan Tempo Dulu</div>
+						<div class="ket" id="ket"><i class="fa-solid fa-camera mt-4" style="padding-right: 4pt;"> </i>Si Biru yang dikenal sebagai Ikon Ampenan Tempo Dulu</div>
 					</div>
 
 					<div class="col-lg-12 col-md-12">
 						<h3 class="mt-20 mb-20" style="text-align:left">Si Biru: Ikon Ampenan Tempo Dulu</h3>
 
 						<p class="excert" style="color: black;">
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-						<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-						<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-
-						<p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</p>
-
-						<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi.</p>
-
-						<p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>
+						<p>Kalau kamu jalan ke arah Pantai Ampenan, coba tengok bangunan kecil di pinggir jalan yang kini dikenal sebagai Gardu Listrik Tempo Dulu. Diperkirakan berdiri sekitar tahun 1930, gardu ini dibangun oleh perusahaan listrik kolonial EBALOM (Electriciteits Maatschappij Bali en Lombok), anak perusahaan ANIEM. Dulu, dari sinilah listrik pertama kali mengalir ke kawasan pelabuhan dan kota Ampenan.</p>
+						<p>Tak jauh dari gardu itu berdiri satu tempat yang tak kalah ikonik: Kios Biru.
+							Awalnya cuma kios kecil bercat biru di tepi jalan utama yang menjual kebutuhan sehari-hari, seperti rokok, minuman, dan camilan. Tapi karena warnanya mencolok dan letaknya strategis, kios ini jadi patokan transportasi umum menurunkan penumpangnya..
+							Bagi warga Ampenan, Mataram, dan sekitarnya, ucapan “turun di Kios Biru” sudah cukup jadi penanda arah, tanpa perlu peta, semua langsung tahu di mana itu.
 						</p>
+
+						<p>Coba deh tanya orang tuamu, siapa tahu dulu mereka langganan turun di Kios Biru, atau malah kamu sendiri yang pernah naik bemo dan nongkrong di sana sambil nunggu berangkat. Hehehe… siapa sangka, tempat sederhana itu ternyata punya cerita panjang yang tak kalah terang dari lampu gardu di sebelahnya.</p>
 					</div>
 				</div>
 			</div>

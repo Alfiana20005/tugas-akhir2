@@ -32,26 +32,28 @@
                             <div></div>
                         </button>
                         <div class="feature-img">
-                            <img class="img-fluid" src="<?= base_url('img/si-biru.jpg'); ?>" alt="">
+                            <img class="img-fluid mt-4" style="max-height: 400px; object-fit:scale-down;" src="<?= base_url('img/gereja-1.jpg'); ?>" alt="">
                         </div>
-                        <div class="ket" id="ket"><i class="fa-solid fa-camera" style="padding-right: 4pt;"> </i>Gereja St. Antonius</div>
+                        <div class="ket" id="ket"><i class="fa-solid fa-camera mt-4" style="padding-right: 4pt;"> </i>Gereja St. Antonius</div>
                     </div>
 
                     <div class="col-lg-12 col-md-12">
-                        <h3 class="mt-20 mb-20" style="text-align:left">Santo Antonius Padua Ampenan: Warisan Rohani di Kota Tua</h3>
+                        <h3 class="mt-20 mb-20" style="text-align:left">Wisata Rohani di Kota Tua</h3>
 
                         <p class="excert" style="color: black;">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-
-                        <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</p>
-
-                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi.</p>
-
-                        <p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>
+                        <p>Gereja Katolik St. Antonius Padua Ampenan merupakan paroki di bawah Keuskupan Denpasar, Dekenat NTB. Seorang pastor dari Serikat Sabda Allah (bahasa Latin: Societas Verbi Divini, disingkat SVD) bernama Pater Agustinus de Boer, SVD datang ke Lombok untuk memulai karya misi, yaitu usaha memperkenalkan ajaran kasih Kristus kepada masyarakat.</p>
+                        <p>Awalnya, ibadah dilakukan disebuah kapela sederhana atau bangunan kecil tempat berdoa di kompleks sekolah Karang Ujung, yang kini menjadi Rumah Sakit Katolik St. Antonius. Karya ini dilanjutkan oleh P. Dionisius Henricus Gierlings, SVD sejak 1949, yang kemudian mendirikan gereja pertama (1962–1963) dan gereja paroki baru di Jl. Majapahit No.10, Ampenan, diresmikan 13 Juni 1980.
                         </p>
+
+                        <p>Beberapa tahun kemudian, karya pelayanan ini dilanjutkan oleh Pater Dionisius Henricus Gierlings, SVD yang datang ke Ampenan pada tahun 1949. Beliau melayani masyarakat dengan penuh semangat dan kasih. Melihat jumlah umat Katolik yang semakin banyak, ia membangun sebuah gereja di Karang Ujung pada tahun 1962, yang kemudian diresmikan pada tahun 1963 oleh Uskup Denpasar, Mgr. Paulus Sani Kleden, SVD (Mgr. atau Monsinyur adalah gelar kehormatan bagi seorang uskup dalam Gereja Katolik).</p>
+                        <p>Oleh Pater Gierlings, geraja diperbesar dengan membangun gereja baru di Jalan Majapahit No. 10, Ampenan. Bangunan ini selesai pada tahun 1979 dan diresmikan sebagai Gereja Paroki St. Antonius Padua Ampenan pada 13 Juni 1980. Istilah Paroki berarti wilayah pelayanan gereja yang memiliki umat tetap dan dipimpin oleh seorang pastor.
+                        </p>
+                        <p>Selain membangun gereja, Pater Gierlings juga memperhatikan kebutuhan masyarakat di bidang pendidikan dan kesehatan. Sekitar tahun 1950, ia mendirikan Poliklinik dan Rumah Sakit Katolik St. Antonius di Karang Ujung untuk membantu siapa pun yang membutuhkan perawatan, tanpa membedakan agama. Tahun 1965, beliau membuka Sekolah Dasar Katolik St. Antonius, dan dua tahun kemudian, Taman Kanak-kanak Katolik St. Antonius. Sekolah-sekolah ini terbuka untuk semua anak.</p>
+                        <div class="feature-img">
+                            <img class="img-fluid mt-4 mb-4" style="max-height: 400px; object-fit:scale-down;" src="<?= base_url('img/gereja-2.jpg'); ?>" alt="">
+                        </div>
+                        <p>Pater Gierlings melayani umat Ampenan selama 42 tahun hingga wafat pada 22 Oktober 1991. Beliau dimakamkan di area gereja Ampenan, tepatnya di belakang gedung gereja, di dekat Gua Maria, tempat doa umat Katolik yang biasanya berbentuk patung Bunda Maria di dalam gua kecil. Hingga kini, banyak umat dan warga yang mengenang beliau sebagai sosok yang rendah hati, sederhana, dan penuh kasih. Melalui keberadaan gereja dan rumah-rumah ibadah lain di sekitar Ampenan, kita dapat melihat bagaimana keragaman menjadi identitas utama kota ini</p>
+
                     </div>
                 </div>
             </div>
