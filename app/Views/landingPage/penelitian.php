@@ -28,6 +28,79 @@
                         <h2 class="mb-4 fs-1">Daftar Penelitian</h2>
                     </div>
 
+                    <!-- Museum Research Section -->
+                    <?php if (!empty($penelitian_museum)): ?>
+                        <div class="museum-research-section mb-5">
+                            <h3 class="border-bottom pb-2"><i class="fas fa-building mr-2"></i>Penelitian Museum</h3>
+                            <div class="card-list mt-3">
+                                <?php foreach ($penelitian_museum as $p) : ?>
+                                    <div class="card mb-3 shadow-sm">
+                                        <div class="card-body">
+                                            <h4 class="card-title fw-bold mb-2">
+                                                <a href="<?= base_url('penelitian/detail/' . $p['id_penelitian']); ?>" class="text-decoration-none text-dark"><?= $p['judul_penelitian']; ?></a>
+                                            </h4>
+                                            <div class="card-meta d-flex align-items-center mb-3">
+                                                <span class="researcher-text"><i class="far fa-calendar-alt me-1 researcher-text"></i>
+                                                    <?php
+                                                    $bulan = ['January' => 'Januari', 'February' => 'Februari', 'March' => 'Maret', 'April' => 'April', 'May' => 'Mei', 'June' => 'Juni', 'July' => 'Juli', 'August' => 'Agustus', 'September' => 'September', 'October' => 'Oktober', 'November' => 'November', 'December' => 'Desember'];
+
+                                                    $tgl_mulai = date('d F Y', strtotime($p['tanggal_mulai']));
+                                                    echo preg_replace_callback('/\b(\w+)\b/', function ($matches) use ($bulan) {
+                                                        return isset($bulan[$matches[0]]) ? $bulan[$matches[0]] : $matches[0];
+                                                    }, $tgl_mulai);
+                                                    ?> -
+                                                    <?php
+                                                    if ($p['tanggal_akhir']) {
+                                                        $tgl_akhir = date('d F Y', strtotime($p['tanggal_akhir']));
+                                                        echo preg_replace_callback('/\b(\w+)\b/', function ($matches) use ($bulan) {
+                                                            return isset($bulan[$matches[0]]) ? $bulan[$matches[0]] : $matches[0];
+                                                        }, $tgl_akhir);
+                                                    } else {
+                                                        echo 'Selesai';
+                                                    }
+                                                    ?>
+                                                </span>
+                                            </div>
+
+                                            <div class="researcher-info p-3 bg-light rounded">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <p class="mb-1 researcher-text"><i class="fas fa-user-graduate mr-2"></i> Peneliti: <?= $p['nama']; ?></p>
+                                                        <p class="mb-1 researcher-text"><i class="fas fa-layer-group mr-2"></i> Kategori:
+                                                            <a href="<?= base_url('penelitian?kategori_objek=' . urlencode($p['kategori_objek'])); ?>" class="text-decoration-none researcher-text">
+                                                                <?= $p['kategori_objek']; ?>
+                                                            </a>
+                                                        </p>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <p class="mb-1 researcher-text"><i class="fas fa-book mr-2"></i> Program Studi: <?= $p['program_studi']; ?></p>
+                                                        <p class="mb-1 researcher-text"><i class="fas fa-university mr-2"></i> Instansi:
+                                                            <a href="<?= base_url('penelitian?instansi=' . urlencode($p['instansi'])); ?>" class="text-decoration-none researcher-text">
+                                                                <?= $p['instansi']; ?>
+                                                            </a>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <?php if (!empty($p['ringkasan'])) : ?>
+                                                <div class="mt-3">
+                                                    <p class="card-text"><?= substr($p['ringkasan'], 0, 150); ?>...</p>
+                                                    <a href="<?= base_url('penelitian/detail/' . $p['id_penelitian']); ?>" class="btn btn-sm btn-outline-primary">Baca Selengkapnya</a>
+                                                </div>
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+
+                    <!-- General Research Section Header -->
+                    <div class="general-research-header mb-3">
+                        <h3 class="border-bottom pb-2"><i class="fas fa-graduation-cap mr-2"></i>Penelitian Umum</h3>
+                    </div>
+
                     <!-- Active Filters Display -->
                     <?php if (!empty($_GET['instansi']) || !empty($_GET['kategori_objek']) || !empty($_GET['tahun'])): ?>
                         <div class="active-filters mb-4">
@@ -57,9 +130,10 @@
                             </div>
                         </div>
                     <?php endif; ?>
+
                     <?php if (empty($penelitian)) : ?>
                         <div class="alert alert-info rounded shadow-sm">
-                            <i class="fas fa-info-circle me-2"></i> Belum ada data penelitian yang tersedia.
+                            <i class="fas fa-info-circle mr-2"></i> Belum ada data penelitian yang tersedia.
                         </div>
                     <?php else : ?>
                         <div class="card-list">
@@ -67,7 +141,7 @@
                                 <div class="card mb-4 shadow-sm">
                                     <div class="card-body">
                                         <h4 class="card-title fw-bold mb-2">
-                                            <a class="text-decoration-none"><?= $p['judul_penelitian']; ?></a>
+                                            <a href="<?= base_url('penelitian/detail/' . $p['id_penelitian']); ?>" class="text-decoration-none text-dark"><?= $p['judul_penelitian']; ?></a>
                                         </h4>
                                         <div class="card-meta d-flex align-items-center mb-3">
                                             <span class="researcher-text"><i class="far fa-calendar-alt me-1 researcher-text"></i>
@@ -92,20 +166,19 @@
                                             </span>
                                         </div>
 
-
                                         <div class="researcher-info p-3 bg-light rounded">
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <p class="mb-1 researcher-text"><i class="fas fa-user-graduate me-2"></i> Peneliti: <?= $p['nama']; ?></p>
-                                                    <p class="mb-1 researcher-text"><i class="fas fa-layer-group me-2"></i> Kategori:
+                                                    <p class="mb-1 researcher-text"><i class="fas fa-user-graduate mr-2"></i> Peneliti: <?= $p['nama']; ?></p>
+                                                    <p class="mb-1 researcher-text"><i class="fas fa-layer-group mr-2"></i> Kategori:
                                                         <a href="<?= base_url('penelitian?kategori_objek=' . urlencode($p['kategori_objek'])); ?>" class="text-decoration-none researcher-text">
                                                             <?= $p['kategori_objek']; ?>
                                                         </a>
                                                     </p>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <p class="mb-1 researcher-text"><i class="fas fa-book me-2"></i> Program Studi: <?= $p['program_studi']; ?></p>
-                                                    <p class="mb-1 researcher-text"><i class="fas fa-university me-2"></i> Instansi:
+                                                    <p class="mb-1 researcher-text"><i class="fas fa-book mr-2"></i> Program Studi: <?= $p['program_studi']; ?></p>
+                                                    <p class="mb-1 researcher-text"><i class="fas fa-university mr-2"></i> Instansi:
                                                         <a href="<?= base_url('penelitian?instansi=' . urlencode($p['instansi'])); ?>" class="text-decoration-none researcher-text">
                                                             <?= $p['instansi']; ?>
                                                         </a>
@@ -114,9 +187,9 @@
                                             </div>
                                         </div>
 
-                                        <?php if (!empty($p['deskripsi_singkat'])) : ?>
+                                        <?php if (!empty($p['ringkasan'])) : ?>
                                             <div class="mt-3">
-                                                <p class="card-text"><?= substr($p['deskripsi_singkat'], 0, 150); ?>...</p>
+                                                <p class="card-text"><?= substr($p['ringkasan'], 0, 150); ?>...</p>
                                                 <a href="<?= base_url('penelitian/detail/' . $p['id_penelitian']); ?>" class="btn btn-sm btn-outline-primary">Baca Selengkapnya</a>
                                             </div>
                                         <?php endif; ?>
@@ -137,7 +210,7 @@
                 </div>
             </div>
 
-            <!-- Sidebar with Filters -->
+            <!-- Sidebar with Filters (unchanged) -->
             <div class="col-lg-4">
                 <div class="sidebar-widgets">
                     <!-- Search Box -->
@@ -148,6 +221,29 @@
                                     value="<?= isset($_GET['q']) ? $_GET['q'] : ''; ?>">
                                 <button type="submit"><i class="fas fa-search"></i></button>
                             </form>
+                        </div>
+                    </div>
+
+                    <!-- Filter by Type -->
+                    <div class="widget-wrap">
+                        <div class="single-sidebar-widget">
+                            <h4 class="widget-title mb-3">Filter Berdasarkan Jenis</h4>
+                            <ul class="list-group">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <a href="<?= base_url('penelitian?jenis=museum'); ?>"
+                                        class="text-decoration-none <?= (isset($_GET['jenis']) && $_GET['jenis'] == 'museum') ? 'fw-bold' : ''; ?>">
+                                        <i class="fas fa-building mr-2"></i>Penelitian Museum
+                                    </a>
+                                    <span class="badge bg-museum text-white rounded-pill"><?= isset($jenis_count['museum']) ? $jenis_count['museum'] : 0; ?></span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <a href="<?= base_url('penelitian?jenis=umum'); ?>"
+                                        class="text-decoration-none <?= (isset($_GET['jenis']) && $_GET['jenis'] == 'umum') ? 'fw-bold' : ''; ?>">
+                                        <i class="fas fa-graduation-cap mr-2"></i>Penelitian Umum
+                                    </a>
+                                    <span class="badge bg-success rounded-pill"><?= isset($jenis_count['umum']) ? $jenis_count['umum'] : 0; ?></span>
+                                </li>
+                            </ul>
                         </div>
                     </div>
 
@@ -223,6 +319,12 @@
                                             <small class="text-muted">
                                                 <i class="fas fa-user-graduate me-1"></i> <?= $p['nama']; ?>
                                             </small>
+                                            <?php if (isset($p['jenis'])): ?>
+                                                <br>
+                                                <span class="badge <?= $p['jenis'] == 'museum' ? 'bg-warning text-dark' : 'bg-success' ?> mt-1">
+                                                    <?= $p['jenis'] == 'museum' ? 'Museum' : 'Umum' ?>
+                                                </span>
+                                            <?php endif; ?>
                                         </div>
                                     </li>
                                 <?php endforeach; ?>

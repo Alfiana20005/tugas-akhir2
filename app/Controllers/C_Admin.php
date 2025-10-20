@@ -1673,10 +1673,28 @@ class C_Admin extends BaseController
                 'rules' => 'required',
                 'errors' => ['required' => 'Tanggal mulai penelitian tidak boleh kosong']
             ],
+            'gambar' => [
+                'rules' => 'uploaded[gambar]|max_size[gambar,2048]|is_image[gambar]|mime_in[gambar,image/jpg,image/jpeg,image/png]',
+                'errors' => [
+                    'uploaded' => 'Gambar penelitian harus diupload',
+                    'max_size' => 'Ukuran gambar maksimal 2MB',
+                    'is_image' => 'File yang diupload harus berupa gambar',
+                    'mime_in' => 'Format gambar harus JPG, JPEG, atau PNG'
+                ]
+            ]
         ];
 
         if (!$this->validate($rules)) {
-            return redirect()->to('/penelitian')->withInput()->with('errors', $this->validator->listErrors());
+            return redirect()->to('/dataPenelitian')->withInput()->with('errors', $this->validator->listErrors());
+        }
+
+        // Handle file upload
+        $gambar = $this->request->getFile('gambar');
+        $namaGambar = null;
+
+        if ($gambar && $gambar->isValid() && !$gambar->hasMoved()) {
+            $namaGambar = $gambar->getRandomName();
+            $gambar->move('uploads/penelitian/', $namaGambar);
         }
 
         $data = [
@@ -1685,9 +1703,11 @@ class C_Admin extends BaseController
             'judul_penelitian' => $this->request->getVar('judul_penelitian'),
             'kategori_objek' => $this->request->getVar('kategori_objek'),
             'jenjang_pendidikan' => $this->request->getVar('jenjang_pendidikan'),
-            'program_studi' => $this->request->getVar('program_studi') ?: null, // Bisa null
+            'program_studi' => $this->request->getVar('program_studi') ?: null,
             'instansi' => $this->request->getVar('instansi'),
             'tanggal_mulai' => $this->request->getVar('tanggal_mulai'),
+            'ringkasan' => $this->request->getVar('ringkasan'),
+            'gambar' => $namaGambar
         ];
 
         if ($this->request->getVar('tanggal_akhir')) {
@@ -1701,32 +1721,49 @@ class C_Admin extends BaseController
         return redirect()->to('/dataPenelitian');
     }
 
-    public function deletePenelitian($id_penelitian)
-    {
-        $id_penelitian = filter_var($id_penelitian, FILTER_SANITIZE_NUMBER_INT);
-
-        $this->M_Penelitian->where('id_penelitian', $id_penelitian)->delete();
-
-        session()->setFlashdata('pesan', 'Data Penelitian Berhasil Dihapus.');
-
-        return redirect()->to('/dataPenelitian');
-    }
-
     public function updatePenelitian($id_penelitian)
     {
+        $penelitianLama = $this->M_Penelitian->find($id_penelitian);
+
         $dataToUpdate = [
             'nama' => $this->request->getVar('nama'),
             'no_identitas' => $this->request->getVar('no_identitas'),
             'judul_penelitian' => $this->request->getVar('judul_penelitian'),
             'kategori_objek' => $this->request->getVar('kategori_objek'),
             'jenjang_pendidikan' => $this->request->getVar('jenjang_pendidikan'),
-            'program_studi' => $this->request->getVar('program_studi') ?: null, // Bisa null
+            'program_studi' => $this->request->getVar('program_studi') ?: null,
             'instansi' => $this->request->getVar('instansi'),
             'tanggal_mulai' => $this->request->getVar('tanggal_mulai'),
+            'ringkasan' => $this->request->getVar('ringkasan')
         ];
 
         if ($this->request->getVar('tanggal_akhir')) {
             $dataToUpdate['tanggal_akhir'] = $this->request->getVar('tanggal_akhir');
+        }
+
+        // Handle file upload jika ada file baru
+        $gambar = $this->request->getFile('gambar');
+        if ($gambar && $gambar->isValid() && !$gambar->hasMoved()) {
+            // Validate file
+            $validation = \Config\Services::validation();
+            $validation->setRules([
+                'gambar' => 'max_size[gambar,2048]|is_image[gambar]|mime_in[gambar,image/jpg,image/jpeg,image/png]'
+            ]);
+
+            if ($validation->withRequest($this->request)->run()) {
+                // Hapus gambar lama jika ada
+                if ($penelitianLama['gambar'] && file_exists('img/penelitian/' . $penelitianLama['gambar'])) {
+                    unlink('img/penelitian/' . $penelitianLama['gambar']);
+                }
+
+                // Upload gambar baru
+                $namaGambar = $gambar->getRandomName();
+                $gambar->move('img/penelitian/', $namaGambar);
+                $dataToUpdate['gambar'] = $namaGambar;
+            } else {
+                session()->setFlashdata('error', 'Error upload gambar: ' . $validation->listErrors());
+                return redirect()->to('/dataPenelitian');
+            }
         }
 
         $dataToUpdate = array_filter($dataToUpdate, function ($var) {
@@ -1739,6 +1776,25 @@ class C_Admin extends BaseController
         } else {
             session()->setFlashdata('error', 'Tidak ada data yang diupdate.');
         }
+
+        return redirect()->to('/dataPenelitian');
+    }
+
+    public function deletePenelitian($id_penelitian)
+    {
+        $id_penelitian = filter_var($id_penelitian, FILTER_SANITIZE_NUMBER_INT);
+
+        // Get data penelitian untuk hapus gambar
+        $penelitian = $this->M_Penelitian->find($id_penelitian);
+
+        // Hapus gambar jika ada
+        if ($penelitian && $penelitian['gambar'] && file_exists('img/penelitian/' . $penelitian['gambar'])) {
+            unlink('img/penelitian/' . $penelitian['gambar']);
+        }
+
+        $this->M_Penelitian->where('id_penelitian', $id_penelitian)->delete();
+
+        session()->setFlashdata('pesan', 'Data Penelitian Berhasil Dihapus.');
 
         return redirect()->to('/dataPenelitian');
     }

@@ -84,6 +84,7 @@ $routes->get('/heritage-walk/si-biru', 'C_LandingPage::siBiru');
 $routes->get('/heritage-walk/gereja-st-antonius', 'C_LandingPage::gereja');
 $routes->get('/heritage-walk/jalan-langko', 'C_LandingPage::langko');
 
+$routes->get('/katalog-pameran-sumbawa', 'C_LandingPage::katalogSumbawa');
 
 $routes->group('', ['filter' => 'filterAdmin'], function ($routes) {
     // Struktur Organisasi & Petugas Museum
