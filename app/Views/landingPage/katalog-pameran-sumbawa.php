@@ -9,7 +9,7 @@
         <div class="row d-flex align-items-center justify-content-center">
             <div class="about-content col-lg-12">
                 <h1 class="text-white">
-                    Katalog Pameran Sumbawa
+                    Katalog Pameran Wastra Kre Alang (Jejak tenun identitas Sumbawa)
                 </h1>
                 <p class="text-white link-nav"><a href="/home">Home </a> <span class="fa fa-chevron-right"></span> <a href="/heritage-walk/si-biru"> Katalog Pameran Sumbawa</a></p>
             </div>
