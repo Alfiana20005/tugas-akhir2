@@ -111,7 +111,7 @@
             margin-top: -30px;
         }
 
-        h1 {
+        .about-content h1 {
             font-size: 20px;
         }
     }
