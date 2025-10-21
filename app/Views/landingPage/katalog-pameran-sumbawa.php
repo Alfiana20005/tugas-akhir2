@@ -110,6 +110,10 @@
         .text-side {
             margin-top: -30px;
         }
+
+        h1 {
+            font-size: 20px;
+        }
     }
 </style>
 
