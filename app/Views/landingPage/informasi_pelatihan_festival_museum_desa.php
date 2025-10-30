@@ -29,7 +29,7 @@
                     <div class="col-lg-12 col-md-12">
                         <h3 class="mt-20 mb-20" style="text-align:left">1. Deskripsi Kegiatan</h3>
                         <p style="color: black;">
-                            Pelatihan Tenaga Permuseuman merupakan kegiatan pembekalan bagi pengelola museum desa di NTB yang mencakup materi konservasi koleksi, penyusunan narasi sejarah dan cerita desa, serta penataan pameran sederhana. Melalui pelatihan ini, peserta diharapkan mampu merawat koleksi budaya secara mandiri, mengemas kisah dan identitas desa dalam bentuk pameran yang komunikatif.
+                            Pelatihan Tenaga Permuseuman merupakan bagian dari rangkaian kegiatan Festival Museum Desa 2025, yang bertujuan meningkatkan kapasitas pengelola museum desa di Nusa Tenggara Barat. Kegiatan ini mencakup pembekalan tentang konservasi koleksi, penyusunan narasi sejarah dan budaya desa, serta penataan pameran sederhana. Melalui pelatihan ini, peserta diharapkan mampu merawat koleksi budaya secara mandiri dan menyiapkan pameran yang komunikatif sebagai bagian dari kegiatan Festival Museum Desa.
                         </p>
 
                         <h3 class="mt-40 mb-20" style="text-align:left">2. Tujuan Kegiatan</h3>
@@ -64,7 +64,7 @@
                                     <tr>
                                         <td>2.</td>
                                         <td>Selasa - Kamis,<br>25 - 27 November 2025</td>
-                                        <td>Penilaian</td>
+                                        <td>Penilaian Lapangan</td>
                                     </tr>
                                     <tr>
                                         <td>3.</td>
@@ -77,11 +77,11 @@
 
                         <h3 class="mt-40 mb-20" style="text-align:left">5. Persyaratan Peserta</h3>
                         <div style="color: black; text-align: justify;">
-                            <p><strong>a)</strong> Peserta diwajibkan mengisi formulir pendaftaran dan memberikannya kepada panitia ketika registrasi kegiatan Pelatihan Tenaga Permuseuman.</p>
+                            <p><strong>a)</strong> Peserta merupakan museum desa, rumah budaya, atau pengelola koleksi budaya di desa pada wilayah Provinsi Nusa Tenggara Barat.</p>
 
                             <p><strong>b)</strong> Peserta wajib mengikuti Pelatihan Tenaga Permuseuman dengan mengirimkan maksimal 2 (dua) orang perwakilan.</p>
 
-                            <p><strong>c)</strong> Peserta merupakan museum desa, rumah budaya, atau pengelola koleksi budaya di desa pada wilayah Provinsi Nusa Tenggara Barat.</p>
+                            <p><strong>c)</strong> Peserta diwajibkan mengisi formulir pendaftaran dan memberikannya kepada panitia ketika registrasi kegiatan Pelatihan Tenaga Permuseuman.</p>
 
                             <p><strong>d)</strong> Kriteria Museum Desa yang dapat mendaftar:</p>
                             <p style="padding-left: 25px;"><strong>i.</strong> Memiliki ruang pamer dan/atau ruang penyimpanan koleksi.</p>
