@@ -21,7 +21,7 @@
 
 
 <!-- Start post-content Area -->
-<section class="post-content-area single-post-area">
+<section class="post-content-area single-post-area" style="padding-top: 40px;">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 posts-list">
