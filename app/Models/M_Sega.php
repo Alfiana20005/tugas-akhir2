@@ -9,12 +9,7 @@ class M_Sega extends Model
     protected $table = 'sega';
     protected $primaryKey = 'id_sega';
     protected $useTimestamps = false;
-
-
-    // protected $allowedFields = ['foto', 'nama','password','email','username','level'];
-    protected $allowedFields = ['judul','deskripsi_indo', 'foto', 'audio1', 'audio2','deskripsi_eng'];
-
-
+    protected $allowedFields = ['judul', 'deskripsi_indo', 'deskripsi_eng', 'foto', 'audio_id', 'audio_eng'];
     protected $validationRules = [];
     protected $validationMessages = [];
     protected $skipValidation = false;
@@ -24,9 +19,4 @@ class M_Sega extends Model
     {
         return $this->find($id_sega);
     }
-
-  
-
-    
 }
-    

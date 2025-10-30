@@ -1416,75 +1416,55 @@ class C_Admin extends BaseController
 
     public function saveSega()
     {
-        //validation
+        // Validation
         $rules = [
             'judul' => [
                 'rules' => 'required',
                 'errors' => ['required' => 'Judul harus diisi']
             ],
-
+            'deskripsi_indo' => [
+                'rules' => 'required',
+                'errors' => ['required' => 'Deskripsi Indonesia harus diisi']
+            ],
         ];
 
         if (!$this->validate($rules)) {
-            // session()->setFlashdata('errors', $this->validator->listErrors());
             return redirect()->to('/sega')->withInput()->with('errors', $this->validator->listErrors());
         }
 
+        // ✅ Handle foto (wajib)
         $foto = $this->request->getFile('foto');
+        $fotoName = $foto->getRandomName();
+        $foto->move('img/sega', $fotoName);
 
-        if ($foto->isValid() && !$foto->hasMoved()) {
-            $fotoName = $foto->getRandomName();
-            $foto->move('img/sega', $fotoName);
-        } else {
-            // Handle file upload error
-            return redirect()->to(base_url('/sega'))
-                ->withInput()
-                ->with('errors', $foto->getErrorString());
-        }
+        // ✅ Handle audio_id (wajib)
+        $file1 = $this->request->getFile('audio_id');
+        $filename1 = $file1->getRandomName();
+        $file1->move('audio', $filename1);
 
-        $file1 = $this->request->getFile('audio1');
+        // ✅ Handle audio_eng (opsional)
+        $file2 = $this->request->getFile('audio_eng');
+        $filename2 = 'null'; // default value
 
-
-        if ($file1->isValid() && !$file1->hasMoved()) {
-            $filename1 = $file1->getRandomName();
-            $file1->move('audio', $filename1);
-        } else {
-            // Handle file upload error
-            return redirect()->to(base_url('/sega'))
-                ->withInput()
-                ->with('errors', $file1->getErrorString());
-        }
-
-        $file2 = $this->request->getFile('audio2');
-        // $filename2 = 'null';
-        if ($file2->isValid() && !$file2->hasMoved()) {
+        if ($file2 && $file2->isValid() && !$file2->hasMoved()) {
             $filename2 = $file2->getRandomName();
             $file2->move('audio', $filename2);
-        } else {
-            // Handle file upload error
-            $filename2 = 'null';
         }
 
-        //tambahh data
-        // $this->M_Petugas->save($this->request->getPost());
+        // ✅ Simpan data
         $this->M_Sega->save([
-            // 'id_petugas' => $id_petugas,
             'judul' => $this->request->getVar('judul'),
             'deskripsi_indo' => $this->request->getVar('deskripsi_indo'),
             'deskripsi_eng' => $this->request->getVar('deskripsi_eng'),
             'foto' => $fotoName,
-            'audio1' => $filename1,
-            'audio2' => $filename2,
-
+            'audio_id' => $filename1,
+            'audio_eng' => $filename2,
         ]);
 
-        //alert
         session()->setFlashdata('pesan', 'Data Berhasil Ditambahkan.');
-
         return redirect()->to('/sega');
-
-        // return view('admin/v_masterpetugas');
     }
+
     public function previewSega($id_sega): string
     {
         $sega = $this->M_Sega->getSega($id_sega);
@@ -1510,6 +1490,7 @@ class C_Admin extends BaseController
         // Redirect ke halaman yang sesuai
         return redirect()->to('/sega');
     }
+
     public function updateSega($id_sega)
     {
         // Mengambil data yang akan diupdate dari request
@@ -1517,50 +1498,33 @@ class C_Admin extends BaseController
             'judul' => $this->request->getVar('judul'),
             'deskripsi_indo' => $this->request->getVar('deskripsi_indo'),
             'deskripsi_eng' => $this->request->getVar('deskripsi_eng'),
-            'foto' => $this->request->getVar('foto'),
-            'audio1' => $this->request->getVar('audio1'),
-            'audio2' => $this->request->getVar('audio2'),
-
         ];
 
+        // ✅ Handle foto - hanya update jika ada file baru
         $foto = $this->request->getFile('foto');
-
-        // Cek apakah file foto diunggah
         if ($foto && $foto->isValid() && !$foto->hasMoved()) {
-            // Generate nama unik untuk file foto
             $fotoName = $foto->getRandomName();
-
-            // Pindahkan file foto ke folder yang diinginkan
-            $foto->move('img/sega', $fotoName); // Perbarui path sesuai dengan folder yang diinginkan
-
-            // Tambahkan nama file foto ke data yang akan diupdate
+            $foto->move('img/sega', $fotoName);
             $dataToUpdate['foto'] = $fotoName;
         }
 
-        $file1 = $this->request->getFile('audio1');
-        if ($file1->isValid() && !$file1->hasMoved()) {
+        // ✅ Handle audio_id - hanya update jika ada file baru
+        $file1 = $this->request->getFile('audio_id');
+        if ($file1 && $file1->isValid() && !$file1->hasMoved()) {
             $filename1 = $file1->getRandomName();
             $file1->move('audio', $filename1);
-            $dataToUpdate['audio1'] = $fotoName;
-        } else {
-            // Handle file upload error
-            return redirect()->to(base_url('/sega'))
-                ->withInput()
-                ->with('errors', $file1->getErrorString());
+            $dataToUpdate['audio_id'] = $filename1;
         }
 
-        $file2 = $this->request->getFile('audio2');
-        // $filename2 = 'null';
-        if ($file2->isValid() && !$file2->hasMoved()) {
+        // ✅ Handle audio_eng - hanya update jika ada file baru
+        $file2 = $this->request->getFile('audio_eng');
+        if ($file2 && $file2->isValid() && !$file2->hasMoved()) {
             $filename2 = $file2->getRandomName();
             $file2->move('audio', $filename2);
-            $dataToUpdate['audio2'] = $fotoName;
-        } else {
-            // Handle file upload error
-            $filename2 = 'null';
+            $dataToUpdate['audio_eng'] = $filename2;
         }
 
-        // Membersihkan data yang mungkin ada dari inputan form
+        // Membersihkan data yang kosong
         $dataToUpdate = array_filter($dataToUpdate);
 
         // Memastikan ada data yang akan diupdate
@@ -1568,30 +1532,27 @@ class C_Admin extends BaseController
             // Mengeksekusi perintah update
             $this->M_Sega->update($id_sega, $dataToUpdate);
 
-            // Ambil data petugas setelah diubah dari database
-            $newDataGallery = $this->M_Sega->getGallery($id_sega);
+            // Ambil data setelah diubah dari database
+            $newDataSega = $this->M_Sega->getSega($id_sega);
 
-            // Perbarui sesi pengguna dengan data baru
+            // Perbarui sesi jika diperlukan
             if (session()->get('level') == 'Admin') {
                 session()->set([
-                    'judul' => $newDataGallery['judul'],
-                    'deskripsi_indo' => $newDataGallery['deskripsi_indo'],
-                    'deskripsi_eng' => $newDataGallery['deskripsi_eng'],
-                    'foto' => $newDataGallery['foto'],
-                    'audio1' => $newDataGallery['audio1'],
-                    'audio2' => $newDataGallery['audio2'],
+                    'judul' => $newDataSega['judul'],
+                    'deskripsi_indo' => $newDataSega['deskripsi_indo'],
+                    'deskripsi_eng' => $newDataSega['deskripsi_eng'],
+                    'foto' => $newDataSega['foto'],
+                    'audio_id' => $newDataSega['audio_id'],
+                    'audio_eng' => $newDataSega['audio_eng'],
                 ]);
             }
-            //alert
+
             session()->setFlashdata('pesan', 'Data Berhasil diubah.');
         } else {
-            // Jika tidak ada data yang diupdate, munculkan pesan kesalahan
             session()->setFlashdata('error', 'Tidak ada data yang diupdate.');
         }
-        // dd('berhasil');
 
-        // Redirect ke halaman sebelumnya atau halaman yang sesuai
-        return redirect()->to('/galleryAdmin');
+        return redirect()->to('/sega');
     }
 
     public function aksesManuskrip(): string

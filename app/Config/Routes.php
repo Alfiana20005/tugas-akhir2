@@ -161,6 +161,7 @@ $routes->group('', ['filter' => 'filterAdmin'], function ($routes) {
     $routes->get('/sega', 'C_Admin::sega');
     $routes->post('/saveSega', 'C_Admin::saveSega');
     $routes->get('/previewSega/(:segment)', 'C_Admin::previewSega/$1');
+    $routes->post('updateSega/(:segment)', 'C_Admin::updateSega/$1');
     $routes->delete('deleteSega/(:segment)', 'C_Admin::deleteSega/$1');
 
     // Akses Manuskrip
