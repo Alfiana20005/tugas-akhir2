@@ -86,6 +86,7 @@ $routes->get('/heritage-walk/jalan-langko', 'C_LandingPage::langko');
 
 $routes->get('/katalog-pameran-sumbawa', 'C_LandingPage::katalogSumbawa');
 $routes->get('/informasi-pelatihan-festival-museum-desa', 'C_LandingPage::pelatihanFestival');
+$routes->get('/kajian-pendirian-museum', 'C_LandingPage::kajianPendirianMuseum');
 
 $routes->group('', ['filter' => 'filterAdmin'], function ($routes) {
     // Struktur Organisasi & Petugas Museum
