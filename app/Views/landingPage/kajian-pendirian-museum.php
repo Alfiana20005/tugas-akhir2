@@ -9,9 +9,9 @@
         <div class="row d-flex align-items-center justify-content-center">
             <div class="about-content col-lg-12">
                 <h1 class="text-white">
-                    Detail Publikasi
+                    Kajian Pendirian Museum
                 </h1>
-                <p class="text-white link-nav"><a href="/home">Home </a> <span class="fa fa-chevron-right"></span> <a href="/publikasi2"> Publikasi</a> <span class="fa fa-chevron-right"></span> Detail</p>
+                <p class="text-white link-nav"><a href="/home">Home </a> <span class="fa fa-chevron-right"></span> <a href="/kajian-pendirian-museum"> Kajian Pendirian Museum</a> <span class="fa fa-chevron-right"></span> Detail</p>
             </div>
         </div>
     </div>
@@ -46,9 +46,15 @@
                     <div class="text-center">
                         <a href="https://drive.google.com/file/d/1RLwSiThPDkuCEQ9f5W9iCYb99vF5szq7/view?usp=sharing"
                             target="_blank"
-                            class="btn btn-primary btn-md mb-3"
+                            class="btn btn-primary btn-md mb-3 me-2"
                             style="background-color:#850000; border-color:#850000; padding: 12px 30px;">
                             <i class="fa fa-download"></i> Download / Buka di Google Drive
+                        </a>
+                        <a href="https://drive.google.com/drive/u/2/folders/1WApVHbvjJEdFP-R7TiaYUDBkihhlCBTB"
+                            target="_blank"
+                            class="btn btn-primary btn-md mb-3"
+                            style="background-color:#850000; border-color:#850000; padding: 12px 30px;">
+                            <i class="fa fa-folder-open"></i> Borang Museum
                         </a>
                         <br>
                         <a href="<?= base_url('publikasi'); ?>"
