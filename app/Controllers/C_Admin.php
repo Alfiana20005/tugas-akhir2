@@ -1524,9 +1524,26 @@ class C_Admin extends BaseController
 
     public function updateSega($id_sega)
     {
-        helper('slug'); // Load helper
+        helper('slug');
 
         $judul = $this->request->getVar('judul');
+        $slug = $this->request->getVar('slug');
+
+        // ✅ Validasi slug
+        $rules = [
+            'slug' => [
+                'rules' => 'required|alpha_dash|max_length[255]',
+                'errors' => [
+                    'required' => 'Slug harus diisi',
+                    'alpha_dash' => 'Slug hanya boleh berisi huruf, angka, dash (-) dan underscore (_)',
+                    'max_length' => 'Slug maksimal 255 karakter'
+                ]
+            ]
+        ];
+
+        if (!$this->validate($rules)) {
+            return redirect()->to('/sega')->withInput()->with('errors', $this->validator->listErrors());
+        }
 
         // Mengambil data yang akan diupdate
         $dataToUpdate = [
@@ -1535,11 +1552,26 @@ class C_Admin extends BaseController
             'deskripsi_eng' => $this->request->getVar('deskripsi_eng'),
         ];
 
-        // ✅ Generate slug baru jika judul berubah
+        // ✅ Cek apakah slug berubah dan pastikan unik
         $currentData = $this->M_Sega->getSegaById($id_sega);
-        if ($currentData['judul'] !== $judul) {
-            $slug = generateSlugFromTitle($judul, 3);
-            $slug = ensureUniqueSlug($slug, $this->M_Sega, $id_sega);
+
+        if ($currentData['slug'] !== $slug) {
+            // Format slug: lowercase, replace spaces with dash
+            $slug = strtolower(trim($slug));
+            $slug = preg_replace('/[^a-z0-9-_]/', '-', $slug);
+            $slug = preg_replace('/-+/', '-', $slug); // Remove multiple dashes
+            $slug = trim($slug, '-');
+
+            // Cek apakah slug sudah digunakan data lain
+            $existingSlug = $this->M_Sega->where('slug', $slug)
+                ->where('id_sega !=', $id_sega)
+                ->first();
+
+            if ($existingSlug) {
+                session()->setFlashdata('error', "Slug '{$slug}' sudah digunakan. Silakan gunakan slug lain.");
+                return redirect()->to('/sega')->withInput();
+            }
+
             $dataToUpdate['slug'] = $slug;
         }
 
@@ -1549,6 +1581,11 @@ class C_Admin extends BaseController
             $fotoName = $foto->getRandomName();
             $foto->move('img/sega', $fotoName);
             $dataToUpdate['foto'] = $fotoName;
+
+            // ✅ Hapus foto lama
+            if (!empty($currentData['foto']) && file_exists('img/sega/' . $currentData['foto'])) {
+                unlink('img/sega/' . $currentData['foto']);
+            }
         }
 
         // Handle audio_id
@@ -1557,6 +1594,11 @@ class C_Admin extends BaseController
             $filename1 = $file1->getRandomName();
             $file1->move('audio', $filename1);
             $dataToUpdate['audio_id'] = $filename1;
+
+            // ✅ Hapus audio lama
+            if (!empty($currentData['audio_id']) && $currentData['audio_id'] !== 'null' && file_exists('audio/' . $currentData['audio_id'])) {
+                unlink('audio/' . $currentData['audio_id']);
+            }
         }
 
         // Handle audio_eng
@@ -1565,6 +1607,11 @@ class C_Admin extends BaseController
             $filename2 = $file2->getRandomName();
             $file2->move('audio', $filename2);
             $dataToUpdate['audio_eng'] = $filename2;
+
+            // ✅ Hapus audio lama
+            if (!empty($currentData['audio_eng']) && $currentData['audio_eng'] !== 'null' && file_exists('audio/' . $currentData['audio_eng'])) {
+                unlink('audio/' . $currentData['audio_eng']);
+            }
         }
 
         $dataToUpdate = array_filter($dataToUpdate);
