@@ -143,7 +143,7 @@
                                     <?php endif; ?>
                                 </td>
                                 <td style="text-align: center;">
-                                    <a href="<?= base_url("/previewSega/{$g['id_sega']}"); ?>" class="btn btn-warning btn-sm">Lihat</a>
+                                    <a href="<?= base_url("/previewSega/{$g['slug']}"); ?>" class="btn btn-warning btn-sm">Lihat</a>
                                     <a href="" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editGallery<?= $g['id_sega']; ?>" data-bs-whatever="@getbootstrap">Edit</a>
                                     <form action="/deleteSega/<?= $g['id_sega']; ?>" method="post" class="d-inline">
                                         <?= csrf_field(); ?>

@@ -57,18 +57,13 @@
 				<div class="col-lg-8 posts-list">
 					<div class="single-post row">
 						<div class="col-lg-12">
-							<div class="quotes d-flex">
-								<img class="img-fluid " style="max-width: 70px;" src="<?= base_url('img/sega/' . $sega['foto']); ?>" alt="">
-								<h3 class="mt-20 mb-20 mx-4"><?= $sega['judul']; ?></h3>
+							<div class="quotes text-center">
+								<img class="img-fluid mb-3" style="border-radius: 5px;" src="<?= base_url('img/sega/' . $sega['foto']); ?>" alt="<?= $sega['judul']; ?>">
+								<h3 class="mt-2 mb-1"><?= $sega['judul']; ?></h3>
 							</div>
 						</div>
-
-
 						<div class="col-lg-12">
-
-
 							<div class="row mt-20 mb-30">
-
 								<div class="col-6">
 									<h4 class="category-title mb-4">Versi Indonesia</h4>
 									<?php if (!empty($sega)): ?>
@@ -76,19 +71,13 @@
 											<source src="<?= base_url('audio/' . $sega['audio_id']); ?>" type="audio/mpeg">
 											Your browser does not support the audio element.
 										</audio>
-
 									<?php else: ?>
 										<p>Tidak ada audio yang tersedia.</p>
 									<?php endif; ?>
 								</div>
-
-
-
 							</div>
-
-							<div class="quotes">
+							<div class="quotes" style="padding-top: 5px;">
 								<!-- <h3 class="mt-20 mb-20"><?= $sega['judul']; ?></h3> -->
-
 								<?php
 								function nl2p($text)
 								{
@@ -123,7 +112,7 @@
 								</div>
 							</div>
 
-							<div class="quotes">
+							<div class="quotes" style="padding-top: 5px;">
 								<!-- <h3 class="mt-20 mb-20"><?= $sega['judul']; ?></h3> -->
 
 								<p class="excert "><?= nl2p($sega['deskripsi_eng']); ?></p>
@@ -153,9 +142,7 @@
 							<p>
 								Klik Untuk Mengunjungi Website
 							</p>
-							<button class="btn btn-warning btn-sm" type="submit"><a href="<?= base_url(); ?>/home">Website</a></button>
-
-
+							<button class="btn btn-primary color-white" style="background-color:#850000; border-color:#850000; padding: 12px 30px;" type="submit"><a href="<?= base_url(); ?>/home" style="color:white">Website</a></button>
 						</div>
 					</div>
 

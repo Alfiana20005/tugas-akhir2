@@ -1403,19 +1403,18 @@ class C_Admin extends BaseController
             $sega['deskripsi_pendek2'] = $this->getExcerpt($sega['deskripsi_eng'], 10); // 30 adalah jumlah kata yang ingin ditampilkan
         }
 
-
-
         $data = [
             'title' => 'Daftar Sega',
             'sega' => $data_sega
         ];
-
 
         return view('CompanyProfile/segaAdmin', $data);
     }
 
     public function saveSega()
     {
+        helper('slug'); // Load helper
+
         // Validation
         $rules = [
             'judul' => [
@@ -1426,34 +1425,64 @@ class C_Admin extends BaseController
                 'rules' => 'required',
                 'errors' => ['required' => 'Deskripsi Indonesia harus diisi']
             ],
+            'foto' => [
+                'rules' => 'uploaded[foto]|max_size[foto,2048]|is_image[foto]|mime_in[foto,image/jpg,image/jpeg,image/png]',
+                'errors' => [
+                    'uploaded' => 'Foto harus diupload',
+                    'max_size' => 'Ukuran foto maksimal 2MB',
+                    'is_image' => 'File yang diupload harus berupa gambar',
+                    'mime_in' => 'Format foto harus JPG, JPEG, atau PNG'
+                ]
+            ],
+            'audio_id' => [
+                'rules' => 'uploaded[audio_id]|max_size[audio_id,2048]|mime_in[audio_id,audio/mpeg,audio/mp3]',
+                'errors' => [
+                    'uploaded' => 'Audio Indonesia harus diupload',
+                    'max_size' => 'Ukuran audio maksimal 2MB',
+                    'mime_in' => 'Format audio harus MP3'
+                ]
+            ],
+            'audio_eng' => [
+                'rules' => 'permit_empty|max_size[audio_eng,2048]|mime_in[audio_eng,audio/mpeg,audio/mp3]',
+                'errors' => [
+                    'max_size' => 'Ukuran audio maksimal 2MB',
+                    'mime_in' => 'Format audio harus MP3'
+                ]
+            ]
         ];
 
         if (!$this->validate($rules)) {
             return redirect()->to('/sega')->withInput()->with('errors', $this->validator->listErrors());
         }
 
-        // ✅ Handle foto (wajib)
+        // Handle foto
         $foto = $this->request->getFile('foto');
         $fotoName = $foto->getRandomName();
         $foto->move('img/sega', $fotoName);
 
-        // ✅ Handle audio_id (wajib)
+        // Handle audio_id
         $file1 = $this->request->getFile('audio_id');
         $filename1 = $file1->getRandomName();
         $file1->move('audio', $filename1);
 
-        // ✅ Handle audio_eng (opsional)
+        // Handle audio_eng
         $file2 = $this->request->getFile('audio_eng');
-        $filename2 = 'null'; // default value
+        $filename2 = 'null';
 
         if ($file2 && $file2->isValid() && !$file2->hasMoved()) {
             $filename2 = $file2->getRandomName();
             $file2->move('audio', $filename2);
         }
 
-        // ✅ Simpan data
+        // ✅ Generate slug dari 3 kata pertama judul
+        $judul = $this->request->getVar('judul');
+        $slug = generateSlugFromTitle($judul, 3);
+        $slug = ensureUniqueSlug($slug, $this->M_Sega);
+
+        // Simpan data
         $this->M_Sega->save([
-            'judul' => $this->request->getVar('judul'),
+            'judul' => $judul,
+            'slug' => $slug,
             'deskripsi_indo' => $this->request->getVar('deskripsi_indo'),
             'deskripsi_eng' => $this->request->getVar('deskripsi_eng'),
             'foto' => $fotoName,
@@ -1465,19 +1494,21 @@ class C_Admin extends BaseController
         return redirect()->to('/sega');
     }
 
-    public function previewSega($id_sega): string
+    public function previewSega($slug): string
     {
-        $sega = $this->M_Sega->getSega($id_sega);
+        $sega = $this->M_Sega->getSega($slug);
 
-        // var_dump($berita);
+        if (!$sega) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+
         $data = [
-
             'sega' => $sega,
         ];
 
-
         return view('CompanyProfile/previewSega', $data);
     }
+
     public function deleteSega($id_Sega)
     {
         // Saring masukan untuk mencegah SQL injection atau serangan lainnya
@@ -1493,14 +1524,26 @@ class C_Admin extends BaseController
 
     public function updateSega($id_sega)
     {
-        // Mengambil data yang akan diupdate dari request
+        helper('slug'); // Load helper
+
+        $judul = $this->request->getVar('judul');
+
+        // Mengambil data yang akan diupdate
         $dataToUpdate = [
-            'judul' => $this->request->getVar('judul'),
+            'judul' => $judul,
             'deskripsi_indo' => $this->request->getVar('deskripsi_indo'),
             'deskripsi_eng' => $this->request->getVar('deskripsi_eng'),
         ];
 
-        // ✅ Handle foto - hanya update jika ada file baru
+        // ✅ Generate slug baru jika judul berubah
+        $currentData = $this->M_Sega->getSegaById($id_sega);
+        if ($currentData['judul'] !== $judul) {
+            $slug = generateSlugFromTitle($judul, 3);
+            $slug = ensureUniqueSlug($slug, $this->M_Sega, $id_sega);
+            $dataToUpdate['slug'] = $slug;
+        }
+
+        // Handle foto
         $foto = $this->request->getFile('foto');
         if ($foto && $foto->isValid() && !$foto->hasMoved()) {
             $fotoName = $foto->getRandomName();
@@ -1508,7 +1551,7 @@ class C_Admin extends BaseController
             $dataToUpdate['foto'] = $fotoName;
         }
 
-        // ✅ Handle audio_id - hanya update jika ada file baru
+        // Handle audio_id
         $file1 = $this->request->getFile('audio_id');
         if ($file1 && $file1->isValid() && !$file1->hasMoved()) {
             $filename1 = $file1->getRandomName();
@@ -1516,7 +1559,7 @@ class C_Admin extends BaseController
             $dataToUpdate['audio_id'] = $filename1;
         }
 
-        // ✅ Handle audio_eng - hanya update jika ada file baru
+        // Handle audio_eng
         $file2 = $this->request->getFile('audio_eng');
         if ($file2 && $file2->isValid() && !$file2->hasMoved()) {
             $filename2 = $file2->getRandomName();
@@ -1524,21 +1567,17 @@ class C_Admin extends BaseController
             $dataToUpdate['audio_eng'] = $filename2;
         }
 
-        // Membersihkan data yang kosong
         $dataToUpdate = array_filter($dataToUpdate);
 
-        // Memastikan ada data yang akan diupdate
         if (!empty($dataToUpdate)) {
-            // Mengeksekusi perintah update
             $this->M_Sega->update($id_sega, $dataToUpdate);
 
-            // Ambil data setelah diubah dari database
-            $newDataSega = $this->M_Sega->getSega($id_sega);
+            $newDataSega = $this->M_Sega->getSegaById($id_sega);
 
-            // Perbarui sesi jika diperlukan
             if (session()->get('level') == 'Admin') {
                 session()->set([
                     'judul' => $newDataSega['judul'],
+                    'slug' => $newDataSega['slug'],
                     'deskripsi_indo' => $newDataSega['deskripsi_indo'],
                     'deskripsi_eng' => $newDataSega['deskripsi_eng'],
                     'foto' => $newDataSega['foto'],
@@ -1552,6 +1591,36 @@ class C_Admin extends BaseController
             session()->setFlashdata('error', 'Tidak ada data yang diupdate.');
         }
 
+        return redirect()->to('/sega');
+    }
+
+    public function generateSlugsForExistingData()
+    {
+        // ✅ Hanya bisa diakses oleh admin
+        if (session()->get('level') !== 'Admin') {
+            return redirect()->to('/')->with('error', 'Unauthorized access');
+        }
+
+        helper('slug');
+
+        // Ambil semua data yang belum punya slug atau slug masih NULL
+        $allSega = $this->M_Sega->findAll();
+        $updated = 0;
+        $skipped = 0;
+
+        foreach ($allSega as $sega) {
+            // Skip jika sudah punya slug
+
+            // Generate slug dari judul
+            $slug = generateSlugFromTitle($sega['judul'], 3);
+            $slug = ensureUniqueSlug($slug, $this->M_Sega, $sega['id_sega']);
+
+            // Update ke database
+            $this->M_Sega->update($sega['id_sega'], ['slug' => $slug]);
+            $updated++;
+        }
+
+        session()->setFlashdata('pesan', "Slug berhasil digenerate! Updated: {$updated}, Skipped: {$skipped}");
         return redirect()->to('/sega');
     }
 

@@ -87,6 +87,7 @@ $routes->get('/heritage-walk/jalan-langko', 'C_LandingPage::langko');
 $routes->get('/katalog-pameran-sumbawa', 'C_LandingPage::katalogSumbawa');
 $routes->get('/informasi-pelatihan-festival-museum-desa', 'C_LandingPage::pelatihanFestival');
 $routes->get('/kajian-pendirian-museum', 'C_LandingPage::kajianPendirianMuseum');
+$routes->get('/generate-slugs-sega', 'C_Admin::generateSlugsForExistingData');
 
 $routes->group('', ['filter' => 'filterAdmin'], function ($routes) {
     // Struktur Organisasi & Petugas Museum
@@ -165,6 +166,7 @@ $routes->group('', ['filter' => 'filterAdmin'], function ($routes) {
     $routes->get('/previewSega/(:segment)', 'C_Admin::previewSega/$1');
     $routes->post('updateSega/(:segment)', 'C_Admin::updateSega/$1');
     $routes->delete('deleteSega/(:segment)', 'C_Admin::deleteSega/$1');
+
 
     // Akses Manuskrip
     $routes->get('/aksesManuskrip', 'C_Admin::aksesManuskrip');

@@ -33,15 +33,12 @@
                             <div class="details">
                                 <h4 class="d-flex justify-content-between">
                                     <a href="<?= base_url('publikasi/detail/' . $p['id_publikasi']); ?>" style="color:#850000;"><span><?= $p['judul']; ?></span> </a>
-
                                 </h4>
                                 <p>
                                     <?= $p['tanggal']; ?>
                                 </p>
-
                             </div>
                         </div>
-
                     </div>
                 <?php endforeach; ?>
             </div>
