@@ -68,8 +68,8 @@
                                     </tr>
                                     <tr>
                                         <td>3.</td>
-                                        <td>4 Desember 2025<br>(Mengikuti jadwal Dinas Pariwisata)</td>
-                                        <td><strong>FESTIVAL MUSEUM DESA 2025</strong><br><em>Kisah Yang Diwariskan: Sejarah, Cerita, Dan Budaya</em></td>
+                                        <td>4 Desember 2025</td>
+                                        <td>FESTIVAL MUSEUM DESA 2025<br>Kisah Yang Diwariskan: Sejarah, Cerita, Dan Budaya</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -90,12 +90,11 @@
                             <p><strong>e)</strong> Museum Desa yang mendaftar harus memiliki dasar hukum, agar pengelolaannya sah dan bisa dipertanggungjawabkan. Bentuknya bisa:</p>
                             <p style="padding-left: 25px;"><strong>i.</strong>Berbadan hukum: Museum didirikan dan dikelola oleh yayasan atau lembaga resmi yang sudah memiliki akta pendirian yayasan/lembaga.</p>
                             <p style="padding-left: 25px;"><strong>ii.</strong>Masuk dalam struktur pemerintahan desa: Museum menjadi bagian dari kelembagaan desa, misalnya ditetapkan melalui Peraturan Desa (Perdes).</p>
+
+                            <p><strong>f)</strong> Lembar pendaftaran wajib diserahkan pada saat registrasi kegiatan Pelatihan Tenaga Permuseuman.</p>
                         </div>
 
                         <h3 class="mt-40 mb-20" style="text-align:left">6. Total Uang Pembinaan</h3>
-                        <p style="color: black;">
-                            Pemenang akan diumumkan pada Festival Museum Desa & Perang Topat 2025.
-                        </p>
                         <div class="table-responsive">
                             <table class="table table-bordered" style="color: black;">
                                 <thead class="thead-light">
@@ -152,6 +151,8 @@
                                 <i class="fa fa-download"></i> Unduh Formulir Pendaftaran
                             </a>
                         </div>
+
+
                     </div>
                 </div>
             </div>
@@ -160,5 +161,148 @@
 </section>
 <!-- End post-content Area -->
 
+<!-- Contact Person Float Button -->
+<div class="cp-float" id="cpFloat">
+    <button class="cp-toggle" id="cpToggle" onclick="toggleCP()">
+        <i class="fa fa-phone"></i>
+    </button>
+    <div class="cp-content" id="cpContent">
+        <button class="cp-close" onclick="toggleCP()">
+            <i class="fa fa-times"></i>
+        </button>
+        <h6 style="margin-bottom: 10px; font-weight: bold;">Hubungi Kami</h6>
+        <p style="margin: 5px 0; font-size: 14px;">
+            <i class="fa fa-user"></i> Lala
+        </p>
+        <p style="margin: 5px 0; font-size: 14px;">
+            <i class="fa fa-phone"></i> <a href="https://wa.me/622145090530" style="color: #fff; text-decoration: none;">0821-4509-0530</a>
+        </p>
+        <p style="margin: 5px 0; font-size: 14px;">
+            <i class="fa fa-whatsapp"></i> <a href="https://wa.me/622145090530" target="_blank" style="color: #fff; text-decoration: none;">WhatsApp</a>
+        </p>
+    </div>
+</div>
+
+<style>
+    .cp-float {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        z-index: 999;
+    }
+
+    .cp-toggle {
+        display: none;
+        background-color: #850000;
+        color: white;
+        border: none;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        font-size: 20px;
+        transition: all 0.3s ease;
+    }
+
+    .cp-toggle:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .cp-content {
+        background-color: #850000;
+        color: white;
+        padding: 15px 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        max-width: 250px;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+    .cp-content:hover {
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+        transform: translateY(-2px);
+    }
+
+    .cp-content h6 {
+        color: white;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        padding-bottom: 8px;
+    }
+
+    .cp-content p i {
+        margin-right: 8px;
+        width: 16px;
+    }
+
+    .cp-close {
+        display: none;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: transparent;
+        border: none;
+        color: white;
+        font-size: 18px;
+        cursor: pointer;
+        padding: 5px;
+        line-height: 1;
+    }
+
+    @media (max-width: 768px) {
+        .cp-toggle {
+            display: block;
+        }
+
+        .cp-content {
+            display: none;
+            position: fixed;
+            bottom: 80px;
+            left: 20px;
+            padding: 20px;
+            max-width: calc(100vw - 40px);
+            animation: slideUp 0.3s ease;
+        }
+
+        .cp-content.active {
+            display: block;
+        }
+
+        .cp-close {
+            display: block;
+        }
+    }
+
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+
+<script>
+    function toggleCP() {
+        const content = document.getElementById('cpContent');
+        content.classList.toggle('active');
+    }
+
+    // Close when clicking outside
+    document.addEventListener('click', function(event) {
+        const cpFloat = document.getElementById('cpFloat');
+        const cpContent = document.getElementById('cpContent');
+
+        if (window.innerWidth <= 768 && !cpFloat.contains(event.target) && cpContent.classList.contains('active')) {
+            cpContent.classList.remove('active');
+        }
+    });
+</script>
 
 <?= $this->endSection(); ?>
