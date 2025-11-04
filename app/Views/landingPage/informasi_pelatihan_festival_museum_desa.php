@@ -59,7 +59,7 @@
                                     <tr>
                                         <td>1.</td>
                                         <td>Rabu, 12 November 2025</td>
-                                        <td>Workshop Tenaga Permuseuman (Kuratorial dan Konservasi Koleksi Desa)</td>
+                                        <td>Pelatihan Tenaga Permuseuman (Kuratorial dan Konservasi Koleksi Desa)</td>
                                     </tr>
                                     <tr>
                                         <td>2.</td>
@@ -87,6 +87,9 @@
                             <p style="padding-left: 25px;"><strong>i.</strong> Memiliki ruang pamer dan/atau ruang penyimpanan koleksi.</p>
                             <p style="padding-left: 25px;"><strong>ii.</strong> Memiliki pengelola atau penanggung jawab yang melaksanakan fungsi pengumpulan, perawatan, dan penyajian koleksi.</p>
                             <p style="padding-left: 25px;"><strong>iii.</strong> Memiliki koleksi yang bernilai sejarah, budaya, ilmu pengetahuan, atau pendidikan dan dikelola secara berkelanjutan.</p>
+                            <p><strong>e)</strong> Museum Desa yang mendaftar harus memiliki dasar hukum, agar pengelolaannya sah dan bisa dipertanggungjawabkan. Bentuknya bisa:</p>
+                            <p style="padding-left: 25px;"><strong>i.</strong>Berbadan hukum: Museum didirikan dan dikelola oleh yayasan atau lembaga resmi yang sudah memiliki akta pendirian yayasan/lembaga.</p>
+                            <p style="padding-left: 25px;"><strong>ii.</strong>Masuk dalam struktur pemerintahan desa: Museum menjadi bagian dari kelembagaan desa, misalnya ditetapkan melalui Peraturan Desa (Perdes).</p>
                         </div>
 
                         <h3 class="mt-40 mb-20" style="text-align:left">6. Total Uang Pembinaan</h3>
