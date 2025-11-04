@@ -177,9 +177,6 @@
         <p style="margin: 5px 0; font-size: 14px;">
             <i class="fa fa-phone"></i> <a href="https://wa.me/622145090530" style="color: #fff; text-decoration: none;">0821-4509-0530</a>
         </p>
-        <p style="margin: 5px 0; font-size: 14px;">
-            <i class="fa fa-whatsapp"></i> <a href="https://wa.me/622145090530" target="_blank" style="color: #fff; text-decoration: none;">WhatsApp</a>
-        </p>
     </div>
 </div>
 
