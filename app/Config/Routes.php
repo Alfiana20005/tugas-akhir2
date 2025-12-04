@@ -87,6 +87,7 @@ $routes->get('/heritage-walk/jalan-langko', 'C_LandingPage::langko');
 $routes->get('/katalog-pameran-sumbawa', 'C_LandingPage::katalogSumbawa');
 $routes->get('/informasi-pelatihan-festival-museum-desa', 'C_LandingPage::pelatihanFestival');
 $routes->get('/kajian-pendirian-museum', 'C_LandingPage::kajianPendirianMuseum');
+$routes->get('/katalog-pameran-temporer', 'C_LandingPage::katalogTemporer');
 $routes->get('/sega/(:segment)', 'C_Admin::previewSega/$1');
 
 $routes->group('', ['filter' => 'filterAdmin'], function ($routes) {
