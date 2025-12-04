@@ -11,7 +11,7 @@
                 <h1 class="text-white">
                     Katalog Pameran Temporer
                 </h1>
-                <p class="text-white link-nav"><a href="/home">Home </a> <span class="fa fa-chevron-right"></span> <a href="/heritage-walk/si-biru"> Katalog Pameran Sumbawa</a></p>
+                <p class="text-white link-nav"><a href="/home">Home </a> <span class="fa fa-chevron-right"></span> <a href="/katalog-pameran-temporer"> Katalog Pameran Temporer</a></p>
             </div>
         </div>
     </div>
