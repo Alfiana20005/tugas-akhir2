@@ -17,6 +17,7 @@ use App\Models\M_ManuskripKol;
 use App\Models\M_Sega;
 use App\Models\M_User;
 use App\Models\M_Penelitian;
+use App\Models\M_Pameran;
 
 class C_Admin extends BaseController
 {
@@ -36,6 +37,7 @@ class C_Admin extends BaseController
     protected $M_Sega;
     protected $M_User;
     protected $M_Penelitian;
+    protected $M_Pameran;
 
     public function __construct()
     {
@@ -55,6 +57,7 @@ class C_Admin extends BaseController
         $this->M_Sega = new M_Sega();
         $this->M_User = new M_User();
         $this->M_Penelitian = new M_Penelitian();
+        $this->M_Pameran = new M_Pameran();
     }
 
     public function strukturOrganisasi()
@@ -1874,5 +1877,204 @@ class C_Admin extends BaseController
         session()->setFlashdata('pesan', 'Data Penelitian Berhasil Dihapus.');
 
         return redirect()->to('/dataPenelitian');
+    }
+
+    public function pameran()
+    {
+        // Ambil data jenis yang sudah ada
+        $existingJenis = $this->M_Pameran->distinct()
+            ->select('jenis')
+            ->where('jenis !=', '')
+            ->where('jenis IS NOT NULL')
+            ->findAll();
+
+        // Convert array of objects ke array of values
+        $jenisArray = array_column($existingJenis, 'jenis');
+
+        $data = [
+            'title' => 'Daftar Pameran',
+            'pameran' => $this->M_Pameran->findAll(),
+            'existingJenis' => $jenisArray  // TAMBAHKAN INI!
+        ];
+
+        return view('CompanyProfile/data_pameran', $data);
+    }
+
+    public function tambahPameran()
+    {
+        // Ambil data jenis yang sudah ada
+        $existingJenis = $this->M_Pameran->distinct()
+            ->select('jenis')
+            ->where('jenis !=', '')
+            ->where('jenis IS NOT NULL')
+            ->findAll();
+
+        // Convert array of objects ke array of values
+        $jenisArray = array_column($existingJenis, 'jenis');
+
+        $data = [
+            'title' => 'Tambah Data Pameran',
+            'existingJenis' => $jenisArray
+        ];
+
+        return view('CompanyProfile/tambahPameran', $data);
+    }
+
+    public function savePameran()
+    {
+        // Validasi dengan pesan error yang jelas
+        $rules = [
+            'judul' => [
+                'rules' => 'required|min_length[3]|max_length[255]',
+                'errors' => [
+                    'required' => 'Judul harus diisi',
+                    'min_length' => 'Judul minimal 3 karakter',
+                    'max_length' => 'Judul maksimal 255 karakter'
+                ]
+            ],
+            'image' => [
+                'rules' => 'uploaded[image]|max_size[image,2048]|is_image[image]|mime_in[image,image/jpg,image/jpeg,image/png,image/gif]',
+                'errors' => [
+                    'uploaded' => 'Gambar pameran harus diupload',
+                    'max_size' => 'Ukuran gambar maksimal 2MB',
+                    'is_image' => 'File yang diupload harus berupa gambar',
+                    'mime_in' => 'Format gambar harus JPG, JPEG, PNG, atau GIF'
+                ]
+            ]
+        ];
+
+        if (!$this->validate($rules)) {
+            return redirect()->to('/tambahPameran')->withInput()->with('errors', $this->validator->getErrors());
+        }
+
+        // Handle file upload
+        $image = $this->request->getFile('image');
+        $namaGambar = null;
+
+        if ($image && $image->isValid() && !$image->hasMoved()) {
+            $namaGambar = $image->getRandomName();
+            $image->move('img/pameran/', $namaGambar);
+        }
+
+        // Ambil data dengan getPost()
+        $data = [
+            'judul' => $this->request->getPost('judul'),
+            'keterangan' => $this->request->getPost('keterangan'),
+            'kode_koleksi' => $this->request->getPost('kode_koleksi'),
+            'asal_dibuat' => $this->request->getPost('asal_dibuat'),
+            'asal_perolehan' => $this->request->getPost('asal_perolehan'),
+            'periode' => $this->request->getPost('periode'),
+            'description' => $this->request->getPost('description'),
+            'highlight' => $this->request->getPost('highlight'),
+            'image' => $namaGambar,
+            'jenis' => $this->request->getPost('jenis')
+        ];
+
+        // Gunakan Query Builder langsung
+        $db = \Config\Database::connect();
+        $builder = $db->table('pameran');
+
+        if ($builder->insert($data)) {
+            session()->setFlashdata('pesan', 'Data Pameran Berhasil Ditambahkan.');
+            return redirect()->to('/dataPameran');
+        } else {
+            session()->setFlashdata('error', 'Gagal menyimpan data.');
+            return redirect()->to('/tambahPameran')->withInput();
+        }
+    }
+
+    public function updatePameran($id_pameran)
+    {
+        $pameranLama = $this->M_Pameran->find($id_pameran);
+
+        if (!$pameranLama) {
+            session()->setFlashdata('error', 'Data pameran tidak ditemukan.');
+            return redirect()->to('/dataPameran');
+        }
+
+        $dataToUpdate = [
+            'judul' => $this->request->getVar('judul'),
+            'keterangan' => $this->request->getVar('keterangan'),
+            'kode_koleksi' => $this->request->getVar('kode_koleksi'),
+            'asal_dibuat' => $this->request->getVar('asal_dibuat'),
+            'asal_perolehan' => $this->request->getVar('asal_perolehan'),
+            'periode' => $this->request->getVar('periode'),
+            'description' => $this->request->getVar('description'),
+            'highlight' => $this->request->getPost('highlight'),
+        ];
+
+        // Tambahkan jenis jika ada
+        $jenis = $this->request->getVar('jenis');
+        if ($jenis && $jenis !== '') {
+            $dataToUpdate['jenis'] = trim($jenis);
+        }
+
+        // Handle file upload jika ada file baru
+        $image = $this->request->getFile('image');
+        if ($image && $image->isValid() && !$image->hasMoved()) {
+            // Validate file
+            $validation = \Config\Services::validation();
+            $validation->setRules([
+                'image' => 'max_size[image,2048]|is_image[image]|mime_in[image,image/jpg,image/jpeg,image/png,image/gif]'
+            ]);
+
+            if ($validation->withRequest($this->request)->run()) {
+                // Hapus gambar lama jika ada
+                if ($pameranLama['image'] && file_exists('img/pameran/' . $pameranLama['image'])) {
+                    unlink('img/pameran/' . $pameranLama['image']);
+                }
+
+                // Upload gambar baru
+                $namaGambar = $image->getRandomName();
+                $image->move('img/pameran/', $namaGambar);
+                $dataToUpdate['image'] = $namaGambar;
+            } else {
+                session()->setFlashdata('error', 'Error upload gambar: ' . $validation->listErrors());
+                return redirect()->to('/dataPameran');
+            }
+        }
+
+        // Filter data yang tidak kosong
+        $dataToUpdate = array_filter($dataToUpdate, function ($var) {
+            return $var !== null && $var !== '';
+        });
+
+        if (!empty($dataToUpdate)) {
+            if ($this->M_Pameran->update($id_pameran, $dataToUpdate)) {
+                session()->setFlashdata('pesan', 'Data Pameran Berhasil diubah.');
+            } else {
+                session()->setFlashdata('error', 'Gagal mengubah data pameran.');
+            }
+        } else {
+            session()->setFlashdata('error', 'Tidak ada data yang diupdate.');
+        }
+
+        return redirect()->to('/dataPameran');
+    }
+
+    public function deletePameran($id_pameran)
+    {
+        $id_pameran = filter_var($id_pameran, FILTER_SANITIZE_NUMBER_INT);
+
+        // Get data pameran untuk hapus gambar
+        $pameran = $this->M_Pameran->find($id_pameran);
+
+        if (!$pameran) {
+            session()->setFlashdata('error', 'Data pameran tidak ditemukan.');
+            return redirect()->to('/dataPameran');
+        }
+
+        // Hapus gambar jika ada
+        if ($pameran['image'] && file_exists('img/pameran/' . $pameran['image'])) {
+            unlink('img/pameran/' . $pameran['image']);
+        }
+
+        if ($this->M_Pameran->delete($id_pameran)) {
+            session()->setFlashdata('pesan', 'Data Pameran Berhasil Dihapus.');
+        } else {
+            session()->setFlashdata('error', 'Gagal menghapus data pameran.');
+        }
+
+        return redirect()->to('/dataPameran');
     }
 }

@@ -1297,7 +1297,17 @@ class C_LandingPage extends BaseController
         // $session = session();
         // $id_user = $session->get('id_user');
         // $user = $this->M_User->getUser($id_user);
+        $db = \Config\Database::connect();
+
+        // Ambil data pameran dengan jenis "Temporer" (case insensitive)
+        $pameran = $db->table('pameran')
+            ->like('jenis', 'temporer', 'both', null, true) // case insensitive
+            ->get()
+            ->getResultArray();
+
         $data = [
+            'title' => 'Katalog Pameran Temporer',
+            'pameran' => $pameran,
             'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
             'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
             'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),

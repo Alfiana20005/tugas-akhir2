@@ -98,6 +98,11 @@
                 <i class="fas fa-fw fa-search-plus"></i>
                 <span>Penelitian</span></a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/dataPameran">
+                <i class="fas fa-fw fa-search-plus"></i>
+                <span>Pameran</span></a>
+        </li>
 
         <!-- <hr class="sidebar-divider"> -->
     <?php endif; ?>

@@ -88,6 +88,18 @@
         margin-bottom: 10px;
     }
 
+    .no-data {
+        text-align: center;
+        padding: 60px 20px;
+        color: #666;
+    }
+
+    .no-data i {
+        font-size: 64px;
+        margin-bottom: 20px;
+        color: #850000;
+    }
+
     @media (max-width: 768px) {
 
         .content-section,
@@ -120,30 +132,66 @@
 <!-- Start post-content Area -->
 <section class="post-content-area single-post-area">
     <div class="container">
-        <!-- KELOMPOK 1: KERE ALANG (11 items) -->
+        <?php if (!empty($pameran)): ?>
+            <?php
+            $index = 0;
+            foreach ($pameran as $p):
+                $isReverse = ($index % 2 != 0) ? 'reverse' : '';
+                $index++;
+            ?>
+                <div class="content-section <?= $isReverse; ?>">
+                    <div class="image-side">
+                        <?php if (!empty($p['image'])): ?>
+                            <img src="<?= base_url('img/pameran/' . $p['image']); ?>" alt="<?= esc($p['judul']); ?>">
+                        <?php else: ?>
+                            <img src="<?= base_url('img/default.jpg'); ?>" alt="Default Image">
+                        <?php endif; ?>
+                    </div>
+                    <div class="text-side">
+                        <span class="section-badge"><?= esc($p['judul']); ?></span>
+                        <h3 class="section-title"><?= esc($p['keterangan']); ?></h3>
 
-        <!-- Section 1: Kere Alang -->
-        <div class="content-section">
-            <div class="image-side">
-                <img src="<?= base_url('img/5490.png'); ?>" alt="Dummy Image 1">
+                        <?php if (!empty($p['kode_koleksi'])): ?>
+                            <div class="section-code">
+                                Koleksi Museum Negeri NTB, pengadaan koleksi tahun <?= esc($p['periode']); ?>, <strong>No.<?= esc($p['kode_koleksi']); ?></strong>
+                            </div>
+                        <?php endif; ?>
+
+                        <p class="section-desc">
+                            <?php if (!empty($p['asal_dibuat'])): ?>
+                                <strong>Asal dibuat:</strong> <?= esc($p['asal_dibuat']); ?><br>
+                            <?php endif; ?>
+
+                            <?php if (!empty($p['asal_perolehan'])): ?>
+                                <strong>Asal Perolehan:</strong> <?= esc($p['asal_perolehan']); ?><br>
+                            <?php endif; ?>
+
+                            <?php if (!empty($p['periode'])): ?>
+                                <strong>Periode:</strong> <?= esc($p['periode']); ?>
+                            <?php endif; ?>
+                        </p>
+
+                        <?php if (!empty($p['description'])): ?>
+                            <p class="section-desc">
+                                <?= nl2br(esc($p['description'])); ?>
+                            </p>
+                        <?php endif; ?>
+
+                        <?php if (!empty($p['highlight']) && trim($p['highlight']) !== ''): ?>
+                            <div class="highlight" style="background-color: #850000; padding: 10px; border-radius: 5px; margin-bottom: 15px;">
+                                <small style="color: white;"><?= nl2br(esc($p['highlight'])); ?></small>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <div class="no-data">
+                <i class="fa fa-inbox"></i>
+                <h3>Belum Ada Data Pameran Temporer</h3>
+                <p>Silakan tambahkan data pameran dengan jenis "Temporer" terlebih dahulu.</p>
             </div>
-            <div class="text-side">
-                <span class="section-badge">Kain Songket Singapura</span>
-                <h3 class="section-title">Motif Perahu Layar,Pucuk Rebung, Bunga, dan Geometris</h3>
-                <div class="section-code">Koleksi Museum Negeri NTB, pengadaan koleksi tahun 1991/1992, <strong>No.5490</strong></div>
-                <p class="section-desc">
-                    <strong>Asal dibuat kemungkinan:</strong> India atau Eropa<br>
-                    <strong>Asal Perolehan:</strong> Lombok, Nusa Tenggara Barat<br>
-                    <strong>Periode:</strong> Diperkirakan sekitar tahun 1925 – 1970
-                </p>
-                <p class="section-desc">
-                    Terbuat dari benang katun dengan teknik songket. Kain dihias dengan motif perahu layar, pucuk rebung, bunga, dan geometris. Kain ini dipakai pada saat upacara adat. Disebut kain Singapura karena perdagangan ditemukan di Singapura, sehingga ketika dijual di Lombok disebut juga Kain Singapura
-                </p>
-            </div>
-        </div>
-
-        <!-- Section 2: Kere Alang -->
-
+        <?php endif; ?>
     </div>
 </section>
 <!-- End post-content Area -->

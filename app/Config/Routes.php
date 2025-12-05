@@ -104,6 +104,12 @@ $routes->group('', ['filter' => 'filterAdmin'], function ($routes) {
     $routes->delete('hapusberita/(:segment)', 'C_Admin::deleteBerita/$1');
     $routes->post('updateBerita/(:segment)', 'C_Admin::updateBerita/$1');
 
+    $routes->get('/dataPameran', 'C_Admin::pameran');
+    $routes->get('/tambahPameran', 'C_Admin::tambahPameran');
+    $routes->post('/savePameran', 'C_Admin::savePameran');
+    $routes->delete('hapusPameran/(:segment)', 'C_Admin::deletePameran/$1');
+    $routes->post('updatePameran/(:segment)', 'C_Admin::updatePameran/$1');
+
     // Kegiatan
     $routes->get('/tambahKegiatan', 'C_Admin::tambahKegiatan');
     $routes->post('/saveKegiatan', 'C_Admin::saveKegiatan');
