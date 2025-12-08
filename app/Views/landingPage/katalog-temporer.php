@@ -167,7 +167,7 @@
                             <?php endif; ?>
 
                             <?php if (!empty($p['periode'])): ?>
-                                <strong>Periode:</strong> <?= esc($p['periode']); ?>
+                                <strong>Periode:</strong> Diperkirakan sekitar tahun <?= esc($p['periode']); ?>
                             <?php endif; ?>
                         </p>
 
