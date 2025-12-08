@@ -9,7 +9,7 @@
         <div class="row d-flex align-items-center justify-content-center">
             <div class="about-content col-lg-12">
                 <h1 class="text-white">
-                    Katalog Pameran Temporer
+                    Katalog Pameran Temporer (Kain dan Diplomasi Budaya)
                 </h1>
                 <p class="text-white link-nav"><a href="/home">Home </a> <span class="fa fa-chevron-right"></span> <a href="/katalog-pameran-temporer"> Katalog Pameran Temporer</a></p>
             </div>
