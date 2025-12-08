@@ -153,7 +153,7 @@
 
                         <?php if (!empty($p['kode_koleksi'])): ?>
                             <div class="section-code">
-                                Koleksi Museum Negeri NTB, pengadaan koleksi tahun <?= esc($p['periode']); ?>, <strong>No.<?= esc($p['kode_koleksi']); ?></strong>
+                                Koleksi Museum Negeri NTB, pengadaan koleksi tahun <?= esc($p['pengadaan']); ?>, <strong>No.<?= esc($p['kode_koleksi']); ?></strong>
                             </div>
                         <?php endif; ?>
 

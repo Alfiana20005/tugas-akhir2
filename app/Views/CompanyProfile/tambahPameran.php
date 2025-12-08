@@ -24,14 +24,14 @@
                 <div class="row mb-3">
                     <label for="judul" class="col-sm-2 col-form-label">Judul <span class="text-danger">*</span></label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="judul" name="judul" value="<?= old('judul'); ?>" required>
+                        <input type="text" class="form-control" id="judul" name="judul" value="<?= old('judul'); ?>">
                     </div>
                 </div>
 
                 <div class="row mb-3">
                     <label for="keterangan" class="col-sm-2 col-form-label">Keterangan</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="keterangan" name="keterangan" value="<?= old('keterangan'); ?>" required>
+                        <input type="text" class="form-control" id="keterangan" name="keterangan" value="<?= old('keterangan'); ?>">
                     </div>
                 </div>
 
@@ -91,6 +91,14 @@
                     <div class="col-sm-10">
                         <input type="text" class="form-control" id="periode" name="periode" value="<?= old('periode'); ?>">
                         <small class="form-text text-muted">Contoh: 1945-1950, Abad ke-19</small>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label for="pengadaan" class="col-sm-2 col-form-label">Pengadaan</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="pengadaan" name="pengadaan" value="<?= old('pengadaan'); ?>">
+                        <small class="form-text text-muted">Contoh: 1985/1986</small>
                     </div>
                 </div>
 

@@ -37,6 +37,7 @@
                             <th style="text-align: center;">Asal Dibuat</th>
                             <th style="text-align: center;">Asal Perolehan</th>
                             <th style="text-align: center;">Periode</th>
+                            <th style="text-align: center;">Pengadaan</th>
                             <th style="text-align: center;">Highlight</th>
                             <th style="text-align: center;">Deskripsi</th>
                             <th style="text-align: center;">Aksi</th>
@@ -65,6 +66,7 @@
                                 <td style="text-align: center;"><?= $p['asal_dibuat']; ?></td>
                                 <td style="text-align: center;"><?= $p['asal_perolehan']; ?></td>
                                 <td style="text-align: center;"><?= $p['periode']; ?></td>
+                                <td style="text-align: center;"><?= $p['pengadaan']; ?></td>
                                 <td style="text-align: center;"><?= $p['highlight']; ?></td>
                                 <td style="text-align: center; width: 300px; max-width: 300px;">
                                     <?= strlen($p['description']) > 50 ? substr($p['description'], 0, 50) . '...' : $p['description']; ?>
@@ -165,6 +167,13 @@
                                 <label for="periode" class="col-sm-3 col-form-label">Periode</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" name="periode" value="<?= $p['periode']; ?>">
+                                </div>
+                            </div>
+
+                            <div class="row mb-2">
+                                <label for="pengadaan" class="col-sm-3 col-form-label">Pengadaan</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="pengadaan" value="<?= $p['pengadaan']; ?>">
                                 </div>
                             </div>
 

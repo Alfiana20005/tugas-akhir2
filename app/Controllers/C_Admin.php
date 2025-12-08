@@ -1964,6 +1964,7 @@ class C_Admin extends BaseController
             'asal_dibuat' => $this->request->getPost('asal_dibuat'),
             'asal_perolehan' => $this->request->getPost('asal_perolehan'),
             'periode' => $this->request->getPost('periode'),
+            'pengadaan' => $this->request->getPost('pengadaan'),
             'description' => $this->request->getPost('description'),
             'highlight' => $this->request->getPost('highlight'),
             'image' => $namaGambar,
@@ -1999,6 +2000,7 @@ class C_Admin extends BaseController
             'asal_dibuat' => $this->request->getVar('asal_dibuat'),
             'asal_perolehan' => $this->request->getVar('asal_perolehan'),
             'periode' => $this->request->getVar('periode'),
+            'pengadaan' => $this->request->getVar('pengadaan'),
             'description' => $this->request->getVar('description'),
             'highlight' => $this->request->getPost('highlight'),
         ];

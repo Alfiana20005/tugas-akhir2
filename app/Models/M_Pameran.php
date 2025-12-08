@@ -18,6 +18,7 @@ class M_Pameran extends Model
         'asal_dibuat',
         'asal_perolehan',
         'periode',
+        'pengadaan',
         'description',
         'image',
         'jenis',
