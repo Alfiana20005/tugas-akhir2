@@ -519,12 +519,16 @@ class C_LandingPage extends BaseController
         $kajianTerbaru = $this->M_Kajian->getKajianTerbaru(5);
         $IsiKajian = $this->M_Isikajian->getDataByIdKajian($id_kajian);
 
-        // Buat deskripsi singkat dari narasi (ambil 200 karakter pertama)
+        // Buat deskripsi singkat dari narasi (ambil 150 karakter)
         $deskripsi = '';
         if (!empty($IsiKajian)) {
             $deskripsi = strip_tags($IsiKajian[0]['narasi']);
-            $deskripsi = substr($deskripsi, 0, 200) . '...';
+            $deskripsi = substr($deskripsi, 0, 150) . '...';
         }
+
+        // Tambahkan nama penulis di deskripsi untuk WhatsApp
+        $penulis = $kajian['penulis'] ?? 'Tim Museum Negeri NTB';
+        $deskripsiDenganPenulis = $penulis . ' — ' . $deskripsi;
 
         // var_dump($berita);
         $data = [
@@ -539,26 +543,26 @@ class C_LandingPage extends BaseController
 
             // Meta Tags untuk SEO & Social Media
             'title' => $kajian['judul'] . ' - Museum Negeri NTB',
-            'meta_description' => $deskripsi,
+            'meta_description' => $deskripsiDenganPenulis,
             'meta_keywords' => 'museum NTB, ' . ($kajian['kategori'] ?? 'publikasi') . ', ' . $kajian['judul'],
 
             // Open Graph (WhatsApp, Facebook, dll)
             'og_title' => $kajian['judul'],
-            'og_description' => $deskripsi,
+            'og_description' => $deskripsiDenganPenulis,
             'og_image' => base_url('img/kajian/' . $kajian['sampul']),
             'og_url' => current_url(),
             'og_type' => 'article',
             'og_site_name' => 'Museum Negeri NTB',
 
             // Article Meta (untuk menampilkan penulis & tanggal)
-            'article_author' => $kajian['penulis'] ?? 'Tim Museum Negeri NTB',
+            'article_author' => $penulis,
             'article_published_time' => date('c', strtotime($kajian['created_at'])),
             'article_section' => $kajian['kategori'] ?? 'Publikasi',
 
             // Twitter Card
             'twitter_card' => 'summary_large_image',
             'twitter_title' => $kajian['judul'],
-            'twitter_description' => $deskripsi,
+            'twitter_description' => $deskripsiDenganPenulis,
             'twitter_image' => base_url('img/kajian/' . $kajian['sampul']),
         ];
 
