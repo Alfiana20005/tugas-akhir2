@@ -528,7 +528,7 @@ class C_LandingPage extends BaseController
 
         // Tambahkan nama penulis di deskripsi untuk WhatsApp
         $penulis = $kajian['penulis'] ?? 'Tim Museum Negeri NTB';
-        $deskripsiDenganPenulis = '✍️ ' . $penulis . "\n\n📰 (Dikutip dari Balawas.id)" . ' — ' . $deskripsi;
+        $deskripsiDenganPenulis = $penulis . "\n\n(Dikutip dari Balawas.id)" . ' — ' . $deskripsi;
 
         // var_dump($berita);
         $data = [
