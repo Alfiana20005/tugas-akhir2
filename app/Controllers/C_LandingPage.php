@@ -514,13 +514,20 @@ class C_LandingPage extends BaseController
         // $session = session();
         // $id_user = $session->get('id_user');
         // $user = $this->M_User->getUser($id_user);
+
         $kajian = $this->M_Kajian->getKajian($id_kajian);
         $kajianTerbaru = $this->M_Kajian->getKajianTerbaru(5);
         $IsiKajian = $this->M_Isikajian->getDataByIdKajian($id_kajian);
 
+        // Buat deskripsi singkat dari narasi (ambil 200 karakter pertama)
+        $deskripsi = '';
+        if (!empty($IsiKajian)) {
+            $deskripsi = strip_tags($IsiKajian[0]['narasi']);
+            $deskripsi = substr($deskripsi, 0, 200) . '...';
+        }
+
         // var_dump($berita);
         $data = [
-
             'kajian' => $kajian,
             'kajianTerbaru' => $kajianTerbaru,
             'isiKajian' => $IsiKajian,
@@ -529,8 +536,31 @@ class C_LandingPage extends BaseController
             'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
             'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
             // 'user' => $user
-        ];
 
+            // Meta Tags untuk SEO & Social Media
+            'title' => $kajian['judul'] . ' - Museum Negeri NTB',
+            'meta_description' => $deskripsi,
+            'meta_keywords' => 'museum NTB, ' . ($kajian['kategori'] ?? 'publikasi') . ', ' . $kajian['judul'],
+
+            // Open Graph (WhatsApp, Facebook, dll)
+            'og_title' => $kajian['judul'],
+            'og_description' => $deskripsi,
+            'og_image' => base_url('img/kajian/' . $kajian['sampul']),
+            'og_url' => current_url(),
+            'og_type' => 'article',
+            'og_site_name' => 'Museum Negeri NTB',
+
+            // Article Meta (untuk menampilkan penulis & tanggal)
+            'article_author' => $kajian['penulis'] ?? 'Tim Museum Negeri NTB',
+            'article_published_time' => date('c', strtotime($kajian['created_at'])),
+            'article_section' => $kajian['kategori'] ?? 'Publikasi',
+
+            // Twitter Card
+            'twitter_card' => 'summary_large_image',
+            'twitter_title' => $kajian['judul'],
+            'twitter_description' => $deskripsi,
+            'twitter_image' => base_url('img/kajian/' . $kajian['sampul']),
+        ];
 
         return view('landingPage/tulisan2', $data);
     }
