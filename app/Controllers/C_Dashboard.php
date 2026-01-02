@@ -40,6 +40,7 @@ class C_Dashboard extends BaseController
         // stastistik pengunjung 
         $jadwalPrw = $this->M_JadwalPrw->getJadwalPrw();
         $data_pengunjung = $this->M_Pengunjung->getTotalPengunjungPerBulan();
+        $bulan_labels = [];
         foreach ($data_pengunjung as $row) {
             $bulan_labels[] = $row['bulan'];
         }
