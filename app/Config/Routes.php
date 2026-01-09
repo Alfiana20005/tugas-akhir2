@@ -308,6 +308,8 @@ $routes->group('', ['filter' => 'filterPerpustakaan'], function ($routes) {
     $routes->post('/previewKodeEksemplar', 'C_Perpustakaan::previewKodeEksemplar');
     $routes->delete('/deleteMultipleBuku', 'C_Perpustakaan::deleteMultipleBuku');
     $routes->get('/cekJudulBuku', 'C_Perpustakaan::cekJudulBuku');
+    $routes->get('/getAllDataBuku', 'C_Perpustakaan::getAllDataBuku');
+    $routes->get('/getFilteredDataBuku', 'C_Perpustakaan::getFilteredDataBuku');
 });
 // 
 

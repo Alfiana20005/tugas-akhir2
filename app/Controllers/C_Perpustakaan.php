@@ -125,6 +125,43 @@ class C_Perpustakaan extends BaseController
         ]);
     }
 
+    public function getFilteredDataBuku()
+    {
+        try {
+            // Ambil parameter filter dari GET
+            $filters = [
+                'keyword' => $this->request->getGet('keyword'),
+                'pengarang' => $this->request->getGet('pengarang'),
+                'penerbit' => $this->request->getGet('penerbit'),
+                'tempatTerbit' => $this->request->getGet('tempatTerbit'),
+                'tahunTerbit' => $this->request->getGet('tahunTerbit'),
+                'kategoriBuku' => $this->request->getGet('kategoriBuku'),
+                'status' => $this->request->getGet('status'),
+            ];
+
+            $data = $this->M_Perpustakaan->getFilteredBooksGrouped($filters);
+
+            // Hitung total eksemplar
+            $totalEksemplar = array_sum(array_column($data, 'eksemplar'));
+
+            return $this->response->setJSON([
+                'success' => true,
+                'data' => $data,
+                'totalBuku' => count($data),
+                'totalEksemplar' => $totalEksemplar,
+                'filters' => $filters
+            ]);
+        } catch (\Exception $e) {
+            log_message('error', 'Error in getFilteredDataBuku: ' . $e->getMessage());
+
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Gagal memuat data: ' . $e->getMessage()
+            ], 500);
+        }
+    }
+
+
     public function cekJudulBuku()
     {
         $judul = $this->request->getGet('judul');

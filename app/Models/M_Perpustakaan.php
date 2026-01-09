@@ -576,4 +576,66 @@ class M_Perpustakaan extends Model
 
         return $maxNumber + 1;
     }
+
+
+    public function getFilteredBooksGrouped($filters = [])
+    {
+        // Gunakan $this->db untuk membuat query builder baru
+        $builder = $this->db->table($this->table);
+
+        $builder->select('
+        MIN(id_buku) as id_buku,
+        MIN(kode) as kode,
+        GROUP_CONCAT(DISTINCT kodeEksemplar ORDER BY kodeEksemplar SEPARATOR ", ") as kodeEksemplar,
+        judul,
+        MIN(pengarang) as pengarang,
+        MIN(jenisPengarang) as jenisPengarang,
+        MIN(penerbit) as penerbit,
+        MIN(tempatTerbit) as tempatTerbit,
+        MIN(tahunTerbit) as tahunTerbit,
+        MIN(kategoriBuku) as kategoriBuku,
+        MIN(rak) as rak,
+        MIN(status) as status,
+        MIN(foto) as foto,
+        COUNT(*) as eksemplar
+    ');
+
+        // Apply filters
+        if (!empty($filters['keyword'])) {
+            $builder->groupStart()
+                ->like('judul', $filters['keyword'])
+                ->orLike('pengarang', $filters['keyword'])
+                ->orLike('kode', $filters['keyword'])
+                ->groupEnd();
+        }
+
+        if (!empty($filters['pengarang'])) {
+            $builder->like('pengarang', $filters['pengarang']);
+        }
+
+        if (!empty($filters['penerbit'])) {
+            $builder->where('penerbit', $filters['penerbit']);
+        }
+
+        if (!empty($filters['tempatTerbit'])) {
+            $builder->where('tempatTerbit', $filters['tempatTerbit']);
+        }
+
+        if (!empty($filters['tahunTerbit'])) {
+            $builder->where('tahunTerbit', $filters['tahunTerbit']);
+        }
+
+        if (!empty($filters['kategoriBuku'])) {
+            $builder->where('kategoriBuku', $filters['kategoriBuku']);
+        }
+
+        if (!empty($filters['status'])) {
+            $builder->where('status', $filters['status']);
+        }
+
+        $builder->groupBy('judul, pengarang, penerbit')
+            ->orderBy('judul', 'ASC');
+
+        return $builder->get()->getResultArray();
+    }
 }

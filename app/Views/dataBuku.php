@@ -348,8 +348,11 @@
     <div class="card shadow mb-4">
         <div class="card-header d-sm-flex py-3 align-items-center justify-content-between">
             <h6 class="m-0 font-weight-bold text-primary">Data Buku</h6>
-            <div class="d-flex">
-                <button type="button" class="btn btn-success" onclick="loadAllDataAndPrint()">
+            <div class="d-flex gap-2">
+                <button type="button" class="btn btn-success" onclick="printFilteredData()">
+                    <i class="fas fa-print"></i> Print Data (Filter Aktif)
+                </button>
+                <button type="button" class="btn btn-info" onclick="loadAllDataAndPrint()">
                     <i class="fas fa-print"></i> Print Semua Data
                 </button>
             </div>
@@ -1095,6 +1098,79 @@
             nomorSeriContainer.style.display = 'none';
             document.getElementById('nomorSeriEdit' + bookId).value = '';
         }
+    }
+
+    function printFilteredData() {
+        const keyword = document.querySelector('input[name="keyword"]')?.value || '';
+        const pengarang = document.querySelector('select[name="pengarang"]')?.value || '';
+        const penerbit = document.querySelector('select[name="penerbit"]')?.value || '';
+        const tempatTerbit = document.querySelector('select[name="tempatTerbit"]')?.value || '';
+        const tahunTerbit = document.querySelector('select[name="tahunTerbit"]')?.value || '';
+        const kategoriBuku = document.querySelector('select[name="kategoriBuku"]')?.value || '';
+        const status = document.querySelector('select[name="status"]')?.value || '';
+
+        const hasActiveFilter = keyword || pengarang || penerbit || tempatTerbit ||
+            tahunTerbit || kategoriBuku || status;
+
+        if (!hasActiveFilter) {
+            if (!confirm('Tidak ada filter yang aktif. Apakah Anda ingin print semua data?')) {
+                return;
+            }
+        }
+
+        const loadingAlert = document.createElement('div');
+        loadingAlert.className = 'alert alert-info position-fixed top-50 start-50 translate-middle';
+        loadingAlert.style.zIndex = '9999';
+        loadingAlert.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memuat data untuk print...';
+        document.body.appendChild(loadingAlert);
+
+        const params = new URLSearchParams();
+        if (keyword) params.append('keyword', keyword);
+        if (pengarang) params.append('pengarang', pengarang);
+        if (penerbit) params.append('penerbit', penerbit);
+        if (tempatTerbit) params.append('tempatTerbit', tempatTerbit);
+        if (tahunTerbit) params.append('tahunTerbit', tahunTerbit);
+        if (kategoriBuku) params.append('kategoriBuku', kategoriBuku);
+        if (status) params.append('status', status);
+
+        const url = '<?= base_url('getFilteredDataBuku') ?>' + (params.toString() ? '?' + params.toString() : '');
+
+        $.ajax({
+            url: url,
+            type: 'GET',
+            dataType: 'json',
+            timeout: 30000,
+            success: function(response) {
+                loadingAlert.remove();
+
+                if (response.success && response.data && response.data.length > 0) {
+                    // Update print content dengan data yang di-filter
+                    updatePrintContent(response.data, response.totalBuku, response.totalEksemplar, response.filters);
+
+                    // Tunggu sebentar untuk memastikan DOM sudah terupdate
+                    setTimeout(() => {
+                        printTable();
+                    }, 100);
+                } else {
+                    alert('Tidak ada data yang ditemukan dengan filter yang dipilih');
+                }
+            },
+            error: function(xhr, status, error) {
+                loadingAlert.remove();
+
+                let errorMsg = 'Terjadi kesalahan saat memuat data';
+
+                if (xhr.status === 404) {
+                    errorMsg = 'Endpoint tidak ditemukan (404). Periksa route dan controller.';
+                } else if (xhr.status === 500) {
+                    errorMsg = 'Server error (500). Periksa log server.';
+                } else if (status === 'timeout') {
+                    errorMsg = 'Request timeout. Data terlalu besar atau server lambat.';
+                }
+
+                alert(errorMsg);
+            }
+        });
     }
 
     // Function untuk load semua data sebelum print
