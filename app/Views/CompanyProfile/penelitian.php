@@ -13,39 +13,45 @@
                 <?= session()->getFlashdata('pesan'); ?>
             </div>
         <?php endif; ?>
+        <?php if (session()->getFlashdata('error')): ?>
+            <div class="alert alert-danger" role="alert">
+                <?= session()->getFlashdata('error'); ?>
+            </div>
+        <?php endif; ?>
     <?php endif; ?>
 
     <div class="modal fade" id="tambahPenelitian" tabindex="-1" aria-labelledby="tambahPenelitian" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title fs-5" id="tambahPenelitian">Tambahkan Penelitian</h4>
                     <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
                 </div>
                 <div class="modal-body">
-                    <form action="/savePenelitian" method="post" id="form">
+                    <form action="/savePenelitian" method="post" id="form" enctype="multipart/form-data">
+                        <?= csrf_field(); ?>
                         <div class="row mb-2">
-                            <label for="nama" class="col-sm-3 col-form-label">Nama</label>
+                            <label for="nama" class="col-sm-3 col-form-label">Nama <span class="text-danger">*</span></label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="nama" name="nama">
                             </div>
                         </div>
                         <div class="row mb-2">
-                            <label for="no_identitas" class="col-sm-3 col-form-label">Nomor Identitas</label>
+                            <label for="no_identitas" class="col-sm-3 col-form-label">Nomor Identitas <span class="text-danger">*</span></label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="no_identitas" name="no_identitas">
                             </div>
                         </div>
                         <div class="row mb-2">
-                            <label for="judul_penelitian" class="col-sm-3 col-form-label">Judul Penelitian</label>
+                            <label for="judul_penelitian" class="col-sm-3 col-form-label">Judul Penelitian <span class="text-danger">*</span></label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="judul_penelitian" name="judul_penelitian">
                             </div>
                         </div>
                         <div class="row mb-2">
-                            <label for="jenis" class="col-sm-3 col-form-label">Jenis</label>
+                            <label for="jenis" class="col-sm-3 col-form-label">Jenis <span class="text-danger">*</span></label>
                             <div class="col-sm-9">
-                                <select class="form-control" id="jenis" name="jenis" required>
+                                <select class="form-control" id="jenis" name="jenis">
                                     <option value="">Pilih Jenis</option>
                                     <option value="umum">Umum</option>
                                     <option value="museum">Museum</option>
@@ -53,13 +59,13 @@
                             </div>
                         </div>
                         <div class="row mb-2">
-                            <label for="kategori_objek" class="col-sm-3 col-form-label">Kategori Objek</label>
+                            <label for="kategori_objek" class="col-sm-3 col-form-label">Kategori Objek <span class="text-danger">*</span></label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="kategori_objek" name="kategori_objek">
                             </div>
                         </div>
                         <div class="row mb-2">
-                            <label for="jenjang_pendidikan" class="col-sm-3 col-form-label">Jenjang Pendidikan</label>
+                            <label for="jenjang_pendidikan" class="col-sm-3 col-form-label">Jenjang Pendidikan <span class="text-danger">*</span></label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="jenjang_pendidikan" name="jenjang_pendidikan">
                             </div>
@@ -71,13 +77,13 @@
                             </div>
                         </div>
                         <div class="row mb-2">
-                            <label for="instansi" class="col-sm-3 col-form-label">Instansi</label>
+                            <label for="instansi" class="col-sm-3 col-form-label">Instansi <span class="text-danger">*</span></label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="instansi" name="instansi">
                             </div>
                         </div>
                         <div class="row mb-2">
-                            <label for="tanggal_mulai" class="col-sm-3 col-form-label">Tanggal Mulai</label>
+                            <label for="tanggal_mulai" class="col-sm-3 col-form-label">Tanggal Mulai <span class="text-danger">*</span></label>
                             <div class="col-sm-9">
                                 <input type="date" class="form-control" id="tanggal_mulai" name="tanggal_mulai">
                             </div>
@@ -86,6 +92,28 @@
                             <label for="tanggal_akhir" class="col-sm-3 col-form-label">Tanggal Akhir</label>
                             <div class="col-sm-9">
                                 <input type="date" class="form-control" id="tanggal_akhir" name="tanggal_akhir">
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <label for="sumber" class="col-sm-3 col-form-label">Sumber <span class="text-danger">*</span></label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="sumber" name="sumber" placeholder="Contoh: Dinas Kebudayaan">
+                                <small class="text-muted">Sumber/referensi penelitian</small>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <label for="link" class="col-sm-3 col-form-label">Link</label>
+                            <div class="col-sm-9">
+                                <input type="url" class="form-control" id="link" name="link" placeholder="https://example.com">
+                                <small class="text-muted">URL lengkap dengan https://</small>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <label for="gambar" class="col-sm-3 col-form-label">Gambar <span class="text-danger">*</span></label>
+                            <div class="col-sm-9">
+                                <input type="file" class="form-control" id="gambar" name="gambar" accept="image/jpeg,image/jpg,image/png">
+                                <small class="text-muted">Format: JPG, JPEG, PNG. Maksimal 2MB</small>
+                                <div id="preview-tambah" class="mt-2"></div>
                             </div>
                         </div>
 
@@ -121,6 +149,9 @@
                             <th style="text-align: center;">Instansi</th>
                             <th style="text-align: center;">Tanggal Mulai</th>
                             <th style="text-align: center;">Tanggal Akhir</th>
+                            <th style="text-align: center;">Sumber</th>
+                            <th style="text-align: center;">Link</th>
+                            <th style="text-align: center;">Gambar</th>
                             <th style="text-align: center;">Aksi</th>
                         </tr>
                     </thead>
@@ -145,6 +176,23 @@
                                 <td style="text-align: center;"><?= $p['instansi']; ?></td>
                                 <td style="text-align: center;"><?= $p['tanggal_mulai']; ?></td>
                                 <td style="text-align: center;"><?= $p['tanggal_akhir']; ?></td>
+                                <td style="text-align: center;"><?= $p['sumber'] ?? '-'; ?></td>
+                                <td style="text-align: center;">
+                                    <?php if (!empty($p['link'])): ?>
+                                        <a href="<?= $p['link']; ?>" target="_blank" class="btn btn-sm btn-info">
+                                            <i class="fas fa-external-link-alt"></i> Link
+                                        </a>
+                                    <?php else: ?>
+                                        -
+                                    <?php endif; ?>
+                                </td>
+                                <td style="text-align: center;">
+                                    <?php if (!empty($p['gambar'])): ?>
+                                        <img src="<?= base_url('uploads/penelitian/' . $p['gambar']); ?>" alt="Gambar" style="width: 50px; height: 50px; object-fit: cover; cursor: pointer;" onclick="showImageModal('<?= base_url('uploads/penelitian/' . $p['gambar']); ?>')">
+                                    <?php else: ?>
+                                        <span class="badge badge-secondary">Tidak ada gambar</span>
+                                    <?php endif; ?>
+                                </td>
                                 <td style="text-align: center;">
                                     <a href="" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editPenelitian<?= $p['id_penelitian']; ?>" data-bs-whatever="@getbootstrap">Edit</a>
                                     <form action="/hapusPenelitian/<?= $p['id_penelitian']; ?>" method="post" class="d-inline">
@@ -165,36 +213,37 @@
     $no = 1;
     foreach ($penelitian as $p): ?>
         <div class="modal fade" id="editPenelitian<?= $p['id_penelitian']; ?>" tabindex="-1" aria-labelledby="editPenelitian" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title fs-5" id="editPenelitian">Edit Penelitian</h4>
                         <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
                     </div>
                     <div class="modal-body">
-                        <form action="<?= base_url() ?>updatePenelitian/<?= $p['id_penelitian']; ?>" method="post" id="form">
+                        <form action="<?= base_url() ?>updatePenelitian/<?= $p['id_penelitian']; ?>" method="post" id="form-edit-<?= $p['id_penelitian']; ?>" enctype="multipart/form-data">
+                            <?= csrf_field(); ?>
                             <div class="row mb-2">
-                                <label for="nama" class="col-sm-3 col-form-label">Nama</label>
+                                <label for="nama-<?= $p['id_penelitian']; ?>" class="col-sm-3 col-form-label">Nama <span class="text-danger">*</span></label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="nama-<?= $p['id_penelitian']; ?>" name="nama" value="<?= $p['nama']; ?>">
                                 </div>
                             </div>
                             <div class="row mb-2">
-                                <label for="no_identitas" class="col-sm-3 col-form-label">Nomor Identitas</label>
+                                <label for="no_identitas-<?= $p['id_penelitian']; ?>" class="col-sm-3 col-form-label">Nomor Identitas <span class="text-danger">*</span></label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="no_identitas-<?= $p['id_penelitian']; ?>" name="no_identitas" value="<?= $p['no_identitas']; ?>">
                                 </div>
                             </div>
                             <div class="row mb-2">
-                                <label for="judul_penelitian" class="col-sm-3 col-form-label">Judul Penelitian</label>
+                                <label for="judul_penelitian-<?= $p['id_penelitian']; ?>" class="col-sm-3 col-form-label">Judul Penelitian <span class="text-danger">*</span></label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="judul_penelitian-<?= $p['id_penelitian']; ?>" name="judul_penelitian" value="<?= $p['judul_penelitian']; ?>">
                                 </div>
                             </div>
                             <div class="row mb-2">
-                                <label for="jenis" class="col-sm-3 col-form-label">Jenis</label>
+                                <label for="jenis-<?= $p['id_penelitian']; ?>" class="col-sm-3 col-form-label">Jenis <span class="text-danger">*</span></label>
                                 <div class="col-sm-9">
-                                    <select class="form-control" id="jenis-<?= $p['id_penelitian']; ?>" name="jenis" required>
+                                    <select class="form-control" id="jenis-<?= $p['id_penelitian']; ?>" name="jenis">
                                         <option value="">Pilih Jenis</option>
                                         <option value="umum" <?= $p['jenis'] == 'umum' ? 'selected' : ''; ?>>Umum</option>
                                         <option value="museum" <?= $p['jenis'] == 'museum' ? 'selected' : ''; ?>>Museum</option>
@@ -202,39 +251,67 @@
                                 </div>
                             </div>
                             <div class="row mb-2">
-                                <label for="kategori_objek" class="col-sm-3 col-form-label">Kategori Objek</label>
+                                <label for="kategori_objek-<?= $p['id_penelitian']; ?>" class="col-sm-3 col-form-label">Kategori Objek <span class="text-danger">*</span></label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="kategori_objek-<?= $p['id_penelitian']; ?>" name="kategori_objek" value="<?= $p['kategori_objek']; ?>">
                                 </div>
                             </div>
                             <div class="row mb-2">
-                                <label for="jenjang_pendidikan" class="col-sm-3 col-form-label">Jenjang Pendidikan</label>
+                                <label for="jenjang_pendidikan-<?= $p['id_penelitian']; ?>" class="col-sm-3 col-form-label">Jenjang Pendidikan <span class="text-danger">*</span></label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="jenjang_pendidikan-<?= $p['id_penelitian']; ?>" name="jenjang_pendidikan" value="<?= $p['jenjang_pendidikan']; ?>">
                                 </div>
                             </div>
                             <div class="row mb-2">
-                                <label for="program_studi" class="col-sm-3 col-form-label">Program Studi</label>
+                                <label for="program_studi-<?= $p['id_penelitian']; ?>" class="col-sm-3 col-form-label">Program Studi</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="program_studi-<?= $p['id_penelitian']; ?>" name="program_studi" value="<?= $p['program_studi']; ?>">
                                 </div>
                             </div>
                             <div class="row mb-2">
-                                <label for="instansi" class="col-sm-3 col-form-label">Instansi</label>
+                                <label for="instansi-<?= $p['id_penelitian']; ?>" class="col-sm-3 col-form-label">Instansi <span class="text-danger">*</span></label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="instansi-<?= $p['id_penelitian']; ?>" name="instansi" value="<?= $p['instansi']; ?>">
                                 </div>
                             </div>
                             <div class="row mb-2">
-                                <label for="tanggal_mulai" class="col-sm-3 col-form-label">Tanggal Mulai</label>
+                                <label for="tanggal_mulai-<?= $p['id_penelitian']; ?>" class="col-sm-3 col-form-label">Tanggal Mulai <span class="text-danger">*</span></label>
                                 <div class="col-sm-9">
                                     <input type="date" class="form-control" id="tanggal_mulai-<?= $p['id_penelitian']; ?>" name="tanggal_mulai" value="<?= $p['tanggal_mulai']; ?>">
                                 </div>
                             </div>
                             <div class="row mb-2">
-                                <label for="tanggal_akhir" class="col-sm-3 col-form-label">Tanggal Akhir</label>
+                                <label for="tanggal_akhir-<?= $p['id_penelitian']; ?>" class="col-sm-3 col-form-label">Tanggal Akhir</label>
                                 <div class="col-sm-9">
                                     <input type="date" class="form-control" id="tanggal_akhir-<?= $p['id_penelitian']; ?>" name="tanggal_akhir" value="<?= $p['tanggal_akhir']; ?>">
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <label for="sumber-<?= $p['id_penelitian']; ?>" class="col-sm-3 col-form-label">Sumber <span class="text-danger">*</span></label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="sumber-<?= $p['id_penelitian']; ?>" name="sumber" value="<?= $p['sumber'] ?? ''; ?>">
+                                    <small class="text-muted">Sumber/referensi penelitian</small>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <label for="link-<?= $p['id_penelitian']; ?>" class="col-sm-3 col-form-label">Link</label>
+                                <div class="col-sm-9">
+                                    <input type="url" class="form-control" id="link-<?= $p['id_penelitian']; ?>" name="link" value="<?= $p['link'] ?? ''; ?>" placeholder="https://example.com">
+                                    <small class="text-muted">URL lengkap dengan https://</small>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <label for="gambar-<?= $p['id_penelitian']; ?>" class="col-sm-3 col-form-label">Gambar</label>
+                                <div class="col-sm-9">
+                                    <?php if (!empty($p['gambar'])): ?>
+                                        <div class="mb-2">
+                                            <img src="<?= base_url('uploads/penelitian/' . $p['gambar']); ?>" alt="Gambar Saat Ini" style="max-width: 200px; max-height: 200px; object-fit: cover;" class="img-thumbnail">
+                                            <p class="text-muted mt-1">Gambar saat ini</p>
+                                        </div>
+                                    <?php endif; ?>
+                                    <input type="file" class="form-control" id="gambar-<?= $p['id_penelitian']; ?>" name="gambar" accept="image/jpeg,image/jpg,image/png">
+                                    <small class="text-muted">Format: JPG, JPEG, PNG. Maksimal 2MB. Kosongkan jika tidak ingin mengubah gambar.</small>
+                                    <div id="preview-edit-<?= $p['id_penelitian']; ?>" class="mt-2"></div>
                                 </div>
                             </div>
 
@@ -250,6 +327,21 @@
     <?php endforeach; ?>
 </div>
 
+<!-- Modal untuk preview gambar -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="imageModalLabel">Preview Gambar</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <img id="modalImage" src="" alt="Preview" style="max-width: 100%; height: auto;">
+            </div>
+        </div>
+    </div>
+</div>
+
 <script async src="https://cdn.jsdelivr.net/npm/es-module-shims@1/dist/es-module-shims.min.js" crossorigin="anonymous"></script>
 <script type="importmap">
     {
@@ -258,11 +350,53 @@
         "bootstrap": "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.esm.min.js"
       }
     }
-    </script>
+</script>
 <script type="module">
     import * as bootstrap from 'bootstrap'
-
     new bootstrap.Popover(document.getElementById('popoverButton'))
+</script>
+
+<script>
+    // Preview gambar untuk form tambah
+    document.getElementById('gambar')?.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        const preview = document.getElementById('preview-tambah');
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                preview.innerHTML = '<img src="' + e.target.result + '" style="max-width: 200px; max-height: 200px; object-fit: cover;" class="img-thumbnail mt-2">';
+            }
+            reader.readAsDataURL(file);
+        } else {
+            preview.innerHTML = '';
+        }
+    });
+
+    // Preview gambar untuk form edit (untuk setiap modal)
+    <?php foreach ($penelitian as $p): ?>
+        document.getElementById('gambar-<?= $p['id_penelitian']; ?>')?.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            const preview = document.getElementById('preview-edit-<?= $p['id_penelitian']; ?>');
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.innerHTML = '<p class="text-success mt-2">Preview gambar baru:</p><img src="' + e.target.result + '" style="max-width: 200px; max-height: 200px; object-fit: cover;" class="img-thumbnail">';
+                }
+                reader.readAsDataURL(file);
+            } else {
+                preview.innerHTML = '';
+            }
+        });
+    <?php endforeach; ?>
+
+    // Fungsi untuk menampilkan gambar dalam modal
+    function showImageModal(imageUrl) {
+        document.getElementById('modalImage').src = imageUrl;
+        const imageModal = new bootstrap.Modal(document.getElementById('imageModal'));
+        imageModal.show();
+    }
 </script>
 
 <?= $this->endSection(); ?>

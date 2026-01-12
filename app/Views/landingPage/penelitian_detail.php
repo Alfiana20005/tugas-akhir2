@@ -37,6 +37,15 @@
                         </a>
                     </div>
 
+                    <!-- Research Image (Dipindahkan ke atas judul) -->
+                    <?php if (!empty($penelitian['gambar'])): ?>
+                        <div class="research-image mb-4">
+                            <img src="<?= base_url('uploads/penelitian/' . $penelitian['gambar']); ?>"
+                                alt="<?= $penelitian['judul_penelitian']; ?>"
+                                class="img-fluid rounded shadow">
+                        </div>
+                    <?php endif; ?>
+
                     <!-- Research Title -->
                     <div class="blog-info mb-4">
                         <h1 class="mb-3"><?= $penelitian['judul_penelitian']; ?></h1>
@@ -47,7 +56,6 @@
                                 <div class="col-md-6">
                                     <p class="mb-2"><i class="fas fa-user-graduate mr-2 text-primary"></i> <strong>Peneliti:</strong> <?= $penelitian['nama']; ?></p>
                                     <p class="mb-2"><i class="fas fa-layer-group mr-2 text-primary"></i> <strong>Kategori:</strong> <?= $penelitian['kategori_objek']; ?></p>
-
                                 </div>
                                 <div class="col-md-6">
                                     <p class="mb-2"><i class="fas fa-university mr-2 text-primary"></i> <strong>Instansi:</strong> <?= $penelitian['instansi']; ?></p>
@@ -71,40 +79,63 @@
                                         }
                                         ?>
                                     </p>
-
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Research Image -->
-                    <?php if (!empty($penelitian['gambar'])): ?>
-                        <div class="research-image mb-4">
-                            <img src="<?= base_url('uploads/penelitian/' . $penelitian['gambar']); ?>"
-                                alt="<?= $penelitian['judul_penelitian']; ?>"
-                                class="img-fluid rounded shadow">
-                        </div>
-                    <?php endif; ?>
-
-                    <!-- Research Summary/Content -->
+                    <!-- Sumber dan Link Jurnal (Menggantikan Ringkasan) -->
                     <div class="research-content">
-                        <?php if (!empty($penelitian['ringkasan'])): ?>
-                            <div class="content-section">
-                                <h3 class="mb-3"><i class="fas fa-file-alt mr-2 text-primary"></i>Ringkasan Penelitian</h3>
-                                <div class="content-text">
-                                    <?= nl2br($penelitian['ringkasan']); ?>
+                        <div class="content-section">
+                            <h3 class="mb-4"><i class="fas fa-quote-right mr-2 text-primary"></i>Sumber Kutipan</h3>
+
+                            <!-- Sumber -->
+                            <?php if (!empty($penelitian['sumber'])): ?>
+                                <div class="info-item mb-4 pb-3 border-bottom">
+                                    <div class="d-flex align-items-start">
+                                        <div class="icon-wrapper mr-3">
+                                            <i class="fas fa-book-open text-primary" style="font-size: 24px;"></i>
+                                        </div>
+                                        <div class="info-content">
+                                            <h5 class="mb-2">Dikutip Dari</h5>
+                                            <p class="mb-0 citation-text"><?= $penelitian['sumber']; ?></p>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        <?php else: ?>
-                            <div class="alert alert-info">
-                                <i class="fas fa-info-circle mr-2"></i>
-                                Ringkasan penelitian belum tersedia.
-                            </div>
-                        <?php endif; ?>
+                            <?php endif; ?>
+
+                            <!-- Link Jurnal -->
+                            <?php if (!empty($penelitian['link'])): ?>
+                                <div class="info-item mb-3">
+                                    <div class="d-flex align-items-start">
+                                        <div class="icon-wrapper mr-3">
+                                            <i class="fas fa-file-alt text-primary" style="font-size: 24px;"></i>
+                                        </div>
+                                        <div class="info-content">
+                                            <h5 class="mb-2">Link Jurnal</h5>
+                                            <a href="<?= $penelitian['link']; ?>" target="_blank" class="btn btn-success btn-sm">
+                                                <i class="fas fa-external-link-alt mr-2"></i>Akses Jurnal
+                                            </a>
+                                            <p class="mb-0 mt-2 text-muted" style="word-break: break-all; font-size: 13px;">
+                                                <i class="fas fa-link mr-1"></i><?= $penelitian['link']; ?>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+
+                            <!-- Jika tidak ada sumber dan link -->
+                            <?php if (empty($penelitian['sumber']) && empty($penelitian['link'])): ?>
+                                <div class="alert alert-info">
+                                    <i class="fas fa-info-circle mr-2"></i>
+                                    Informasi sumber kutipan dan link jurnal belum tersedia.
+                                </div>
+                            <?php endif; ?>
+                        </div>
                     </div>
 
                     <!-- Share Section -->
-                    <div class="share-section mt-5 pt-4 border-top">
+                    <!-- <div class="share-section mt-5 pt-4 border-top">
                         <h5 class="mb-3">Bagikan Penelitian Ini:</h5>
                         <div class="social-share">
                             <a href="https://www.facebook.com/sharer/sharer.php?u=<?= current_url(); ?>"
@@ -120,7 +151,7 @@
                                 <i class="fab fa-whatsapp"></i> WhatsApp
                             </a>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
 
@@ -230,7 +261,7 @@
     }
 
     .research-image img {
-        max-height: 400px;
+        max-height: 500px;
         width: 100%;
         object-fit: cover;
     }
@@ -245,7 +276,7 @@
     }
 
     .stat-item {
-        border-left: 4px solid #007bff;
+        border-left: 4px solid #850000;
     }
 
     .content-section {
@@ -255,13 +286,58 @@
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
 
+    .info-item .icon-wrapper {
+        min-width: 40px;
+        text-align: center;
+    }
+
+    .info-item .info-content h5 {
+        color: #333;
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    .info-item .info-content p {
+        font-size: 15px;
+        line-height: 1.6;
+    }
+
+    .info-item .btn-primary,
+    .info-item .btn-success {
+        padding: 8px 20px;
+        font-weight: 500;
+    }
+
+    .citation-text {
+        font-size: 15px;
+        line-height: 1.8;
+        color: #555;
+        font-style: italic;
+        padding: 10px 15px;
+        background: #f8f9fa;
+        border-left: 3px solid #850000;
+        border-radius: 4px;
+    }
+
+    .text-primary {
+        color: #850000 !important;
+    }
+
     @media (max-width: 768px) {
         .research-image img {
-            max-height: 250px;
+            max-height: 300px;
         }
 
         .content-section {
             padding: 1.5rem;
+        }
+
+        .info-item .icon-wrapper {
+            min-width: 35px;
+        }
+
+        .info-item .info-content h5 {
+            font-size: 16px;
         }
     }
 </style>

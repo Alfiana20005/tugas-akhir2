@@ -1774,6 +1774,7 @@ class C_Admin extends BaseController
 
         if ($gambar && $gambar->isValid() && !$gambar->hasMoved()) {
             $namaGambar = $gambar->getRandomName();
+            // Path yang konsisten: uploads/penelitian/
             $gambar->move('uploads/penelitian/', $namaGambar);
         }
 
@@ -1787,7 +1788,8 @@ class C_Admin extends BaseController
             'program_studi' => $this->request->getVar('program_studi') ?: null,
             'instansi' => $this->request->getVar('instansi'),
             'tanggal_mulai' => $this->request->getVar('tanggal_mulai'),
-            'ringkasan' => $this->request->getVar('ringkasan'),
+            'sumber' => $this->request->getVar('sumber'),
+            'link' => $this->request->getVar('link') ?: null,
             'gambar' => $namaGambar
         ];
 
@@ -1806,6 +1808,43 @@ class C_Admin extends BaseController
     {
         $penelitianLama = $this->M_Penelitian->find($id_penelitian);
 
+        // Validation rules untuk update
+        $rules = [
+            'nama' => [
+                'rules' => 'required',
+                'errors' => ['required' => 'Nama peneliti harus diisi']
+            ],
+            'no_identitas' => [
+                'rules' => 'required',
+                'errors' => ['required' => 'Nomor identitas tidak boleh kosong']
+            ],
+            'judul_penelitian' => [
+                'rules' => 'required',
+                'errors' => ['required' => 'Judul penelitian harus diisi']
+            ],
+            'link' => [
+                'rules' => 'permit_empty|valid_url',
+                'errors' => ['valid_url' => 'Format link tidak valid']
+            ]
+        ];
+
+        // Validate jika ada file gambar yang diupload
+        $gambar = $this->request->getFile('gambar');
+        if ($gambar && $gambar->isValid() && !$gambar->hasMoved()) {
+            $rules['gambar'] = [
+                'rules' => 'max_size[gambar,2048]|is_image[gambar]|mime_in[gambar,image/jpg,image/jpeg,image/png]',
+                'errors' => [
+                    'max_size' => 'Ukuran gambar maksimal 2MB',
+                    'is_image' => 'File yang diupload harus berupa gambar',
+                    'mime_in' => 'Format gambar harus JPG, JPEG, atau PNG'
+                ]
+            ];
+        }
+
+        if (!$this->validate($rules)) {
+            return redirect()->to('/dataPenelitian')->withInput()->with('errors', $this->validator->listErrors());
+        }
+
         $dataToUpdate = [
             'nama' => $this->request->getVar('nama'),
             'no_identitas' => $this->request->getVar('no_identitas'),
@@ -1816,7 +1855,8 @@ class C_Admin extends BaseController
             'program_studi' => $this->request->getVar('program_studi') ?: null,
             'instansi' => $this->request->getVar('instansi'),
             'tanggal_mulai' => $this->request->getVar('tanggal_mulai'),
-            'ringkasan' => $this->request->getVar('ringkasan')
+            'sumber' => $this->request->getVar('sumber'),
+            'link' => $this->request->getVar('link') ?: null
         ];
 
         if ($this->request->getVar('tanggal_akhir')) {
@@ -1824,28 +1864,16 @@ class C_Admin extends BaseController
         }
 
         // Handle file upload jika ada file baru
-        $gambar = $this->request->getFile('gambar');
         if ($gambar && $gambar->isValid() && !$gambar->hasMoved()) {
-            // Validate file
-            $validation = \Config\Services::validation();
-            $validation->setRules([
-                'gambar' => 'max_size[gambar,2048]|is_image[gambar]|mime_in[gambar,image/jpg,image/jpeg,image/png]'
-            ]);
-
-            if ($validation->withRequest($this->request)->run()) {
-                // Hapus gambar lama jika ada
-                if ($penelitianLama['gambar'] && file_exists('img/penelitian/' . $penelitianLama['gambar'])) {
-                    unlink('img/penelitian/' . $penelitianLama['gambar']);
-                }
-
-                // Upload gambar baru
-                $namaGambar = $gambar->getRandomName();
-                $gambar->move('img/penelitian/', $namaGambar);
-                $dataToUpdate['gambar'] = $namaGambar;
-            } else {
-                session()->setFlashdata('error', 'Error upload gambar: ' . $validation->listErrors());
-                return redirect()->to('/dataPenelitian');
+            // Hapus gambar lama jika ada (path yang konsisten)
+            if ($penelitianLama['gambar'] && file_exists('uploads/penelitian/' . $penelitianLama['gambar'])) {
+                unlink('uploads/penelitian/' . $penelitianLama['gambar']);
             }
+
+            // Upload gambar baru
+            $namaGambar = $gambar->getRandomName();
+            $gambar->move('uploads/penelitian/', $namaGambar);
+            $dataToUpdate['gambar'] = $namaGambar;
         }
 
         $dataToUpdate = array_filter($dataToUpdate, function ($var) {

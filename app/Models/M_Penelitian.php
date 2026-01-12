@@ -21,8 +21,9 @@ class M_Penelitian extends Model
         'instansi',
         'tanggal_mulai',
         'tanggal_akhir',
-        'ringkasan',
-        'gambar'
+        'gambar',
+        'sumber',
+        'link'
     ];
 
     protected $validationRules = [];
