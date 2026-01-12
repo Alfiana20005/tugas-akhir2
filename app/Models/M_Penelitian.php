@@ -13,6 +13,7 @@ class M_Penelitian extends Model
     protected $allowedFields = [
         'nama',
         'no_identitas',
+        'jenis',
         'judul_penelitian',
         'kategori_objek',
         'jenjang_pendidikan',

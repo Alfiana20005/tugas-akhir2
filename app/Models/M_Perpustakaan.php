@@ -580,7 +580,6 @@ class M_Perpustakaan extends Model
 
     public function getFilteredBooksGrouped($filters = [])
     {
-        // Gunakan $this->db untuk membuat query builder baru
         $builder = $this->db->table($this->table);
 
         $builder->select('
@@ -597,10 +596,11 @@ class M_Perpustakaan extends Model
         MIN(rak) as rak,
         MIN(status) as status,
         MIN(foto) as foto,
-        COUNT(*) as eksemplar
+        COUNT(*) as jumlah_record,
+        SUM(COALESCE(eksemplar, 1)) as eksemplar
     ');
 
-        // Apply filters
+        // Apply filters dengan validasi
         if (!empty($filters['keyword'])) {
             $builder->groupStart()
                 ->like('judul', $filters['keyword'])
@@ -636,6 +636,13 @@ class M_Perpustakaan extends Model
         $builder->groupBy('judul, pengarang, penerbit')
             ->orderBy('judul', 'ASC');
 
-        return $builder->get()->getResultArray();
+        $result = $builder->get()->getResultArray();
+
+        // Debug log
+        if (empty($result)) {
+            log_message('debug', 'No results found for filters: ' . json_encode($filters));
+        }
+
+        return $result;
     }
 }

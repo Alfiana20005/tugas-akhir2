@@ -1194,37 +1194,58 @@
     }
 
     // Function untuk update content print dengan semua data
-    function updatePrintContent(allData) {
+    // Function untuk update content print dengan data yang di-filter
+    function updatePrintContent(allData, totalBuku = null, totalEksemplar = null, filters = null) {
         let tbody = '';
         allData.forEach(function(buku, index) {
             tbody += `
-                <tr>
-                    <td style="text-align: center;">${index + 1}</td>
-                    <td style="text-align: center;">${buku.kode}</td>
-                    <td style="text-align: center;">
-                        <img src="<?= base_url("img/perpustakaan/") ?>${buku.foto}" alt="" width="60px">
-                    </td>
-                    <td style="text-align: center;">${buku.judul}</td>
-                    <td style="text-align: center;">${buku.pengarang}</td>
-                    <td style="text-align: center;">${buku.penerbit}</td>
-                    <td style="text-align: center;">${buku.tempatTerbit}</td>
-                    <td style="text-align: center;">${buku.tahunTerbit}</td>
-                    <td style="text-align: center;">${buku.kategoriBuku}</td>
-                    <td style="text-align: center;">${buku.rak}</td>
-                    <td style="text-align: center;">${buku.status}</td>
-                    <td style="text-align: center;">${buku.eksemplar}</td>
-                </tr>
-            `;
+            <tr>
+                <td style="text-align: center;">${index + 1}</td>
+                <td style="text-align: center;">${buku.kode || '-'}</td>
+                <td style="text-align: center;">
+                    <img src="<?= base_url("img/perpustakaan/") ?>${buku.foto || 'default.jpg'}" alt="" width="60px" onerror="this.src='<?= base_url("img/perpustakaan/default.jpg") ?>'">
+                </td>
+                <td style="text-align: center;">${buku.judul || '-'}</td>
+                <td style="text-align: center;">${buku.pengarang || '-'}</td>
+                <td style="text-align: center;">${buku.penerbit || '-'}</td>
+                <td style="text-align: center;">${buku.tempatTerbit || '-'}</td>
+                <td style="text-align: center;">${buku.tahunTerbit || '-'}</td>
+                <td style="text-align: center;">${buku.kategoriBuku || '-'}</td>
+                <td style="text-align: center;">${buku.rak || '-'}</td>
+                <td style="text-align: center;">${buku.status || '-'}</td>
+                <td style="text-align: center;">${buku.eksemplar || 0}</td>
+            </tr>
+        `;
         });
 
         document.querySelector('#printBuku tbody').innerHTML = tbody;
 
+        // Hitung total jika tidak diberikan
+        const calculatedTotalBuku = totalBuku !== null ? totalBuku : allData.length;
+        const calculatedTotalEksemplar = totalEksemplar !== null ? totalEksemplar :
+            allData.reduce((sum, item) => sum + parseInt(item.eksemplar || 0), 0);
+
         const totalInfo = document.querySelector('#printBuku .total-info');
         if (totalInfo) {
+            let filterInfo = '';
+            if (filters) {
+                const activeFilters = [];
+                if (filters.keyword) activeFilters.push(`Keyword: ${filters.keyword}`);
+                if (filters.pengarang) activeFilters.push(`Pengarang: ${filters.pengarang}`);
+                if (filters.penerbit) activeFilters.push(`Penerbit: ${filters.penerbit}`);
+                if (filters.kategoriBuku) activeFilters.push(`Kategori: ${filters.kategoriBuku}`);
+                if (filters.status) activeFilters.push(`Status: ${filters.status}`);
+
+                if (activeFilters.length > 0) {
+                    filterInfo = `<div style="margin-top: 10px; font-size: 9pt;"><strong>Filter Aktif:</strong> ${activeFilters.join(', ')}</div>`;
+                }
+            }
+
             totalInfo.innerHTML = `
-                <strong>Total Judul Buku: ${allData.length}</strong><br>
-                <strong>Total Eksemplar: ${allData.reduce((sum, item) => sum + parseInt(item.eksemplar || 0), 0)}</strong>
-            `;
+            <strong>Total Judul Buku: ${calculatedTotalBuku}</strong><br>
+            <strong>Total Eksemplar: ${calculatedTotalEksemplar}</strong>
+            ${filterInfo}
+        `;
         }
     }
 

@@ -43,6 +43,16 @@
                             </div>
                         </div>
                         <div class="row mb-2">
+                            <label for="jenis" class="col-sm-3 col-form-label">Jenis</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" id="jenis" name="jenis" required>
+                                    <option value="">Pilih Jenis</option>
+                                    <option value="umum">Umum</option>
+                                    <option value="museum">Museum</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
                             <label for="kategori_objek" class="col-sm-3 col-form-label">Kategori Objek</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="kategori_objek" name="kategori_objek">
@@ -104,6 +114,7 @@
                             <th style="text-align: center;">Nama</th>
                             <th style="text-align: center;">No Identitas</th>
                             <th style="text-align: center;">Judul Penelitian</th>
+                            <th style="text-align: center;">Jenis</th>
                             <th style="text-align: center;">Kategori Objek</th>
                             <th style="text-align: center;">Jenjang Pendidikan</th>
                             <th style="text-align: center;">Program Studi</th>
@@ -123,6 +134,11 @@
                                 <td style="text-align: center;"><?= $p['nama']; ?></td>
                                 <td style="text-align: center;"><?= $p['no_identitas']; ?></td>
                                 <td style="text-align: center;"><?= $p['judul_penelitian']; ?></td>
+                                <td style="text-align: center;">
+                                    <span class="badge badge-<?= $p['jenis'] == 'museum' ? 'primary' : 'secondary'; ?>">
+                                        <?= ucfirst($p['jenis']); ?>
+                                    </span>
+                                </td>
                                 <td style="text-align: center;"><?= $p['kategori_objek']; ?></td>
                                 <td style="text-align: center;"><?= $p['jenjang_pendidikan']; ?></td>
                                 <td style="text-align: center;"><?= $p['program_studi']; ?></td>
@@ -173,6 +189,16 @@
                                 <label for="judul_penelitian" class="col-sm-3 col-form-label">Judul Penelitian</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="judul_penelitian-<?= $p['id_penelitian']; ?>" name="judul_penelitian" value="<?= $p['judul_penelitian']; ?>">
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <label for="jenis" class="col-sm-3 col-form-label">Jenis</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" id="jenis-<?= $p['id_penelitian']; ?>" name="jenis" required>
+                                        <option value="">Pilih Jenis</option>
+                                        <option value="umum" <?= $p['jenis'] == 'umum' ? 'selected' : ''; ?>>Umum</option>
+                                        <option value="museum" <?= $p['jenis'] == 'museum' ? 'selected' : ''; ?>>Museum</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="row mb-2">

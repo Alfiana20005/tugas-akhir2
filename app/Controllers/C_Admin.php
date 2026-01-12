@@ -1780,6 +1780,7 @@ class C_Admin extends BaseController
         $data = [
             'nama' => $this->request->getVar('nama'),
             'no_identitas' => $this->request->getVar('no_identitas'),
+            'jenis' => $this->request->getVar('jenis'),
             'judul_penelitian' => $this->request->getVar('judul_penelitian'),
             'kategori_objek' => $this->request->getVar('kategori_objek'),
             'jenjang_pendidikan' => $this->request->getVar('jenjang_pendidikan'),
@@ -1808,6 +1809,7 @@ class C_Admin extends BaseController
         $dataToUpdate = [
             'nama' => $this->request->getVar('nama'),
             'no_identitas' => $this->request->getVar('no_identitas'),
+            'jenis' => $this->request->getVar('jenis'),
             'judul_penelitian' => $this->request->getVar('judul_penelitian'),
             'kategori_objek' => $this->request->getVar('kategori_objek'),
             'jenjang_pendidikan' => $this->request->getVar('jenjang_pendidikan'),
