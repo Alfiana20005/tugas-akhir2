@@ -39,7 +39,7 @@
                                             <h4 class="card-title fw-bold mb-2">
                                                 <a href="<?= base_url('penelitian/detail/' . $p['id_penelitian']); ?>" class="text-decoration-none text-dark"><?= $p['judul_penelitian']; ?></a>
                                             </h4>
-                                            <div class="card-meta d-flex align-items-center mb-3">
+                                            <!-- <div class="card-meta d-flex align-items-center mb-3">
                                                 <span class="researcher-text"><i class="far fa-calendar-alt me-1 researcher-text"></i>
                                                     <?php
                                                     $bulan = ['January' => 'Januari', 'February' => 'Februari', 'March' => 'Maret', 'April' => 'April', 'May' => 'Mei', 'June' => 'Juni', 'July' => 'Juli', 'August' => 'Agustus', 'September' => 'September', 'October' => 'Oktober', 'November' => 'November', 'December' => 'Desember'];
@@ -60,7 +60,7 @@
                                                     }
                                                     ?>
                                                 </span>
-                                            </div>
+                                            </div> -->
 
                                             <div class="researcher-info p-3 bg-light rounded">
                                                 <div class="row">

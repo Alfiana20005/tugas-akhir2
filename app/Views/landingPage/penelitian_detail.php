@@ -59,25 +59,8 @@
                                 </div>
                                 <div class="col-md-6">
                                     <p class="mb-2"><i class="fas fa-university mr-2 text-primary"></i> <strong>Instansi:</strong> <?= $penelitian['instansi']; ?></p>
-                                    <p class="mb-2"><i class="far fa-calendar-alt mr-2 text-primary"></i> <strong>Periode:</strong>
-                                        <?php
-                                        $bulan = ['January' => 'Januari', 'February' => 'Februari', 'March' => 'Maret', 'April' => 'April', 'May' => 'Mei', 'June' => 'Juni', 'July' => 'Juli', 'August' => 'Agustus', 'September' => 'September', 'October' => 'Oktober', 'November' => 'November', 'December' => 'Desember'];
-
-                                        $tgl_mulai = date('d F Y', strtotime($penelitian['tanggal_mulai']));
-                                        echo preg_replace_callback('/\b(\w+)\b/', function ($matches) use ($bulan) {
-                                            return isset($bulan[$matches[0]]) ? $bulan[$matches[0]] : $matches[0];
-                                        }, $tgl_mulai);
-                                        ?> -
-                                        <?php
-                                        if ($penelitian['tanggal_akhir']) {
-                                            $tgl_akhir = date('d F Y', strtotime($penelitian['tanggal_akhir']));
-                                            echo preg_replace_callback('/\b(\w+)\b/', function ($matches) use ($bulan) {
-                                                return isset($bulan[$matches[0]]) ? $bulan[$matches[0]] : $matches[0];
-                                            }, $tgl_akhir);
-                                        } else {
-                                            echo 'Selesai';
-                                        }
-                                        ?>
+                                    <p class="mb-2"><i class="fa fa-graduation-cap mr-1 text-primary"></i>
+                                        <strong>Program Studi:</strong> <?= $penelitian['program_studi']; ?>
                                     </p>
                                 </div>
                             </div>
