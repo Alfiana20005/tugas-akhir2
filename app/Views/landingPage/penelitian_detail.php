@@ -48,7 +48,7 @@
 
                     <!-- Research Title -->
                     <div class="blog-info mb-4">
-                        <h1 class="mb-3"><?= $penelitian['judul_penelitian']; ?></h1>
+                        <h2 class="mb-3"><?= $penelitian['judul_penelitian']; ?></h2>
 
                         <!-- Research Meta Info -->
                         <div class="research-meta p-3 bg-light rounded mb-4">

@@ -1116,10 +1116,10 @@ class C_LandingPage extends BaseController
                 ->groupEnd();
         }
 
-        // Sort by date from oldest to newest for general research
-        $penelitianModel->orderBy('tanggal_mulai', 'ASC');
+        // Sort by date from newest to oldest (DESC) for general research
+        $penelitianModel->orderBy('tanggal_mulai', 'DESC');
 
-        // Get museum research separately (always show at top)
+        // Get museum research separately (always show at top, newest first)
         $museumModel = new \App\Models\M_Penelitian();
         $penelitian_museum = $museumModel->where('jenis', 'museum')
             ->orderBy('tanggal_mulai', 'DESC')
@@ -1161,7 +1161,7 @@ class C_LandingPage extends BaseController
             'umum' => $db->query("SELECT COUNT(*) as count FROM penelitian WHERE jenis = 'umum'")->getRow()->count
         ];
 
-        // Get the latest research without filters - keep this as DESC to show the latest
+        // Get the latest research without filters (newest first)
         $latestModel = new \App\Models\M_Penelitian();
         $latest_penelitian = $latestModel->orderBy('tanggal_mulai', 'DESC')
             ->limit(3)
