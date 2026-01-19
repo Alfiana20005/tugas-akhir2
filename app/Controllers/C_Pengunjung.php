@@ -143,7 +143,10 @@ class C_Pengunjung extends BaseController
     public function statistik()
     {
         $tahun = $this->request->getPost('tahun');
+        $kategori = $this->request->getPost('kategori');
+
         $data['tahun'] = $tahun;
+        $data['kategori'] = $kategori;
 
         if (empty($tahun)) {
             $tahun = date('Y');
@@ -168,6 +171,8 @@ class C_Pengunjung extends BaseController
 
         $bulan_labels = [];
         $data_grafik = [];
+        $all_categories = [];
+        $total_per_kategori = []; // Tambahkan ini
 
         $randomColors = [
             '#78A083',
@@ -182,14 +187,28 @@ class C_Pengunjung extends BaseController
             '#FB8B24'
         ];
 
-        // Shuffle the $randomColors array to make sure colors are unique for each category
         shuffle($randomColors);
 
         foreach ($data_pengunjung as $row) {
             $bulan_labels[] = $bulanMapping[$row['bulan']];
 
+            // Simpan semua kategori unik
+            if (!in_array($row['kategori'], $all_categories)) {
+                $all_categories[] = $row['kategori'];
+            }
+
+            // Hitung total per kategori
+            if (!isset($total_per_kategori[$row['kategori']])) {
+                $total_per_kategori[$row['kategori']] = 0;
+            }
+            $total_per_kategori[$row['kategori']] += $row['total'];
+
+            // Filter berdasarkan kategori jika dipilih
+            if (!empty($kategori) && $kategori !== 'semua' && $row['kategori'] !== $kategori) {
+                continue;
+            }
+
             if (!isset($data_grafik[$row['kategori']])) {
-                // Take the first color from the shuffled array for the current category
                 $currentColor = array_shift($randomColors);
 
                 $data_grafik[$row['kategori']] = [
@@ -207,6 +226,8 @@ class C_Pengunjung extends BaseController
         $data['bulan_labels'] = json_encode(array_unique($bulan_labels));
         $data['data_grafik'] = json_encode(array_values($data_grafik));
         $data['data_pengunjung'] = $data_pengunjung;
+        $data['all_categories'] = $all_categories;
+        $data['total_per_kategori'] = $total_per_kategori; // Tambahkan ini
         $data['jumlah'] = $this->M_Pengunjung->getDataByMonth($tahun);
 
         return $data;
