@@ -12,31 +12,31 @@ class M_Pengunjung extends Model
     // protected $useTimestamps = true;
 
 
-    protected $allowedFields = ['nama', 'alamat','no_hp','kategori','jumlah','id_petugas','created_at'];
+    protected $allowedFields = ['nama', 'alamat', 'no_hp', 'kategori', 'jumlah', 'id_petugas', 'created_at'];
 
     protected $validationRules = [];
     protected $validationMessages = [];
     protected $skipValidation = false;
     protected $cleanValidationRules = true;
 
-    public function getPaginated($num, $keyword=null) {
+    public function getPaginated($num, $keyword = null)
+    {
         $builder = $this->table('data_pengunjung');
-    
+
         // Pilih semua kolom dari tabel
         $builder->select('*');
-        
+
         // Jika ada pencarian, tambahkan kondisi 'like'
         if ($keyword) {
             $builder->like('nama', $keyword); // Ganti dengan kolom yang sesuai jika perlu
-            $builder->orlike('alamat', $keyword);    
-            $builder->orlike('no_hp', $keyword);    
-            $builder->orlike('kategori', $keyword);    
-            $builder->orlike('created_at', $keyword);   
+            $builder->orlike('alamat', $keyword);
+            $builder->orlike('no_hp', $keyword);
+            $builder->orlike('kategori', $keyword);
+            $builder->orlike('created_at', $keyword);
         }
-        
-        // Kembalikan data paginated dan pager
-    return $builder->paginate($num);
 
+        // Kembalikan data paginated dan pager
+        return $builder->paginate($num);
     }
     public function getPengunjung($id_pengunjung)
     {
@@ -57,64 +57,68 @@ class M_Pengunjung extends Model
     public function getDataByYear($tahun)
     {
         $query = $this->db->query("SELECT MONTH(created_at) as bulan, kategori, SUM(jumlah) as total FROM data_pengunjung WHERE YEAR(created_at) = ? GROUP BY bulan, kategori", [$tahun]);
-    
+
         // Ambil hasil query sebagai array
         $result = $query->getResultArray();
-    
+
         // Konversi nomor bulan menjadi nama bulan
         foreach ($result as &$row) {
             if (isset($row['bulan'])) {
                 $row['bulan'] = date("F", mktime(0, 0, 0, $row['bulan'], 1));
-            }        }
-    
+            }
+        }
+
         return $result;
     }
-    
-    public function getDataByMonth($tahun){
+
+    public function getDataByMonth($tahun)
+    {
         $query = $this->db->query("SELECT MONTH(created_at) as bulan, SUM(jumlah) as total FROM data_pengunjung WHERE YEAR(created_at) = ? GROUP BY bulan", [$tahun]);
-    
+
         // Ambil hasil query sebagai array
         $result = $query->getResultArray();
-        
+
         // Konversi nomor bulan menjadi nama bulan
         foreach ($result as &$row) {
             $row['bulan'] = date("F", mktime(0, 0, 0, $row['bulan'], 1));
         }
-    
-    return $result;
+
+        return $result;
     }
-    
+
     public function getDataByDateRange($tanggalAwal, $tanggalAkhir)
     {
         return $this->where('created_at >=', $tanggalAwal)
-                    ->where('created_at <=', $tanggalAkhir)
-                    ->findAll();
+            ->where('created_at <=', $tanggalAkhir)
+            ->findAll();
     }
 
 
-    
-    public function countPengunjung() {
+
+    public function countPengunjung()
+    {
         $model = new M_Pengunjung();
 
         // Menghitung jumlah petugas
         return $this->selectSum('jumlah')->get()->getRowArray()['jumlah'];
     }
-    public function countPengunjungToday() {
-        $currentToday= date('Y-m-d');
-    
+    public function countPengunjungToday()
+    {
+        $currentToday = date('Y-m-d');
+
         return $this->selectSum('jumlah')->where('DATE_FORMAT(created_at, "%Y-%m-%d")', $currentToday)->get()->getRowArray()['jumlah'];
     }
     public function countPengunjungThisMonth()
     {
         $currentMonth = date('Y-m');
-    
+
         return $this->selectSum('jumlah')->where('DATE_FORMAT(created_at, "%Y-%m")', $currentMonth)->get()->getRowArray()['jumlah'];
     }
-    
+
     public function countPengunjungThisYear()
     {
         $currentYear = date('Y');
-    
+
         return $this->selectSum('jumlah')->where('YEAR(created_at)', $currentYear)->get()->getRowArray()['jumlah'];
     }
 
@@ -122,24 +126,27 @@ class M_Pengunjung extends Model
     {
         $tahunIni = date('Y');
         $query = $this->db->query("SELECT MONTH(created_at) as bulan, SUM(jumlah) as total FROM data_pengunjung WHERE YEAR(created_at) = ? GROUP BY bulan", [$tahunIni]);
-        
+
         // Ambil hasil query sebagai array
         $result = $query->getResultArray();
-        
+
         // Konversi nomor bulan menjadi nama bulan
         foreach ($result as &$row) {
             $row['bulan'] = date("F", mktime(0, 0, 0, $row['bulan'], 1));
         }
-        
+
         return $result;
     }
-    
-    
-    
 
-
-  
-
-    
+    public function getDataByYearRange($tahun_awal, $tahun_akhir)
+    {
+        return $this->db->table('data_pengunjung') // Ganti dari 'pengunjung' ke 'data_pengunjung'
+            ->select('YEAR(created_at) as tahun, kategori, SUM(jumlah) as total') // Ganti 'tanggal' ke 'created_at'
+            ->where('YEAR(created_at) >=', $tahun_awal)
+            ->where('YEAR(created_at) <=', $tahun_akhir)
+            ->groupBy(['YEAR(created_at)', 'kategori'])
+            ->orderBy('YEAR(created_at)', 'ASC')
+            ->get()
+            ->getResultArray();
+    }
 }
-    

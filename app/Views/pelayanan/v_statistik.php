@@ -23,8 +23,8 @@ $bulanMapping = [
 <div class="container-fluid statistik">
   <form action="/statistik" method="post" class="d-inline">
     <div class="row">
-      <div class="col-lg-3 mb-4">
-        <label for="tahun" class="form-label">Tahun</label>
+      <div class="col-lg-2 mb-4">
+        <label for="tahun" class="form-label">Tahun Awal</label>
         <select class="form-control" name="tahun" id="tahun" aria-label="tahun">
           <?php
           $tahunSekarang = date('Y');
@@ -37,7 +37,20 @@ $bulanMapping = [
         </select>
       </div>
 
-      <!-- Dropdown Kategori Baru -->
+      <div class="col-lg-2 mb-4">
+        <label for="tahun_akhir" class="form-label">Tahun Akhir</label>
+        <select class="form-control" name="tahun_akhir" id="tahun_akhir" aria-label="tahun_akhir">
+          <?php
+          $tahunSekarang = date('Y');
+          for ($i = 0; $i <= 44; $i++) :
+            $tahunOption = $tahunSekarang - $i;
+            $selected = ($tahunOption == ($tahun_akhir ?? $tahun)) ? 'selected' : '';
+          ?>
+            <option value="<?= $tahunOption; ?>" <?= $selected; ?>><?= $tahunOption; ?></option>
+          <?php endfor; ?>
+        </select>
+      </div>
+
       <div class="col-lg-3 mb-4">
         <label for="kategori" class="form-label">Kategori</label>
         <select class="form-control" name="kategori" id="kategori" aria-label="kategori">
@@ -52,10 +65,10 @@ $bulanMapping = [
         </select>
       </div>
 
-      <div class="col-lg-3 mb-4">
+      <div class="col-lg-2 mb-4">
         <label class="form-label" style="visibility: hidden;">Action</label>
-        <button type="submit" class="btn btn-sm btn-primary shadow-s d-block">
-          <i class="fas fa-sm text-white-50"></i> Tampilkan Data
+        <button type="submit" class="btn btn-sm btn-primary shadow-s d-block w-100">
+          <i class="fas fa-search fa-sm text-white-50"></i> Tampilkan Data
         </button>
       </div>
     </div>
@@ -69,47 +82,27 @@ $bulanMapping = [
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
               <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                Total Pengunjung Tahun <?= $tahun; ?></div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">
-                <?php
-                // Menghitung total pengunjung
-                $totalPengunjung = 0;
-                foreach ($data_pengunjung as $row) {
-                  $totalPengunjung += $row['total'];
-                }
-                echo number_format($totalPengunjung, 0, ',', '.');
-                ?> Orang
-              </div>
-            </div>
-            <div class="col-auto">
-              <i class="fas fa-users fa-2x text-gray-300"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4">
-    <div class="col-xl-12 col-md-12">
-      <div class="card border-left-primary shadow h-100 py-2">
-        <div class="card-body">
-          <div class="row no-gutters align-items-center">
-            <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                 <?php if (isset($kategori) && $kategori !== 'semua') : ?>
-                  Total Pengunjung Kategori: <?= $kategori; ?> - Tahun <?= $tahun; ?>
+                  Total Pengunjung Kategori: <?= $kategori; ?>
+                  <?php if ($tahun == $tahun_akhir) : ?>
+                    - Tahun <?= $tahun; ?>
+                  <?php else : ?>
+                    - Tahun <?= $tahun; ?> s/d <?= $tahun_akhir; ?>
+                  <?php endif; ?>
                 <?php else : ?>
-                  Total Pengunjung Tahun <?= $tahun; ?>
+                  Total Pengunjung
+                  <?php if ($tahun == $tahun_akhir) : ?>
+                    Tahun <?= $tahun; ?>
+                  <?php else : ?>
+                    Tahun <?= $tahun; ?> s/d <?= $tahun_akhir; ?>
+                  <?php endif; ?>
                 <?php endif; ?>
               </div>
               <div class="h5 mb-0 font-weight-bold text-gray-800">
                 <?php
                 if (isset($kategori) && $kategori !== 'semua') {
-                  // Tampilkan total kategori yang dipilih
                   echo number_format($total_per_kategori[$kategori] ?? 0, 0, ',', '.');
                 } else {
-                  // Tampilkan total keseluruhan
                   $totalPengunjung = 0;
                   foreach ($data_pengunjung as $row) {
                     $totalPengunjung += $row['total'];
@@ -120,7 +113,6 @@ $bulanMapping = [
               </div>
 
               <?php if (!isset($kategori) || $kategori === 'semua') : ?>
-                <!-- Tampilkan breakdown per kategori di bawah -->
                 <div class="mt-3">
                   <small class="text-muted">Rincian per Kategori:</small>
                   <div class="row mt-2">
@@ -145,10 +137,16 @@ $bulanMapping = [
     </div>
   </div>
 
+
   <div class="card shadow mb-4">
     <div class="card-header d-sm-flex align-items-center justify-content-between mb-4">
       <h6 class="m-0 font-weight-bold text-primary">
-        Statistik Pengunjung Tahun <?= $tahun; ?>
+        Statistik Pengunjung
+        <?php if ($tahun == $tahun_akhir) : ?>
+          Tahun <?= $tahun; ?>
+        <?php else : ?>
+          Tahun <?= $tahun; ?> s/d <?= $tahun_akhir; ?>
+        <?php endif; ?>
         <?php if (isset($kategori) && $kategori !== 'semua') : ?>
           - Kategori: <?= $kategori; ?>
         <?php endif; ?>
@@ -171,14 +169,18 @@ $bulanMapping = [
 </div>
 
 <script>
-  // Bar Chart Example
   var ctx = document.getElementById("statistik");
+  var chartLabels = <?= $chart_labels; ?>;
+  var datasets = <?= $data_grafik; ?>;
+
+  console.log('Chart Labels:', chartLabels);
+  console.log('Datasets:', datasets);
+
   var myBarChart = new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: [],
-      datasets: <?= $data_grafik; ?>
-
+      labels: chartLabels,
+      datasets: datasets
     },
     options: {
       maintainAspectRatio: false,
@@ -192,28 +194,20 @@ $bulanMapping = [
       },
       scales: {
         xAxes: [{
-          type: 'time',
-          time: {
-            unit: 'month'
-          },
           gridLines: {
             display: false,
             drawBorder: false
           },
-          // ticks: {
-          //   maxTicksLimit: 10
-          // },
-          // maxBarThickness: 5,
+          ticks: {
+            maxTicksLimit: 20
+          }
         }],
         yAxes: [{
           ticks: {
             min: 0,
-            max: 1500000,
-            // maxTicksLimit: 5,
             padding: 10,
-            // Include a dollar sign in the ticks
             callback: function(value, index, values) {
-              return '$' + number_format(value);
+              return value.toLocaleString('id-ID');
             }
           },
           gridLines: {
@@ -226,7 +220,7 @@ $bulanMapping = [
         }],
       },
       legend: {
-        display: false
+        display: <?= (isset($kategori) && $kategori !== 'semua') ? 'false' : 'true'; ?>
       },
       tooltips: {
         titleMarginBottom: 10,
@@ -238,12 +232,12 @@ $bulanMapping = [
         borderWidth: 1,
         xPadding: 15,
         yPadding: 15,
-        displayColors: false,
+        displayColors: true,
         caretPadding: 10,
         callbacks: {
           label: function(tooltipItem, chart) {
             var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-            return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
+            return datasetLabel + ': ' + tooltipItem.yLabel.toLocaleString('id-ID') + ' orang';
           }
         }
       },
@@ -415,7 +409,13 @@ $bulanMapping = [
         <div class="text-center">
           <h6 class="m-0 font-weight-bold text-black">LAPORAN DATA PENGUNJUNG</h6>
           <h6 class="m-0 font-weight-bold text-black">MUSEUM NEGERI NUSA TENGGARA BARAT (NTB)</h6>
-          <h6 class="m-0 font-weight-bold text-black mb-4">TAHUN <?= $tahun; ?> </h6>
+          <h6 class="m-0 font-weight-bold text-black mb-4">
+            <?php if ($tahun == $tahun_akhir) : ?>
+              TAHUN <?= $tahun; ?>
+            <?php else : ?>
+              TAHUN <?= $tahun; ?> - <?= $tahun_akhir; ?>
+            <?php endif; ?>
+          </h6>
         </div>
         <img src="img\logo-.png" alt="" id="logo" style="width: 80px; margin-left: 20px;">
       </div>
@@ -425,17 +425,16 @@ $bulanMapping = [
         <table class="table table-bordered" id="" width="100%" cellspacing="0">
           <thead>
             <tr>
-              <th>Bulan</th>
+              <th><?= ($is_year_range) ? 'Tahun' : 'Bulan'; ?></th>
               <?php
               // Inisialisasi array untuk menyimpan kategori unik
               $uniqueCategories = [];
               foreach ($data_pengunjung as $row) :
-                // Menyimpan kategori unik
                 if (!in_array($row['kategori'], $uniqueCategories)) {
                   $uniqueCategories[] = $row['kategori'];
                 }
               endforeach;
-              // Menampilkan satu header untuk setiap kategori unik
+
               foreach ($uniqueCategories as $category) : ?>
                 <th><?= $category; ?></th>
               <?php endforeach; ?>
@@ -444,61 +443,83 @@ $bulanMapping = [
           </thead>
           <tbody>
             <?php
-            // Inisialisasi array untuk menyimpan bulan unik
-            $uniqueMonths = [];
-            $dataByMonth = [];
-            $totalByMonth = [];
-            // 
-            foreach ($data_pengunjung as $row) :
-              // Menyimpan bulan unik
-              if (!in_array($row['bulan'], $uniqueMonths)) {
-                $uniqueMonths[] = $row['bulan'];
-              }
-              // Menyimpan data berdasarkan bulan
-              if (!isset($dataByMonth[$row['bulan']])) {
-                $dataByMonth[$row['bulan']] = [];
-              }
-              $dataByMonth[$row['bulan']][$row['kategori']] = $row['total'];
-            endforeach;
-            // Menampilkan data
-            foreach ($uniqueMonths as $month) : ?>
-              <tr>
-                <td><?= $bulanMapping[$month]; ?></td>
-                <?php foreach ($uniqueCategories as $category) : ?>
-                  <td><?= $dataByMonth[$month][$category] ?? 0; ?></td>
-                <?php endforeach; ?>
-                <td>
-                  <?php
-                  // Menampilkan jumlah total untuk bulan tertentu
-                  $totalByMonth = array_sum($dataByMonth[$month]);
-                  echo $totalByMonth;
-                  ?>
-                </td>
-              </tr>
-            <?php endforeach; ?>
+            if ($is_year_range) {
+              // Untuk rentang tahun - group by tahun
+              $uniquePeriods = [];
+              $dataByPeriod = [];
+
+              foreach ($data_pengunjung as $row) :
+                if (!in_array($row['tahun'], $uniquePeriods)) {
+                  $uniquePeriods[] = $row['tahun'];
+                }
+                if (!isset($dataByPeriod[$row['tahun']])) {
+                  $dataByPeriod[$row['tahun']] = [];
+                }
+                $dataByPeriod[$row['tahun']][$row['kategori']] = $row['total'];
+              endforeach;
+
+              sort($uniquePeriods);
+
+              foreach ($uniquePeriods as $period) : ?>
+                <tr>
+                  <td><?= $period; ?></td>
+                  <?php foreach ($uniqueCategories as $category) : ?>
+                    <td><?= number_format($dataByPeriod[$period][$category] ?? 0, 0, ',', '.'); ?></td>
+                  <?php endforeach; ?>
+                  <td>
+                    <?= number_format(array_sum($dataByPeriod[$period]), 0, ',', '.'); ?>
+                  </td>
+                </tr>
+              <?php endforeach;
+            } else {
+              // Untuk tahun tunggal - group by bulan
+              $uniqueMonths = [];
+              $dataByMonth = [];
+
+              foreach ($data_pengunjung as $row) :
+                if (!in_array($row['bulan'], $uniqueMonths)) {
+                  $uniqueMonths[] = $row['bulan'];
+                }
+                if (!isset($dataByMonth[$row['bulan']])) {
+                  $dataByMonth[$row['bulan']] = [];
+                }
+                $dataByMonth[$row['bulan']][$row['kategori']] = $row['total'];
+              endforeach;
+
+              foreach ($uniqueMonths as $month) : ?>
+                <tr>
+                  <td><?= $bulanMapping[$month]; ?></td>
+                  <?php foreach ($uniqueCategories as $category) : ?>
+                    <td><?= number_format($dataByMonth[$month][$category] ?? 0, 0, ',', '.'); ?></td>
+                  <?php endforeach; ?>
+                  <td>
+                    <?= number_format(array_sum($dataByMonth[$month]), 0, ',', '.'); ?>
+                  </td>
+                </tr>
+            <?php endforeach;
+
+              $dataByPeriod = $dataByMonth; // Untuk tfoot
+            }
+            ?>
           </tbody>
           <tfoot>
             <tr>
               <th>Total</th>
-              <?php
-              // Menampilkan total untuk setiap kategori
-              foreach ($uniqueCategories as $category) : ?>
+              <?php foreach ($uniqueCategories as $category) : ?>
                 <td>
                   <?php
-                  $totalByCategory = array_sum(array_column($dataByMonth, $category));
-                  echo $totalByCategory;
+                  $totalByCategory = array_sum(array_column($dataByPeriod, $category));
+                  echo number_format($totalByCategory, 0, ',', '.');
                   ?>
                 </td>
-
               <?php endforeach; ?>
               <td>
                 <?php
-                // Menampilkan jumlah total untuk jumlah seluruh total setiap kategori
-                $totalByTotal = 0; // Initialize totalByTotal to 0
+                $totalByTotal = 0;
                 foreach ($uniqueCategories as $category) {
-                  $totalByTotal += array_sum(array_column($dataByMonth, $category));
+                  $totalByTotal += array_sum(array_column($dataByPeriod, $category));
                 }
-                echo $totalByTotal;
+                echo number_format($totalByTotal, 0, ',', '.');
                 ?>
               </td>
             </tr>

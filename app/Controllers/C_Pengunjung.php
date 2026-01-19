@@ -143,16 +143,28 @@ class C_Pengunjung extends BaseController
     public function statistik()
     {
         $tahun = $this->request->getPost('tahun');
+        $tahun_akhir = $this->request->getPost('tahun_akhir');
         $kategori = $this->request->getPost('kategori');
 
         $data['tahun'] = $tahun;
+        $data['tahun_akhir'] = $tahun_akhir;
         $data['kategori'] = $kategori;
 
         if (empty($tahun)) {
             $tahun = date('Y');
         }
 
-        $data_pengunjung = $this->M_Pengunjung->getDataByYear($tahun);
+        // Jika tahun_akhir tidak diisi, set sama dengan tahun awal
+        if (empty($tahun_akhir)) {
+            $tahun_akhir = $tahun;
+        }
+
+        // Pastikan tahun_akhir >= tahun awal
+        if ($tahun_akhir < $tahun) {
+            $temp = $tahun;
+            $tahun = $tahun_akhir;
+            $tahun_akhir = $temp;
+        }
 
         $bulanMapping = [
             'January' => 'Januari',
@@ -169,11 +181,6 @@ class C_Pengunjung extends BaseController
             'December' => 'Desember',
         ];
 
-        $bulan_labels = [];
-        $data_grafik = [];
-        $all_categories = [];
-        $total_per_kategori = []; // Tambahkan ini
-
         $randomColors = [
             '#78A083',
             '#344955',
@@ -187,47 +194,115 @@ class C_Pengunjung extends BaseController
             '#FB8B24'
         ];
 
-        shuffle($randomColors);
+        // Cek apakah rentang tahun atau tahun tunggal
+        if ($tahun == $tahun_akhir) {
+            // Tampilkan data per bulan untuk tahun tunggal
+            $data_pengunjung = $this->M_Pengunjung->getDataByYear($tahun);
 
-        foreach ($data_pengunjung as $row) {
-            $bulan_labels[] = $bulanMapping[$row['bulan']];
+            $bulan_labels = [];
+            $data_grafik = [];
+            $all_categories = [];
+            $total_per_kategori = [];
 
-            // Simpan semua kategori unik
-            if (!in_array($row['kategori'], $all_categories)) {
-                $all_categories[] = $row['kategori'];
+            shuffle($randomColors);
+
+            foreach ($data_pengunjung as $row) {
+                $bulan_labels[] = $bulanMapping[$row['bulan']];
+
+                if (!in_array($row['kategori'], $all_categories)) {
+                    $all_categories[] = $row['kategori'];
+                }
+
+                if (!isset($total_per_kategori[$row['kategori']])) {
+                    $total_per_kategori[$row['kategori']] = 0;
+                }
+                $total_per_kategori[$row['kategori']] += $row['total'];
+
+                if (!empty($kategori) && $kategori !== 'semua' && $row['kategori'] !== $kategori) {
+                    continue;
+                }
+
+                if (!isset($data_grafik[$row['kategori']])) {
+                    $currentColor = array_shift($randomColors);
+                    if (!$currentColor) {
+                        $currentColor = '#' . substr(md5(rand()), 0, 6);
+                    }
+
+                    $data_grafik[$row['kategori']] = [
+                        'label' => $row['kategori'],
+                        'backgroundColor' => $currentColor,
+                        'hoverBackgroundColor' => $currentColor,
+                        'borderColor' => $currentColor,
+                        'data' => [],
+                    ];
+                }
+
+                $data_grafik[$row['kategori']]['data'][$bulanMapping[$row['bulan']]] = $row['total'];
             }
 
-            // Hitung total per kategori
-            if (!isset($total_per_kategori[$row['kategori']])) {
-                $total_per_kategori[$row['kategori']] = 0;
+            $data['bulan_labels'] = json_encode(array_values(array_unique($bulan_labels)));
+            $data['chart_labels'] = json_encode(array_values(array_unique($bulan_labels)));
+            $data['is_year_range'] = false; // Flag untuk view
+
+        } else {
+            // Tampilkan data per tahun untuk rentang tahun
+            $data_pengunjung = $this->M_Pengunjung->getDataByYearRange($tahun, $tahun_akhir);
+
+            $tahun_labels = [];
+            $data_grafik = [];
+            $all_categories = [];
+            $total_per_kategori = [];
+
+            shuffle($randomColors);
+
+            foreach ($data_pengunjung as $row) {
+                $tahunLabel = $row['tahun'];
+                if (!in_array($tahunLabel, $tahun_labels)) {
+                    $tahun_labels[] = $tahunLabel;
+                }
+
+                if (!in_array($row['kategori'], $all_categories)) {
+                    $all_categories[] = $row['kategori'];
+                }
+
+                if (!isset($total_per_kategori[$row['kategori']])) {
+                    $total_per_kategori[$row['kategori']] = 0;
+                }
+                $total_per_kategori[$row['kategori']] += $row['total'];
+
+                if (!empty($kategori) && $kategori !== 'semua' && $row['kategori'] !== $kategori) {
+                    continue;
+                }
+
+                if (!isset($data_grafik[$row['kategori']])) {
+                    $currentColor = array_shift($randomColors);
+                    if (!$currentColor) {
+                        $currentColor = '#' . substr(md5(rand()), 0, 6);
+                    }
+
+                    $data_grafik[$row['kategori']] = [
+                        'label' => $row['kategori'],
+                        'backgroundColor' => $currentColor,
+                        'hoverBackgroundColor' => $currentColor,
+                        'borderColor' => $currentColor,
+                        'data' => [],
+                    ];
+                }
+
+                $data_grafik[$row['kategori']]['data'][$tahunLabel] = $row['total'];
             }
-            $total_per_kategori[$row['kategori']] += $row['total'];
 
-            // Filter berdasarkan kategori jika dipilih
-            if (!empty($kategori) && $kategori !== 'semua' && $row['kategori'] !== $kategori) {
-                continue;
-            }
+            sort($tahun_labels);
 
-            if (!isset($data_grafik[$row['kategori']])) {
-                $currentColor = array_shift($randomColors);
-
-                $data_grafik[$row['kategori']] = [
-                    'label' => $row['kategori'],
-                    'backgroundColor' => $currentColor,
-                    'hoverBackgroundColor' => $currentColor,
-                    'borderColor' => $currentColor,
-                    'data' => [],
-                ];
-            }
-
-            $data_grafik[$row['kategori']]['data'][$bulanMapping[$row['bulan']]] = $row['total'];
+            $data['bulan_labels'] = json_encode([]);
+            $data['chart_labels'] = json_encode($tahun_labels);
+            $data['is_year_range'] = true; // Flag untuk view
         }
 
-        $data['bulan_labels'] = json_encode(array_unique($bulan_labels));
         $data['data_grafik'] = json_encode(array_values($data_grafik));
         $data['data_pengunjung'] = $data_pengunjung;
         $data['all_categories'] = $all_categories;
-        $data['total_per_kategori'] = $total_per_kategori; // Tambahkan ini
+        $data['total_per_kategori'] = $total_per_kategori;
         $data['jumlah'] = $this->M_Pengunjung->getDataByMonth($tahun);
 
         return $data;
