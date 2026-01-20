@@ -173,9 +173,6 @@ $bulanMapping = [
   var chartLabels = <?= $chart_labels; ?>;
   var datasets = <?= $data_grafik; ?>;
 
-  console.log('Chart Labels:', chartLabels);
-  console.log('Datasets:', datasets);
-
   var myBarChart = new Chart(ctx, {
     type: 'bar',
     data: {
@@ -243,13 +240,14 @@ $bulanMapping = [
       },
     }
   });
+</script>
 
-  // Fungsi untuk print tabel biasa
+<!-- 2. Script untuk Print dan Download PDF -->
+<script>
   function printTable() {
     window.print();
   }
 
-  // Fungsi untuk download PDF dengan grafik dan tabel
   async function downloadPDF() {
     const button = event.target.closest('button');
     const originalButtonText = button.innerHTML;
@@ -270,8 +268,6 @@ $bulanMapping = [
       const pageHeight = pdf.internal.pageSize.getHeight();
 
       // ===== HALAMAN 1: GRAFIK =====
-
-      // Logo dan Header (jika ada)
       pdf.setFontSize(16);
       pdf.setFont(undefined, 'bold');
       pdf.text('LAPORAN DATA PENGUNJUNG', pageWidth / 2, 20, {
@@ -282,22 +278,25 @@ $bulanMapping = [
         align: 'center'
       });
       pdf.setFontSize(12);
-      pdf.text('TAHUN <?= $tahun; ?>', pageWidth / 2, 33, {
+
+      <?php if ($tahun == $tahun_akhir) : ?>
+        const yearText = 'TAHUN <?= $tahun; ?>';
+      <?php else : ?>
+        const yearText = 'TAHUN <?= $tahun; ?> - <?= $tahun_akhir; ?>';
+      <?php endif; ?>
+
+      pdf.text(yearText, pageWidth / 2, 33, {
         align: 'center'
       });
-
-      // Garis pemisah
       pdf.setLineWidth(0.5);
       pdf.line(15, 36, pageWidth - 15, 36);
 
-      // Grafik
       const canvas = document.getElementById('statistik');
       const imgData = canvas.toDataURL('image/png', 1.0);
       const imgWidth = 250;
       const imgHeight = (canvas.height * imgWidth) / canvas.width;
       pdf.addImage(imgData, 'PNG', (pageWidth - imgWidth) / 2, 42, imgWidth, imgHeight);
 
-      // Total Pengunjung
       const totalPengunjung = <?php
                               $totalPengunjung = 0;
                               foreach ($data_pengunjung as $row) {
@@ -308,86 +307,78 @@ $bulanMapping = [
 
       pdf.setFontSize(12);
       pdf.setFont(undefined, 'bold');
-      const totalText = `Total Pengunjung: ${totalPengunjung.toLocaleString('id-ID')} Orang`;
-      pdf.text(totalText, pageWidth / 2, imgHeight + 52, {
+      pdf.text('Total Pengunjung: ' + totalPengunjung.toLocaleString('id-ID') + ' Orang', pageWidth / 2, imgHeight + 52, {
         align: 'center'
       });
 
-      // Footer halaman 1
       pdf.setFontSize(8);
       pdf.setFont(undefined, 'normal');
-      pdf.text(`Dicetak pada: ${new Date().toLocaleString('id-ID', { 
-      day: '2-digit', 
-      month: 'long', 
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    })}`, 15, pageHeight - 10);
-      pdf.text('Halaman 1 dari 2', pageWidth - 40, pageHeight - 10);
+      pdf.text('Dicetak pada: ' + new Date().toLocaleString('id-ID'), 15, pageHeight - 10);
 
-      // ===== HALAMAN 2: TABEL =====
-      pdf.addPage();
-
-      // Header halaman 2
-      pdf.setFontSize(16);
-      pdf.setFont(undefined, 'bold');
-      pdf.text('LAPORAN DATA PENGUNJUNG', pageWidth / 2, 20, {
-        align: 'center'
-      });
-      pdf.setFontSize(14);
-      pdf.text('MUSEUM NEGERI NUSA TENGGARA BARAT (NTB)', pageWidth / 2, 27, {
-        align: 'center'
-      });
-      pdf.setFontSize(12);
-      pdf.text('TAHUN <?= $tahun; ?>', pageWidth / 2, 33, {
-        align: 'center'
-      });
-      pdf.setLineWidth(0.5);
-      pdf.line(15, 36, pageWidth - 15, 36);
-
-      // Capture tabel dari #report
+      // ===== HALAMAN BERIKUTNYA: TABEL =====
       const reportElement = document.getElementById('report');
-      const tableElement = reportElement.querySelector('.table');
-
-      // Sementara tampilkan report untuk di-capture
       reportElement.style.display = 'block';
 
-      const tableCanvas = await html2canvas(tableElement, {
-        scale: 2,
-        backgroundColor: '#ffffff',
-        logging: false
+      // Ambil semua container .mb-4 yang BENAR-BENAR berisi tabel
+      const tableContainers = Array.from(reportElement.querySelectorAll('.mb-4')).filter(container => {
+        // Pastikan container memiliki tabel di dalamnya
+        return container.querySelector('table') !== null;
       });
 
-      // Sembunyikan lagi
-      reportElement.style.display = 'none';
+      console.log('Jumlah container tabel valid:', tableContainers.length);
 
-      const tableImgData = tableCanvas.toDataURL('image/png');
-      const tableImgWidth = pageWidth - 30; // margin 15 kiri kanan
-      const tableImgHeight = (tableCanvas.height * tableImgWidth) / tableCanvas.width;
+      // Counter untuk halaman
+      let pageCounter = 2;
 
-      // Cek apakah tabel muat di satu halaman
-      if (tableImgHeight > pageHeight - 60) {
-        // Jika terlalu tinggi, scale down
-        const scaledHeight = pageHeight - 60;
-        const scaledWidth = (tableCanvas.width * scaledHeight) / tableCanvas.height;
-        pdf.addImage(tableImgData, 'PNG', 15, 42, scaledWidth, scaledHeight);
-      } else {
-        pdf.addImage(tableImgData, 'PNG', 15, 42, tableImgWidth, tableImgHeight);
+      for (let i = 0; i < tableContainers.length; i++) {
+        pdf.addPage();
+
+        // Header untuk setiap halaman
+        pdf.setFontSize(14);
+        pdf.setFont(undefined, 'bold');
+        pdf.text('LAPORAN DATA PENGUNJUNG', pageWidth / 2, 15, {
+          align: 'center'
+        });
+        pdf.setFontSize(12);
+        pdf.text(yearText, pageWidth / 2, 22, {
+          align: 'center'
+        });
+        pdf.setLineWidth(0.5);
+        pdf.line(15, 25, pageWidth - 15, 25);
+
+        // Capture container
+        const tableCanvas = await html2canvas(tableContainers[i], {
+          scale: 2,
+          backgroundColor: '#ffffff',
+          logging: false
+        });
+
+        const tableImgData = tableCanvas.toDataURL('image/png');
+        const tableImgWidth = pageWidth - 30;
+        const tableImgHeight = (tableCanvas.height * tableImgWidth) / tableCanvas.width;
+
+        if (tableImgHeight > pageHeight - 50) {
+          const scaledHeight = pageHeight - 50;
+          const scaledWidth = (tableCanvas.width * scaledHeight) / tableCanvas.height;
+          pdf.addImage(tableImgData, 'PNG', 15, 30, scaledWidth, scaledHeight);
+        } else {
+          pdf.addImage(tableImgData, 'PNG', 15, 30, tableImgWidth, tableImgHeight);
+        }
+
+        // Footer
+        pdf.setFontSize(8);
+        pdf.text('Halaman ' + pageCounter, pageWidth - 40, pageHeight - 10);
+        pageCounter++;
       }
 
-      // Footer halaman 2
-      pdf.setFontSize(8);
-      pdf.text(`Dicetak pada: ${new Date().toLocaleString('id-ID', { 
-      day: '2-digit', 
-      month: 'long', 
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    })}`, 15, pageHeight - 10);
-      pdf.text('Halaman 2 dari 2', pageWidth - 40, pageHeight - 10);
+      reportElement.style.display = 'none';
 
-      // Download PDF
-      const fileName = `Statistik_Pengunjung_<?= $tahun; ?>${<?= isset($kategori) && $kategori !== 'semua' ? "true" : "false"; ?> ? '_<?= $kategori ?? ""; ?>' : ''}.pdf`;
+      let fileName = 'Statistik_Pengunjung_<?= $tahun; ?>-<?= $tahun_akhir; ?>';
+      <?php if (isset($kategori) && $kategori !== 'semua') : ?>
+        fileName += '_<?= $kategori; ?>';
+      <?php endif; ?>
+      fileName += '.pdf';
+
       pdf.save(fileName);
 
     } catch (error) {
@@ -421,72 +412,178 @@ $bulanMapping = [
       </div>
       <hr>
 
-      <div class="table text-center">
-        <table class="table table-bordered" id="" width="100%" cellspacing="0">
-          <thead>
-            <tr>
-              <th><?= ($is_year_range) ? 'Tahun' : 'Bulan'; ?></th>
-              <?php
-              // Inisialisasi array untuk menyimpan kategori unik
-              $uniqueCategories = [];
-              foreach ($data_pengunjung as $row) :
-                if (!in_array($row['kategori'], $uniqueCategories)) {
-                  $uniqueCategories[] = $row['kategori'];
-                }
-              endforeach;
+      <?php
+      // Inisialisasi array untuk menyimpan kategori unik
+      $uniqueCategories = [];
+      foreach ($data_pengunjung as $row) :
+        if (!in_array($row['kategori'], $uniqueCategories)) {
+          $uniqueCategories[] = $row['kategori'];
+        }
+      endforeach;
 
-              foreach ($uniqueCategories as $category) : ?>
-                <th><?= $category; ?></th>
-              <?php endforeach; ?>
-              <th>Jumlah</th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php
-            if ($is_year_range) {
-              // Untuk rentang tahun - group by tahun
-              $uniquePeriods = [];
-              $dataByPeriod = [];
+      if ($is_year_range) {
+        // ===== UNTUK RENTANG TAHUN =====
+        $uniquePeriods = [];
+        $dataByPeriod = [];
 
-              foreach ($data_pengunjung as $row) :
-                if (!in_array($row['tahun'], $uniquePeriods)) {
-                  $uniquePeriods[] = $row['tahun'];
-                }
-                if (!isset($dataByPeriod[$row['tahun']])) {
-                  $dataByPeriod[$row['tahun']] = [];
-                }
-                $dataByPeriod[$row['tahun']][$row['kategori']] = $row['total'];
-              endforeach;
+        foreach ($data_pengunjung as $row) :
+          if (!in_array($row['tahun'], $uniquePeriods)) {
+            $uniquePeriods[] = $row['tahun'];
+          }
+          if (!isset($dataByPeriod[$row['tahun']])) {
+            $dataByPeriod[$row['tahun']] = [];
+          }
+          $dataByPeriod[$row['tahun']][$row['kategori']] = $row['total'];
+        endforeach;
 
-              sort($uniquePeriods);
+        sort($uniquePeriods);
 
-              foreach ($uniquePeriods as $period) : ?>
-                <tr>
-                  <td><?= $period; ?></td>
-                  <?php foreach ($uniqueCategories as $category) : ?>
-                    <td><?= number_format($dataByPeriod[$period][$category] ?? 0, 0, ',', '.'); ?></td>
+        // Pecah data per 10 tahun
+        $chunkedPeriods = array_chunk($uniquePeriods, 10);
+
+        // Loop untuk setiap chunk (1 chunk = 1 tabel)
+        foreach ($chunkedPeriods as $chunkIndex => $periodChunk) :
+          $startYear = $periodChunk[0];
+          $endYear = end($periodChunk);
+      ?>
+
+          <!-- SATU TABEL PER CHUNK -->
+          <div class="mb-4 <?= ($chunkIndex > 0) ? 'page-break' : ''; ?>">
+            <?php if (count($chunkedPeriods) > 1) : ?>
+              <h6 class="text-center font-weight-bold mb-3">Periode <?= $startYear; ?> - <?= $endYear; ?></h6>
+            <?php endif; ?>
+
+            <div class="table text-center">
+              <table class="table table-bordered" width="100%" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>Tahun</th>
+                    <?php foreach ($uniqueCategories as $category) : ?>
+                      <th><?= $category; ?></th>
+                    <?php endforeach; ?>
+                    <th>Jumlah</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php foreach ($periodChunk as $period) : ?>
+                    <tr>
+                      <td><?= $period; ?></td>
+                      <?php foreach ($uniqueCategories as $category) : ?>
+                        <td><?= number_format($dataByPeriod[$period][$category] ?? 0, 0, ',', '.'); ?></td>
+                      <?php endforeach; ?>
+                      <td>
+                        <?= number_format(array_sum($dataByPeriod[$period]), 0, ',', '.'); ?>
+                      </td>
+                    </tr>
                   <?php endforeach; ?>
-                  <td>
-                    <?= number_format(array_sum($dataByPeriod[$period]), 0, ',', '.'); ?>
-                  </td>
-                </tr>
-              <?php endforeach;
-            } else {
-              // Untuk tahun tunggal - group by bulan
-              $uniqueMonths = [];
-              $dataByMonth = [];
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <th>Subtotal</th>
+                    <?php foreach ($uniqueCategories as $category) : ?>
+                      <td>
+                        <?php
+                        $subtotalByCategory = 0;
+                        foreach ($periodChunk as $period) {
+                          $subtotalByCategory += $dataByPeriod[$period][$category] ?? 0;
+                        }
+                        echo number_format($subtotalByCategory, 0, ',', '.');
+                        ?>
+                      </td>
+                    <?php endforeach; ?>
+                    <td>
+                      <?php
+                      $subtotalAll = 0;
+                      foreach ($periodChunk as $period) {
+                        $subtotalAll += array_sum($dataByPeriod[$period]);
+                      }
+                      echo number_format($subtotalAll, 0, ',', '.');
+                      ?>
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
 
-              foreach ($data_pengunjung as $row) :
-                if (!in_array($row['bulan'], $uniqueMonths)) {
-                  $uniqueMonths[] = $row['bulan'];
-                }
-                if (!isset($dataByMonth[$row['bulan']])) {
-                  $dataByMonth[$row['bulan']] = [];
-                }
-                $dataByMonth[$row['bulan']][$row['kategori']] = $row['total'];
-              endforeach;
+        <?php
+        endforeach; // End foreach chunkedPeriods
 
-              foreach ($uniqueMonths as $month) : ?>
+        // Tabel Grand Total HANYA jika ada lebih dari 1 chunk
+        if (count($chunkedPeriods) > 1) :
+        ?>
+          <div class="mb-4 page-break">
+            <h6 class="text-center font-weight-bold mb-3">GRAND TOTAL (<?= $uniquePeriods[0]; ?> - <?= end($uniquePeriods); ?>)</h6>
+
+            <div class="table text-center">
+              <table class="table table-bordered" width="100%" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>Keterangan</th>
+                    <?php foreach ($uniqueCategories as $category) : ?>
+                      <th><?= $category; ?></th>
+                    <?php endforeach; ?>
+                    <th>Jumlah</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>TOTAL KESELURUHAN</th>
+                    <?php foreach ($uniqueCategories as $category) : ?>
+                      <td>
+                        <?php
+                        $grandTotalByCategory = array_sum(array_column($dataByPeriod, $category));
+                        echo number_format($grandTotalByCategory, 0, ',', '.');
+                        ?>
+                      </td>
+                    <?php endforeach; ?>
+                    <td>
+                      <?php
+                      $grandTotal = 0;
+                      foreach ($uniqueCategories as $category) {
+                        $grandTotal += array_sum(array_column($dataByPeriod, $category));
+                      }
+                      echo number_format($grandTotal, 0, ',', '.');
+                      ?>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        <?php
+        endif; // End if count > 1
+
+      } else {
+        // ===== UNTUK TAHUN TUNGGAL (PER BULAN) =====
+        $uniqueMonths = [];
+        $dataByMonth = [];
+
+        foreach ($data_pengunjung as $row) :
+          if (!in_array($row['bulan'], $uniqueMonths)) {
+            $uniqueMonths[] = $row['bulan'];
+          }
+          if (!isset($dataByMonth[$row['bulan']])) {
+            $dataByMonth[$row['bulan']] = [];
+          }
+          $dataByMonth[$row['bulan']][$row['kategori']] = $row['total'];
+        endforeach;
+        ?>
+
+        <!-- SATU TABEL UNTUK DATA BULANAN -->
+        <div class="table text-center">
+          <table class="table table-bordered" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th>Bulan</th>
+                <?php foreach ($uniqueCategories as $category) : ?>
+                  <th><?= $category; ?></th>
+                <?php endforeach; ?>
+                <th>Jumlah</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php foreach ($uniqueMonths as $month) : ?>
                 <tr>
                   <td><?= $bulanMapping[$month]; ?></td>
                   <?php foreach ($uniqueCategories as $category) : ?>
@@ -496,36 +593,36 @@ $bulanMapping = [
                     <?= number_format(array_sum($dataByMonth[$month]), 0, ',', '.'); ?>
                   </td>
                 </tr>
-            <?php endforeach;
-
-              $dataByPeriod = $dataByMonth; // Untuk tfoot
-            }
-            ?>
-          </tbody>
-          <tfoot>
-            <tr>
-              <th>Total</th>
-              <?php foreach ($uniqueCategories as $category) : ?>
+              <?php endforeach; ?>
+            </tbody>
+            <tfoot>
+              <tr>
+                <th>Total</th>
+                <?php foreach ($uniqueCategories as $category) : ?>
+                  <td>
+                    <?php
+                    $totalByCategory = array_sum(array_column($dataByMonth, $category));
+                    echo number_format($totalByCategory, 0, ',', '.');
+                    ?>
+                  </td>
+                <?php endforeach; ?>
                 <td>
                   <?php
-                  $totalByCategory = array_sum(array_column($dataByPeriod, $category));
-                  echo number_format($totalByCategory, 0, ',', '.');
+                  $totalByTotal = 0;
+                  foreach ($uniqueCategories as $category) {
+                    $totalByTotal += array_sum(array_column($dataByMonth, $category));
+                  }
+                  echo number_format($totalByTotal, 0, ',', '.');
                   ?>
                 </td>
-              <?php endforeach; ?>
-              <td>
-                <?php
-                $totalByTotal = 0;
-                foreach ($uniqueCategories as $category) {
-                  $totalByTotal += array_sum(array_column($dataByPeriod, $category));
-                }
-                echo number_format($totalByTotal, 0, ',', '.');
-                ?>
-              </td>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+
+      <?php } // End if is_year_range 
+      ?>
+
     </div>
   </div>
 </div>
