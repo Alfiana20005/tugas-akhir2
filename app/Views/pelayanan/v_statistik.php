@@ -321,13 +321,11 @@ $bulanMapping = [
 
       // Ambil semua container .mb-4 yang BENAR-BENAR berisi tabel
       const tableContainers = Array.from(reportElement.querySelectorAll('.mb-4')).filter(container => {
-        // Pastikan container memiliki tabel di dalamnya
         return container.querySelector('table') !== null;
       });
 
       console.log('Jumlah container tabel valid:', tableContainers.length);
 
-      // Counter untuk halaman
       let pageCounter = 2;
 
       for (let i = 0; i < tableContainers.length; i++) {
@@ -346,23 +344,40 @@ $bulanMapping = [
         pdf.setLineWidth(0.5);
         pdf.line(15, 25, pageWidth - 15, 25);
 
-        // Capture container
+        // Capture container dengan scale lebih tinggi dan width yang cukup
         const tableCanvas = await html2canvas(tableContainers[i], {
-          scale: 2,
+          scale: 3, // Tingkatkan scale untuk kualitas lebih baik
           backgroundColor: '#ffffff',
-          logging: false
+          logging: false,
+          windowWidth: tableContainers[i].scrollWidth, // Gunakan scroll width untuk capture semua kolom
+          width: tableContainers[i].scrollWidth // Pastikan semua lebar tercapture
         });
 
         const tableImgData = tableCanvas.toDataURL('image/png');
-        const tableImgWidth = pageWidth - 30;
+
+        // Gunakan margin lebih kecil agar tabel bisa lebih lebar
+        const marginLeft = 10;
+        const marginRight = 10;
+        const availableWidth = pageWidth - marginLeft - marginRight;
+
+        const tableImgWidth = availableWidth;
         const tableImgHeight = (tableCanvas.height * tableImgWidth) / tableCanvas.width;
 
-        if (tableImgHeight > pageHeight - 50) {
-          const scaledHeight = pageHeight - 50;
+        // Cek apakah tinggi melebihi halaman
+        const maxHeight = pageHeight - 40; // 30 untuk header + 10 untuk footer
+
+        if (tableImgHeight > maxHeight) {
+          // Jika terlalu tinggi, sesuaikan berdasarkan tinggi
+          const scaledHeight = maxHeight;
           const scaledWidth = (tableCanvas.width * scaledHeight) / tableCanvas.height;
-          pdf.addImage(tableImgData, 'PNG', 15, 30, scaledWidth, scaledHeight);
+
+          // Center horizontal jika width lebih kecil dari available
+          const xPosition = scaledWidth < availableWidth ?
+            (pageWidth - scaledWidth) / 2 : marginLeft;
+
+          pdf.addImage(tableImgData, 'PNG', xPosition, 30, scaledWidth, scaledHeight);
         } else {
-          pdf.addImage(tableImgData, 'PNG', 15, 30, tableImgWidth, tableImgHeight);
+          pdf.addImage(tableImgData, 'PNG', marginLeft, 30, tableImgWidth, tableImgHeight);
         }
 
         // Footer
