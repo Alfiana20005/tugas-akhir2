@@ -68,7 +68,7 @@ $routes->get('/koleksi', 'C_LandingPage::koleksi_page');
 
 $routes->get('/koleksi_kategori/(:segment)', 'C_LandingPage::koleksi_kategori/$1');
 $routes->get('/koleksi_detail', 'C_LandingPage::koleksi_detail');
-$routes->get('/koleksi_detail/(:segment)', 'C_LandingPage::koleksi_detail/$1');
+$routes->get('/koleksi/detail/(:segment)', 'C_LandingPage::koleksi_detail/$1');
 $routes->get('/publikasi', 'C_LandingPage::publikasi');
 $routes->get('/publikasi/detail/(:num)', 'C_LandingPage::publikasi2_detail/$1');
 $routes->get('/detailBuku/(:segment)', 'C_LandingPage::detailBuku/$1');

@@ -52,7 +52,7 @@
 
             <div class="portfolio-links">
               <a href="<?= base_url("img/koleksiAdmin/" . $k['foto']); ?>" data-gallery="portfolioGallery" class="portfolio-lightbox" title="<?= $k['nama']; ?>"><i class="fa-solid fa-eye"></i></a>
-              <a href="<?= base_url("/koleksi_detail2/{$k['id_koleksi']}"); ?>" title="More Details"><i class="fa-solid fa-circle-info"></i></a>
+              <a href="<?= base_url("/koleksi/detail/{$k['id_koleksi']}"); ?>" title="More Details"><i class="fa-solid fa-circle-info"></i></a>
             </div>
           </div>
         </div>
