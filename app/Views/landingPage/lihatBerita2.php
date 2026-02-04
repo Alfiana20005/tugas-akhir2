@@ -109,31 +109,31 @@
 						<ul class="cat-list">
 
 							<li>
-								<a href="/beritaKategori2/Pendidikan" class="d-flex justify-content-between">
+								<a href="/berita/kategori/Pendidikan" class="d-flex justify-content-between">
 									<p>Pendidikan</p>
 									<!-- <p>59</p> -->
 								</a>
 							</li>
 							<li>
-								<a href="/beritaKategori2/Sosial Masyarakat" class="d-flex justify-content-between">
+								<a href="/berita/kategori/Sosial Masyarakat" class="d-flex justify-content-between">
 									<p>Sosial Masyarakat</p>
 									<!-- <p>29</p> -->
 								</a>
 							</li>
 							<li>
-								<a href="/beritaKategori2/Sejarah dan Budaya" class="d-flex justify-content-between">
+								<a href="/berita/kategori/Sejarah dan Budaya" class="d-flex justify-content-between">
 									<p>Sejarah dan Budaya</p>
 									<!-- <p>15</p> -->
 								</a>
 							</li>
 							<li>
-								<a href="/beritaKategori2/Pemerintahan" class="d-flex justify-content-between">
+								<a href="/berita/kategori/Pemerintahan" class="d-flex justify-content-between">
 									<p>Pemerintahan</p>
 									<!-- <p>09</p> -->
 								</a>
 							</li>
 							<li>
-								<a href="/beritaKategori2/Pariwisata" class="d-flex justify-content-between">
+								<a href="/berita/kategori/Pariwisata" class="d-flex justify-content-between">
 									<p>Pariwisata</p>
 									<!-- <p>09</p> -->
 								</a>
