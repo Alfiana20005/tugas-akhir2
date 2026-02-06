@@ -36,61 +36,61 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/koleksiAdmin">
-                <i class="fas fa-fw fa-users"></i>
+                <i class="fas fa-fw fa-archive"></i>
                 <span>Koleksi</span></a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/kajianAdmin">
-                <i class="fas fa-fw fa-users"></i>
+                <i class="fas fa-fw fa-book-reader"></i>
                 <span>Kajian</span></a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/tambahPublikasi">
-                <i class="fas fa-fw fa-users"></i>
+                <i class="fas fa-fw fa-newspaper"></i>
                 <span>Publikasi</span></a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link" href="/dataManuskripKol">
-                <i class="fas fa-fw fa-users"></i>
+                <i class="fas fa-fw fa-scroll"></i>
                 <span>Koleksi Manuskrip</span></a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/dataManuskrip">
-                <i class="fas fa-fw fa-users"></i>
+                <i class="fas fa-fw fa-file-contract"></i>
                 <span>Manuskrip</span></a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/aksesManuskrip">
-                <i class="fas fa-fw fa-users"></i>
+                <i class="fas fa-fw fa-user-lock"></i>
                 <span>Hak Akses Manuskrip</span></a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link" href="/beritaAdmin">
-                <i class="fas fa-fw fa-users"></i>
+                <i class="fas fa-fw fa-rss"></i>
                 <span>Berita</span></a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/tambahKegiatan">
-                <i class="fas fa-fw fa-users"></i>
+                <i class="fas fa-fw fa-calendar-alt"></i>
                 <span>Kegiatan</span></a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link" href="/pesanAdmin">
-                <i class="fas fa-fw fa-users"></i>
+                <i class="fas fa-fw fa-envelope"></i>
                 <span>Pesan</span></a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link" href="/galleryAdmin">
-                <i class="fas fa-fw fa-users"></i>
+                <i class="fas fa-fw fa-images"></i>
                 <span>Galeri</span></a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/sega">
-                <i class="fas fa-fw fa-users"></i>
+                <i class="fas fa-fw fa-cube"></i>
                 <span>Sega</span></a>
         </li>
         <li class="nav-item">
@@ -100,7 +100,7 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/dataPameran">
-                <i class="fas fa-fw fa-search-plus"></i>
+                <i class="fas fa-fw fa-palette"></i>
                 <span>Pameran</span></a>
         </li>
 
@@ -146,12 +146,12 @@
 
         <li class="nav-item">
             <a class="nav-link" href="/tambahdata">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <i class="fas fa-fw fa-plus-circle"></i>
                 <span>Tambah Data Koleksi</span></a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/seluruhKoleksi">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <i class="fas fa-fw fa-boxes"></i>
                 <span>Seluruh Koleksi</span></a>
         </li>
 
@@ -182,7 +182,7 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/perawatan">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <i class="fas fa-fw fa-tools"></i>
                 <span>Perawatan</span></a>
         </li>
         <!-- <li class="nav-item">
@@ -203,13 +203,13 @@
 
         <li class="nav-item">
             <a class="nav-link" href="/tambahdata">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <i class="fas fa-fw fa-plus-circle"></i>
                 <span>Tambah Data Koleksi</span></a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link" href="/seluruhKoleksi">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <i class="fas fa-fw fa-boxes"></i>
                 <span>Seluruh Koleksi</span></a>
         </li>
 
@@ -241,7 +241,7 @@
 
         <li class="nav-item">
             <a class="nav-link" href="/perawatan">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <i class="fas fa-fw fa-tools"></i>
                 <span>Perawatan</span></a>
         </li>
         <li class="nav-item">
@@ -265,45 +265,45 @@
         </div>
         <li class="nav-item">
             <a class="nav-link" href="/strukturOrganisasi">
-                <i class="fas fa-fw fa-users"></i>
+                <i class="fas fa-fw fa-sitemap"></i>
                 <span>Struktur Organisasi</span></a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/koleksiAdmin">
-                <i class="fas fa-fw fa-users"></i>
+                <i class="fas fa-fw fa-archive"></i>
                 <span>Koleksi</span></a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/kajianAdmin">
-                <i class="fas fa-fw fa-users"></i>
+                <i class="fas fa-fw fa-book-reader"></i>
                 <span>Kajian</span></a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/tambahPublikasi">
-                <i class="fas fa-fw fa-users"></i>
+                <i class="fas fa-fw fa-newspaper"></i>
                 <span>Publikasi</span></a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link" href="/beritaAdmin">
-                <i class="fas fa-fw fa-users"></i>
+                <i class="fas fa-fw fa-rss"></i>
                 <span>Berita</span></a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/tambahKegiatan">
-                <i class="fas fa-fw fa-users"></i>
+                <i class="fas fa-fw fa-calendar-alt"></i>
                 <span>Kegiatan</span></a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link" href="/pesanAdmin">
-                <i class="fas fa-fw fa-users"></i>
+                <i class="fas fa-fw fa-envelope"></i>
                 <span>Pesan</span></a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link" href="/galleryAdmin">
-                <i class="fas fa-fw fa-users"></i>
+                <i class="fas fa-fw fa-images"></i>
                 <span>Galeri</span></a>
         </li>
         <!-- <li class="nav-item">
@@ -324,7 +324,7 @@
         </div>
         <li class="nav-item">
             <a class="nav-link" href="/seluruhKoleksi">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <i class="fas fa-fw fa-boxes"></i>
                 <span>Seluruh Koleksi</span></a>
         </li>
         <li class="nav-item">
@@ -353,7 +353,7 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/perawatan">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <i class="fas fa-fw fa-tools"></i>
                 <span>Perawatan</span></a>
         </li>
 
@@ -363,7 +363,7 @@
 
         <li class="nav-item">
             <a class="nav-link" href="/inputData">
-                <i class="fas fa-fw fa-users"></i>
+                <i class="fas fa-fw fa-book"></i>
                 <span>Data Buku</span></a>
         </li>
         <!-- <hr class="sidebar-divider"> -->
@@ -380,45 +380,45 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/strukturOrganisasi">
-                <i class="fas fa-fw fa-users"></i>
+                <i class="fas fa-fw fa-sitemap"></i>
                 <span>Struktur Organisasi</span></a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/koleksiAdmin">
-                <i class="fas fa-fw fa-users"></i>
+                <i class="fas fa-fw fa-archive"></i>
                 <span>Koleksi</span></a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/kajianAdmin">
-                <i class="fas fa-fw fa-users"></i>
+                <i class="fas fa-fw fa-book-reader"></i>
                 <span>Kajian</span></a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/tambahPublikasi">
-                <i class="fas fa-fw fa-users"></i>
+                <i class="fas fa-fw fa-newspaper"></i>
                 <span>Publikasi</span></a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link" href="/beritaAdmin">
-                <i class="fas fa-fw fa-users"></i>
+                <i class="fas fa-fw fa-rss"></i>
                 <span>Berita</span></a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/tambahKegiatan">
-                <i class="fas fa-fw fa-users"></i>
+                <i class="fas fa-fw fa-calendar-alt"></i>
                 <span>Kegiatan</span></a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link" href="/pesanAdmin">
-                <i class="fas fa-fw fa-users"></i>
+                <i class="fas fa-fw fa-envelope"></i>
                 <span>Pesan</span></a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link" href="/galleryAdmin">
-                <i class="fas fa-fw fa-users"></i>
+                <i class="fas fa-fw fa-images"></i>
                 <span>Galeri</span></a>
         </li>
         <hr class="sidebar-divider">
@@ -429,13 +429,13 @@
 
         <li class="nav-item">
             <a class="nav-link" href="/tambahdata">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <i class="fas fa-fw fa-plus-circle"></i>
                 <span>Tambah Data Koleksi</span></a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link" href="/seluruhKoleksi">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <i class="fas fa-fw fa-boxes"></i>
                 <span>Seluruh Koleksi</span></a>
         </li>
 
@@ -466,7 +466,7 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/perawatan">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <i class="fas fa-fw fa-tools"></i>
                 <span>Perawatan</span></a>
         </li>
         <li class="nav-item">
@@ -488,45 +488,45 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/strukturOrganisasi">
-                <i class="fas fa-fw fa-users"></i>
+                <i class="fas fa-fw fa-sitemap"></i>
                 <span>Struktur Organisasi</span></a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/koleksiAdmin">
-                <i class="fas fa-fw fa-users"></i>
+                <i class="fas fa-fw fa-archive"></i>
                 <span>Koleksi</span></a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/kajianAdmin">
-                <i class="fas fa-fw fa-users"></i>
+                <i class="fas fa-fw fa-book-reader"></i>
                 <span>Kajian</span></a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/tambahPublikasi">
-                <i class="fas fa-fw fa-users"></i>
+                <i class="fas fa-fw fa-newspaper"></i>
                 <span>Publikasi</span></a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link" href="/beritaAdmin">
-                <i class="fas fa-fw fa-users"></i>
+                <i class="fas fa-fw fa-rss"></i>
                 <span>Berita</span></a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/tambahKegiatan">
-                <i class="fas fa-fw fa-users"></i>
+                <i class="fas fa-fw fa-calendar-alt"></i>
                 <span>Kegiatan</span></a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link" href="/pesanAdmin">
-                <i class="fas fa-fw fa-users"></i>
+                <i class="fas fa-fw fa-envelope"></i>
                 <span>Pesan</span></a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link" href="/galleryAdmin">
-                <i class="fas fa-fw fa-users"></i>
+                <i class="fas fa-fw fa-images"></i>
                 <span>Galeri</span></a>
         </li>
         <hr class="sidebar-divider">
@@ -561,7 +561,7 @@
 
         <li class="nav-item">
             <a class="nav-link" href="/dataBuku">
-                <i class="fas fa-fw fa-users"></i>
+                <i class="fas fa-fw fa-book"></i>
                 <span>Data Buku</span></a>
         </li>
 
