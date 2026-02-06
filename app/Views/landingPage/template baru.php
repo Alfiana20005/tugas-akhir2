@@ -161,7 +161,7 @@
 							</ul>
 						</li>
 						<li><a href="/berita"><strong>Berita</strong></a></li>
-						<li><a href="/kegiatan"><strong>Kegiatan</strong></a></li>
+						<!-- <li><a href="/kegiatan"><strong>Kegiatan</strong></a></li> -->
 						<li class="menu-has-children"><a href=""><strong>Tulisan</strong></a>
 							<ul>
 								<li><a href="/kajian">Tulisan</a></li>
