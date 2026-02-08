@@ -25,16 +25,40 @@
 			<div class="col-lg-8 posts-list">
 
 				<div class="single-post row d-flex">
-
 					<div class="col-lg-12 col-md-12 ">
 						<div class="feature-img mb-2">
-							<img class="img-fluid" src="<?= base_url("img/koleksiAdmin/" . $koleksi['foto']); ?>" alt="" style="width: 120%; height: 320px; object-fit: contain;">>
+							<img class="img-fluid" src="<?= base_url("img/koleksiAdmin/" . $koleksi['foto']); ?>" alt="" style="width: 100%; height: 320px; object-fit: contain;">
 						</div>
-						<!-- -->
 					</div>
+
+					<!-- Galeri Gambar Deskripsi -->
+					<?php
+					$gambar_deskripsi = !empty($koleksi['gambar_deskripsi']) ? json_decode($koleksi['gambar_deskripsi'], true) : [];
+					if (!empty($gambar_deskripsi) && is_array($gambar_deskripsi)):
+					?>
+						<div class="col-lg-12 mt-4">
+							<h4 class="mb-3">Galeri Gambar</h4>
+							<div class="row">
+								<?php foreach ($gambar_deskripsi as $index => $img): ?>
+									<?php if (!empty($img)): ?>
+										<div class="col-md-6 col-lg-6 mb-3">
+											<div class="gallery-item">
+												<img src="<?= base_url('img/koleksiDeskripsi/' . $img); ?>"
+													class="img-fluid img-thumbnail"
+													alt="Gambar Koleksi <?= $index + 1; ?>"
+													style="width: 100%; height: 350px; object-fit: cover; cursor: pointer;"
+													onclick="openImageModal('<?= base_url('img/koleksiDeskripsi/' . $img); ?>')">
+											</div>
+										</div>
+									<?php endif; ?>
+								<?php endforeach; ?>
+							</div>
+						</div>
+					<?php endif; ?>
 
 				</div>
 			</div>
+
 			<div class="col-lg-4 sidebar-widgets">
 				<div class="widget-wrap">
 
@@ -42,32 +66,33 @@
 						<h4 class="category-title">Detail Koleksi</h4>
 						<ul class="cat-list">
 							<li>
-								<a href="/kajian2" class="d-flex justify-content-between">
-									<p></p>
-									<!-- <p>37</p> -->
+								<a href="#" class="d-flex justify-content-between">
+									<p><strong>Nama:</strong></p>
 								</a>
+								<p><?= esc($koleksi['nama']); ?></p>
 							</li>
 							<li>
 								<a href="#" class="d-flex justify-content-between">
-									<p>Nama : <?= $koleksi['nama']; ?></p>
-									<!-- <p>24</p> -->
+									<p><strong>Nomor:</strong></p>
 								</a>
+								<p><?= esc($koleksi['no']); ?></p>
 							</li>
 							<li>
 								<a href="#" class="d-flex justify-content-between">
-									<p>Nomor : <?= $koleksi['no']; ?></p>
-									<!-- <p>59</p> -->
+									<p><strong>Kategori:</strong></p>
 								</a>
+								<p><?= esc($koleksi['kategori']); ?></p>
 							</li>
 							<li>
 								<a href="#" class="d-flex justify-content-between">
-									<p>Ukuran : </p>
-
+									<p><strong>Ukuran:</strong></p>
 								</a>
-								<p><?= $koleksi['ukuran']; ?> </p>
+								<p><?= esc($koleksi['ukuran']); ?></p>
 							</li>
-
 							<li>
+								<a href="#" class="d-flex justify-content-between">
+									<p><strong>Deskripsi:</strong></p>
+								</a>
 								<?php
 								function nl2p($text)
 								{
@@ -83,11 +108,7 @@
 									return $text;
 								}
 								?>
-								<a href="#" class="d-flex justify-content-between">
-									<p> </p>
-
-								</a>
-								<p><?= nl2p($koleksi['deskripsi']); ?> </p>
+								<div><?= nl2p($koleksi['deskripsi']); ?></div>
 							</li>
 						</ul>
 					</div>
@@ -98,5 +119,64 @@
 	</div>
 </section>
 <!-- End post-content Area -->
+
+<!-- Modal untuk melihat gambar fullscreen -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Gambar Koleksi</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body text-center">
+				<img id="modalImage" src="" class="img-fluid" alt="Gambar Koleksi">
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	function openImageModal(imageSrc) {
+		document.getElementById('modalImage').src = imageSrc;
+		var imageModal = new bootstrap.Modal(document.getElementById('imageModal'));
+		imageModal.show();
+	}
+</script>
+
+<!-- CSS tambahan untuk styling galeri -->
+<style>
+	.gallery-item {
+		position: relative;
+		overflow: hidden;
+		border-radius: 8px;
+		transition: transform 0.3s ease;
+	}
+
+	.gallery-item:hover {
+		transform: scale(1.05);
+		box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+	}
+
+	.gallery-item img {
+		transition: all 0.3s ease;
+	}
+
+	.gallery-item:hover img {
+		opacity: 0.9;
+	}
+
+	.cat-list li {
+		border-bottom: 1px solid #eee;
+		padding: 10px 0;
+	}
+
+	.cat-list li:last-child {
+		border-bottom: none;
+	}
+
+	.cat-list p {
+		margin-bottom: 5px;
+	}
+</style>
 
 <?= $this->endSection(); ?>

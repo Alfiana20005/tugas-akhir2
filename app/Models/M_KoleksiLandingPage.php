@@ -12,7 +12,7 @@ class M_KoleksiLandingPage extends Model
 
 
     // protected $allowedFields = ['foto', 'nama','password','email','username','level'];
-    protected $allowedFields = ['nama', 'no', 'ukuran', 'foto',  'deskripsi', 'kategori'];
+    protected $allowedFields = ['nama', 'no', 'ukuran', 'foto', 'deskripsi', 'kategori', 'gambar_deskripsi'];
 
 
     protected $validationRules = [];

@@ -1094,54 +1094,72 @@ class C_Admin extends BaseController
         $rules = [
             'nama' => [
                 'rules' => 'required',
-                'errors' => ['required' => 'Judul harus diisi']
+                'errors' => ['required' => 'Nama harus diisi']
             ],
             'no' => [
                 'rules' => 'required',
+                'errors' => ['required' => 'Nomor koleksi tidak boleh kosong']
+            ],
+            'foto' => [
+                'rules' => 'uploaded[foto]|max_size[foto,2048]|is_image[foto]|mime_in[foto,image/jpg,image/jpeg,image/png]',
                 'errors' => [
-                    'required' => 'tanggal tidak boleh kosong',
-
-
+                    'uploaded' => 'Foto utama harus diupload',
+                    'max_size' => 'Ukuran foto maksimal 2MB',
+                    'is_image' => 'File harus berupa gambar',
+                    'mime_in' => 'Format file harus JPG, JPEG, atau PNG'
                 ]
             ],
         ];
 
         if (!$this->validate($rules)) {
-            // session()->setFlashdata('errors', $this->validator->listErrors());
             return redirect()->to('/koleksiAdmin')->withInput()->with('errors', $this->validator->listErrors());
         }
 
+        // Upload foto utama
         $foto = $this->request->getFile('foto');
 
         if ($foto->isValid() && !$foto->hasMoved()) {
             $fotoName = $foto->getRandomName();
             $foto->move('img/koleksiAdmin', $fotoName);
         } else {
-            // Handle file upload error
             return redirect()->to(base_url('/koleksiAdmin'))
                 ->withInput()
                 ->with('errors', $foto->getErrorString());
         }
 
-        //tambahh data
-        // $this->M_Petugas->save($this->request->getPost());
+        // Upload multiple gambar deskripsi
+        $gambarDeskripsi = $this->request->getFileMultiple('gambar_deskripsi');
+        $namaGambarArray = [];
+
+        if ($gambarDeskripsi && count($gambarDeskripsi) > 0) {
+            foreach ($gambarDeskripsi as $gambar) {
+                // Cek apakah file valid dan bukan file kosong
+                if ($gambar->isValid() && !$gambar->hasMoved()) {
+                    // Validasi ukuran dan tipe file
+                    if ($gambar->getSize() <= 2048000 && in_array($gambar->getMimeType(), ['image/jpg', 'image/jpeg', 'image/png'])) {
+                        $namaGambar = $gambar->getRandomName();
+                        $gambar->move('img/koleksiDeskripsi', $namaGambar);
+                        $namaGambarArray[] = $namaGambar;
+                    }
+                }
+            }
+        }
+
+        // Simpan data koleksi
         $this->M_KoleksiLandingPage->save([
-            // 'id_petugas' => $id_petugas,
             'nama' => $this->request->getVar('nama'),
             'no' => $this->request->getVar('no'),
             'deskripsi' => $this->request->getVar('deskripsi'),
             'ukuran' => $this->request->getVar('ukuran'),
             'kategori' => $this->request->getVar('kategori'),
             'foto' => $fotoName,
-
+            'gambar_deskripsi' => json_encode($namaGambarArray), // Simpan sebagai JSON
         ]);
 
         //alert
         session()->setFlashdata('pesan', 'Data Berhasil Ditambahkan.');
 
         return redirect()->to('/koleksiAdmin');
-
-        // return view('admin/v_masterpetugas');
     }
 
 
