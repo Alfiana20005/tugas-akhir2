@@ -139,6 +139,7 @@ $routes->group('', ['filter' => 'filterAdmin'], function ($routes) {
     $routes->post('/saveKoleksi', 'C_Admin::saveKoleksi');
     $routes->delete('hapusKoleksiAdmin/(:segment)', 'C_Admin::deleteKoleksi/$1');
     $routes->post('updateKoleksiAdmin/(:segment)', 'C_Admin::updateKoleksiAdmin/$1');
+    $routes->post('hapusGambarDeskripsiByName', 'C_Admin::hapusGambarDeskripsiByName');
 
     // Gallery Admin
     $routes->get('/galleryAdmin', 'C_Admin::galleryAdmin');

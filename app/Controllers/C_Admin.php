@@ -1186,36 +1186,66 @@ class C_Admin extends BaseController
             'kategori' => $this->request->getVar('kategori'),
             'ukuran' => $this->request->getVar('ukuran'),
             'deskripsi' => $this->request->getVar('deskripsi'),
-            'foto' => $this->request->getVar('foto'),
-
         ];
 
+        // Upload foto utama jika ada
         $foto = $this->request->getFile('foto');
-
-        // Cek apakah file foto diunggah
         if ($foto && $foto->isValid() && !$foto->hasMoved()) {
-            // Generate nama unik untuk file foto
+            // Hapus foto lama jika ada
+            $koleksiLama = $this->M_KoleksiLandingPage->find($id_koleksi);
+            if (!empty($koleksiLama['foto']) && file_exists('img/koleksiAdmin/' . $koleksiLama['foto'])) {
+                unlink('img/koleksiAdmin/' . $koleksiLama['foto']);
+            }
+
             $fotoName = $foto->getRandomName();
-
-            // Pindahkan file foto ke folder yang diinginkan
-            $foto->move('img/koleksiAdmin', $fotoName); // Perbarui path sesuai dengan folder yang diinginkan
-
-            // Tambahkan nama file foto ke data yang akan diupdate
+            $foto->move('img/koleksiAdmin', $fotoName);
             $dataToUpdate['foto'] = $fotoName;
         }
 
-        // Membersihkan data yang mungkin ada dari inputan form
-        $dataToUpdate = array_filter($dataToUpdate);
+        // Handle urutan gambar deskripsi yang diubah
+        $urutanBaru = $this->request->getPost('urutan_gambar');
+        if (!empty($urutanBaru)) {
+            // Jika ada perubahan urutan, update dengan urutan baru
+            $dataToUpdate['gambar_deskripsi'] = $urutanBaru;
+        } else {
+            // Jika tidak ada perubahan urutan, ambil data existing
+            $koleksiLama = $this->M_KoleksiLandingPage->find($id_koleksi);
+            $existingImages = !empty($koleksiLama['gambar_deskripsi']) ? json_decode($koleksiLama['gambar_deskripsi'], true) : [];
+
+            // Upload gambar deskripsi baru jika ada
+            $gambarBaru = $this->request->getFileMultiple('gambar_deskripsi');
+
+            if ($gambarBaru && is_array($gambarBaru)) {
+                foreach ($gambarBaru as $gambar) {
+                    // Cek apakah file valid dan belum mencapai limit 2 gambar
+                    if ($gambar->isValid() && !$gambar->hasMoved() && count($existingImages) < 2) {
+                        // Validasi ukuran dan tipe
+                        if ($gambar->getSize() <= 2048000 && in_array($gambar->getMimeType(), ['image/jpg', 'image/jpeg', 'image/png'])) {
+                            $namaGambar = $gambar->getRandomName();
+                            $gambar->move('img/koleksiDeskripsi', $namaGambar);
+                            $existingImages[] = $namaGambar;
+                        }
+                    }
+                }
+            }
+
+            $dataToUpdate['gambar_deskripsi'] = json_encode($existingImages);
+        }
+
+        // Membersihkan data yang kosong
+        $dataToUpdate = array_filter($dataToUpdate, function ($value) {
+            return $value !== null && $value !== '';
+        });
 
         // Memastikan ada data yang akan diupdate
         if (!empty($dataToUpdate)) {
             // Mengeksekusi perintah update
             $this->M_KoleksiLandingPage->update($id_koleksi, $dataToUpdate);
 
-            // Ambil data petugas setelah diubah dari database
-            $newDataKoleksi = $this->M_KoleksiLandingPage->getKOleksiById($id_koleksi);
+            // Ambil data koleksi setelah diubah dari database
+            $newDataKoleksi = $this->M_KoleksiLandingPage->find($id_koleksi);
 
-            // Perbarui sesi pengguna dengan data baru
+            // Perbarui sesi jika perlu (untuk non-admin)
             if (session()->get('level') != 'Admin') {
                 session()->set([
                     'nama' => $newDataKoleksi['nama'],
@@ -1226,16 +1256,52 @@ class C_Admin extends BaseController
                     'foto' => $newDataKoleksi['foto'],
                 ]);
             }
-            //alert
+
             session()->setFlashdata('pesan', 'Data Berhasil diubah.');
         } else {
-            // Jika tidak ada data yang diupdate, munculkan pesan kesalahan
             session()->setFlashdata('error', 'Tidak ada data yang diupdate.');
         }
-        // dd('berhasil');
 
-        // Redirect ke halaman sebelumnya atau halaman yang sesuai
         return redirect()->to('/koleksiAdmin');
+    }
+
+    // Method baru untuk hapus gambar deskripsi by name
+    public function hapusGambarDeskripsiByName()
+    {
+        $json = $this->request->getJSON();
+        $id_koleksi = $json->id_koleksi;
+        $image_name = $json->image_name;
+
+        $koleksi = $this->M_KoleksiLandingPage->find($id_koleksi);
+
+        if ($koleksi) {
+            $gambar_array = json_decode($koleksi['gambar_deskripsi'], true);
+
+            if (is_array($gambar_array)) {
+                // Remove image from array
+                $key = array_search($image_name, $gambar_array);
+
+                if ($key !== false) {
+                    unset($gambar_array[$key]);
+                    $gambar_array = array_values($gambar_array); // Reindex array
+
+                    // Delete file
+                    $filePath = 'img/koleksiDeskripsi/' . $image_name;
+                    if (file_exists($filePath)) {
+                        unlink($filePath);
+                    }
+
+                    // Update database
+                    $this->M_KoleksiLandingPage->update($id_koleksi, [
+                        'gambar_deskripsi' => json_encode($gambar_array)
+                    ]);
+
+                    return $this->response->setJSON(['success' => true, 'message' => 'Gambar berhasil dihapus']);
+                }
+            }
+        }
+
+        return $this->response->setJSON(['success' => false, 'message' => 'Gambar tidak ditemukan']);
     }
 
 
