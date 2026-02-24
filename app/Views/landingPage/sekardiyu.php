@@ -56,7 +56,7 @@
 			<div class="col-lg-4 col-md-6">
 				<div class="single-other-issue">
 					<div class="thumb">
-						<img class="img-fluid mb-2" src="img/sekardiyu/sekardiyu2.png" alt="">
+						<img class="img-fluid mb-2" src="img/sekardiyu/sekardiyu2.png" alt="" style="height: 100% !important;">
 					</div>
 				</div>
 			</div>
@@ -64,7 +64,7 @@
 			<div class="col-lg-4 col-md-6">
 				<div class="single-other-issue">
 					<div class="thumb">
-						<img class="img-fluid mb-2" src="img/sekardiyu/sekardiyu3.png" alt="">
+						<img class="img-fluid mb-2" src="img/sekardiyu/sekardiyu3.png" alt="" style="height: 100% !important;">
 					</div>
 
 				</div>
@@ -72,7 +72,7 @@
 			<div class="col-lg-4 col-md-6">
 				<div class="single-other-issue">
 					<div class="thumb">
-						<img class="img-fluid mb-2" src="img/sekardiyu/sekardiyu4.png" alt="">
+						<img class="img-fluid mb-2" src="img/sekardiyu/sekardiyu4.png" alt="" style="height: 100% !important;">
 					</div>
 
 				</div>
