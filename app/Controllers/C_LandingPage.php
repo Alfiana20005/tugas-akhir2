@@ -208,8 +208,12 @@ class C_LandingPage extends BaseController
             $sumber = $berita['sumber'] ?? 'Museum Negeri NTB';
             $deskripsiDenganSumber = $sumber . ' — ' . $deskripsi;
 
+            // Format tanggal Indonesia
+            $tanggalIndo = tanggal_indonesia_lengkap($berita['created_at']);
+
             $data = [
                 'berita' => $berita,
+                'tanggal_indo' => $tanggalIndo,
                 'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
                 'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
                 'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
@@ -223,7 +227,7 @@ class C_LandingPage extends BaseController
                 // Open Graph (WhatsApp, Facebook, dll)
                 'og_title' => $berita['judul'],
                 'og_description' => $deskripsiDenganSumber,
-                'og_image' => base_url('img/berita/' . $berita['gambar']), // Sesuaikan dengan field gambar berita
+                'og_image' => base_url('img/berita/' . $berita['gambar']),
                 'og_url' => current_url(),
                 'og_type' => 'article',
                 'og_site_name' => 'Museum Negeri NTB',
@@ -258,6 +262,8 @@ class C_LandingPage extends BaseController
 
         foreach ($data_berita as &$berita) {
             $berita['isi_pendek'] = $this->getExcerpt($berita['isi'], 20);
+            // Tambahkan tanggal Indonesia untuk setiap berita
+            $berita['tanggal_indo'] = tanggal_indonesia($berita['created_at']);
         }
 
         $data = [
@@ -278,7 +284,7 @@ class C_LandingPage extends BaseController
             // Open Graph untuk halaman daftar
             'og_title' => 'Berita ' . $kategoriBerita . ' - Museum Negeri NTB',
             'og_description' => 'Kumpulan berita terkini dari Museum Negeri NTB kategori ' . $kategoriBerita,
-            'og_image' => base_url('img/logo-museum.png'), // Gunakan logo default
+            'og_image' => base_url('img/logo-museum.png'),
             'og_url' => current_url(),
             'og_type' => 'website',
             'og_site_name' => 'Museum Negeri NTB',
