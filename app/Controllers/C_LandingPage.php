@@ -189,19 +189,70 @@ class C_LandingPage extends BaseController
         ];
         return view('landingPage/tatatertib2', $data);
     }
-    public function berita(): string
+
+    public function berita($id_berita = null): string
     {
+        // Jika ada ID berita, tampilkan detail berita
+        if ($id_berita !== null) {
+            $berita = $this->M_Berita->getBeritaById($id_berita);
+
+            // Buat deskripsi singkat dari isi berita (ambil 150 karakter)
+            $deskripsi = '';
+            if (!empty($berita['isi'])) {
+                $deskripsi = strip_tags($berita['isi']);
+                $deskripsi = substr($deskripsi, 0, 150) . '...';
+            }
+
+            // Tambahkan sumber di deskripsi untuk WhatsApp
+            $sumber = $berita['sumber'] ?? 'Museum Negeri NTB';
+            $deskripsiDenganSumber = $sumber . ' — ' . $deskripsi;
+
+            $data = [
+                'berita' => $berita,
+                'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
+                'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
+                'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
+                'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
+
+                // Meta Tags untuk SEO & Social Media
+                'title' => $berita['judul'] . ' - Museum Negeri NTB',
+                'meta_description' => $deskripsiDenganSumber,
+                'meta_keywords' => 'museum NTB, berita, ' . ($berita['kategori'] ?? 'berita') . ', ' . $berita['judul'],
+
+                // Open Graph (WhatsApp, Facebook, dll)
+                'og_title' => $berita['judul'],
+                'og_description' => $deskripsiDenganSumber,
+                'og_image' => base_url('img/berita/' . $berita['gambar']), // Sesuaikan dengan field gambar berita
+                'og_url' => current_url(),
+                'og_type' => 'article',
+                'og_site_name' => 'Museum Negeri NTB',
+
+                // Article Meta (untuk menampilkan sumber & tanggal)
+                'article_author' => $sumber,
+                'article_published_time' => date('c', strtotime($berita['created_at'])),
+                'article_section' => $berita['kategori'] ?? 'Berita',
+
+                // Twitter Card
+                'twitter_card' => 'summary_large_image',
+                'twitter_title' => $berita['judul'],
+                'twitter_description' => $deskripsiDenganSumber,
+                'twitter_image' => base_url('img/berita/' . $berita['gambar']),
+            ];
+
+            return view('landingPage/berita_detail', $data);
+        }
+
+        // Jika tidak ada ID, tampilkan daftar berita (kode lama)
         $kategoriBerita = $this->request->getPost('kategoriBerita') ?? 'Regional';
         $lihatSemua = $this->request->getGet('lihatSemua') ?? false;
         $limit = $lihatSemua ? null : 4;
 
         if ($lihatSemua) {
-            $data['berita'] = $this->M_Berita->getBeritaByKategoriAll($kategoriBerita);
+            $beritaByKategori = $this->M_Berita->getBeritaByKategoriAll($kategoriBerita);
         } else {
-            $data['berita'] = $this->M_Berita->getBeritaByKategori($kategoriBerita, $limit);
+            $beritaByKategori = $this->M_Berita->getBeritaByKategori($kategoriBerita, $limit);
         }
 
-        $data['kategoriBerita'] = $kategoriBerita;
         $data_berita = $this->M_Berita->getBeritaBaru();
 
         foreach ($data_berita as &$berita) {
@@ -209,15 +260,27 @@ class C_LandingPage extends BaseController
         }
 
         $data = [
-            'title' => 'Daftar Berita',
+            'title' => 'Daftar Berita - Museum Negeri NTB',
             'dataBerita' => $data_berita,
             'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
             'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
             'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
             'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
-            'berita' => $data['berita'],
+            'berita' => $beritaByKategori,
             'kategoriBerita' => $kategoriBerita,
             'lihatSemua' => $lihatSemua,
+
+            // Meta Tags untuk halaman daftar berita
+            'meta_description' => 'Kumpulan berita terkini dari Museum Negeri NTB kategori ' . $kategoriBerita,
+            'meta_keywords' => 'museum NTB, berita, ' . $kategoriBerita,
+
+            // Open Graph untuk halaman daftar
+            'og_title' => 'Berita ' . $kategoriBerita . ' - Museum Negeri NTB',
+            'og_description' => 'Kumpulan berita terkini dari Museum Negeri NTB kategori ' . $kategoriBerita,
+            'og_image' => base_url('img/logo-museum.png'), // Gunakan logo default
+            'og_url' => current_url(),
+            'og_type' => 'website',
+            'og_site_name' => 'Museum Negeri NTB',
         ];
 
         return view('landingPage/berita2', $data);
