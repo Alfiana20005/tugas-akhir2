@@ -208,12 +208,10 @@ class C_LandingPage extends BaseController
 
         foreach ($data_berita as &$berita) {
             $berita['isi_pendek'] = $this->getExcerpt($berita['isi'], 20);
-            // Tambahkan tanggal Indonesia untuk setiap berita
-            $berita['tanggal_indo'] = tanggal_indonesia($berita['created_at']);
         }
 
         $data = [
-            'title' => 'Daftar Berita - Museum Negeri NTB',
+            'title' => 'Daftar Berita',
             'dataBerita' => $data_berita,
             'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
             'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
@@ -222,24 +220,6 @@ class C_LandingPage extends BaseController
             'berita' => $data['berita'],
             'kategoriBerita' => $kategoriBerita,
             'lihatSemua' => $lihatSemua,
-
-            // Meta Tags untuk SEO & Social Media
-            'meta_description' => 'Kumpulan berita terkini dari Museum Negeri NTB kategori ' . $kategoriBerita,
-            'meta_keywords' => 'museum NTB, berita, ' . $kategoriBerita,
-
-            // Open Graph untuk halaman daftar (WhatsApp, Facebook, dll)
-            'og_title' => 'Berita ' . $kategoriBerita . ' - Museum Negeri NTB',
-            'og_description' => 'Kumpulan berita terkini dari Museum Negeri NTB kategori ' . $kategoriBerita,
-            'og_image' => base_url('img/logo-museum.png'), // Gunakan logo default
-            'og_url' => current_url(),
-            'og_type' => 'website',
-            'og_site_name' => 'Museum Negeri NTB',
-
-            // Twitter Card
-            'twitter_card' => 'summary_large_image',
-            'twitter_title' => 'Berita ' . $kategoriBerita . ' - Museum Negeri NTB',
-            'twitter_description' => 'Kumpulan berita terkini dari Museum Negeri NTB kategori ' . $kategoriBerita,
-            'twitter_image' => base_url('img/logo-museum.png'),
         ];
 
         return view('landingPage/berita2', $data);
@@ -269,13 +249,22 @@ class C_LandingPage extends BaseController
         }
 
         $beritaTerbaru = $this->M_Berita->getBeritaTerbaru(10);
+
+        // Tambahkan tanggal Indonesia untuk setiap berita terbaru
+        foreach ($beritaTerbaru as &$item) {
+            $item['tanggal_indo'] = tanggal_indonesia($item['tanggal']);
+        }
+
         $data['kategoriBerita'] = $kategoriBerita;
 
         // Siapkan informasi sumber berita
         $source_info = !empty($berita['sumber']) ? $berita['sumber'] : 'Museum Negeri NTB';
 
+        // Format tanggal Indonesia untuk berita utama
+        $tanggalIndo = tanggal_indonesia_lengkap($berita['tanggal']);
+
         // Buat deskripsi untuk meta dan OG tags
-        $description = 'Berita dari ' . $source_info .  '. Dipublikasikan pada ' . date('d F Y', strtotime($berita['tanggal']));
+        $description = 'Berita dari ' . $source_info . '. Dipublikasikan pada ' . $tanggalIndo;
 
         // Pastikan deskripsi tidak lebih dari 160 karakter untuk optimal SEO
         if (strlen($description) > 160) {
@@ -293,6 +282,7 @@ class C_LandingPage extends BaseController
             'berita' => $berita,
             'berita2' => $data['berita2'],
             'beritaterbaru' => $beritaTerbaru,
+            'tanggal_indo' => $tanggalIndo, // Tambahkan tanggal Indonesia
             'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
             'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
             'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
