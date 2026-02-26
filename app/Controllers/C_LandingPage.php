@@ -44,6 +44,7 @@ class C_LandingPage extends BaseController
     public function __construct()
     {
         helper('form');
+        helper('date');
         $this->M_Petugas = new M_Petugas();
         $this->M_Berita = new M_Berita();
         $this->M_Kegiatan = new M_Kegiatan();
@@ -316,7 +317,7 @@ class C_LandingPage extends BaseController
         $source_info = !empty($berita['sumber']) ? $berita['sumber'] : 'Museum Negeri NTB';
 
         // Buat deskripsi untuk meta dan OG tags
-        $description = 'Berita dari ' . $source_info .  '. Dipublikasikan pada ' . date('d F Y', strtotime($berita['tanggal'])) . ' - Museum Negeri NTB.';
+        $description = 'Berita dari ' . $source_info .  '. Dipublikasikan pada ' . date('d F Y', strtotime($berita['tanggal']));
 
         // Pastikan deskripsi tidak lebih dari 160 karakter untuk optimal SEO
         if (strlen($description) > 160) {
