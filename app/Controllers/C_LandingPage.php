@@ -282,7 +282,7 @@ class C_LandingPage extends BaseController
             'berita' => $berita,
             'berita2' => $data['berita2'],
             'beritaterbaru' => $beritaTerbaru,
-            'tanggal_indo' => $tanggalIndo, // Tambahkan tanggal Indonesia
+            'tanggal_indo' => $tanggalIndo,
             'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
             'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
             'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),

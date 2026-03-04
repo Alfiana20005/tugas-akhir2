@@ -2,6 +2,21 @@
 
 <?= $this->section('content'); ?>
 
+<style>
+    .single-destinations .thumb {
+        height: 400px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .single-destinations .thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+</style>
+
 <!-- start banner Area -->
 <section class="about-banner relative">
     <div class="overlay overlay-bg"></div>
@@ -25,10 +40,9 @@
             <div class="active-recent-blog-carusel">
                 <?php foreach ($publikasi as $p): ?>
                     <div class="">
-
                         <div class="single-destinations">
                             <div class="thumb">
-                                <img src="<?= base_url("img/publikasi/" . $p['foto']); ?>" alt="">
+                                <img src="<?= base_url("img/publikasi/" . $p['foto']); ?>" alt="<?= $p['judul']; ?>">
                             </div>
                             <div class="details">
                                 <h4 class="d-flex justify-content-between">
@@ -42,7 +56,6 @@
                     </div>
                 <?php endforeach; ?>
             </div>
-
         </div>
     </div>
 </section>
