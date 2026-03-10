@@ -48,7 +48,7 @@
   .image-side img {
     width: 100%;
     height: 350px;
-    object-fit: cover;
+    object-fit: contain;
   }
 
   .text-side {
