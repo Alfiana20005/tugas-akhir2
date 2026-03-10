@@ -89,7 +89,7 @@ class C_LandingPage extends BaseController
         // Tambahkan excerpt untuk deskripsi koleksi jika terlalu panjang
         foreach ($koleksi as &$k) {
             if (strlen($k['deskripsi']) > 200) {
-                $k['deskripsi'] = $this->getExcerpt($k['deskripsi'], 30);
+                $k['deskripsi'] = $this->getExcerpt($k['deskripsi'], 50);
             }
         }
 

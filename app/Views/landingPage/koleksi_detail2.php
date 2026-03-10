@@ -25,10 +25,10 @@
 			<div class="col-lg-8 posts-list">
 
 				<div class="single-post row d-flex">
-					<div class="col-lg-12 col-md-12 ">
-						<div class="feature-img mb-2">
-							<img class="img-fluid" src="<?= base_url("img/koleksiAdmin/" . $koleksi['foto']); ?>" alt="" style="width: 100%; height: 320px; object-fit: contain;">
-						</div>
+
+					<!-- Nama Koleksi -->
+					<div class="col-lg-12 mb-4">
+						<h2 class="koleksi-title"><?= esc($koleksi['nama']); ?></h2>
 					</div>
 
 					<!-- Galeri Gambar Deskripsi -->
@@ -36,8 +36,8 @@
 					$gambar_deskripsi = !empty($koleksi['gambar_deskripsi']) ? json_decode($koleksi['gambar_deskripsi'], true) : [];
 					if (!empty($gambar_deskripsi) && is_array($gambar_deskripsi)):
 					?>
-						<div class="col-lg-12 mt-4">
-							<h4 class="mb-3">Galeri Gambar</h4>
+						<div class="col-lg-12">
+							<h4 class="mb-3">Tampak Koleksi</h4>
 							<div class="row">
 								<?php foreach ($gambar_deskripsi as $index => $img): ?>
 									<?php if (!empty($img)): ?>
@@ -52,6 +52,31 @@
 										</div>
 									<?php endif; ?>
 								<?php endforeach; ?>
+							</div>
+						</div>
+					<?php endif; ?>
+
+					<!-- Deskripsi Koleksi -->
+					<?php
+					function nl2p($text)
+					{
+						$text = trim($text);
+						$paragraphs = explode("\n", $text);
+						$result = '';
+						foreach ($paragraphs as $paragraph) {
+							$paragraph = trim($paragraph);
+							if (!empty($paragraph)) {
+								$result .= '<p>' . esc($paragraph) . '</p>';
+							}
+						}
+						return $result;
+					}
+					?>
+					<?php if (!empty($koleksi['deskripsi'])): ?>
+						<div class="col-lg-12 mt-4">
+							<h4 class="mb-3">Deskripsi</h4>
+							<div class="deskripsi-content">
+								<?= nl2p($koleksi['deskripsi']); ?>
 							</div>
 						</div>
 					<?php endif; ?>
@@ -88,27 +113,6 @@
 									<p><strong>Ukuran:</strong></p>
 								</a>
 								<p><?= esc($koleksi['ukuran']); ?></p>
-							</li>
-							<li>
-								<a href="#" class="d-flex justify-content-between">
-									<p><strong>Deskripsi:</strong></p>
-								</a>
-								<?php
-								function nl2p($text)
-								{
-									$text = trim($text);
-									$paragraphs = explode("\n", $text);
-									$text = '';
-									foreach ($paragraphs as $paragraph) {
-										$paragraph = trim($paragraph);
-										if (!empty($paragraph)) {
-											$text .= '<p>' . esc($paragraph) . '</p>';
-										}
-									}
-									return $text;
-								}
-								?>
-								<div><?= nl2p($koleksi['deskripsi']); ?></div>
 							</li>
 						</ul>
 					</div>
@@ -176,6 +180,20 @@
 
 	.cat-list p {
 		margin-bottom: 5px;
+	}
+
+	.koleksi-title {
+		font-size: 1.8rem;
+		font-weight: 700;
+		color: #333;
+		border-left: 4px solid #850000;
+		padding-left: 12px;
+	}
+
+	.deskripsi-content p {
+		margin-bottom: 10px;
+		line-height: 1.7;
+		color: #555;
 	}
 </style>
 

@@ -1,6 +1,6 @@
 <?= $this->extend('landingPage/template baru'); ?>
-
 <?= $this->section('content'); ?>
+
 <!-- start banner Area -->
 <section class="about-banner relative">
   <div class="overlay overlay-bg"></div>
@@ -17,49 +17,176 @@
 </section>
 <!-- End banner Area -->
 
-<!-- ======= Portfolio Section ======= -->
-<section id="portfolio" class="portfolio pt-30">
+<style>
+  .content-section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 60px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .content-section:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .content-section.reverse {
+    flex-direction: row-reverse;
+  }
+
+  .image-side {
+    flex: 1;
+    min-width: 450px;
+  }
+
+  .image-side img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+  }
+
+  .text-side {
+    flex: 1;
+    padding: 30px;
+    margin: 0;
+  }
+
+  .section-badge {
+    display: inline-block;
+    background: #850000;
+    color: white;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+
+  .section-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 10px;
+    text-align: left;
+  }
+
+  .section-code {
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    color: #333;
+    margin-bottom: 15px;
+    padding: 8px 12px;
+    background: #f7fafc;
+    border-left: 4px solid #850000;
+    display: inline-block;
+  }
+
+  .section-desc {
+    font-size: 15px;
+    color: #333;
+    line-height: 1.8;
+    margin-bottom: 10px;
+  }
+
+  .no-data {
+    text-align: center;
+    padding: 60px 20px;
+    color: #666;
+  }
+
+  .no-data i {
+    font-size: 64px;
+    margin-bottom: 20px;
+    color: #850000;
+  }
+
+  @media (max-width: 768px) {
+
+    .content-section,
+    .content-section.reverse {
+      flex-direction: column;
+      margin-bottom: 40px;
+      gap: 30px;
+    }
+
+    .image-side {
+      min-width: 100%;
+      height: auto;
+    }
+
+    .image-side img {
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .text-side {
+      margin-top: -30px;
+    }
+
+    .about-content h1 {
+      font-size: 28px;
+    }
+  }
+</style>
+
+<!-- Start post-content Area -->
+<section class="post-content-area single-post-area">
   <div class="container">
+    <?php if (!empty($koleksi)): ?>
+      <?php
+      $index = 0;
+      foreach ($koleksi as $k):
+        $isReverse = ($index % 2 != 0) ? 'reverse' : '';
+        $index++;
+      ?>
+        <div class="content-section <?= $isReverse; ?>"
+          onclick="window.location.href='<?= base_url('/koleksi/detail/' . $k['id_koleksi']); ?>'">
+          <div class="image-side">
+            <?php if (!empty($k['foto'])): ?>
+              <img src="<?= base_url('img/koleksiAdmin/' . $k['foto']); ?>" alt="<?= esc($k['nama']); ?>">
+            <?php else: ?>
+              <img src="<?= base_url('img/default.jpg'); ?>" alt="Default Image">
+            <?php endif; ?>
+          </div>
+          <div class="text-side">
+            <span class="section-badge"><?= esc($k['kategori']); ?></span>
+            <h3 class="section-title"><?= esc($k['nama']); ?></h3>
 
+            <?php if (!empty($k['no'])): ?>
+              <div class="section-code">
+                No. Koleksi: <strong><?= esc($k['no']); ?></strong>
+              </div>
+            <?php endif; ?>
 
-    <!-- <div class="row my-4">
-      <a href="/koleksi_kategori/Geologika" class="genric-btn primary-border small my-2 mx-2"> Geologika</a>
-      <a href="/koleksi_kategori/Biologika" class="genric-btn primary-border small my-2 mx-2"> Biologika</a>
-      <a href="/koleksi_kategori/Etnografika" class="genric-btn primary-border small my-2 mx-2"> Etnografika</a>
-      <a href="/koleksi_kategori/Arkeologika" class="genric-btn primary-border small my-2 mx-2"> Arkeologika</a>
-      <a href="/koleksi_kategori/Historika" class="genric-btn primary-border small my-2 mx-2"> Historika</a>
-      <a href="/koleksi_kategori/Numismatika" class="genric-btn primary-border small my-2 mx-2"> Numismatika</a>
-      <a href="/koleksi_kategori/Filologika" class="genric-btn primary-border small my-2 mx-2"> Filologika</a>
-      <a href="/koleksi_kategori/Kramologika" class="genric-btn primary-border small my-2 mx-2"> Kramologika</a>
-      <a href="/koleksi_kategori/Seni Rupa" class="genric-btn primary-border small my-2 mx-2"> Seni Rupa</a>
-      <a href="/koleksi_kategori/Teknologika" class="genric-btn primary-border small my-2 mx-2"> Teknologika</a> -->
-    <!-- /<a href="/kegiatanKategori2/Museum Talk" class="genric-btn primary-border small my-2 mx-2"> Lain-lain</a> -->
+            <?php if (!empty($k['ukuran'])): ?>
+              <p class="section-desc">
+                <strong>Ukuran:</strong> <?= esc($k['ukuran']); ?>
+              </p>
+            <?php endif; ?>
 
-    <!-- <div class="col-lg-12 d-flex justify-content-center" data-aos="fade-up" data-aos-delay="100">
-
-      </div>
-    </div> -->
-
-    <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
-      <?php foreach ($koleksi as $k): ?>
-        <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-          <div class="portfolio-wrap">
-            <img src="<?= base_url("img/koleksiAdmin/" . $k['foto']); ?>" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4><?= $k['nama']; ?></h4>
-              <p><?= $k['kategori']; ?></p>
-            </div>
-
-            <div class="portfolio-links">
-              <a href="<?= base_url("img/koleksiAdmin/" . $k['foto']); ?>" data-gallery="portfolioGallery" class="portfolio-lightbox" title="<?= $k['nama']; ?>"><i class="fa-solid fa-eye"></i></a>
-              <a href="<?= base_url("/koleksi/detail/{$k['id_koleksi']}"); ?>" title="More Details"><i class="fa-solid fa-circle-info"></i></a>
-            </div>
+            <?php if (!empty($k['deskripsi'])): ?>
+              <p class="section-desc">
+                <?= nl2br(esc($k['deskripsi'])); ?>
+              </p>
+            <?php endif; ?>
           </div>
         </div>
       <?php endforeach; ?>
-    </div>
-
+    <?php else: ?>
+      <div class="no-data">
+        <i class="fa fa-inbox"></i>
+        <h3>Belum Ada Data Koleksi</h3>
+        <p>Silakan tambahkan data koleksi terlebih dahulu.</p>
+      </div>
+    <?php endif; ?>
   </div>
-</section><!-- End Portfolio Section -->
+</section>
+<!-- End post-content Area -->
 
 <?= $this->endSection(); ?>
