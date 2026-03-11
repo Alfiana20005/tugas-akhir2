@@ -162,24 +162,24 @@
                         foreach ($penelitian as $p): ?>
                             <tr>
                                 <td style="text-align: center;"><?= $no++; ?></td>
-                                <td style="text-align: center;"><?= $p['nama']; ?></td>
-                                <td style="text-align: center;"><?= $p['no_identitas']; ?></td>
-                                <td style="text-align: center;"><?= $p['judul_penelitian']; ?></td>
+                                <td style="text-align: center;"><?= esc($p['nama']); ?></td>
+                                <td style="text-align: center;"><?= esc($p['no_identitas']); ?></td>
+                                <td style="text-align: center;"><?= esc($p['judul_penelitian']); ?></td>
                                 <td style="text-align: center;">
                                     <span class="badge badge-<?= $p['jenis'] == 'museum' ? 'primary' : 'secondary'; ?>">
-                                        <?= ucfirst($p['jenis']); ?>
+                                        <?= esc(ucfirst($p['jenis'])); ?>
                                     </span>
                                 </td>
-                                <td style="text-align: center;"><?= $p['kategori_objek']; ?></td>
-                                <td style="text-align: center;"><?= $p['jenjang_pendidikan']; ?></td>
-                                <td style="text-align: center;"><?= $p['program_studi']; ?></td>
-                                <td style="text-align: center;"><?= $p['instansi']; ?></td>
-                                <td style="text-align: center;"><?= $p['tanggal_mulai']; ?></td>
-                                <td style="text-align: center;"><?= $p['tanggal_akhir']; ?></td>
-                                <td style="text-align: center;"><?= $p['sumber'] ?? '-'; ?></td>
+                                <td style="text-align: center;"><?= esc($p['kategori_objek']); ?></td>
+                                <td style="text-align: center;"><?= esc($p['jenjang_pendidikan']); ?></td>
+                                <td style="text-align: center;"><?= esc($p['program_studi']); ?></td>
+                                <td style="text-align: center;"><?= esc($p['instansi']); ?></td>
+                                <td style="text-align: center;"><?= esc($p['tanggal_mulai']); ?></td>
+                                <td style="text-align: center;"><?= esc($p['tanggal_akhir']); ?></td>
+                                <td style="text-align: center;"><?= esc($p['sumber']) ?? '-'; ?></td>
                                 <td style="text-align: center;">
                                     <?php if (!empty($p['link'])): ?>
-                                        <a href="<?= $p['link']; ?>" target="_blank" class="btn btn-sm btn-info">
+                                        <a href="<?= esc($p['link']); ?>" target="_blank" class="btn btn-sm btn-info">
                                             <i class="fas fa-external-link-alt"></i> Link
                                         </a>
                                     <?php else: ?>
@@ -225,19 +225,19 @@
                             <div class="row mb-2">
                                 <label for="nama-<?= $p['id_penelitian']; ?>" class="col-sm-3 col-form-label">Nama <span class="text-danger">*</span></label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="nama-<?= $p['id_penelitian']; ?>" name="nama" value="<?= $p['nama']; ?>">
+                                    <input type="text" class="form-control" id="nama-<?= $p['id_penelitian']; ?>" name="nama" value="<?= esc($p['nama']); ?>">
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <label for="no_identitas-<?= $p['id_penelitian']; ?>" class="col-sm-3 col-form-label">Nomor Identitas <span class="text-danger">*</span></label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="no_identitas-<?= $p['id_penelitian']; ?>" name="no_identitas" value="<?= $p['no_identitas']; ?>">
+                                    <input type="text" class="form-control" id="no_identitas-<?= $p['id_penelitian']; ?>" name="no_identitas" value="<?= esc($p['no_identitas']); ?>">
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <label for="judul_penelitian-<?= $p['id_penelitian']; ?>" class="col-sm-3 col-form-label">Judul Penelitian <span class="text-danger">*</span></label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="judul_penelitian-<?= $p['id_penelitian']; ?>" name="judul_penelitian" value="<?= $p['judul_penelitian']; ?>">
+                                    <input type="text" class="form-control" id="judul_penelitian-<?= $p['id_penelitian']; ?>" name="judul_penelitian" value="<?= esc($p['judul_penelitian']); ?>">
                                 </div>
                             </div>
                             <div class="row mb-2">
@@ -253,50 +253,50 @@
                             <div class="row mb-2">
                                 <label for="kategori_objek-<?= $p['id_penelitian']; ?>" class="col-sm-3 col-form-label">Kategori Objek <span class="text-danger">*</span></label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="kategori_objek-<?= $p['id_penelitian']; ?>" name="kategori_objek" value="<?= $p['kategori_objek']; ?>">
+                                    <input type="text" class="form-control" id="kategori_objek-<?= $p['id_penelitian']; ?>" name="kategori_objek" value="<?= esc($p['kategori_objek']); ?>">
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <label for="jenjang_pendidikan-<?= $p['id_penelitian']; ?>" class="col-sm-3 col-form-label">Jenjang Pendidikan <span class="text-danger">*</span></label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="jenjang_pendidikan-<?= $p['id_penelitian']; ?>" name="jenjang_pendidikan" value="<?= $p['jenjang_pendidikan']; ?>">
+                                    <input type="text" class="form-control" id="jenjang_pendidikan-<?= $p['id_penelitian']; ?>" name="jenjang_pendidikan" value="<?= esc($p['jenjang_pendidikan']); ?>">
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <label for="program_studi-<?= $p['id_penelitian']; ?>" class="col-sm-3 col-form-label">Program Studi</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="program_studi-<?= $p['id_penelitian']; ?>" name="program_studi" value="<?= $p['program_studi']; ?>">
+                                    <input type="text" class="form-control" id="program_studi-<?= $p['id_penelitian']; ?>" name="program_studi" value="<?= esc($p['program_studi']); ?>">
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <label for="instansi-<?= $p['id_penelitian']; ?>" class="col-sm-3 col-form-label">Instansi <span class="text-danger">*</span></label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="instansi-<?= $p['id_penelitian']; ?>" name="instansi" value="<?= $p['instansi']; ?>">
+                                    <input type="text" class="form-control" id="instansi-<?= $p['id_penelitian']; ?>" name="instansi" value="<?= esc($p['instansi']); ?>">
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <label for="tanggal_mulai-<?= $p['id_penelitian']; ?>" class="col-sm-3 col-form-label">Tanggal Mulai <span class="text-danger">*</span></label>
                                 <div class="col-sm-9">
-                                    <input type="date" class="form-control" id="tanggal_mulai-<?= $p['id_penelitian']; ?>" name="tanggal_mulai" value="<?= $p['tanggal_mulai']; ?>">
+                                    <input type="date" class="form-control" id="tanggal_mulai-<?= $p['id_penelitian']; ?>" name="tanggal_mulai" value="<?= esc($p['tanggal_mulai']); ?>">
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <label for="tanggal_akhir-<?= $p['id_penelitian']; ?>" class="col-sm-3 col-form-label">Tanggal Akhir</label>
                                 <div class="col-sm-9">
-                                    <input type="date" class="form-control" id="tanggal_akhir-<?= $p['id_penelitian']; ?>" name="tanggal_akhir" value="<?= $p['tanggal_akhir']; ?>">
+                                    <input type="date" class="form-control" id="tanggal_akhir-<?= $p['id_penelitian']; ?>" name="tanggal_akhir" value="<?= esc($p['tanggal_akhir']); ?>">
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <label for="sumber-<?= $p['id_penelitian']; ?>" class="col-sm-3 col-form-label">Sumber <span class="text-danger">*</span></label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="sumber-<?= $p['id_penelitian']; ?>" name="sumber" value="<?= $p['sumber'] ?? ''; ?>">
+                                    <input type="text" class="form-control" id="sumber-<?= $p['id_penelitian']; ?>" name="sumber" value="<?= esc($p['sumber'] ?? ''); ?>">
                                     <small class="text-muted">Sumber/referensi penelitian</small>
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <label for="link-<?= $p['id_penelitian']; ?>" class="col-sm-3 col-form-label">Link</label>
                                 <div class="col-sm-9">
-                                    <input type="url" class="form-control" id="link-<?= $p['id_penelitian']; ?>" name="link" value="<?= $p['link'] ?? ''; ?>" placeholder="https://example.com">
+                                    <input type="url" class="form-control" id="link-<?= $p['id_penelitian']; ?>" name="link" value="<?= esc($p['link'] ?? ''); ?>" placeholder="https://example.com">
                                     <small class="text-muted">URL lengkap dengan https://</small>
                                 </div>
                             </div>

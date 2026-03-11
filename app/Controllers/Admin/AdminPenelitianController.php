@@ -31,20 +31,25 @@ class AdminPenelitianController extends BaseController
     public function savePenelitian()
     {
         $rules = [
-            'judul' => [
+            'nama' => [
                 'rules' => 'required',
-                'errors' => ['required' => 'Judul harus diisi']
+                'errors' => ['required' => 'Nama tidak boleh kosong']
             ],
-            'penulis' => [
+            'no_identitas' => [
                 'rules' => 'required',
-                'errors' => [
-                    'required' => 'tanggal tidak boleh kosong',
-                ]
+                'errors' => ['required' => 'Nomor Identitas tidak boleh kosong']
             ],
-            'abstrak' => [
-                'rules' => 'max_length[1000]',
+            'judul_penelitian' => [
+                'rules' => 'required',
+                'errors' => ['required' => 'Judul Penelitian tidak boleh kosong']
+            ],
+            'gambar' => [
+                'rules' => 'uploaded[gambar]|max_size[gambar,2048]|is_image[gambar]|mime_in[gambar,image/jpg,image/jpeg,image/png]',
                 'errors' => [
-                    'max_length' => 'Sinopsis tidak boleh lebih dari 1000 karakter',
+                    'uploaded' => 'Pilih gambar terlebih dahulu',
+                    'max_size' => 'Ukuran gambar maksimal 2MB',
+                    'is_image' => 'Yang Anda pilih bukan gambar',
+                    'mime_in' => 'Yang Anda pilih bukan gambar file'
                 ]
             ],
         ];
@@ -53,34 +58,47 @@ class AdminPenelitianController extends BaseController
             return redirect()->to('/dataPenelitian')->withInput()->with('errors', $this->validator->listErrors());
         }
 
-        $foto = $this->request->getFile('foto');
+        $gambar = $this->request->getFile('gambar');
 
-        if ($foto && $foto->isValid() && !$foto->hasMoved()) {
-            $fotoName = $foto->getRandomName();
-            $foto->move('img/penelitian', $fotoName);
+        if ($gambar && $gambar->isValid() && !$gambar->hasMoved()) {
+            $gambarName = $gambar->getRandomName();
+            $gambar->move('uploads/penelitian', $gambarName);
         } else {
             return redirect()->to(base_url('/dataPenelitian'))
                 ->withInput()
-                ->with('errors', $foto ? $foto->getErrorString() : 'Foto diperlukan');
+                ->with('errors', $gambar ? $gambar->getErrorString() : 'Gambar diperlukan');
         }
 
         $this->M_Penelitian->save([
-            'judul' => $this->request->getVar('judul'),
-            'penulis' => $this->request->getVar('penulis'),
-            'abstrak' => $this->request->getVar('abstrak'),
-            'tanggal' => date("Y-m-d"), // Add current date mapping
+            'nama' => $this->request->getVar('nama'),
+            'no_identitas' => $this->request->getVar('no_identitas'),
+            'judul_penelitian' => $this->request->getVar('judul_penelitian'),
+            'jenis' => $this->request->getVar('jenis'),
+            'kategori_objek' => $this->request->getVar('kategori_objek'),
+            'jenjang_pendidikan' => $this->request->getVar('jenjang_pendidikan'),
+            'program_studi' => $this->request->getVar('program_studi'),
+            'instansi' => $this->request->getVar('instansi'),
+            'tanggal_mulai' => $this->request->getVar('tanggal_mulai'),
+            'tanggal_akhir' => $this->request->getVar('tanggal_akhir'),
+            'sumber' => $this->request->getVar('sumber'),
             'link' => $this->request->getVar('link'),
-            'foto' => $fotoName,
+            'gambar' => $gambarName,
         ]);
 
         session()->setFlashdata('pesan', 'Data Berhasil Ditambahkan.');
-
         return redirect()->to('/dataPenelitian');
     }
 
     public function deletePenelitian($id_penelitian)
     {
         $id_penelitian = filter_var($id_penelitian, FILTER_SANITIZE_NUMBER_INT);
+        $penelitian = $this->M_Penelitian->find($id_penelitian);
+
+        if (!$penelitian) {
+            session()->setFlashdata('error', 'Data gagal dihapus: Data penelitian tidak ditemukan.');
+            return redirect()->to('/dataPenelitian');
+        }
+
         $this->M_Penelitian->delete($id_penelitian);
         session()->setFlashdata('pesan', 'Data Berhasil Dihapus.');
 
@@ -89,38 +107,74 @@ class AdminPenelitianController extends BaseController
 
     public function updatePenelitian($id_penelitian)
     {
+        $id_penelitian = filter_var($id_penelitian, FILTER_SANITIZE_NUMBER_INT);
+        $penelitian = $this->M_Penelitian->find($id_penelitian);
+
+        if (!$penelitian) {
+            session()->setFlashdata('error', 'Data gagal diubah: Data penelitian tidak ditemukan.');
+            return redirect()->to('/dataPenelitian');
+        }
+
+        $rules = [
+            'nama' => [
+                'rules' => 'required',
+                'errors' => ['required' => 'Nama tidak boleh kosong']
+            ],
+            'no_identitas' => [
+                'rules' => 'required',
+                'errors' => ['required' => 'Nomor Identitas tidak boleh kosong']
+            ],
+            'judul_penelitian' => [
+                'rules' => 'required',
+                'errors' => ['required' => 'Judul Penelitian tidak boleh kosong']
+            ],
+        ];
+
+        $gambar = $this->request->getFile('gambar');
+        
+        // Only validate image if user selects a new image
+        if ($gambar && $gambar->getError() != 4) { // Error 4 indicates no file was uploaded
+            $rules['gambar'] = [
+                'rules' => 'max_size[gambar,2048]|is_image[gambar]|mime_in[gambar,image/jpg,image/jpeg,image/png]',
+                'errors' => [
+                    'max_size' => 'Ukuran gambar maksimal 2MB',
+                    'is_image' => 'Yang Anda pilih bukan gambar',
+                    'mime_in' => 'Yang Anda pilih bukan gambar file'
+                ]
+            ];
+        }
+
+        if (!$this->validate($rules)) {
+            return redirect()->to('/dataPenelitian')->withInput()->with('errors', $this->validator->listErrors());
+        }
+
         $dataToUpdate = [
-            'judul' => $this->request->getVar('judul'),
-            'penulis' => $this->request->getVar('penulis'),
-            'abstrak' => $this->request->getVar('abstrak'),
+            'nama' => $this->request->getVar('nama'),
+            'no_identitas' => $this->request->getVar('no_identitas'),
+            'judul_penelitian' => $this->request->getVar('judul_penelitian'),
+            'jenis' => $this->request->getVar('jenis'),
+            'kategori_objek' => $this->request->getVar('kategori_objek'),
+            'jenjang_pendidikan' => $this->request->getVar('jenjang_pendidikan'),
+            'program_studi' => $this->request->getVar('program_studi'),
+            'instansi' => $this->request->getVar('instansi'),
+            'tanggal_mulai' => $this->request->getVar('tanggal_mulai'),
+            'tanggal_akhir' => $this->request->getVar('tanggal_akhir'),
+            'sumber' => $this->request->getVar('sumber'),
             'link' => $this->request->getVar('link'),
         ];
 
-        $foto = $this->request->getFile('foto');
-
-        if ($foto && $foto->isValid() && !$foto->hasMoved()) {
-            $fotoName = $foto->getRandomName();
-            $foto->move('img/penelitian', $fotoName);
-            $dataToUpdate['foto'] = $fotoName;
+        if ($gambar && $gambar->isValid() && !$gambar->hasMoved()) {
+            $gambarName = $gambar->getRandomName();
+            $gambar->move('uploads/penelitian', $gambarName);
+            $dataToUpdate['gambar'] = $gambarName;
         }
 
         $dataToUpdate = array_filter($dataToUpdate, function ($value) {
-            return $value !== null && $value !== '';
+            return $value !== null; // Keep empty string
         });
 
         if (!empty($dataToUpdate)) {
             $this->M_Penelitian->update($id_penelitian, $dataToUpdate);
-            $newDataPublikasi = $this->M_Penelitian->getPenelitian($id_penelitian);
-
-            if (session()->get('level') != 'Admin') {
-                session()->set([
-                    'judul' => $newDataPublikasi['judul'],
-                    'penulis' => $newDataPublikasi['penulis'],
-                    'abstrak' => $newDataPublikasi['abstrak'],
-                    'link' => $newDataPublikasi['link'],
-                    'foto' => $newDataPublikasi['foto'],
-                ]);
-            }
             session()->setFlashdata('pesan', 'Data Berhasil diubah.');
         } else {
             session()->setFlashdata('error', 'Tidak ada data yang diupdate.');
