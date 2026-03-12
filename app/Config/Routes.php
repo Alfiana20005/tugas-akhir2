@@ -86,98 +86,105 @@ $routes->get('/kajian-pendirian-museum', 'C_LandingPage::kajianPendirianMuseum')
 $routes->get('/katalog-pameran-temporer', 'C_LandingPage::katalogTemporer');
 $routes->get('/sega/(:segment)', 'App\Controllers\Admin\AdminSegaController::previewSega/$1');
 
+// Routes Admin (namespace Admin) - dilindungi filterAdmin
+$routes->group('', ['filter' => 'filterAdmin', 'namespace' => 'App\Controllers\Admin'], function ($routes) {
+    // Struktur Organisasi & Petugas Museum
+    $routes->get('/strukturOrganisasi', 'AdminProfileController::strukturOrganisasi');
+    $routes->post('/petugasMuseum', 'AdminProfileController::petugasMuseum');
+    $routes->post('/updateKaryawan/(:segment)', 'AdminProfileController::updateKaryawan/$1');
+    $routes->delete('hapusOrganisasi/(:segment)', 'AdminProfileController::hapusOrganisasi/$1');
+
+    // Berita Admin
+    $routes->get('/beritaAdmin', 'AdminBeritaController::berita');
+    $routes->get('/tambahBerita', 'AdminBeritaController::tambahBerita');
+    $routes->post('/saveBerita', 'AdminBeritaController::save');
+    $routes->delete('hapusberita/(:segment)', 'AdminBeritaController::deleteBerita/$1');
+    $routes->post('updateBerita/(:segment)', 'AdminBeritaController::updateBerita/$1');
+
+    $routes->get('/dataPameran', 'AdminPameranController::pameran');
+    $routes->get('/tambahPameran', 'AdminPameranController::tambahPameran');
+    $routes->post('/savePameran', 'AdminPameranController::savePameran');
+    $routes->delete('hapusPameran/(:segment)', 'AdminPameranController::deletePameran/$1');
+    $routes->post('updatePameran/(:segment)', 'AdminPameranController::updatePameran/$1');
+
+    // Kegiatan
+    $routes->get('/tambahKegiatan', 'AdminKegiatanController::tambahKegiatan');
+    $routes->post('/saveKegiatan', 'AdminKegiatanController::saveKegiatan');
+    $routes->delete('hapusKegiatan/(:segment)', 'AdminKegiatanController::deleteKegiatan/$1');
+    $routes->post('updateKegiatan/(:segment)', 'AdminKegiatanController::updateKegiatan/$1');
+
+    // Publikasi
+    $routes->get('/tambahPublikasi', 'AdminPublikasiController::tambahPublikasi');
+    $routes->post('/savePublikasi', 'AdminPublikasiController::savePublikasi');
+    $routes->delete('hapusPublikasi/(:segment)', 'AdminPublikasiController::deletePublikasi/$1');
+    $routes->post('updatePublikasi/(:segment)', 'AdminPublikasiController::updatePublikasi/$1');
+
+    // Manuskrip Koleksi
+    $routes->get('/dataManuskripKol', 'AdminManuskripController::dataManuskripKol');
+    $routes->post('/saveManuskripKol', 'AdminManuskripController::saveManuskripKol');
+    $routes->delete('hapusManuskripKol/(:segment)', 'AdminManuskripController::deleteManuskripKol/$1');
+    $routes->post('updateManuskripKol/(:segment)', 'AdminManuskripController::updateManuskripKol/$1');
+
+    // Manuskrip
+    $routes->get('/dataManuskrip', 'AdminManuskripController::dataManuskrip');
+    $routes->post('/saveManuskrip', 'AdminManuskripController::saveManuskrip');
+    $routes->delete('hapusManuskrip/(:segment)', 'AdminManuskripController::deleteManuskrip/$1');
+    $routes->post('updateManuskrip/(:segment)', 'AdminManuskripController::updateManuskrip/$1');
+
+    // Koleksi Admin
+    $routes->get('/koleksiAdmin', 'AdminKoleksiController::koleksiAdmin');
+    $routes->post('/saveKoleksi', 'AdminKoleksiController::saveKoleksi');
+    $routes->delete('hapusKoleksiAdmin/(:segment)', 'AdminKoleksiController::deleteKoleksi/$1');
+    $routes->post('updateKoleksiAdmin/(:segment)', 'AdminKoleksiController::updateKoleksiAdmin/$1');
+    $routes->post('hapusGambarDeskripsiByName', 'AdminKoleksiController::hapusGambarDeskripsiByName');
+
+    // Gallery Admin
+    $routes->get('/galleryAdmin', 'AdminGalleryController::galleryAdmin');
+    $routes->post('/saveGallery', 'AdminGalleryController::saveGallery');
+    $routes->post('updateGallery/(:segment)', 'AdminGalleryController::updateGallery/$1');
+    $routes->delete('hapusGallery/(:segment)', 'AdminGalleryController::deleteGallery/$1');
+
+    // Kajian Admin
+    $routes->post('/saveKajian', 'AdminKajianController::saveKajian');
+    $routes->get('/kajianAdmin', 'AdminKajianController::kajianAdmin');
+    $routes->get('/tulisKajian', 'AdminKajianController::tulisKajian');
+    $routes->post('/addSection', 'AdminKajianController::addSection');
+    $routes->get('/tulisKajian/(:segment)', 'AdminKajianController::tulisKajian/$1');
+    $routes->post('/saveIsiKajian', 'AdminKajianController::saveIsiKajian');
+    $routes->get('/previewKajian/(:segment)', 'AdminKajianController::previewKajian/$1');
+    $routes->get('/tulisKajian/(:num)', 'AdminKajianController::tulisKajian/$1');
+    $routes->delete('hapusKajian/(:segment)', 'AdminKajianController::deleteKajian/$1');
+
+    // Pesan Admin
+    $routes->get('/pesanAdmin', 'AdminPesanController::pesanAdmin');
+    $routes->delete('hapuspesan/(:segment)', 'AdminPesanController::deletePesan/$1');
+
+    // Penelitian
+    $routes->get('/dataPenelitian', 'AdminPenelitianController::tambahPenelitian');
+    $routes->post('/savePenelitian', 'AdminPenelitianController::savePenelitian');
+    $routes->delete('hapusPenelitian/(:segment)', 'AdminPenelitianController::deletePenelitian/$1');
+    $routes->post('updatePenelitian/(:segment)', 'AdminPenelitianController::updatePenelitian/$1');
+
+    // Sega
+    $routes->get('/sega', 'AdminSegaController::sega');
+    $routes->post('/saveSega', 'AdminSegaController::saveSega');
+    $routes->post('updateSega/(:segment)', 'AdminSegaController::updateSega/$1');
+    $routes->delete('deleteSega/(:segment)', 'AdminSegaController::deleteSega/$1');
+    $routes->get('/sega/(:segment)', 'AdminSegaController::previewSega/$1');
+
+    // Akses Manuskrip
+    $routes->get('/aksesManuskrip', 'AdminManuskripController::aksesManuskrip');
+    $routes->post('/acceptedUpdate', 'AdminManuskripController::acceptedUpdate');
+});
+
+// Routes Admin (namespace default) - dilindungi filterAdmin
 $routes->group('', ['filter' => 'filterAdmin'], function ($routes) {
-    // Nested group for Admin Namespace
-    $routes->group('', ['namespace' => 'App\Controllers\Admin'], function ($routes) {
-        // Struktur Organisasi & Petugas Museum
-        $routes->get('/strukturOrganisasi', 'AdminProfileController::strukturOrganisasi');
-        $routes->post('/petugasMuseum', 'AdminProfileController::petugasMuseum');
-        $routes->post('/updateKaryawan/(:segment)', 'AdminProfileController::updateKaryawan/$1');
-        $routes->delete('hapusOrganisasi/(:segment)', 'AdminProfileController::hapusOrganisasi/$1');
+    // Dashboard
+    $routes->get('/dashboard', 'C_Dashboard::index');
+    $routes->get('/dashboard2', 'C_Dashboard::grafikKoleksi');
+    $routes->get('dashboard/getDataPerawatanByYear/(:num)', 'C_Dashboard::getDataPerawatanByYear/$1');
 
-        // Berita Admin
-        $routes->get('/beritaAdmin', 'AdminBeritaController::berita');
-        $routes->get('/tambahBerita', 'AdminBeritaController::tambahBerita');
-        $routes->post('/saveBerita', 'AdminBeritaController::save');
-        $routes->delete('hapusberita/(:segment)', 'AdminBeritaController::deleteBerita/$1');
-        $routes->post('updateBerita/(:segment)', 'AdminBeritaController::updateBerita/$1');
-
-        $routes->get('/dataPameran', 'AdminPameranController::pameran');
-        $routes->get('/tambahPameran', 'AdminPameranController::tambahPameran');
-        $routes->post('/savePameran', 'AdminPameranController::savePameran');
-        $routes->delete('hapusPameran/(:segment)', 'AdminPameranController::deletePameran/$1');
-        $routes->post('updatePameran/(:segment)', 'AdminPameranController::updatePameran/$1');
-
-        // Kegiatan
-        $routes->get('/tambahKegiatan', 'AdminKegiatanController::tambahKegiatan');
-        $routes->post('/saveKegiatan', 'AdminKegiatanController::saveKegiatan');
-        $routes->delete('hapusKegiatan/(:segment)', 'AdminKegiatanController::deleteKegiatan/$1');
-        $routes->post('updateKegiatan/(:segment)', 'AdminKegiatanController::updateKegiatan/$1');
-
-        // Publikasi
-        $routes->get('/tambahPublikasi', 'AdminPublikasiController::tambahPublikasi');
-        $routes->post('/savePublikasi', 'AdminPublikasiController::savePublikasi');
-        $routes->delete('hapusPublikasi/(:segment)', 'AdminPublikasiController::deletePublikasi/$1');
-        $routes->post('updatePublikasi/(:segment)', 'AdminPublikasiController::updatePublikasi/$1');
-
-        // Manuskrip Koleksi
-        $routes->get('/dataManuskripKol', 'AdminManuskripController::dataManuskripKol');
-        $routes->post('/saveManuskripKol', 'AdminManuskripController::saveManuskripKol');
-        $routes->delete('hapusManuskripKol/(:segment)', 'AdminManuskripController::deleteManuskripKol/$1');
-        $routes->post('updateManuskripKol/(:segment)', 'AdminManuskripController::updateManuskripKol/$1');
-
-        // Manuskrip
-        $routes->get('/dataManuskrip', 'AdminManuskripController::dataManuskrip');
-        $routes->post('/saveManuskrip', 'AdminManuskripController::saveManuskrip');
-        $routes->delete('hapusManuskrip/(:segment)', 'AdminManuskripController::deleteManuskrip/$1');
-        $routes->post('updateManuskrip/(:segment)', 'AdminManuskripController::updateManuskrip/$1');
-
-        // Koleksi Admin
-        $routes->get('/koleksiAdmin', 'AdminKoleksiController::koleksiAdmin');
-        $routes->post('/saveKoleksi', 'AdminKoleksiController::saveKoleksi');
-        $routes->delete('hapusKoleksiAdmin/(:segment)', 'AdminKoleksiController::deleteKoleksi/$1');
-        $routes->post('updateKoleksiAdmin/(:segment)', 'AdminKoleksiController::updateKoleksiAdmin/$1');
-        $routes->post('hapusGambarDeskripsiByName', 'AdminKoleksiController::hapusGambarDeskripsiByName');
-
-        // Gallery Admin
-        $routes->get('/galleryAdmin', 'AdminGalleryController::galleryAdmin');
-        $routes->post('/saveGallery', 'AdminGalleryController::saveGallery');
-        $routes->post('updateGallery/(:segment)', 'AdminGalleryController::updateGallery/$1');
-        $routes->delete('hapusGallery/(:segment)', 'AdminGalleryController::deleteGallery/$1');
-
-        // Kajian Admin
-        $routes->post('/saveKajian', 'AdminKajianController::saveKajian');
-        $routes->get('/kajianAdmin', 'AdminKajianController::kajianAdmin');
-        $routes->get('/tulisKajian', 'AdminKajianController::tulisKajian');
-        $routes->post('/addSection', 'AdminKajianController::addSection'); 
-        $routes->get('/tulisKajian/(:segment)', 'AdminKajianController::tulisKajian/$1');
-        $routes->post('/saveIsiKajian', 'AdminKajianController::saveIsiKajian');
-        $routes->get('/previewKajian/(:segment)', 'AdminKajianController::previewKajian/$1');
-        $routes->get('/tulisKajian/(:num)', 'AdminKajianController::tulisKajian/$1');
-        $routes->delete('hapusKajian/(:segment)', 'AdminKajianController::deleteKajian/$1');
-
-        // Pesan Admin
-        $routes->get('/pesanAdmin', 'AdminPesanController::pesanAdmin');
-        $routes->delete('hapuspesan/(:segment)', 'AdminPesanController::deletePesan/$1');
-
-        // Penelitian
-        $routes->get('/dataPenelitian', 'AdminPenelitianController::tambahPenelitian');
-        $routes->post('/savePenelitian', 'AdminPenelitianController::savePenelitian');
-        $routes->delete('hapusPenelitian/(:segment)', 'AdminPenelitianController::deletePenelitian/$1');
-        $routes->post('updatePenelitian/(:segment)', 'AdminPenelitianController::updatePenelitian/$1');
-
-        // Sega
-        $routes->get('/sega', 'AdminSegaController::sega');
-        $routes->post('/saveSega', 'AdminSegaController::saveSega');
-        $routes->post('updateSega/(:segment)', 'AdminSegaController::updateSega/$1');
-        $routes->delete('deleteSega/(:segment)', 'AdminSegaController::deleteSega/$1');
-        $routes->get('/sega/(:segment)', 'AdminSegaController::previewSega/$1');
-
-        // Akses Manuskrip
-        $routes->get('/aksesManuskrip', 'AdminManuskripController::aksesManuskrip');
-        $routes->post('/acceptedUpdate', 'AdminManuskripController::acceptedUpdate');
-    });
-
+    // Petugas
     $routes->get('/petugas', 'C_Petugas::index');
     $routes->get('/tambahpetugas', 'C_Petugas::formtambah');
     $routes->post('/save', 'C_Petugas::save');
@@ -189,12 +196,7 @@ $routes->group('', ['filter' => 'filterAdmin'], function ($routes) {
     $routes->get('profile/(:segment)', 'C_Petugas::profile/$1');
 });
 
-
-
 $routes->get('/halamanLogin', 'C_Login::index');
-$routes->get('/dashboard', 'C_Dashboard::index');
-$routes->get('/dashboard2', 'C_Dashboard::grafikKoleksi');
-$routes->get('dashboard/getDataPerawatanByYear/(:num)', 'C_Dashboard::getDataPerawatanByYear/$1');
 
 //login
 $routes->post('/login', 'C_Login::login');

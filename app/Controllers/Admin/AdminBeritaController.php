@@ -8,17 +8,17 @@ use App\Models\M_Berita;
 class AdminBeritaController extends BaseController
 {
     protected $helpers = ['form'];
-    protected $M_Berita;
+    protected $Berita;
 
     public function __construct()
     {
         helper('form');
-        $this->M_Berita = new M_Berita();
+        $this->Berita = new M_Berita();
     }
 
     public function berita(): string
     {
-        $dataBerita = $this->M_Berita->orderBy('tanggal', 'DESC')->findAll();
+        $dataBerita = $this->Berita->orderBy('tanggal', 'DESC')->findAll();
 
         $data = [
             'title' => 'Daftar Berita',
@@ -56,17 +56,17 @@ class AdminBeritaController extends BaseController
         $removeFoto = $this->request->getVar('removeFoto');
 
         if ($removeFoto) {
-            $fotoName = null; 
+            $fotoName = null;
         } else {
             if ($foto && $foto->isValid() && !$foto->hasMoved()) {
                 $fotoName = $foto->getRandomName();
                 $foto->move('img/berita', $fotoName);
             } else {
-                $fotoName = $this->request->getVar('existingFoto'); 
+                $fotoName = $this->request->getVar('existingFoto');
             }
         }
 
-        $this->M_Berita->save([
+        $this->Berita->save([
             'judul' => $this->request->getVar('judul'),
             'tanggal' => $this->request->getVar('tanggal'),
             'type' => $this->request->getVar('type'),
@@ -87,7 +87,7 @@ class AdminBeritaController extends BaseController
     public function deleteBerita($id_berita)
     {
         $id_berita = filter_var($id_berita, FILTER_SANITIZE_NUMBER_INT);
-        $this->M_Berita->delete($id_berita);
+        $this->Berita->delete($id_berita);
         session()->setFlashdata('pesan', 'Data Berhasil Dihapus.');
 
         return redirect()->to('/beritaAdmin');
@@ -119,8 +119,8 @@ class AdminBeritaController extends BaseController
         $dataToUpdate = array_filter($dataToUpdate);
 
         if (!empty($dataToUpdate)) {
-            $this->M_Berita->update($id_berita, $dataToUpdate);
-            $newDataBerita = $this->M_Berita->getBerita($id_berita);
+            $this->Berita->update($id_berita, $dataToUpdate);
+            $newDataBerita = $this->Berita->getBerita($id_berita);
 
             if (session()->get('level') != 'Admin') {
                 session()->set([
