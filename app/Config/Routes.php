@@ -145,12 +145,15 @@ $routes->group('', ['filter' => 'filterAdmin', 'namespace' => 'App\Controllers\A
     $routes->delete('hapusGallery/(:segment)', 'AdminGalleryController::deleteGallery/$1');
 
     // Kajian Admin
+    $routes->get('/tambahKajian', 'AdminKajianController::tambahKajian');
     $routes->post('/saveKajian', 'AdminKajianController::saveKajian');
     $routes->get('/kajianAdmin', 'AdminKajianController::kajianAdmin');
     $routes->get('/tulisKajian', 'AdminKajianController::tulisKajian');
     $routes->post('/addSection', 'AdminKajianController::addSection');
     $routes->get('/tulisKajian/(:segment)', 'AdminKajianController::tulisKajian/$1');
     $routes->post('/saveIsiKajian', 'AdminKajianController::saveIsiKajian');
+    $routes->post('/updateIsiKajian/(:segment)', 'AdminKajianController::updateIsiKajian/$1');
+    $routes->delete('/deleteIsiKajian/(:segment)', 'AdminKajianController::deleteIsiKajian/$1');
     $routes->get('/previewKajian/(:segment)', 'AdminKajianController::previewKajian/$1');
     $routes->get('/tulisKajian/(:num)', 'AdminKajianController::tulisKajian/$1');
     $routes->delete('hapusKajian/(:segment)', 'AdminKajianController::deleteKajian/$1');

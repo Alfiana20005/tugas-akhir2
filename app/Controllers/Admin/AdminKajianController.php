@@ -31,6 +31,15 @@ class AdminKajianController extends BaseController
         return view('CompanyProfile/kajianAdmin', $data);
     }
 
+    public function tambahKajian(): string
+    {
+        $data = [
+            'title' => 'Tambah Kajian',
+        ];
+
+        return view('CompanyProfile/tambahKajian', $data);
+    }
+
     public function saveKajian()
     {
         $rules = [
@@ -47,7 +56,7 @@ class AdminKajianController extends BaseController
         ];
 
         if (!$this->validate($rules)) {
-            return redirect()->to('/kajianAdmin')->withInput()->with('errors', $this->validator->listErrors());
+            return redirect()->to('/tambahKajian')->withInput()->with('errors', $this->validator->listErrors());
         }
 
         $foto = $this->request->getFile('sampul');
@@ -56,7 +65,7 @@ class AdminKajianController extends BaseController
             $fotoName = $foto->getRandomName();
             $foto->move('img/kajian', $fotoName);
         } else {
-            return redirect()->to(base_url('/kajianAdmin'))
+            return redirect()->to(base_url('/tambahKajian'))
                 ->withInput()
                 ->with('errors', $foto ? $foto->getErrorString() : 'Sampul diperlukan');
         }
@@ -69,18 +78,41 @@ class AdminKajianController extends BaseController
             'sampul' => $fotoName,
         ]);
 
+        $id_kajian = $this->M_Kajian->getInsertID();
+
+        // Simpan narasi jika diisi
+        $narasi = $this->request->getVar('narasi');
+        if (!empty($narasi)) {
+            $fotoNarasi = $this->request->getFile('foto');
+            $removeFoto = $this->request->getVar('removeFoto');
+            $fotoNarasiName = null;
+
+            if ($removeFoto) {
+                $fotoNarasiName = null;
+            } elseif ($fotoNarasi && $fotoNarasi->isValid() && !$fotoNarasi->hasMoved()) {
+                $fotoNarasiName = $fotoNarasi->getRandomName();
+                $fotoNarasi->move('img/kajian', $fotoNarasiName);
+            }
+
+            $this->M_Isikajian->save([
+                'narasi' => $narasi,
+                'id_kajian' => $id_kajian,
+                'foto' => $fotoNarasiName,
+            ]);
+        }
+
         session()->setFlashdata('pesan', 'Data Berhasil Ditambahkan.');
 
-        return redirect()->to('/kajianAdmin');
+        return redirect()->to('/tulisKajian/' . $id_kajian);
     }
 
     public function tulisKajian($id_kajian): string
     {
-        $data_kajian = $this->M_Isikajian->findAll();
+        $data_kajian = $this->M_Isikajian->getDataByIdKajian($id_kajian);
         $kajian = $this->M_Kajian->getKajian($id_kajian);
 
         $data = [
-            'title' => 'Daftar Kegiatan',
+            'title' => 'Tulis Kajian',
             'kajian' => $kajian,
             'data_kajian' => $data_kajian,
         ];
@@ -112,6 +144,47 @@ class AdminKajianController extends BaseController
         ]);
 
         session()->setFlashdata('pesan', 'Data Berhasil Ditambahkan.');
+
+        return redirect()->to('/tulisKajian/' . $id_kajian);
+    }
+
+    public function updateIsiKajian($id_dataKajian)
+    {
+        $id_kajian = $this->request->getPost('id_kajian');
+        $foto = $this->request->getFile('foto');
+        $removeFoto = $this->request->getVar('removeFoto');
+
+        // Ambil data lama
+        $existing = $this->M_Isikajian->find($id_dataKajian);
+
+        if ($removeFoto) {
+            $fotoName = null;
+        } else {
+            if ($foto && $foto->isValid() && !$foto->hasMoved()) {
+                $fotoName = $foto->getRandomName();
+                $foto->move('img/kajian', $fotoName);
+            } else {
+                $fotoName = $existing['foto'] ?? null;
+            }
+        }
+
+        $this->M_Isikajian->update($id_dataKajian, [
+            'narasi' => $this->request->getVar('narasi'),
+            'foto' => $fotoName,
+        ]);
+
+        session()->setFlashdata('pesan', 'Narasi Berhasil Diperbarui.');
+
+        return redirect()->to('/tulisKajian/' . $id_kajian);
+    }
+
+    public function deleteIsiKajian($id_dataKajian)
+    {
+        $existing = $this->M_Isikajian->find($id_dataKajian);
+        $id_kajian = $existing['id_kajian'] ?? null;
+
+        $this->M_Isikajian->delete($id_dataKajian);
+        session()->setFlashdata('pesan', 'Bagian Narasi Berhasil Dihapus.');
 
         return redirect()->to('/tulisKajian/' . $id_kajian);
     }

@@ -17,135 +17,117 @@
     <?php endif; ?>
 
     
+    <div class="card mb-3">
+        <div class="row">
+            <div class="col-md-2" style="width: 150px;">
+                <img src="<?= base_url("img/kajian/" . $kajian['sampul']); ?>" class="img-fluid rounded-start mx-4 mt-4" style="width: 250px;" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <a href="/kajianAdmin"><h5 class="card-title"><?= $kajian['judul']; ?></h5></a>
+                    <p class="card-text"><?= $kajian['kategori']; ?></p>
+                    <p class="card-text"><small class="text-body-secondary">Last updated <?= $kajian['updated_at']; ?></small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ NARASI YANG SUDAH ADA (EDIT MODE) ============ -->
+    <?php if (!empty($data_kajian)): ?>
+        <?php foreach ($data_kajian as $index => $dk): ?>
             <div class="card mb-3">
-                <div class="row">
-                    <div class="col-md-2" style="width: 150px;">
-                        <img src="<?= base_url("img/kajian/" . $kajian['sampul']); ?>" class="img-fluid rounded-start mx-4 mt-4" style="width: 250px;" alt="...">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <a href="/kajianAdmin"><h5 class="card-title"><?= $kajian['judul']; ?></h5></a>
-                            <p class="card-text"><?= $kajian['kategori']; ?></p>
-                            <p class="card-text"><small class="text-body-secondary">Last updated <?= $kajian['updated_at']; ?></small></p>
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h6 class="mb-0">Bagian <?= $index + 1; ?></h6>
+                    <form action="/deleteIsiKajian/<?= $dk['id_dataKajian']; ?>" method="post" class="d-inline">
+                        <?= csrf_field(); ?>
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Hapus bagian narasi ini?');">
+                            <i class="fas fa-trash"></i> Hapus
+                        </button>
+                    </form>
+                </div>
+                <div class="card-body">
+                    <form action="/updateIsiKajian/<?= $dk['id_dataKajian']; ?>" method="post" enctype="multipart/form-data">
+                        <?= csrf_field(); ?>
+                        <input type="hidden" name="id_kajian" value="<?= $kajian['id_kajian']; ?>">
+                        <div class="mb-3">
+                            <label for="narasi-edit-<?= $dk['id_dataKajian']; ?>" class="form-label">Narasi</label>
+                            <textarea class="form-control tinymce-editor" id="narasi-edit-<?= $dk['id_dataKajian']; ?>" rows="3" name="narasi"><?= $dk['narasi']; ?></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <div class="row mb-2">
+                                <div class="col-sm-2">
+                                    <?php if (!empty($dk['foto'])): ?>
+                                        <img src="<?= base_url('img/kajian/' . $dk['foto']); ?>" alt="Foto Narasi" class="img-thumbnail" id="img-preview-edit-<?= $dk['id_dataKajian']; ?>">
+                                    <?php else: ?>
+                                        <img src="/img/default.jpg" alt="" class="img-thumbnail" id="img-preview-edit-<?= $dk['id_dataKajian']; ?>">
+                                    <?php endif; ?>
+                                </div>
+                                <div class="col-sm-10">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input form-control" id="gambar-edit-<?= $dk['id_dataKajian']; ?>" name="foto" onchange="previewImg('gambar-edit-<?= $dk['id_dataKajian']; ?>', 'img-preview-edit-<?= $dk['id_dataKajian']; ?>')">
+                                        <label class="custom-file-label">Ganti Foto (opsional)</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="removeFoto-edit-<?= $dk['id_dataKajian']; ?>" name="removeFoto" value="1">
+                            <label class="form-check-label" for="removeFoto-edit-<?= $dk['id_dataKajian']; ?>">
+                                Klik apabila tidak membutuhkan gambar
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-success btn-sm">
+                            <i class="fas fa-save"></i> Update Narasi
+                        </button>
+                    </form>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    <?php endif; ?>
+
+    <!-- ============ FORM TAMBAH NARASI BARU ============ -->
+    <div class="card mb-3" id="formTambahNarasi">
+        <div class="card-header">
+            <h6 class="mb-0">Tambah Narasi Baru</h6>
+        </div>
+        <div class="card-body">
+            <form id="formKajianContainer" action="/saveIsiKajian" method="post" enctype="multipart/form-data">
+                <?= csrf_field(); ?>
+                <input type="hidden" name="id_kajian" value="<?= $kajian['id_kajian']; ?>">
+                <div class="mb-3">
+                    <label for="narasi" class="form-label">Tuliskan Narasi</label>
+                    <textarea class="form-control tinymce-editor" id="narasi" rows="3" name="narasi"></textarea>
+                </div>
+                <div class="mb-3">
+                    <div class="row mb-2">
+                        <div class="col-sm-2">
+                            <img src="/img/default.jpg" alt="" class="img-thumbnail" id="img-preview-new">
+                        </div>
+                        <div class="col-sm-10">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input form-control" id="gambar-new" name="foto" onchange="previewImg('gambar-new', 'img-preview-new')">
+                                <label class="custom-file-label" for="gambar-new">Masukkan Foto Anda</label>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <form id="formKajianContainer" action="/saveIsiKajian" method="post" enctype="multipart/form-data">
-                    <div id="formsContainer">
-                        <div class="my-4 mx-4">
-                            <input type="hidden"  name="id_kajian" value="<?= $kajian['id_kajian']; ?>">
-                            <div class="mb-3">
-                                <label for="narasi" class="form-label">Tuliskan Narasi</label>
-                                <script>
-                                    tinymce.init({
-                                        selector: 'textarea',
-                                        plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
-                                        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
-                                    });
-                                </script>
-                                <textarea class="form-control" id="narasi" rows="3" name="narasi"></textarea>
-                            </div>
-                            <div class="mb-3">  
-                                <div class="row mb-2">
-                                    <div class="col-sm-2">
-                                        <img src="/img/default.jpg" alt="" class="img-thumbnail img-preview" id="img-preview">
-                                    </div>
-                                    <div class="col-sm-10">
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input form-control" id="gambar" name="foto" onchange="previewImg('gambar')">
-                                            <label class="custom-file-label" for="customFile">Masukkan Foto Anda</label>
-                                            <?php if (!empty($data_kajian['foto'])): ?>
-                                                <div class="my-2">
-                                                    <p>Foto Saat Ini:</p>
-                                                    <img src="<?= base_url('img/kajian/' . $data_kajian['foto']); ?>" alt="Foto Kajian" width="100">
-                                                </div>
-                                                
-                                            <?php endif; ?>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" id="removeFoto" name="removeFoto" value="1">
+                    <label class="form-check-label" for="removeFoto">
+                        Klik apabila tidak membutuhkan gambar
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary btn-sm">
+                    <i class="fas fa-plus"></i> Simpan Narasi Baru
+                </button>
+            </form>
+        </div>
+    </div>
 
-                            </div>
-                            <div class="form-check my-4">
-                                                    <input class="form-check-input" type="checkbox" id="removeFoto" name="removeFoto" value="1">
-                                                    <label class="form-check-label" for="removeFoto">
-                                                    Klik apabila tidak membutuhkan gambar
-                                                    </label>
-                                                </div>
-
-                                                
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-success btn-sm mb-2 mx-4">Simpan</button>
-                    
-                </form>
-            </div>
-        
-        
-    
 </div>
 
 <script>
-    document.getElementById('addSection').addEventListener('click', function (e) {
-        e.preventDefault();
-        addFormSection();
-    });
-
-    let formCount = 1;
-
-    function addFormSection() {
-        formCount++;
-        const container = document.getElementById('formsContainer');    
-        const newForm = document.createElement('div');
-        newForm.classList.add('card', 'mb-3');
-        newForm.innerHTML = `
-        <form id="formKajianContainer" action="/saveIsiKajian" method="post" enctype="multipart/form-data">
-                    <div id="formsContainer">
-
-                        <div class="my-4 mx-4">
-                            <input type="hidden" name="id_kajian${formCount}" value="<?= $kajian['id_kajian']; ?>">
-                            <div class="mb-3">
-                                <label for="narasi${formCount}" class="form-label">Tuliskan Narasi</label>
-                                <textarea class="form-control" id="narasi${formCount}" rows="3" name="narasi${formCount}"></textarea>
-                            </div>
-                            <div class="mb-3">  
-                                <div class="row mb-2">
-                                    <div class="col-sm-2">
-                                        <img src="/img/default.jpg" alt="" class="img-thumbnail img-preview" id="img-preview">
-                                    </div>
-                                    <div class="col-sm-10">
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input form-control" id="gambar${formCount}" name="foto${formCount}" onchange="previewImg('gambar${formCount}')">
-                                            <label class="custom-file-label" >Masukkan Gambar</label>
-                                            <?php if (!empty($data_kajian['foto'])): ?>
-                                                <div class="my-2">
-                                                    <p>Foto Saat Ini:</p>
-                                                    <img src="<?= base_url('img/kajian/' . $data_kajian['foto']); ?>" alt="Foto Kajian" width="100">
-                                                </div>
-                                            <?php endif; ?>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="form-check my-4">
-                                                    <input class="form-check-input" type="checkbox" id="removeFoto${formCount}" name="removeFoto${formCount}" value="1">
-                                                    <label class="form-check-label" for="removeFoto">
-                                                        Klik apabila tidak membutuhkan gambar
-                                                    </label>
-                                                </div>
-
-                                               
-                        </div>
-                        </div>
-                    
-                </form>
-                        
-        `;
-        container.appendChild(newForm);
-    }
-
     function previewImg(inputId, imgId) {
         const input = document.getElementById(inputId);
         const imgPreview = document.getElementById(imgId);
@@ -159,71 +141,30 @@
             reader.readAsDataURL(file);
         }
     }
-</script>
 
-<!-- <script>
     document.getElementById('addSection').addEventListener('click', function (e) {
         e.preventDefault();
-        addFormSection();
+        document.getElementById('formTambahNarasi').scrollIntoView({ behavior: 'smooth' });
     });
-
-    let formCount = 1;
-
-    function addFormSection() {
-        formCount++;
-        const container = document.getElementById('formsContainer');    
-        const newForm = document.createElement('div');
-        newForm.classList.add('my-4', 'mx-4');
-        newForm.innerHTML = `
-            <input type="hidden" name="id_kajian" value="<?= $kajian['id_kajian']; ?>">
-            <div class="mb-3">
-                <label for="narasi${formCount}" class="form-label">Tuliskan Narasi</label>
-                <textarea class="form-control" id="narasi${formCount}" rows="3" name="narasi[]"></textarea>
-            </div>
-            <div class="mb-3">
-                <div class="row mb-2">
-                    <div class="col-sm-2">
-                        <img src="/img/default.jpg" alt="" class="img-thumbnail img-preview" id="img-preview-${formCount}">
-                    </div>
-                    <div class="col-sm-10">
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input form-control" id="gambar-${formCount}" name="foto[]" onchange="previewImg(this, 'img-preview-${formCount}')">
-                            <label class="custom-file-label" for="gambar-${formCount}">Masukkan Gambar</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
-        container.appendChild(newForm);
-    }
-
-    function previewImg(input, imgPreviewId) {
-        const file = input.files[0];
-        const imgPreview = document.getElementById(imgPreviewId);
-
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                imgPreview.src = e.target.result;
-            }
-            reader.readAsDataURL(file);
-        }
-    }
-</script> -->
+</script>
 
 <script>
-  tinymce.init({
-    selector: '#narasi',
-    plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown',
-    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-    tinycomments_mode: 'embedded',
-    tinycomments_author: 'Author name',
-    mergetags_list: [
-      { value: 'First.Name', title: 'First Name' },
-      { value: 'Email', title: 'Email' },
-    ],
-    ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
-  });
+    tinymce.init({
+        selector: '.tinymce-editor',
+        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+        tinycomments_mode: 'embedded',
+        tinycomments_author: 'Author name',
+        mergetags_list: [{
+                value: 'First.Name',
+                title: 'First Name'
+            },
+            {
+                value: 'Email',
+                title: 'Email'
+            },
+        ],
+        ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+    });
 </script>
 
 <?= $this->endSection(); ?>
