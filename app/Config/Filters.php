@@ -37,6 +37,7 @@ class Filters extends BaseConfig
         'filterAdminPelayanan' => \App\Filters\FilterAdminPelayanan::class,
         'filterPerpustakaan' => \App\Filters\FilterPerpustakaan::class,
         'filterManuskrip' => \App\Filters\FilterManuskrip::class,
+        'filterLogin' => \App\Filters\FilterLogin::class,
     ];
 
     /**

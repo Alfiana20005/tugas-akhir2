@@ -17,7 +17,7 @@ class FilterPerpustakaan implements FilterInterface
 
         // Cek apakah user memiliki akses ke perpustakaan
         // Misalnya hanya level 'Admin' atau 'Perpustakaan' yang bisa akses
-        $allowedLevels = ['Perpustakaan']; // Sesuaikan dengan level yang diizinkan
+        $allowedLevels = ['Admin', 'Perpustakaan']; // Sesuaikan dengan level yang diizinkan
 
         if (!in_array(session()->level, $allowedLevels)) {
             // Redirect ke halaman yang sesuai berdasarkan level

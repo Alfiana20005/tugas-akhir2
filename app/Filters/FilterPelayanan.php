@@ -16,7 +16,7 @@ class FilterPelayanan implements FilterInterface
         }
 
         // 2. Cek akses pelayanan - level yang boleh akses modul pelayanan
-        $allowedLevels = ['Petugas Pelayanan']; // Admin dan Petugas Pelayanan
+        $allowedLevels = ['Admin', 'Petugas Pelayanan', 'Kepala Museum', 'Admin/Pelayanan']; // Admin dan Petugas Pelayanan
 
         if (!in_array(session()->level, $allowedLevels)) {
             return redirect()->to(base_url('/dashboard'))

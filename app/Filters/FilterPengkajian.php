@@ -16,7 +16,7 @@ class FilterPengkajian implements FilterInterface
         }
 
         // 2. Cek akses pengkajian - level yang boleh akses modul inventaris & perawatan
-        $allowedLevels = ['Petugas Pengkajian']; // Admin dan Petugas Pengkajian
+        $allowedLevels = ['Admin', 'Petugas Pengkajian', 'Ketua Pengkajian', 'Kepala Museum', 'Admin/Pengkajian']; // Admin dan Petugas Pengkajian
 
         if (!in_array(session()->level, $allowedLevels)) {
             return redirect()->to(base_url('/dashboard'))

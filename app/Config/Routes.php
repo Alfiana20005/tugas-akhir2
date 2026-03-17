@@ -180,13 +180,21 @@ $routes->group('', ['filter' => 'filterAdmin', 'namespace' => 'App\Controllers\A
     $routes->post('/acceptedUpdate', 'AdminManuskripController::acceptedUpdate');
 });
 
-// Routes Admin (namespace default) - dilindungi filterAdmin
-$routes->group('', ['filter' => 'filterAdmin'], function ($routes) {
+// Routes Umum untuk semua user login
+$routes->group('', ['filter' => 'filterLogin'], function ($routes) {
     // Dashboard
     $routes->get('/dashboard', 'C_Dashboard::index');
     $routes->get('/dashboard2', 'C_Dashboard::grafikKoleksi');
     $routes->get('dashboard/getDataPerawatanByYear/(:num)', 'C_Dashboard::getDataPerawatanByYear/$1');
 
+    // Profile untuk semua user login
+    $routes->post('/updateProfile/(:segment)', 'C_Petugas::updateProfile/$1');
+    $routes->get('/profile', 'C_Petugas::profile');
+    $routes->get('profile/(:segment)', 'C_Petugas::profile/$1');
+});
+
+// Routes Admin (namespace default) - dilindungi filterAdmin
+$routes->group('', ['filter' => 'filterAdmin'], function ($routes) {
     // Petugas
     $routes->get('/petugas', 'C_Petugas::index');
     $routes->get('/tambahpetugas', 'C_Petugas::formtambah');
@@ -194,9 +202,6 @@ $routes->group('', ['filter' => 'filterAdmin'], function ($routes) {
     $routes->delete('hapuspetugas/(:segment)', 'C_Petugas::delete/$1');
     $routes->get('ubahpetugas/(:segment)', 'C_Petugas::edit/$1');
     $routes->post('/updatepetugas/(:segment)', 'C_Petugas::update/$1');
-    $routes->post('/updateProfile/(:segment)', 'C_Petugas::updateProfile/$1');
-    $routes->get('/profile', 'C_Petugas::profile');
-    $routes->get('profile/(:segment)', 'C_Petugas::profile/$1');
 });
 
 $routes->get('/halamanLogin', 'C_Login::index');
