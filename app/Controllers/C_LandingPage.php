@@ -1362,4 +1362,19 @@ class C_LandingPage extends BaseController
         ];
         return view('landingPage/katalog-temporer', $data);
     }
+
+    public function ketentuanLombaVideo(): string
+    {
+        // $session = session();
+        // $id_user = $session->get('id_user');
+        // $user = $this->M_User->getUser($id_user);
+        $data = [
+            'totalkeseluruhan' => $this->M_Pengunjung->countPengunjung(),
+            'totalHariIni' => $this->M_Pengunjung->countPengunjungToday(),
+            'totalBulan' => $this->M_Pengunjung->countPengunjungThisMonth(),
+            'totalTahun' => $this->M_Pengunjung->countPengunjungThisYear(),
+            // 'user' => $user
+        ];
+        return view('landingPage/ketentuan-lomba-video', $data);
+    }
 }
