@@ -303,6 +303,12 @@
                             <h4>"Kotaku Museumku – Kampungku Museumku"</h4>
                             <p>Dengan menampilkan cerita, budaya, atau kehidupan masyarakat di wilayah Nusa Tenggara Barat (NTB).</p>
                         </div>
+                        <div class="mt-4 mb-3">
+                            <p class="content-text mb-3">Untuk mengetahui lebih lanjut tentang tema "Kotaku Museumku Kampungku Museumku", silakan unduh file berikut:</p>
+                            <div style="border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(133, 0, 0, 0.08);">
+                                <iframe src="https://drive.google.com/file/d/1RfXh5O0t3rNPQogQwaqQkQU2L07N6CLP/preview" width="100%" height="500" allow="autoplay" style="border:none;"></iframe>
+                            </div>
+                        </div>
                     </li>
                     <li><strong>3.</strong> Karya yang dinilai merupakan 50 (lima puluh) karya pertama yang dikirimkan sesuai dengan ketentuan dan batas waktu yang ditetapkan panitia.</li>
                     <li><strong>4.</strong> Durasi video <strong>3–5 menit</strong>.</li>
