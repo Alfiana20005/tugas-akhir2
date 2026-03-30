@@ -22,6 +22,7 @@ $bulanMapping = [
 
 <div class="container-fluid statistik">
   <form action="/statistik" method="post" class="d-inline">
+    <?= csrf_field(); ?>
     <div class="row">
       <div class="col-lg-2 mb-4">
         <label for="tahun" class="form-label">Tahun Awal</label>

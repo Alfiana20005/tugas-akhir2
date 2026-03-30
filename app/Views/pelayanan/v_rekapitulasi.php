@@ -10,6 +10,7 @@
         <?php endif; ?>
     <!-- Page Heading -->
     <form action="<?= base_url('/rekapitulasi');?>" method="post">
+        <?= csrf_field(); ?>
         <div class="row">
             <div class="col">
                 <input type="date" class="form-control" placeholder="tanggal awal" aria-label="bulan" name="awal"  value="<?= (!empty($tanggalAwal)) ? $tanggalAwal : ''; ?>">
@@ -132,6 +133,7 @@
             </div>
             <div class="modal-body">
                 <form action="updatePengunjung/<?= $pengunjung['id_pengunjung']; ?>" method="post" enctype="multipart/form-data" id="form">
+                <?= csrf_field(); ?>
                 <div class="row mb-2">
                     <label for="nama" class="col-sm-3 col-form-label">Nama</label>
                     <div class="col-sm-9">
