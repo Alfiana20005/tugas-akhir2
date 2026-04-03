@@ -705,7 +705,7 @@ class C_LandingPage extends BaseController
         $image_url = base_url('img/publikasi/' . $publikasi['foto']);
 
         // URL canonical
-        $canonical_url = base_url('publikasi2_detail/' . $id_publikasi);
+        $canonical_url = base_url('publikasi/detail/' . $id_publikasi);
 
         $data = [
             'title' => $publikasi['judul'] . ' - Museum Negeri NTB',
