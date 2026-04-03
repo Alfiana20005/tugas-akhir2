@@ -22,9 +22,9 @@
 	<!-- Open Graph Meta Tags untuk Facebook, WhatsApp, dll -->
 	<meta property="og:title" content="<?= isset($og_title) ? esc($og_title) : (isset($title) ? esc($title) : 'MuseumNegeri-NTB'); ?>">
 	<meta property="og:description" content="<?= isset($og_description) ? esc($og_description) : (isset($meta_description) ? esc($meta_description) : 'Website resmi Museum Negeri NTB - Melestarikan warisan budaya dan sejarah Nusa Tenggara Barat'); ?>">
-	<meta property="og:image" content="<?= isset($og_image) ? $og_image : base_url('img/logomuseum2.png'); ?>">
-	<meta property="og:image:width" content="1200">
-	<meta property="og:image:height" content="630">
+	<meta property="og:image" content="<?= isset($og_image) ? str_replace(' ', '%20', $og_image) : base_url('img/logomuseum2.png'); ?>">
+	<meta property="og:image:secure_url" content="<?= isset($og_image) ? str_replace(' ', '%20', $og_image) : base_url('img/logomuseum2.png'); ?>">
+	<meta property="og:image:type" content="image/jpeg">
 	<meta property="og:url" content="<?= isset($og_url) ? $og_url : current_url(); ?>">
 	<meta property="og:type" content="<?= isset($og_type) ? $og_type : 'website'; ?>">
 	<meta property="og:site_name" content="<?= isset($og_site_name) ? esc($og_site_name) : 'Museum Negeri NTB'; ?>">
@@ -41,16 +41,20 @@
 	<meta name="twitter:card" content="<?= isset($twitter_card) ? $twitter_card : 'summary_large_image'; ?>">
 	<meta name="twitter:title" content="<?= isset($twitter_title) ? esc($twitter_title) : (isset($og_title) ? esc($og_title) : 'MuseumNegeri-NTB'); ?>">
 	<meta name="twitter:description" content="<?= isset($twitter_description) ? esc($twitter_description) : (isset($og_description) ? esc($og_description) : 'Website resmi Museum Negeri NTB'); ?>">
-	<meta name="twitter:image" content="<?= isset($twitter_image) ? $twitter_image : (isset($og_image) ? $og_image : base_url('img/logomuseum2.png')); ?>">
+	<meta name="twitter:image" content="<?= isset($twitter_image) ? str_replace(' ', '%20', $twitter_image) : (isset($og_image) ? str_replace(' ', '%20', $og_image) : base_url('img/logomuseum2.png')); ?>">
 	<meta name="twitter:site" content="@museumnegerintb">
 
 	<!-- WhatsApp specific (menggunakan Open Graph) -->
+	<!-- image:alt -->
 	<meta property="og:image:alt" content="<?= isset($og_title) ? esc($og_title) : 'Museum Negeri NTB'; ?>">
 
 	<!-- Additional meta untuk better preview -->
+	<meta itemprop="name" content="<?= isset($title) ? esc($title) : 'MuseumNegeri-NTB'; ?>">
+	<meta itemprop="description" content="<?= isset($meta_description) ? esc($meta_description) : 'Website resmi Museum Negeri NTB - Melestarikan warisan budaya dan sejarah Nusa Tenggara Barat'; ?>">
+	<meta itemprop="image" content="<?= isset($og_image) ? str_replace(' ', '%20', $og_image) : base_url('img/logomuseum2.png'); ?>">
+
 	<meta name="robots" content="index, follow">
 	<meta name="language" content="Indonesian">
-
 
 	<!-- Google Tag Manager -->
 	<script>
