@@ -25,6 +25,7 @@
                 </div>
                 <div class="modal-body">
                     <form action="/savePublikasi" method="post" enctype="multipart/form-data" id="form">
+                        <?= csrf_field(); ?>
                         <div class="row mb-2">
                             <label for="email" class="col-sm-3 col-form-label">Judul</label>
                             <div class="col-sm-9">
@@ -152,6 +153,7 @@
                     </div>
                     <div class="modal-body">
                         <form action="<?= base_url() ?>updatePublikasi/<?= $p['id_publikasi']; ?>" method="post" enctype="multipart/form-data" id="form">
+                            <?= csrf_field(); ?>
                             <div class="row mb-2">
                                 <label for="email" class="col-sm-3 col-form-label">Judul</label>
                                 <div class="col-sm-9">
