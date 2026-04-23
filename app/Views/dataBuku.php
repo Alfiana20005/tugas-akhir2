@@ -90,6 +90,7 @@
                 </div>
                 <div class="modal-body">
                     <form action="/saveDataBuku" method="post" enctype="multipart/form-data" id="form">
+                        <?= csrf_field(); ?>
                         <div class="row mb-2">
                             <label for="email" class="col-sm-3 col-form-label">Kode</label>
                             <div class="col-sm-9">
