@@ -289,11 +289,11 @@ Berikut accordion dengan logika **Scroll + Checkbox** untuk setiap lomba:
     <div class="container">
         <div class="row d-flex align-items-center justify-content-center">
             <div class="about-content col-lg-12">
-                <h1 class="text-white">Kategori Lomba</h1>
+                <h1 class="text-white">Lomba Museum Begawe Vol.3</h1>
                 <p class="text-white link-nav">
                     <a href="/home">Home</a>
                     <span class="fa fa-chevron-right"></span>
-                    <a href="#">Kategori Lomba</a>
+                    <a href="#">Lomba Museum Begawe Vol.3</a>
                 </p>
             </div>
         </div>
