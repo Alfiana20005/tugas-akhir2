@@ -281,6 +281,19 @@ Berikut accordion dengan logika **Scroll + Checkbox** untuk setiap lomba:
     .acc-item:nth-child(1) { animation: fadeUp 0.5s ease 0.1s both; }
     .acc-item:nth-child(2) { animation: fadeUp 0.5s ease 0.22s both; }
     .acc-item:nth-child(3) { animation: fadeUp 0.5s ease 0.34s both; }
+
+    /* Mobile adjustment */
+    @media (max-width: 576px) {
+        .syarat-scroll-box {
+            max-height: 380px;
+        }
+    
+        .styled-list > li,
+        .sub-list li,
+        .desc-box p {
+            text-align: left;
+        }
+    }
 </style>
 
 <!-- Banner -->
