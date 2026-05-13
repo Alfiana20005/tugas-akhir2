@@ -201,13 +201,11 @@
                     <li><strong>2.</strong> Lomba bersifat <strong>individu</strong>.</li>
                     <li><strong>3.</strong> Peserta melukis atau menghias caping sesuai tema yang ditentukan oleh panitia.</li>
                     <li><strong>4.</strong> Seluruh perlengkapan utama disediakan oleh panitia.</li>
-                    <li><strong>5.</strong> Peserta diperkenankan membawa perlengkapan tambahan jika dibutuhkan (sesuai ketentuan panitia).</li>
-                    <li><strong>6.</strong> Karya harus orisinal dan dikerjakan langsung di lokasi lomba.</li>
-                    <li><strong>7.</strong> Durasi pengerjaan akan ditentukan oleh panitia.</li>
-                    <li><strong>8.</strong> Peserta wajib hadir tepat waktu sesuai jadwal yang telah ditentukan.</li>
-                    <li><strong>9.</strong> Peserta wajib menjaga kebersihan dan ketertiban selama kegiatan berlangsung.</li>
-                    <li><strong>10.</strong> Mengisi formulir pendaftaran dan mengumpulkan sesuai batas waktu yang ditentukan.</li>
-                    <li><strong>11.</strong> Keputusan dewan juri bersifat mutlak dan tidak dapat diganggu gugat.</li>
+                    <li><strong>5.</strong> Peserta wajib hadir tepat waktu sesuai jadwal yang telah ditentukan.</li>
+                    <li><strong>6.</strong> Peserta wajib menjaga kebersihan dan ketertiban selama kegiatan berlangsung.</li>
+                    <li><strong>7.</strong> Mengisi formulir pendaftaran dan mengumpulkan sesuai batas waktu yang ditentukan.</li>
+                    <li><strong>8.</strong> Keputusan dewan juri bersifat mutlak dan tidak dapat diganggu gugat.</li>
+                    <li><strong>9.</strong> Pendaftaran akan ditutup apabila kuota sudah terpenuhi.</li>
                 </ul>
 
                 <div class="ornament-divider">✦ ✦ ✦</div>

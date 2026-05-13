@@ -217,25 +217,23 @@
                 <h3 class="section-heading">Persyaratan Pendaftaran</h3>
                 <ul class="styled-list">
                     <li><strong>1.</strong> Peserta merupakan siswa aktif Sekolah Luar Biasa (SLB) di wilayah Nusa Tenggara Barat.</li>
-                    <li><strong>2.</strong> Setiap sekolah mengirimkan 1 (satu) tim.</li>
-                    <li><strong>3.</strong> Setiap tim terdiri dari maksimal 9 peserta beserta dengan 1 (satu) guru pendamping.</li>
+                    <li><strong>2.</strong> Setiap sekolah mengirimkan 1 (satu) tim yang terdiri dari maksimal 9 peserta beserta dengan 1 (satu) guru pendamping.</li>
                     <li>
-                        <strong>4.</strong> Peserta menampilkan pertunjukan seni kelompok berupa:
+                        <strong>3.</strong> Peserta menampilkan pertunjukan seni kelompok berupa:
                         <ul class="sub-list mt-2">
                             <li><strong>a)</strong> Tari (tradisional/kontemporer)</li>
                             <li><strong>b)</strong> Musik (band, vokal, paduan suara, musikalisasi puisi)</li>
                             <li><strong>c)</strong> Teater mini (drama pendek)</li>
-                            <li><strong>d)</strong> dll.</li>
+                            <li><strong>d)</strong> Penampilan kesenian lainnya sesuai kreativitas peserta.</li>
                         </ul>
                     </li>
-                    <li><strong>5.</strong> Durasi penampilan <strong>5–10 menit</strong>.</li>
-                    <li><strong>6.</strong> Penampilan disesuaikan dengan kemampuan peserta dan mengedepankan ekspresi, kreativitas, serta kerja sama tim.</li>
-                    <li><strong>7.</strong> Penampilan tidak mengandung unsur kekerasan, diskriminasi, atau konten yang tidak sesuai dengan nilai edukatif.</li>
-                    <li><strong>8.</strong> Peserta wajib didampingi oleh guru/pendamping selama kegiatan berlangsung.</li>
-                    <li><strong>9.</strong> Perwakilan sekolah wajib mengikuti <strong>Technical Meeting</strong>.</li>
-                    <li><strong>10.</strong> Mengisi formulir pendaftaran secara lengkap dan mengumpulkan sesuai batas waktu yang ditentukan.</li>
-                    <li><strong>11.</strong> Kebutuhan khusus peserta (aksesibilitas, alat bantu, dll.) wajib diinformasikan kepada panitia sejak awal.</li>
-                    <li><strong>12.</strong> Keputusan dewan juri bersifat mutlak dan tidak dapat diganggu gugat.</li>
+                    <li><strong>4.</strong> Durasi penampilan <strong>5–10 menit</strong>.</li>
+                    <li><strong>5.</strong> Penampilan disesuaikan dengan kemampuan peserta dan mengedepankan ekspresi, kreativitas, serta kerja sama tim.</li>
+                    <li><strong>6.</strong> Peserta wajib didampingi oleh guru/pendamping selama kegiatan berlangsung.</li>
+                    <li><strong>7.</strong> Perwakilan sekolah wajib mengikuti <strong>Technical Meeting</strong>.</li>
+                    <li><strong>8.</strong> Kebutuhan khusus peserta (aksesibilitas, alat bantu, dll.) wajib diinformasikan kepada panitia sejak awal.</li>
+                    <li><strong>9.</strong> Keputusan dewan juri bersifat mutlak dan tidak dapat diganggu gugat.</li>
+                    <li><strong>10.</strong> Pendaftaran akan ditutup apabila kuota sudah terpenuhi.</li>
                 </ul>
 
                 <div class="ornament-divider">✦ ✦ ✦</div>

@@ -198,18 +198,18 @@
                 <h3 class="section-heading">Persyaratan Pendaftaran</h3>
                 <ul class="styled-list">
                     <li><strong>1.</strong> Peserta merupakan siswa aktif tingkat SMA/SMK/MA atau sederajat di wilayah Nusa Tenggara Barat.</li>
-                    <li><strong>2.</strong> Setiap sekolah mengirimkan maksimal 1 (satu) tim.</li>
-                    <li><strong>3.</strong> Setiap tim terdiri dari <strong>4–10 orang</strong> beserta 1 orang pendamping.</li>
-                    <li><strong>4.</strong> Peserta membawakan tari modern ethnic, yaitu perpaduan unsur gaya tari modern dan tradisional.</li>
-                    <li><strong>5.</strong> Durasi penampilan <strong>5–7 menit</strong>.</li>
-                    <li><strong>6.</strong> Peserta wajib menyerahkan sinopsis singkat tarian (maksimal 200 kata).</li>
-                    <li><strong>7.</strong> Musik pengiring disiapkan oleh peserta dan diserahkan kepada panitia sebelum pelaksanaan.</li>
-                    <li><strong>8.</strong> Kostum mencerminkan konsep tari, tetap sopan, dan mendukung tema yang dibawakan.</li>
-                    <li><strong>9.</strong> Properti diperbolehkan selama tidak membahayakan peserta maupun penonton.</li>
-                    <li><strong>10.</strong> Penampilan tidak mengandung unsur SARA, kekerasan, atau konten yang tidak sesuai norma.</li>
-                    <li><strong>11.</strong> Mengisi formulir pendaftaran dan mengumpulkan sesuai batas waktu yang ditentukan.</li>
-                    <li><strong>12.</strong> Pendaftaran akan ditutup apabila kuota telah terpenuhi.</li>
-                    <li><strong>13.</strong> Keputusan dewan juri bersifat mutlak dan tidak dapat diganggu gugat.</li>
+                    <li><strong>2.</strong> Setiap sekolah mengirimkan maksimal 1 (satu) tim yang terdiri dari 4-10 orang beserta 1 orang pendamping.</li>
+                    <li><strong>3.</strong> Peserta membawakan tari modern ethnic, yaitu perpaduan unsur gaya tari modern dan tradisional.</li>
+                    <li><strong>4.</strong> Durasi penampilan <strong>5–7 menit</strong>.</li>
+                    <li><strong>5.</strong> Peserta wajib menyerahkan sinopsis singkat tarian (maksimal 200 kata).</li>
+                    <li><strong>6.</strong> Musik pengiring disiapkan oleh peserta dan diserahkan kepada panitia sebelum pelaksanaan.</li>
+                    <li><strong>7.</strong> Kostum mencerminkan konsep tari, tetap sopan, dan mendukung tema yang dibawakan.</li>
+                    <li><strong>8.</strong> Properti diperbolehkan selama tidak membahayakan peserta maupun penonton.</li>
+                    <li><strong>9.</strong> Penampilan tidak mengandung unsur SARA, kekerasan, atau konten yang tidak sesuai norma.</li>
+                    <li><strong>10.</strong> Mengisi formulir pendaftaran dan mengumpulkan sesuai batas waktu yang ditentukan.</li>
+                    <li><strong>11.</strong> Pendaftaran akan ditutup apabila kuota telah terpenuhi.</li>
+                    <li><strong>12.</strong> Keputusan dewan juri bersifat mutlak dan tidak dapat diganggu gugat.</li>
+                    <li><strong>13.</strong> Pendaftaran akan ditutup apabila kuota sudah terpenuhi.</li>
                 </ul>
 
                 <div class="ornament-divider">✦ ✦ ✦</div>
