@@ -344,13 +344,11 @@ Berikut accordion dengan logika **Scroll + Checkbox** untuk setiap lomba:
                             <li><strong>2.</strong> Lomba bersifat <strong>individu</strong>.</li>
                             <li><strong>3.</strong> Peserta melukis atau menghias caping sesuai tema yang ditentukan oleh panitia.</li>
                             <li><strong>4.</strong> Seluruh perlengkapan utama disediakan oleh panitia.</li>
-                            <li><strong>5.</strong> Peserta diperkenankan membawa perlengkapan tambahan jika dibutuhkan (sesuai ketentuan panitia).</li>
-                            <li><strong>6.</strong> Karya harus orisinal dan dikerjakan langsung di lokasi lomba.</li>
-                            <li><strong>7.</strong> Durasi pengerjaan akan ditentukan oleh panitia.</li>
-                            <li><strong>8.</strong> Peserta wajib hadir tepat waktu sesuai jadwal yang telah ditentukan.</li>
-                            <li><strong>9.</strong> Peserta wajib menjaga kebersihan dan ketertiban selama kegiatan berlangsung.</li>
-                            <li><strong>10.</strong> Mengisi formulir pendaftaran dan mengumpulkan sesuai batas waktu yang ditentukan.</li>
-                            <li><strong>11.</strong> Keputusan dewan juri bersifat mutlak dan tidak dapat diganggu gugat.</li>
+                            <li><strong>5.</strong> Peserta wajib hadir tepat waktu sesuai jadwal yang telah ditentukan.</li>
+                            <li><strong>6.</strong> Peserta wajib menjaga kebersihan dan ketertiban selama kegiatan berlangsung.</li>
+                            <li><strong>7.</strong> Mengisi formulir pendaftaran dan mengumpulkan sesuai batas waktu yang ditentukan.</li>
+                            <li><strong>8.</strong> Keputusan dewan juri bersifat mutlak dan tidak dapat diganggu gugat.</li>
+                            <li><strong>9.</strong> Pendaftaran akan ditutup apabila kuota sudah terpenuhi.</li>
                         </ul>
                     </div>
                     <p class="scroll-hint" id="hint-caping"><i class="fa fa-arrow-down"></i> Scroll untuk membaca semua ketentuan</p>
@@ -387,19 +385,19 @@ Berikut accordion dengan logika **Scroll + Checkbox** untuk setiap lomba:
                     <h3 class="section-heading">Persyaratan Pendaftaran</h3>
                     <div class="syarat-scroll-box" id="scroll-dance" onscroll="onScroll('dance')">
                         <ul class="styled-list">
-                            <li><strong>1.</strong> Peserta merupakan siswa aktif tingkat SMA/SMK/MA atau sederajat di wilayah Nusa Tenggara Barat.</li>
-                            <li><strong>2.</strong> Setiap sekolah mengirimkan maksimal 1 (satu) tim.</li>
-                            <li><strong>3.</strong> Setiap tim terdiri dari <strong>4–10 orang</strong> beserta 1 orang pendamping.</li>
-                            <li><strong>4.</strong> Peserta membawakan tari modern ethnic, yaitu perpaduan unsur gaya tari modern dan tradisional.</li>
-                            <li><strong>5.</strong> Durasi penampilan <strong>5–7 menit</strong>.</li>
-                            <li><strong>6.</strong> Peserta wajib menyerahkan sinopsis singkat tarian (maksimal 200 kata).</li>
-                            <li><strong>7.</strong> Musik pengiring disiapkan oleh peserta dan diserahkan kepada panitia sebelum pelaksanaan.</li>
-                            <li><strong>8.</strong> Kostum mencerminkan konsep tari, tetap sopan, dan mendukung tema yang dibawakan.</li>
-                            <li><strong>9.</strong> Properti diperbolehkan selama tidak membahayakan peserta maupun penonton.</li>
-                            <li><strong>10.</strong> Penampilan tidak mengandung unsur SARA, kekerasan, atau konten yang tidak sesuai norma.</li>
-                            <li><strong>11.</strong> Mengisi formulir pendaftaran dan mengumpulkan sesuai batas waktu yang ditentukan.</li>
-                            <li><strong>12.</strong> Pendaftaran akan ditutup apabila kuota telah terpenuhi.</li>
-                            <li><strong>13.</strong> Keputusan dewan juri bersifat mutlak dan tidak dapat diganggu gugat.</li>
+                                <li><strong>1.</strong> Peserta merupakan siswa aktif tingkat SMA/SMK/MA atau sederajat di wilayah Nusa Tenggara Barat.</li>
+                                <li><strong>2.</strong> Setiap sekolah mengirimkan maksimal 1 (satu) tim yang terdiri dari 4-10 orang beserta 1 orang pendamping.</li>
+                                <li><strong>3.</strong> Peserta membawakan tari modern ethnic, yaitu perpaduan unsur gaya tari modern dan tradisional.</li>
+                                <li><strong>4.</strong> Durasi penampilan <strong>5–7 menit</strong>.</li>
+                                <li><strong>5.</strong> Peserta wajib menyerahkan sinopsis singkat tarian (maksimal 200 kata).</li>
+                                <li><strong>6.</strong> Musik pengiring disiapkan oleh peserta dan diserahkan kepada panitia sebelum pelaksanaan.</li>
+                                <li><strong>7.</strong> Kostum mencerminkan konsep tari, tetap sopan, dan mendukung tema yang dibawakan.</li>
+                                <li><strong>8.</strong> Properti diperbolehkan selama tidak membahayakan peserta maupun penonton.</li>
+                                <li><strong>9.</strong> Penampilan tidak mengandung unsur SARA, kekerasan, atau konten yang tidak sesuai norma.</li>
+                                <li><strong>10.</strong> Mengisi formulir pendaftaran dan mengumpulkan sesuai batas waktu yang ditentukan.</li>
+                                <li><strong>11.</strong> Pendaftaran akan ditutup apabila kuota telah terpenuhi.</li>
+                                <li><strong>12.</strong> Keputusan dewan juri bersifat mutlak dan tidak dapat diganggu gugat.</li>
+                                <li><strong>13.</strong> Pendaftaran akan ditutup apabila kuota sudah terpenuhi.</li>
                         </ul>
                     </div>
                     <p class="scroll-hint" id="hint-dance"><i class="fa fa-arrow-down"></i> Scroll untuk membaca semua ketentuan</p>
@@ -436,26 +434,24 @@ Berikut accordion dengan logika **Scroll + Checkbox** untuk setiap lomba:
                     <h3 class="section-heading">Persyaratan Pendaftaran</h3>
                     <div class="syarat-scroll-box" id="scroll-talent" onscroll="onScroll('talent')">
                         <ul class="styled-list">
-                            <li><strong>1.</strong> Peserta merupakan siswa aktif Sekolah Luar Biasa (SLB) di wilayah Nusa Tenggara Barat.</li>
-                            <li><strong>2.</strong> Setiap sekolah mengirimkan 1 (satu) tim.</li>
-                            <li><strong>3.</strong> Setiap tim terdiri dari maksimal 9 peserta beserta dengan 1 (satu) guru pendamping.</li>
-                            <li>
-                                <strong>4.</strong> Peserta menampilkan pertunjukan seni kelompok berupa:
-                                <ul class="sub-list mt-2">
-                                    <li><strong>a)</strong> Tari (tradisional/kontemporer)</li>
-                                    <li><strong>b)</strong> Musik (band, vokal, paduan suara, musikalisasi puisi)</li>
-                                    <li><strong>c)</strong> Teater mini (drama pendek)</li>
-                                    <li><strong>d)</strong> dll.</li>
-                                </ul>
-                            </li>
-                            <li><strong>5.</strong> Durasi penampilan <strong>5–10 menit</strong>.</li>
-                            <li><strong>6.</strong> Penampilan disesuaikan dengan kemampuan peserta dan mengedepankan ekspresi, kreativitas, serta kerja sama tim.</li>
-                            <li><strong>7.</strong> Penampilan tidak mengandung unsur kekerasan, diskriminasi, atau konten yang tidak sesuai dengan nilai edukatif.</li>
-                            <li><strong>8.</strong> Peserta wajib didampingi oleh guru/pendamping selama kegiatan berlangsung.</li>
-                            <li><strong>9.</strong> Perwakilan sekolah wajib mengikuti <strong>Technical Meeting</strong>.</li>
-                            <li><strong>10.</strong> Mengisi formulir pendaftaran secara lengkap dan mengumpulkan sesuai batas waktu yang ditentukan.</li>
-                            <li><strong>11.</strong> Kebutuhan khusus peserta (aksesibilitas, alat bantu, dll.) wajib diinformasikan kepada panitia sejak awal.</li>
-                            <li><strong>12.</strong> Keputusan dewan juri bersifat mutlak dan tidak dapat diganggu gugat.</li>
+                                <li><strong>1.</strong> Peserta merupakan siswa aktif Sekolah Luar Biasa (SLB) di wilayah Nusa Tenggara Barat.</li>
+                                <li><strong>2.</strong> Setiap sekolah mengirimkan 1 (satu) tim yang terdiri dari maksimal 9 peserta beserta dengan 1 (satu) guru pendamping.</li>
+                                <li>
+                                    <strong>3.</strong> Peserta menampilkan pertunjukan seni kelompok berupa:
+                                    <ul class="sub-list mt-2">
+                                        <li><strong>a)</strong> Tari (tradisional/kontemporer)</li>
+                                        <li><strong>b)</strong> Musik (band, vokal, paduan suara, musikalisasi puisi)</li>
+                                        <li><strong>c)</strong> Teater mini (drama pendek)</li>
+                                        <li><strong>d)</strong> Penampilan kesenian lainnya sesuai kreativitas peserta.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>4.</strong> Durasi penampilan <strong>5–10 menit</strong>.</li>
+                                <li><strong>5.</strong> Penampilan disesuaikan dengan kemampuan peserta dan mengedepankan ekspresi, kreativitas, serta kerja sama tim.</li>
+                                <li><strong>6.</strong> Peserta wajib didampingi oleh guru/pendamping selama kegiatan berlangsung.</li>
+                                <li><strong>7.</strong> Perwakilan sekolah wajib mengikuti <strong>Technical Meeting</strong>.</li>
+                                <li><strong>8.</strong> Kebutuhan khusus peserta (aksesibilitas, alat bantu, dll.) wajib diinformasikan kepada panitia sejak awal.</li>
+                                <li><strong>9.</strong> Keputusan dewan juri bersifat mutlak dan tidak dapat diganggu gugat.</li>
+                                <li><strong>10.</strong> Pendaftaran akan ditutup apabila kuota sudah terpenuhi.</li>
                         </ul>
                     </div>
                     <p class="scroll-hint" id="hint-talent"><i class="fa fa-arrow-down"></i> Scroll untuk membaca semua ketentuan</p>
